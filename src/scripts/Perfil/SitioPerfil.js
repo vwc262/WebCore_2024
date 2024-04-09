@@ -14,12 +14,15 @@ class SitioPerfil {
     }
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        console.log(estacion);
+        //console.log(estacion);
 
         let estacionDiv = document.createElement("div");
         let nombreEstacion = document.createElement("p");
         let nombreSignal = document.createElement("p");
         let valorSignal = document.createElement("p");
+        let imagenEstacionFondoPerfil = document.createElement("img");
+        let imagenEstacionNivelPerfil = document.createElement("img");
+        let imagenEstacionBombaPerfil = document.createElement("img");
 
         nombreEstacion.innerText = estacion.Nombre;
         if (estacion.Signals.length > 0 && estacion.Signals[0].Nombre.includes("Nivel")) {
@@ -36,7 +39,7 @@ class SitioPerfil {
         }
 
         estacionDiv.setAttribute("class", `sitioPerfil_${estacion.Nombre}`);
-        valorSignal.setAttribute("id", estacion.Nombre);
+        valorSignal.setAttribute("id", estacion.IdEstacion);
 
         estacionDiv.append(nombreEstacion);
         estacionDiv.append(nombreSignal);
