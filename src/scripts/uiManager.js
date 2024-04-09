@@ -1,3 +1,5 @@
+import Login from "./Entities/Login/Login.js";
+
 const $btnHeader = document.querySelector(".header__buttons");
 
 $btnHeader.addEventListener("click", (ev) => {
@@ -33,6 +35,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "10";
+        Login.Instace.create();
         break;
     }
   }
