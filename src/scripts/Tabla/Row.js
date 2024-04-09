@@ -1,4 +1,4 @@
-import Estacion from "../Entities/Estacion";
+import Estacion from "../Entities/Estacion.js";
 
 class Row {
     /**
