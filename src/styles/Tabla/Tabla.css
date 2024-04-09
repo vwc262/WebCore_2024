@@ -1,51 +1,56 @@
 .curved-table-container {
-  width: 600px;
-  height: 995px;
-  background-color: aquamarine;
-  position: absolute;
-  top: 0px;
-  right: 0px;
+    width: 600px;
+    height: 1080px;
+    background-color: aquamarine;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .fondo-tabla {
-  width: 600px;
-  position: absolute;
-  top: 0px;
-  height: 995px;
+    width: 600px;
+    position: absolute;
+    top: 0px;
+    height: 1080px;
 }
 
 .title-table {
-  position: absolute;
-  top: 56px;
-  left: 170px;
-  font-size: 35px;
-  font-family: "RobotoCondensadaRegular";
-  color: goldenrod;
+    position: absolute;
+    top: 56px;
+    left: 170px;
+    font-size: 35px;
+    font-family: "RobotoCondensadaRegular";
+    color: goldenrod;
 }
 
 .curved-tBody {
-  background: crimson;
-  top: 142px;
-  width: 325px;
-  height: 800px;
-  left: 100px;
-  position: absolute;
+    background: crimson;
+    top: 142px;
+    width: 325px;
+    height: 800px;
+    left: 100px;
+    position: absolute;
 }
 
 .resumen-tabla {
-  height: 40px;
-  position: absolute;
-  bottom: 60px;
-  font-size: 14px;
-  left: 95px;
-  top: 955px;
+    height: 40px;
+    position: absolute;
+    bottom: 60px;
+    font-size: 14px;
+    left: 95px;
+    top: 955px;
 }
 
 .contenedor-resumen {
-  background-size: cover !important;
-  color: #dda65e;
-  padding: 3.5px;
-  width: 237px;
-  display: flex;
-  background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/Summary.png?v=10);
+    background-size: cover !important;
+    color: #dda65e;
+    padding: 3.5px;
+    width: 237px;
+    display: flex;
+    background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/Summary.png?v=10);
+}
+
+
+.sitio-tabla {
+    height: 42px;
 }

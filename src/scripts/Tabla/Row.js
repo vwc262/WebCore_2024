@@ -1,12 +1,15 @@
 class Row {
-    constructor(site) {
-        this.site = site;
+    constructor(estacion) {
+        this.estacion = estacion;
         this.create();
     }
 
     create() {
         let row = document.createElement('div');
-        row.innerText = `row ${site}`;
+        row.innerText = `row ${this.estacion.Nombre}`;
+        row.classList = `sitio-tabla`;
+
+        return row;
     }
 
     destroy() {
@@ -17,3 +20,35 @@ class Row {
 }
 
 export { Row };
+
+
+// Abreviacion
+// : 
+// "tc1"
+// Enlace
+// : 
+// 0
+// IdEstacion
+// : 
+// 1
+// Latitud
+// : 
+// 19.377071
+// Lineas
+// : 
+// [Linea]
+// Longitud
+// : 
+// -99.16459
+// Nombre
+// : 
+// "TC-1"
+// Signals
+// : 
+// (8) [Signal, Signal, Signal, Signal, Signal, Signal, Signal, Signal]
+// Tiempo
+// : 
+// "2024-03-25T13:07:03"
+// TipoEstacion
+// : 
+// undefined
