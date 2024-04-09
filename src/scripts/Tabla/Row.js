@@ -5,56 +5,45 @@ class Row {
      * 
      * @param {Estacion} estacion 
      */
-    constructor(estacion ) {
-        this.estacion = estacion;
+    constructor(idEstacion) {
+        this.idEstacion = idEstacion;
         this.create();
     }
 
     create() {
-        let row = document.createElement('div');
-        row.innerText = `row ${this.estacion.Nombre}`;
-        row.classList = `sitio-tabla`;
+        let rowContainer = document.createElement('div');
+        rowContainer.classList = `sitio-tabla`;
 
-        return row;
+        this.enlace = document.createElement('img');
+        this.enlace.classList = `enlace-tabla`;
+
+        let nombreFechaContainer = document.createElement('div');
+        nombreFechaContainer.classList = `nombre-Fecha-Container`;
+
+        this.nombre = document.createElement('div');
+        this.nombre.classList = `nombre-tabla`;
+        
+        this.fecha = document.createElement('div');
+        this.fecha.classList = `fecha-tabla`;
+
+        rowContainer.append(this.enlace, nombreFechaContainer);
+        nombreFechaContainer.append(nombre, this.fecha);
+
+        this.updateEstacion();
+
+        rowContainer.addEventListener('click', (event) => {
+            // particular
+        });
+
+        return rowContainer;
     }
 
-    destroy() {
-        // console.log(`${this.name} is destroyed.`);
-        // delete this.name;
-        // delete this.age;
+    updateEstacion() {
+        this.nombre.innerText = `${this.estacion.Nombre}`;
+        this.enlace.setAttribute('src', 'http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/state_0.png?v=10');
+        this.fecha.innerText = `${this.estacion.Tiempo}`;
     }
+
 }
 
 export { Row };
-
-
-// Abreviacion
-// : 
-// "tc1"
-// Enlace
-// : 
-// 0
-// IdEstacion
-// : 
-// 1
-// Latitud
-// : 
-// 19.377071
-// Lineas
-// : 
-// [Linea]
-// Longitud
-// : 
-// -99.16459
-// Nombre
-// : 
-// "TC-1"
-// Signals
-// : 
-// (8) [Signal, Signal, Signal, Signal, Signal, Signal, Signal, Signal]
-// Tiempo
-// : 
-// "2024-03-25T13:07:03"
-// TipoEstacion
-// : 
-// undefined
