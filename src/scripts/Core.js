@@ -1,5 +1,7 @@
+import { VwcApp } from "./App.js";
 import Estacion from "./Entities/Estacion.js";
 import { Fetcher } from "./Fetcher/Fetcher.js";
+import { EventsManager } from "./Managers/EventsManager.js";
 import { EnumControllerMapeo, EnumProyecto, RequestType } from "./Utilities/Enums.js";
 
 /**
@@ -26,16 +28,17 @@ class Core {
      * 
      * @param {EnumProyecto} idProyecto 
      */
-    Init(idProyecto) {
+    async Init(idProyecto) {
         console.info("Iniciando App");
         this.IdProyecto = idProyecto;
-        this.Update();
+        await this.Update();
         this.IdInterval = setInterval(() => this.Update(), 10 * 1000);
-
     }
     async Update() {
         const data = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.READ}?idProyecto=${this.IdProyecto}`, RequestType.GET, undefined, false);
         this.data = this.GetData(data);
+        console.log(this.data);
+        EventsManager.Instance.EmitirEvento('Update'); // Manda mensaje de update a todos los elementos que necesiten actualizar
     }
     /**
      * 
@@ -57,4 +60,4 @@ class Core {
 
 }
 export { Core }
-window.onload = Core.Instance.Init(EnumProyecto.Padierna);
+window.onload = () => new VwcApp().Start();
