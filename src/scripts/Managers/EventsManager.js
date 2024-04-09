@@ -19,13 +19,13 @@ class EventsManager {
      * @param {EventoCustomizado} fnHanlder 
      */
     Suscribirevento(nombreEvento, fnHanlder) {
-        if (this.#Eventos.has(nombreEvento)) {
+        if (!this.#Eventos.has(nombreEvento)) {
             this.#Eventos.set(nombreEvento, [fnHanlder]);
         }
         else {
             let eventos = this.#Eventos.get(nombreEvento);
             if (eventos) {
-                this.eventos.set(nombreEvento, [...eventos, fnHanlder]);
+                this.#Eventos.set(nombreEvento, [...eventos, fnHanlder]);
             }
         }
     }
@@ -44,7 +44,7 @@ class EventsManager {
         const eventos = this.#Eventos.get(nombreEvento);
         if (eventos) {
             eventos.forEach(evento => {
-                evento.fnHandler(data);
+                evento.FnHandler(data);
             });
         }
     }
