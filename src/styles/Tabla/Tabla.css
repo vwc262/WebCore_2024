@@ -30,6 +30,7 @@
     height: 800px;
     left: 100px;
     position: absolute;
+    overflow: hidden;
 }
 
 .resumen-tabla {
@@ -38,7 +39,7 @@
     bottom: 60px;
     font-size: 14px;
     left: 95px;
-    top: 955px;
+    top: 990px;
 }
 
 .contenedor-resumen {

@@ -1,16 +1,27 @@
 import { Core } from "../Core.js";
+import Estacion from "../Entities/Estacion.js";
 import { Row } from "./Row.js";
 
 /**
  * @returns {Tabla}
  */
 class Tabla {
+    /**
+     * @type {[Estacion]}
+     */
     rows = [];
 
     constructor() {
      
+        /**
+         * @type {HTMLElement}
+         */
         this.tBody = document.querySelector('.curved-tBody');
+
+        this.tBody
+
         this.create();
+
     }
 
     create() {

@@ -1,5 +1,11 @@
+import Estacion from "../Entities/Estacion";
+
 class Row {
-    constructor(estacion) {
+    /**
+     * 
+     * @param {Estacion} estacion 
+     */
+    constructor(estacion ) {
         this.estacion = estacion;
         this.create();
     }
