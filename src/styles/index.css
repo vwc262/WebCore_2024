@@ -8,16 +8,20 @@
 
 html,
 body {
+  background-color: antiquewhite;
   font-family: "Roboto", sans-serif;
+  width: 1920px;
+  height: 1080px;
   color: white;
 }
 
 header {
-  width: 100%;
-  height: 5vh;
+  width: 1920px;
+  height: 65px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  position: absolute;
+  z-index: 111;
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 1) 0%,
@@ -29,111 +33,44 @@ header {
   );
 }
 
-section {
-  width: 100%;
-  height: 95vh;
-  position: absolute;
-  transition: all 0.5s ease;
-}
-
-aside {
-  position: absolute;
-  right: 0;
-  background-color: black;
-  height: 95vh;
-  width: 600px;
-  z-index: 100;
-}
-
-#section__home {
-  background-color: aqua;
-  z-index: 5;
-}
-
-#section__vistaMapa {
-  background-color: rgb(64, 255, 0);
-  z-index: 4;
-}
-
-#section__graficador {
-  background-color: rgb(0, 255, 242);
-  z-index: 3;
-}
-
-#section__login {
-  background-color: rgb(255, 153, 0);
-  z-index: 2;
-}
-
-#section__particular {
-  background-color: rgb(255, 0, 0);
-  z-index: 1;
-}
-
-.buttons__header {
-  width: 40%;
-  height: 100%;
-  flex-direction: row;
-  gap: 20px;
+nav {
   display: flex;
   align-items: center;
-  padding: 6px;
-  pointer-events: auto;
+  gap: 12px;
 }
 
-.buttons__header img {
+nav img {
   width: 10px;
 }
 
-.title__container {
-  width: 25%;
-  height: 100%;
+.headerBtn__Home,
+.headerBtn__Mapa,
+.headerBtn__Graficador,
+.headerBtn__Login {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 8px;
+  border-bottom: solid rgb(182, 180, 180) 1px;
 }
 
-.title__header {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  margin-left: 200px;
+main {
+  width: 1920px;
+  height: 1080px;
+  background-color: aqua;
 }
 
-.title__container h1 {
-  font-size: 20px;
+section {
+  position: absolute;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
 }
 
-.header__datos-container span {
-  font-size: 10px;
-}
-
-.home__container,
-.vistaMapa__container,
-.graficador__container,
-.login__container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  border-bottom: solid rgb(173, 170, 170) 1px;
-  transition: all 0.3s ease;
-}
-
-.login__container {
-  border: none;
-}
-
-.buttons__header :hover {
-  color: rgb(228, 221, 101);
-}
-
-.header__active {
-  color: rgb(228, 221, 101);
+aside {
+  background-color: rgb(202, 202, 149);
+  position: absolute;
+  z-index: 110;
+  width: 600px;
+  height: 1080px;
+  left: 1320px;
 }
