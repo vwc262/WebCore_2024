@@ -18,7 +18,7 @@ const EnumProyecto = {
     Encharcamientos: 6,
     Sectores: 7,
     Lumbreras: 8,
-}
+};
 /**
  * @returns {EnumControllerMapeo}
  */
@@ -27,5 +27,14 @@ const EnumControllerMapeo = {
     DELETE: 'DeleteSignalMapeo',
     UPDATE: 'UpdateSignalMapeo'
 };
+/**
+ * @returns {EnumTipoSignal}
+ */
+const EnumTipoSignal = {
+    Nivel: "m",
+    Presion: "kg/cm2",
+    Gasto: "l/s",
+    Totalizado: "m3"
+}
 
-export { RequestType, EnumProyecto, EnumControllerMapeo }
+export { RequestType, EnumProyecto, EnumControllerMapeo, EnumTipoSignal }
