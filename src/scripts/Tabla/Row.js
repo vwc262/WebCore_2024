@@ -1,12 +1,13 @@
 import Estacion from "../Entities/Estacion.js";
+import { Core } from "../Core.js";
 
 class Row {
     /**
      * 
      * @param {Estacion} estacion 
      */
-    constructor(idEstacion) {
-        this.idEstacion = idEstacion;
+    constructor(IdEstacion) {
+        this.IdEstacion = IdEstacion;
         this.create();
     }
 
@@ -27,7 +28,7 @@ class Row {
         this.fecha.classList = `fecha-tabla`;
 
         rowContainer.append(this.enlace, nombreFechaContainer);
-        nombreFechaContainer.append(nombre, this.fecha);
+        nombreFechaContainer.append(this.nombre, this.fecha);
 
         this.updateEstacion();
 
@@ -39,9 +40,12 @@ class Row {
     }
 
     updateEstacion() {
-        this.nombre.innerText = `${this.estacion.Nombre}`;
+        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
+
+
+        this.nombre.innerText = `${estacion.Nombre}`;
         this.enlace.setAttribute('src', 'http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/state_0.png?v=10');
-        this.fecha.innerText = `${this.estacion.Tiempo}`;
+        this.fecha.innerText = `${estacion.Tiempo}`;
     }
 
 }
