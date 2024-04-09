@@ -16,7 +16,6 @@ $btnHeader.addEventListener("click", (ev) => {
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
         section__particular.style.zIndex = "5";
-        console.log("hola")
         break;
       case "vistaMapa__container header__active":
         section__home.style.zIndex = "5";

@@ -1,6 +1,6 @@
 .curved-table-container {
-  width: 100%;
-  height: 95vh;
+  width: 600px;
+  height: 995px;
   background-color: aquamarine;
   position: absolute;
   top: 0px;
@@ -11,7 +11,7 @@
   width: 600px;
   position: absolute;
   top: 0px;
-  height: 95vh;
+  height: 995px;
 }
 
 .title-table {
