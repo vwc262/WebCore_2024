@@ -1,0 +1,86 @@
+.particular__header {
+  position: absolute;
+  top: 65px;
+  display: flex;
+  width: 1320px;
+  height: 50px;
+  background: linear-gradient(
+    90deg,
+    rgb(36 53 69) 0%,
+    rgb(21 21 22 / 94%) 35%,
+    rgb(14 83 97 / 99%) 70%,
+    rgb(36 49 52) 100%
+  );
+  align-items: center;
+  gap: 51px;
+}
+
+.particular__panelControl {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.particular__panelControl img {
+  width: 60px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.particular__panelControl img:hover {
+  width: 65px;
+}
+
+.particular__items {
+  width: 900px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  overflow: hidden;
+}
+
+.particular__slider {
+  width: 210px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.particular__slider input {
+  -webkit-appearance: none;
+  width: 250px !important;
+  display: inline-block;
+  border-radius: 25px;
+  background: linear-gradient(
+    90deg,
+    rgb(24 49 57) 0%,
+    rgb(77 200 124) 50%,
+    rgb(20 45 53) 100%
+  );
+  transform: scale(0.65);
+  box-shadow: 0px 4px 5px 0px #0000008f;
+}
+
+.etiqueta__Nombre {
+  color: cyan;
+  text-align: center;
+  display: inline-block;
+}
+.etiqueta__Valor {
+  text-align: center;
+  display: inline-block;
+}
+.etiqueta__Unidad {
+  color: goldenrod;
+  text-align: center;
+  display: inline-block;
+}
+
+.tabla__active {
+  background: rgba(87, 158, 162, 0.35) !important;
+}

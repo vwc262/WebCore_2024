@@ -1,4 +1,4 @@
-const $btnHeader = document.querySelector(".buttons__header");
+const $btnHeader = document.querySelector(".header__buttons");
 
 $btnHeader.addEventListener("click", (ev) => {
   if (ev.target.nodeName == "DIV") {
@@ -10,34 +10,32 @@ $btnHeader.addEventListener("click", (ev) => {
     actualTarger.classList.add("header__active");
 
     switch (actualTarger.className) {
-      case "home__container header__active":
+      case "headerBtn__Home header__active":
         section__home.style.zIndex = "10";
-        section__vistaMapa.style.zIndex = "5";
+        section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
         break;
-      case "vistaMapa__container header__active":
+      case "headerBtn__Mapa header__active":
         section__home.style.zIndex = "5";
-        section__vistaMapa.style.zIndex = "10";
+        section__mapa.style.zIndex = "10";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
         break;
-      case "graficador__container header__active":
+      case "headerBtn__Graficador header__active":
         section__home.style.zIndex = "5";
-        section__vistaMapa.style.zIndex = "5";
+        section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "10";
         section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
         break;
-      case "login__container header__active":
+      case "headerBtn__Login header__active":
         section__home.style.zIndex = "5";
-        section__vistaMapa.style.zIndex = "5";
+        section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "10";
-        section__particular.style.zIndex = "5";
         break;
     }
   }
 });
+
+
