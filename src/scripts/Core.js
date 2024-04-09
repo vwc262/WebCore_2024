@@ -35,15 +35,23 @@ class Core {
     }
     async Update() {
         const data = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.READ}?idProyecto=${this.IdProyecto}`, RequestType.GET, undefined, false);
-        this.data = this.getData(data);
+        this.data = this.GetData(data);
     }
     /**
      * 
      * @param {*} jsonObject 
      * @returns {[Estacion]}
      */
-    getData(jsonObject) {
+    GetData(jsonObject) {
         return jsonObject.map(element => new Estacion(element));
+    }
+    /**
+     * Obtiene los datos de la estacion especifica
+     * @param {number} idEstacion 
+     * @returns {Estacion | undefined} 
+     */
+    GetDatosEstacion(idEstacion) {
+        return this.data.find(estacion => estacion.IdEstacion == idEstacion);
     }
 
 
