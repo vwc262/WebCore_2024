@@ -1,12 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Monitoreo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
+  <link rel="stylesheet" href="../styles/index.css">
+  <script src="../scripts/Core.js" type="module"></script>
+
 </head>
 
 <body>
+  <header>
+    <nav class="buttons__header">
+      <div class="home__container header__active">
+        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/PozosSistemaLerma/Iconos/home.png?v=undefined">Home
+      </div>
+      <div class="vistaMapa__container">
+        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/PozosSistemaLerma/Iconos/icomapa.png?v=undefined">Vista
+        mapa
+      </div>
+      <div class="graficador__container">
+        <img
+          src="http://w1.doomdns.com:11002/RecursosWeb/Client/PozosSistemaLerma/Reportes/graficador.png?v=undefined">Graficador
+      </div>
+      <div class="login__container">
+        <img
+          src="http://w1.doomdns.com:11002/RecursosWeb/Client/PozosSistemaLerma/Control/login_btn.png?v=undefined">Login
+      </div>
+    </nav>
+    <div class="title__header">
+      <div class="title__container">
+        <h1>Tanques Padierna</h1>
+        <div class="header__datos-container">
+          <span class="header__fecha">00/00/0000</span>
+          <span class="header__estado">Fuera de Linea</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="aside__tabla">
+      <div class="curved-table-container">
+        <img class="fondo-tabla"
+          src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/fondoTabla.png?v=10">
+        <label class="title-table">Sitios</label>
+        <div class="curved-tBody"></div>
+        <div class="resumen-tabla">
+          <div class="contenedor-resumen">
+            <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">5</div>
+            <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">20</div>
+            <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">0</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <section id="section__section"></section>
+    <section id="section__vistaMapa"></section>
+    <section id="section__graficador"></section>
+    <section id="section__login"></section>
+    <section id="section__particular">
+      <div class="particular__container">
+        <header class="header__particular"></header>
+        <main class="main__particular">
+          <sectio class="section__particular"></sectio>
+        </main>
+      </div>
+    </section>
+  </main>
 </body>
-<script src="../scripts/Core.js" type="module"></script>
+
+<script src="../scripts/uiManager.js"></script>
 
 </html>
