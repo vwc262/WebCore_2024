@@ -60,24 +60,41 @@ class Tabla {
             this.indice = 0;
         }
 
-        this.rows.forEach((row) => {
-            row.updatePosition(this.indice);
-        });
+        // console.log(this.indice);
+
+        let indexCurvedRows = 0;
+        for (let indexEstacion = -this.indice; indexEstacion < Core.Instance.data.length; indexEstacion++) {
+            const estacion = Core.Instance.data[indexEstacion];
+            let row = this.rows[indexEstacion];
+
+            row.IdEstacion = estacion.IdEstacion;
+            
+            if (this.curvedRows[indexCurvedRows] != undefined) {
+                this.curvedRows[indexCurvedRows].innerHTML = '';
+                this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
+            }
+
+            row.Update();
+
+            indexCurvedRows++;
+        }
     }
 
     create() {
-        Core.Instance.data.forEach((estacion, index) => {
-            this.rows.push(new Row(estacion.IdEstacion, index));
+        let indexCurvedRows = 0;
+        for (let indexEstacion = -this.indice; indexEstacion < Core.Instance.data.length; indexEstacion++) {
+            const estacion = Core.Instance.data[indexEstacion];
+
+            this.rows.push(new Row(estacion.IdEstacion, indexEstacion));
             const row = this.rows[this.rows.length - 1];
-            if (index < this.curvedRows.length) {
-                this.curvedRows[index].innerHTML = '';
-                this.curvedRows[index].appendChild(row.create());
+
+            if (this.curvedRows[indexCurvedRows] != undefined) {
+                this.curvedRows[indexCurvedRows].innerHTML = '';
+                this.curvedRows[indexCurvedRows].appendChild(row.create());
             }
-        });
-    }
 
-    update() {
-
+            indexCurvedRows++;
+        }
     }
 }
 
