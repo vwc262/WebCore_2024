@@ -12,8 +12,6 @@ class VwcApp {
   IniciarUI() {
     new Tabla().create(); // Inicio de tabla curva
     new Perfil().create(); // Inicio del perfil
-    new Particular().loadInfo();
-    new Particular().clickEventTable();
   }
 }
 
