@@ -19,16 +19,15 @@
     top: 56px;
     left: 170px;
     font-size: 35px;
-    font-family: "RobotoCondensadaRegular";
     color: goldenrod;
 }
 
 .curved-tBody {
-    background: crimson;
+    /* background: rgba(220, 20, 60, 0.196); */
     top: 142px;
-    width: 325px;
+    width: 360px;
     height: 800px;
-    left: 100px;
+    left: 92px;
     position: absolute;
     overflow: hidden;
 }
@@ -51,7 +50,42 @@
     background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/Summary.png?v=10);
 }
 
+.curved-Row{
+    width: 315px;
+    height: 42px;
+    /* display: none; */
+}
 
 .sitio-tabla {
     height: 42px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+
+.enlace-tabla{
+    height: 20px;
+    width: 20px;
+}
+
+.nombre-Fecha-Container{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.nombre-tabla{
+    font-size: 1.1em;
+}
+
+.fecha-tabla{
+    font-size: 0.75em;
 }
