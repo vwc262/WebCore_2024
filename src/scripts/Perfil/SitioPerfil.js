@@ -25,7 +25,7 @@ class SitioPerfil {
     }
     Update() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion)
-        console.log('Update SitioPerfil' + estacion.Nombre);
+        //console.log('Update SitioPerfil' + estacion.Nombre);
     }
 }
 
