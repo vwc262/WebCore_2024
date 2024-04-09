@@ -1,5 +1,6 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
+import configuracion from "../../config/PadiernaConfig.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 
 class SitioPerfil {
@@ -11,18 +12,46 @@ class SitioPerfil {
         this.IdEstacion = IdEstacion;
     }
     createSitio() {
-        let estacionDiv = document.createElement("div");
-        let nombreEstacion = document.createElement();
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        estacionDiv.setAttribute("id", estacion.IdEstacion)
-        estacionDiv.innerText = estacion.Nombre;
+        //console.log(estacion);
+
+        let estacionDiv = document.createElement("div");
+        let nombreEstacion = document.createElement("p");
+        let nombreSignal = document.createElement("p");
+        let valorSignal = document.createElement("p");
+
+        nombreEstacion.innerText = estacion.Nombre;
+        if (estacion.Signals.length > 0 && estacion.Signals[0].Nombre.includes("Nivel")) {
+            nombreSignal.innerText = estacion.Signals[0].Nombre;
+            valorSignal.innerText = "Valor: " + estacion.Signals[0].Valor + " m";
+        }
+        else {
+            nombreSignal = "";
+        }
+
+        estacionDiv.setAttribute("class", estacion.Nombre);
+        valorSignal.setAttribute("id", estacion.Nombre);
+
+        estacionDiv.append(nombreEstacion);
+        estacionDiv.append(nombreSignal);
+        estacionDiv.append(valorSignal);
+
+        this.ponerPosiciones(estacionDiv);
         this.suscribirEventos();
         return estacionDiv;
+    }
+
+    ponerPosiciones(estacionDiv) {
+        const estilosEstacionEtiqueta = configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
+        if (estilosEstacionEtiqueta != undefined) {
+            estacionDiv.style = estilosEstacionEtiqueta.Etiqueta;
+        }
     }
 
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     }
+
     Update() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion)
         //console.log('Update SitioPerfil' + estacion.Nombre);
