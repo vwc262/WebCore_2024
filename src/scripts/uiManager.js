@@ -1,7 +1,8 @@
 import Login from "./Entities/Login/Login.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
-const btnHome = document.querySelector(".headerBtn__Home");
+const $btnHome = document.querySelector(".headerBtn__Home");
+const $datosHeader = document.querySelector(".header__datos-particular");
 
 $btnHeader.addEventListener("click", (ev) => {
   if (ev.target.nodeName == "DIV") {
@@ -19,6 +20,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
         section__particular.style.zIndex = "5";
+        $datosHeader.style.opacity = "0";
         break;
       case "headerBtn__Mapa header__active":
         section__home.style.zIndex = "5";
@@ -26,6 +28,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
         section__particular.style.zIndex = "5";
+        $datosHeader.style.opacity = "0";
         break;
       case "headerBtn__Graficador header__active":
         section__home.style.zIndex = "5";
@@ -33,6 +36,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__graficador.style.zIndex = "10";
         section__login.style.zIndex = "5";
         section__particular.style.zIndex = "5";
+        $datosHeader.style.opacity = "0";
         break;
       case "headerBtn__Login header__active":
         section__home.style.zIndex = "5";
@@ -40,6 +44,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "10";
         section__particular.style.zIndex = "5";
+        $datosHeader.style.opacity = "0";
         Login.Instace.create();
         break;
     }
@@ -47,7 +52,7 @@ $btnHeader.addEventListener("click", (ev) => {
 });
 
 function GoHome() {
-  btnHome.click();
+  $btnHome.click();
 }
 
 export { GoHome };
