@@ -1,6 +1,7 @@
 import Login from "./Entities/Login/Login.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
+const btnHome = document.querySelector('.headerBtn__Home');
 
 $btnHeader.addEventListener("click", (ev) => {
   if (ev.target.nodeName == "DIV") {
@@ -40,5 +41,11 @@ $btnHeader.addEventListener("click", (ev) => {
     }
   }
 });
+
+function GoHome() {
+  btnHome.click();
+}
+
+export { GoHome }
 
 
