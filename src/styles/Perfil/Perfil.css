@@ -1,0 +1,16 @@
+.sitioPerfil {
+    background: linear-gradient(180deg, rgb(183 190 197) 0%, rgb(88 108 134) 11%, rgb(27 56 87) 49%, rgb(81 102 138) 94%, rgb(0 0 0) 100%);
+    box-shadow: inset 2px 2px 2px rgb(0 0 0 / 40%), inset -2px -2px 2px rgb(0 0 0);
+    font-size: 12px;
+    border-radius: 8px;
+    width: 125px !important;
+    height: auto !important;
+    text-align: -webkit-center;
+    align-items: center;
+}
+
+.estiloNombreEstacion {
+    border-radius: 5px;
+    width: 115px;
+    margin: 5px;
+}
