@@ -1,10 +1,51 @@
-import Estacion from "../Entities/Estacion.js";
 import { Core } from "../Core.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
+import { CreateElement } from "../Utilities/CustomFunctions.js";
+import { EnumUnidadesSignal } from "../Utilities/Enums.js";
 
 class Particular {
-  constructor(estacion) {
-    this.estacion = estacion;
+  static #_instance = null;
+  Estacion = undefined;
+  /**
+   *@return {Particular}
+   */
+  static get Instance() {
+    if (!this.#_instance) {
+      this.#_instance = new Particular();
+    }
+    return this.#_instance;
   }
+
+  constructor() {
+    EventsManager.Instance.Suscribirevento(
+      "Update",
+      new EventoCustomizado(this.Update)
+    );
+  }
+  /**
+   * @type {HTMLElement}
+   */
+  HTMLUpdateElements = {};
+
+  setEstacion(estacion) {
+    this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
+  }
+
+  Update = () => {
+    console.log("particular Update");
+    const estacionUpdate = Core.Instance.GetDatosEstacion(
+      this.Estacion.IdEstacion
+    );
+
+    estacionUpdate.Signals.forEach((signal) => {
+      let signalActualizar =
+        this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
+
+      if (signalActualizar) {
+        signalActualizar.innerText = signal.Valor;
+      }
+    });
+  };
 
   mostrarDetalles() {
     // Elementos del DOM
@@ -14,10 +55,10 @@ class Particular {
     this.$headerStatus = document.querySelector("#state");
     this.$particularImg = document.querySelector("#particularImg");
 
-    this.$headerTitle.innerText = this.estacion.Nombre;
+    this.$headerTitle.innerText = this.Estacion.Nombre;
 
     // Cambiar el texto de acuerdo al estado de la estación
-    if (this.estacion.Enlace == "0") {
+    if (this.Estacion.Enlace == "0") {
       this.$headerStatus.innerText = "Fuera de línea";
       this.$headerStatus.style.color = "red";
     } else {
@@ -26,7 +67,7 @@ class Particular {
     }
 
     // Obtener la fecha y formatearla
-    const fecha = new Date(this.estacion.Tiempo);
+    const fecha = new Date(this.Estacion.Tiempo);
     const options = {
       year: "2-digit",
       month: "2-digit",
@@ -40,7 +81,7 @@ class Particular {
     this.$headerDate.innerText = fechaFormateada;
 
     // Construir la URL de la imagen particular
-    const sitioAbrev = this.estacion.Abreviacion;
+    const sitioAbrev = this.Estacion.Abreviacion;
     const urlImgParticular = `http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=10`;
 
     // Asignar la URL de la imagen al atributo src del elemento de imagen
@@ -62,27 +103,49 @@ class Particular {
     );
     this.$signalsContainer.innerHTML = "";
 
-    this.estacion.Signals.forEach((signal) => {
-      const signalItem = document.createElement("div");
-      signalItem.classList.add("particular__item");
+    this.Estacion.Signals.forEach((signal) => {
+      // const signalItem = document.createElement("div");
+      // signalItem.classList.add("particular__item");
 
-      const etiquetaNombre = document.createElement("div");
-      etiquetaNombre.classList.add("etiqueta__Nombre");
-      etiquetaNombre.textContent = signal.Nombre;
+      const $signalItem = CreateElement({
+        nodeElement: "div",
+        attributes: { class: "particular__item" },
+      });
 
-      const etiquetaValor = document.createElement("div");
-      etiquetaValor.classList.add("etiqueta__Valor");
-      etiquetaValor.textContent = signal.Valor;
+      const $etiquetaNombre = CreateElement({
+        nodeElement: "div",
+        attributes: { class: "etiqueta__Nombre" },
+        innerText: signal.Nombre,
+      });
 
-      const etiquetaUnidad = document.createElement("div");
-      etiquetaUnidad.classList.add("etiqueta__Unidad");
-      etiquetaUnidad.textContent = "m";
+      const $etiquetaValor = CreateElement({
+        nodeElement: "div",
+        attributes: {
+          class: "etiqueta__Valor",
+          id: `particular__valorSlider_${signal.IdSignal}`,
+        },
+        innerText: signal.Valor,
+      });
 
-      signalItem.appendChild(etiquetaNombre);
-      signalItem.appendChild(etiquetaValor);
-      signalItem.appendChild(etiquetaUnidad);
+      const $etiquetaUnidad = CreateElement({
+        nodeElement: "div",
+        attributes: { class: "etiqueta__Unidad" },
+        innerText: `${EnumUnidadesSignal[signal.TipoSignal]}`,
+      });
 
-      this.$signalsContainer.appendChild(signalItem);
+      $signalItem.append($etiquetaNombre, $etiquetaValor, $etiquetaUnidad);
+      this.alojarElementoDinamico([$etiquetaValor]);
+
+      this.$signalsContainer.appendChild($signalItem);
+    });
+  }
+  /**
+   *aloja un elemento dinamico a la propiedad HTML
+   * @param {[HTMLElement]} elementos
+   */
+  alojarElementoDinamico(elementos) {
+    elementos.forEach((elemento) => {
+      this.HTMLUpdateElements[elemento.id] = elemento;
     });
   }
 
@@ -117,7 +180,7 @@ class Particular {
   }
 
   panelControl() {
-    const signals = this.estacion.Signals;
+    const signals = this.Estacion.Signals;
     const tipoSignal7Count = signals.filter(
       (signal) => signal.TipoSignal === 7
     ).length;
@@ -134,3 +197,5 @@ class Particular {
 }
 
 export { Particular };
+
+// tengo un update, pero se generan multiples
