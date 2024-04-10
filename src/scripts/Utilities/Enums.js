@@ -30,11 +30,35 @@ const EnumControllerMapeo = {
 /**
  * @returns {EnumTipoSignal}
  */
-const EnumTipoSignal = {
-    Nivel: "m",
-    Presion: "kg/cm2",
-    Gasto: "l/s",
-    Totalizado: "m3"
+var EnumTipoSignal =
+{
+    Default: 0,
+    Nivel: 1,
+    Presion: 2,
+    Gasto: 3,
+    Totalizado: 4,
+    ValvulaAnalogica: 5,
+    ValvulaDiscreta: 6,
+    Bomba: 7,
+    PerillaBomba: 8,
+    PerillaGeneral: 9,
+    Voltaje: 10,
+    Enlace: 11,
+    FallaAC: 12,
+    Tiempo: 13,
+    Mantenimiento: 14,
+    PuertaAbierta: 15
 }
 
-export { RequestType, EnumProyecto, EnumControllerMapeo, EnumTipoSignal }
+/**
+ * @returns {EnumUnidadesSignal}
+ */
+const EnumUnidadesSignal = {
+    1: "m",
+    2: "kg/cm2",
+    3: "l/s",
+    4: "m3",
+    10: "v"
+}
+
+export { RequestType, EnumProyecto, EnumControllerMapeo, EnumTipoSignal, EnumUnidadesSignal }

@@ -13,6 +13,9 @@ class Estacion {
         this.Abreviacion = estacionCruda.abreviacion;
         this.TipoEstacion = estacionCruda.TipoEstacion;
         this.Lineas = this.#EstablecerLineas(estacionCruda.lineas);
+        /**
+         * @type {[Signal]}
+         */
         this.Signals = this.#EstablecerSignals(estacionCruda.signals)
     }
     /**
@@ -25,6 +28,11 @@ class Estacion {
     }
     #EstablecerSignals(signalsCrudas) {
         return signalsCrudas.map(signalCruda => new Signal(signalCruda))
+    }
+    ObtenerPrimerSignal() {
+        if (this.Signals.length > 0) {
+            return this.Signals[0];
+        }
     }
 }
 
