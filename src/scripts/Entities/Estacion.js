@@ -1,5 +1,6 @@
 import Linea from "./Linea.js";
 import Signal from "./Signal.js";
+import { EnumTipoSignal } from "../Utilities/Enums.js";
 
 
 class Estacion {
@@ -33,6 +34,14 @@ class Estacion {
         if (this.Signals.length > 0) {
             return this.Signals[0];
         }
+    }
+    /**
+     * 
+     * @param {keyof EnumTipoSignal} EnumTipoSignal 
+     * @returns {[Signal]}
+     */
+    ObtenerSignalPorTipoSignal(EnumTipoSignal){
+        return this.Signals.filter(signal  => signal.TipoSignal == EnumTipoSignal) ?? [];     
     }
 }
 
