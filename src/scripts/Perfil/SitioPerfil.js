@@ -15,7 +15,6 @@ class SitioPerfil {
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
-        console.log(estacion);
 
         let estacionDiv = document.createElement("div");
         let nombreEstacion = document.createElement("p");
