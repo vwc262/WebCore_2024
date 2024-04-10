@@ -66,6 +66,29 @@ var EnumTipoSignal =
 }
 
 /**
+ * @returns {EnumTipoSignalString}
+ */
+var EnumTipoSignalString =
+{
+    0: 'Default',
+    1: 'Nivel',
+    2: 'Presion',
+    3: 'Gasto',
+    4: 'Totalizado',
+    5: 'ValvulaAnalogica',
+    6: 'ValvulaDiscreta',
+    7: 'Bomba',
+    8: 'PerillaBomba',
+    9: 'PerillaGeneral',
+    10: 'Voltaje',
+    11: 'Enlace',
+    12: 'FallaAC',
+    13: 'Tiempo',
+    14: 'Mantenimiento',
+    15: 'PuertaAbierta',
+}
+
+/**
  * @returns {EnumUnidadesSignal}
  */
 const EnumUnidadesSignal = {
@@ -76,4 +99,4 @@ const EnumUnidadesSignal = {
     10: "v"
 }
 
-export { RequestType, EnumProyecto, EnumControllerMapeo, EnumTipoSignal, EnumUnidadesSignal, EnumNombreProyecto }
+export { RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString }

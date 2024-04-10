@@ -35,12 +35,9 @@ class Row {
     this.Update();
 
     this.rowContainer.addEventListener("click", (event) => {
-      // particular
       const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-      const particular = new Particular(estacion);
-      particular.mostrarDetalles();
-
-      alert("se supone que aqui deberia ir al particular: " + estacion.Nombre);
+      Particular.Instance.setEstacion(estacion);
+      Particular.Instance.mostrarDetalles();
     });
 
     return this.rowContainer;

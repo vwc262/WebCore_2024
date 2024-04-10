@@ -1,45 +1,52 @@
 import Estacion from "../Entities/Estacion.js";
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-
+import { CreateElement } from '../Utilities/CustomFunctions.js'
+import Signal from "../Entities/Signal.js";
+import { Cell } from "./Cell.js";
 
 class RowVariables {
     /**
      * 
      * @param {Estacion} estacion 
+     * @param {Map<string, [Signal]>} columns
      */
-    constructor(IdEstacion) {
+    constructor(IdEstacion, columns) {
         this.IdEstacion = IdEstacion;
+        this.columns = columns;
+
         this.create();
     }
 
     create() {
+
         this.rowContainer = document.createElement('div');
         this.rowContainer.classList = `sitio-tabla`;
+        this.signalsContainer = [];
+        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
 
-        this.enlace = document.createElement('img');
-        this.enlace.classList = `enlace-tabla`;
+        estacion.Signals.forEach(signal => {
+            if (this.columns[signal.TipoSignal]) {
+                this.columns[signal.TipoSignal].push(signal);
+            }
+        });
 
-        let nombreFechaContainer = document.createElement('div');
-        nombreFechaContainer.classList = `nombre-Fecha-Container`;
+        Object.keys(this.columns).forEach(key => {
 
-        this.nombre = document.createElement('div');
-        this.nombre.classList = `nombre-tabla`;
-
-        this.fecha = document.createElement('div');
-        this.fecha.classList = `fecha-tabla`;
-
-        this.rowContainer.append(this.enlace, nombreFechaContainer);
-        nombreFechaContainer.append(this.nombre, this.fecha);
+            if (this.columns[key].length > 0) {
+                this.signalsContainer.push(new Cell(this.columns[key][0]));
+                this.rowContainer.appendChild(this.signalsContainer[this.signalsContainer.length - 1].create());
+            } else {
+                this.rowContainer.appendChild(this.signalColumnContainer = CreateElement({
+                    nodeElement: 'div',
+                    attributes: { class: 'signal-Column-Container-NA' },
+                    innerText: 'N/A',
+                    events: new Map()
+                }));
+            }
+        });
 
         this.Update();
-
-        this.rowContainer.addEventListener('click', (event) => {
-            // particular
-            const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-
-            alert("se supone que aqui deberia ir al particular: " + estacion.Nombre);
-        });
 
         return this.rowContainer;
     }
@@ -47,9 +54,6 @@ class RowVariables {
     Update() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
 
-        this.nombre.innerText = `${estacion.Nombre}`;
-        this.enlace.setAttribute('src', 'http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/state_0.png?v=10');
-        this.fecha.innerText = `${estacion.Tiempo}`;
     }
 
     // suscribirEventos() {
