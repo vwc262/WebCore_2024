@@ -2,7 +2,8 @@ import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import configuracion from "../../config/PadiernaConfig.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumUnidadesSignal } from "../Utilities/Enums.js";
+import { EnumTipoSignal, EnumUnidadesSignal } from "../Utilities/Enums.js";
+import { CreateElement } from "../Utilities/CustomFunctions.js";
 
 class SitioPerfil {
     /**
@@ -16,27 +17,22 @@ class SitioPerfil {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
 
-        let estacionDiv = document.createElement("div");
-        let nombreEstacion = document.createElement("p");
-        let signalEtiqueta = document.createElement("p");
-
-        let imagenEstacionFondoPerfil = document.createElement("img");
+        let signalEtiqueta;
+        let estacionDiv = CreateElement({ nodeElement: 'div', attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil' } });
+        let nombreEstacion = CreateElement({ nodeElement: 'p', attributes: { id: `idEstacion_${estacion.IdEstacion}`, class: 'estiloNombreEstacion', style: `background: ${estacion.Enlace == 0 ? "red" : "green"}` }, innerText: estacion.Nombre });
+        let imagenEstacionFondoPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idEstacionFondo_${estacion.IdEstacion}`, class: "idEstacionFondo", style: `background: url(${Core.Instance.ResourcesPath}/Sitios/${estacion.Abreviacion}/Perfil/m.png?v=10)` } })
         let imagenEstacionNivelPerfil = document.createElement("img");
-        let imagenEstacionBombaPerfil = document.createElement("img");
 
-        nombreEstacion.innerText = estacion.Nombre;
 
         if (signal) {
-            signalEtiqueta.innerText = `${signal.Nombre}: ${signal.Valor} ${EnumUnidadesSignal[signal.TipoSignal]}`;
+            signalEtiqueta = CreateElement({ nodeElement: 'p', innerText: `${signal.Nombre}: ${signal.Valor} ${EnumUnidadesSignal[signal.TipoSignal]}` });
+
+            estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
+                let imagenEstacionBombaPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "Bomba", style: `background: url(${Core.Instance.ResourcesPath}/Sitios/${estacion.Abreviacion}/Perfil/b/)` } })
+            })
         }
 
-        estacionDiv.setAttribute("class", `sitioPerfil_${estacion.Nombre}`);
-        estacionDiv.setAttribute("class", `sitioPerfil`);
-
-        nombreEstacion.setAttribute("class", `estiloNombreEstacion`); 
-        nombreEstacion.setAttribute("id", `idEstacion_${estacion.IdEstacion}`);
-        nombreEstacion.style.background = estacion.Enlace == 0 ? "red" : "green";
-
+        //estacionDiv.append(imagenEstacionFondoPerfil);
         estacionDiv.append(nombreEstacion);
         estacionDiv.append(signalEtiqueta);
 
