@@ -62,9 +62,9 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     align-content: center;
-    width: 100%;
+    width: 92%;
 }
 
 .enlace-tabla {
@@ -94,9 +94,9 @@
 
 .header-table-variables {
     position: absolute;
-    top: 65px;
-    left: 105px;
-    width: 840px;
+    top: 80px;
+    left: 55px;
+    width: 869px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -144,10 +144,12 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    width: 90px;
+    height: 60px;
 }
 
 .iconthImage {
-    height: 60px;
+    height: 55px;
 }
 
 .headerText {
@@ -176,4 +178,19 @@
     background-size: 100% 100% !important;
     pointer-events: auto;
     background: url("http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/btn_abrirrotate.png?v=10");
+}
+
+/*  */
+
+.signal-Column-Container{
+    width: 70px;
+    height: 42px;
+}
+
+.signal-nombre{
+
+}
+
+.signal-valor{
+
 }

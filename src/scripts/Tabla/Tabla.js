@@ -1,5 +1,6 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
+import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { Row } from "./Row.js";
 import { RowVariables } from "./RowVariables.js";
 
@@ -58,9 +59,27 @@ class Tabla {
             this.tBodyVariablesContainer.style = `right:${visible ? '-455' : '475'}px;`;
         });
 
+        this.columns = {
+            1: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).length > 0),
+            2: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Presion).length > 0),
+            3: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Gasto).length > 0),
+            4: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Totalizado).length > 0),
+            5: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.ValvulaAnalogica).length > 0),
+            6: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.ValvulaDiscreta).length > 0),
+            7: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).length > 0),
+            9: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PerillaGeneral).length > 0),
+            10: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Voltaje).length > 0),
+            12: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.FallaAC).length > 0),
+            15: Core.Instance.data.filter(estacion => estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PuertaAbierta).length > 0),
+        }
+
+        Object.keys(this.columns).forEach(key => {
+            if (this.columns[key].length == 0) {
+                delete this.columns[key];
+            } else this.columns[key] = []
+        });
 
         this.create();
-
     }
 
     /**
@@ -108,8 +127,9 @@ class Tabla {
         for (let indexEstacion = -this.indice; indexEstacion < Core.Instance.data.length; indexEstacion++) {
             const estacion = Core.Instance.data[indexEstacion];
 
-            this.rows.push(new Row(estacion.IdEstacion, indexEstacion));
-            this.rowVariables.push(new RowVariables(estacion.IdEstacion, indexEstacion));
+            this.rows.push(new Row(estacion.IdEstacion));
+            this.rowVariables.push(new RowVariables(estacion.IdEstacion, this.columns));
+            
             const row = this.rows[this.rows.length - 1];
             const rowVariables = this.rowVariables[this.rows.length - 1];
 
