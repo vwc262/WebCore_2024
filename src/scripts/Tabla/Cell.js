@@ -21,8 +21,6 @@ class Cell {
             events: new Map()
         });
 
-console.log(this.signal.TipoSignal, this.moreThanOne)
-
         this.signalNombre = CreateElement({
             nodeElement: 'div',
             attributes: { class: 'signal-nombre'/*, style: `color: ${this.moreThanOne ? 'cyan' : 'white'};`*/ },
