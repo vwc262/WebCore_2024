@@ -16,6 +16,8 @@ class Mapa {
       center: { lat: 19.4286, lng: -99.251 },
       zoom: 13,
     });
+
+    console.log(Core.Instance.data);
   }
 
   createMarkers() {

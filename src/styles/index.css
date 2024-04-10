@@ -120,4 +120,5 @@ aside {
 
 .section__particular {
   background-color: darksalmon;
+  z-index: 15;
 }
