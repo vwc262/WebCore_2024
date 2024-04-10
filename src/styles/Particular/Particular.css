@@ -54,21 +54,6 @@
   display: none;
 }
 
-.particular__slider input {
-  -webkit-appearance: none;
-  width: 250px !important;
-  display: inline-block;
-  border-radius: 25px;
-  background: linear-gradient(
-    90deg,
-    rgb(24 49 57) 0%,
-    rgb(77 200 124) 50%,
-    rgb(20 45 53) 100%
-  );
-  transform: scale(0.65);
-  box-shadow: 0px 4px 5px 0px #0000008f;
-}
-
 .etiqueta__Nombre {
   color: cyan;
   text-align: center;
@@ -130,4 +115,37 @@
 .header__datos-particular {
   opacity: 0;
   transition: all 0.4s ease;
+}
+
+.particular__slider input[type="range"] {
+  appearance: none;
+  width: 250px !important;
+  height: 10px;
+  display: inline-block;
+  border-radius: 25px;
+  background: linear-gradient(
+    90deg,
+    rgb(24 49 57) 0%,
+    rgb(77 200 124) 50%,
+    rgb(20 45 53) 100%
+  );
+  transform: scale(0.65);
+  box-shadow: 0px 4px 5px 0px #0000008f;
+}
+
+.particular__slider input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  position: relative;
+  background: url(http://w1.doomdns.com:11002/RecursosWeb//Client//TanquesPadierna//General//esfera_slider.png);
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: all 0.6s ease;
+  cursor: pointer;
+}
+
+.particular__slider input[type="range"]::-webkit-slider-thumb:hover {
+  width: 30px;
+  height: 30px;
 }

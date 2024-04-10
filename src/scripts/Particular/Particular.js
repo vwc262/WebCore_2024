@@ -1,10 +1,15 @@
 import { Core } from "../Core.js";
+import Estacion from "../Entities/Estacion.js";
+import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { EnumUnidadesSignal } from "../Utilities/Enums.js";
 
 class Particular {
   static #_instance = null;
+  /**
+   * @type {Estacion}
+   */
   Estacion = undefined;
   /**
    *@return {Particular}
@@ -42,7 +47,7 @@ class Particular {
         this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
 
       if (signalActualizar) {
-        signalActualizar.innerText = signal.Valor;
+        signalActualizar.innerText = signal.GetValorString(true, true);
       }
     });
   };
@@ -75,19 +80,12 @@ class Particular {
       this.$headerStatus.style.color = "green";
     }
 
-    // Obtener la fecha y formatearla
-    const fecha = new Date(this.Estacion.Tiempo);
-    const options = {
-      year: "2-digit",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    const fechaFormateada = fecha.toLocaleDateString("es-ES", options);
-
     // Asignar la fecha formateada al elemento HTML
-    this.$headerDate.innerText = fechaFormateada;
+    this.$headerDate.innerText = this.Estacion.ObtenerFecha();
+    // this.$headerDate.setAttribute(
+    //   "id",
+    //   `particular__date_${this.Estacion.IdEstacion}`
+    // );
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
@@ -127,7 +125,7 @@ class Particular {
       const $etiquetaNombre = CreateElement({
         nodeElement: "div",
         attributes: { class: "etiqueta__Nombre" },
-        innerText: signal.Nombre,
+        innerText: `${signal.GetNomenclaturaSignal()}: `,
       });
 
       const $etiquetaValor = CreateElement({
@@ -135,17 +133,12 @@ class Particular {
         attributes: {
           class: "etiqueta__Valor",
           id: `particular__valorSlider_${signal.IdSignal}`,
+          style: `color: ${signal.GetValorColor()}`,
         },
-        innerText: signal.Valor,
+        innerText: signal.GetValorString(true, true),
       });
 
-      const $etiquetaUnidad = CreateElement({
-        nodeElement: "div",
-        attributes: { class: "etiqueta__Unidad" },
-        innerText: `${EnumUnidadesSignal[signal.TipoSignal]}`,
-      });
-
-      $signalItem.append($etiquetaNombre, $etiquetaValor, $etiquetaUnidad);
+      $signalItem.append($etiquetaNombre, $etiquetaValor);
       this.alojarElementoDinamico([$etiquetaValor]);
 
       this.$signalsContainer.appendChild($signalItem);
@@ -207,3 +200,17 @@ class Particular {
 export { Particular };
 
 // tengo un update, pero se generan multiples
+
+// const openModal = document.querySelector('.hero__cta');
+// const modal = document.querySelector('.modal');
+// const closeModal = document.querySelector('.modal__close');
+
+// openModal.addEventListener('click', (e)=>{
+//     e.preventDefault();
+//     modal.classList.add('modal--show');
+// });
+
+// closeModal.addEventListener('click', (e)=>{
+//     e.preventDefault();
+//     modal.classList.remove('modal--show');
+// });
