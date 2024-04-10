@@ -3,7 +3,7 @@ import Login from "./Entities/Login/Login.js";
 const $btnHeader = document.querySelector(".header__buttons");
 const btnHome = document.querySelector(".headerBtn__Home");
 
-const ultimoBotonSeleccionado = undefined;
+let ultimoBotonSeleccionado = btnHome;
 
 $btnHeader.addEventListener("click", (ev) => {
   if (ev.target.nodeName == "DIV") {

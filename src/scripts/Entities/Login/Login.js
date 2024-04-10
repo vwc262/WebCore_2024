@@ -1,6 +1,6 @@
 import * as CustomFunctions from "../../Utilities/CustomFunctions.js";
-import { EnumNombreProyecto, RequestType } from "../../Utilities/Enums.js";
-import { GoHome } from "../../uiManager.js";
+import { RequestType } from "../../Utilities/Enums.js";
+import { GoBack, GoHome } from "../../uiManager.js";
 import { Core } from "../../Core.js"
 import { Fetcher } from "../../Fetcher/Fetcher.js";
 import { Credentials } from "./Credentials.js";
@@ -75,6 +75,7 @@ class Login {
                 this.userName = this.#inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
                 alert(result.message);
+                GoBack();
             } else {
                 alert('Credenciales no autorizadas');
             }
