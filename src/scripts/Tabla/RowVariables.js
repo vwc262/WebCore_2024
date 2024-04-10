@@ -23,6 +23,16 @@ class RowVariables {
         this.rowContainer = document.createElement('div');
         this.rowContainer.classList = `sitio-tabla`;
         this.signalsContainer = [];
+
+        this.expandRow = CreateElement({
+            nodeElement: 'div',
+            attributes: { class: 'expand-btn-Row' },
+            innerText: '',
+            events: new Map()
+        });
+
+        this.rowContainer.append(this.expandRow);
+
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
 
         estacion.Signals.forEach(signal => {
@@ -34,7 +44,7 @@ class RowVariables {
         Object.keys(this.columns).forEach(key => {
 
             if (this.columns[key].length > 0) {
-                this.signalsContainer.push(new Cell(this.columns[key][0]));
+                this.signalsContainer.push(new Cell(this.columns[key][0], this.columns[key].length > 1));
                 this.rowContainer.appendChild(this.signalsContainer[this.signalsContainer.length - 1].create());
             } else {
                 this.rowContainer.appendChild(this.signalColumnContainer = CreateElement({

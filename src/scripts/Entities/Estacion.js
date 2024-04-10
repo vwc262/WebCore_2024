@@ -40,8 +40,37 @@ class Estacion {
      * @param {keyof EnumTipoSignal} EnumTipoSignal 
      * @returns {[Signal]}
      */
-    ObtenerSignalPorTipoSignal(EnumTipoSignal){
-        return this.Signals.filter(signal  => signal.TipoSignal == EnumTipoSignal) ?? [];     
+    ObtenerSignalPorTipoSignal(EnumTipoSignal) {
+        return this.Signals.filter(signal => signal.TipoSignal == EnumTipoSignal) ?? [];
+    }
+
+    /**
+     * @returns {string} fecha con formato
+     */
+    ObtenerFecha() {
+        let stringDate = this.Tiempo;
+        if (stringDate.includes('Date')) {
+            stringDate = stringDate.split("(")[1].split(")")[0];
+            stringDate = new Date(parseInt(stringDate));
+        }
+        else {
+
+            stringDate = new Date(stringDate);
+        }
+        let fullYear = stringDate.getFullYear();
+        let month = stringDate.getMonth() + 1;
+        month = month < 10 ? "0" + month : month;
+        let day = stringDate.getDate();
+        day = day < 10 ? "0" + day : day;
+        let hours = stringDate.getHours();
+        hours = hours < 10 ? "0" + hours : hours;
+        let minutes = stringDate.getMinutes();
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        let seconds = stringDate.getSeconds();
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        stringDate = day + '/' + month + '/' + fullYear + ' ' + hours + ':' + minutes;
+        
+        return stringDate;
     }
 }
 
