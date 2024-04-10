@@ -20,44 +20,50 @@ class SitioPerfil {
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
+        const estilosEstacionEtiqueta = configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
 
         let valorSignal;
         let estacionDiv = CreateElement({ nodeElement: 'div', attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil' } });
         let etiquetaDiv = CreateElement({ nodeElement: 'div', attributes: { id: `etiquetaSitioPerfil_${estacion.Nombre}`, class: 'etiquetaSitioPerfil' } });
         let estacionPerfilDiv = CreateElement({ nodeElement: 'div', attributes: { id: `estacionPerfil_${estacion.Nombre}`, class: 'estacionPerfil' } });
         let nombreSitio = CreateElement({ nodeElement: 'p', attributes: { id: `idEstacion_${estacion.IdEstacion}`, class: 'estiloNombreEstacion', style: `background: ${estacion.Enlace == 0 ? "red" : "green"}` }, innerText: estacion.Nombre });
-        let imagenEstacionFondoPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idEstacionFondo_${estacion.Abreviacion}`, class: "idEstacionFondo", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/m.png?v=10` } });
-        let imagenEstacionNivelPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idEstacionNivel_${estacion.Abreviacion}`, class: "idEstacionFondo", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/l/n1_0.png?v=10 ` } });
-        let imagenEstacionBombaPerfil;
 
         if (signal) {
-            const valor = `${signal.Valor} ${EnumUnidadesSignal[signal.TipoSignal]}`;
-            
-            valorSignal = CreateElement({ nodeElement: 'p', attributes: {id: `valor_${signal.Nombre}`} ,innerText: `${signal.Nombre}: ${estacion.Enlace == 0 ? "---" : valor}` });
-            estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
-                imagenEstacionBombaPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "Bomba", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/b/` } })
-            })
+            const valor = `${signal.GetValorString(true, true)}`;
+
+            valorSignal = CreateElement({ nodeElement: 'p', attributes: { id: `valor_${signal.Nombre}`, style: `color: ${signal.GetValorColor()}` }, innerText: `${signal.GetNomenclaturaSignal()}: ${estacion.Enlace == 0 ? "---" : valor}` });
         }
 
-        estacionPerfilDiv.append(imagenEstacionFondoPerfil, imagenEstacionNivelPerfil);
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+            let imagenEstacionNivelPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idEstacionNivel_${estacion.Abreviacion}`, class: "idEstacionFondo", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/l/n${signalNivel.Ordinal + 1}_${signalNivel.IndiceImagen}.png?v=10 ` } });
+            estacionPerfilDiv.append(imagenEstacionNivelPerfil);
+            if (estilosEstacionEtiqueta != undefined)
+                imagenEstacionNivelPerfil.style = estilosEstacionEtiqueta.Imagen;
+        })
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
+            let imagenEstacionBombaPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "Bomba", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/b/b${signalBomba.Ordinal + 1}_${signalBomba.Valor}.png` } });
+            estacionPerfilDiv.append(imagenEstacionBombaPerfil);
+            if (estilosEstacionEtiqueta != undefined)
+                imagenEstacionBombaPerfil.style = estilosEstacionEtiqueta.Imagen;
+        })
+
         etiquetaDiv.append(nombreSitio, valorSignal);
 
         this.ElementosDinamicosHTML[nombreSitio.id] = nombreSitio;
-        if(signal){
+        if (signal) {
             this.ElementosDinamicosHTML[valorSignal.id] = valorSignal;
         }
-        estacionDiv.append(etiquetaDiv, estacionPerfilDiv);
+        estacionDiv.append(estacionPerfilDiv, etiquetaDiv);
 
-        this.ponerEstilos(etiquetaDiv, estacionPerfilDiv);
+        this.ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta);
         this.suscribirEventos();
         return estacionDiv;
     }
 
-    ponerEstilos(etiquetaDiv, estacionPerfilDiv) {
-        const estilosEstacionEtiqueta = configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
+    ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta) {
+
         if (estilosEstacionEtiqueta != undefined) {
             etiquetaDiv.style = estilosEstacionEtiqueta.Etiqueta;
-            estacionPerfilDiv.style = estilosEstacionEtiqueta.Imagen;
         }
     }
 
@@ -71,11 +77,11 @@ class SitioPerfil {
 
         const name = this.ElementosDinamicosHTML[`idEstacion_${estacion.IdEstacion}`];
         name.style.background = estacion.Enlace == 0 ? "red" : "green";
-        
+
         if (signal) {
-            const valor = `${signal.Valor} ${EnumUnidadesSignal[signal.TipoSignal]}`;
+            const valor = `${signal.GetValorString(true, true)} ${EnumUnidadesSignal[signal.TipoSignal]}`;
             const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.Nombre}`];
-            valorSignal.innerText = `${signal.Nombre}: ${estacion.Enlace == 0 ? "---" : valor}`;
+            valorSignal.innerText = `${signal.GetNomenclaturaSignal()}: ${estacion.Enlace == 0 ? "---" : valor}`;
         }
     }
 }

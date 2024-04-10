@@ -2,58 +2,65 @@ var configuracion = {
     perfil: {
         estilosEstacion: [
             {
+                "IdEstacion": 1,
+                "Imagen": "position: absolute; width: 199px; height: 122px; left: 221px; top: 691px;",
+                "Etiqueta": "position: absolute; top: 645px; left: 23px;",
+                "Estado": "display:none;"
+                
+            },
+            {
                 "IdEstacion": 2,
-                "Imagen": "position: absolute; width: 199px; height: 122px; left:  221px; top: 691px;",
-                "Etiqueta": "position: absolute; top: 645px; left:   23px;",
+                "Imagen": "position: absolute; width: 199px; height: 122px; left: 221px; top: 691px;",
+                "Etiqueta": "position: absolute; top: 645px; left: 23px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 3,
-                "Imagen": "position: absolute; width: 141px; height: 86px; left:  130px; top: 442px;",
+                "Imagen": "position: absolute; width: 141px; height: 86px; left: 130px; top: 442px;",
                 "Etiqueta": "position: absolute; top: 335px; left:   44px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 4,
-                "Imagen": "position: absolute; width: 300px; height: 131px; left:  328px; top: 596px;",
+                "Imagen": "position: absolute; width: 300px; height: 131px; left: 328px; top: 596px;",
                 "Etiqueta": "position: absolute; top: 717px; left:  472px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 5,
-                "Imagen": "position: absolute; width: 176px; height: 144px; left:  639px; top: 535px;",
+                "Imagen": "position: absolute; width: 176px; height: 144px; left: 639px; top: 535px;",
                 "Etiqueta": "position: absolute; top: 438px; left:  640px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 6,
-                "Imagen": "position: absolute; width: 210px; height: 102px; left:  376px; top: 416px;",
+                "Imagen": "position: absolute; width: 210px; height: 102px; left: 376px; top: 416px;",
                 "Etiqueta": "position: absolute; top: 330px; left:  334px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 7,
-                "Imagen": "position: absolute; width: 151px; height: 171px; left:  417px; top: 150px;",
-                "Etiqueta": "position: absolute; top:  74px; left:  550px;",
+                "Imagen": "position: absolute; width: 151px; height: 171px; left: 417px; top: 150px;",
+                "Etiqueta": "position: absolute; top:  74px; left: 550px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 9,
                 "Imagen": "position: absolute; width: 189px; height: 119px; left:  797px; top: 739px;",
-                "Etiqueta": "position: absolute; top: 735px; left:  694px;",
+                "Etiqueta": "position: absolute; top: 735px; left: 694px;",
                 "Estado": "display:none;"
                 
             },
             {
                 "IdEstacion": 10,
                 "Imagen": "position: absolute; width: 164px; height: 116px; left:  854px; top: 529px;",
-                "Etiqueta": "position: absolute; top: 487px; left:  820px;",
+                "Etiqueta": "position: absolute; top: 487px; left: 820px;",
                 "Estado": "display:none;"
                 
             },
@@ -88,7 +95,7 @@ var configuracion = {
             {
                 "IdEstacion": 15,
                 "Imagen": "position: absolute; width: 201px; height: 111px; left: 1022px; top: 236px;",
-                "Etiqueta": "position: absolute; top: 155px; left:  972px;",
+                "Etiqueta": "position: absolute; top: 155px; left: 972px;",
                 "Estado": "display:none;"
                 
             },
@@ -130,7 +137,7 @@ var configuracion = {
             {
                 "IdEstacion": 21,
                 "Imagen": "position: absolute; width: 275px; height: 170px; left: 1036px; top: 869px;",
-                "Etiqueta": "position: absolute; top: 938px; left:  930px;",
+                "Etiqueta": "position: absolute; top: 938px; left: 930px;",
                 "Estado": "display:none;"
                 
             },
