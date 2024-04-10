@@ -49,7 +49,7 @@ class Particular {
 
   mostrarDetalles() {
     // Elementos del DOM
-    //console.log("Detalles de la estación:", this.estacion.Signals);
+    console.log("Detalles de la estación:", this.estacion.Signals);
     this.$headerTitle = document.querySelector("#title");
     this.$headerDate = document.querySelector("#date");
     this.$headerStatus = document.querySelector("#state");
