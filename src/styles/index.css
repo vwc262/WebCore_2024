@@ -13,6 +13,7 @@ body {
   width: 1920px;
   height: 1080px;
   color: white;
+  user-select: none;
 }
 
 header {
@@ -47,7 +48,6 @@ nav img {
 main {
   width: 1920px;
   height: 1080px;
-  background-color: aqua;
   overflow: hidden;
   position: absolute;
 }
@@ -103,11 +103,9 @@ aside {
 }
 
 .section__home {
-  background-color: rgb(51, 54, 54);
   z-index: 5;
 }
 .section__vistaMapa {
-  background-color: rgb(98, 0, 255);
   z-index: 4;
 }
 .section__graficador {
@@ -115,11 +113,9 @@ aside {
   z-index: 3;
 }
 .section__login {
-  background-color: rgb(229, 255, 0);
   z-index: 2;
 }
 
 .section__particular {
-  background-color: darksalmon;
   z-index: 1;
 }
