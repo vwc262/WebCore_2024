@@ -17,3 +17,7 @@
     width: 115px;
     margin: 5px;
 }
+
+.idEstacionFondo {
+    position: absolute;
+}
