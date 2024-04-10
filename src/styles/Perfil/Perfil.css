@@ -15,9 +15,36 @@
 .estiloNombreEstacion {
     border-radius: 5px;
     width: 115px;
+    height: auto;
     margin: 5px;
 }
 
 .idEstacionFondo {
     position: absolute;
+    margin: 5px;
+}
+
+.horizontalScroll {
+    width: 390px !important;
+    height: 10px;
+    position: absolute;
+    top: 1046px;
+    left: 533px;
+    background-color: #fff02c00 !important;
+    transform: rotate(180deg);
+    border-radius: 10px;
+    transition: all ease 0.2s;
+    background-size: 100% !important;
+    background-position: 0px 10px !important;
+    -webkit-appearance: none;
+}
+
+.horizontalScroll::-webkit-slider-thumb {
+    background: var(--bola);
+    -webkit-appearance: none;
+    appearance: none; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
 }
