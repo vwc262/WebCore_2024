@@ -2,13 +2,23 @@ import { VwcApp } from "./App.js";
 import Estacion from "./Entities/Estacion.js";
 import { Fetcher } from "./Fetcher/Fetcher.js";
 import { EventsManager } from "./Managers/EventsManager.js";
-import { EnumControllerMapeo, EnumProyecto, RequestType } from "./Utilities/Enums.js";
+import { EnumControllerMapeo, EnumNombreProyecto, EnumProyecto, RequestType } from "./Utilities/Enums.js";
 
 /**
  * Clase Base de la App Web
  */
 class Core {
+    /**
+     * Retorna la ruta de resources
+     * @returns {string }
+     */
+    get ResourcesPath() {
+        return `http://w1.doomdns.com:11002/RecursosWeb/WebCore24/${EnumNombreProyecto[this.IdProyecto]}/`;
+    }
     IdInterval = undefined;
+    /**
+     * @type {keyof EnumProyecto}
+     */
     IdProyecto = EnumProyecto.Default;
     /**
      * @type {[Estacion]}

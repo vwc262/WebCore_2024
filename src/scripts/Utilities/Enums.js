@@ -20,6 +20,21 @@ const EnumProyecto = {
     Lumbreras: 8,
 };
 /**
+ * @returns NombreProyecto
+ */
+const EnumNombreProyecto = {
+    Default: 0,
+    1: 'TanquesGustavoAMadero',
+    2: 'TanquesPadierna',
+    3: 'PozosSistemaLerma',
+    4: 'TanquesYaqui',
+    5: 'TanquesChalmita',
+    6: 'Encharcamientos',
+    7: 'Sectores',
+    8: 'Lumbreras',
+}
+
+/**
  * @returns {EnumControllerMapeo}
  */
 const EnumControllerMapeo = {
@@ -61,4 +76,4 @@ const EnumUnidadesSignal = {
     10: "v"
 }
 
-export { RequestType, EnumProyecto, EnumControllerMapeo, EnumTipoSignal, EnumUnidadesSignal }
+export { RequestType, EnumProyecto, EnumControllerMapeo, EnumTipoSignal, EnumUnidadesSignal, EnumNombreProyecto }
