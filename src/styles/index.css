@@ -17,7 +17,7 @@ body {
 
 header {
   width: 1920px;
-  height: 65px;
+  height: 58px;
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -48,6 +48,7 @@ main {
   width: 1920px;
   height: 1080px;
   background-color: aqua;
+  overflow: hidden;
 }
 
 section {
@@ -58,7 +59,6 @@ section {
 }
 
 aside {
-  background-color: rgb(202, 202, 149);
   position: absolute;
   z-index: 110;
   width: 600px;
