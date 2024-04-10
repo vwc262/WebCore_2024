@@ -1,11 +1,17 @@
 import * as CustomFunctions from "../../Utilities/CustomFunctions.js";
-import { EnumNombreProyecto } from "../../Utilities/Enums.js";
+import { EnumNombreProyecto, RequestType } from "../../Utilities/Enums.js";
 import { GoHome } from "../../uiManager.js";
 import { Core } from "../../Core.js"
+import { Fetcher } from "../../Fetcher/Fetcher.js";
+import { Credentials } from "./Credentials.js";
 class Login {
+    action = "Login"
     #isCreated = false;
     #btnConfirmar = undefined;
     #btnCancelar = undefined;
+    /**
+     * @type {HTMLElement}
+     */
     #inputusuario = undefined;
     #inputContrasena = undefined;
     static #instance = undefined;
@@ -40,12 +46,13 @@ class Login {
     #OnCancelar = (e) => {
         GoHome();
     }
-    #OnConfirmar = (e) => {
+    #OnConfirmar = async (e) => {
         if (this.#inputusuario.value == '' && this.#inputContrasena.value == '') {
             alert('Ingresar datos en los campos de usuario y contraseña');
             return;
         }
-
+        const result = await Fetcher.Instance.RequestData(this.action, RequestType.POST, new Credentials(this.#inputusuario.value, this.#inputContrasena.value, Core.Instance.IdProyecto), true);
+        alert(result);
 
     }
 }

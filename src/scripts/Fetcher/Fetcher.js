@@ -5,7 +5,7 @@ import { RequestType } from "../Utilities/Enums.js";
  * Clase base para request
  */
 class Fetcher {
-    root = 'http://w1.doomdns.com:11000/vwctestapi/crud';
+    #root = 'http://w1.doomdns.com:11000/vwctestapi/crud';
     static #_instance = undefined;
     /**
      * @returns {Fetcher}
@@ -19,7 +19,7 @@ class Fetcher {
     /**
      * Request de informacion a la API
      * @param {string} action 
-     * @param {RequestType} requestType 
+     * @param {RequestType } requestType 
      * @param {boolean} doSerialize 
      * @returns {object}
      */
@@ -36,7 +36,7 @@ class Fetcher {
             delete config.body;
             delete config.headers;
         }
-        const response = await fetch(`${this.root}/${action}`, config);
+        const response = await fetch(`${this.#root}/${action}`, config);
         return await response.json();
     }
 }

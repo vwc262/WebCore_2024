@@ -13,7 +13,7 @@ class Credentials {
     constructor(usuario, psw, idProyecto) {
         this.usuario = usuario;
         this.contrasena = psw;
-        this.idProyectp = idProyecto;
+        this.idProyecto = idProyecto;
     }
 }
 
