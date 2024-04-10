@@ -75,6 +75,8 @@ class Tabla {
 
         Object.keys(this.columns).forEach(key => {
             if (this.columns[key].length == 0) {
+                let th = document.querySelector(`.thContainer[tag="${key}"]`);
+                th.remove();
                 delete this.columns[key];
             } else this.columns[key] = []
         });
@@ -129,7 +131,7 @@ class Tabla {
 
             this.rows.push(new Row(estacion.IdEstacion));
             this.rowVariables.push(new RowVariables(estacion.IdEstacion, this.columns));
-            
+
             const row = this.rows[this.rows.length - 1];
             const rowVariables = this.rowVariables[this.rows.length - 1];
 

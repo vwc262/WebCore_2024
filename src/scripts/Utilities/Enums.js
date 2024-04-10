@@ -89,6 +89,29 @@ var EnumTipoSignalString =
 }
 
 /**
+ * @returns {EnumTipoSignalString}
+ */
+var EnumTipoSignalNomenclatura =
+{
+    0: 'D',
+    1: 'N',
+    2: 'P',
+    3: 'G',
+    4: 'T',
+    5: 'VA',
+    6: 'VD',
+    7: 'B',
+    8: 'PB',
+    9: 'PG',
+    10: 'V',
+    11: 'E',
+    12: 'AC',
+    13: 'T',
+    14: 'M',
+    15: 'PA',
+}
+
+/**
  * @returns {EnumUnidadesSignal}
  */
 const EnumUnidadesSignal = {
@@ -99,4 +122,79 @@ const EnumUnidadesSignal = {
     10: "v"
 }
 
-export { RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString }
+/**
+ * @returns {EnumValorValvulaDiscreta}
+ */
+const EnumValorValvulaDiscreta = {
+    NoDisponible: 0,
+    Cerrado: 1,
+    Abierto: 2
+}
+
+/**
+ * @returns {EnumFallaAC}
+ */
+const EnumFallaAC = {
+    Alarmado: 0,
+    Normal: 1,
+}
+
+/**
+ * @returns {EnumPuertaAbierta}
+ */
+const EnumPuertaAbierta = {
+    Alarmado: 0,
+    Normal: 1,
+}
+
+/**
+ * @returns {EnumValorBomba}
+ */
+const EnumValorBomba = {
+    NoDisponible: 0,
+    Arrancada: 1,
+    Apagada: 2,
+    Falla: 3
+}
+
+/**
+ * @returns {EnumPerillaBomba}
+ */
+const EnumPerillaBomba = {
+    Off: 0,
+    Remoto: 1,
+    Local: 2
+}
+
+/**
+ * @returns {EnumPerillaGeneral}
+ */
+const EnumPerillaGeneral = {
+    Manual: 0,
+    Remoto: 1,
+    Automatismo: 2
+}
+
+/**
+ * @returns {EnumEnlace}
+ */
+const EnumEnlace = {
+    FueraLinea: 0,
+    Radio: 1,
+    Celular: 2,
+    Hibrido: 3
+}
+
+/**
+ * @returns {EnumDentroLimite}
+ */
+const EnumDentroLimite = {
+    Bajo: 0,
+    Normal: 1,
+    Alto: 2,
+}
+
+export {
+    RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString, EnumTipoSignalNomenclatura,
+    EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite
+}

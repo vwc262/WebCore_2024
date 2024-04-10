@@ -51,7 +51,7 @@ class Row {
       "src",
       "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/state_0.png?v=10"
     );
-    this.fecha.innerText = `${estacion.Tiempo}`;
+    this.fecha.innerText = `${estacion.ObtenerFecha()}`;
   }
 
   // suscribirEventos() {

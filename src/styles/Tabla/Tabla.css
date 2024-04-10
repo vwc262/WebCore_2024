@@ -70,6 +70,7 @@
 .enlace-tabla {
     height: 20px;
     width: 20px;
+    margin-left: 15px;
 }
 
 .nombre-Fecha-Container {
@@ -126,7 +127,7 @@
     top: 170px;
     width: 950px;
     height: 800px;
-    left: 65px;
+    left: 45px;
     position: absolute;
     overflow: hidden;
 }
@@ -135,6 +136,8 @@
     width: 950px;
     height: 42px;
     background: linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%);
+    outline: 1px solid rgb(115 140 187 / 50%);
+    border-radius: 5px;
 }
 
 .thContainer {
@@ -182,15 +185,54 @@
 
 /*  */
 
-.signal-Column-Container{
-    width: 70px;
+.signal-Column-Container {
+    width: 85px;
     height: 42px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 1px black;
+    font-size: 11pt;
 }
 
-.signal-nombre{
-
+.signal-Column-Container-NA {
+    width: 85px;
+    height: 42px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color: rgb(206 206 206 / 45%);
+    text-shadow: 1px 1px 1px black;
+    font-size: 11pt;
 }
 
-.signal-valor{
+.signal-nombre {}
 
+.signal-valor {}
+
+.expand-btn-Row{
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-size: contain !important;
+    margin-top: 5px;
+    opacity: 1;
+    background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/General/mas_nrm.png?v=10);
+    pointer-events: all;
+    position: absolute;
+    left: -8px;
+}
+
+.bottomGlowColumn{
+    width: 215px;
+    height: 2px;
+    box-shadow: 2px 9px 6px 2px #5a71a2;
+    position: absolute;
+    top: 55px;
 }
