@@ -49,6 +49,7 @@ main {
   height: 1080px;
   background-color: aqua;
   overflow: hidden;
+  position: absolute;
 }
 
 section {
