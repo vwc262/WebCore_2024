@@ -32,7 +32,7 @@ class Particular {
   }
 
   Update = () => {
-    console.log("particular Update");
+    //console.log("particular Update");
     const estacionUpdate = Core.Instance.GetDatosEstacion(
       this.Estacion.IdEstacion
     );
@@ -54,6 +54,7 @@ class Particular {
     this.$headerDate = document.querySelector("#date");
     this.$headerStatus = document.querySelector("#state");
     this.$particularImg = document.querySelector("#particularImg");
+    this.$datosHeader = document.querySelector(".header__datos-particular");
 
     this.$headerTitle.innerText = this.Estacion.Nombre;
 
@@ -63,6 +64,7 @@ class Particular {
     section__graficador.style.zIndex = "5";
     section__login.style.zIndex = "5";
     section__particular.style.zIndex = "10";
+    this.$datosHeader.style.opacity = "1";
 
     // Cambiar el texto de acuerdo al estado de la estación
     if (this.Estacion.Enlace == "0") {
@@ -108,12 +110,15 @@ class Particular {
     this.$signalsContainer = document.querySelector(
       ".particular__ItemsContainer"
     );
+
     this.$signalsContainer.innerHTML = "";
+    this.HTMLUpdateElements = {};
 
-    this.Estacion.Signals.forEach((signal) => {
-      // const signalItem = document.createElement("div");
-      // signalItem.classList.add("particular__item");
-
+    //console.log(this.HTMLUpdateElements);
+    // Filtrar los signals con TipoSignal igual a 1, 3 o 4
+    this.Estacion.Signals.filter((signal) =>
+      [1, 3, 4].includes(signal.TipoSignal)
+    ).forEach((signal) => {
       const $signalItem = CreateElement({
         nodeElement: "div",
         attributes: { class: "particular__item" },
@@ -160,17 +165,13 @@ class Particular {
     const container = document.querySelector(".particular__ItemsContainer");
     const sliderInput = document.querySelector("#sliderInput");
 
-    // Comprobar si hay más de 10 elementos en el contenedor
-    const itemsCount = container.querySelectorAll(".particular__item").length;
-    if (itemsCount > 10) {
-      // Mostrar el control deslizante
+    // Mostrar el control deslizante si los elementos se desbordan del contenedor
+    if (container.scrollWidth > container.clientWidth) {
       document.querySelector(".particular__slider").style.display = "flex";
     } else {
-      // Ocultar el control deslizante
       document.querySelector(".particular__slider").style.display = "none";
     }
 
-    // Si el control deslizante está visible, actualizar la lógica de desplazamiento
     if (
       document.querySelector(".particular__slider").style.display !== "none"
     ) {
