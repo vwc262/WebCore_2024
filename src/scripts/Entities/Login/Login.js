@@ -1,6 +1,7 @@
 import * as CustomFunctions from "../../Utilities/CustomFunctions.js";
+import { EnumNombreProyecto } from "../../Utilities/Enums.js";
 import { GoHome } from "../../uiManager.js";
-
+import { Core } from "../../Core.js"
 class Login {
     #isCreated = false;
     #btnConfirmar = undefined;
@@ -19,6 +20,8 @@ class Login {
     }
     create() {
         if (!this.#isCreated) {
+            const backgroundVideo = document.querySelector('#loginVid1');
+            backgroundVideo.setAttribute('src', `${Core.Instance.ResourcesPath}/Control/login_loop.mp4?v=-1`)
             const mainContainer = document.querySelector('#section__login');
             // Si no se ha creado se crea el contenido
             const container = CustomFunctions.CreateElement({ nodeElement: 'div', attributes: { id: 'loginInputContainer', class: 'contenedorLogInInicial' } });

@@ -2,170 +2,177 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VWC - Tanques Padierna</title>
-  <script src="../scripts/Core.js" type="module"></script>
-  <link rel="stylesheet" href="../styles/index.css">
-  <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
-  <link rel="stylesheet" href="../styles/Particular/Particular.css">
-  <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VWC - Tanques Padierna</title>
+    <script src="../scripts/Core.js" type="module"></script>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
+    <link rel="stylesheet" href="../styles/Particular/Particular.css">
+    <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
+    <link rel="stylesheet" href="../styles/Login/Login.css">
 </head>
 
 <body>
-  <header>
-    <nav class="header__buttons">
-      <div class="headerBtn__Home header__active">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Iconos/home.png?v=undefined"
-          alt="">Home
-      </div>
-      <div class="headerBtn__Mapa">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Iconos/icomapa.png?v=undefined"
-          alt="">Mapa
-      </div>
-      <div class="headerBtn__Graficador">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Reportes/graficador.png?v=undefined"
-          alt="">Graficador
-      </div>
-      <div class="headerBtn__Login">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/login_btn.png?v=undefined"
-          alt="">Login
-      </div>
-    </nav>
-    <div class="header__title">
-      <h1 id="title">Tanques Padierna</h1>
-      <div class="header__datos-particular">
-        <span id="date">00/00/0000</span>
-        <span id="state">Fuera de línea</span>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <aside class="aside__tabla">
-      <div class="curved-table-variables-container">
-        <img class="fondo-tabla-variables"
-          src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/tablaVariables.png?v=10">
-
-        <div class="curved-tBody-variables">
-          <div class="curved-Row-variables" style="transform: translate( 5px,   0px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(16px,  12px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(26px,  24px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(31px,  36px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(36px,  48px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(39px,  60px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(40px,  72px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(42px,  84px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(39px,  96px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(36px, 108px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(32px, 120px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(26px, 132px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(18px, 144px);"></div>
-          <div class="curved-Row-variables" style="transform: translate( 8px, 156px);"></div>
-          <div class="curved-Row-variables" style="transform: translate(-5px, 168px);"></div>
-        </div>
-
-        <div class="header-table-variables">
-          <div class="thContainer" tag="levels">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/nivel.png?v=10">
-            <div class="headerText">Nivel<br>[m]</div>
-          </div>
-          <div class="thContainer" tag="pressures">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/presion.png?v=10">
-            <div class="headerText">Presion<br>[kg/cm<sup>2</sup>]</div>
-          </div>
-          <div class="thContainer" tag="ValvesPercentage">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/valvulamariposa.png?v=10">
-            <div class="headerText">Valvula mariposa<br>[%]</div>
-          </div>
-          <div class="thContainer" tag="isValveOpenlst">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/valvulaflotador.png?v=10">
-            <div class="headerText">Valvula flotador<br>&nbsp;</div>
-          </div>
-          <div class="thContainer" tag="pumps">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/bomba.png?v=10">
-            <div class="headerText">Bomba<br>&nbsp;</div>
-          </div>
-          <div class="thContainer" tag="voltages">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/voltaje.png?v=10">
-            <div class="headerText">Voltaje<br>[V]</div>
-          </div>
-          <div class="thContainer" tag="RTUOperationModeAndIsAutomatismOnCombineds">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/modocontrol.png?v=10">
-            <div class="headerText">Modo control<br>&nbsp;</div>
-          </div>
-          <div class="thContainer" tag="isAutomatismStoplst">
-            <img class="iconthImage"
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/fallaautomatismo.png?v=10">
-            <div class="headerText">Falla automatismo<br>&nbsp;</div>
-          </div>
-        </div>
-
-        <div class="btnTabla"></div>
-      </div>
-      <div class="curved-table-container">
-        <img class="fondo-tabla"
-          src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/fondoTabla.png?v=10">
-        <label class="title-table">Sitios</label>
-        <div class="curved-tBody">
-          <div class="curved-Row" style="transform: translate( 5px,   0px);"></div>
-          <div class="curved-Row" style="transform: translate(16px,  12px);"></div>
-          <div class="curved-Row" style="transform: translate(26px,  24px);"></div>
-          <div class="curved-Row" style="transform: translate(31px,  36px);"></div>
-          <div class="curved-Row" style="transform: translate(36px,  48px);"></div>
-          <div class="curved-Row" style="transform: translate(39px,  60px);"></div>
-          <div class="curved-Row" style="transform: translate(40px,  72px);"></div>
-          <div class="curved-Row" style="transform: translate(42px,  84px);"></div>
-          <div class="curved-Row" style="transform: translate(39px,  96px);"></div>
-          <div class="curved-Row" style="transform: translate(36px, 108px);"></div>
-          <div class="curved-Row" style="transform: translate(32px, 120px);"></div>
-          <div class="curved-Row" style="transform: translate(26px, 132px);"></div>
-          <div class="curved-Row" style="transform: translate(18px, 144px);"></div>
-          <div class="curved-Row" style="transform: translate( 8px, 156px);"></div>
-          <div class="curved-Row" style="transform: translate(-5px, 168px);"></div>
-        </div>
-        <div class="resumen-tabla">
-          <div class="contenedor-resumen">
-            <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">5</div>
-            <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">20</div>
-            <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">0</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <section id="section__home" class="section__home"></section>
-    <section id="section__mapa" class="section__mapa">
-      <div id="map" style="width: 1920px; height: 1080px;"></div>
-    </section>
-    <section id="section__graficador" class="section__graficador"></section>
-    <section id="section__login" class="section__login"></section>
-    <section id="section__particular" class="section__particular">
-      <div class="particular__header">
-        <div class="particular__panelControl">
-          <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/controlPanel.png?v=10">
-        </div>
-        <div class="Particular__ItemsContainer">
-          <div class="particular__items">
-            <div class="particular__item">
-              <div class="etiqueta__Nombre">N1</div>
-              <div class="etiqueta__Valor">3.08</div>
-              <div class="etiqueta__Unidad">m</div>
+    <header>
+        <nav class="header__buttons">
+            <div class="headerBtn__Home header__active">
+                <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Iconos/home.png?v=undefined"
+                    alt="">Home
             </div>
-          </div>
+            <div class="headerBtn__Mapa">
+                <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Iconos/icomapa.png?v=undefined"
+                    alt="">Mapa
+            </div>
+            <div class="headerBtn__Graficador">
+                <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Reportes/graficador.png?v=undefined"
+                    alt="">Graficador
+            </div>
+            <div class="headerBtn__Login">
+                <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/login_btn.png?v=undefined"
+                    alt="">Login
+            </div>
+        </nav>
+        <div class="header__title">
+            <h1 id="title">Tanques Padierna</h1>
+            <div class="header__datos-particular">
+                <span id="date">00/00/0000</span>
+                <span id="state">Fuera de línea</span>
+            </div>
         </div>
-        <div class="particular__slider">
-          <input type="range" style="display: inline-block" value="0" min="0" max="3" step="0.1">
-        </div>
-      </div>
-    </section>
-  </main>
+    </header>
+
+    <main>
+        <aside class="aside__tabla">
+            <div class="curved-table-variables-container">
+                <img class="fondo-tabla-variables"
+                    src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/tablaVariables.png?v=10">
+
+                <div class="curved-tBody-variables">
+                    <div class="curved-Row-variables" style="transform: translate( 5px,   0px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(16px,  12px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(26px,  24px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(31px,  36px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(36px,  48px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(39px,  60px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(40px,  72px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(42px,  84px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(39px,  96px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(36px, 108px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(32px, 120px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(26px, 132px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(18px, 144px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate( 8px, 156px);"></div>
+                    <div class="curved-Row-variables" style="transform: translate(-5px, 168px);"></div>
+                </div>
+
+                <div class="header-table-variables">
+                    <div class="thContainer" tag="levels">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/nivel.png?v=10">
+                        <div class="headerText">Nivel<br>[m]</div>
+                    </div>
+                    <div class="thContainer" tag="pressures">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/presion.png?v=10">
+                        <div class="headerText">Presion<br>[kg/cm<sup>2</sup>]</div>
+                    </div>
+                    <div class="thContainer" tag="ValvesPercentage">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/valvulamariposa.png?v=10">
+                        <div class="headerText">Valvula mariposa<br>[%]</div>
+                    </div>
+                    <div class="thContainer" tag="isValveOpenlst">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/valvulaflotador.png?v=10">
+                        <div class="headerText">Valvula flotador<br>&nbsp;</div>
+                    </div>
+                    <div class="thContainer" tag="pumps">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/bomba.png?v=10">
+                        <div class="headerText">Bomba<br>&nbsp;</div>
+                    </div>
+                    <div class="thContainer" tag="voltages">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/voltaje.png?v=10">
+                        <div class="headerText">Voltaje<br>[V]</div>
+                    </div>
+                    <div class="thContainer" tag="RTUOperationModeAndIsAutomatismOnCombineds">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/modocontrol.png?v=10">
+                        <div class="headerText">Modo control<br>&nbsp;</div>
+                    </div>
+                    <div class="thContainer" tag="isAutomatismStoplst">
+                        <img class="iconthImage"
+                            src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/Encabezados/fallaautomatismo.png?v=10">
+                        <div class="headerText">Falla automatismo<br>&nbsp;</div>
+                    </div>
+                </div>
+
+                <div class="btnTabla"></div>
+            </div>
+            <div class="curved-table-container">
+                <img class="fondo-tabla"
+                    src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/fondoTabla.png?v=10">
+                <label class="title-table">Sitios</label>
+                <div class="curved-tBody">
+                    <div class="curved-Row" style="transform: translate( 5px,   0px);"></div>
+                    <div class="curved-Row" style="transform: translate(16px,  12px);"></div>
+                    <div class="curved-Row" style="transform: translate(26px,  24px);"></div>
+                    <div class="curved-Row" style="transform: translate(31px,  36px);"></div>
+                    <div class="curved-Row" style="transform: translate(36px,  48px);"></div>
+                    <div class="curved-Row" style="transform: translate(39px,  60px);"></div>
+                    <div class="curved-Row" style="transform: translate(40px,  72px);"></div>
+                    <div class="curved-Row" style="transform: translate(42px,  84px);"></div>
+                    <div class="curved-Row" style="transform: translate(39px,  96px);"></div>
+                    <div class="curved-Row" style="transform: translate(36px, 108px);"></div>
+                    <div class="curved-Row" style="transform: translate(32px, 120px);"></div>
+                    <div class="curved-Row" style="transform: translate(26px, 132px);"></div>
+                    <div class="curved-Row" style="transform: translate(18px, 144px);"></div>
+                    <div class="curved-Row" style="transform: translate( 8px, 156px);"></div>
+                    <div class="curved-Row" style="transform: translate(-5px, 168px);"></div>
+                </div>
+                <div class="resumen-tabla">
+                    <div class="contenedor-resumen">
+                        <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">5
+                        </div>
+                        <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">
+                            20</div>
+                        <div style="flex-grow: 1; height: 30px; font-size: 2em; text-align: center; padding-top: 2px;">0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <section id="section__home" class="section__home"></section>
+        <section id="section__mapa" class="section__mapa">
+            <div id="map" style="width: 1920px; height: 1080px;"></div>
+        </section>
+        <section id="section__graficador" class="section__graficador"></section>
+        <section id="section__login" class="section__login">
+            <video id="loginVid1" class="loginVid" autoplay="autoplay" muted="" style="display: block;" loop="loop" src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/login_loop.mp4?v=-1"></video>
+        </section>
+        <section id="section__particular" class="section__particular">
+            <div class="particular__header">
+                <div class="particular__panelControl">
+                    <img
+                        src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/controlPanel.png?v=10">
+                </div>
+                <div class="Particular__ItemsContainer">
+                    <div class="particular__items">
+                        <div class="particular__item">
+                            <div class="etiqueta__Nombre">N1</div>
+                            <div class="etiqueta__Valor">3.08</div>
+                            <div class="etiqueta__Unidad">m</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="particular__slider">
+                    <input type="range" style="display: inline-block" value="0" min="0" max="3" step="0.1">
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 
 <script type="module" src="../scripts/uiManager.js"></script>
