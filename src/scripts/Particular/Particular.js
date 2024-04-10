@@ -57,6 +57,13 @@ class Particular {
 
     this.$headerTitle.innerText = this.Estacion.Nombre;
 
+    // Maneja los zIndex al cambiar de "paginas"
+    section__home.style.zIndex = "5";
+    section__mapa.style.zIndex = "5";
+    section__graficador.style.zIndex = "5";
+    section__login.style.zIndex = "5";
+    section__particular.style.zIndex = "10";
+
     // Cambiar el texto de acuerdo al estado de la estación
     if (this.Estacion.Enlace == "0") {
       this.$headerStatus.innerText = "Fuera de línea";
