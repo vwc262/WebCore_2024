@@ -194,7 +194,13 @@ const EnumDentroLimite = {
     Alto: 2,
 }
 
+
+const EnumAppEvents = {
+    LogOut: 'LogOut',
+    Update: 'Update',
+}
+
 export {
     RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString, EnumTipoSignalNomenclatura,
-    EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite
+    EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite, EnumAppEvents
 }
