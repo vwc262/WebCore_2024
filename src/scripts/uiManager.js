@@ -1,4 +1,6 @@
+import { ArranqueParo } from "./ArranqueParo/ArranqueParo.js";
 import Login from "./Entities/Login/Login.js";
+import { Particular } from "./Particular/Particular.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
 const btnHome = document.querySelector(".headerBtn__Home");
@@ -70,7 +72,8 @@ function Modal() {
 
   $panelControl_Particulares.addEventListener("click", (e) => {
     e.preventDefault();
-    $modal.classList.add("modal--show");
+    ArranqueParo.Instance.Create(Particular.Instance.Estacion.IdEstacion);
+    // $modal.classList.add("modal--show");
   });
 
   $closeModal.addEventListener("click", (e) => {
