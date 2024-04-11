@@ -69,7 +69,7 @@ class RowVariables {
 
             this.expandRow = CreateElement({
                 nodeElement: 'div',
-                attributes: { class: 'expand-btn-Row', maximized: 0, extraRows: extraRows - 1, rowIndex: this.actualIndex },
+                attributes: { class: 'expand-btn-Row', maximized: 0, extraRows: extraRows - 1, rowIndex: this.actualIndex, style: `background: url(${Core.Instance.ResourcesPath}General/mas_nrm.png?v=10)` },
                 innerText: '',
                 events: new Map().set('click', [(event) => {
 
