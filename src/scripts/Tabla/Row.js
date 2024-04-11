@@ -10,7 +10,6 @@ class Row {
    */
   constructor(IdEstacion) {
     this.IdEstacion = IdEstacion;
-    this.create();
   }
 
   create() {

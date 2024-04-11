@@ -1,3 +1,4 @@
+import { EnumProyecto } from "./Enums.js";
 HTMLElement.prototype.SetMultipleAttributes = function (attributes) {
     for (const [key, value] of Object.entries(attributes)) this.setAttribute(key, value);
     return this;
@@ -19,6 +20,35 @@ export const CreateElement = function ({ nodeElement, attributes = {}, innerText
     return createdElement;
 }
 
+/**
+ * 
+ * @param {EnumProyecto} idProyecto 
+ * @returns { number} 
+ */
+export const ObtenerWidthRender = function (idProyecto) {
+    const width = 1920;
+    switch (idProyecto) {
+        case EnumProyecto.Default: break;
+        case EnumProyecto.GustavoAMadero: break;
+        case EnumProyecto.PozosSistemaLerma: break;
+        case EnumProyecto.Yaqui: break;
+        case EnumProyecto.Chalmita: break;
+        case EnumProyecto.Encharcamientos: break;
+        case EnumProyecto.Sectores: break;
+        case EnumProyecto.Lumbreras: break;
+    }
+    return width;
+}
+
+
+/**
+ * Restringe un valor a un rango dado
+ * @param {number} val 
+ * @param {number} min 
+ * @param {number} max 
+ * @returns 
+ */
+export const Clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
 
 

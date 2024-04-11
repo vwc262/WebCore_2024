@@ -200,6 +200,7 @@ const EnumAppEvents = {
     Update: 'Update',
 }
 
+
 export {
     RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString, EnumTipoSignalNomenclatura,
     EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite, EnumAppEvents

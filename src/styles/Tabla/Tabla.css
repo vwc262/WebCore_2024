@@ -216,7 +216,7 @@
 
 .signal-valor {}
 
-.expand-btn-Row{
+.expand-btn-Row {
     width: 25px;
     height: 25px;
     border: none;
@@ -229,7 +229,7 @@
     left: -8px;
 }
 
-.bottomGlowColumn{
+.bottomGlowColumn {
     width: 215px;
     height: 2px;
     box-shadow: 2px 9px 6px 2px #5a71a2;

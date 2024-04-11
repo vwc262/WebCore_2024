@@ -12,16 +12,24 @@
     width: 125px !important;
 }
 
+.signalSitioPerfil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+}
+
 .estiloNombreEstacion {
     border-radius: 5px;
     width: 115px;
     height: auto;
-    margin: 5px;
+    /* margin: 5px; */
 }
 
 .idEstacionFondo {
     position: absolute;
-    margin: 5px;
 }
 
 .horizontalScroll {
