@@ -2,6 +2,7 @@ import SitioPerfil from "./SitioPerfil.js";
 import { Core } from "../Core.js";
 import { CreateElement, ObtenerWidthRender } from "../Utilities/CustomFunctions.js";
 import configuracionPadierna from "../../config/PadiernaConfig.js";
+import ParticlesAnimator from "./ParticlesAnimationManager.js";
 
 class Perfil {
     constructor(sitios) {
@@ -25,21 +26,17 @@ class Perfil {
             estacionesDiv.appendChild(estacionPerfil.createSitio());
 
             if (estilosEstacionTuberias != undefined) {
-                tuberiaEstacion = CreateElement({ nodeElement: "canvas", attributes: { class: "tuberiaPorBombeo", id: `${estilosEstacionTuberias.Tag}`, style: estilosEstacionTuberias.css } });
+                tuberiaEstacion = CreateElement({ nodeElement: "canvas", attributes: { class: "tuberiaPerfil", id: `${estilosEstacionTuberias.Tag}`, style: estilosEstacionTuberias.css } });
                 tuberiasDiv.appendChild(tuberiaEstacion);
+                this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion);
             }
         })
 
-        Core.Instance.data.forEach(estacion => {
-            const estacionPerfil = new SitioPerfil(estacion.IdEstacion);
-            estacionesDiv.appendChild(estacionPerfil.createSitio());
-        })
-
-
         configuracionPadierna.perfil.estilosTuberias.PorGravedad.forEach(element => {
             if (element != undefined) {
-                tuberiaEstacion = CreateElement({ nodeElement: "canvas", attributes: { class: "tuberiaPorGravedad", id: `${element.Tag}_Gravedad`, style: element.css } });
+                tuberiaEstacion = CreateElement({ nodeElement: "canvas", attributes: { class: "tuberiaPerfil", id: `${element.Tag}_Gravedad`, style: element.css } });
                 tuberiasDiv.appendChild(tuberiaEstacion);
+                this.InitTuberias(element.css, tuberiaEstacion);
             }
         })
 
@@ -49,6 +46,11 @@ class Perfil {
     }
     scroll = (e) => {
         this.Panner.style.transform = `translateX(${-e.currentTarget.value}px)`;
+    }
+
+    InitTuberias(cssPipe, canvas) {
+        let particlesAnimatorInstance = new ParticlesAnimator(cssPipe, canvas);
+        particlesAnimatorInstance.init();
     }
 }
 
