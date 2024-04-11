@@ -2,6 +2,7 @@ import Estacion from "../Entities/Estacion.js";
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { Particular } from "../Particular/Particular.js";
+import { CreateElement } from "../Utilities/CustomFunctions.js";
 
 class Row {
   /**
@@ -16,6 +17,8 @@ class Row {
     this.rowContainer = document.createElement("div");
     this.rowContainer.classList = `sitio-tabla`;
 
+    let bottomGlowColumn = CreateElement({ nodeElement: 'div', attributes: { class: 'bottomGlowColumn' } });
+
     this.enlace = document.createElement("img");
     this.enlace.classList = `enlace-tabla`;
 
@@ -28,7 +31,7 @@ class Row {
     this.fecha = document.createElement("div");
     this.fecha.classList = `fecha-tabla`;
 
-    this.rowContainer.append(this.enlace, nombreFechaContainer);
+    this.rowContainer.append(this.enlace, nombreFechaContainer, bottomGlowColumn);
     nombreFechaContainer.append(this.nombre, this.fecha);
 
     this.Update();
@@ -48,7 +51,7 @@ class Row {
     this.nombre.innerText = `${estacion.Nombre}`;
     this.enlace.setAttribute(
       "src",
-      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/state_0.png?v=10"
+      `${Core.Instance.ResourcesPath}General/state_${estacion.Enlace}.png?v=0`
     );
     this.fecha.innerText = `${estacion.ObtenerFecha()}`;
   }
