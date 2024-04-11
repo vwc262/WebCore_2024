@@ -22,6 +22,10 @@ class RowVariables {
 
         this.rowContainer = document.createElement('div');
         this.rowContainer.classList = `sitio-tabla`;
+
+        /**
+     * @type {[Cell]}
+     */
         this.signalsContainer = [];
 
         this.expandRow = CreateElement({
@@ -47,7 +51,7 @@ class RowVariables {
                 this.signalsContainer.push(new Cell(this.columns[key][0], this.columns[key].length > 1));
                 this.rowContainer.appendChild(this.signalsContainer[this.signalsContainer.length - 1].create());
             } else {
-                this.rowContainer.appendChild(this.signalColumnContainer = CreateElement({
+                this.rowContainer.appendChild(CreateElement({
                     nodeElement: 'div',
                     attributes: { class: 'signal-Column-Container-NA' },
                     innerText: 'N/A',
