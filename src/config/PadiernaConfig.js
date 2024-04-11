@@ -3,8 +3,8 @@ var configuracion = {
         estilosEstacion: [
             {
                 "IdEstacion": 1,
-                "Imagen": "position: absolute; width: 199px; height: 122px; left: 221px; top: 691px;",
-                "Etiqueta": "position: absolute; top: 645px; left: 23px;",
+                "Imagen": "position: absolute; width: 210px; height: 102px; left: 376px; top: 416px;",
+                "Etiqueta": "position: absolute; top: 330px; left: 334px;",
                 "Estado": "display:none;"
                 
             },
@@ -144,9 +144,75 @@ var configuracion = {
         ],
         estilosTuberias: [
             {
-                "idBomba": "1260100",
-                "idEstacion": 2,
-                "Abreviacion": "cartero_yaqui_t1",
+                "idLinea": 0,
+                "idEstacion": 0,
+                "Tag": "Sacalum_Gravedad",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 3,
+                "idEstacion": 3,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 4,
+                "idEstacion": 4,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 5,
+                "idEstacion": 5,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 6,
+                "idEstacion": 7,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 8,
+                "idEstacion": 10,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 9,
+                "idEstacion": 11,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 11,
+                "idEstacion": 13,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 12,
+                "idEstacion": 14,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 15,
+                "idEstacion": 17,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 16,
+                "idEstacion": 18,
+                "Tag": "cartero_yaqui_t1",
+                "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
+            },
+            {
+                "idLinea": 19,
+                "idEstacion": 21,
+                "Tag": "cartero_yaqui_t1",
                 "css": "position: absolute;top: 775px;left: 170px;transform: rotate(83deg);width: 195px;height: 18px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
             },
         ]
