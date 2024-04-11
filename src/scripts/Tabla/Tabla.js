@@ -59,6 +59,7 @@ class Tabla {
         });
 
         this.btnTabla = document.querySelector('.btnTabla');
+        this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/btn_abrir.png?v=10")`;
         this.btnTabla.addEventListener('click', () => {
 
             let visible = this.tBodyVariablesContainer.getAttribute('visible');
@@ -68,6 +69,7 @@ class Tabla {
 
             this.tBodyVariablesContainer.setAttribute('visible', `${visible ? '0' : '1'}`);
             this.tBodyVariablesContainer.style = `right:${visible ? '-455' : '475'}px;`;
+            this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/${visible ? 'btn_abrir': 'btn_abrirrotate'}.png?v=10")`;
         });
 
         this.columns = {
@@ -95,6 +97,23 @@ class Tabla {
         this.online = document.querySelector('.texto-resumen[tag="online"]');
         this.offline = document.querySelector('.texto-resumen[tag="offline"]');
         this.mantenimiento = document.querySelector('.texto-resumen[tag="mantenimiento"]');
+
+        Object.keys(EnumTipoSignal).forEach(key => {
+            let th = document.querySelector(`.thContainer[tag="${EnumTipoSignal[key]}"]`);
+            if (th != null) {
+                let img = th.firstElementChild;
+                img.setAttribute('src', `${Core.Instance.ResourcesPath}Encabezados/${key}.png?v=0`);
+            }
+        });
+
+        let fondoTabla = document.querySelector(`.fondo-tabla`);
+        fondoTabla.setAttribute('src', `${Core.Instance.ResourcesPath}General/fondoTabla.png?v=0`);
+
+        let fondoTablaVariables = document.querySelector(`.fondo-tabla-variables`);
+        fondoTablaVariables.setAttribute('src', `${Core.Instance.ResourcesPath}General/tablaVariables.png?v=0`);
+
+        let summaryFondo = document.querySelector(`.contenedor-resumen`);
+        summaryFondo.style.background = `url(${Core.Instance.ResourcesPath}General/Summary.png?v=0)`;
 
     }
 
