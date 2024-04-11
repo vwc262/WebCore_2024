@@ -5,13 +5,11 @@ import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { EnumUnidadesSignal } from "../Utilities/Enums.js";
+import { SetActualModule } from "../uiManager.js";
 
 class Particular {
+  //#region  Singleton
   static #_instance = null;
-  /**
-   * @type {Estacion}
-   */
-  Estacion = undefined;
   /**
    *@return {Particular}
    */
@@ -21,18 +19,30 @@ class Particular {
     }
     return this.#_instance;
   }
+  //#endregion
 
+  //#region Constructor
   constructor() {
     EventsManager.Instance.Suscribirevento(
       "Update",
       new EventoCustomizado(this.Update)
     );
   }
+  //#endregion
+
+  //#region Propiedades
+  /**
+   * @type {Estacion}
+   */
+  Estacion = undefined;
   /**
    * @type {HTMLElement}
    */
   HTMLUpdateElements = {};
 
+  //#endregion
+
+  //#region Metodos
   setEstacion(estacion) {
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
   }
@@ -43,12 +53,14 @@ class Particular {
       this.Estacion.IdEstacion
     );
 
+    this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
+    this.setEnlaceParticular(estacionUpdate.Enlace);
+
     estacionUpdate.Signals.forEach((signal) => {
       let signalActualizar =
         this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
 
-      // let dateActualizar = this.HTMLUpdateElements
-      // let statusActualizar = this.HTMLUpdateElements
+
 
       if (signalActualizar) {
         signalActualizar.innerText = signal.GetValorString(true, true);
@@ -57,11 +69,12 @@ class Particular {
   };
 
   mostrarDetalles() {
+    SetActualModule("Particular");
     // Elementos del DOM
     //console.log("Detalles de la estación:", this.Estacion.Signals);
     this.$headerTitle = document.querySelector("#title");
-    this.$headerDate = document.querySelector("#date");
-    this.$headerStatus = document.querySelector("#state");
+    this.$headerDate = document.querySelector("#date__particular");
+    this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
     this.$datosHeader = document.querySelector(".header__datos-particular");
 
@@ -76,20 +89,10 @@ class Particular {
     this.$datosHeader.style.opacity = "1";
 
     // Cambiar el texto de acuerdo al estado de la estación
-    if (this.Estacion.Enlace == "0") {
-      this.$headerStatus.innerText = "Fuera de línea";
-      this.$headerStatus.style.color = "red";
-    } else {
-      this.$headerStatus.innerText = "En línea";
-      this.$headerStatus.style.color = "green";
-    }
+    this.setEnlaceParticular(this.Estacion.Enlace);
 
     // Asignar la fecha formateada al elemento HTML
     this.$headerDate.innerText = this.Estacion.ObtenerFecha();
-    // this.$headerDate.setAttribute(
-    //   "id",
-    //   `particular__date_${this.Estacion.IdEstacion}`
-    // );
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
@@ -116,7 +119,6 @@ class Particular {
     this.$signalsContainer.innerHTML = "";
     this.HTMLUpdateElements = {};
 
-    //console.log(this.HTMLUpdateElements);
     // Filtrar los signals con TipoSignal igual a 1, 3 o 4
     this.Estacion.Signals.filter((signal) =>
       [1, 3, 4].includes(signal.TipoSignal)
@@ -144,7 +146,6 @@ class Particular {
 
       $signalItem.append($etiquetaNombre, $etiquetaValor);
       this.alojarElementoDinamico([$etiquetaValor]);
-
       this.$signalsContainer.appendChild($signalItem);
     });
   }
@@ -163,11 +164,7 @@ class Particular {
     const sliderInput = document.querySelector("#sliderInput");
 
     // Mostrar el control deslizante si los elementos se desbordan del contenedor
-    if (container.scrollWidth > container.clientWidth) {
-      document.querySelector(".particular__slider").style.display = "flex";
-    } else {
-      document.querySelector(".particular__slider").style.display = "none";
-    }
+    document.querySelector(".particular__slider").style.display = container.scrollWidth > container.clientWidth ? "flex" : "none";
 
     if (
       document.querySelector(".particular__slider").style.display !== "none"
@@ -192,13 +189,16 @@ class Particular {
     const panelControlElement = document.querySelector(
       ".particular__panelControl"
     );
-
-    if (tipoSignal7Count >= 1) {
-      panelControlElement.style.display = "flex"; // Mostrar el panel de control      
-    } else {
-      panelControlElement.style.display = "none"; // Ocultar el panel de control
-    }
+    panelControlElement.style.display = tipoSignal7Count >= 1 ? "flex" : "none"
   }
+
+  setEnlaceParticular(valorEnlace) {
+    // Cambiar el texto de acuerdo al estado de la estación
+    const offline = valorEnlace == "0";
+    this.$headerStatus.innerText = offline ? "Fuera de línea" : "En línea";
+    this.$headerStatus.style.color = offline ? "red" : "green";
+  }
+  //#endregion
 }
 
 export { Particular };
