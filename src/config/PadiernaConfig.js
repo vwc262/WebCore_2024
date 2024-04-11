@@ -59,14 +59,14 @@ var configuracionPadierna = {
             },
             {
                 "IdEstacion": 10,
-                "Imagen": "position: absolute; width: 164px; height: 116px; left:  854px; top: 529px;",
+                "Imagen": "position: absolute; width: 81px; height: 116px; left:  854px; top: 532px;",
                 "Etiqueta": "position: absolute; top: 487px; left: 820px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 11,
-                "Imagen": "position: absolute; width: 164px; height: 116px; left:  854px; top: 529px;",
+                "Imagen": "position: absolute; width: 83px; height: 112px; left:  935px; top: 529px;",
                 "Etiqueta": "position: absolute; top: 640px; left:  923px;",
                 "Estado": "display:none;"
 
@@ -80,14 +80,14 @@ var configuracionPadierna = {
             },
             {
                 "IdEstacion": 13,
-                "Imagen": "position: absolute; width: 261px; height: 212px; left: 1099px; top: 413px;",
+                "Imagen": "position: absolute; width: 155px; height: 139px; left: 1203px; top: 485px;",
                 "Etiqueta": "position: absolute; top: 419px; left: 1210px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 14,
-                "Imagen": "position: absolute; width: 261px; height: 212px; left: 1099px; top: 413px;",
+                "Imagen": "position: absolute; width: 103px; height: 128px; left: 1099px; top: 476px;",
                 "Etiqueta": "position: absolute; top: 573px; left: 1360px;",
                 "Estado": "display:none;"
 
