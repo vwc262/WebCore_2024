@@ -41,6 +41,15 @@ export const ObtenerWidthRender = function (idProyecto) {
 }
 
 
+/**
+ * Restringe un valor a un rango dado
+ * @param {number} val 
+ * @param {number} min 
+ * @param {number} max 
+ * @returns 
+ */
+export const Clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+
 
 
 
