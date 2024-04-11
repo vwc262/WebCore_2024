@@ -12,6 +12,10 @@ class Tabla {
      * @type {[Row]}
      */
     rows = [];
+
+    /**
+     * @type {[RowVariables]}
+     */
     rowVariables = [];
 
     constructor() {
@@ -78,10 +82,9 @@ class Tabla {
                 let th = document.querySelector(`.thContainer[tag="${key}"]`);
                 th.remove();
                 delete this.columns[key];
-            } else this.columns[key] = []
+            } else this.columns[key] = [];
         });
 
-        this.create();
     }
 
     /**
@@ -133,7 +136,7 @@ class Tabla {
             this.rowVariables.push(new RowVariables(estacion.IdEstacion, this.columns));
 
             const row = this.rows[this.rows.length - 1];
-            const rowVariables = this.rowVariables[this.rows.length - 1];
+            const rowVariables = this.rowVariables[this.rowVariables.length - 1];
 
             if (this.curvedRows[indexCurvedRows] != undefined) {
                 this.curvedRows[indexCurvedRows].innerHTML = '';
