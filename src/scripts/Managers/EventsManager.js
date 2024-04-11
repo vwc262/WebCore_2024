@@ -40,7 +40,7 @@ class EventsManager {
         if (eventosCUstomizadosRestantes)
             this.#Eventos.set(nombreEvento, eventosCUstomizadosRestantes);
     }
-    EmitirEvento(nombreEvento, data) {
+    EmitirEvento(nombreEvento, data = {}) {
         const eventos = this.#Eventos.get(nombreEvento);
         if (eventos) {
             eventos.forEach(evento => {
@@ -53,6 +53,10 @@ class EventsManager {
  * @returns {EventoCustomizado}
  */
 class EventoCustomizado {
+    /**
+     * 
+     * @param {Function} fnHandler 
+     */
     constructor(fnHandler) {
         this.FnHandler = fnHandler;
         this.IdEvento = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
