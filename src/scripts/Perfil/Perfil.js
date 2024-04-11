@@ -5,6 +5,7 @@ import configuracionPadierna from "../../config/PadiernaConfig.js";
 import ParticlesAnimator from "./ParticlesAnimationManager.js";
 
 class Perfil {
+
     constructor(sitios) {
         this.sitios = sitios;
         this.Panner = undefined;
@@ -48,6 +49,7 @@ class Perfil {
         this.Panner.append(estacionesDiv)
         estacionesDiv.append(tuberiasDiv);
         perfil.append(this.Panner, this.horizontalScroll);
+
     }
     scroll = (e) => {
         this.Panner.style.transform = `translateX(${-e.currentTarget.value}px)`;

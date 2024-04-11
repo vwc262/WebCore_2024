@@ -56,7 +56,6 @@ class ParticlesAnimator {
     // Falta funcion para saber en que modilo se esta
     drawWaterCanvasByGravity() {
         //if (!vwc.isParticularActive && $(`.${this.CanvasName}`).is(":visible") && !Perfil.isPanning) {
-        //var canvasWaterElements = $(`.${this.CanvasName}`).attr({ width: characteristicsWaterCanvas._Width, height: characteristicsWaterCanvas._Height });
         var canvasWaterElements = this.Canvas;
         canvasWaterElements.setAttribute("width", `${this.characteristicsWaterCanvas._Width}`);
         canvasWaterElements.setAttribute("height", `${this.characteristicsWaterCanvas._Height}`);
