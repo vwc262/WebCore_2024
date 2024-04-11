@@ -1,6 +1,7 @@
 import { ArranqueParo } from "./ArranqueParo/ArranqueParo.js";
 import Login from "./Entities/Login/Login.js";
 import { Particular } from "./Particular/Particular.js";
+import { EnumModule } from "./Utilities/Enums.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
 const btnHome = document.querySelector(".headerBtn__Home");
@@ -16,16 +17,19 @@ $btnHeader.addEventListener("click", (ev) => {
     });
     const actualTarger = ev.target;
     actualTarger.classList.add("header__active");
+    const isParticularActive = Module == EnumModule.Particular;
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
-        section__home.style.zIndex = "10";
+        SetActualModule(isParticularActive ? "Particular" : "Perfil");
+        section__home.style.zIndex = isParticularActive ? "5" : "10";
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
+        section__particular.style.zIndex = isParticularActive ? "10" : "5";
         ultimoBotonSeleccionado = actualTarger;
         break;
       case "headerBtn__Mapa header__active":
+        SetActualModule("Mapa");
         section__home.style.zIndex = "5";
         section__mapa.style.zIndex = "10";
         section__graficador.style.zIndex = "5";
@@ -34,6 +38,7 @@ $btnHeader.addEventListener("click", (ev) => {
         ultimoBotonSeleccionado = actualTarger;
         break;
       case "headerBtn__Graficador header__active":
+        SetActualModule("Graficador");
         section__home.style.zIndex = "5";
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "10";
@@ -91,4 +96,13 @@ const ShowModal = (txtToShow, title) => {
 
 Modal();
 
-export { GoHome, GoBack, ShowModal };
+var Module = EnumModule.Perfil;
+/**
+ * 
+ * @param {keyof EnumModule} enumModule 
+ */
+const SetActualModule = function (enumModule) {
+  Module = EnumModule[enumModule];
+}
+
+export { GoHome, GoBack, ShowModal, SetActualModule };

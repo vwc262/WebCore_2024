@@ -200,8 +200,15 @@ const EnumAppEvents = {
     Update: 'Update',
 }
 
+const EnumModule = {
+    Perfil: 'Perfil',
+    Particular: 'Particular',
+    Mapa: 'Mapa',
+    Graficador: 'Graficador',
+}
+
 
 export {
     RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString, EnumTipoSignalNomenclatura,
-    EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite, EnumAppEvents
+    EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite, EnumAppEvents, EnumModule
 }
