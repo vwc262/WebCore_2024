@@ -1,6 +1,7 @@
 import SitioPerfil from "./SitioPerfil.js";
 import { Core } from "../Core.js";
 import { CreateElement, ObtenerWidthRender } from "../Utilities/CustomFunctions.js";
+import configuracionPadierna from "../../config/PadiernaConfig.js";
 
 class Perfil {
     constructor(sitios) {
@@ -12,13 +13,38 @@ class Perfil {
         const widthRenderPerfil = ObtenerWidthRender(Core.Instance.IdProyecto);
         let perfil = document.querySelector(".section__home")
         this.Panner = CreateElement({ nodeElement: "div", attributes: { class: "perfilPanner" } });
+
+        let tuberiasDiv = CreateElement({ nodeElement: "div", attributes: { class: "tuberiasContainer" } });
+        let tuberiaEstacion;
         let estacionesDiv = CreateElement({ nodeElement: "div", attributes: { class: "estacionesContainer", style: `background: url(${Core.Instance.ResourcesPath}CelulaPadierna/background.jpg?v=10); width: ${widthRenderPerfil}px; height: 1080px;` } });
         let scrollHorizontal = CreateElement({ nodeElement: "input", attributes: { class: "horizontalScroll", value: 0, min: 0, max: (widthRenderPerfil - 1920) + this.offSetTabla, type: "range", style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);` }, events: new Map().set('input', [this.scroll]) });
+
+        Core.Instance.data.forEach(estacion => {
+            const estacionPerfil = new SitioPerfil(estacion.IdEstacion);
+            const estilosEstacionTuberias = configuracionPadierna.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
+            estacionesDiv.appendChild(estacionPerfil.createSitio());
+
+            if (estilosEstacionTuberias != undefined) {
+                tuberiaEstacion = CreateElement({ nodeElement: "canvas", attributes: { class: "tuberiaPorBombeo", id: `${estilosEstacionTuberias.Tag}`, style: estilosEstacionTuberias.css } });
+                tuberiasDiv.appendChild(tuberiaEstacion);
+            }
+        })
+
         Core.Instance.data.forEach(estacion => {
             const estacionPerfil = new SitioPerfil(estacion.IdEstacion);
             estacionesDiv.appendChild(estacionPerfil.createSitio());
         })
+
+
+        configuracionPadierna.perfil.estilosTuberias.PorGravedad.forEach(element => {
+            if (element != undefined) {
+                tuberiaEstacion = CreateElement({ nodeElement: "canvas", attributes: { class: "tuberiaPorGravedad", id: `${element.Tag}_Gravedad`, style: element.css } });
+                tuberiasDiv.appendChild(tuberiaEstacion);
+            }
+        })
+
         this.Panner.append(estacionesDiv)
+        estacionesDiv.append(tuberiasDiv);
         perfil.append(this.Panner, scrollHorizontal);
     }
     scroll = (e) => {

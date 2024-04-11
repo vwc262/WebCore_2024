@@ -1,6 +1,6 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
-import configuracion from "../../config/PadiernaConfig.js";
+import configuracionPadierna from "../../config/PadiernaConfig.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumTipoSignal, EnumUnidadesSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
@@ -21,7 +21,7 @@ class SitioPerfil {
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
-        const estilosEstacionEtiqueta = configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
+        const estilosEstacionEtiqueta = configuracionPadierna.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
 
         let valorSignal;
         let nameSignal;
@@ -59,7 +59,7 @@ class SitioPerfil {
         if (signal) {
             this.ElementosDinamicosHTML[valorSignal.id] = valorSignal;
         }
-        estacionDiv.append(estacionPerfilDiv, etiquetaDiv);
+        estacionDiv.append(estacionPerfilDiv, etiquetaDiv, );
 
         this.ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta);
         this.suscribirEventos();
@@ -67,7 +67,6 @@ class SitioPerfil {
     }
 
     ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta) {
-
         if (estilosEstacionEtiqueta != undefined) {
             etiquetaDiv.style = estilosEstacionEtiqueta.Etiqueta;
         }
