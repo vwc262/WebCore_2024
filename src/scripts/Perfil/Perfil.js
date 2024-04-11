@@ -1,23 +1,28 @@
 import SitioPerfil from "./SitioPerfil.js";
 import { Core } from "../Core.js";
-import { CreateElement } from "../Utilities/CustomFunctions.js";
+import { CreateElement, ObtenerWidthRender } from "../Utilities/CustomFunctions.js";
 
 class Perfil {
     constructor(sitios) {
         this.sitios = sitios;
+        this.Panner = undefined;
+        this.offSetTabla = 473; // se calculo a mano ya que la tabla mide 600 pero como es curva tiene un espacion a considerar
     }
-
     create() {
+        const widthRenderPerfil = ObtenerWidthRender(Core.Instance.IdProyecto);
         let perfil = document.querySelector(".section__home")
-        let estacionesDiv = CreateElement({ nodeElement: "div", attributes: { class: "estacionesContainer", style: `background: url(${Core.Instance.ResourcesPath}CelulaPadierna/background.jpg?v=10); width: 1920px; height: 1080px;` } });
-        let scrollHorizontal = CreateElement({ nodeElement: "input", attributes: { class: "horizontalScroll", type: "range", style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);` } });
-
+        this.Panner = CreateElement({ nodeElement: "div", attributes: { class: "perfilPanner" } });
+        let estacionesDiv = CreateElement({ nodeElement: "div", attributes: { class: "estacionesContainer", style: `background: url(${Core.Instance.ResourcesPath}CelulaPadierna/background.jpg?v=10); width: ${widthRenderPerfil}px; height: 1080px;` } });
+        let scrollHorizontal = CreateElement({ nodeElement: "input", attributes: { class: "horizontalScroll", value: 0, min: 0, max: (widthRenderPerfil - 1920) + this.offSetTabla, type: "range", style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);` }, events: new Map().set('input', [this.scroll]) });
         Core.Instance.data.forEach(estacion => {
             const estacionPerfil = new SitioPerfil(estacion.IdEstacion);
             estacionesDiv.appendChild(estacionPerfil.createSitio());
         })
-
-        perfil.append(estacionesDiv, scrollHorizontal);
+        this.Panner.append(estacionesDiv)
+        perfil.append(this.Panner, scrollHorizontal);
+    }
+    scroll = (e) => {
+        this.Panner.style.transform = `translateX(${-e.currentTarget.value}px)`;
     }
 }
 
