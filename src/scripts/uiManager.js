@@ -6,8 +6,8 @@ const btnHome = document.querySelector(".headerBtn__Home");
 let ultimoBotonSeleccionado = btnHome;
 
 $btnHeader.addEventListener("click", (ev) => {
-  const table = document.querySelector('.aside__tabla');
-  table.style.display = 'block';
+  const table = document.querySelector(".aside__tabla");
+  table.style.display = "block";
   if (ev.target.nodeName == "DIV") {
     [...ev.currentTarget.children].forEach((element) => {
       element.classList.remove("header__active");
@@ -20,6 +20,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
+        section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
         break;
       case "headerBtn__Mapa header__active":
@@ -27,6 +28,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__mapa.style.zIndex = "10";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
+        section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
         break;
       case "headerBtn__Graficador header__active":
@@ -34,14 +36,16 @@ $btnHeader.addEventListener("click", (ev) => {
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "10";
         section__login.style.zIndex = "5";
+        section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
         break;
       case "headerBtn__Login header__active":
         section__home.style.zIndex = "5";
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
+        section__particular.style.zIndex = "5";
         section__login.style.zIndex = "10";
-        table.style.display = 'none';
+        table.style.display = "none";
         Login.Instace.create();
         break;
     }
@@ -78,9 +82,9 @@ function Modal() {
 const ShowModal = (txtToShow, title) => {
   const $modal = document.querySelector(".modal");
   $modal.classList.add("modal--show");
-  $modal.querySelector('.modal__title').innerText = title;
-  $modal.querySelector('.modal__paragraph').innerText = txtToShow;
-}
+  $modal.querySelector(".modal__title").innerText = title;
+  $modal.querySelector(".modal__paragraph").innerText = txtToShow;
+};
 
 Modal();
 

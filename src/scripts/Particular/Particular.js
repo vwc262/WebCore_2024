@@ -46,6 +46,9 @@ class Particular {
       let signalActualizar =
         this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
 
+      // let dateActualizar = this.HTMLUpdateElements
+      // let statusActualizar = this.HTMLUpdateElements
+
       if (signalActualizar) {
         signalActualizar.innerText = signal.GetValorString(true, true);
       }
