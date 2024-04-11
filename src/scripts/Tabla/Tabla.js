@@ -136,14 +136,16 @@ class Tabla {
             this.rowVariables.push(new RowVariables(estacion.IdEstacion, this.columns));
 
             const row = this.rows[this.rows.length - 1];
+            row.create();
             const rowVariables = this.rowVariables[this.rowVariables.length - 1];
+            rowVariables.create();
 
             if (this.curvedRows[indexCurvedRows] != undefined) {
                 this.curvedRows[indexCurvedRows].innerHTML = '';
-                this.curvedRows[indexCurvedRows].appendChild(row.create());
+                this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
 
                 this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
-                this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.create());
+                this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
             }
 
             indexCurvedRows++;

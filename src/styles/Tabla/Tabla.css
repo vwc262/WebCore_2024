@@ -111,8 +111,8 @@
     height: 1080px;
     position: absolute;
     top: 0px;
-    /* right: 475px; */
-    right: -455px;
+    right: 475px;
+    /* right: -455px; */
     transition: all cubic-bezier(0.4, 0, 0.2, 1) 1s;
 }
 

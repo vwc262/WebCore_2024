@@ -14,28 +14,16 @@ class RowVariables {
     constructor(IdEstacion, columns) {
         this.IdEstacion = IdEstacion;
         this.columns = columns;
-
-        this.create();
     }
 
     create() {
+        /**
+        * @type {[Cell]}
+        */
+        this.signalsContainer = [];
 
         this.rowContainer = document.createElement('div');
         this.rowContainer.classList = `sitio-tabla`;
-
-        /**
-     * @type {[Cell]}
-     */
-        this.signalsContainer = [];
-
-        this.expandRow = CreateElement({
-            nodeElement: 'div',
-            attributes: { class: 'expand-btn-Row' },
-            innerText: '',
-            events: new Map()
-        });
-
-        this.rowContainer.append(this.expandRow);
 
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
 
@@ -44,6 +32,8 @@ class RowVariables {
                 this.columns[signal.TipoSignal].push(signal);
             }
         });
+
+        let moreThanOne = false;
 
         Object.keys(this.columns).forEach(key => {
 
@@ -58,7 +48,47 @@ class RowVariables {
                     events: new Map()
                 }));
             }
+
+            if (this.columns[key].length > 1) {
+                moreThanOne = true;
+            }
         });
+
+        if (moreThanOne) {
+            this.expandRow = CreateElement({
+                nodeElement: 'div',
+                attributes: { class: 'expand-btn-Row', maximized: 0 },
+                innerText: '',
+                events: new Map().set('click', [(event) => {
+
+                    let maximized = event.currentTarget.getAttribute('maximized');
+                    if (maximized == null || maximized == undefined) maximized = false;
+                    else if (maximized == '0') maximized = false;
+                    else maximized = true;
+
+                    event.currentTarget.setAttribute('maximized', `${maximized ? '0' : '1'}`);
+                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'mas_nrm' : 'menos_nrm'}.png?v=10)`;
+                }]).set('mouseover', [(event) => {
+
+                    let maximized = event.currentTarget.getAttribute('maximized');
+                    if (maximized == null || maximized == undefined) maximized = false;
+                    else if (maximized == '0') maximized = false;
+                    else maximized = true;
+
+                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_ovr' : 'mas_ovr'}.png?v=10)`;
+                }]).set('mouseout', [(event) => {
+
+                    let maximized = event.currentTarget.getAttribute('maximized');
+                    if (maximized == null || maximized == undefined) maximized = false;
+                    else if (maximized == '0') maximized = false;
+                    else maximized = true;
+
+                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_nrm' : 'mas_nrm'}.png?v=10)`;
+                }])
+            });
+
+            this.rowContainer.append(this.expandRow);
+        }
 
         this.Update();
 
