@@ -1,6 +1,6 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
-import { EnumTipoSignal } from "../Utilities/Enums.js";
+import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { ExtraRowVariables } from "./ExtraRowVariables.js";
 import { Row } from "./Row.js";
 import { RowVariables } from "./RowVariables.js";
@@ -91,6 +91,10 @@ class Tabla {
                 delete this.columns[key];
             } else this.columns[key] = [];
         });
+
+        this.online = document.querySelector('.texto-resumen[tag="online"]');
+        this.offline = document.querySelector('.texto-resumen[tag="offline"]');
+        this.mantenimiento = document.querySelector('.texto-resumen[tag="mantenimiento"]');
 
     }
 
@@ -199,6 +203,13 @@ class Tabla {
 
             indexCurvedRows++;
         }
+
+        let onlineCount = Core.Instance.data.filter(estacion => estacion.Enlace != EnumEnlace.FueraLinea).length;
+        let offlineCount = Core.Instance.data.length - onlineCount;
+
+        this.online.innerHTML = onlineCount
+        this.offline.innerHTML = offlineCount;
+        this.mantenimiento.innerHTML = 0;
     }
 }
 
