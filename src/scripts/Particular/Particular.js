@@ -42,12 +42,12 @@ class Particular {
       this.Estacion.IdEstacion
     );
 
+    this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
+    this.setEnlaceParticular(estacionUpdate.Enlace);
+
     estacionUpdate.Signals.forEach((signal) => {
       let signalActualizar =
         this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
-
-      // let dateActualizar = this.HTMLUpdateElements
-      // let statusActualizar = this.HTMLUpdateElements
 
       if (signalActualizar) {
         signalActualizar.innerText = signal.GetValorString(true, true);
@@ -59,8 +59,8 @@ class Particular {
     // Elementos del DOM
     //console.log("Detalles de la estación:", this.Estacion.Signals);
     this.$headerTitle = document.querySelector("#title");
-    this.$headerDate = document.querySelector("#date");
-    this.$headerStatus = document.querySelector("#state");
+    this.$headerDate = document.querySelector("#date__particular");
+    this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
     this.$datosHeader = document.querySelector(".header__datos-particular");
 
@@ -74,21 +74,8 @@ class Particular {
     section__particular.style.zIndex = "10";
     this.$datosHeader.style.opacity = "1";
 
-    // Cambiar el texto de acuerdo al estado de la estación
-    if (this.Estacion.Enlace == "0") {
-      this.$headerStatus.innerText = "Fuera de línea";
-      this.$headerStatus.style.color = "red";
-    } else {
-      this.$headerStatus.innerText = "En línea";
-      this.$headerStatus.style.color = "green";
-    }
-
     // Asignar la fecha formateada al elemento HTML
     this.$headerDate.innerText = this.Estacion.ObtenerFecha();
-    // this.$headerDate.setAttribute(
-    //   "id",
-    //   `particular__date_${this.Estacion.IdEstacion}`
-    // );
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
@@ -141,11 +128,24 @@ class Particular {
         innerText: signal.GetValorString(true, true),
       });
 
+      this.setEnlaceParticular(this.Estacion.Enlace);
+
       $signalItem.append($etiquetaNombre, $etiquetaValor);
       this.alojarElementoDinamico([$etiquetaValor]);
 
       this.$signalsContainer.appendChild($signalItem);
     });
+  }
+
+  setEnlaceParticular(valorEnlace) {
+    // Cambiar el texto de acuerdo al estado de la estación
+    if (valorEnlace == "0") {
+      this.$headerStatus.innerText = "Fuera de línea";
+      this.$headerStatus.style.color = "red";
+    } else {
+      this.$headerStatus.innerText = "En línea";
+      this.$headerStatus.style.color = "green";
+    }
   }
   /**
    *aloja un elemento dinamico a la propiedad HTML
