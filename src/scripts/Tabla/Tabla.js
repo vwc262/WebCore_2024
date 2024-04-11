@@ -1,6 +1,7 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
+import { ExtraRowVariables } from "./ExtraRowVariables.js";
 import { Row } from "./Row.js";
 import { RowVariables } from "./RowVariables.js";
 
@@ -28,7 +29,13 @@ class Tabla {
 
         this.cantidadElementos = Core.Instance.data.length;
         this.indice = 0;
+        this.offset = {
+            extraRows: 0,
+            actualIndex: 0,
+        };
         this.elementosVisibles = 15;
+
+        this.extraRows = [];
 
         this.curvedRows = document.getElementsByClassName('curved-Row');
         this.curvedRowsVariables = document.getElementsByClassName('curved-Row-variables');
@@ -94,20 +101,30 @@ class Tabla {
     setScrollDirection(upwards) {
         this.indice += upwards ? 1 : -1
 
-        if (this.indice < -(this.cantidadElementos - this.elementosVisibles)) {
-            this.indice = -(this.cantidadElementos - this.elementosVisibles);
+        this.refreshTable();
+    }
+
+    refreshTable() {
+
+        if (this.indice < -(this.cantidadElementos - this.elementosVisibles) /*- (this.cantidadElementos - this.elementosVisibles + this.indice < this.offset.extraRows ? this.offset.extraRows : 0)*/) {
+            this.indice = -(this.cantidadElementos - this.elementosVisibles) /*- (this.cantidadElementos - this.elementosVisibles + this.indice < this.offset.extraRows ? this.offset.extraRows : 0)*/;
         }
         if (this.indice > 0) {
             this.indice = 0;
         }
 
-        // console.log(this.indice);
-
         let indexCurvedRows = 0;
-        for (let indexEstacion = -this.indice; indexEstacion < Core.Instance.data.length; indexEstacion++) {
+        let indexEstacion = -this.indice;
+
+        Object.keys(this.extraRows).forEach(key => {
+            this.extraRows[key].rowContainer.remove();
+            delete this.extraRows[key];
+        });
+
+        for (let indexRow = -this.indice; indexRow < Core.Instance.data.length; indexRow++) {
             const estacion = Core.Instance.data[indexEstacion];
-            let row = this.rows[indexEstacion];
-            let rowVariables = this.rowVariables[indexEstacion];
+            let row = this.rows[indexRow];
+            let rowVariables = this.rowVariables[indexRow];
 
             row.IdEstacion = estacion.IdEstacion;
             rowVariables.IdEstacion = estacion.IdEstacion;
@@ -117,13 +134,40 @@ class Tabla {
                 this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
 
                 this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
+                this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%)';
                 this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
+
+                if (indexRow >= this.offset.actualIndex && indexRow < this.offset.actualIndex + this.offset.extraRows) {
+                    for (let ordinalSignal = 1; ordinalSignal <= this.offset.extraRows; ordinalSignal++) {
+
+                        indexRow++;
+                        indexCurvedRows++;
+
+                        if (this.curvedRows[indexCurvedRows] != undefined) {
+                            const columns = {};
+                            Object.keys(this.columns).forEach(key => { columns[key] = []; });
+                            this.extraRows.push(new ExtraRowVariables(estacion.IdEstacion, columns, ordinalSignal));
+                            this.extraRows[this.extraRows.length - 1].create();
+
+                            this.curvedRows[indexCurvedRows].innerHTML = '';
+
+                            this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
+                            this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(24, 64, 89, 0.5) 0%, rgba(24, 64, 89, 0.3) 60%, rgba(0, 0, 0, 0) 90%)';
+                            this.curvedRowsVariables[indexCurvedRows].appendChild(this.extraRows[this.extraRows.length - 1].rowContainer);
+                        }
+
+                    }
+                }
             }
 
             row.Update();
-            rowVariables.Update();
+            rowVariables.Update(indexRow);
 
+            indexEstacion++;
             indexCurvedRows++;
+
+            // if (indexCurvedRows >= this.elementosVisibles )
+            //     return;
         }
     }
 
@@ -132,8 +176,13 @@ class Tabla {
         for (let indexEstacion = -this.indice; indexEstacion < Core.Instance.data.length; indexEstacion++) {
             const estacion = Core.Instance.data[indexEstacion];
 
+            const columns = {};
+            Object.keys(this.columns).forEach(key => { columns[key] = []; });
+
             this.rows.push(new Row(estacion.IdEstacion));
-            this.rowVariables.push(new RowVariables(estacion.IdEstacion, this.columns));
+            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.offset, function () {
+                this.refreshTable();
+            }.bind(this), indexEstacion));
 
             const row = this.rows[this.rows.length - 1];
             row.create();
