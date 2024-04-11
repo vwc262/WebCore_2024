@@ -1,9 +1,10 @@
 import * as CustomFunctions from "../../Utilities/CustomFunctions.js";
-import { RequestType } from "../../Utilities/Enums.js";
+import {  EnumAppEvents, RequestType } from "../../Utilities/Enums.js";
 import { GoBack, GoHome, ShowModal } from "../../uiManager.js";
 import { Core } from "../../Core.js"
 import { Fetcher } from "../../Fetcher/Fetcher.js";
 import { Credentials } from "./Credentials.js";
+import { EventsManager } from "../../Managers/EventsManager.js";
 class Login {
     action = "Login"
     #isCreated = false;
@@ -105,6 +106,7 @@ class Login {
         ['touchstart', 'click'].forEach(eventName => window.removeEventListener(eventName, this.#OnUserInteracion));
         this.btnHeaderLogin.style.display = 'flex';
         ShowModal('Se cerro sesión por falta de interacción', "Inicio sesión");
+        EventsManager.Instance.EmitirEvento(EnumAppEvents.LogOut);
     }
     #VerifyIfSessionIsValid = () => {
         const actualTime = new Date();

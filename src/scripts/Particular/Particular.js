@@ -1,3 +1,4 @@
+import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import Signal from "../Entities/Signal.js";
@@ -193,7 +194,7 @@ class Particular {
     );
 
     if (tipoSignal7Count >= 1) {
-      panelControlElement.style.display = "flex"; // Mostrar el panel de control
+      panelControlElement.style.display = "flex"; // Mostrar el panel de control      
     } else {
       panelControlElement.style.display = "none"; // Ocultar el panel de control
     }

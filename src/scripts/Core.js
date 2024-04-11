@@ -2,7 +2,7 @@ import { VwcApp } from "./App.js";
 import Estacion from "./Entities/Estacion.js";
 import { Fetcher } from "./Fetcher/Fetcher.js";
 import { EventsManager } from "./Managers/EventsManager.js";
-import { EnumControllerMapeo, EnumNombreProyecto, EnumProyecto, RequestType } from "./Utilities/Enums.js";
+import { EnumAppEvents, EnumControllerMapeo, EnumNombreProyecto, EnumProyecto, RequestType } from "./Utilities/Enums.js";
 
 /**
  * Clase Base de la App Web
@@ -48,7 +48,7 @@ class Core {
         const data = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.READ}?idProyecto=${this.IdProyecto}`, RequestType.GET, undefined, false);
         this.data = this.GetData(data);
         //console.log(this.data);
-        EventsManager.Instance.EmitirEvento('Update'); // Manda mensaje de update a todos los elementos que necesiten actualizar
+        EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
     }
     /**
      * 
