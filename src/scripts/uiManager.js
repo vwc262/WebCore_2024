@@ -6,14 +6,14 @@ const btnHome = document.querySelector(".headerBtn__Home");
 let ultimoBotonSeleccionado = btnHome;
 
 $btnHeader.addEventListener("click", (ev) => {
+  const table = document.querySelector('.aside__tabla');
+  table.style.display = 'block';
   if (ev.target.nodeName == "DIV") {
     [...ev.currentTarget.children].forEach((element) => {
       element.classList.remove("header__active");
     });
-
     const actualTarger = ev.target;
     actualTarger.classList.add("header__active");
-
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         section__home.style.zIndex = "10";
@@ -41,6 +41,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "10";
+        table.style.display = 'none';
         Login.Instace.create();
         break;
     }
@@ -74,6 +75,13 @@ function Modal() {
   });
 }
 
+const ShowModal = (txtToShow, title) => {
+  const $modal = document.querySelector(".modal");
+  $modal.classList.add("modal--show");
+  $modal.querySelector('.modal__title').innerText = title;
+  $modal.querySelector('.modal__paragraph').innerText = txtToShow;
+}
+
 Modal();
 
-export { GoHome, GoBack };
+export { GoHome, GoBack, ShowModal };

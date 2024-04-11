@@ -1,6 +1,8 @@
 .loginInput {
     animation: vibrate 2s linear 0s infinite reverse both;
     transform: translate(0px, 1px);
+    box-sizing: border-box;
+    user-select: none;
 }
 
 @keyframes vibrate {
@@ -45,7 +47,8 @@
     }
 }
 
-.username {    
+.username {
+    border: none;
     position: absolute;
     opacity: 0.6;
     top: 130px;
@@ -59,8 +62,9 @@
     border-radius: 5px;
     background: transparent;
     color: rgb(255, 255, 255);
-  }
-  .passwordField {
+}
+
+.passwordField {
     color: rgb(255, 255, 255);
     position: absolute;
     top: 130px;
@@ -73,9 +77,9 @@
     border: 25px;
     border-radius: 5px;
     background: transparent;
-  }
+}
 
-  .floatingBtn {
+.floatingBtn {
     position: absolute;
     top: 210px;
     left: 343px;
@@ -85,14 +89,14 @@
     cursor: pointer;
     transition: transform ease 0.5s;
     opacity: 0.7;
-  }
-  
-  .floatingBtn:hover {
+}
+
+.floatingBtn:hover {
     filter: hue-rotate(-23deg);
     transform: scale(1.2);
-  }
+}
 
-  .floatingBtnCancelar {
+.floatingBtnCancelar {
     position: absolute;
     top: 210px;
     left: 89px;
@@ -102,15 +106,15 @@
     cursor: pointer;
     transition: transform ease 0.5s;
     opacity: 0.7;
-  }
-  
-  .floatingBtnCancelar:hover {
+}
+
+.floatingBtnCancelar:hover {
     filter: hue-rotate(340deg);
     transform: scale(1.2);
-  }
+}
 
 
-  .contenedorLogInInicial {
+.contenedorLogInInicial {
     position: inherit;
     left: 628px;
     top: 415px;
@@ -118,4 +122,3 @@
     height: 362px;
     background-size: 100% 100% !important;
 }
-  
