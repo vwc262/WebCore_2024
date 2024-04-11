@@ -105,4 +105,4 @@ const SetActualModule = function (enumModule) {
   Module = EnumModule[enumModule];
 }
 
-export { GoHome, GoBack, ShowModal, SetActualModule };
+export { GoHome, GoBack, ShowModal, SetActualModule, Module };
