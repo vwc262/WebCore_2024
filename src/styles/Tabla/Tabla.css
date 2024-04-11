@@ -1,238 +1,247 @@
-.curved-table-container {
-    width: 600px;
-    height: 1080px;
-    /* background-color: aquamarine; */
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
-
-.fondo-tabla {
-    width: 600px;
-    position: absolute;
-    top: 0px;
-    height: 1080px;
-}
-
-.title-table {
-    position: absolute;
-    top: 88px;
-    left: 200px;
-    font-size: 35px;
-    color: goldenrod;
-}
-
-.curved-tBody {
-    /* background: rgba(220, 20, 60, 0.196); */
-    top: 170px;
-    width: 360px;
-    height: 800px;
-    left: 92px;
-    position: absolute;
-    overflow: hidden;
-}
-
-.resumen-tabla {
-    height: 40px;
-    position: absolute;
-    bottom: 60px;
-    font-size: 14px;
-    left: 95px;
-    top: 1005px;
-}
-
-.contenedor-resumen {
-    background-size: cover !important;
-    color: #dda65e;
-    padding: 3.5px;
-    width: 237px;
-    display: flex;
-    background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/Summary.png?v=10);
-}
-
-.curved-Row {
-    width: 315px;
-    height: 42px;
-    /* display: none; */
-}
-
-.sitio-tabla {
-    height: 42px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    align-content: center;
-    width: 92%;
-}
-
-.enlace-tabla {
-    height: 20px;
-    width: 20px;
-    margin-left: 15px;
-}
-
-.nombre-Fecha-Container {
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.nombre-tabla {
-    font-size: 1.1em;
-}
-
-.fecha-tabla {
-    font-size: 0.75em;
-}
-
-/*  */
-
-.header-table-variables {
-    position: absolute;
-    top: 80px;
-    left: 55px;
-    width: 869px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.curved-table-variables-container {
-    width: 1000px;
-    height: 1080px;
-    position: absolute;
-    top: 0px;
-    /* right: 475px; */
-    right: -455px;
-    transition: all cubic-bezier(0.4, 0, 0.2, 1) 1s;
-}
-
-.fondo-tabla-variables {
-    position: absolute;
-    top: 0px;
-    height: 1080px;
-    width: 1000px;
-}
-
-.curved-tBody-variables {
-    top: 170px;
-    width: 950px;
-    height: 800px;
-    left: 45px;
-    position: absolute;
-    overflow: hidden;
-}
-
-.curved-Row-variables {
-    width: 950px;
-    height: 42px;
-    background: linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%);
-    outline: 1px solid rgb(115 140 187 / 50%);
-    border-radius: 5px;
-}
-
-.thContainer {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    height: 60px;
-}
-
-.iconthImage {
-    height: 55px;
-}
-
-.headerText {
+ .texto-resumen {
+    flex-grow: 1;
+    font-size: 2em;
     text-align: center;
-    color: goldenrod;
-    font-size: 12px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: space-around;
-    justify-content: space-between;
-    align-items: stretch;
-}
+    margin-left: 18px;
+ }
 
-/*  */
+ /*  */
 
-.btnTabla {
-    position: relative;
-    top: 44%;
-    left: 27px;
-    transition: filter ease 0.2s, transform cubic-bezier(0.4, 0, 0.2, 1) 1s;
-    z-index: 12;
-    width: 62px;
-    height: 145px;
-    border: none;
-    background-size: 100% 100% !important;
-    pointer-events: auto;
-    background: url("http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/btn_abrirrotate.png?v=10");
-}
+ .curved-table-container {
+     width: 600px;
+     height: 1080px;
+     /* background-color: aquamarine; */
+     position: absolute;
+     top: 0px;
+     right: 0px;
+ }
 
-/*  */
+ .fondo-tabla {
+     width: 600px;
+     position: absolute;
+     top: 0px;
+     height: 1080px;
+ }
 
-.signal-Column-Container {
-    width: 85px;
-    height: 42px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 1px 1px 1px black;
-    font-size: 11pt;
-}
+ .title-table {
+     position: absolute;
+     top: 88px;
+     left: 200px;
+     font-size: 35px;
+     color: goldenrod;
+ }
 
-.signal-Column-Container-NA {
-    width: 85px;
-    height: 42px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    color: rgb(206 206 206 / 45%);
-    text-shadow: 1px 1px 1px black;
-    font-size: 11pt;
-}
+ .curved-tBody {
+     /* background: rgba(220, 20, 60, 0.196); */
+     top: 170px;
+     width: 360px;
+     height: 800px;
+     left: 92px;
+     position: absolute;
+     overflow: hidden;
+ }
 
-.signal-nombre {}
+ .resumen-tabla {
+     height: 40px;
+     position: absolute;
+     bottom: 60px;
+     font-size: 14px;
+     left: 95px;
+     top: 1005px;
+ }
 
-.signal-valor {}
+ .contenedor-resumen {
+     background-size: cover !important;
+     color: #dda65e;
+     padding: 3.5px;
+     width: 237px;
+     display: flex;
+     background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/Summary.png?v=10);
+ }
 
-.expand-btn-Row {
-    width: 25px;
-    height: 25px;
-    border: none;
-    background-size: contain !important;
-    margin-top: 5px;
-    opacity: 1;
-    background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/General/mas_nrm.png?v=10);
-    pointer-events: all;
-    position: absolute;
-    left: -8px;
-}
+ .curved-Row {
+     width: 315px;
+     height: 42px;
+     /* display: none; */
+ }
 
-.bottomGlowColumn {
-    width: 215px;
-    height: 2px;
-    box-shadow: 2px 9px 6px 2px #5a71a2;
-    position: absolute;
-    top: 55px;
-}
+ .sitio-tabla {
+     height: 42px;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     align-items: center;
+     justify-content: space-between;
+     align-content: center;
+     width: 92%;
+ }
+
+ .enlace-tabla {
+     height: 20px;
+     width: 20px;
+     margin-left: 15px;
+ }
+
+ .nombre-Fecha-Container {
+     width: 250px;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-content: center;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .nombre-tabla {
+     font-size: 1.1em;
+ }
+
+ .fecha-tabla {
+     font-size: 0.75em;
+ }
+
+ /*  */
+
+ .header-table-variables {
+     position: absolute;
+     top: 80px;
+     left: 55px;
+     width: 869px;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     align-content: center;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .curved-table-variables-container {
+     width: 1000px;
+     height: 1080px;
+     position: absolute;
+     top: 0px;
+     /* right: 475px; */
+     right: -455px;
+     transition: all cubic-bezier(0.4, 0, 0.2, 1) 1s;
+ }
+
+ .fondo-tabla-variables {
+     position: absolute;
+     top: 0px;
+     height: 1080px;
+     width: 1000px;
+ }
+
+ .curved-tBody-variables {
+     top: 170px;
+     width: 950px;
+     height: 800px;
+     left: 45px;
+     position: absolute;
+     overflow: hidden;
+ }
+
+ .curved-Row-variables {
+     width: 950px;
+     height: 42px;
+     background: linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%);
+     outline: 1px solid rgb(115 140 187 / 50%);
+     border-radius: 5px;
+ }
+
+ .thContainer {
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-content: center;
+     justify-content: center;
+     align-items: center;
+     width: 90px;
+     height: 60px;
+ }
+
+ .iconthImage {
+     height: 55px;
+ }
+
+ .headerText {
+     text-align: center;
+     color: goldenrod;
+     font-size: 12px;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     align-content: space-around;
+     justify-content: space-between;
+     align-items: stretch;
+ }
+
+ /*  */
+
+ .btnTabla {
+     position: relative;
+     top: 44%;
+     left: 27px;
+     transition: filter ease 0.2s, transform cubic-bezier(0.4, 0, 0.2, 1) 1s;
+     z-index: 12;
+     width: 62px;
+     height: 145px;
+     border: none;
+     background-size: 100% 100% !important;
+     pointer-events: auto;
+     background: url("http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMagdalenaContreras/General/btn_abrirrotate.png?v=10");
+ }
+
+ /*  */
+
+ .signal-Column-Container {
+     width: 85px;
+     height: 42px;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-content: center;
+     justify-content: center;
+     align-items: center;
+     text-shadow: 1px 1px 1px black;
+     font-size: 11pt;
+ }
+
+ .signal-Column-Container-NA {
+     width: 85px;
+     height: 42px;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-content: center;
+     justify-content: center;
+     align-items: center;
+     color: rgb(206 206 206 / 45%);
+     text-shadow: 1px 1px 1px black;
+     font-size: 11pt;
+ }
+
+ .signal-nombre {}
+
+ .signal-valor {}
+
+ .expand-btn-Row {
+     width: 25px;
+     height: 25px;
+     border: none;
+     background-size: contain !important;
+     margin-top: 5px;
+     opacity: 1;
+     background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/General/mas_nrm.png?v=10);
+     pointer-events: all;
+     position: absolute;
+     left: -8px;
+ }
+
+ .bottomGlowColumn {
+     width: 215px;
+     height: 2px;
+     box-shadow: 2px 9px 6px 2px #5a71a2;
+     position: absolute;
+     top: 55px;
+ }
