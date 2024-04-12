@@ -194,6 +194,7 @@ const EnumDentroLimite = {
 const EnumAppEvents = {
   LogOut: "LogOut",
   Update: "Update",
+  ParticularChanged:"ParticularChanged",
 };
 
 const EnumModule = {

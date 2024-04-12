@@ -6,6 +6,7 @@ import {
     EnumModule,
     EnumTipoSignalNomenclatura,
     EnumDentroLimite,
+    EnumEnlace,
 } from "../Utilities/Enums.js";
 
 class Estacion {
@@ -92,6 +93,13 @@ class Estacion {
             return perillas[ordinalBomba];
         }
     }
+    /**
+     * Indica si la estacion esta en linea
+     * @returns {boolean}
+     */
+    EstaEnLinea() {
+        return this.Enlace >= EnumEnlace.Radio && this.Enlace <= EnumEnlace.Hibrido;
+    }
 
     /**
      *
@@ -111,10 +119,10 @@ class Estacion {
 
         if (signal.TipoSignal == EnumTipoSignal.Nivel) {
             if (signal.DentroRango) {
-                if (signal.DentroLimite == EnumDentroLimite.Alto){
+                if (signal.DentroLimite == EnumDentroLimite.Alto) {
                     indiceImagen = "10r";
                 }
-                else{
+                else {
                     indiceImagen = signal.IndiceImagen;
                 }
             }
