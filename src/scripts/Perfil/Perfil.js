@@ -15,6 +15,7 @@ class Perfil {
         this.moveX = 0;
         this.maxPan = 0;
     }
+
     create() {
         const widthRenderPerfil = ObtenerWidthRender(Core.Instance.IdProyecto);
         let perfil = document.querySelector(".section__home")
@@ -22,6 +23,7 @@ class Perfil {
             nodeElement: "div",
             attributes: { class: "perfilPanner" }
         });
+
         this.hoverDiv = CreateElement({
             nodeElement: "div",
             attributes: { class: "hoverPerfil" }
@@ -31,20 +33,25 @@ class Perfil {
             nodeElement: "div",
             attributes: { class: "tuberiasContainer" }
         });
+
         let tuberiaEstacion;
+
         this.Panner = CreateElement({
             nodeElement: "div",
             attributes: { class: "perfilPanner" },
             events: new Map().set('mousemove', [this.#drag])
         });
+
         let estacionesDiv = CreateElement({
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}CelulaPadierna/background.jpg?v=10); width: ${widthRenderPerfil}px; height: 1080px;`
+                style: `background: url(${Core.Instance.ResourcesPath}CelulaPadierna/background.png?v=10); width: ${widthRenderPerfil}px; height: 1080px;`
             }
         });
+
         this.maxPan = (widthRenderPerfil - 1920) + this.offSetTabla;
+
         this.horizontalScroll = CreateElement({
             nodeElement: "input",
             attributes: {
@@ -77,7 +84,7 @@ class Perfil {
                 });
 
                 tuberiasDiv.appendChild(tuberiaEstacion);
-                this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion);
+                this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion, estacion.IdEstacion);
             }
         })
 
@@ -105,8 +112,8 @@ class Perfil {
         this.Panner.style.transform = `translateX(${-e.currentTarget.value}px)`;
     }
 
-    InitTuberias(cssPipe, canvas) {
-        let particlesAnimatorInstance = new ParticlesAnimator(cssPipe, canvas);
+    InitTuberias(cssPipe, canvas, idEstacion) {
+        let particlesAnimatorInstance = new ParticlesAnimator(cssPipe, canvas, idEstacion);
         particlesAnimatorInstance.init();
     }
 

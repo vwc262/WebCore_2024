@@ -1,9 +1,12 @@
 import { EnumModule } from "../Utilities/Enums.js";
 import { Module } from "../uiManager.js";
+import { Core } from "../Core.js";
+import Estacion from "../Entities/Estacion.js";
+import { EnumValorBomba, EnumTipoSignal } from "../Utilities/Enums.js";
 
 class ParticlesAnimator {
 
-    constructor(cssPipe, canvas) {
+    constructor(cssPipe, canvas, idEstacion) {
         let width_height = this.GetWidthHeightFromCSSText(cssPipe);
         this.elementWidth = width_height[0];
         this.elementHeight = width_height[1];
@@ -18,9 +21,11 @@ class ParticlesAnimator {
         this.Canvas = canvas;
         this.indexContainer = 0;
         this.particlesElements = [];
+        this.idEstacion = idEstacion;
     }
 
     init() {
+        this.bombasEncendias = this.ObtenerCantidadDeBombasEncendidas();
         this.fillParticles();
         this.SetAnimationFrame();
         this.Render();
@@ -73,7 +78,7 @@ class ParticlesAnimator {
             for (var particleIndex = 0; particleIndex < this.particlesElements.length; particleIndex++) {
                 var actualParticle = this.particlesElements[particleIndex];
 
-                const bombasEncendias = 1; //Falta obtener la cantidad de bombas encendidas de la base de datos
+                
 
                 actualParticle.velocity_x = this.characteristicsWaterCanvas.particleInitialVelocity_x;
                 context.beginPath();
@@ -83,9 +88,9 @@ class ParticlesAnimator {
                 context.arc(actualParticle.x, actualParticle.y, actualParticle.radius, Math.PI * 2, false);
                 context.fill();
                 // actualParticle.x += -1 * Math.floor(Math.random() * 2) * (bombasEncendias?.bombasOn ?? 1);
-                actualParticle.x += -1 * Math.floor(Math.random() * 2) * (bombasEncendias);
-                // actualParticle.y += -0.33 * (particleIndex % 2 == 0 ? actualParticle.velocity_y + 1 : actualParticle.velocity_y - 1) * (bombasEncendias?.bombasOn ?? 1);
-                actualParticle.y += -0.33 * (particleIndex % 2 == 0 ? actualParticle.velocity_y + 1 : actualParticle.velocity_y - 1) * (bombasEncendias);
+                actualParticle.x += -1 * Math.floor(Math.random() * 2) * (this.bombasEncendias);
+                // actualParticle.y += -0.33 * (particleIndex % 2 == 0 ? actualParticle.velocity_y + 1 : actualParticle.velocity_y - 1) * (this.bombasEncendias?.bombasOn ?? 1);
+                actualParticle.y += -0.33 * (particleIndex % 2 == 0 ? actualParticle.velocity_y + 1 : actualParticle.velocity_y - 1) * (this.bombasEncendias);
 
                 let desborde = actualParticle.radius;
                 if (actualParticle.x < desborde) actualParticle.x = this.characteristicsWaterCanvas._Width - desborde;
@@ -98,9 +103,20 @@ class ParticlesAnimator {
     };
 
     Render = function () {
+        this.bombasEncendias = this.ObtenerCantidadDeBombasEncendidas();
         window.requestAnimationFrame(() => { this.Render() });
-        this.drawWaterCanvasByGravity();
+        if(this.bombasEncendias > 0){
+            this.drawWaterCanvasByGravity();
+        }
     };
+
+    ObtenerCantidadDeBombasEncendidas(){
+        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
+        // estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
+        //     console.log(signalBomba)
+        // })
+        return 1; //Falta obtener la cantidad de bombas encendidas de la base de datos
+    }
 
     SetAnimationFrame = function () {
         this.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
