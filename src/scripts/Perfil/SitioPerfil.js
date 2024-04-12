@@ -21,7 +21,7 @@ class SitioPerfil {
         this.setHover = setHover;
         this.estilosEstacionEtiqueta = configuracionPadierna.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
     }
-    
+
     createEtiqueta() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
@@ -30,13 +30,17 @@ class SitioPerfil {
         let nameSignal;
         let etiquetaDiv = CreateElement({
             nodeElement: 'div',
-            attributes: { id: `etiquetaSitioPerfil_${estacion.Nombre}`, class: 'etiquetaSitioPerfil' },
-            
+            attributes: {
+                id: `etiquetaSitioPerfil_${estacion.Nombre}`,
+                class: 'etiquetaSitioPerfil'
+            },
         });
+
         let signalDiv = CreateElement({
             nodeElement: 'div',
             attributes: { class: 'signalSitioPerfil' }
         });
+
         let nombreSitio = CreateElement({
             nodeElement: 'p',
             attributes: {
@@ -57,6 +61,7 @@ class SitioPerfil {
                 },
                 innerText: `${estacion.Enlace == 0 ? "---" : valor}`
             });
+
             nameSignal = CreateElement({
                 nodeElement: 'p',
                 attributes: {
@@ -65,6 +70,7 @@ class SitioPerfil {
                 },
                 innerText: `${signal.GetNomenclaturaSignal()}:  `
             });
+
             signalDiv.append(nameSignal, valorSignal)
         }
 
@@ -77,11 +83,11 @@ class SitioPerfil {
         this.ponerPosiciones(etiquetaDiv, this.estilosEstacionEtiqueta);
 
         return etiquetaDiv;
-
     }
+
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        
+
         let estacionDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
@@ -98,14 +104,16 @@ class SitioPerfil {
             nodeElement: 'div',
             attributes: { id: `estacionPerfil_${estacion.Nombre}`, class: 'estacionPerfil' }
         });
-        
+
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
 
             let imagenEstacionBombaPerfil = CreateElement({
                 nodeElement: "img",
                 attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio", src: estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil") }
             });
+
             estacionPerfilDiv.append(imagenEstacionBombaPerfil);
+            this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;
         })
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
@@ -115,15 +123,15 @@ class SitioPerfil {
             });
 
             estacionPerfilDiv.append(imagenEstacionNivelPerfil);
+            this.ElementosDinamicosHTML[imagenEstacionNivelPerfil.id] = imagenEstacionNivelPerfil;
         })
-        
+
+
         estacionDiv.append(estacionPerfilDiv);
-        
+
         this.suscribirEventos();
         return estacionDiv;
     }
-
-
 
     ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta) {
         if (estilosEstacionEtiqueta != undefined) {
@@ -145,13 +153,24 @@ class SitioPerfil {
         const signal = estacion.ObtenerPrimerSignal();
 
         const name = this.ElementosDinamicosHTML[`idEstacion_${estacion.IdEstacion}`];
-        name.style.background = estacion.Enlace == 0 ? "red" : "green";
+        const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
+
+        name.style.background = estacion.Enlace != 0 ? "green" : "red";
 
         if (signal) {
-            const valor = `${signal.GetValorString(true, true)} ${EnumUnidadesSignal[signal.TipoSignal]}`;
+            const valor = `${signal.GetValorString(true, true)}`;
             const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.Nombre}`];
-            valorSignal.innerText = `${estacion.Enlace == 0 ? "---" : valor}`;
+            valorSignal.innerText = `${estacion.Enlace != 0 ? valor : "---"}`;
         }
+
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+            nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
+        })
+
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
+            const bomba = this.ElementosDinamicosHTML[`idBomba_${signalBomba.IdSignal}`];
+            bomba.src = estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil");
+        })
     }
 
     mostrarParticular = () => {

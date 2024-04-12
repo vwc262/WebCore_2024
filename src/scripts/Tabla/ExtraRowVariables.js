@@ -52,23 +52,8 @@ class ExtraRowVariables {
             }
         });
 
-        this.Update();
-
         return this.rowContainer;
     }
-
-    /**
-     * 
-     * @param {int} actualIndex 
-     */
-    Update() {
-        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-
-    }
-
-    // suscribirEventos() {
-    //     EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.updateEstacion()));
-    // }
 
 }
 

@@ -1,5 +1,6 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { ExtraRowVariables } from "./ExtraRowVariables.js";
 import { Row } from "./Row.js";
@@ -69,7 +70,7 @@ class Tabla {
 
             this.tBodyVariablesContainer.setAttribute('visible', `${visible ? '0' : '1'}`);
             this.tBodyVariablesContainer.style = `right:${visible ? '-455' : '475'}px;`;
-            this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/${visible ? 'btn_abrir': 'btn_abrirrotate'}.png?v=10")`;
+            this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/${visible ? 'btn_abrir' : 'btn_abrirrotate'}.png?v=10")`;
         });
 
         this.columns = {
@@ -202,10 +203,16 @@ class Tabla {
             const columns = {};
             Object.keys(this.columns).forEach(key => { columns[key] = []; });
 
-            this.rows.push(new Row(estacion.IdEstacion));
-            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.offset, function () {
-                this.refreshTable();
-            }.bind(this), indexEstacion));
+            this.rows.push(new Row(estacion.IdEstacion,
+                function (mouseover, IdEstacion) {
+                    this.hoverRow(mouseover, IdEstacion);
+                }.bind(this)));
+            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.offset, indexEstacion,
+                function () {
+                    this.refreshTable();
+                }.bind(this), function (mouseover, IdEstacion) {
+                    this.hoverRow(mouseover, IdEstacion);
+                }.bind(this)));
 
             const row = this.rows[this.rows.length - 1];
             row.create();
@@ -229,6 +236,31 @@ class Tabla {
         this.online.innerHTML = onlineCount
         this.offline.innerHTML = offlineCount;
         this.mantenimiento.innerHTML = 0;
+
+        this.suscribirEventos();
+        this.update();
+    }
+
+    hoverRow(mouseover, IdEstacion) {
+        let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
+        let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
+
+        row.rowContainer.style.background = `${mouseover ? 'rgba(87,168,152,0.35)' : 'rgba(87,168,152,0.0)'} `;
+        rowVariable.rowContainer.style.background = `${mouseover ? 'rgba(87,168,152,0.35)' : 'rgba(87,168,152,0.0)'} `;
+    }
+
+    update() {
+
+        let onlineCount = Core.Instance.data.filter(estacion => estacion.Enlace != EnumEnlace.FueraLinea).length;
+        let offlineCount = Core.Instance.data.length - onlineCount;
+
+        this.online.innerHTML = onlineCount
+        this.offline.innerHTML = offlineCount;
+        this.mantenimiento.innerHTML = 0;
+    }
+
+    suscribirEventos() {
+        EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.update()));
     }
 }
 

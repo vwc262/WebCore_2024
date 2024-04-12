@@ -73,12 +73,14 @@
      justify-content: space-between;
      align-content: center;
      width: 92%;
+     border-radius: 10px;
  }
 
  .enlace-tabla {
      height: 20px;
      width: 20px;
      margin-left: 15px;
+     pointer-events: none;
  }
 
  .nombre-Fecha-Container {
@@ -89,6 +91,7 @@
      align-content: center;
      justify-content: center;
      align-items: center;
+     pointer-events: none;
  }
 
  .nombre-tabla {
@@ -242,4 +245,5 @@
     position: absolute;
     top: 35px;
     left: 6px;
+    pointer-events: none;
  }

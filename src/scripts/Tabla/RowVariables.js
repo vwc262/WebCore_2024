@@ -12,10 +12,10 @@ class RowVariables {
      * @param {Map<string, [Signal]>} columns 
      * @param {int} ordinalSignal 
      * @param {Object} offset object with offset.value
-     * @param {Function} refreshTable callback
      * @param {int} actualIndex 
+     * @param {Function} refreshTable callback
      */
-    constructor(IdEstacion, columns, ordinalSignal, offset, refreshTable, actualIndex) {
+    constructor(IdEstacion, columns, ordinalSignal, offset, actualIndex, refreshTable) {
         this.IdEstacion = IdEstacion;
         this.columns = columns;
         this.ordinalSignal = ordinalSignal;
@@ -30,9 +30,10 @@ class RowVariables {
         */
         this.signalsContainer = [];
 
-        this.rowContainer = document.createElement('div');
-        this.rowContainer.classList = `sitio-tabla`;
-        //rgba(87,168,152,0.35)
+        this.rowContainer = CreateElement({
+            nodeElement: 'div',
+            attributes: { class: `sitio-tabla` },
+        });
 
         /**
          * @type {Estacion} estacion
@@ -122,7 +123,6 @@ class RowVariables {
         }
 
         this.Update(this.actualIndex);
-        this.suscribirEventos();
 
         return this.rowContainer;
     }
@@ -132,30 +132,7 @@ class RowVariables {
      * @param {int} actualIndex 
      */
     Update(actualIndex) {
-        // this.actualIndex = actualIndex;
-        // const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-
-        // estacion.Signals.forEach(signal => {
-        //     let key = signal.TipoSignal;
-
-            
-        //     if (this.columns[key].length != undefined && this.columns[key][this.ordinalSignal] != undefined) {
-        //         this.signalsContainer.push(new Cell(this.columns[key][this.ordinalSignal], this.columns[key].length > 1));
-        //         this.rowContainer.appendChild(this.signalsContainer[this.signalsContainer.length - 1].create());
-        //     } else {
-        //         this.rowContainer.appendChild(CreateElement({
-        //             nodeElement: 'div',
-        //             attributes: { class: 'signal-Column-Container-NA' },
-        //             innerText: 'N/A',
-        //             events: new Map()
-        //         }));
-        //     }
-        // });
-
-    }
-
-    suscribirEventos() {
-        EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
+        this.actualIndex = actualIndex;
     }
 
 }
