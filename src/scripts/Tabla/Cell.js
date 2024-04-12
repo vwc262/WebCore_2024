@@ -51,7 +51,7 @@ class Cell {
         let signal = estacion.Signals.find((signal) => signal.IdSignal == this.signal.IdSignal);
 
         if (signal != null) {
-            this.signalValor.innerText = this.signal.GetValorString(false, true);
+            this.signalValor.innerText = signal.GetValorString(false, true);
         }
 
     }
