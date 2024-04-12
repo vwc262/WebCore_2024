@@ -1,6 +1,7 @@
 import Linea from "./Linea.js";
 import Signal from "./Signal.js";
-import { EnumTipoSignal } from "../Utilities/Enums.js";
+import { Core } from "../Core.js";
+import { EnumTipoSignal, EnumModule, EnumTipoSignalNomenclatura, EnumDentroLimite } from "../Utilities/Enums.js";
 
 
 class Estacion {
@@ -42,6 +43,22 @@ class Estacion {
      */
     ObtenerSignalPorTipoSignal(EnumTipoSignal) {
         return this.Signals.filter(signal => signal.TipoSignal == EnumTipoSignal) ?? [];
+    }
+
+    /**
+     * 
+     * @param {Signal} signal 
+     * @param {keyof EnumModule} modulo 
+     */
+    ObtenerRenderNivelOBomba(signal, modulo){
+        if(signal.TipoSignal != EnumTipoSignal.Nivel && signal.TipoSignal != EnumTipoSignal.Bomba){
+            return "";
+        }
+        const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "l" : "b";
+        const indiceImagen = signal.TipoSignal == EnumTipoSignal.Nivel ? signal.DentroRango ? signal.DentroLimite == EnumDentroLimite.Alto ? "10r" : signal.IndiceImagen : "r" : signal.DentroRango ? signal.Valor : 0;
+        const url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion}/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]}${signal.Ordinal + 1}_${indiceImagen}.png?v=10 `;
+        
+        return url;
     }
 
     /**
