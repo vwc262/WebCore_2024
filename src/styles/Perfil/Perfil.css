@@ -1,7 +1,5 @@
 .sitioPerfil {
-    height: auto !important;
-    text-align: -webkit-center;
-    align-items: center;
+    cursor: pointer;
 }
 
 .etiquetaSitioPerfil {
@@ -18,14 +16,17 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
+    text-align: center;
     gap: 6px;
 }
 
 .estiloNombreEstacion {
+    pointer-events: none;
     border-radius: 5px;
     width: 115px;
     height: auto;
-    /* margin: 5px; */
+    text-align: center;
+    margin: 5px; 
 }
 
 .idEstacionFondo {
@@ -55,4 +56,21 @@
     background-size: cover;
     width: 20px;
     height: 20px;
+}
+
+.renderImagesSitio{
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.estacionPerfil{
+    pointer-events: none;
+}
+
+.hoverPerfil{
+    pointer-events: none;
 }

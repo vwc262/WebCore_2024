@@ -51,6 +51,13 @@ var configuracionPadierna = {
 
             },
             {
+                "IdEstacion": 8,
+                "Imagen": "position: absolute; width: 0px; height: 0px; left: 0px; top: 0px; display:none;",
+                "Etiqueta": "position: absolute; top:  0px; left: 0px; display:none;",
+                "Estado": "display:none;"
+
+            },
+            {
                 "IdEstacion": 9,
                 "Imagen": "position: absolute; width: 189px; height: 119px; left:  797px; top: 739px;",
                 "Etiqueta": "position: absolute; top: 735px; left: 694px;",
