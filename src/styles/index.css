@@ -32,6 +32,8 @@ header {
     rgb(113 139 182) 100%,
     rgb(132 162 217) 100%
   );
+  align-items: center;
+  justify-content: space-between;
 }
 
 nav {
@@ -90,7 +92,7 @@ aside {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-left: 500px;
+  /* margin-left: 500px; */
   justify-content: center;
 }
 
@@ -118,4 +120,26 @@ aside {
 
 .section__particular {
   z-index: 1;
+}
+
+.header__btnRegresar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+  padding: 20px;
+  transition:  color 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.header__btnRegresar img {
+  width: 100px;
+}
+
+.header__btnRegresar:hover {
+  color: goldenrod;
 }
