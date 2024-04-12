@@ -177,7 +177,8 @@ class ArranqueParo {
       carruselItem.style.left = `${index * 100}px`;
       this.#carruselContainer.append(carruselItem);
     });
-    this.refillCarrusel();
+    if (bombas.length > 3)
+      this.refillCarrusel();
   }
   refillCarrusel() {
     [...this.#carruselContainer.children].reverse().forEach((item, index) => {
@@ -212,15 +213,17 @@ class ArranqueParo {
    */
   MoverCarrusel = (e) => {
     //Distincion para saber si va atras o adelante
-    const isAtras = e.currentTarget.id == "carruselPrev_AP";
-    this.transicionCarrusel(isAtras);
-    if (!isAtras) {
-      this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(this.#carruselContainer.firstChild.style.left.replace("px", "") - 100)}px;opacity:0;`;
-      this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
-    }
-    if (isAtras) {
-      this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
-      this.#carruselContainer.append(this.#carruselContainer.firstChild);
+    if (this.#carruselContainer.children.length > 3) {
+      const isAtras = e.currentTarget.id == "carruselPrev_AP";
+      this.transicionCarrusel(isAtras);
+      if (!isAtras) {
+        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(this.#carruselContainer.firstChild.style.left.replace("px", "") - 100)}px;opacity:0;`;
+        this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
+      }
+      if (isAtras) {
+        this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
+        this.#carruselContainer.append(this.#carruselContainer.firstChild);
+      }
     }
   };
   transicionCarrusel(isAtras) {
