@@ -113,22 +113,8 @@ class Particular {
 
     const $btnBack = document.querySelector(".header__btnRegresar");
     $btnBack.addEventListener("click", () => {
-      const isParticularActive = Module == EnumModule.Particular;
-      const $titleHeader = document.querySelector("#title");
-
-      console.log(isParticularActive);
-      if (isParticularActive) {
-        // Maneja los zIndex al cambiar de "paginas"
-        section__home.style.zIndex = "10";
-        section__mapa.style.zIndex = "5";
-        section__graficador.style.zIndex = "5";
-        section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
-        $titleHeader.innerText = "Tanques Padierna";
-        this.$datosHeader.style.opacity = "0";
-        this.$btnBack.style.opacity = "0";
-        this.$btnBack.style.pointerEvents = "none";
-      }
+      SetActualModule("Perfil");
+      GoHome();   
     });
   }
 
