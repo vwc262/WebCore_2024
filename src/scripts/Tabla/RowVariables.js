@@ -122,6 +122,7 @@ class RowVariables {
         }
 
         this.Update(this.actualIndex);
+        this.suscribirEventos();
 
         return this.rowContainer;
     }
@@ -131,14 +132,31 @@ class RowVariables {
      * @param {int} actualIndex 
      */
     Update(actualIndex) {
-        this.actualIndex = actualIndex;
-        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
+        // this.actualIndex = actualIndex;
+        // const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
+
+        // estacion.Signals.forEach(signal => {
+        //     let key = signal.TipoSignal;
+
+            
+        //     if (this.columns[key].length != undefined && this.columns[key][this.ordinalSignal] != undefined) {
+        //         this.signalsContainer.push(new Cell(this.columns[key][this.ordinalSignal], this.columns[key].length > 1));
+        //         this.rowContainer.appendChild(this.signalsContainer[this.signalsContainer.length - 1].create());
+        //     } else {
+        //         this.rowContainer.appendChild(CreateElement({
+        //             nodeElement: 'div',
+        //             attributes: { class: 'signal-Column-Container-NA' },
+        //             innerText: 'N/A',
+        //             events: new Map()
+        //         }));
+        //     }
+        // });
 
     }
 
-    // suscribirEventos() {
-    //     EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.updateEstacion()));
-    // }
+    suscribirEventos() {
+        EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
+    }
 
 }
 
