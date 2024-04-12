@@ -59,12 +59,12 @@ class Core {
             let time = new Date();
             let ss = time.getSeconds();
 
-            estacion.Enlace = ss < 45 ? 3 : ss < 30 ? 2 : ss < 15 ? 1 : 0;
+            estacion.Enlace = ss > 45 ? 3 : ss > 30 ? 2 : ss > 15 ? 1 : 0;
             estacion.Tiempo = time.toISOString();
 
             estacion.Signals.forEach(signal => {
-                signal.DentroLimite = ss < 40 ? 2 : ss < 20 ? 1 : 0;
-                signal.DentroRango = ss < 45 ? 1 : 0;
+                signal.DentroLimite = ss > 40 ? 2 : ss > 20 ? 1 : 0;
+                signal.DentroRango = ss > 45 ? 1 : 0;
                 signal.IndiceImagen = parseInt(ss / 60);
                 signal.Valor = ss;
             });
