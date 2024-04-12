@@ -224,30 +224,34 @@ class ArranqueParo {
   MoverCarrusel = (e) => {
     //Distincion para saber si va atras o adelante
     const isAtras = e.currentTarget.id == "carruselPrev_AP";
-    this.#itemsCarrusel = this.#itemsCarrusel.sort();
+
     if (!isAtras) {
       const ultimo = this.#itemsCarrusel[this.#itemsCarrusel.length - 1];
-      ultimo.style.cssText = "left:-100px;opacity:0;transition:none";
+      ultimo.style.transition = "";
+      ultimo.style.opacity = 0;
+      ultimo.style.left = "-100px";
       this.#itemsCarrusel = [ultimo, ...this.#itemsCarrusel];
       this.#itemsCarrusel.splice(this.#itemsCarrusel.length - 1, 1);
+      setTimeout(() => {
+        this.transicionCarrusel(isAtras);
+      }, 200);
     }
-    this.#itemsCarrusel = isAtras
-      ? this.#itemsCarrusel.sort()
-      : this.#itemsCarrusel.reverse();
-    this.#itemsCarrusel.forEach((item, index) => {
-      const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `left:${
-        isAtras ? currentX - 100 : currentX + 100
-      }px; opacity = 1; transition:left linear .2s`;
-    });
-
     if (isAtras) {
-      this.#itemsCarrusel[0].style.cssText =
-        "left:300px;opacity:0;transition:none";
+      this.transicionCarrusel(isAtras);
+      this.#itemsCarrusel[0].style.cssText = "left:300px;opacity:0;";
       this.#itemsCarrusel.push(this.#itemsCarrusel[0]);
       this.#itemsCarrusel.splice(0, 1);
     }
   };
+
+  transicionCarrusel(isAtras) {
+    this.#itemsCarrusel.forEach((item, index) => {
+      const currentX = parseFloat(item.style.left.replace("px", ""));
+      item.style.cssText = `left:${
+        isAtras ? currentX - 100 : 100 * index
+      }px;opacity:1;`;
+    });
+  }
 
   Update = () => {
     if (this.isVisible) {
