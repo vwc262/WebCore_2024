@@ -141,12 +141,8 @@
   top: 0;
   left: 0;
   text-align: center;
-  transition: left linear 0.2s;
-  /* flex-direction: column; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* gap: 10px; */
-  /* display: flex; */
+  transition: all ease .2s;
+  /* transition-delay: 500ms; */
 }
 
 .arranqueParo__itemsContainer {

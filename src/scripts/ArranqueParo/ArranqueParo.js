@@ -64,8 +64,8 @@ class ArranqueParo {
     // Si ya se complen las condiciones cambiar la bandera is visible a true
 
     // Validación
+    this.animPanel();
     if (sesionIniciada && estacionActual.Enlace === 0) {
-      this.animPanel();
     } else {
       const mensaje = sesionIniciada
         ? "El sitio debe de estar en línea"
@@ -179,7 +179,7 @@ class ArranqueParo {
         attributes: { class: "arranqueParo__modo" },
         innerText:
           EnumPerillaBomba[
-            estacion.ObtenerValorPerillaBomba(bomba.Ordinal).Valor
+          estacion.ObtenerValorPerillaBomba(bomba.Ordinal).Valor
           ],
       });
       const bombaImg = CreateElement({
@@ -196,6 +196,9 @@ class ArranqueParo {
       carruselItem.style.left = `${index * 100}px`;
       this.#carruselContainer.append(carruselItem);
     });
+    let clone = this.#carruselContainer.lastChild.cloneNode(true);
+    clone.style.left = "-100px";
+    this.#carruselContainer.prepend(clone);
   }
 
   /**
@@ -223,33 +226,22 @@ class ArranqueParo {
    */
   MoverCarrusel = (e) => {
     //Distincion para saber si va atras o adelante
-    const isAtras = e.currentTarget.id == "carruselPrev_AP";
-
+    const isAtras = e.currentTarget.id == "carruselPrev_AP";    
+    this.transicionCarrusel(isAtras);
+    
     if (!isAtras) {
-      const ultimo = this.#itemsCarrusel[this.#itemsCarrusel.length - 1];
-      ultimo.style.transition = "";
-      ultimo.style.opacity = 0;
-      ultimo.style.left = "-100px";
-      this.#itemsCarrusel = [ultimo, ...this.#itemsCarrusel];
-      this.#itemsCarrusel.splice(this.#itemsCarrusel.length - 1, 1);
-      setTimeout(() => {
-        this.transicionCarrusel(isAtras);
-      }, 200);
+      this.#carruselContainer.lastChild.style.cssText = "transition:none;left:-100px;opacity:0;";
+      this.#carruselContainer.prepend(this.#carruselContainer.lastChild);      
     }
     if (isAtras) {
-      this.transicionCarrusel(isAtras);
-      this.#itemsCarrusel[0].style.cssText = "left:300px;opacity:0;";
-      this.#itemsCarrusel.push(this.#itemsCarrusel[0]);
-      this.#itemsCarrusel.splice(0, 1);
+      this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
+      this.#carruselContainer.append(this.#carruselContainer.firstChild);
     }
   };
-
   transicionCarrusel(isAtras) {
-    this.#itemsCarrusel.forEach((item, index) => {
+    [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `left:${
-        isAtras ? currentX - 100 : 100 * index
-      }px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
     });
   }
 
