@@ -203,10 +203,16 @@ class Tabla {
             const columns = {};
             Object.keys(this.columns).forEach(key => { columns[key] = []; });
 
-            this.rows.push(new Row(estacion.IdEstacion));
-            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.offset, function () {
-                this.refreshTable();
-            }.bind(this), indexEstacion));
+            this.rows.push(new Row(estacion.IdEstacion,
+                function (mouseover, IdEstacion) {
+                    this.hoverRow(mouseover, IdEstacion);
+                }.bind(this)));
+            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.offset, indexEstacion,
+                function () {
+                    this.refreshTable();
+                }.bind(this), function (mouseover, IdEstacion) {
+                    this.hoverRow(mouseover, IdEstacion);
+                }.bind(this)));
 
             const row = this.rows[this.rows.length - 1];
             row.create();
@@ -233,6 +239,14 @@ class Tabla {
 
         this.suscribirEventos();
         this.update();
+    }
+
+    hoverRow(mouseover, IdEstacion) {
+        let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
+        let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
+
+        row.rowContainer.style.background = `${mouseover ? 'rgba(87,168,152,0.35)' : 'rgba(87,168,152,0.0)'} `;
+        rowVariable.rowContainer.style.background = `${mouseover ? 'rgba(87,168,152,0.35)' : 'rgba(87,168,152,0.0)'} `;
     }
 
     update() {
