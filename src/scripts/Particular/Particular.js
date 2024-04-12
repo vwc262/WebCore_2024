@@ -5,7 +5,7 @@ import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { EnumUnidadesSignal, EnumModule } from "../Utilities/Enums.js";
-import { GoHome, SetActualModule } from "../uiManager.js";
+import { GoBack, GoHome, Module, SetActualModule } from "../uiManager.js";
 
 class Particular {
   //#region  Singleton
@@ -110,6 +110,26 @@ class Particular {
 
     // Funcionalidad para mostrar el panel de control
     this.panelControl();
+
+    const $btnBack = document.querySelector(".header__btnRegresar");
+    $btnBack.addEventListener("click", () => {
+      const isParticularActive = Module == EnumModule.Particular;
+      const $titleHeader = document.querySelector("#title");
+
+      console.log(isParticularActive);
+      if (isParticularActive) {
+        // Maneja los zIndex al cambiar de "paginas"
+        section__home.style.zIndex = "10";
+        section__mapa.style.zIndex = "5";
+        section__graficador.style.zIndex = "5";
+        section__login.style.zIndex = "5";
+        section__particular.style.zIndex = "5";
+        $titleHeader.innerText = "Tanques Padierna";
+        this.$datosHeader.style.opacity = "0";
+        this.$btnBack.style.opacity = "0";
+        this.$btnBack.style.pointerEvents = "none";
+      }
+    });
   }
 
   createSignals() {
@@ -200,12 +220,6 @@ class Particular {
     this.$headerStatus.innerText = offline ? "Fuera de línea" : "En línea";
     this.$headerStatus.style.color = offline ? "red" : "green";
   }
-
-  btnBack() {
-    const $btnBack = document.querySelector(".header__btnRegresar");
-    $btnBack.addEventListener("click", GoHome());
-  }
-
   //#endregion
 }
 
