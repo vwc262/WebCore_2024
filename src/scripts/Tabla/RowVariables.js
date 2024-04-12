@@ -12,10 +12,10 @@ class RowVariables {
      * @param {Map<string, [Signal]>} columns 
      * @param {int} ordinalSignal 
      * @param {Object} offset object with offset.value
-     * @param {Function} refreshTable callback
      * @param {int} actualIndex 
+     * @param {Function} refreshTable callback
      */
-    constructor(IdEstacion, columns, ordinalSignal, offset, refreshTable, actualIndex) {
+    constructor(IdEstacion, columns, ordinalSignal, offset, actualIndex, refreshTable) {
         this.IdEstacion = IdEstacion;
         this.columns = columns;
         this.ordinalSignal = ordinalSignal;
@@ -30,9 +30,10 @@ class RowVariables {
         */
         this.signalsContainer = [];
 
-        this.rowContainer = document.createElement('div');
-        this.rowContainer.classList = `sitio-tabla`;
-        //rgba(87,168,152,0.35)
+        this.rowContainer = CreateElement({
+            nodeElement: 'div',
+            attributes: { class: `sitio-tabla` },
+        });
 
         /**
          * @type {Estacion} estacion
