@@ -2,7 +2,7 @@ import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import configuracionPadierna from "../../config/PadiernaConfig.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumTipoSignal, EnumUnidadesSignal } from "../Utilities/Enums.js";
+import { EnumModule, EnumTipoSignal, EnumUnidadesSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
 
@@ -40,14 +40,15 @@ class SitioPerfil {
         }
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
-            let imagenEstacionBombaPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "Bomba", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/b/b${signalBomba.Ordinal + 1}_${signalBomba.Valor}.png` } });
+            
+            let imagenEstacionBombaPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "Bomba", src: estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil") } });
             estacionPerfilDiv.append(imagenEstacionBombaPerfil);
             if (estilosEstacionEtiqueta != undefined)
                 imagenEstacionBombaPerfil.style = estilosEstacionEtiqueta.Imagen;
         })
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
-            let imagenEstacionNivelPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idEstacionNivel_${estacion.Abreviacion}`, class: "idEstacionFondo", src: `${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/l/n${signalNivel.Ordinal + 1}_${signalNivel.IndiceImagen}.png?v=10 ` }, events: new Map().set("click", [this.mostrarParticular]) });
+            let imagenEstacionNivelPerfil = CreateElement({ nodeElement: "img", attributes: { id: `idEstacionNivel_${estacion.Abreviacion}`, class: "idEstacionFondo", src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") }, events: new Map().set("click", [this.mostrarParticular]) });
             estacionPerfilDiv.append(imagenEstacionNivelPerfil);
             if (estilosEstacionEtiqueta != undefined)
                 imagenEstacionNivelPerfil.style = estilosEstacionEtiqueta.Imagen;
@@ -59,7 +60,7 @@ class SitioPerfil {
         if (signal) {
             this.ElementosDinamicosHTML[valorSignal.id] = valorSignal;
         }
-        estacionDiv.append(estacionPerfilDiv, etiquetaDiv, );
+        estacionDiv.append(estacionPerfilDiv, etiquetaDiv,);
 
         this.ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta);
         this.suscribirEventos();
