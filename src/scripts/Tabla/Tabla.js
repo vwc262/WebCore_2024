@@ -161,10 +161,10 @@ class Tabla {
                 this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%)';
                 this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
 
-                if (indexRow >= this.offset.actualIndex && indexRow < this.offset.actualIndex + this.offset.extraRows) {
+                if (indexCurvedRows >= this.offset.actualIndex && indexCurvedRows < this.offset.actualIndex + this.offset.extraRows) {
                     for (let ordinalSignal = 1; ordinalSignal <= this.offset.extraRows; ordinalSignal++) {
 
-                        indexRow++;
+                        // indexRow++;
                         indexCurvedRows++;
 
                         if (this.curvedRows[indexCurvedRows] != undefined) {
@@ -190,8 +190,6 @@ class Tabla {
             indexEstacion++;
             indexCurvedRows++;
 
-            // if (indexCurvedRows >= this.elementosVisibles )
-            //     return;
         }
     }
 
