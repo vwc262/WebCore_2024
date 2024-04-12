@@ -4,8 +4,8 @@ import Estacion from "../Entities/Estacion.js";
 import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
-import { EnumUnidadesSignal } from "../Utilities/Enums.js";
-import { SetActualModule } from "../uiManager.js";
+import { EnumUnidadesSignal, EnumModule } from "../Utilities/Enums.js";
+import { GoHome, SetActualModule } from "../uiManager.js";
 
 class Particular {
   //#region  Singleton
@@ -60,8 +60,6 @@ class Particular {
       let signalActualizar =
         this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
 
-
-
       if (signalActualizar) {
         signalActualizar.innerText = signal.GetValorString(true, true);
       }
@@ -77,6 +75,7 @@ class Particular {
     this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
     this.$datosHeader = document.querySelector(".header__datos-particular");
+    this.$btnBack = document.querySelector(".header__btnRegresar");
 
     this.$headerTitle.innerText = this.Estacion.Nombre;
 
@@ -87,6 +86,8 @@ class Particular {
     section__login.style.zIndex = "5";
     section__particular.style.zIndex = "10";
     this.$datosHeader.style.opacity = "1";
+    this.$btnBack.style.opacity = "1";
+    this.$btnBack.style.pointerEvents = "auto";
 
     // Cambiar el texto de acuerdo al estado de la estación
     this.setEnlaceParticular(this.Estacion.Enlace);
@@ -164,7 +165,8 @@ class Particular {
     const sliderInput = document.querySelector("#sliderInput");
 
     // Mostrar el control deslizante si los elementos se desbordan del contenedor
-    document.querySelector(".particular__slider").style.display = container.scrollWidth > container.clientWidth ? "flex" : "none";
+    document.querySelector(".particular__slider").style.display =
+      container.scrollWidth > container.clientWidth ? "flex" : "none";
 
     if (
       document.querySelector(".particular__slider").style.display !== "none"
@@ -189,7 +191,7 @@ class Particular {
     const panelControlElement = document.querySelector(
       ".particular__panelControl"
     );
-    panelControlElement.style.display = tipoSignal7Count >= 1 ? "flex" : "none"
+    panelControlElement.style.display = tipoSignal7Count >= 1 ? "flex" : "none";
   }
 
   setEnlaceParticular(valorEnlace) {
@@ -198,6 +200,12 @@ class Particular {
     this.$headerStatus.innerText = offline ? "Fuera de línea" : "En línea";
     this.$headerStatus.style.color = offline ? "red" : "green";
   }
+
+  btnBack() {
+    const $btnBack = document.querySelector(".header__btnRegresar");
+    $btnBack.addEventListener("click", GoHome());
+  }
+
   //#endregion
 }
 
