@@ -92,6 +92,13 @@ class Estacion {
             return perillas[ordinalBomba];
         }
     }
+    /**
+     * Indica si la estacion esta en linea
+     * @returns {boolean}
+     */
+    EstaEnLinea() {
+        return this.Enlace >= 1 && this.Enlace <= 3;
+    }
 
     /**
      *
@@ -111,10 +118,10 @@ class Estacion {
 
         if (signal.TipoSignal == EnumTipoSignal.Nivel) {
             if (signal.DentroRango) {
-                if (signal.DentroLimite == EnumDentroLimite.Alto){
+                if (signal.DentroLimite == EnumDentroLimite.Alto) {
                     indiceImagen = "10r";
                 }
-                else{
+                else {
                     indiceImagen = signal.IndiceImagen;
                 }
             }
