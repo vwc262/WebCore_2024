@@ -143,7 +143,7 @@ var configuracionPadierna = {
             },
             {
                 "IdEstacion": 21,
-                "Imagen": "position: absolute; width: 275px; height: 170px; left: 1036px; top: 869px;",
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 1048px; top: 875px;",
                 "Etiqueta": "position: absolute; top: 938px; left: 930px;",
                 "Estado": "display:none;"
 
