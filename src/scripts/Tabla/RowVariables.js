@@ -32,6 +32,7 @@ class RowVariables {
 
         this.rowContainer = document.createElement('div');
         this.rowContainer.classList = `sitio-tabla`;
+        //rgba(87,168,152,0.35)
 
         /**
          * @type {Estacion} estacion

@@ -1,3 +1,6 @@
+import { EnumModule } from "../Utilities/Enums.js";
+import { Module } from "../uiManager.js";
+
 class ParticlesAnimator {
 
     constructor(cssPipe, canvas) {
@@ -55,10 +58,10 @@ class ParticlesAnimator {
 
     // Falta funcion para saber en que modilo se esta
     drawWaterCanvasByGravity() {
-        //if (!vwc.isParticularActive && $(`.${this.CanvasName}`).is(":visible") && !Perfil.isPanning) {
-        var canvasWaterElements = this.Canvas;
-        canvasWaterElements.setAttribute("width", `${this.characteristicsWaterCanvas._Width}`);
-        canvasWaterElements.setAttribute("height", `${this.characteristicsWaterCanvas._Height}`);
+        if (Module == EnumModule.Perfil /*&& !Perfil.isPanning*/) {
+            var canvasWaterElements = this.Canvas;
+            canvasWaterElements.setAttribute("width", `${this.characteristicsWaterCanvas._Width}`);
+            canvasWaterElements.setAttribute("height", `${this.characteristicsWaterCanvas._Height}`);
 
 
             var context = canvasWaterElements.getContext("2d");
@@ -90,8 +93,8 @@ class ParticlesAnimator {
                 if (actualParticle.x > this.characteristicsWaterCanvas._Width - desborde) actualParticle.x = desborde;
                 if (actualParticle.y > this.characteristicsWaterCanvas._Height - desborde) actualParticle.y = desborde;
             }
-        
-        //}
+
+        }
     };
 
     Render = function () {
