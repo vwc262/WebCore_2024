@@ -44,6 +44,11 @@ class Particular {
 
   //#region Metodos
   setEstacion(estacion) {
+    if(this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion){
+      // Hay Cambio de particular
+      EventsManager.Instance.EmitirEvento("ParticularChanged")
+      this.estacion = estacion;
+    }
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
   }
 

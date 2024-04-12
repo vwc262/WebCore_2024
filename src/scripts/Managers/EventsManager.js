@@ -1,3 +1,4 @@
+import { EnumAppEvents } from "../Utilities/Enums.js";
 class EventsManager {
     static #_instance = undefined
     /**
@@ -40,6 +41,11 @@ class EventsManager {
         if (eventosCUstomizadosRestantes)
             this.#Eventos.set(nombreEvento, eventosCUstomizadosRestantes);
     }
+    /**
+     * 
+     * @param {keyof EnumAppEvents } nombreEvento 
+     * @param {{}} data 
+     */
     EmitirEvento(nombreEvento, data = {}) {
         const eventos = this.#Eventos.get(nombreEvento);
         if (eventos) {

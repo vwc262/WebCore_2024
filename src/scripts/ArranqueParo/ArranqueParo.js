@@ -36,6 +36,7 @@ class ArranqueParo {
       EnumAppEvents.Update,
       new EventoCustomizado(this.Update)
     );
+    EventsManager.Instance.Suscribirevento(EnumAppEvents.ParticularChanged, new EventoCustomizado(this.CloseArranqueParo));
 
     this.#carruselContainer = document.querySelector(
       ".arranqueParo__itemsContainer"
@@ -65,8 +66,9 @@ class ArranqueParo {
     // Si ya se complen las condiciones cambiar la bandera is visible a true
 
     // Validación
-    this.animPanel();
-    if (sesionIniciada && estacionActual.Enlace === 0) {
+    if (sesionIniciada && estacionActual.EstaEnLinea()) {
+      this.animPanel();
+      this.isVisible = true;
     } else {
       const mensaje = sesionIniciada
         ? "El sitio debe de estar en línea"
@@ -236,6 +238,12 @@ class ArranqueParo {
   Update = () => {
     if (this.isVisible) {
       const estacionUpdate = Core.Instance.GetDatosEstacion(this.idEstacion);
+      if (estacionUpdate.EstaEnLinea()) {
+
+      }
+      else {
+        this.CloseArranqueParo();
+      }
     }
   };
 
@@ -243,6 +251,7 @@ class ArranqueParo {
     // Logica para cerrar el modal
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
+    console.log("Cerrando panel MON AMI")
   };
   //#endregion
 }
