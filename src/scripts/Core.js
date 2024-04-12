@@ -1,5 +1,6 @@
 import { VwcApp } from "./App.js";
 import Estacion from "./Entities/Estacion.js";
+import Signal from "./Entities/Signal.js";
 import { Fetcher } from "./Fetcher/Fetcher.js";
 import { EventsManager } from "./Managers/EventsManager.js";
 import { EnumAppEvents, EnumControllerMapeo, EnumNombreProyecto, EnumProyecto, RequestType } from "./Utilities/Enums.js";
@@ -47,8 +48,27 @@ class Core {
     async Update() {
         const data = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.READ}?idProyecto=${this.IdProyecto}`, RequestType.GET, undefined, false);
         this.data = this.GetData(data);
+
+        this.randomValues();
         //console.log(this.data);
         EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
+    }
+
+    randomValues() {
+        this.data.forEach(estacion => {
+            let time = new Date();
+            let ss = time.getSeconds();
+
+            estacion.Enlace = ss < 45 ? 3 : ss < 30 ? 2 : ss < 15 ? 1 : 0;
+            estacion.Tiempo = time.toISOString();
+
+            estacion.Signals.forEach(signal => {
+                signal.DentroLimite = ss < 40 ? 2 : ss < 20 ? 1 : 0;
+                signal.DentroRango = ss < 45 ? 1 : 0;
+                signal.IndiceImagen = parseInt(ss / 60);
+                signal.Valor = ss;
+            });
+        });
     }
     /**
      * 
