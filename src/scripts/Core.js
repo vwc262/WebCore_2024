@@ -64,8 +64,8 @@ class Core {
 
             estacion.Signals.forEach(signal => {
                 signal.DentroLimite = ss > 40 ? 2 : ss > 20 ? 1 : 0;
-                signal.DentroRango = ss > 45;
-                signal.IndiceImagen = parseInt(ss / 60);
+                signal.DentroRango = ss > 45 ? false : true;
+                signal.IndiceImagen = parseInt((ss / 60) * 10);
                 signal.Valor = ss;
             });
         });

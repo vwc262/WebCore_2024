@@ -2,6 +2,9 @@
 
 import Signal from "../Entities/Signal.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
+import { EventsManager, EventoCustomizado } from "../Managers/EventsManager.js";
+import { Core } from "../Core.js";
+
 
 class Cell {
     /**
@@ -35,7 +38,26 @@ class Cell {
 
         this.signalColumnContainer.append(this.signalNombre, this.signalValor);
 
+        this.suscribirEventos();
+        this.Update();
+
         return this.signalColumnContainer;
+    }
+
+    Update() {
+        let IdEstacion = this.signal.IdEstacion;
+        const estacion = Core.Instance.GetDatosEstacion(IdEstacion);
+
+        let signal = estacion.Signals.find((signal) => signal.IdSignal == this.signal.IdSignal);
+
+        if (signal != null) {
+            this.signalValor.innerText = this.signal.GetValorString(false, true);
+        }
+
+    }
+
+    suscribirEventos() {
+        EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     }
 }
 
