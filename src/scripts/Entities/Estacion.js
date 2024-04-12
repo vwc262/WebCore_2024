@@ -6,6 +6,7 @@ import {
     EnumModule,
     EnumTipoSignalNomenclatura,
     EnumDentroLimite,
+    EnumEnlace,
 } from "../Utilities/Enums.js";
 
 class Estacion {
@@ -97,7 +98,7 @@ class Estacion {
      * @returns {boolean}
      */
     EstaEnLinea() {
-        return this.Enlace >= 1 && this.Enlace <= 3;
+        return this.Enlace >= EnumEnlace.Radio && this.Enlace <= EnumEnlace.Hibrido;
     }
 
     /**
