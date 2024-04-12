@@ -50,6 +50,7 @@ class ArranqueParo {
   isVisible = false;
   #isCarouselCreated = false;
   #itemsCarrusel = [];
+  clone = undefined;
   /**
    * @type {HTMLElement}
    */
@@ -106,18 +107,7 @@ class ArranqueParo {
   }
 
   CrearCarrusel() {
-    const $carruselContainer = document.querySelector(
-      ".arranqueParo__carruselBombas"
-    );
-    const $selectBombaContainer = document.querySelector(
-      ".arranqueParo__BtnsCarrusel"
-    );
-
-    const $carruselItem = document.querySelectorAll(
-      ".controlParo__carruselItem"
-    );
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
-
     // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea
     if (estacion.Lineas.length > 1) {
       this.PintarBotonesLineasEstacion(estacion);
@@ -128,15 +118,6 @@ class ArranqueParo {
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba)
       );
 
-    // if ($carruselContainer.scrollWidth > $carruselContainer.clientWidth) {
-    //   console.log("se desborda el item");
-    //   $selectBombaContainer.style.opacity = "1";
-    //   $selectBombaContainer.style.pointerEvents = "all";
-    // } else {
-    //   console.log("NOOOO se desborda el item");
-    //   $selectBombaContainer.style.opacity = "0.5";
-    //   $selectBombaContainer.style.pointerEvents = "none";
-    // }
     this.SetIsCarouselCreated(true);
   }
   /**
@@ -196,9 +177,14 @@ class ArranqueParo {
       carruselItem.style.left = `${index * 100}px`;
       this.#carruselContainer.append(carruselItem);
     });
-    let clone = this.#carruselContainer.lastChild.cloneNode(true);
-    clone.style.left = "-100px";
-    this.#carruselContainer.prepend(clone);
+    this.refillCarrusel();
+  }
+  refillCarrusel() {
+    [...this.#carruselContainer.children].reverse().forEach((item, index) => {
+      const clone = item.cloneNode(true)
+      clone.style.left = `${(index + 1) * - 100}px`
+      this.#carruselContainer.prepend(clone);
+    });
   }
 
   /**
@@ -226,12 +212,11 @@ class ArranqueParo {
    */
   MoverCarrusel = (e) => {
     //Distincion para saber si va atras o adelante
-    const isAtras = e.currentTarget.id == "carruselPrev_AP";    
+    const isAtras = e.currentTarget.id == "carruselPrev_AP";
     this.transicionCarrusel(isAtras);
-    
     if (!isAtras) {
-      this.#carruselContainer.lastChild.style.cssText = "transition:none;left:-100px;opacity:0;";
-      this.#carruselContainer.prepend(this.#carruselContainer.lastChild);      
+      this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(this.#carruselContainer.firstChild.style.left.replace("px", "") - 100)}px;opacity:0;`;
+      this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
     }
     if (isAtras) {
       this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
