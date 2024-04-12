@@ -68,6 +68,7 @@ class Signal {
         }
         return color;
     }
+    
 }
 
 export default Signal;

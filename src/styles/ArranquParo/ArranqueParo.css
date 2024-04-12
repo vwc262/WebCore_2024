@@ -49,10 +49,10 @@
   width: 235px;
   height: 200px;
   padding: 10px;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   max-width: 235px;
   overflow: hidden;
 }
@@ -137,11 +137,24 @@
   width: 100px;
   height: 100%;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  transition: left linear 0.2s;
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* gap: 10px; */
+  /* display: flex; */
+}
+
+.arranqueParo__itemsContainer {
+  position: absolute;
+  overflow: hidden;
+  width: 302px;
+  height: 140px;
+  left: 0px;
 }
 
 .arranqueParo__modo {
@@ -153,7 +166,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
-  height: 100%;
+  height: 90px;
   background-position-x: center;
 }
 
@@ -222,4 +235,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.Bomba_active {
 }

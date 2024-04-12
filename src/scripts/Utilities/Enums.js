@@ -1,214 +1,225 @@
 /**
- * @returns {{RequestType}}} 
+ * @returns {{RequestType}}}
  */
 const RequestType = {
-    GET: "GET",
-    POST: "POST"
+  GET: "GET",
+  POST: "POST",
 };
 /**
  * @returns {EnumProyecto}
  */
 const EnumProyecto = {
-    Default: 0,
-    GustavoAMadero: 1,
-    Padierna: 2,
-    PozosSistemaLerma: 3,
-    Yaqui: 4,
-    Chalmita: 5,
-    Encharcamientos: 6,
-    Sectores: 7,
-    Lumbreras: 8,
+  Default: 0,
+  GustavoAMadero: 1,
+  Padierna: 2,
+  PozosSistemaLerma: 3,
+  Yaqui: 4,
+  Chalmita: 5,
+  Encharcamientos: 6,
+  Sectores: 7,
+  Lumbreras: 8,
 };
 /**
  * @returns NombreProyecto
  */
 const EnumNombreProyecto = {
-    Default: 0,
-    1: 'TanquesGustavoAMadero',
-    2: 'TanquesPadierna',
-    3: 'PozosSistemaLerma',
-    4: 'TanquesYaqui',
-    5: 'TanquesChalmita',
-    6: 'Encharcamientos',
-    7: 'Sectores',
-    8: 'Lumbreras',
-}
+  Default: 0,
+  1: "TanquesGustavoAMadero",
+  2: "TanquesPadierna",
+  3: "PozosSistemaLerma",
+  4: "TanquesYaqui",
+  5: "TanquesChalmita",
+  6: "Encharcamientos",
+  7: "Sectores",
+  8: "Lumbreras",
+};
 
 /**
  * @returns {EnumControllerMapeo}
  */
 const EnumControllerMapeo = {
-    READ: 'ReadSignalsEstacion',
-    DELETE: 'DeleteSignalMapeo',
-    UPDATE: 'UpdateSignalMapeo'
+  READ: "ReadSignalsEstacion",
+  DELETE: "DeleteSignalMapeo",
+  UPDATE: "UpdateSignalMapeo",
 };
 /**
  * @returns {EnumTipoSignal}
  */
-var EnumTipoSignal =
-{
-    Default: 0,
-    Nivel: 1,
-    Presion: 2,
-    Gasto: 3,
-    Totalizado: 4,
-    ValvulaAnalogica: 5,
-    ValvulaDiscreta: 6,
-    Bomba: 7,
-    PerillaBomba: 8,
-    PerillaGeneral: 9,
-    Voltaje: 10,
-    Enlace: 11,
-    FallaAC: 12,
-    Tiempo: 13,
-    Mantenimiento: 14,
-    PuertaAbierta: 15
-}
+var EnumTipoSignal = {
+  Default: 0,
+  Nivel: 1,
+  Presion: 2,
+  Gasto: 3,
+  Totalizado: 4,
+  ValvulaAnalogica: 5,
+  ValvulaDiscreta: 6,
+  Bomba: 7,
+  PerillaBomba: 8,
+  PerillaGeneral: 9,
+  Voltaje: 10,
+  Enlace: 11,
+  FallaAC: 12,
+  Tiempo: 13,
+  Mantenimiento: 14,
+  PuertaAbierta: 15,
+};
 
 /**
  * @returns {EnumTipoSignalString}
  */
-var EnumTipoSignalString =
-{
-    0: 'Default',
-    1: 'Nivel',
-    2: 'Presion',
-    3: 'Gasto',
-    4: 'Totalizado',
-    5: 'ValvulaAnalogica',
-    6: 'ValvulaDiscreta',
-    7: 'Bomba',
-    8: 'PerillaBomba',
-    9: 'PerillaGeneral',
-    10: 'Voltaje',
-    11: 'Enlace',
-    12: 'FallaAC',
-    13: 'Tiempo',
-    14: 'Mantenimiento',
-    15: 'PuertaAbierta',
-}
+var EnumTipoSignalString = {
+  0: "Default",
+  1: "Nivel",
+  2: "Presion",
+  3: "Gasto",
+  4: "Totalizado",
+  5: "ValvulaAnalogica",
+  6: "ValvulaDiscreta",
+  7: "Bomba",
+  8: "PerillaBomba",
+  9: "PerillaGeneral",
+  10: "Voltaje",
+  11: "Enlace",
+  12: "FallaAC",
+  13: "Tiempo",
+  14: "Mantenimiento",
+  15: "PuertaAbierta",
+};
 
 /**
  * @returns {EnumTipoSignalString}
  */
-var EnumTipoSignalNomenclatura =
-{
-    0: 'D',
-    1: 'N',
-    2: 'P',
-    3: 'G',
-    4: 'T',
-    5: 'VA',
-    6: 'VD',
-    7: 'B',
-    8: 'PB',
-    9: 'PG',
-    10: 'V',
-    11: 'E',
-    12: 'AC',
-    13: 'T',
-    14: 'M',
-    15: 'PA',
-}
+var EnumTipoSignalNomenclatura = {
+  0: "D",
+  1: "N",
+  2: "P",
+  3: "G",
+  4: "T",
+  5: "VA",
+  6: "VD",
+  7: "B",
+  8: "PB",
+  9: "PG",
+  10: "V",
+  11: "E",
+  12: "AC",
+  13: "T",
+  14: "M",
+  15: "PA",
+};
 
 /**
  * @returns {EnumUnidadesSignal}
  */
 const EnumUnidadesSignal = {
-    1: "m",
-    2: "kg/cm2",
-    3: "l/s",
-    4: "m3",
-    10: "v"
-}
+  1: "m",
+  2: "kg/cm2",
+  3: "l/s",
+  4: "m3",
+  10: "v",
+};
 
 /**
  * @returns {EnumValorValvulaDiscreta}
  */
 const EnumValorValvulaDiscreta = {
-    NoDisponible: 0,
-    Cerrado: 1,
-    Abierto: 2
-}
+  NoDisponible: 0,
+  Cerrado: 1,
+  Abierto: 2,
+};
 
 /**
  * @returns {EnumFallaAC}
  */
 const EnumFallaAC = {
-    Alarmado: 0,
-    Normal: 1,
-}
+  Alarmado: 0,
+  Normal: 1,
+};
 
 /**
  * @returns {EnumPuertaAbierta}
  */
 const EnumPuertaAbierta = {
-    Alarmado: 0,
-    Normal: 1,
-}
+  Alarmado: 0,
+  Normal: 1,
+};
 
 /**
  * @returns {EnumValorBomba}
  */
 const EnumValorBomba = {
-    NoDisponible: 0,
-    Arrancada: 1,
-    Apagada: 2,
-    Falla: 3
-}
+  NoDisponible: 0,
+  Arrancada: 1,
+  Apagada: 2,
+  Falla: 3,
+};
 
 /**
  * @returns {EnumPerillaBomba}
  */
 const EnumPerillaBomba = {
-    Off: 0,
-    Remoto: 1,
-    Local: 2
-}
+  0: "Off",
+  1: "Remoto",
+  2: "Local",
+};
 
 /**
  * @returns {EnumPerillaGeneral}
  */
 const EnumPerillaGeneral = {
-    Manual: 0,
-    Remoto: 1,
-    Automatismo: 2
-}
+  Manual: 0,
+  Remoto: 1,
+  Automatismo: 2,
+};
 
 /**
  * @returns {EnumEnlace}
  */
 const EnumEnlace = {
-    FueraLinea: 0,
-    Radio: 1,
-    Celular: 2,
-    Hibrido: 3
-}
+  FueraLinea: 0,
+  Radio: 1,
+  Celular: 2,
+  Hibrido: 3,
+};
 
 /**
  * @returns {EnumDentroLimite}
  */
 const EnumDentroLimite = {
-    Bajo: 0,
-    Normal: 1,
-    Alto: 2,
-}
-
+  Bajo: 0,
+  Normal: 1,
+  Alto: 2,
+};
 
 const EnumAppEvents = {
-    LogOut: 'LogOut',
-    Update: 'Update',
-}
+  LogOut: "LogOut",
+  Update: "Update",
+};
 
 const EnumModule = {
-    Perfil: 'Perfil',
-    Particular: 'Particular',
-    Mapa: 'Mapa',
-    Graficador: 'Graficador',
-}
-
+  Perfil: "Perfil",
+  Particular: "Particular",
+  Mapa: "Mapa",
+  Graficador: "Graficador",
+};
 
 export {
-    RequestType, EnumProyecto, EnumControllerMapeo, EnumUnidadesSignal, EnumNombreProyecto, EnumTipoSignal, EnumTipoSignalString, EnumTipoSignalNomenclatura,
-    EnumValorValvulaDiscreta, EnumFallaAC, EnumPuertaAbierta, EnumValorBomba, EnumPerillaBomba, EnumPerillaGeneral, EnumEnlace, EnumDentroLimite, EnumAppEvents, EnumModule
-}
+  RequestType,
+  EnumProyecto,
+  EnumControllerMapeo,
+  EnumUnidadesSignal,
+  EnumNombreProyecto,
+  EnumTipoSignal,
+  EnumTipoSignalString,
+  EnumTipoSignalNomenclatura,
+  EnumValorValvulaDiscreta,
+  EnumFallaAC,
+  EnumPuertaAbierta,
+  EnumValorBomba,
+  EnumPerillaBomba,
+  EnumPerillaGeneral,
+  EnumEnlace,
+  EnumDentroLimite,
+  EnumAppEvents,
+  EnumModule,
+};
