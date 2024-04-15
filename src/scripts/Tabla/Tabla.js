@@ -33,6 +33,7 @@ class Tabla {
         this.offset = {
             extraRows: 0,
             actualIndex: 0,
+            btn: null,
         };
         this.elementosVisibles = 15;
 
@@ -62,6 +63,11 @@ class Tabla {
         this.btnTabla = document.querySelector('.btnTabla');
         this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/btn_abrir.png?v=10")`;
         this.btnTabla.addEventListener('click', () => {
+
+
+            if (this.offset.btn != null) {
+                this.offset.btn.click();
+            }
 
             let visible = this.tBodyVariablesContainer.getAttribute('visible');
             if (visible == null || visible == undefined) visible = false;

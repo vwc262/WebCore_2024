@@ -32,7 +32,7 @@ class RowVariables {
 
         this.rowContainer = CreateElement({
             nodeElement: 'div',
-            attributes: { class: `sitio-tabla` },
+            attributes: { class: `sitio-tabla`, style: 'width: 100%;' },
         });
 
         /**
@@ -97,6 +97,7 @@ class RowVariables {
                     let extraRows = maximized ? 0 : parseInt(event.currentTarget.getAttribute('extraRows'));
                     this.offset.extraRows = extraRows;
                     this.offset.actualIndex = maximized ? 0 : this.actualIndex;
+                    this.offset.btn = maximized ? null : event.currentTarget;
 
                     this.refreshTable();
 
