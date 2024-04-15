@@ -148,6 +148,13 @@ var configuracionPadierna = {
                 "Estado": "display:none;"
 
             },
+            {
+                "IdEstacion": 22,
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 20px; top: 50px;",
+                "Etiqueta": "position: absolute; top: 20px; left: 50px;",
+                "Estado": "display:none;"
+
+            },
         ],
         estilosTuberias: {
             PorGravedad: [
