@@ -145,6 +145,20 @@ class Estacion {
 
         return url;
     }
+
+    /**
+     * 
+     * @param {number} idSignal 
+     * @returns {Signal}
+     */
+    ObtenerSignal(idSignal) {
+        return this.Signals.find(signal => signal.IdSignal == idSignal);
+    }
+
+    ObtenerPerillaGeneral(ordinalLinea = 0) {
+        return this.Signals.filter(signal => signal.TipoSignal == EnumTipoSignal.PerillaGeneral)[ordinalLinea];
+
+    }
 }
 
 export default Estacion;

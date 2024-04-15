@@ -4,6 +4,7 @@ import {
   EnumAppEvents,
   EnumPerillaBomba,
   EnumTipoSignal,
+  EnumValorBomba,
 } from "../Utilities/Enums.js";
 import Login from "../Entities/Login/Login.js";
 import { ShowModal } from "../uiManager.js";
@@ -36,11 +37,18 @@ class ArranqueParo {
       EnumAppEvents.Update,
       new EventoCustomizado(this.Update)
     );
-    EventsManager.Instance.Suscribirevento(EnumAppEvents.ParticularChanged, new EventoCustomizado(this.CloseArranqueParo));
+    EventsManager.Instance.Suscribirevento(
+      EnumAppEvents.ParticularChanged,
+      new EventoCustomizado(this.CloseArranqueParo)
+    );
 
     this.#carruselContainer = document.querySelector(
       ".arranqueParo__itemsContainer"
     );
+
+    this.#PerillaGeneralText = document.querySelector(".arranqueParo__modoTxt");
+
+
 
     // Agregar eventos de clic una sola vez en el constructor
     this.agregarEventosClic();
@@ -56,6 +64,11 @@ class ArranqueParo {
    * @type {HTMLElement}
    */
   #carruselContainer = undefined;
+  /**
+   * @type {{HTMLElement}}
+   */
+  #UpdateableElements = {};
+  #PerillaGeneralText = undefined;
   //#endregion
 
   //#region Metodos
@@ -79,30 +92,25 @@ class ArranqueParo {
   }
 
   animPanel() {
-    const $panelArranqueParo = document.querySelector(
-      ".arranqueParo__panelControl"
-    );
+    const $panelArranqueParo = document.querySelector(".arranqueParo__panelControl");
+    $panelArranqueParo.style.opacity = "1";
 
     const $panelFondo = document.querySelector(".arranqueParo__Container");
 
-    $panelArranqueParo.style.opacity = "1";
-    const urlImg =
-      "url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=10)";
+    const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
+
+
+    $imgArranqueParo.setAttribute(
+      "src",
+      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=11"
+    );
 
     // Agregar un event listener para detectar cuando la transición ha terminado
     $panelArranqueParo.addEventListener("transitionend", () => {
       // Verificar si la opacidad es igual a 1 después de la transición
-      if (
-        parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 &&
-        !this.#isCarouselCreated
-      ) {
-        $panelArranqueParo.style.background = urlImg;
-        $panelArranqueParo.style.backgroundRepeat = "no-repeat";
-        $panelArranqueParo.style.backgroundSize = "contain";
-        $panelArranqueParo.style.backgroundPositionY = "bottom";
-
+      if (parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 && !this.#isCarouselCreated) {
         $panelFondo.style.transform = "translateY(16vh)";
-
+        $panelFondo.style.opacity = "1";
         this.CrearCarrusel();
       }
     });
@@ -111,15 +119,16 @@ class ArranqueParo {
   CrearCarrusel() {
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea
+    const perillaGeneral = estacion.ObtenerPerillaGeneral(); // Por default toma la perilla general de la linea 1  (base 0) 
     if (estacion.Lineas.length > 1) {
       this.PintarBotonesLineasEstacion(estacion);
       const bombasPrimerLinea = estacion.ObtenerBombasPorLinea(1);
       this.CrearItemsCarrusel(bombasPrimerLinea);
     } else
-      this.CrearItemsCarrusel(
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba)
-      );
+      this.CrearItemsCarrusel(estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba));
 
+    this.#PerillaGeneralText.mySignal = perillaGeneral;
+    this.setUpdateElements(this.#PerillaGeneralText);
     this.SetIsCarouselCreated(true);
   }
   /**
@@ -143,6 +152,9 @@ class ArranqueParo {
     const idLinea = parseInt(e.currentTarget.getAttribute("idLinea"));
     const bombasPorLinea = estacion.ObtenerBombasPorLinea(idLinea);
     this.CrearItemsCarrusel(bombasPorLinea);
+    const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea - 1); // 
+    this.#PerillaGeneralText.mySignal = perillaGeneral;
+    this.setUpdateElements(this.#PerillaGeneralText);
   };
   /**
    *
@@ -150,43 +162,73 @@ class ArranqueParo {
    */
   CrearItemsCarrusel(bombas) {
     //Limpiar Papa
+    this.deleteUpdateElements();
     this.#carruselContainer.innerHTML = "";
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     bombas.forEach((bomba, index) => {
+      const signalPerillaBomba = estacion.ObtenerValorPerillaBomba(bomba.Ordinal);
       const carruselItem = CreateElement({
         nodeElement: "div",
         attributes: { class: "controlParo__carruselItem" },
       });
       const modo = CreateElement({
         nodeElement: "div",
-        attributes: { class: "arranqueParo__modo" },
-        innerText:
-          EnumPerillaBomba[
-          estacion.ObtenerValorPerillaBomba(bomba.Ordinal).Valor
-          ],
+        attributes: { id: `AP_Perilla_${signalPerillaBomba.IdSignal}`, class: "arranqueParo__modo" },
+        innerText: signalPerillaBomba.GetValorPerilla(),
       });
+      modo.mySignal = signalPerillaBomba;
       const bombaImg = CreateElement({
         nodeElement: "div",
-        attributes: { class: "arranqueParo__bombaImg" },
+        attributes: { id: `AP_Bomba_${bomba.IdSignal}`, class: "arranqueParo__bombaImg", style: this.SetBombaPanelBackground(bomba) },
+        events: new Map().set('click', [this.clickBomba])
       });
+      bombaImg.mySignal = bomba;
       const bombaNum = CreateElement({
         nodeElement: "div",
-        attributes: { class: "arranqueParo__bombaNum;" },
+        attributes: { class: "arranqueParo__bombaNum" },
         innerText: bomba.Nombre,
       });
       this.#itemsCarrusel.push(carruselItem);
+      this.setUpdateElements(modo, bombaImg);
       carruselItem.append(modo, bombaImg, bombaNum);
       carruselItem.style.left = `${index * 100}px`;
       this.#carruselContainer.append(carruselItem);
     });
-    if (bombas.length > 3)
-      this.refillCarrusel();
+    if (bombas.length > 3) this.refillCarrusel();
+  }
+  clickBomba = (e) => {
+    /**
+     * @type {Signal}
+     */
+    const signalBomba = e.currentTarget.mySignal;
+  }
+  /**
+   * Guarda los elementos a actualizar 
+   * @param  {...HTMLElement} elementos 
+   */
+  setUpdateElements(...elementos) {
+    elementos.forEach(arg => {
+      this.#UpdateableElements[arg.id] = arg;
+    })
+  }
+  deleteUpdateElements() {
+    this.#UpdateableElements = {};
   }
   refillCarrusel() {
     [...this.#carruselContainer.children].reverse().forEach((item, index) => {
-      const clone = item.cloneNode(true)
-      clone.style.left = `${(index + 1) * - 100}px`
+      const clone = item.cloneNode(true);
+      clone.addEventListener('click', this.clickBomba);
+      clone.mySignal = item.children[1].mySignal; // La posicion uno es el elemento bomba
+      clone.style.left = `${(index + 1) * -100}px`;
       this.#carruselContainer.prepend(clone);
+
+      const perillaClone = clone.children[0];
+      perillaClone.id = perillaClone.id + 'C';
+      perillaClone.mySignal = item.children[0].mySignal;
+      const bombaClone = clone.children[1];
+      bombaClone.id = bombaClone.id + 'C';
+      bombaClone.mySignal = item.children[1].mySignal;
+      this.setUpdateElements(perillaClone, bombaClone);
     });
   }
 
@@ -201,6 +243,12 @@ class ArranqueParo {
   agregarEventosClic() {
     const $btnPrev = document.querySelector(".arranqueParo__Prev");
     const $btnNext = document.querySelector(".arranqueParo__Next");
+    const $closePanelArranqueParo = document.querySelector(
+      ".arranqueParo__closePanel"
+    );
+
+    // Agrega evento de click al boton de cerrar panel
+    $closePanelArranqueParo.addEventListener("click", this.CloseArranqueParo);
 
     // Agregar evento de clic al botón de "prev"
     $btnPrev.addEventListener("click", this.MoverCarrusel);
@@ -219,11 +267,14 @@ class ArranqueParo {
       const isAtras = e.currentTarget.id == "carruselPrev_AP";
       this.transicionCarrusel(isAtras);
       if (!isAtras) {
-        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(this.#carruselContainer.firstChild.style.left.replace("px", "") - 100)}px;opacity:0;`;
+        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(
+          this.#carruselContainer.firstChild.style.left.replace("px", "") - 100
+        )}px;opacity:0;`;
         this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
       }
       if (isAtras) {
-        this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
+        this.#carruselContainer.firstChild.style.cssText =
+          "transition:none;left:300px;opacity:0;";
         this.#carruselContainer.append(this.#carruselContainer.firstChild);
       }
     }
@@ -231,7 +282,8 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100
+        }px;opacity:1;`;
     });
   }
 
@@ -239,19 +291,77 @@ class ArranqueParo {
     if (this.isVisible) {
       const estacionUpdate = Core.Instance.GetDatosEstacion(this.idEstacion);
       if (estacionUpdate.EstaEnLinea()) {
-
-      }
-      else {
+        Object.values(this.#UpdateableElements).forEach(elemento => {
+          /**
+           * @type {Signal}
+           */
+          const signalRef = elemento.mySignal;
+          const signalUpdate = estacionUpdate.ObtenerSignal(signalRef.IdSignal);
+          switch (signalUpdate.TipoSignal) {
+            case EnumTipoSignal.Bomba:
+              elemento.setAttribute('style', this.SetBombaPanelBackground(signalUpdate));
+              break;
+            case EnumTipoSignal.PerillaBomba:
+              elemento.innerText = signalUpdate.GetValorPerilla();
+              break;
+            case EnumTipoSignal.PerillaGeneral:
+              elemento.innerText = signalUpdate.GetValorPerillaGeneral();
+              break;
+          }
+        });
+      } else {
         this.CloseArranqueParo();
       }
     }
   };
+  /**
+   * 
+   * @param {Signal} signalBomba 
+   * @returns 
+   */
+  SetBombaPanelBackground(signalBomba) {
+    return `background: url(${Core.Instance.ResourcesPath}Control/btn_bomba.png) 100% 100%;filter: ${this.FilterBomba(signalBomba.Valor)}`;
+  }
+  FilterBomba(valorBomba) {
+    let filter = 'grayscale(2)';
+    switch (valorBomba) {
+      case EnumValorBomba.NoDisponible:
+        filter = 'grayscale(2)';
+        break;
+      case EnumValorBomba.Arrancada:
+        filter = 'hue-rotate(120deg)'
+        break;
+      case EnumValorBomba.Apagada:
+        filter = 'hue-rotate(0deg)'
+        break;
+      case EnumValorBomba.Falla:
+        filter = 'hue-rotate(231deg)'
+        break;
+    }
+    return filter;
+  }
 
   CloseArranqueParo = () => {
     // Logica para cerrar el modal
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
-    console.log("Cerrando panel MON AMI")
+    console.log("Cerrando panel MON AMI");
+    const $panelArranqueParoContainer = document.querySelector(
+      ".arranqueParo__panelControl"
+    );
+    const $panelArranqueParo = document.querySelector(
+      ".arranqueParo__Container"
+    );
+
+    const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
+
+    $panelArranqueParoContainer.style.opacity = "0";
+    $panelArranqueParo.style.opacity = "0";
+    $panelArranqueParo.style.transform = "translateY(100vh)";
+    $imgArranqueParo.setAttribute(
+      "src",
+      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/transition_inicio.png?v=-1"
+    );
   };
   //#endregion
 }

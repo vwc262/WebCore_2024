@@ -1,4 +1,4 @@
-import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite } from "../Utilities/Enums.js";
+import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBomba } from "../Utilities/Enums.js";
 import Semaforo from "./Semaforo.js";
 class Signal {
     constructor(signalCruda) {
@@ -68,7 +68,18 @@ class Signal {
         }
         return color;
     }
-    
+    /**
+     * 
+     * @param {Signal} signalPerilla 
+     */
+    GetValorPerilla() {
+        return EnumPerillaBomba[this.valor] ?? 'Off';
+    }
+    GetValorPerillaGeneral() {
+        return EnumPerillaGeneral[this.valor] ?? 'Manual';
+    }
+
+
 }
 
 export default Signal;
