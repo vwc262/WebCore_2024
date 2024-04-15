@@ -199,10 +199,10 @@
 }
 
 .arranqueParo__Encenderimg {
-  background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/BTN_ON.png?v=-1);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position-x: center;
+  background: url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/Control/BTN_ON.png?v=-1);
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position-x: center !important;
   width: 100%;
   height: 50px;
 }

@@ -2,15 +2,19 @@ import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import {
   EnumAppEvents,
+  EnumControllerMapeo,
   EnumPerillaBomba,
+  EnumPerillaGeneral,
   EnumTipoSignal,
   EnumValorBomba,
+  RequestType,
 } from "../Utilities/Enums.js";
 import Login from "../Entities/Login/Login.js";
 import { ShowModal } from "../uiManager.js";
 import Estacion from "../Entities/Estacion.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import Signal from "../Entities/Signal.js";
+import { Fetcher } from "../Fetcher/Fetcher.js";
 class ArranqueParo {
   //#region Singleton
   static #instance = undefined;
@@ -73,6 +77,7 @@ class ArranqueParo {
    * @type {Signal}
    */
   #bombaSeleccionada = undefined;
+  #prenderBomba = true;
   //#endregion
 
   //#region Metodos
@@ -122,7 +127,7 @@ class ArranqueParo {
 
   CrearCarrusel() {
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
-    // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea    
+    // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea
     if (estacion.Lineas.length > 1) {
       this.PintarBotonesLineasEstacion(estacion);
       const bombasPrimerLinea = estacion.ObtenerBombasPorLinea(1);
@@ -158,7 +163,7 @@ class ArranqueParo {
     this.SetPerillaGeneral(idLinea - 1);
   };
   SetPerillaGeneral(idLinea = 0, estacion) {
-    const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); // 
+    const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); //
     this.#PerillaGeneralText.mySignal = perillaGeneral;
     this.#PerillaGeneralText.innerText = perillaGeneral.GetValorPerillaGeneral();
     this.setUpdateElements(this.#PerillaGeneralText);
@@ -194,8 +199,8 @@ class ArranqueParo {
     this.#bombaSeleccionada = e.currentTarget.mySignal;
   }
   /**
-   * Guarda los elementos a actualizar 
-   * @param  {...HTMLElement} elementos 
+   * Guarda los elementos a actualizar
+   * @param  {...HTMLElement} elementos
    */
   setUpdateElements(...elementos) {
     elementos.forEach(arg => {
@@ -246,8 +251,49 @@ class ArranqueParo {
 
     // Agregar evento de clic al botón de "next"
     $btnNext.addEventListener("click", this.MoverCarrusel);
-  }
+    // Evento click boton accion
+    const btnAccion = document.querySelector('.arranqueParo__encenderApagarBomba');
+    btnAccion.addEventListener("click", this.CambiarAccion);
+    btnAccion.prender = true;
 
+    // Evento enviar comando
+    const btnEnviarComando = document.querySelector('.arranqueParo__confirmarimg');
+    btnEnviarComando.addEventListener('click', this.EnviarComando);
+
+  }
+  CambiarAccion = (e) => {
+    const btnAccion = e.currentTarget;
+    btnAccion.children[1].style.background = `url(${Core.Instance.ResourcesPath}Control/${btnAccion.prender ? 'BTN_STOP' : 'BTN_ON'}.png)`;
+    btnAccion.prender = !btnAccion.prender;
+    this.#prenderBomba = btnAccion.prender;
+  }
+  ArmarCodigo() {
+    return this.idEstacion << 8 | this.#bombaSeleccionada.Ordinal << 4 | (this.#prenderBomba ? 1 : 0);
+  }
+  EnviarComando = async (e) => {
+    const alertTitle = 'Control Bombas';
+    const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
+    const enLinea = estacion.EstaEnLinea();
+    if (enLinea && this.#bombaSeleccionada) {
+      const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
+      const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal - 1);
+      const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
+      if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral[1]) {
+        if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBomba[1]) {
+          if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {
+            ShowModal(`Mandando a ${this.#prenderBomba ? 'prender' : 'apagar'} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
+            const result = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`, RequestType.POST, { Usuario: Login.Instace.userName, idEstacion: this.idEstacion, Codigo: this.ArmarCodigo(), RegModbus: 2020 }, true);
+          }
+          else ShowModal('La bomba debe estar encendida o apagada', alertTitle);
+        }
+        else ShowModal(`La perilla de la bomba debe estar en ${EnumPerillaBomba[1]}`, alertTitle);
+      }
+      else {
+        ShowModal('La perilla general debe estar en Remoto', alertTitle);
+      }
+    }
+    else ShowModal(enLinea ? 'Debe seleccionar una bomba' : 'El sitio debe estar en linea', alertTitle);
+  }
   /**
    * Evento para mover el carrusel
    * @param {Event} e
@@ -276,7 +322,6 @@ class ArranqueParo {
       item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
     });
   }
-
   Update = () => {
     if (this.isVisible) {
       const estacionUpdate = Core.Instance.GetDatosEstacion(this.idEstacion);
@@ -303,21 +348,14 @@ class ArranqueParo {
       }
     }
   };
-
   CloseArranqueParo = () => {
     // Logica para cerrar el modal
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
     console.log("Cerrando panel MON AMI");
-    const $panelArranqueParoContainer = document.querySelector(
-      ".arranqueParo__panelControl"
-    );
-    const $panelArranqueParo = document.querySelector(
-      ".arranqueParo__Container"
-    );
-
+    const $panelArranqueParoContainer = document.querySelector(".arranqueParo__panelControl");
+    const $panelArranqueParo = document.querySelector(".arranqueParo__Container");
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
-
     $panelArranqueParoContainer.style.opacity = "0";
     $panelArranqueParo.style.opacity = "0";
     $panelArranqueParo.style.transform = "translateY(100vh)";

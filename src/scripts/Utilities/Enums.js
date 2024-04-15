@@ -41,6 +41,7 @@ const EnumControllerMapeo = {
   READ: "ReadSignalsEstacion",
   DELETE: "DeleteSignalMapeo",
   UPDATE: "UpdateSignalMapeo",
+  INSERTCOMANDO: "InsertComando"
 };
 /**
  * @returns {EnumTipoSignal}
@@ -167,9 +168,9 @@ const EnumPerillaBomba = {
  * @returns {EnumPerillaGeneral}
  */
 const EnumPerillaGeneral = {
-  Manual: 0,
-  Remoto: 1,
-  Automatismo: 2,
+  0: 'Manual',
+  1: 'Remoto',
+  2: 'Automatismo',
 };
 
 /**
@@ -194,7 +195,7 @@ const EnumDentroLimite = {
 const EnumAppEvents = {
   LogOut: "LogOut",
   Update: "Update",
-  ParticularChanged:"ParticularChanged",
+  ParticularChanged: "ParticularChanged",
 };
 
 const EnumModule = {
