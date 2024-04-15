@@ -78,12 +78,39 @@ class Core {
       estacion.Signals.forEach((signal) => {
         signal.DentroLimite = ss > 40 ? 2 : ss > 20 ? 1 : 0;
         signal.DentroRango = ss > 45 ? false : true;
-        signal.IndiceImagen = parseInt((ss / 60) * 10);
-        if (signal.TipoSignal == EnumTipoSignal.Bomba) {
+        signal.IndiceImagen = parseInt((ss / 60.0) * 10);
+
+        if (signal.TipoSignal == EnumTipoSignal.Nivel) {
+          signal.Valor = ss * 10.0 / 60.0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.Presion) {
+          signal.Valor = ss * 100.0 / 60.0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.Gasto) {
+          signal.Valor = ss * 1000.0 / 60.0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.Totalizado) {
+          signal.Valor = ss * 10000 / 60;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.ValvulaAnalogica) {
+          signal.Valor = ss * 100.0 / 60.0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.ValvulaDiscreta) {
+          signal.Valor = ss > 40 ? 2 : ss > 20 ? 1 : 0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.Bomba) {
           signal.Valor = ss > 45 ? 3 : ss > 30 ? 2 : ss > 15 ? 1 : 0;
-        } else if (signal.TipoSignal == EnumTipoSignal.PerillaBomba || signal.TipoSignal == EnumTipoSignal.PerillaGeneral) {
-          signal.Valor = 1;
-        } else {
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.PerillaBomba || signal.TipoSignal == EnumTipoSignal.PerillaGeneral) {
+          signal.Valor = ss > 40 ? 2 : ss > 20 ? 1 : 0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.Voltaje) {
+          signal.Valor = ss * 15.0 / 60.0;
+        }
+        else if (signal.TipoSignal == EnumTipoSignal.FallaAC || signal.TipoSignal == EnumTipoSignal.PuertaAbierta) {
+          signal.Valor = ss > 45 ? false : true;
+        }
+        else {
           signal.Valor = ss;
         }
       });

@@ -4,6 +4,7 @@ import {
   EnumAppEvents,
   EnumControllerMapeo,
   EnumPerillaBomba,
+  EnumPerillaBombaString,
   EnumPerillaGeneral,
   EnumTipoSignal,
   EnumValorBomba,
@@ -278,15 +279,15 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal - 1);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral[1]) {
-        if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBomba[1]) {
+      if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral.Remoto) {
+        if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBomba.Remoto) {
           if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {
             ShowModal(`Mandando a ${this.#prenderBomba ? 'prender' : 'apagar'} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
             const result = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`, RequestType.POST, { Usuario: Login.Instace.userName, idEstacion: this.idEstacion, Codigo: this.ArmarCodigo(), RegModbus: 2020 }, true);
           }
           else ShowModal('La bomba debe estar encendida o apagada', alertTitle);
         }
-        else ShowModal(`La perilla de la bomba debe estar en ${EnumPerillaBomba[1]}`, alertTitle);
+        else ShowModal(`La perilla de la bomba debe estar en ${EnumPerillaBombaString[1]}`, alertTitle);
       }
       else {
         ShowModal('La perilla general debe estar en Remoto', alertTitle);

@@ -1,5 +1,5 @@
 import { Core } from "../Core.js";
-import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBomba } from "../Utilities/Enums.js";
+import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBombaString, EnumPerillaGeneralString } from "../Utilities/Enums.js";
 import Linea from "./Linea.js";
 import Semaforo from "./Semaforo.js";
 class Signal {
@@ -12,7 +12,7 @@ class Signal {
         this.Ordinal = signalCruda.ordinal;
         this.IndiceImagen = signalCruda.indiceImagen;
         this.DentroLimite = signalCruda.dentroLimite;
-        this.DentroRango = signalCruda.dentroRango;  
+        this.DentroRango = signalCruda.dentroRango;
         this.Linea = signalCruda.linea;
         this.Semaforo = this.#EstablecerSemaforo(signalCruda.semaforo);
     }
@@ -27,7 +27,67 @@ class Signal {
      * @returns {string} valor signal tomando en cuenta DentroRango
      */
     GetValorString(unidades, rayitas) {
-        return `${this.DentroRango ? parseFloat(this.Valor).toFixed() : rayitas ? '---' : 'No disponible'}${unidades && this.DentroRango ? EnumUnidadesSignal[this.TipoSignal] : ''}`;
+
+        if (this.TipoSignal == EnumTipoSignal.ValvulaDiscreta) {
+            if (this.DentroRango) {
+
+                if (parseInt(this.Valor) == EnumValorValvulaDiscreta.Abierto) {
+                    return 'Abierto';
+                }
+                else if (parseInt(this.Valor) == EnumValorValvulaDiscreta.Cerrado) {
+                    return 'Cerrado';
+                } else {
+                    return 'No disponible';
+                }
+            }
+            else {
+                return '---';
+            }
+        }
+        else if (this.TipoSignal == EnumTipoSignal.Bomba) {
+            if (this.DentroRango) {
+
+                if (parseInt(this.Valor) == EnumValorBomba.Apagada) {
+                    return 'Apagada';
+                }
+                else if (parseInt(this.Valor) == EnumValorBomba.Arrancada) {
+                    return 'Encendida';
+                }
+                else if (parseInt(this.Valor) == EnumValorBomba.Falla) {
+                    return 'Con falla';
+                }
+                else {
+                    return 'N/D';
+                }
+            }
+            else {
+                return '---';
+            }
+        }
+        else if (this.TipoSignal == EnumTipoSignal.PerillaGeneral) {
+            return this.GetValorPerillaGeneral();
+        }
+        else if (this.TipoSignal == EnumTipoSignal.FallaAC) {
+            if (this.Valor) {
+                return '---';
+            } else {
+                return 'Falla AC';
+            }
+        }
+        else if (this.TipoSignal == EnumTipoSignal.PuertaAbierta) {
+            if (this.Valor) {
+                return '---';
+            } else {
+                return 'Abierta';
+            }
+        }
+        else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
+            return `${this.DentroRango ? parseFloat(this.Valor).toFixed(0) : rayitas ? '---' : 'No disponible'}${unidades && this.DentroRango ? EnumUnidadesSignal[this.TipoSignal] : ''}`;
+        }
+        else {
+            return `${this.DentroRango ? parseFloat(this.Valor).toFixed(2) : rayitas ? '---' : 'No disponible'}${unidades && this.DentroRango ? EnumUnidadesSignal[this.TipoSignal] : ''}`;
+        }
+
     }
 
     /**
@@ -41,21 +101,23 @@ class Signal {
 
         let color = 'rgb(255, 255, 255)';
 
-        switch (EnumTipoSignal) {
+        if (!this.DentroRango) return color;
+
+        switch (this.TipoSignal) {
             case EnumTipoSignal.ValvulaDiscreta:
-                color = `${this.DentroRango ? this.Valor == EnumValorValvulaDiscreta.Abierto ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)' : 'rgb(255, 255, 255)'}`;
+                color = `${parseInt(this.Valor) == EnumValorValvulaDiscreta.Abierto ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.Bomba:
-                color = `${this.DentroRango ? this.Valor == EnumValorBomba.Arrancada ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)' : 'rgb(255, 255, 255)'}`;
+                color = `${parseInt(this.Valor) == EnumValorBomba.Arrancada ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.PerillaGeneral:
-                color = `${this.DentroRango ? this.Valor == EnumPerillaGeneral.Remoto ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)' : 'rgb(255, 255, 255)'}`;
+                color = `${parseInt(this.Valor) == EnumPerillaGeneral.Remoto ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.FallaAC:
-                color = `${this.DentroRango ? this.Valor == EnumFallaAC.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)' : 'rgb(255, 255, 255)'}`;
+                color = `${parseInt(this.Valor) == EnumFallaAC.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.PuertaAbierta:
-                color = `${this.DentroRango ? this.Valor == EnumPuertaAbierta.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)' : 'rgb(255, 255, 255)'}`;
+                color = `${parseInt(this.Valor) == EnumPuertaAbierta.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.Nivel:
             case EnumTipoSignal.Presion:
@@ -63,11 +125,12 @@ class Signal {
             case EnumTipoSignal.Totalizado:
             case EnumTipoSignal.ValvulaAnalogica:
             case EnumTipoSignal.Voltaje:
-                color = `${this.DentroRango ? this.DentroLimite == EnumDentroLimite.Bajo ? 'orange' : this.DentroLimite == EnumDentroLimite.Alto ? '#810b0b' : 'rgb(255, 255, 255)' : 'rgb(206 206 206 / 80%)'}`;
+                color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'orange' : this.DentroLimite == EnumDentroLimite.Alto ? '#810b0b' : 'rgb(255, 255, 255)'}`;
                 break;
             default:
                 break;
         }
+
         return color;
     }
     GetImagenBombaPanelControl() {
@@ -96,10 +159,10 @@ class Signal {
      * @param {Signal} signalPerilla 
      */
     GetValorPerillaBomba() {
-        return EnumPerillaBomba[this.Valor] ?? 'Off';
+        return EnumPerillaBombaString[this.Valor] ?? 'Off';
     }
     GetValorPerillaGeneral() {
-        return EnumPerillaGeneral[this.Valor] ?? 'Manual';
+        return EnumPerillaGeneralString[this.Valor] ?? 'Manual';
     }
 
 

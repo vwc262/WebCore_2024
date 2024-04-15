@@ -158,7 +158,7 @@ const EnumValorBomba = {
 /**
  * @returns {EnumPerillaBomba}
  */
-const EnumPerillaBomba = {
+const EnumPerillaBombaString = {
   0: "Off",
   1: "Remoto",
   2: "Local",
@@ -167,10 +167,28 @@ const EnumPerillaBomba = {
 /**
  * @returns {EnumPerillaGeneral}
  */
-const EnumPerillaGeneral = {
+const EnumPerillaGeneralString = {
   0: 'Manual',
   1: 'Remoto',
   2: 'Automatismo',
+};
+
+/**
+ * @returns {EnumPerillaBomba}
+*/
+const EnumPerillaBomba = {
+  Off: 0,
+  Remoto: 1,
+  Local: 2,
+};
+
+/**
+ * @returns {EnumPerillaGeneral}
+*/
+const EnumPerillaGeneral = {
+  Manual: 0,
+  Remoto: 1,
+  Automatismo: 2,
 };
 
 /**
@@ -220,6 +238,8 @@ export {
   EnumValorBomba,
   EnumPerillaBomba,
   EnumPerillaGeneral,
+  EnumPerillaBombaString,
+  EnumPerillaGeneralString,
   EnumEnlace,
   EnumDentroLimite,
   EnumAppEvents,
