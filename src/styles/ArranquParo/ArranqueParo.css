@@ -141,7 +141,7 @@
   top: 0;
   left: 0;
   text-align: center;
-  transition: all ease .2s;
+  transition: all ease 0.2s;
   /* transition-delay: 500ms; */
 }
 

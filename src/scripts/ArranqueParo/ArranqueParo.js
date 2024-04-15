@@ -36,7 +36,10 @@ class ArranqueParo {
       EnumAppEvents.Update,
       new EventoCustomizado(this.Update)
     );
-    EventsManager.Instance.Suscribirevento(EnumAppEvents.ParticularChanged, new EventoCustomizado(this.CloseArranqueParo));
+    EventsManager.Instance.Suscribirevento(
+      EnumAppEvents.ParticularChanged,
+      new EventoCustomizado(this.CloseArranqueParo)
+    );
 
     this.#carruselContainer = document.querySelector(
       ".arranqueParo__itemsContainer"
@@ -86,8 +89,7 @@ class ArranqueParo {
     const $panelFondo = document.querySelector(".arranqueParo__Container");
 
     $panelArranqueParo.style.opacity = "1";
-    const urlImg =
-      "url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=10)";
+    const urlImg = `url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=10)`;
 
     // Agregar un event listener para detectar cuando la transición ha terminado
     $panelArranqueParo.addEventListener("transitionend", () => {
@@ -102,6 +104,7 @@ class ArranqueParo {
         $panelArranqueParo.style.backgroundPositionY = "bottom";
 
         $panelFondo.style.transform = "translateY(16vh)";
+        $panelFondo.style.opacity = "1";
 
         this.CrearCarrusel();
       }
@@ -162,7 +165,7 @@ class ArranqueParo {
         attributes: { class: "arranqueParo__modo" },
         innerText:
           EnumPerillaBomba[
-          estacion.ObtenerValorPerillaBomba(bomba.Ordinal).Valor
+            estacion.ObtenerValorPerillaBomba(bomba.Ordinal).Valor
           ],
       });
       const bombaImg = CreateElement({
@@ -179,13 +182,12 @@ class ArranqueParo {
       carruselItem.style.left = `${index * 100}px`;
       this.#carruselContainer.append(carruselItem);
     });
-    if (bombas.length > 3)
-      this.refillCarrusel();
+    if (bombas.length > 3) this.refillCarrusel();
   }
   refillCarrusel() {
     [...this.#carruselContainer.children].reverse().forEach((item, index) => {
-      const clone = item.cloneNode(true)
-      clone.style.left = `${(index + 1) * - 100}px`
+      const clone = item.cloneNode(true);
+      clone.style.left = `${(index + 1) * -100}px`;
       this.#carruselContainer.prepend(clone);
     });
   }
@@ -219,11 +221,14 @@ class ArranqueParo {
       const isAtras = e.currentTarget.id == "carruselPrev_AP";
       this.transicionCarrusel(isAtras);
       if (!isAtras) {
-        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(this.#carruselContainer.firstChild.style.left.replace("px", "") - 100)}px;opacity:0;`;
+        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(
+          this.#carruselContainer.firstChild.style.left.replace("px", "") - 100
+        )}px;opacity:0;`;
         this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
       }
       if (isAtras) {
-        this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
+        this.#carruselContainer.firstChild.style.cssText =
+          "transition:none;left:300px;opacity:0;";
         this.#carruselContainer.append(this.#carruselContainer.firstChild);
       }
     }
@@ -231,7 +236,9 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${
+        isAtras ? currentX - 100 : currentX + 100
+      }px;opacity:1;`;
     });
   }
 
@@ -239,9 +246,7 @@ class ArranqueParo {
     if (this.isVisible) {
       const estacionUpdate = Core.Instance.GetDatosEstacion(this.idEstacion);
       if (estacionUpdate.EstaEnLinea()) {
-
-      }
-      else {
+      } else {
         this.CloseArranqueParo();
       }
     }
@@ -251,7 +256,22 @@ class ArranqueParo {
     // Logica para cerrar el modal
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
-    console.log("Cerrando panel MON AMI")
+    console.log("Cerrando panel MON AMI");
+    const $panelArranqueParoContainer = document.querySelector(
+      ".arranqueParo__panelControl"
+    );
+    const $panelArranqueParo = document.querySelector(
+      ".arranqueParo__Container"
+    );
+
+    $panelArranqueParoContainer.style.background =
+      "url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition_inicio.png?v=10)";
+    $panelArranqueParoContainer.style.backgroundRepeat = "no-repeat";
+    $panelArranqueParoContainer.style.backgroundSize = "contain";
+    $panelArranqueParoContainer.style.backgroundPositionY = "bottom";
+    $panelArranqueParoContainer.style.opacity = "0";
+    $panelArranqueParo.style.opacity = "0";
+    $panelArranqueParo.style.transform = "translateY(100vh)";
   };
   //#endregion
 }
