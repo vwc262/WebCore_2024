@@ -4,7 +4,11 @@ import Estacion from "../Entities/Estacion.js";
 import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
-import { EnumUnidadesSignal, EnumModule } from "../Utilities/Enums.js";
+import {
+  EnumUnidadesSignal,
+  EnumModule,
+  EnumTipoSignal,
+} from "../Utilities/Enums.js";
 import { GoBack, GoHome, Module, SetActualModule } from "../uiManager.js";
 
 class Particular {
@@ -44,9 +48,9 @@ class Particular {
 
   //#region Metodos
   setEstacion(estacion) {
-    if(this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion){
+    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {
       // Hay Cambio de particular
-      EventsManager.Instance.EmitirEvento("ParticularChanged")
+      EventsManager.Instance.EmitirEvento("ParticularChanged");
       this.estacion = estacion;
     }
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
@@ -67,6 +71,26 @@ class Particular {
 
       if (signalActualizar) {
         signalActualizar.innerText = signal.GetValorString(true, true);
+      }
+
+      let $imgNivelAgua =
+        this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
+
+      if ($imgNivelAgua) {
+        $imgNivelAgua.setAttribute(
+          "src",
+          estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
+        );
+      }
+
+      let $imgBombaParticular =
+        this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
+
+      if ($imgBombaParticular) {
+        $imgBombaParticular.setAttribute(
+          "src",
+          estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
+        );
       }
     });
   };
@@ -116,10 +140,12 @@ class Particular {
     // Funcionalidad para mostrar el panel de control
     this.panelControl();
 
+    this.setNivelAgua(sitioAbrev);
+
     const $btnBack = document.querySelector(".header__btnRegresar");
     $btnBack.addEventListener("click", () => {
       SetActualModule("Perfil");
-      GoHome();   
+      GoHome();
     });
   }
 
@@ -211,7 +237,56 @@ class Particular {
     this.$headerStatus.innerText = offline ? "Fuera de línea" : "En línea";
     this.$headerStatus.style.color = offline ? "red" : "green";
   }
+
+  setNivelAgua() {
+    const $nivelContainer = document.getElementById("particular__aguaNivel");
+    const $bombasContainer = document.getElementById(
+      "particular__bombasEstado"
+    );
+
+    $nivelContainer.innerHTML = "";
+    $bombasContainer.innerHTML = "";
+
+    this.Estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(
+      (bomba) => {
+        const $imgBombaParticular = CreateElement({
+          nodeElement: "img",
+          attributes: {
+            id: `particular_bomba_${bomba.IdSignal}`,
+            class: "bomba__Particular",
+            src: this.Estacion.ObtenerRenderNivelOBomba(bomba, "Particular"),
+          },
+        });
+        this.HTMLUpdateElements[$imgBombaParticular.id] = $imgBombaParticular;
+        $bombasContainer.append($imgBombaParticular);
+      }
+    );
+
+    this.Estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(
+      (nivel) => {
+        const $nivelAgua = CreateElement({
+          nodeElement: "img",
+          attributes: {
+            id: `particular_nivel_${nivel.IdSignal}`,
+            class: "nivelAgua__Particular",
+            src: this.Estacion.ObtenerRenderNivelOBomba(nivel, "Particular"),
+          },
+        });
+        this.HTMLUpdateElements[$nivelAgua.id] = $nivelAgua;
+        $nivelContainer.append($nivelAgua);
+      }
+    );
+  }
   //#endregion
 }
 
 export { Particular };
+
+// estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+//   nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
+// })
+
+// <div class="particular__aguaNivel">
+// <img id="nivelAgua__Particular"
+//   src="http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/Sitios/ctl15/Particular/l/n1_1.png?v=-1">
+// </div>
