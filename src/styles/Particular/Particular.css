@@ -162,6 +162,7 @@
   height: 972px;
   top: 108px;
   position: absolute;
+  pointer-events: none;
 }
 
 .bomba__Particular {
@@ -169,4 +170,5 @@
   height: 972px;
   top: 108px;
   position: absolute;
+  pointer-events: none;
 }

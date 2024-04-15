@@ -84,7 +84,7 @@ class Particular {
       }
 
       let $imgBombaParticular =
-        this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
+        this.HTMLUpdateElements[`particular_bomba_${signal.IdSignal}`];
 
       if ($imgBombaParticular) {
         $imgBombaParticular.setAttribute(
@@ -105,6 +105,7 @@ class Particular {
     this.$particularImg = document.querySelector("#particularImg");
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
+    this.$panelBombas = document.querySelector(".arranqueParo__panelControl");
 
     this.$headerTitle.innerText = this.Estacion.Nombre;
 
@@ -117,6 +118,7 @@ class Particular {
     this.$datosHeader.style.opacity = "1";
     this.$btnBack.style.opacity = "1";
     this.$btnBack.style.pointerEvents = "auto";
+    this.$panelBombas.style.pointerEvents = "auto";
 
     // Cambiar el texto de acuerdo al estado de la estación
     this.setEnlaceParticular(this.Estacion.Enlace);
@@ -281,12 +283,3 @@ class Particular {
 }
 
 export { Particular };
-
-// estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
-//   nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
-// })
-
-// <div class="particular__aguaNivel">
-// <img id="nivelAgua__Particular"
-//   src="http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/Sitios/ctl15/Particular/l/n1_1.png?v=-1">
-// </div>

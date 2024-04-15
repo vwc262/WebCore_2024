@@ -1,0 +1,30 @@
+#map {
+  width: 1455px !important;
+  height: 1025px !important;
+  position: relative;
+  overflow: hidden;
+  top: 57px;
+  z-index: 10;
+}
+
+.marker-tag {
+  background-color: #4285f4;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.marker-tag::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #4285f4;
+}
