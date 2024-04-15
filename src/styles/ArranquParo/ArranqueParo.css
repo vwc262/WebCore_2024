@@ -4,12 +4,14 @@
   z-index: 10;
   top: 380px;
   left: 50px;
-  background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition_inicio.png?v=10);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position-y: bottom;
   opacity: 0;
   transition: all 0.4s ease;
+}
+
+.arranqueParo__panelControl img {
+  width: 445px;
+  position: relative;
+  top: 90px;
 }
 
 .arranqueParo__Container {
@@ -75,7 +77,7 @@
 .arranqueParo__closePanel {
   position: relative;
   left: 255px;
-  top: -15px;
+  top: -100px;
 }
 .arranqueParo__closePanel img {
   width: 30px;
