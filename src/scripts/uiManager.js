@@ -21,6 +21,7 @@ $btnHeader.addEventListener("click", (ev) => {
     actualTarger.classList.add("header__active");
     const isParticularActive = Module == EnumModule.Particular;
     const $btnBack = document.querySelector(".header__btnRegresar");
+    const $panelBombas = document.querySelector(".arranqueParo__panelControl")
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
@@ -33,6 +34,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $titleHeader.innerText = "Tanques Padierna";
         $datosHeader.style.opacity = "0";
+        $panelBombas.style.pointerEvents ="none"
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
@@ -45,6 +47,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = "Tanques Padierna";
+        $panelBombas.style.pointerEvents ="none"
         break;
       case "headerBtn__Graficador header__active":
         SetActualModule("Graficador");
@@ -57,6 +60,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = "Tanques Padierna";
+        $panelBombas.style.pointerEvents ="none"
         break;
       case "headerBtn__Login header__active":
         section__home.style.zIndex = "5";
@@ -68,6 +72,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = "Tanques Padierna";
+        $panelBombas.style.pointerEvents ="none"
         Login.Instace.create();
         break;
     }

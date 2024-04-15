@@ -8,25 +8,46 @@ class Mapa {
 
   create() {
     this.initMap();
-    this.createMarkers();
+    // this.createMarkers();
   }
 
   async initMap() {
-    this.map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 19.4286, lng: -99.251 },
+    let map;
+    const initPosition = { lat: 19.42883139576554, lng: -99.13096374906871 };
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+    map = new Map(document.getElementById("map"), {
       zoom: 13,
+      center: initPosition,
+      mapId: "DEMO_MAP_ID",
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition.LEFT_TOP,
+      },
+      zoomControl: true,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_CENTER,
+      },
+      scaleControl: true,
+      streetViewControl: true,
+      streetViewControlOptions: {
+        position: google.maps.ControlPosition.LEFT_BOTTOM,
+      },
+      fullscreenControl: true,
     });
 
-    console.log(Core.Instance.data);
-  }
+    Core.Instance.data.forEach((dataMarker) => {
+      const markerTag = document.createElement("div");
 
-  createMarkers() {
-    Core.Instance.data.forEach((data) => {
-      const marker = new google.maps.Marker({
-        position: { lat: data.Latitud, lng: data.Longitud },
-        map: this.map,
+      markerTag.className = "marker-tag";
+      markerTag.textContent = dataMarker.Nombre;
+      const marker = new AdvancedMarkerView({
+        map: map,
+        position: { lat: dataMarker.Latitud, lng: dataMarker.Longitud },
+        content: markerTag,
       });
-      this.markers.push(marker);
     });
   }
 }
