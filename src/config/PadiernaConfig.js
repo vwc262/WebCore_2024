@@ -150,8 +150,8 @@ var configuracionPadierna = {
             },
             {
                 "IdEstacion": 22,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 20px; top: 50px;",
-                "Etiqueta": "position: absolute; top: 20px; left: 50px;",
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
+                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
                 "Estado": "display:none;"
 
             },
