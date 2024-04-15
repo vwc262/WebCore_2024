@@ -32,7 +32,7 @@ class Cell {
 
         this.signalValor = CreateElement({
             nodeElement: 'div',
-            attributes: { class: 'signal-valor' },
+            attributes: { class: 'signal-valor', style: `color: ${this.signal.GetValorColor()};` },
             innerText: this.signal.GetValorString(false, true),
         });
 
@@ -52,6 +52,7 @@ class Cell {
 
         if (signal != null) {
             this.signalValor.innerText = signal.GetValorString(false, true);
+            this.signalValor.style.color = `${this.signal.GetValorColor()}`;
         }
 
     }
