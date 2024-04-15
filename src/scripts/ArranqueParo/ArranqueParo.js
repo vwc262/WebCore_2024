@@ -88,8 +88,14 @@ class ArranqueParo {
 
     const $panelFondo = document.querySelector(".arranqueParo__Container");
 
+    const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
+
     $panelArranqueParo.style.opacity = "1";
-    const urlImg = `url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=10)`;
+
+    $imgArranqueParo.setAttribute(
+      "src",
+      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=11"
+    );
 
     // Agregar un event listener para detectar cuando la transición ha terminado
     $panelArranqueParo.addEventListener("transitionend", () => {
@@ -98,10 +104,10 @@ class ArranqueParo {
         parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 &&
         !this.#isCarouselCreated
       ) {
-        $panelArranqueParo.style.background = urlImg;
-        $panelArranqueParo.style.backgroundRepeat = "no-repeat";
-        $panelArranqueParo.style.backgroundSize = "contain";
-        $panelArranqueParo.style.backgroundPositionY = "bottom";
+        // $panelArranqueParo.style.background = urlImg;
+        // $panelArranqueParo.style.backgroundRepeat = "no-repeat";
+        // $panelArranqueParo.style.backgroundSize = "contain";
+        // $panelArranqueParo.style.backgroundPositionY = "bottom";
 
         $panelFondo.style.transform = "translateY(16vh)";
         $panelFondo.style.opacity = "1";
@@ -203,6 +209,12 @@ class ArranqueParo {
   agregarEventosClic() {
     const $btnPrev = document.querySelector(".arranqueParo__Prev");
     const $btnNext = document.querySelector(".arranqueParo__Next");
+    const $closePanelArranqueParo = document.querySelector(
+      ".arranqueParo__closePanel"
+    );
+
+    // Agrega evento de click al boton de cerrar panel
+    $closePanelArranqueParo.addEventListener("click", this.CloseArranqueParo);
 
     // Agregar evento de clic al botón de "prev"
     $btnPrev.addEventListener("click", this.MoverCarrusel);
@@ -264,14 +276,15 @@ class ArranqueParo {
       ".arranqueParo__Container"
     );
 
-    $panelArranqueParoContainer.style.background =
-      "url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition_inicio.png?v=10)";
-    $panelArranqueParoContainer.style.backgroundRepeat = "no-repeat";
-    $panelArranqueParoContainer.style.backgroundSize = "contain";
-    $panelArranqueParoContainer.style.backgroundPositionY = "bottom";
+    const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
+
     $panelArranqueParoContainer.style.opacity = "0";
     $panelArranqueParo.style.opacity = "0";
     $panelArranqueParo.style.transform = "translateY(100vh)";
+    $imgArranqueParo.setAttribute(
+      "src",
+      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/transition_inicio.png?v=-1"
+    );
   };
   //#endregion
 }
