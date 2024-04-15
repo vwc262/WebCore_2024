@@ -133,8 +133,8 @@ class Tabla {
         let diff = this.offset.extraRows > 0 ? -this.indice - this.offset.actualIndex : 0;
         let overlap = this.offset.extraRows > 0 && diff > 0;
 
-        if (this.indice < -(this.cantidadElementos - this.elementosVisibles) - diff) {
-            this.indice = -(this.cantidadElementos - this.elementosVisibles) - diff;
+        if (this.indice < -(this.cantidadElementos - this.elementosVisibles) + (overlap ? -this.offset.extraRows : 0)) {
+            this.indice = -(this.cantidadElementos - this.elementosVisibles) + (overlap ? -this.offset.extraRows : 0);
         }
         if (this.indice > 0) {
             this.indice = 0;
@@ -143,27 +143,36 @@ class Tabla {
         let indexCurvedRows = 0;
         let overflow = this.offset.extraRows > 0 && indexCurvedRows - this.indice > this.offset.actualIndex + this.offset.extraRows
         let indexEstacion = -this.indice + (overlap ? -diff : 0);
+        let compensacion = false;
 
         Object.keys(this.extraRows).forEach(key => {
             this.extraRows[key].rowContainer.remove();
             delete this.extraRows[key];
         });
 
-        for (let indexRow = -this.indice + (overlap ? -diff : 0); indexRow < Core.Instance.data.length; indexRow++) {
-            const estacion = Core.Instance.data[indexEstacion];
+        for (let indexRow = 0; indexRow < this.rows.length; indexRow++) {
 
-            let row = this.rows[indexRow];
-            let rowVariables = this.rowVariables[indexRow];
+            if (overflow && !compensacion) {
+                compensacion = true;
+                indexEstacion += diff - this.offset.extraRows;
+                //console.log('compensación', diff - this.offset.extraRows);
+            }
 
-            row.IdEstacion = estacion.IdEstacion;
-            rowVariables.IdEstacion = estacion.IdEstacion;
+            indexRow = indexEstacion;
 
-            let isTop = false;
+            if (this.curvedRows[indexCurvedRows] != undefined && this.rows[indexRow] != undefined) {
 
-            if (this.curvedRows[indexCurvedRows] != undefined) {
+                const estacion = Core.Instance.data[indexEstacion];
+
+                let row = this.rows[indexRow];
+                let rowVariables = this.rowVariables[indexRow];
+
+                row.IdEstacion = estacion.IdEstacion;
+                rowVariables.IdEstacion = estacion.IdEstacion;
+
+                let isTop = false;
                 this.curvedRows[indexCurvedRows].innerHTML = '';
                 this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
-
 
                 if (indexCurvedRows == 0 && this.offset.actualIndex > 0 && overlap && diff <= this.offset.extraRows) {
                     isTop = indexCurvedRows == 0;
@@ -213,17 +222,18 @@ class Tabla {
 
                     continue;
                 }
-            }
 
-            row.Update();
-            rowVariables.Update(indexRow);
+                row.Update();
+                rowVariables.Update(indexRow);
+
+            }
 
             indexEstacion++;
             indexCurvedRows++;
 
         }
 
-        console.log('------------------------------------------------------');
+        //console.log('------------------------------------------------------');
     }
 
     create() {
