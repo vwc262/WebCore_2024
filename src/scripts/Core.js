@@ -21,9 +21,8 @@ class Core {
    * @returns {string }
    */
   get ResourcesPath() {
-    return `http://w1.doomdns.com:11002/RecursosWeb/WebCore24/${
-      EnumNombreProyecto[this.IdProyecto]
-    }/`;
+    return `http://w1.doomdns.com:11002/RecursosWeb/WebCore24/${EnumNombreProyecto[this.IdProyecto]
+      }/`;
   }
   IdInterval = undefined;
   /**
@@ -82,6 +81,8 @@ class Core {
         signal.IndiceImagen = parseInt((ss / 60) * 10);
         if (signal.TipoSignal == EnumTipoSignal.Bomba) {
           signal.Valor = ss > 45 ? 3 : ss > 30 ? 2 : ss > 15 ? 1 : 0;
+        } else if (signal.TipoSignal == EnumTipoSignal.PerillaBomba || signal.TipoSignal == EnumTipoSignal.PerillaGeneral) {
+          signal.Valor = 1;
         } else {
           signal.Valor = ss;
         }

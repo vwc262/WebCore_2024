@@ -1,5 +1,6 @@
 import { Core } from "../Core.js";
 import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBomba } from "../Utilities/Enums.js";
+import Linea from "./Linea.js";
 import Semaforo from "./Semaforo.js";
 class Signal {
     constructor(signalCruda) {
@@ -11,7 +12,7 @@ class Signal {
         this.Ordinal = signalCruda.ordinal;
         this.IndiceImagen = signalCruda.indiceImagen;
         this.DentroLimite = signalCruda.dentroLimite;
-        this.DentroRango = signalCruda.dentroRango;
+        this.DentroRango = signalCruda.dentroRango;  
         this.Linea = signalCruda.linea;
         this.Semaforo = this.#EstablecerSemaforo(signalCruda.semaforo);
     }
@@ -95,10 +96,10 @@ class Signal {
      * @param {Signal} signalPerilla 
      */
     GetValorPerillaBomba() {
-        return EnumPerillaBomba[this.valor] ?? 'Off';
+        return EnumPerillaBomba[this.Valor] ?? 'Off';
     }
     GetValorPerillaGeneral() {
-        return EnumPerillaGeneral[this.valor] ?? 'Manual';
+        return EnumPerillaGeneral[this.Valor] ?? 'Manual';
     }
 
 
