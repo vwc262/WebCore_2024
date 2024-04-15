@@ -149,3 +149,24 @@
   width: 30px;
   height: 30px;
 }
+
+.particular__aguaNivel img {
+  width: 1455px;
+  height: 972px;
+  top: 108px;
+  position: absolute;
+}
+
+.nivelAgua__Particular {
+  width: 1455px;
+  height: 972px;
+  top: 108px;
+  position: absolute;
+}
+
+.bomba__Particular {
+  width: 1455px;
+  height: 972px;
+  top: 108px;
+  position: absolute;
+}
