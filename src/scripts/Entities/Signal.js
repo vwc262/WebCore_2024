@@ -1,3 +1,4 @@
+import { Core } from "../Core.js";
 import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBomba } from "../Utilities/Enums.js";
 import Semaforo from "./Semaforo.js";
 class Signal {
@@ -68,11 +69,32 @@ class Signal {
         }
         return color;
     }
+    GetImagenBombaPanelControl() {
+        return `background: url(${Core.Instance.ResourcesPath}Control/btn_bomba.png) 100% 100%;filter: ${this.FilterPanelBombaColor(this.Valor)}`;
+    }
+    FilterPanelBombaColor(valorBomba) {
+        let filter = 'grayscale(2)';
+        switch (valorBomba) {
+            case EnumValorBomba.NoDisponible:
+                filter = 'grayscale(2)';
+                break;
+            case EnumValorBomba.Arrancada:
+                filter = 'hue-rotate(120deg)'
+                break;
+            case EnumValorBomba.Apagada:
+                filter = 'hue-rotate(0deg)'
+                break;
+            case EnumValorBomba.Falla:
+                filter = 'hue-rotate(231deg)'
+                break;
+        }
+        return filter;
+    }
     /**
      * 
      * @param {Signal} signalPerilla 
      */
-    GetValorPerilla() {
+    GetValorPerillaBomba() {
         return EnumPerillaBomba[this.valor] ?? 'Off';
     }
     GetValorPerillaGeneral() {
