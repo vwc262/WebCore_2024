@@ -130,18 +130,18 @@ class Tabla {
 
     refreshTable() {
 
-        let diff = -this.indice - this.offset.actualIndex;
-        let overlap = diff > 0;
+        let diff = this.offset.extraRows > 0 ? -this.indice - this.offset.actualIndex : 0;
+        let overlap = this.offset.extraRows > 0 && diff > 0;
 
-        // if (this.indice < -(this.cantidadElementos - this.elementosVisibles) - this.offset.extraRows) {
-        //     this.indice = -(this.cantidadElementos - this.elementosVisibles) - this.offset.extraRows;
-        // }
+        if (this.indice < -(this.cantidadElementos - this.elementosVisibles) - diff) {
+            this.indice = -(this.cantidadElementos - this.elementosVisibles) - diff;
+        }
         if (this.indice > 0) {
             this.indice = 0;
         }
 
         let indexCurvedRows = 0;
-        let overflow = indexCurvedRows - this.indice > this.offset.actualIndex + this.offset.extraRows
+        let overflow = this.offset.extraRows > 0 && indexCurvedRows - this.indice > this.offset.actualIndex + this.offset.extraRows
         let indexEstacion = -this.indice + (overlap ? -diff : 0);
 
         Object.keys(this.extraRows).forEach(key => {
@@ -168,7 +168,7 @@ class Tabla {
                 if (indexCurvedRows == 0 && this.offset.actualIndex > 0 && overlap && diff <= this.offset.extraRows) {
                     isTop = indexCurvedRows == 0;
                 } else {
-                    console.log('overlap', overlap, 'overflow', overflow, 'indexCurvedRows', indexCurvedRows, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indice', this.indice, 'actualIndex', this.offset.actualIndex, 'diff', diff);
+                    //console.log('overlap', overlap, 'overflow', overflow, 'indexCurvedRows', indexCurvedRows, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indice', this.indice, 'actualIndex', this.offset.actualIndex, 'diff', diff);
                     this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
                     this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
                 }
@@ -178,7 +178,7 @@ class Tabla {
                 if (indexCurvedRows - this.indice >= this.offset.actualIndex && indexCurvedRows - this.indice <= this.offset.actualIndex + this.offset.extraRows) {
                     for (let ordinalSignal = 1 + (overlap ? diff - 1 : 0); ordinalSignal <= this.offset.extraRows; ordinalSignal++) {
 
-                        console.log(isTop, 'indexCurvedRows', indexCurvedRows, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indice', this.indice, 'actualIndex', this.offset.actualIndex, 'diff', diff);
+                        //console.log(isTop, 'indexCurvedRows', indexCurvedRows, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indice', this.indice, 'actualIndex', this.offset.actualIndex, 'diff', diff);
 
                         if (!isTop) {
                             indexCurvedRows++;
