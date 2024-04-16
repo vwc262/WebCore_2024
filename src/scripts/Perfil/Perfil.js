@@ -46,7 +46,7 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}CelulaPadierna/background.png?v=10); width: ${widthRenderPerfil}px; height: 1080px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.png?v=10); width: ${widthRenderPerfil}px; height: 1080px;`
             }
         });
 
@@ -83,7 +83,7 @@ class Perfil {
                     }
                 });
 
-                tuberiasDiv.appendChild(tuberiaEstacion);
+                tuberiasDiv.appendChild(tuberiaEstacion);                
                 this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion, estacion.IdEstacion);
             }
         })

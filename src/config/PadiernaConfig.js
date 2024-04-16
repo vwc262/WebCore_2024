@@ -248,7 +248,7 @@ var configuracionPadierna = {
                     "IdLinea": 11,
                     "IdEstacion": 13,
                     "Tag": "TC-6_TC-7",
-                    "css": "position: absolute; top: 423px; left: 1035px; transform: rotate(43deg); width: 87px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
+                    "css": "position: absolute; top: 461px;; left: 1035px; transform: rotate(43deg); width: 87px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
                 },
                 {
                     "IdLinea": 12,
