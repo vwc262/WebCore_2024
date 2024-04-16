@@ -413,12 +413,8 @@ class ArranqueParo {
     // Distincion para saber si va atras o adelante
     if (this.#carruselContainer.children.length > 3) {
       const isAtras = e.currentTarget.id == "carruselPrev_AP";
-      this.transicionCarrusel(isAtras);
       this.BorrarSeleccion();
-      [...this.#carruselContainer.children].forEach((item) => {
-        this.SetSeleccionado(item);
-      });
-
+      this.transicionCarrusel(isAtras);
       if (!isAtras) {
         this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(
           this.#carruselContainer.firstChild.style.left.replace("px", "") - 100
@@ -435,8 +431,8 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100
-        }px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
+      this.SetSeleccionado(item);
     });
   }
   Update = () => {
