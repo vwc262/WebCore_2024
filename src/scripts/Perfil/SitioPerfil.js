@@ -1,6 +1,6 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
-import configuracionPadierna from "../../config/PadiernaConfig.js";
+import { Configuracion } from "../../config/PadiernaConfig.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
@@ -17,9 +17,10 @@ class SitioPerfil {
      * @param {Function} setHover
      */
     constructor(IdEstacion, setHover) {
+        this.Configuracion = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
         this.IdEstacion = IdEstacion;
         this.setHover = setHover;
-        this.estilosEstacionEtiqueta = configuracionPadierna.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
+        this.estilosEstacionEtiqueta = this.Configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
     }
 
     createEtiqueta() {
@@ -155,7 +156,7 @@ class SitioPerfil {
         const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
 
         name.style.background = estacion.Enlace != 0 ? "green" : "red";
-        
+
         if (signal) {
             const valor = `${signal.GetValorString(true, true)}`;
             const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdEstacion}`];

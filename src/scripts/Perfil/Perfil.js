@@ -1,7 +1,7 @@
 import SitioPerfil from "./SitioPerfil.js";
 import { Core } from "../Core.js";
 import { Clamp, CreateElement, ObtenerWidthRender } from "../Utilities/CustomFunctions.js";
-import configuracionPadierna from "../../config/PadiernaConfig.js";
+import { Configuracion } from "../../config/PadiernaConfig.js";
 import ParticlesAnimator from "./ParticlesAnimationManager.js";
 import Estacion from "../Entities/Estacion.js";
 
@@ -17,6 +17,7 @@ class Perfil {
     }
 
     create() {
+        const configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
         const widthRenderPerfil = ObtenerWidthRender(Core.Instance.IdProyecto);
         let perfil = document.querySelector(".section__home")
         this.Panner = CreateElement({
@@ -70,7 +71,7 @@ class Perfil {
                 this.setHoverPerfil(isMouseOut, estacion, css);
             }.bind(this));
 
-            const estilosEstacionTuberias = configuracionPadierna.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
+            const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
             estacionesDiv.appendChild(estacionPerfil.createSitio());
             estacionesDiv.appendChild(estacionPerfil.createEtiqueta());
 
@@ -83,12 +84,12 @@ class Perfil {
                     }
                 });
 
-                tuberiasDiv.appendChild(tuberiaEstacion);                
+                tuberiasDiv.appendChild(tuberiaEstacion);
                 this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion, estacion.IdEstacion);
             }
         })
 
-        configuracionPadierna.perfil.estilosTuberias.PorGravedad.forEach(element => {
+        configuracionProyecto.perfil.estilosTuberias.PorGravedad.forEach(element => {
             if (element != undefined) {
                 tuberiaEstacion = CreateElement({
                     nodeElement: "canvas",

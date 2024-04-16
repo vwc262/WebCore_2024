@@ -14,33 +14,42 @@ export var projectName = EnumNameProjecto.TanquesPadierna;
 
 export var sitiosInfo = [];
 
+var isReporteadorCreated = false;
+
 // Cuando la ventana se carga completamente, ejecutar la siguiente función
 async function inicializarReporteador() {
-  inicializarImages();
-  // peticion de estaciones del proyecto
-  const jsonData = await FetcherGraficador.request({
-    action: `${EnumPeticiones.READ}`,
-  });
+  if (!isReporteadorCreated) {
 
-  sitiosInfo = jsonData.Sites;
+    inicializarImages();
+    // peticion de estaciones del proyecto
+    const jsonData = await FetcherGraficador.request({
+      action: `${EnumPeticiones.READ}`,
+    });
 
-  // Inicializar el video utilizando el método initVideo del controladorVideo
-  // Se pasa la URL del video y la función showUIVideo del UIControlador como argumentos
-  controladorVideo.initVideo(
-    // URL del video a cargar
-    `${FetcherGraficador.getImage(projectName, 'Reportes', '3-Cortinilla', 'mp4')}`,
-    // Función para mostrar la interfaz de usuario del video
-    UIControlador.showUIVideoInit
-  );
+    sitiosInfo = jsonData.Sites;
 
-  InicialSelector();
-  initCalendario();
-  initGraficador();
+    // Inicializar el video utilizando el método initVideo del controladorVideo
+    // Se pasa la URL del video y la función showUIVideo del UIControlador como argumentos
+    controladorVideo.initVideo(
+      // URL del video a cargar
+      `${FetcherGraficador.getImage(projectName, 'Reportes', '3-Cortinilla', 'mp4')}`,
+      // Función para mostrar la interfaz de usuario del video
+      UIControlador.showUIVideoInit
+    );
+
+    InicialSelector();
+    initCalendario();
+    initGraficador();
+  }
+  isReporteadorCreated = true;
 };
 
 function inicializarImages() {
   const modal = document.querySelector(".modalValidation");
   modal.style.background = `url(${FetcherGraficador.getImage(projectName, 'Control', 'modalbackground', 'png')})`;
+
+  const returnImage = document.querySelector(".btnReturnImage")
+  returnImage.setAttribute('src', `${FetcherGraficador.getImage(projectName, 'General', 'ToPerfil', 'gif')}`)
 
   const pdfImage = document.querySelector(".btnPDF")
   pdfImage.setAttribute('src', `${FetcherGraficador.getImage(projectName, 'Reportes', 'PDF', 'png')}`)

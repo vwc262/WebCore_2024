@@ -1,6 +1,7 @@
 import { ArranqueParo } from "./ArranqueParo/ArranqueParo.js";
 import Login from "./Entities/Login/Login.js";
 import { Particular } from "./Particular/Particular.js";
+import { inicializarReporteador } from "./Reporteador/Reportes.js";
 import { EnumModule } from "./Utilities/Enums.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
@@ -65,6 +66,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $titleHeader.innerText = "Tanques Padierna";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "none";
+        inicializarReporteador();
         break;
       case "headerBtn__Login header__active":
         section__home.style.zIndex = "5";

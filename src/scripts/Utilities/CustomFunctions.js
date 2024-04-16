@@ -26,7 +26,7 @@ export const CreateElement = function ({ nodeElement, attributes = {}, innerText
  * @returns { number} 
  */
 export const ObtenerWidthRender = function (idProyecto) {
-    const width = 1920;
+    let width = 1920;
     switch (idProyecto) {
         case EnumProyecto.Default: break;
         case EnumProyecto.GustavoAMadero: break;
@@ -36,6 +36,9 @@ export const ObtenerWidthRender = function (idProyecto) {
         case EnumProyecto.Encharcamientos: break;
         case EnumProyecto.Sectores: break;
         case EnumProyecto.Lumbreras: break;
+        case EnumProyecto.SantaCatarina:
+            width = 1940;
+            break;
     }
     return width;
 }
