@@ -228,15 +228,21 @@ class ArranqueParo {
      * @type {Signal}
      */
     this.#bombaSeleccionada = e.currentTarget.mySignal;
-    const container = e.currentTarget;
-    const position = parseFloat(container.style.left.replace("px", ""));
-    switch (position) {
-      case 0:
-        this.$btnNext.click();
-        break;
-      case 200:
-        this.$btnPrev.click();
-        break;
+    if (this.#carruselContainer.children.length > 3) {
+      const container = e.currentTarget;
+      const position = parseFloat(container.style.left.replace("px", ""));
+      switch (position) {
+        case 0:
+          this.$btnNext.click();
+          break;
+        case 200:
+          this.$btnPrev.click();
+          break;
+      }
+    }
+    else {
+      this.BorrarSeleccion();
+      this.SetSeleccionado(e.currentTarget);
     }
   };
   /**
@@ -371,19 +377,28 @@ class ArranqueParo {
         alertTitle
       );
   };
+  BorrarSeleccion() {
+    [...this.#carruselContainer.children].forEach(element => {
+      element.classList.remove("midItem");
+      if (element.children.length > 3) {
+        element.children[element.children.length - 1].remove();
+      }
+    });
+  }
   SetSeleccionado(ContainerImagenBomba) {
     const hologram = CreateElement({
       nodeElement: "div",
       attributes: { class: "hologramaBase" },
     });
-    if (ContainerImagenBomba.style.left == "100px") {
+    if (this.#carruselContainer.children.length > 3) {
+      if (ContainerImagenBomba.style.left == "100px") {
+        ContainerImagenBomba.classList.add("midItem");
+        ContainerImagenBomba.append(hologram);
+      }
+    }
+    else {
       ContainerImagenBomba.classList.add("midItem");
       ContainerImagenBomba.append(hologram);
-    } else {
-      ContainerImagenBomba.classList.remove("midItem");
-      if (ContainerImagenBomba.children.length > 3) {
-        ContainerImagenBomba.children[ContainerImagenBomba.children.length - 1].remove();
-      }
     }
   }
   /**
@@ -395,7 +410,7 @@ class ArranqueParo {
     if (this.#carruselContainer.children.length > 3) {
       const isAtras = e.currentTarget.id == "carruselPrev_AP";
       this.transicionCarrusel(isAtras);
-
+      this.BorrarSeleccion();
       [...this.#carruselContainer.children].forEach((item) => {
         this.SetSeleccionado(item);
       });
