@@ -43,7 +43,7 @@ article video {
 
 .calendarioContainer {
   position: absolute;
-  top: 356px;
+  top: 305px;
   left: 170px;
   height: 255px;
   width: 450px;
@@ -59,7 +59,7 @@ article video {
   background-color: #0f131d;
   transform: scaleX(1.27) perspective(1000px) rotateX(-5deg);
   position: absolute;
-  top: 205px;
+  top: 150px;
   left: 780px;
   width: 455px;
   height: 325px;
