@@ -154,7 +154,7 @@
   position: absolute;
   overflow: hidden;
   width: 302px;
-  height: 140px;
+  height: 160px;
   left: 0px;
 }
 
@@ -238,4 +238,7 @@
   justify-content: space-between;
 }
 
-.Bomba_active {}
+.midItem {
+  transform: scale(1.25);
+  transition: transform 0.4s ease;
+}
