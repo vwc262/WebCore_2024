@@ -70,7 +70,7 @@ class Particular {
         this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
 
       if (signalActualizar) {
-        signalActualizar.innerText = signal.GetValorString(true, true);
+        signalActualizar.innerHTML = signal.GetValorString(true, true);
       }
 
       let $imgNivelAgua =
@@ -181,7 +181,7 @@ class Particular {
           id: `particular__valorSlider_${signal.IdSignal}`,
           style: `color: ${signal.GetValorColor()}`,
         },
-        innerText: signal.GetValorString(true, true),
+        innerHTML: signal.GetValorString(true, true),
       });
 
       $signalItem.append($etiquetaNombre, $etiquetaValor);
