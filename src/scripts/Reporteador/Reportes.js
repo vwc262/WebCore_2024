@@ -42,6 +42,9 @@ function inicializarImages() {
   const modal = document.querySelector(".modalValidation");
   modal.style.background = `url(${FetcherGraficador.getImage(projectName, 'Control', 'modalbackground', 'png')})`;
 
+  const returnImage = document.querySelector(".btnReturnImage")
+  returnImage.setAttribute('src', `${FetcherGraficador.getImage(projectName,'General','ToPerfil','gif')}`)
+
   const pdfImage = document.querySelector(".btnPDF")
   pdfImage.setAttribute('src', `${FetcherGraficador.getImage(projectName, 'Reportes', 'PDF', 'png')}`)
 

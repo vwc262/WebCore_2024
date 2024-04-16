@@ -39,6 +39,15 @@ function setBtnReturn() {
     "mp4"
   )}`;
 
+  btnReturn.addEventListener("click", () => {
+    UIControlador.hideUIimmediately(Object.values(UIControlador.graficaUI));
+    txtSinHistoricos.style.opacity = "0";
+
+    controladorVideo.initVideo(
+      videoGraficadorReverse,
+      UIControlador.showUIVideoInit
+    );
+  });
 }
 
 function setEventsOfficeButtons() {
@@ -56,7 +65,7 @@ function setEventsOfficeButtons() {
 }
 
 function Cerrar() {
-  
+
 }
 
 function GhostVariable() {
