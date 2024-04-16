@@ -18,6 +18,7 @@ const EnumProyecto = {
   Encharcamientos: 6,
   Sectores: 7,
   Lumbreras: 8,
+  SantaCatarina: 9
 };
 /**
  * @returns NombreProyecto
@@ -32,6 +33,7 @@ const EnumNombreProyecto = {
   6: "Encharcamientos",
   7: "Sectores",
   8: "Lumbreras",
+  9: "TanquesSantaCatarina"
 };
 
 /**
