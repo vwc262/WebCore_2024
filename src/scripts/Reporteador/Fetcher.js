@@ -1,4 +1,5 @@
 import { Core } from "../Core.js";
+import { EnumProyecto } from "../Utilities/Enums.js";
 
 const FetcherGraficador = {
   SinData: {},
@@ -19,7 +20,7 @@ const FetcherGraficador = {
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
-    project = EnumProyecto.Padierna
+    project = getNombreProyectoIdProyecto(Core.Instance.IdProyecto),
   }) {
     const options = {
       method: method,
@@ -53,12 +54,20 @@ const EnumPeticiones = {
   HISTORICOS: "GetReportes",
 };
 
-const EnumProyecto = {
-  Padierna: 'Padierna',
-};
+// const EnumProyecto = {
+//   Padierna: 'Padierna',
+// };
 
 const EnumNameProjecto = {
   TanquesPadierna: 'TanquesPadierna',
 }
 
+const getNombreProyectoIdProyecto = (idProyecto) => {
+  switch (idProyecto) {
+    case EnumProyecto.Padierna: return "Padierna";
+    case EnumProyecto.SantaCatarina: return "SantaCatarina";
+
+  }
+
+}
 export { FetcherGraficador, EnumPeticiones, EnumProyecto, EnumNameProjecto };
