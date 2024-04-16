@@ -94,10 +94,10 @@ class SitioPerfil {
             events: new Map()
                 .set("click", [this.mostrarParticular])
                 .set("mouseover", [() => {
-                    this.setHover(false, estacion, this.estilosEstacionEtiqueta.Imagen)
+                    this.setHover(false, estacion, this.estilosEstacionEtiqueta.Imagen);
                 }])
                 .set("mouseout", [() => {
-                    this.setHover(true);
+                    this.setHover(true, estacion);
                 }])
         });
         let estacionPerfilDiv = CreateElement({
