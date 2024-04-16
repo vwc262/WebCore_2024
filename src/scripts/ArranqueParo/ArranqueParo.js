@@ -238,6 +238,10 @@ class ArranqueParo {
         case 200:
           this.$btnPrev.click();
           break;
+        default:
+          this.BorrarSeleccion();
+          this.SetSeleccionado(e.currentTarget);
+          break;
       }
     }
     else {
