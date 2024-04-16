@@ -317,9 +317,8 @@ class ArranqueParo {
   }
   CambiarAccion = (e) => {
     const btnAccion = e.currentTarget;
-    btnAccion.children[1].style.background = `url(${
-      Core.Instance.ResourcesPath
-    }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
+    btnAccion.children[1].style.background = `url(${Core.Instance.ResourcesPath
+      }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
     btnAccion.prender = !btnAccion.prender;
     this.#prenderBomba = btnAccion.prender;
   };
@@ -339,23 +338,22 @@ class ArranqueParo {
         this.#bombaSeleccionada.IdSignal
       );
       const perillaBomba = estacion.ObtenerValorPerillaBomba(
-        signalBomba.Ordinal - 1
+        signalBomba.Ordinal
       );
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
       if (
         perillaGeneral.GetValorPerillaGeneral() ==
-        EnumPerillaGeneralString[perillaGeneral.Valor]
+        EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]
       ) {
         if (
-          perillaBomba.GetValorPerillaBomba() == EnumPerillaBombaString[perillaBomba.Valor]
+          perillaBomba.GetValorPerillaBomba() == EnumPerillaBombaString[EnumPerillaBomba.Remoto]
         ) {
           if (
             signalBomba.Valor == EnumValorBomba.Arrancada ||
             signalBomba.Valor == EnumValorBomba.Apagada
           ) {
             ShowModal(
-              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${
-                this.#bombaSeleccionada.Nombre
+              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre
               }`,
               alertTitle
             );
@@ -403,10 +401,12 @@ class ArranqueParo {
       if (ContainerImagenBomba.style.left == "100px") {
         ContainerImagenBomba.classList.add("midItem");
         ContainerImagenBomba.append(hologram);
+        this.#bombaSeleccionada = ContainerImagenBomba.mySignal;
       }
     } else {
       ContainerImagenBomba.classList.add("midItem");
       ContainerImagenBomba.append(hologram);
+      this.#bombaSeleccionada = ContainerImagenBomba.mySignal;
     }
   }
   /**
@@ -435,9 +435,8 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${
-        isAtras ? currentX - 100 : currentX + 100
-      }px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100
+        }px;opacity:1;`;
       this.SetSeleccionado(item);
     });
   }
