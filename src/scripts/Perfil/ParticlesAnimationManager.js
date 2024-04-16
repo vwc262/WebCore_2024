@@ -4,7 +4,7 @@ import { Core } from "../Core.js";
 import { EnumValorBomba, EnumTipoSignal } from "../Utilities/Enums.js";
 
 class ParticlesAnimator {
-    
+
     constructor(cssPipe, canvas, idEstacion) {
         let width_height = this.GetWidthHeightFromCSSText(cssPipe);
         this.elementWidth = width_height[0];
@@ -111,10 +111,11 @@ class ParticlesAnimator {
                 bombaEncendidas = 1;
         });
 
-        this.Canvas.style.display = `${bombaEncendidas > 0 ? "block" : "none"};`;
-        const canvas = document.getElementById(this.Canvas.id);
-        //canvas.style.backgroundColor = green;
-        
+        if (bombaEncendidas > 0)
+            this.Canvas.style.display = "block";
+        else
+            this.Canvas.style.display = "none";
+
         return bombaEncendidas;
     }
 
