@@ -366,37 +366,32 @@ class ArranqueParo {
    * @param {Event} e
    */
   MoverCarrusel = (e) => {
-    //Distincion para saber si va atras o adelante
+    // Distincion para saber si va atras o adelante
     if (this.#carruselContainer.children.length > 3) {
       const isAtras = e.currentTarget.id == "carruselPrev_AP";
       this.transicionCarrusel(isAtras);
+
+      [...this.#carruselContainer.children].forEach((item) => {
+        if (item.style.left == "100px") {
+          item.classList.add("midItem");
+        } else {
+          item.classList.remove("midItem");
+        }
+      });
+
       if (!isAtras) {
-        [...this.#carruselContainer.children].forEach((item) => {
-          if (item.style.left == "100px") {
-            item.classList.add("midItem");
-          } else {
-            item.classList.remove("midItem");
-          }
-        });
         this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(
           this.#carruselContainer.firstChild.style.left.replace("px", "") - 100
         )}px;opacity:0;`;
         this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
-      }
-      if (isAtras) {
-        [...this.#carruselContainer.children].forEach((item) => {
-          if (item.style.left == "100px") {
-            item.classList.add("midItem");
-          } else {
-            item.classList.remove("midItem");
-          }
-        });
+      } else {
         this.#carruselContainer.firstChild.style.cssText =
           "transition:none;left:300px;opacity:0;";
         this.#carruselContainer.append(this.#carruselContainer.firstChild);
       }
     }
   };
+
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
