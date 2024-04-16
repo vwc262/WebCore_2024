@@ -16,7 +16,7 @@ class VwcApp {
     new Perfil().create(); // Inicio del perfil
     new Mapa().create();
 
-    inicializarReporteador();
+    //inicializarReporteador();
   }
 }
 
