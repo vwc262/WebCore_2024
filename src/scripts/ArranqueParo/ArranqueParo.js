@@ -53,8 +53,6 @@ class ArranqueParo {
 
     this.#PerillaGeneralText = document.querySelector(".arranqueParo__modoTxt");
 
-
-
     // Agregar eventos de clic una sola vez en el constructor
     this.agregarEventosClic();
   }
@@ -102,13 +100,14 @@ class ArranqueParo {
   }
 
   animPanel() {
-    const $panelArranqueParo = document.querySelector(".arranqueParo__panelControl");
+    const $panelArranqueParo = document.querySelector(
+      ".arranqueParo__panelControl"
+    );
     $panelArranqueParo.style.opacity = "1";
 
     const $panelFondo = document.querySelector(".arranqueParo__Container");
 
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
-
 
     $imgArranqueParo.setAttribute(
       "src",
@@ -118,7 +117,10 @@ class ArranqueParo {
     // Agregar un event listener para detectar cuando la transición ha terminado
     $panelArranqueParo.addEventListener("transitionend", () => {
       // Verificar si la opacidad es igual a 1 después de la transición
-      if (parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 && !this.#isCarouselCreated) {
+      if (
+        parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 &&
+        !this.#isCarouselCreated
+      ) {
         $panelFondo.style.transform = "translateY(16vh)";
         $panelFondo.style.opacity = "1";
         this.CrearCarrusel();
@@ -134,8 +136,9 @@ class ArranqueParo {
       const bombasPrimerLinea = estacion.ObtenerBombasPorLinea(1);
       this.CrearItemsCarrusel(bombasPrimerLinea);
     } else
-      this.CrearItemsCarrusel(estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba));
-
+      this.CrearItemsCarrusel(
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba)
+      );
 
     this.SetPerillaGeneral(0, estacion);
     this.SetIsCarouselCreated(true);
@@ -166,7 +169,8 @@ class ArranqueParo {
   SetPerillaGeneral(idLinea = 0, estacion) {
     const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); //
     this.#PerillaGeneralText.mySignal = perillaGeneral;
-    this.#PerillaGeneralText.innerText = perillaGeneral.GetValorPerillaGeneral();
+    this.#PerillaGeneralText.innerText =
+      perillaGeneral.GetValorPerillaGeneral();
     this.setUpdateElements(this.#PerillaGeneralText);
   }
   /**
@@ -178,13 +182,37 @@ class ArranqueParo {
     this.ResetCarrusel();
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     bombas.forEach((bomba, index) => {
-      const signalPerillaBomba = estacion.ObtenerValorPerillaBomba(bomba.Ordinal);
-      const carruselItem = CreateElement({ nodeElement: "div", attributes: { class: "controlParo__carruselItem" } });
-      const modo = CreateElement({ nodeElement: "div", attributes: { id: `AP_Perilla_${signalPerillaBomba.IdSignal}`, class: "arranqueParo__modo" }, innerText: signalPerillaBomba.GetValorPerillaBomba() });
+      const signalPerillaBomba = estacion.ObtenerValorPerillaBomba(
+        bomba.Ordinal
+      );
+      const carruselItem = CreateElement({
+        nodeElement: "div",
+        attributes: { class: "controlParo__carruselItem" },
+      });
+      const modo = CreateElement({
+        nodeElement: "div",
+        attributes: {
+          id: `AP_Perilla_${signalPerillaBomba.IdSignal}`,
+          class: "arranqueParo__modo",
+        },
+        innerText: signalPerillaBomba.GetValorPerillaBomba(),
+      });
       modo.mySignal = signalPerillaBomba;
-      const bombaImg = CreateElement({ nodeElement: "div", attributes: { id: `AP_Bomba_${bomba.IdSignal}`, class: "arranqueParo__bombaImg", style: bomba.GetImagenBombaPanelControl() }, events: new Map().set('click', [this.clickBomba]) });
+      const bombaImg = CreateElement({
+        nodeElement: "div",
+        attributes: {
+          id: `AP_Bomba_${bomba.IdSignal}`,
+          class: "arranqueParo__bombaImg",
+          style: bomba.GetImagenBombaPanelControl(),
+        },
+        events: new Map().set("click", [this.clickBomba]),
+      });
       bombaImg.mySignal = bomba;
-      const bombaNum = CreateElement({ nodeElement: "div", attributes: { class: "arranqueParo__bombaNum" }, innerText: bomba.Nombre, });
+      const bombaNum = CreateElement({
+        nodeElement: "div",
+        attributes: { class: "arranqueParo__bombaNum" },
+        innerText: bomba.Nombre,
+      });
       this.#itemsCarrusel.push(carruselItem);
       this.setUpdateElements(modo, bombaImg);
       carruselItem.append(modo, bombaImg, bombaNum);
@@ -198,15 +226,15 @@ class ArranqueParo {
      * @type {Signal}
      */
     this.#bombaSeleccionada = e.currentTarget.mySignal;
-  }
+  };
   /**
    * Guarda los elementos a actualizar
    * @param  {...HTMLElement} elementos
    */
   setUpdateElements(...elementos) {
-    elementos.forEach(arg => {
+    elementos.forEach((arg) => {
       this.#UpdateableElements[arg.id] = arg;
-    })
+    });
   }
   deleteUpdateElements() {
     this.#UpdateableElements = {};
@@ -214,16 +242,16 @@ class ArranqueParo {
   refillCarrusel() {
     [...this.#carruselContainer.children].reverse().forEach((item, index) => {
       const clone = item.cloneNode(true);
-      clone.addEventListener('click', this.clickBomba);
+      clone.addEventListener("click", this.clickBomba);
       clone.mySignal = item.children[1].mySignal; // La posicion uno es el elemento bomba
       clone.style.left = `${(index + 1) * -100}px`;
       this.#carruselContainer.prepend(clone);
 
       const perillaClone = clone.children[0];
-      perillaClone.id = perillaClone.id + 'C';
+      perillaClone.id = perillaClone.id + "C";
       perillaClone.mySignal = item.children[0].mySignal;
       const bombaClone = clone.children[1];
-      bombaClone.id = bombaClone.id + 'C';
+      bombaClone.id = bombaClone.id + "C";
       bombaClone.mySignal = item.children[1].mySignal;
       this.setUpdateElements(perillaClone, bombaClone);
     });
@@ -253,48 +281,86 @@ class ArranqueParo {
     // Agregar evento de clic al botón de "next"
     $btnNext.addEventListener("click", this.MoverCarrusel);
     // Evento click boton accion
-    const btnAccion = document.querySelector('.arranqueParo__encenderApagarBomba');
+    const btnAccion = document.querySelector(
+      ".arranqueParo__encenderApagarBomba"
+    );
     btnAccion.addEventListener("click", this.CambiarAccion);
     btnAccion.prender = true;
 
     // Evento enviar comando
-    const btnEnviarComando = document.querySelector('.arranqueParo__confirmarimg');
-    btnEnviarComando.addEventListener('click', this.EnviarComando);
-
+    const btnEnviarComando = document.querySelector(
+      ".arranqueParo__confirmarimg"
+    );
+    btnEnviarComando.addEventListener("click", this.EnviarComando);
   }
   CambiarAccion = (e) => {
     const btnAccion = e.currentTarget;
-    btnAccion.children[1].style.background = `url(${Core.Instance.ResourcesPath}Control/${btnAccion.prender ? 'BTN_STOP' : 'BTN_ON'}.png)`;
+    btnAccion.children[1].style.background = `url(${
+      Core.Instance.ResourcesPath
+    }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
     btnAccion.prender = !btnAccion.prender;
     this.#prenderBomba = btnAccion.prender;
-  }
+  };
   ArmarCodigo() {
-    return this.idEstacion << 8 | this.#bombaSeleccionada.Ordinal << 4 | (this.#prenderBomba ? 1 : 0);
+    return (
+      (this.idEstacion << 8) |
+      (this.#bombaSeleccionada.Ordinal << 4) |
+      (this.#prenderBomba ? 1 : 0)
+    );
   }
   EnviarComando = async (e) => {
-    const alertTitle = 'Control Bombas';
+    const alertTitle = "Control Bombas";
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     const enLinea = estacion.EstaEnLinea();
     if (enLinea && this.#bombaSeleccionada) {
-      const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
-      const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal - 1);
+      const signalBomba = estacion.ObtenerSignal(
+        this.#bombaSeleccionada.IdSignal
+      );
+      const perillaBomba = estacion.ObtenerValorPerillaBomba(
+        signalBomba.Ordinal - 1
+      );
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral.Remoto) {
+      if (
+        perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral.Remoto
+      ) {
         if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBomba.Remoto) {
-          if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {
-            ShowModal(`Mandando a ${this.#prenderBomba ? 'prender' : 'apagar'} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
-            const result = await Fetcher.Instance.RequestData(`${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`, RequestType.POST, { Usuario: Login.Instace.userName, idEstacion: this.idEstacion, Codigo: this.ArmarCodigo(), RegModbus: 2020 }, true);
-          }
-          else ShowModal('La bomba debe estar encendida o apagada', alertTitle);
-        }
-        else ShowModal(`La perilla de la bomba debe estar en ${EnumPerillaBombaString[1]}`, alertTitle);
+          if (
+            signalBomba.Valor == EnumValorBomba.Arrancada ||
+            signalBomba.Valor == EnumValorBomba.Apagada
+          ) {
+            ShowModal(
+              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${
+                this.#bombaSeleccionada.Nombre
+              }`,
+              alertTitle
+            );
+            const result = await Fetcher.Instance.RequestData(
+              `${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
+              RequestType.POST,
+              {
+                Usuario: Login.Instace.userName,
+                idEstacion: this.idEstacion,
+                Codigo: this.ArmarCodigo(),
+                RegModbus: 2020,
+              },
+              true
+            );
+          } else
+            ShowModal("La bomba debe estar encendida o apagada", alertTitle);
+        } else
+          ShowModal(
+            `La perilla de la bomba debe estar en ${EnumPerillaBombaString[1]}`,
+            alertTitle
+          );
+      } else {
+        ShowModal("La perilla general debe estar en Remoto", alertTitle);
       }
-      else {
-        ShowModal('La perilla general debe estar en Remoto', alertTitle);
-      }
-    }
-    else ShowModal(enLinea ? 'Debe seleccionar una bomba' : 'El sitio debe estar en linea', alertTitle);
-  }
+    } else
+      ShowModal(
+        enLinea ? "Debe seleccionar una bomba" : "El sitio debe estar en linea",
+        alertTitle
+      );
+  };
   /**
    * Evento para mover el carrusel
    * @param {Event} e
@@ -305,12 +371,26 @@ class ArranqueParo {
       const isAtras = e.currentTarget.id == "carruselPrev_AP";
       this.transicionCarrusel(isAtras);
       if (!isAtras) {
+        [...this.#carruselContainer.children].forEach((item) => {
+          if (item.style.left == "100px") {
+            item.classList.add("midItem");
+          } else {
+            item.classList.remove("midItem");
+          }
+        });
         this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(
           this.#carruselContainer.firstChild.style.left.replace("px", "") - 100
         )}px;opacity:0;`;
         this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
       }
       if (isAtras) {
+        [...this.#carruselContainer.children].forEach((item) => {
+          if (item.style.left == "100px") {
+            item.classList.add("midItem");
+          } else {
+            item.classList.remove("midItem");
+          }
+        });
         this.#carruselContainer.firstChild.style.cssText =
           "transition:none;left:300px;opacity:0;";
         this.#carruselContainer.append(this.#carruselContainer.firstChild);
@@ -320,21 +400,28 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${
+        isAtras ? currentX - 100 : currentX + 100
+      }px;opacity:1;`;
     });
   }
   Update = () => {
     if (this.isVisible) {
       const estacionUpdate = Core.Instance.GetDatosEstacion(this.idEstacion);
       if (estacionUpdate.EstaEnLinea()) {
-        Object.values(this.#UpdateableElements).forEach(elemento => {
+        Object.values(this.#UpdateableElements).forEach((elemento) => {
           /**
            * @type {Signal}
            */
-          const signalUpdate = estacionUpdate.ObtenerSignal(elemento.mySignal.IdSignal);
+          const signalUpdate = estacionUpdate.ObtenerSignal(
+            elemento.mySignal.IdSignal
+          );
           switch (signalUpdate.TipoSignal) {
             case EnumTipoSignal.Bomba:
-              elemento.setAttribute('style', signalUpdate.GetImagenBombaPanelControl());
+              elemento.setAttribute(
+                "style",
+                signalUpdate.GetImagenBombaPanelControl()
+              );
               break;
             case EnumTipoSignal.PerillaBomba:
               elemento.innerText = signalUpdate.GetValorPerillaBomba();
@@ -354,8 +441,12 @@ class ArranqueParo {
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
     console.log("Cerrando panel MON AMI");
-    const $panelArranqueParoContainer = document.querySelector(".arranqueParo__panelControl");
-    const $panelArranqueParo = document.querySelector(".arranqueParo__Container");
+    const $panelArranqueParoContainer = document.querySelector(
+      ".arranqueParo__panelControl"
+    );
+    const $panelArranqueParo = document.querySelector(
+      ".arranqueParo__Container"
+    );
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
     $panelArranqueParoContainer.style.opacity = "0";
     $panelArranqueParo.style.opacity = "0";
