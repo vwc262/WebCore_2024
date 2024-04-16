@@ -188,7 +188,9 @@ class ArranqueParo {
       const carruselItem = CreateElement({
         nodeElement: "div",
         attributes: { class: "controlParo__carruselItem" },
+        events: new Map().set("click", [this.clickBomba])
       });
+      carruselItem.mySignal = bomba;
       const modo = CreateElement({
         nodeElement: "div",
         attributes: {
@@ -204,10 +206,10 @@ class ArranqueParo {
           id: `AP_Bomba_${bomba.IdSignal}`,
           class: "arranqueParo__bombaImg",
           style: bomba.GetImagenBombaPanelControl(),
-        },
-        events: new Map().set("click", [this.clickBomba]),
+        }
       });
       bombaImg.mySignal = bomba;
+
       const bombaNum = CreateElement({
         nodeElement: "div",
         attributes: { class: "arranqueParo__bombaNum" },
@@ -226,6 +228,16 @@ class ArranqueParo {
      * @type {Signal}
      */
     this.#bombaSeleccionada = e.currentTarget.mySignal;
+    const container = e.currentTarget;
+    const position = parseFloat(container.style.left.replace("px", ""));
+    switch (position) {
+      case 0:
+        this.$btnNext.click();
+        break;
+      case 200:
+        this.$btnPrev.click();
+        break;
+    }
   };
   /**
    * Guarda los elementos a actualizar
@@ -266,8 +278,8 @@ class ArranqueParo {
   }
 
   agregarEventosClic() {
-    const $btnPrev = document.querySelector(".arranqueParo__Prev");
-    const $btnNext = document.querySelector(".arranqueParo__Next");
+    this.$btnPrev = document.querySelector(".arranqueParo__Prev");
+    this.$btnNext = document.querySelector(".arranqueParo__Next");
     const $closePanelArranqueParo = document.querySelector(
       ".arranqueParo__closePanel"
     );
@@ -276,10 +288,10 @@ class ArranqueParo {
     $closePanelArranqueParo.addEventListener("click", this.CloseArranqueParo);
 
     // Agregar evento de clic al botón de "prev"
-    $btnPrev.addEventListener("click", this.MoverCarrusel);
+    this.$btnPrev.addEventListener("click", this.MoverCarrusel);
 
     // Agregar evento de clic al botón de "next"
-    $btnNext.addEventListener("click", this.MoverCarrusel);
+    this.$btnNext.addEventListener("click", this.MoverCarrusel);
     // Evento click boton accion
     const btnAccion = document.querySelector(
       ".arranqueParo__encenderApagarBomba"
@@ -295,9 +307,8 @@ class ArranqueParo {
   }
   CambiarAccion = (e) => {
     const btnAccion = e.currentTarget;
-    btnAccion.children[1].style.background = `url(${
-      Core.Instance.ResourcesPath
-    }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
+    btnAccion.children[1].style.background = `url(${Core.Instance.ResourcesPath
+      }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
     btnAccion.prender = !btnAccion.prender;
     this.#prenderBomba = btnAccion.prender;
   };
@@ -329,8 +340,7 @@ class ArranqueParo {
             signalBomba.Valor == EnumValorBomba.Apagada
           ) {
             ShowModal(
-              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${
-                this.#bombaSeleccionada.Nombre
+              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre
               }`,
               alertTitle
             );
@@ -361,6 +371,21 @@ class ArranqueParo {
         alertTitle
       );
   };
+  SetSeleccionado(ContainerImagenBomba) {
+    const hologram = CreateElement({
+      nodeElement: "div",
+      attributes: { class: "hologramaBase" },
+    });
+    if (ContainerImagenBomba.style.left == "100px") {
+      ContainerImagenBomba.classList.add("midItem");
+      ContainerImagenBomba.append(hologram);
+    } else {
+      ContainerImagenBomba.classList.remove("midItem");
+      if (ContainerImagenBomba.children.length > 3) {
+        ContainerImagenBomba.children[ContainerImagenBomba.children.length - 1].remove();
+      }
+    }
+  }
   /**
    * Evento para mover el carrusel
    * @param {Event} e
@@ -372,19 +397,7 @@ class ArranqueParo {
       this.transicionCarrusel(isAtras);
 
       [...this.#carruselContainer.children].forEach((item) => {
-        const hologram = CreateElement({
-          nodeElement: "div",
-          attributes: { class: "hologramaBase" },
-        });
-        if (item.style.left == "100px") {
-          item.classList.add("midItem");
-          item.append(hologram);
-        } else {
-          item.classList.remove("midItem");
-          if(item.children.length > 3) {
-            item.children[item.children.length -1 ].remove();
-          }
-        }
+        this.SetSeleccionado(item);
       });
 
       if (!isAtras) {
@@ -403,9 +416,8 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${
-        isAtras ? currentX - 100 : currentX + 100
-      }px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100
+        }px;opacity:1;`;
     });
   }
   Update = () => {
