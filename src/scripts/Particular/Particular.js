@@ -116,6 +116,7 @@ class Particular {
     section__login.style.zIndex = "5";
     section__particular.style.zIndex = "10";
     this.$datosHeader.style.opacity = "1";
+    this.$datosHeader.style.display = "block";
     this.$btnBack.style.opacity = "1";
     this.$btnBack.style.pointerEvents = "auto";
     this.$panelBombas.style.pointerEvents = "auto";
@@ -179,7 +180,6 @@ class Particular {
         attributes: {
           class: "etiqueta__Valor",
           id: `particular__valorSlider_${signal.IdSignal}`,
-          style: `color: ${signal.GetValorColor()}`,
         },
         innerHTML: signal.GetValorString(true, true),
       });
