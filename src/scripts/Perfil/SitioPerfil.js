@@ -2,7 +2,7 @@ import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import configuracionPadierna from "../../config/PadiernaConfig.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumModule, EnumTipoSignal, EnumUnidadesSignal } from "../Utilities/Enums.js";
+import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
 
@@ -56,7 +56,7 @@ class SitioPerfil {
             valorSignal = CreateElement({
                 nodeElement: 'p',
                 attributes: {
-                    id: `valor_${signal.Nombre}`,
+                    id: `valor_${signal.IdEstacion}`,
                     style: `color: ${signal.GetValorColor()}`
                 },
                 innerText: `${estacion.Enlace == 0 ? "---" : valor}`
@@ -66,7 +66,6 @@ class SitioPerfil {
                 nodeElement: 'p',
                 attributes: {
                     id: `name_${signal.Nombre}`,
-                    style: `color: ${signal.GetValorColor()}`
                 },
                 innerText: `${signal.GetNomenclaturaSignal()}:  `
             });
@@ -156,11 +155,12 @@ class SitioPerfil {
         const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
 
         name.style.background = estacion.Enlace != 0 ? "green" : "red";
-
+        
         if (signal) {
             const valor = `${signal.GetValorString(true, true)}`;
-            const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.Nombre}`];
+            const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdEstacion}`];
             valorSignal.innerText = `${estacion.Enlace != 0 ? valor : "---"}`;
+            valorSignal.style.color = signal.GetValorColor();
         }
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
