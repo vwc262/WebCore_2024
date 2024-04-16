@@ -55,12 +55,11 @@ class SitioPerfil {
             const valor = `${signal.GetValorString(true, true)}`;
 
             valorSignal = CreateElement({
-                nodeElement: 'p',
+                nodeElement: 'div',
                 attributes: {
                     id: `valor_${signal.IdEstacion}`,
-                    style: `color: ${signal.GetValorColor()}`
                 },
-                innerText: `${estacion.Enlace == 0 ? "---" : valor}`
+                innerHTML: valor
             });
 
             nameSignal = CreateElement({
@@ -160,8 +159,7 @@ class SitioPerfil {
         if (signal) {
             const valor = `${signal.GetValorString(true, true)}`;
             const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdEstacion}`];
-            valorSignal.innerText = `${estacion.Enlace != 0 ? valor : "---"}`;
-            valorSignal.style.color = signal.GetValorColor();
+            valorSignal.innerHTML = valor;
         }
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
