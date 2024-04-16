@@ -52,7 +52,7 @@ class Cell {
 
         if (signal != null) {
             this.signalValor.innerText = signal.GetValorString(false, true);
-            this.signalValor.style.color = `${this.signal.GetValorColor()}`;
+            this.signalValor.style.color = `${signal.GetValorColor()}`;
         }
 
     }
