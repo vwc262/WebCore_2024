@@ -14,6 +14,13 @@
   <link rel="stylesheet" href="../styles/Modal/modal.css">
   <link rel="stylesheet" href="../styles/ArranquParo/ArranqueParo.css">
   <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
+  <!-- reportes -->
+  <link rel="stylesheet" href="../styles/Reporteador/reportes.css">
+  <link rel="stylesheet" href="../styles/Reporteador/selectSite.css">
+  <link rel="stylesheet" href="../styles/Reporteador/carrusel.css">
+  <link rel="stylesheet" href="../styles/Reporteador/signalAGraficar.css">
+  <link rel="stylesheet" href="../styles/Reporteador/hologram.css">
+  <link rel="stylesheet" href="../styles/Reporteador/calendario.css">
 </head>
 
 <body>
@@ -154,7 +161,119 @@
     <section id="section__mapa" class="section__mapa">
       <div id="map" style="width: 1920px; height: 1080px;"></div>
     </section>
-    <section id="section__graficador" class="section__graficador"></section>
+    <section id="section__graficador" class="section__graficador">
+
+      <div class="MainContainer">
+
+        <div class="btn__graficar">
+          <img class="btnPDF">
+          <img class="btnCSV"> <a id="aCSV"></a>
+        </div>
+
+        <main>
+          <!-- ========== Video ========== -->
+          <article>
+            <video class="videoInicio" muted>
+          </article>
+
+          <!-- ========== Btn Seleccionar Sitio ========== -->
+          <div class="select-menu">
+            <div class="select-btn">
+              <span class="sBtn-text">Elige un Sitio</span>
+              <img class="sBtn-Select" alt="">
+            </div>
+
+            <ul class="options">
+
+            </ul>
+          </div>
+
+          <!-- ========== Overlays ========== -->
+          <!-- ========== Calendiario ========== -->
+          <div class="calendarioContainer">
+            <div class="dateContainer">
+              <button id="btnInitDate" class="btnFechaSeleccionada">
+                <label for=""><span>Fecha inicial: </span id="initDate"></label>
+              </button>
+              <button id="btnEndDate">
+                <label for=""><span id="endDate">Fecha final: </span></label>
+              </button>
+            </div>
+            <div class="yearBtnsContainer">
+              <button>
+              </button>
+              <span id="spanYear" class="spanYear">2024</span>
+              <button> > </button>
+            </div>
+            <div class="monthsContainer">
+              <button class="mes" id="Ene" mesId="0">Ene</button>
+              <button class="mes" id="Feb" mesId="1">Feb</button>
+              <button class="mes" id="Mar" mesId="2">Mar</button>
+              <button class="mes" id="Abr" mesId="3">Abr</button>
+              <button class="mes" id="May" mesId="4">May</button>
+              <button class="mes" id="Jun" mesId="5">Jun</button>
+              <button class="mes" id="Jul" mesId="6">Jul</button>
+              <button class="mes" id="Ago" mesId="7">Ago</button>
+              <button class="mes" id="Sep" mesId="8">Sep</button>
+              <button class="mes" id="Oct" mesId="9">Oct</button>
+              <button class="mes" id="Nov" mesId="10">Nov</button>
+              <button class="mes" id="Dic" mesId="11">Dic</button>
+            </div>
+            <div class="daysContainer"></div>
+          </div>
+
+          <!-- ========== Sitio ========== -->
+          <div class="SitioContainer">
+            <div class="sitioTitleContainer">
+              <h1 class="sitioTitle"></h1>
+            </div>
+            <div class="sitioImgContainer">
+              <img class="sitioImg" src="" alt="">
+            </div>
+          </div>
+
+          <!-- ========== Signals Graficar ========== -->
+          <div class="listaSignalsContainer">
+            <div class="signalHeader">
+              <div class="headerTitleSignal">
+                <span>Variables a Graficar</span>
+              </div>
+              <div class="headerIcon">
+                <img class="buttonGraficar" alt="">
+                <span>Graficar</span>
+              </div>
+            </div>
+            <div class="signalContent">
+            </div>
+            <div class="signalFooter">
+              <div class="signalFooterImg"></div>
+            </div>
+          </div>
+
+          <!-- ========== Carrusel ========== -->
+          <div class="carrusel-Main__Container">
+            <div class="variables__Container"></div>
+
+            <div class="btnCarrusel">
+              <button class="btnMoverCarrusel" id="next"></button>
+              <button class="btnMoverCarrusel" id="prev"></button>
+            </div>
+          </div>
+        </main>
+
+        <div class="modalValidation">
+          <h3 class="headerModal">Limite de variables</h3>
+          <p class="textModal">Máximo 6 variables</p>
+          <button class="btnCloseModal" id="closeModal">Cerrar</button>
+        </div>
+
+        <div id="chartdiv"></div>
+        <div class="sinHistoricos">
+          <h3> NO SE OBTUVIERON HISTÓRICOS </h3>
+        </div>
+        <div class="imgClon"></div>
+      </div>
+    </section>
     <section id="section__login" class="section__login">
       <video id="loginVid1" class="loginVid" autoplay="autoplay" muted="" style="display: block;" loop="loop"
         src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/login_loop.mp4?v=-1"></video>
@@ -239,9 +358,16 @@
 
 <script type="module" src="../scripts/uiManager.js"></script>
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.47&key=AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98">
-  
 </script> -->
 
-<script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-  ({key: "AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98", v: "beta"});</script>
+<script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+    ({ key: "AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98", v: "beta" });</script>
+
+<!-- reportes -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script type="module" src="../scripts/Reporteador/External/pdfmake.js"></script>
+<script type="module" src="../scripts/Reporteador/CSVController.js"></script>
+
 </html>

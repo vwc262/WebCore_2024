@@ -5,6 +5,7 @@ import { Core } from "../../Core.js"
 import { Fetcher } from "../../Fetcher/Fetcher.js";
 import { Credentials } from "./Credentials.js";
 import { EventsManager } from "../../Managers/EventsManager.js";
+
 class Login {
     action = "Login"
     #isCreated = false;
