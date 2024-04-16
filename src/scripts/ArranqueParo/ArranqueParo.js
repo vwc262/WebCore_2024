@@ -372,10 +372,18 @@ class ArranqueParo {
       this.transicionCarrusel(isAtras);
 
       [...this.#carruselContainer.children].forEach((item) => {
+        const hologram = CreateElement({
+          nodeElement: "div",
+          attributes: { class: "hologramaBase" },
+        });
         if (item.style.left == "100px") {
           item.classList.add("midItem");
+          item.append(hologram);
         } else {
           item.classList.remove("midItem");
+          if(item.children.length > 3) {
+            item.children[item.children.length -1 ].remove();
+          }
         }
       });
 
