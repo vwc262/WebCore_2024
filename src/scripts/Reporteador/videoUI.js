@@ -4,6 +4,7 @@ import UIReportes from "./UIReportes.js";
 import { CreateVariables } from "./carrusel.js"; // Importa CreateVariables del módulo carrusel.js
 import { setElementProperty } from "./utilities.js"; // Importa setElementProperty del módulo utilities.js
 
+
 // Definición del objeto UIControlador
 const UIControlador = {
   // Objeto que contiene referencias a elementos del DOM relacionados con la interfaz de usuario
