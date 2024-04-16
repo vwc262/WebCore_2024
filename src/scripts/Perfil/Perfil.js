@@ -4,6 +4,7 @@ import { Clamp, CreateElement, ObtenerWidthRender } from "../Utilities/CustomFun
 import { Configuracion } from "../../config/PadiernaConfig.js";
 import ParticlesAnimator from "./ParticlesAnimationManager.js";
 import Estacion from "../Entities/Estacion.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 
 class Perfil {
 
@@ -108,6 +109,8 @@ class Perfil {
         estacionesDiv.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner, this.horizontalScroll);
 
+        EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
+
     }
     scroll = (e) => {
         this.Panner.style.transform = `translateX(${-e.currentTarget.value}px)`;
@@ -134,11 +137,16 @@ class Perfil {
      * @param {Estacion} estacion 
      * @param {string} css formato estilo css
      */
-    setHoverPerfil(isMouseOut, estacion, css) {
+    setHoverPerfil(isMouseOut, estacion, css, stopPropagation) {
         if (isMouseOut)
             this.hoverDiv.style = "dispaly: none;";
         else {
             this.hoverDiv.style = `display: block; background: url(${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/${estacion.Abreviacion}.png?v=10); ${css}`;
+        }
+
+        if (!stopPropagation) {
+
+            EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: !isMouseOut, IdEstacion: estacion.IdEstacion, stopPropagation: true });
         }
     }
 }
