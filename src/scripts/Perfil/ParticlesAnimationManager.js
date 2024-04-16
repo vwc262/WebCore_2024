@@ -1,11 +1,10 @@
 import { EnumModule } from "../Utilities/Enums.js";
 import { Module } from "../uiManager.js";
 import { Core } from "../Core.js";
-import Estacion from "../Entities/Estacion.js";
 import { EnumValorBomba, EnumTipoSignal } from "../Utilities/Enums.js";
 
 class ParticlesAnimator {
-
+    
     constructor(cssPipe, canvas, idEstacion) {
         let width_height = this.GetWidthHeightFromCSSText(cssPipe);
         this.elementWidth = width_height[0];
@@ -17,7 +16,6 @@ class ParticlesAnimator {
             fps: 20,
             siteAbreviation: ''
         };
-
         this.Canvas = canvas;
         this.indexContainer = 0;
         this.particlesElements = [];
@@ -25,7 +23,7 @@ class ParticlesAnimator {
     }
 
     init() {
-        this.bombasEncendias = this.ObtenerCantidadDeBombasEncendidas();
+        this.bombasEncendias = 0;
         this.fillParticles();
         this.SetAnimationFrame();
         this.Render();
@@ -78,8 +76,6 @@ class ParticlesAnimator {
             for (var particleIndex = 0; particleIndex < this.particlesElements.length; particleIndex++) {
                 var actualParticle = this.particlesElements[particleIndex];
 
-                
-
                 actualParticle.velocity_x = this.characteristicsWaterCanvas.particleInitialVelocity_x;
                 context.beginPath();
                 var gradient = context.createRadialGradient(actualParticle.x, actualParticle.y, 0, actualParticle.x, actualParticle.y, actualParticle.radius);
@@ -87,9 +83,7 @@ class ParticlesAnimator {
                 context.fillStyle = gradient;
                 context.arc(actualParticle.x, actualParticle.y, actualParticle.radius, Math.PI * 2, false);
                 context.fill();
-                // actualParticle.x += -1 * Math.floor(Math.random() * 2) * (bombasEncendias?.bombasOn ?? 1);
                 actualParticle.x += -1 * Math.floor(Math.random() * 2) * (this.bombasEncendias);
-                // actualParticle.y += -0.33 * (particleIndex % 2 == 0 ? actualParticle.velocity_y + 1 : actualParticle.velocity_y - 1) * (this.bombasEncendias?.bombasOn ?? 1);
                 actualParticle.y += -0.33 * (particleIndex % 2 == 0 ? actualParticle.velocity_y + 1 : actualParticle.velocity_y - 1) * (this.bombasEncendias);
 
                 let desborde = actualParticle.radius;
@@ -98,24 +92,30 @@ class ParticlesAnimator {
                 if (actualParticle.x > this.characteristicsWaterCanvas._Width - desborde) actualParticle.x = desborde;
                 if (actualParticle.y > this.characteristicsWaterCanvas._Height - desborde) actualParticle.y = desborde;
             }
-
         }
     };
 
-    Render = function () {
-        this.bombasEncendias = this.ObtenerCantidadDeBombasEncendidas();
-        window.requestAnimationFrame(() => { this.Render() });
-        if(this.bombasEncendias > 0){
+    Render = () => {
+        this.bombasEncendias = this.idEstacion ? this.ObtenerCantidadDeBombasEncendidas() : 1;
+        window.requestAnimationFrame(this.Render);
+        if (this.bombasEncendias > 0) {
             this.drawWaterCanvasByGravity();
         }
     };
 
-    ObtenerCantidadDeBombasEncendidas(){
-        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        // estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
-        //     console.log(signalBomba)
-        // })
-        return 1; //Falta obtener la cantidad de bombas encendidas de la base de datos
+    ObtenerCantidadDeBombasEncendidas() {
+        let bombaEncendidas = 0;
+        const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
+            if (signalBomba.Valor == EnumValorBomba.Arrancada)
+                bombaEncendidas = 1;
+        });
+
+        this.Canvas.style.display = `${bombaEncendidas > 0 ? "block" : "none"};`;
+        const canvas = document.getElementById(this.Canvas.id);
+        //canvas.style.backgroundColor = green;
+        
+        return bombaEncendidas;
     }
 
     SetAnimationFrame = function () {

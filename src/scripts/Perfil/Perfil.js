@@ -83,7 +83,7 @@ class Perfil {
                     }
                 });
 
-                tuberiasDiv.appendChild(tuberiaEstacion);
+                tuberiasDiv.appendChild(tuberiaEstacion);                
                 this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion, estacion.IdEstacion);
             }
         })
