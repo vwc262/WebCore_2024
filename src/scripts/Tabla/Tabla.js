@@ -1,3 +1,4 @@
+import { Configuracion } from "../../config/PadiernaConfig.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
@@ -121,6 +122,8 @@ class Tabla {
 
         let summaryFondo = document.querySelector(`.contenedor-resumen`);
         summaryFondo.style.background = `url(${Core.Instance.ResourcesPath}General/Summary.png?v=0)`;
+
+        this.Configuracion = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
 
     }
 
@@ -288,12 +291,20 @@ class Tabla {
         this.update();
     }
 
-    hoverRow(mouseover, IdEstacion) {
+    hoverRow(mouseover, IdEstacion, stopPropagation) {
         let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
         let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
 
         row.rowContainer.style.background = `${mouseover ? 'rgba(87,168,152,0.35)' : 'rgba(87,168,152,0.0)'} `;
         rowVariable.rowContainer.style.background = `${mouseover ? 'rgba(87,168,152,0.35)' : 'rgba(87,168,152,0.0)'} `;
+
+        if (!stopPropagation) {
+
+            const estacion = Core.Instance.data.find(estacion => estacion.IdEstacion == IdEstacion);
+            const estilosEstacionEtiqueta = this.Configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == IdEstacion);
+
+            EventsManager.Instance.EmitirEvento('OnMouseHoverTabla', { isMouseOut: !mouseover, estacion: estacion, css: estilosEstacionEtiqueta.Imagen, stopPropagation: true });
+        }
     }
 
     update() {
@@ -308,6 +319,7 @@ class Tabla {
 
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.update()));
+        EventsManager.Instance.Suscribirevento('OnMouseHoverPerfil', new EventoCustomizado((data) => this.hoverRow(data.mouseover, data.IdEstacion, data.stopPropagation)));
     }
 }
 

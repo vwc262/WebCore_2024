@@ -1,3 +1,6 @@
+import { Core } from "../Core.js";
+import { EnumProyecto } from "../Utilities/Enums.js";
+
 const FetcherGraficador = {
   SinData: {},
   methodType: {
@@ -5,7 +8,7 @@ const FetcherGraficador = {
     POST: "POST",
   },
   version: 0,
-  uriAssets: "http://w1.doomdns.com:11002/RecursosWeb/Graficador2024/",
+  uriAssets: "http://w1.doomdns.com:11002/RecursosWeb/WebCore24/",
   uri: "http://w1.doomdns.com:11000/api24/VWC/Unreal/",
   /**
    * Funcion para hacer request del tipo get y post , Nota : Si es tipo Post jsonizar debe estar en true
@@ -17,7 +20,7 @@ const FetcherGraficador = {
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
-    project = EnumProyecto.Padierna
+    project = getNombreProyectoIdProyecto(Core.Instance.IdProyecto),
   }) {
     const options = {
       method: method,
@@ -42,7 +45,7 @@ const FetcherGraficador = {
     return jsonData;
   },
   getImage: function (projectName, folderRoot, assetName, ext) {
-    return `${this.uriAssets}/${projectName}/${folderRoot}/${assetName}.${ext}?v=${this.version}`;
+    return `${Core.Instance.ResourcesPath}${folderRoot}/${assetName}.${ext}?v=${this.version}`;
   }
 };
 
@@ -51,12 +54,20 @@ const EnumPeticiones = {
   HISTORICOS: "GetReportes",
 };
 
-const EnumProyecto = {
-  Padierna: 'Padierna',
-};
+// const EnumProyecto = {
+//   Padierna: 'Padierna',
+// };
 
 const EnumNameProjecto = {
   TanquesPadierna: 'TanquesPadierna',
 }
 
+const getNombreProyectoIdProyecto = (idProyecto) => {
+  switch (idProyecto) {
+    case EnumProyecto.Padierna: return "Padierna";
+    case EnumProyecto.SantaCatarina: return "SantaCatarina";
+
+  }
+
+}
 export { FetcherGraficador, EnumPeticiones, EnumProyecto, EnumNameProjecto };
