@@ -146,4 +146,6 @@ aside {
 
 .unidades {
   color: white !important;
+  font-size: 0.75em;
+  letter-spacing: 1px;
 }

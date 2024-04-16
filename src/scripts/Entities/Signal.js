@@ -36,8 +36,9 @@ class Signal {
                 }
                 else if (parseInt(this.Valor) == EnumValorValvulaDiscreta.Cerrado) {
                     return 'Cerrado';
-                } else {
-                    return 'No disponible';
+                }
+                else {
+                    return 'N/D';
                 }
             }
             else {
@@ -65,19 +66,33 @@ class Signal {
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.PerillaGeneral) {
-            return this.GetValorPerillaGeneral();
+            if (this.DentroRango) {
+                return this.GetValorPerillaGeneral();
+            } else {
+                return '---';
+            }
         }
         else if (this.TipoSignal == EnumTipoSignal.FallaAC) {
-            if (this.Valor) {
-                return 'Falla AC';
+            if (this.DentroRango) {
+
+                if (this.Valor) {
+                    return 'Falla AC';
+                } else {
+                    return '';
+                }
             } else {
                 return '---';
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.PuertaAbierta) {
-            if (this.Valor) {
-                return 'Abierta';
-            } else {
+            if (this.DentroRango) {
+                if (this.Valor) {
+                    return 'Abierta';
+                } else {
+                    return '';
+                }
+            }
+            else {
                 return '---';
             }
         }
@@ -90,9 +105,9 @@ class Signal {
                     _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
                 }
 
-                return `<label>${value}</label> <label class="unidades">${_unidades}</label>`;
+                return `<label style="color: ${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
             } else {
-                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'No disponible'}</label>`;
+                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
             }
         }
         else {
@@ -106,7 +121,7 @@ class Signal {
 
                 return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
             } else {
-                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'No disponible'}</label>`;
+                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
             }
         }
 
@@ -130,7 +145,7 @@ class Signal {
                 color = `${parseInt(this.Valor) == EnumValorValvulaDiscreta.Abierto ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.Bomba:
-                color = `${parseInt(this.Valor) == EnumValorBomba.Arrancada ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
+                color = `${parseInt(this.Valor) == EnumValorBomba.Arrancada || parseInt(this.Valor) == EnumValorBomba.Apagada ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.PerillaGeneral:
                 color = `${parseInt(this.Valor) == EnumPerillaGeneral.Remoto ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
@@ -147,7 +162,7 @@ class Signal {
             case EnumTipoSignal.Totalizado:
             case EnumTipoSignal.ValvulaAnalogica:
             case EnumTipoSignal.Voltaje:
-                color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'orange' : this.DentroLimite == EnumDentroLimite.Alto ? '#810b0b' : 'rgb(255, 255, 255)'}`;
+                color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'rgb(203, 185, 136)' : this.DentroLimite == EnumDentroLimite.Alto ? '#fa8c8c' : 'rgb(255, 255, 255)'}`;
                 break;
             default:
                 break;
@@ -181,10 +196,10 @@ class Signal {
      * @param {Signal} signalPerilla 
      */
     GetValorPerillaBomba() {
-        return EnumPerillaBombaString[this.Valor] ?? 'Off';
+        return EnumPerillaBombaString[this.Valor] ?? '---';
     }
     GetValorPerillaGeneral() {
-        return EnumPerillaGeneralString[this.Valor] ?? 'Manual';
+        return EnumPerillaGeneralString[this.Valor] ?? '---';
     }
 
 
