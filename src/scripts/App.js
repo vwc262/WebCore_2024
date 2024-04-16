@@ -4,6 +4,7 @@ import { EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
 import { Particular } from "./Particular/Particular.js";
 import { Mapa } from "./Mapa/Mapa.js";
+import { inicializarReporteador } from "./Reporteador/Reportes.js";
 
 class VwcApp {
   async Start() {
@@ -14,6 +15,8 @@ class VwcApp {
     new Tabla().create(); // Inicio de tabla curva
     new Perfil().create(); // Inicio del perfil
     new Mapa().create();
+
+    inicializarReporteador();
   }
 }
 
