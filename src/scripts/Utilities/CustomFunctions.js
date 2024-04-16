@@ -8,10 +8,16 @@ HTMLElement.prototype.SetMultipleAttributes = function (attributes) {
  * @param {{ nodeElement : keyof HTMLElementTagNameMap, attributes : {}, innerText: string ,events : Map<string,[Function]> }} params 
  * @returns 
  */
-export const CreateElement = function ({ nodeElement, attributes = {}, innerText = "", events = new Map() }) {
+export const CreateElement = function ({ nodeElement, attributes = {}, innerText = "", events = new Map(), innerHTML = undefined }) {
     const createdElement = document.createElement(nodeElement);
     createdElement.SetMultipleAttributes(attributes);
-    createdElement.innerText = innerText ?? '';
+
+    if (innerHTML != undefined) {
+        createdElement.innerHTML = innerHTML;
+    } else {
+        createdElement.innerText = innerText ?? '';
+    }
+
     for (const [key, functions] of events.entries()) {
         functions.forEach(fnEv => {
             createdElement.addEventListener(key, fnEv);
