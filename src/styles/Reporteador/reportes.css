@@ -24,7 +24,7 @@ article video {
   align-items: center;
   position: absolute;
   z-index: 10;
-  top: 0;
+  /* top: 0; */
   left: 895px;
 }
 

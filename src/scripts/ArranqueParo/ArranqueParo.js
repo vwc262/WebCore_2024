@@ -6,6 +6,7 @@ import {
   EnumPerillaBomba,
   EnumPerillaBombaString,
   EnumPerillaGeneral,
+  EnumPerillaGeneralString,
   EnumTipoSignal,
   EnumValorBomba,
   RequestType,
@@ -188,7 +189,7 @@ class ArranqueParo {
       const carruselItem = CreateElement({
         nodeElement: "div",
         attributes: { class: "controlParo__carruselItem" },
-        events: new Map().set("click", [this.clickBomba])
+        events: new Map().set("click", [this.clickBomba]),
       });
       carruselItem.mySignal = bomba;
       const modo = CreateElement({
@@ -206,7 +207,7 @@ class ArranqueParo {
           id: `AP_Bomba_${bomba.IdSignal}`,
           class: "arranqueParo__bombaImg",
           style: bomba.GetImagenBombaPanelControl(),
-        }
+        },
       });
       bombaImg.mySignal = bomba;
 
@@ -243,8 +244,7 @@ class ArranqueParo {
           this.SetSeleccionado(e.currentTarget);
           break;
       }
-    }
-    else {
+    } else {
       this.BorrarSeleccion();
       this.SetSeleccionado(e.currentTarget);
     }
@@ -317,8 +317,9 @@ class ArranqueParo {
   }
   CambiarAccion = (e) => {
     const btnAccion = e.currentTarget;
-    btnAccion.children[1].style.background = `url(${Core.Instance.ResourcesPath
-      }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
+    btnAccion.children[1].style.background = `url(${
+      Core.Instance.ResourcesPath
+    }Control/${btnAccion.prender ? "BTN_STOP" : "BTN_ON"}.png)`;
     btnAccion.prender = !btnAccion.prender;
     this.#prenderBomba = btnAccion.prender;
   };
@@ -342,15 +343,19 @@ class ArranqueParo {
       );
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
       if (
-        perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral.Remoto
+        perillaGeneral.GetValorPerillaGeneral() ==
+        EnumPerillaGeneralString[perillaGeneral.Valor]
       ) {
-        if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBomba.Remoto) {
+        if (
+          perillaBomba.GetValorPerillaBomba() == EnumPerillaBombaString[perillaBomba.Valor]
+        ) {
           if (
             signalBomba.Valor == EnumValorBomba.Arrancada ||
             signalBomba.Valor == EnumValorBomba.Apagada
           ) {
             ShowModal(
-              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre
+              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${
+                this.#bombaSeleccionada.Nombre
               }`,
               alertTitle
             );
@@ -382,7 +387,7 @@ class ArranqueParo {
       );
   };
   BorrarSeleccion() {
-    [...this.#carruselContainer.children].forEach(element => {
+    [...this.#carruselContainer.children].forEach((element) => {
       element.classList.remove("midItem");
       if (element.children.length > 3) {
         element.children[element.children.length - 1].remove();
@@ -399,8 +404,7 @@ class ArranqueParo {
         ContainerImagenBomba.classList.add("midItem");
         ContainerImagenBomba.append(hologram);
       }
-    }
-    else {
+    } else {
       ContainerImagenBomba.classList.add("midItem");
       ContainerImagenBomba.append(hologram);
     }
@@ -431,7 +435,9 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${
+        isAtras ? currentX - 100 : currentX + 100
+      }px;opacity:1;`;
       this.SetSeleccionado(item);
     });
   }
