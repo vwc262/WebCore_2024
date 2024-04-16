@@ -154,7 +154,7 @@
   position: absolute;
   overflow: hidden;
   width: 302px;
-  height: 160px;
+  height: 180px;
   left: 0px;
 }
 
@@ -240,4 +240,16 @@
 
 .midItem {
   transform: scale(1.25);
+}
+
+.hologramaBase {
+  background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/General/dial.gif?v=-1);
+  width: 100px;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  top: -43px;
+  left: -14px;
+  z-index: -1;
 }
