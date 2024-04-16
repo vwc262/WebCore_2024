@@ -33,7 +33,7 @@ class Cell {
         this.signalValor = CreateElement({
             nodeElement: 'div',
             attributes: { class: 'signal-valor', style: `color: ${this.signal.GetValorColor()};` },
-            innerText: this.signal.GetValorString(false, true),
+            innerHTML: this.signal.GetValorString(false, true),
         });
 
         this.signalColumnContainer.append(this.signalNombre, this.signalValor);
@@ -51,7 +51,7 @@ class Cell {
         let signal = estacion.Signals.find((signal) => signal.IdSignal == this.signal.IdSignal);
 
         if (signal != null) {
-            this.signalValor.innerText = signal.GetValorString(false, true);
+            this.signalValor.innerHTML = signal.GetValorString(false, true);
             this.signalValor.style.color = `${signal.GetValorColor()}`;
         }
 

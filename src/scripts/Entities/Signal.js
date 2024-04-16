@@ -69,23 +69,45 @@ class Signal {
         }
         else if (this.TipoSignal == EnumTipoSignal.FallaAC) {
             if (this.Valor) {
-                return '---';
-            } else {
                 return 'Falla AC';
+            } else {
+                return '---';
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.PuertaAbierta) {
             if (this.Valor) {
-                return '---';
-            } else {
                 return 'Abierta';
+            } else {
+                return '---';
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
-            return `${this.DentroRango ? parseFloat(this.Valor).toFixed(0) : rayitas ? '---' : 'No disponible'}${unidades && this.DentroRango ? EnumUnidadesSignal[this.TipoSignal] : ''}`;
+            if (this.DentroRango) {
+                let value = `${parseFloat(this.Valor).toFixed(0)}`;
+                let _unidades = '';
+
+                if (unidades) {
+                    _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+                }
+
+                return `<label>${value}</label> <label class="unidades">${_unidades}</label>`;
+            } else {
+                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'No disponible'}</label>`;
+            }
         }
         else {
-            return `${this.DentroRango ? parseFloat(this.Valor).toFixed(2) : rayitas ? '---' : 'No disponible'}${unidades && this.DentroRango ? EnumUnidadesSignal[this.TipoSignal] : ''}`;
+            if (this.DentroRango) {
+                let value = `${parseFloat(this.Valor).toFixed(2)}`;
+                let _unidades = '';
+
+                if (unidades) {
+                    _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+                }
+
+                return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+            } else {
+                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'No disponible'}</label>`;
+            }
         }
 
     }
