@@ -113,7 +113,7 @@
      flex-direction: row;
      flex-wrap: nowrap;
      align-content: center;
-     justify-content: space-between;
+     justify-content: flex-start;
      align-items: center;
  }
 
@@ -158,7 +158,7 @@
      align-content: center;
      justify-content: center;
      align-items: center;
-     width: 85px;
+     width: 86px;
      height: 60px;
  }
 

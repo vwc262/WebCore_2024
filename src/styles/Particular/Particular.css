@@ -74,10 +74,10 @@
 }
 
 .particular__imgSitio {
-  width: 1455px;
-  height: 972px;
+  width: 1920px;
+  height: 1080px;
   position: absolute;
-  top: 108px;
+  top: 0px;
 }
 
 .particular__imgSitio img {
@@ -115,6 +115,9 @@
 .header__datos-particular {
   opacity: 0;
   transition: all 0.4s ease;
+  font-size: 12pt;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
   display: none;
 }
 
@@ -152,24 +155,28 @@
 }
 
 .particular__aguaNivel img {
-  width: 1455px;
-  height: 972px;
-  top: 108px;
+  width: 1920px;
+  height: 1080px;
+  top: 0px;
   position: absolute;
 }
 
 .nivelAgua__Particular {
-  width: 1455px;
-  height: 972px;
-  top: 108px;
+  width: 1920px;
+  height: 1080px;
+  top: 0px;
   position: absolute;
   pointer-events: none;
 }
 
 .bomba__Particular {
-  width: 1455px;
-  height: 972px;
-  top: 108px;
+  width: 1920px;
+  height: 1080px;
+  top: 0px;
   position: absolute;
   pointer-events: none;
+}
+
+#date__particular{
+  color: #d09f24;
 }
