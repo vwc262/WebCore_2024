@@ -22,6 +22,7 @@ class Mapa {
       center: initPosition,
       mapId: "DEMO_MAP_ID",
       mapTypeControl: true,
+      mapTypeId: "terrain",
       mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
         position: google.maps.ControlPosition.LEFT_TOP,
@@ -35,7 +36,7 @@ class Mapa {
       streetViewControlOptions: {
         position: google.maps.ControlPosition.LEFT_BOTTOM,
       },
-      fullscreenControl: true,
+      fullscreenControl: false,
     });
 
     Core.Instance.data.forEach((dataMarker) => {
