@@ -54,8 +54,7 @@ export const ObtenerWidthRender = function (idProyecto) {
  * @param {String} titulo 
  */
 export const ObtenerFormatoTituloProyecto = function (titulo) {
-    titulo = titulo.replace('Tanques', 'Tanques ');
-    titulo = titulo.replace('Pozos', 'Pozos ');
+    titulo = titulo.replace(/([A-Z])/g, ' $1').trim();
 
     return titulo;
 }
