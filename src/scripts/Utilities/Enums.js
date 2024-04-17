@@ -116,10 +116,10 @@ var EnumTipoSignalNomenclatura = {
  */
 const EnumUnidadesSignal = {
   1: "m",
-  2: "kg/cm2",
-  3: "l/s",
-  4: "m3",
-  10: "v",
+  2: "<sup>kg</sup>/<sub>cm<sup>2</sup></sub>",
+  3: "<sup>l</sup>/<sub>s</sub>",
+  4: "m<sup>3</sup>",
+  10: "V",
 };
 
 /**
