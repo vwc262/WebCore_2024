@@ -8,6 +8,7 @@ import {
   EnumUnidadesSignal,
   EnumModule,
   EnumTipoSignal,
+  EnumEnlace,
 } from "../Utilities/Enums.js";
 import { GoBack, GoHome, Module, SetActualModule } from "../uiManager.js";
 
@@ -235,8 +236,16 @@ class Particular {
 
   setEnlaceParticular(valorEnlace) {
     // Cambiar el texto de acuerdo al estado de la estación
-    const offline = valorEnlace == "0";
-    this.$headerStatus.innerText = offline ? "Fuera de línea" : "En línea";
+    const offline = valorEnlace == EnumEnlace.FueraLinea;
+    const online =
+      valorEnlace == EnumEnlace.Celular
+        ? "C"
+        : valorEnlace == EnumEnlace.Radio
+        ? "R"
+        : "H";
+    this.$headerStatus.innerHTML = offline
+      ? "Fuera de línea"
+      : `En línea (${online})`;
     this.$headerStatus.style.color = offline ? "red" : "green";
   }
 
