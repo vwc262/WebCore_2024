@@ -1,9 +1,7 @@
 import { VwcApp } from "./App.js";
 import Estacion from "./Entities/Estacion.js";
-import Signal from "./Entities/Signal.js";
 import { Fetcher } from "./Fetcher/Fetcher.js";
 import { EventsManager } from "./Managers/EventsManager.js";
-import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import {
   EnumAppEvents,
   EnumControllerMapeo,
@@ -51,12 +49,6 @@ class Core {
   async Init(idProyecto) {
     console.info("Iniciando App");
     this.IdProyecto = idProyecto;
-
-    let title = document.getElementById('title__page');
-    title.innerText = `VWC - ${ObtenerFormatoTituloProyecto(EnumNombreProyecto[this.IdProyecto])}`;
-
-    const $titleHeader = document.querySelector("#title");
-    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[this.IdProyecto])}`;
 
     await this.Update();
     this.IdInterval = setInterval(() => this.Update(), 10 * 1000);
@@ -140,6 +132,8 @@ class Core {
   GetDatosEstacion(idEstacion) {
     return this.data.find((estacion) => estacion.IdEstacion == idEstacion);
   }
+
 }
 export { Core };
+
 window.onload = () => new VwcApp().Start();
