@@ -49,6 +49,17 @@ export const ObtenerWidthRender = function (idProyecto) {
     return width;
 }
 
+/**
+ * 
+ * @param {String} titulo 
+ */
+export const ObtenerFormatoTituloProyecto = function (titulo) {
+    titulo = titulo.replace('Tanques', 'Tanques ');
+    titulo = titulo.replace('Pozos', 'Pozos ');
+
+    return titulo;
+}
+
 
 /**
  * Restringe un valor a un rango dado
