@@ -104,6 +104,7 @@ class Particular {
     this.$headerDate = document.querySelector("#date__particular");
     this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
+    this.$particularCapaTextoImg = document.querySelector("#particularTextoImg");
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
     this.$panelBombas = document.querySelector(".arranqueParo__panelControl");
@@ -131,9 +132,11 @@ class Particular {
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
     const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=10`;
+    const urlImgParticularCapaTexto = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/capatexto.png?v=10`;
 
     // Asignar la URL de la imagen al atributo src del elemento de imagen
     this.$particularImg.src = urlImgParticular;
+    this.$particularCapaTextoImg.src = urlImgParticularCapaTexto;
 
     // Crear señales
     this.createSignals();
