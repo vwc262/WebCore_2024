@@ -130,7 +130,7 @@ class Particular {
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
-    const urlImgParticular = `http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=10`;
+    const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=10`;
 
     // Asignar la URL de la imagen al atributo src del elemento de imagen
     this.$particularImg.src = urlImgParticular;
@@ -242,11 +242,11 @@ class Particular {
         ? "C"
         : valorEnlace == EnumEnlace.Radio
         ? "R"
-        : "H";
+        : "CR";
     this.$headerStatus.innerHTML = offline
       ? "Fuera de línea"
       : `En línea (${online})`;
-    this.$headerStatus.style.color = offline ? "red" : "green";
+    this.$headerStatus.style.color = offline ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)";
   }
 
   setNivelAgua() {

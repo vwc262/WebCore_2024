@@ -76,7 +76,7 @@ class Tabla {
             else visible = true;
 
             this.tBodyVariablesContainer.setAttribute('visible', `${visible ? '0' : '1'}`);
-            this.tBodyVariablesContainer.style = `right:${visible ? '-455' : '475'}px;`;
+            this.tBodyVariablesContainer.style = `right:${visible ? `-455` : `${this.quantityColumns * 45}`}px;`;
             this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/${visible ? 'btn_abrir' : 'btn_abrirrotate'}.png?v=10")`;
         });
 
@@ -101,6 +101,8 @@ class Tabla {
                 delete this.columns[key];
             } else this.columns[key] = [];
         });
+
+        this.quantityColumns = Object.keys(this.columns).length;
 
         this.online = document.querySelector('.texto-resumen[tag="online"]');
         this.offline = document.querySelector('.texto-resumen[tag="offline"]');
