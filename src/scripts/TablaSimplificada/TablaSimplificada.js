@@ -180,7 +180,7 @@ class TablaSimplificada {
       // Añadir la nueva celda al <tr>
       this.NEW__ROW.appendChild(this.enlaceCell);
 
-      if (ROW.Enlace === EnumEnlace.FueraLinea) {
+      if (ROW.enlace === EnumEnlace.FueraLinea) {
         totalOffline++;
       } else {
         totalOnline++;
