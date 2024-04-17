@@ -44,11 +44,19 @@ class Perfil {
             events: new Map().set('mousemove', [this.#drag])
         });
 
-        let estacionesDiv = CreateElement({
+        let backgroundPerfil = CreateElement({
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.png?v=10); width: ${widthRenderPerfil}px; height: 1080px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
+            }
+        });
+
+        let capaSitios = CreateElement({
+            nodeElement: "div",
+            attributes: {
+                class: "capasitios",
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
             }
         });
 
@@ -73,8 +81,8 @@ class Perfil {
             }.bind(this));
 
             const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
-            estacionesDiv.appendChild(estacionPerfil.createSitio());
-            estacionesDiv.appendChild(estacionPerfil.createEtiqueta());
+            backgroundPerfil.appendChild(estacionPerfil.createSitio());
+            backgroundPerfil.appendChild(estacionPerfil.createEtiqueta());
 
             if (estilosEstacionTuberias != undefined) {
                 tuberiaEstacion = CreateElement({
@@ -105,8 +113,8 @@ class Perfil {
             }
         })
 
-        this.Panner.append(estacionesDiv)
-        estacionesDiv.append(tuberiasDiv, this.hoverDiv);
+        this.Panner.append(backgroundPerfil, capaSitios)
+        backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner, this.horizontalScroll);
 
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));

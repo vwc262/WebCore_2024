@@ -604,7 +604,9 @@ var Configuracion = {
             case EnumProyecto.SantaCatarina:
                 config = configuracionSantaCatarina;
                 break;
-
+            case EnumProyecto.GustavoAMadero:
+                config = configuracionSantaCatarina;
+                break;
         }
 
         return config;

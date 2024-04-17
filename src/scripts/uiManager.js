@@ -1,8 +1,10 @@
 import { ArranqueParo } from "./ArranqueParo/ArranqueParo.js";
+import { Core } from "./Core.js";
 import Login from "./Entities/Login/Login.js";
 import { Particular } from "./Particular/Particular.js";
 import { inicializarReporteador } from "./Reporteador/Reportes.js";
-import { EnumModule } from "./Utilities/Enums.js";
+import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
+import { EnumModule, EnumNombreProyecto } from "./Utilities/Enums.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
 const $btnHome = document.querySelector(".headerBtn__Home");
@@ -34,7 +36,7 @@ $btnHeader.addEventListener("click", (ev) => {
         section__particular.style.zIndex = isParticularActive ? "10" : "5";
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = "0";
-        $titleHeader.innerText = "Tanques Padierna";
+        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $datosHeader.style.opacity = "0";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "block";
@@ -49,7 +51,7 @@ $btnHeader.addEventListener("click", (ev) => {
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
-        $titleHeader.innerText = "Tanques Padierna";
+        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "block";
         break;
@@ -64,7 +66,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "1";
         $btnBack.style.pointerEvents = "auto";
         $datosHeader.style.opacity = "0";
-        $titleHeader.innerText = "Tanques Padierna";
+        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "none";
         inicializarReporteador();
@@ -78,7 +80,7 @@ $btnHeader.addEventListener("click", (ev) => {
         table.style.display = "none";
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
-        $titleHeader.innerText = "Tanques Padierna";
+        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $panelBombas.style.pointerEvents = "none";
         Login.Instace.create();
         break;
