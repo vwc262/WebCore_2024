@@ -1,7 +1,7 @@
 import SitioPerfil from "./SitioPerfil.js";
 import { Core } from "../Core.js";
 import { Clamp, CreateElement, ObtenerWidthRender } from "../Utilities/CustomFunctions.js";
-import { Configuracion } from "../../config/PadiernaConfig.js";
+import { Configuracion } from "../../config/config.js";
 import ParticlesAnimator from "./ParticlesAnimationManager.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
@@ -49,6 +49,14 @@ class Perfil {
             attributes: {
                 class: "estacionesContainer",
                 style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
+            }
+        });
+
+        let capaTubos = CreateElement({
+            nodeElement: "div",
+            attributes: {
+                class: "capasitios",
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
             }
         });
 
@@ -113,7 +121,7 @@ class Perfil {
             }
         })
 
-        this.Panner.append(backgroundPerfil, capaSitios)
+        this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner, this.horizontalScroll);
 

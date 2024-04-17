@@ -1,4 +1,4 @@
-import { Configuracion } from "../../config/PadiernaConfig.js";
+import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";

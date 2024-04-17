@@ -8,7 +8,7 @@ import { inicializarReporteador } from "./Reporteador/Reportes.js";
 
 class VwcApp {
   async Start() {
-    await Core.Instance.Init(EnumProyecto.Padierna); // Espera a que tenga la informacion
+    await Core.Instance.Init(EnumProyecto.GustavoAMadero); // Espera a que tenga la informacion
     this.IniciarUI();
   }
   IniciarUI() {

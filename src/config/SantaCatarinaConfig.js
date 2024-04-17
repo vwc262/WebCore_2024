@@ -1,4 +1,4 @@
-export const PadiernaConfig = {
+export const SantaCatarinaConfig = {
     perfil: {
         estilosEstacion: [
             {
@@ -150,6 +150,34 @@ export const PadiernaConfig = {
             },
             {
                 "IdEstacion": 22,
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
+                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Estado": "display:none;"
+
+            },
+            {
+                "IdEstacion": 23,
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
+                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Estado": "display:none;"
+
+            },
+            {
+                "IdEstacion": 24,
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
+                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Estado": "display:none;"
+
+            },
+            {
+                "IdEstacion": 25,
+                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
+                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Estado": "display:none;"
+
+            },
+            {
+                "IdEstacion": 26,
                 "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
                 "Etiqueta": "position: absolute; left: 88px; top: 892px;",
                 "Estado": "display:none;"
