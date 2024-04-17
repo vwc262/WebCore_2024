@@ -38,6 +38,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $datosHeader.style.opacity = "0";
+        $datosHeader.style.display = "none";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "block";
         break;
@@ -52,6 +53,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+        $datosHeader.style.display = "none";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "block";
         break;
@@ -67,6 +69,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.pointerEvents = "auto";
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+        $datosHeader.style.display = "none";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "none";
         inicializarReporteador();
@@ -81,6 +84,7 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.style.opacity = "0";
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+        $datosHeader.style.display = "none";
         $panelBombas.style.pointerEvents = "none";
         Login.Instace.create();
         break;

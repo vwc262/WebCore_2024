@@ -6,6 +6,7 @@ import {
   EnumPerillaBomba,
   EnumPerillaBombaString,
   EnumPerillaGeneral,
+  EnumPerillaGeneralString,
   EnumTipoSignal,
   EnumValorBomba,
   RequestType,
@@ -188,7 +189,7 @@ class ArranqueParo {
       const carruselItem = CreateElement({
         nodeElement: "div",
         attributes: { class: "controlParo__carruselItem" },
-        events: new Map().set("click", [this.clickBomba])
+        events: new Map().set("click", [this.clickBomba]),
       });
       carruselItem.mySignal = bomba;
       const modo = CreateElement({
@@ -206,7 +207,7 @@ class ArranqueParo {
           id: `AP_Bomba_${bomba.IdSignal}`,
           class: "arranqueParo__bombaImg",
           style: bomba.GetImagenBombaPanelControl(),
-        }
+        },
       });
       bombaImg.mySignal = bomba;
 
@@ -243,8 +244,7 @@ class ArranqueParo {
           this.SetSeleccionado(e.currentTarget);
           break;
       }
-    }
-    else {
+    } else {
       this.BorrarSeleccion();
       this.SetSeleccionado(e.currentTarget);
     }
@@ -329,42 +329,35 @@ class ArranqueParo {
       (this.#prenderBomba ? 1 : 0)
     );
   }
+  async RequestComando() {
+    const alertTitle = "Control Bombas";
+    ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
+    const result = await Fetcher.Instance.RequestData(
+      `${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
+      RequestType.POST,
+      {
+        Usuario: Login.Instace.userName,
+        idEstacion: this.idEstacion,
+        Codigo: this.ArmarCodigo(),
+        RegModbus: 2020,
+      },
+      true
+    );
+  }
   EnviarComando = async (e) => {
     const alertTitle = "Control Bombas";
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     const enLinea = estacion.EstaEnLinea();
     if (enLinea && this.#bombaSeleccionada) {
-      const signalBomba = estacion.ObtenerSignal(
-        this.#bombaSeleccionada.IdSignal
-      );
-      const perillaBomba = estacion.ObtenerValorPerillaBomba(
-        signalBomba.Ordinal - 1
-      );
+      const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
+      const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      if (
-        perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneral.Remoto
-      ) {
-        if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBomba.Remoto) {
-          if (
-            signalBomba.Valor == EnumValorBomba.Arrancada ||
-            signalBomba.Valor == EnumValorBomba.Apagada
-          ) {
-            ShowModal(
-              `Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre
-              }`,
-              alertTitle
-            );
-            const result = await Fetcher.Instance.RequestData(
-              `${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
-              RequestType.POST,
-              {
-                Usuario: Login.Instace.userName,
-                idEstacion: this.idEstacion,
-                Codigo: this.ArmarCodigo(),
-                RegModbus: 2020,
-              },
-              true
-            );
+      if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]) {
+        if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBombaString[EnumPerillaBomba.Remoto]) {
+          if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {
+            if (this.#prenderBomba && signalBomba.Valor != EnumValorBomba.Arrancada) this.RequestComando();
+            else if (!this.#prenderBomba && signalBomba.Valor != EnumValorBomba.Apagada) this.RequestComando();
+            else ShowModal(this.#prenderBomba ? 'La bomba ya esta encendida' : 'La bomba ya esta apagada', alertTitle);
           } else
             ShowModal("La bomba debe estar encendida o apagada", alertTitle);
         } else
@@ -382,7 +375,7 @@ class ArranqueParo {
       );
   };
   BorrarSeleccion() {
-    [...this.#carruselContainer.children].forEach(element => {
+    [...this.#carruselContainer.children].forEach((element) => {
       element.classList.remove("midItem");
       if (element.children.length > 3) {
         element.children[element.children.length - 1].remove();
@@ -398,11 +391,12 @@ class ArranqueParo {
       if (ContainerImagenBomba.style.left == "100px") {
         ContainerImagenBomba.classList.add("midItem");
         ContainerImagenBomba.append(hologram);
+        this.#bombaSeleccionada = ContainerImagenBomba.mySignal;
       }
-    }
-    else {
+    } else {
       ContainerImagenBomba.classList.add("midItem");
       ContainerImagenBomba.append(hologram);
+      this.#bombaSeleccionada = ContainerImagenBomba.mySignal;
     }
   }
   /**
@@ -431,7 +425,8 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100
+        }px;opacity:1;`;
       this.SetSeleccionado(item);
     });
   }
