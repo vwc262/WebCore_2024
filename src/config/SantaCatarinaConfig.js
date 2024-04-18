@@ -194,163 +194,163 @@ export const SantaCatarinaConfig = {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas0",
-                    "css": "position: absolute; display:block; top:160px; left:1639px; transform:rotate(413.5deg); width:120px; height:17px;"
+                    "css": "position: absolute; display:block; top:160px; left:1639px; border-radius: 15px; transform:rotate(413.5deg); width:120px; height:17px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas1",
-                    "css": "position: absolute; display:block; top:356px; left:1437px; transform:rotate(54deg); width:104px; height:10px;"
+                    "css": "position: absolute; display:block; top:356px; left:1437px; border-radius: 15px; transform:rotate(54deg); width:104px; height:10px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas2",
-                    "css": "position: absolute; display:block; top:637px; left:1603px; transform:rotate(53.5deg); width:120px; height:17px;"
+                    "css": "position: absolute; display:block; top:637px; left:1603px; border-radius: 15px; transform:rotate(53.5deg); width:120px; height:17px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas3",
-                    "css": "position: absolute; display:block; top:640px; left:1347px; transform:rotate(349.5deg); width:201px; height:16px;"
+                    "css": "position: absolute; display:block; top:640px; left:1347px; border-radius: 15px; transform:rotate(349.5deg); width:201px; height:16px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas4",
-                    "css": "position: absolute; display:block; top:450px; left:1140px; transform:rotate(53.5deg); width:147px; height:9px;"
+                    "css": "position: absolute; display:block; top:450px; left:1140px; border-radius: 15px; transform:rotate(53.5deg); width:147px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas5",
-                    "css": "position: absolute; display:block; top:234px; left:1208px; transform:rotate(122.5deg); width:65px; height:6px;"
+                    "css": "position: absolute; display:block; top:234px; left:1208px; border-radius: 15px; transform:rotate(122.5deg); width:65px; height:6px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas6",
-                    "css": "position: absolute; display:block; top:214px; left:1037px; transform:rotate(50.5deg); width:102px; height:9px;"
+                    "css": "position: absolute; display:block; top:214px; left:1037px; border-radius: 15px; transform:rotate(50.5deg); width:102px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas7",
-                    "css": "position: absolute; display:block; top:449px; left:1012px; transform:rotate(53.0deg); width:163px; height:9px;"
+                    "css": "position: absolute; display:block; top:449px; left:1012px; border-radius: 15px; transform:rotate(53.0deg); width:163px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas8",
-                    "css": "position: absolute; display:block; top:696px; left:1222px; transform:rotate(55.5deg); width:74px; height:9px;"
+                    "css": "position: absolute; display:block; top:696px; left:1222px; border-radius: 15px; transform:rotate(55.5deg); width:74px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas9",
-                    "css": "position: absolute; display:block; top:869px; left:1328px; transform:rotate(55.5deg);  width:74px; height:9px;"
+                    "css": "position: absolute; display:block; top:869px; left:1328px; border-radius: 15px; transform:rotate(55.5deg);  width:74px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas10",
-                    "css": "position: absolute; display:block; top:939px; left:1221px; transform:rotate(189.9deg); width:517px; height:34px;"
+                    "css": "position: absolute; display:block; top:939px; left:1221px; border-radius: 15px; transform:rotate(189.9deg); width:517px; height:34px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas11",
-                    "css": "position: absolute; display:block; top:350px; left:796px; transform:rotate(53.6deg); width:254px; height:9px;"
+                    "css": "position: absolute; display:block; top:350px; left:796px; border-radius: 15px; transform:rotate(53.6deg); width:254px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas12",
-                    "css": "position: absolute; display:block; top:300px; left:567px; transform:rotate(237.3deg); width:79px; height:8px;"
+                    "css": "position: absolute; display:block; top:300px; left:567px; border-radius: 15px; transform:rotate(237.3deg); width:79px; height:8px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas13",
-                    "css": "position: absolute; display:block; top:459px; left:669px; transform:rotate(57.3deg); width:79px; height:9px;"
+                    "css": "position: absolute; display:block; top:459px; left:669px; border-radius: 15px; transform:rotate(57.3deg); width:79px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas14",
-                    "css": "position: absolute; display:block; top:607px; left:774px; transform:rotate(57.3deg); width:61px; height:10px;"
+                    "css": "position: absolute; display:block; top:607px; left:774px; border-radius: 15px; transform:rotate(57.3deg); width:61px; height:10px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas15",
-                    "css": "position: absolute; display:block; top:736px; left:860px; transform:rotate(57.3deg); width:54px; height:10px;"
+                    "css": "position: absolute; display:block; top:736px; left:860px; border-radius: 15px; transform:rotate(57.3deg); width:54px; height:10px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas16",
-                    "css": "position: absolute; display:block; top:870px; left:959px; transform:rotate(57.3deg); width:58px; height:17px;"
+                    "css": "position: absolute; display:block; top:870px; left:959px; border-radius: 15px; transform:rotate(57.3deg); width:58px; height:17px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas17",
-                    "css": "position: absolute; display:block; top:460px; left:259px; transform:rotate(55.3deg); width:139px; height:9px;"
+                    "css": "position: absolute; display:block; top:460px; left:259px; border-radius: 15px; transform:rotate(55.3deg); width:139px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas18",
-                    "css": "position: absolute; display:block; top:512px; left:399px; transform:rotate(128.9deg); width:50px; height:9px;"
+                    "css": "position: absolute; display:block; top:512px; left:399px; border-radius: 15px; transform:rotate(128.9deg); width:50px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas19",
-                    "css": "position: absolute; display:block; top:750px; left:450px; transform:rotate(54.9deg); width:71px; height:9px;"
+                    "css": "position: absolute; display:block; top:750px; left:450px; border-radius: 15px; transform:rotate(54.9deg); width:71px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas20",
-                    "css": "position: absolute; display:block; top:802px; left:596px; transform:rotate(128.9deg); width:33px; height:9px;"
+                    "css": "position: absolute; display:block; top:802px; left:596px; border-radius: 15px; transform:rotate(128.9deg); width:33px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas21",
-                    "css": "position: absolute; display:block; top:899px; left:691px; transform:rotate(56.9deg); width:39px; height:9px;"
+                    "css": "position: absolute; display:block; top:899px; left:691px; border-radius: 15px; transform:rotate(56.9deg); width:39px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas22",
-                    "css": "position: absolute; display:block; top:919px; left:509px; transform:rotate(56.9deg); width:45px; height:9px;"
+                    "css": "position: absolute; display:block; top:919px; left:509px; border-radius: 15px; transform:rotate(56.9deg); width:45px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas23",
-                    "css": "position: absolute; display:block; top:382px; left:85px; transform:rotate(58.5deg); width:151px; height:8px;"
+                    "css": "position: absolute; display:block; top:382px; left:85px; border-radius: 15px; transform:rotate(58.5deg); width:151px; height:8px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas24",
-                    "css": "position: absolute; display:block; top:589px; left:110px; transform:rotate(310.1deg); width:73px; height:9px;"
+                    "css": "position: absolute; display:block; top:589px; left:110px; border-radius: 15px; transform:rotate(310.1deg); width:73px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas25",
-                    "css": "position: absolute; display:block; top:753px; left:81px; transform:rotate(90.1deg); width:69px; height:9px;"
+                    "css": "position: absolute; display:block; top:753px; left:81px; border-radius: 15px; transform:rotate(90.1deg); width:69px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
                     "Tag": "Canvas26",
-                    "css": "position: absolute; display:block; top:904px; left:205px; transform:rotate(55.5deg); width:59px; height:9px;"
+                    "css": "position: absolute; display:block; top:904px; left:205px; border-radius: 15px; transform:rotate(55.5deg); width:59px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
