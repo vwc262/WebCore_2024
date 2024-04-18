@@ -141,34 +141,22 @@ class Tabla {
 
     refreshTable() {
 
-        let diff = this.offset.extraRows > 0 ? -this.indice - this.offset.actualIndex : 0;
-        let overlap = this.offset.extraRows > 0 && diff > 0;
-
-        if (this.indice < -(this.cantidadElementos - this.elementosVisibles) + (overlap ? -this.offset.extraRows : 0)) {
-            this.indice = -(this.cantidadElementos - this.elementosVisibles) + (overlap ? -this.offset.extraRows : 0);
+        if (this.indice < -(this.cantidadElementos - this.elementosVisibles)) {
+            this.indice = -(this.cantidadElementos - this.elementosVisibles);
         }
         if (this.indice > 0) {
             this.indice = 0;
         }
 
         let indexCurvedRows = 0;
-        let overflow = this.offset.extraRows > 0 && indexCurvedRows - this.indice > this.offset.actualIndex + this.offset.extraRows
-        let indexEstacion = -this.indice + (overlap ? -diff : 0);
-        let compensacion = false;
+        let indexEstacion = -this.indice;
 
         Object.keys(this.extraRows).forEach(key => {
             this.extraRows[key].rowContainer.remove();
             delete this.extraRows[key];
         });
 
-        for (let indexRow = 0; indexRow < this.rows.length; indexRow++) {
-
-            if (overflow && !compensacion) {
-                compensacion = true;
-                indexEstacion += diff - this.offset.extraRows;
-                //console.log('compensación', diff - this.offset.extraRows);
-            }
-
+        for (let indexRow = 0; indexRow < this.cantidadElementos; indexRow++) {
             indexRow = indexEstacion;
 
             if (this.curvedRows[indexCurvedRows] != undefined && this.rows[indexRow] != undefined) {
@@ -181,58 +169,13 @@ class Tabla {
                 row.IdEstacion = estacion.IdEstacion;
                 rowVariables.IdEstacion = estacion.IdEstacion;
 
-                let isTop = false;
                 this.curvedRows[indexCurvedRows].innerHTML = '';
                 this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
 
-                if (indexCurvedRows == 0 && this.offset.actualIndex > 0 && overlap && diff <= this.offset.extraRows) {
-                    isTop = indexCurvedRows == 0;
-                } else {
-                    //console.log('overlap', overlap, 'overflow', overflow, 'indexCurvedRows', indexCurvedRows, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indice', this.indice, 'actualIndex', this.offset.actualIndex, 'diff', diff);
-                    this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
-                    this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
-                }
+                this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
+                this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
 
                 this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%)';
-
-                if (indexCurvedRows - this.indice >= this.offset.actualIndex && indexCurvedRows - this.indice <= this.offset.actualIndex + this.offset.extraRows) {
-                    for (let ordinalSignal = 1 + (overlap ? diff - 1 : 0); ordinalSignal <= this.offset.extraRows; ordinalSignal++) {
-
-                        //console.log(isTop, 'indexCurvedRows', indexCurvedRows, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indice', this.indice, 'actualIndex', this.offset.actualIndex, 'diff', diff);
-
-                        if (!isTop) {
-                            indexCurvedRows++;
-                        }
-
-                        const columns = {};
-                        Object.keys(this.columns).forEach(key => { columns[key] = []; });
-
-                        this.extraRows.push(new ExtraRowVariables(estacion.IdEstacion, columns, ordinalSignal));
-                        this.extraRows[this.extraRows.length - 1].create();
-
-                        this.curvedRows[indexCurvedRows].innerHTML = '';
-
-                        this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
-                        this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(24, 64, 89, 0.5) 0%, rgba(24, 64, 89, 0.3) 60%, rgba(0, 0, 0, 0) 90%)';
-                        this.curvedRowsVariables[indexCurvedRows].appendChild(this.extraRows[this.extraRows.length - 1].rowContainer);
-
-                        if (isTop) {
-                            indexCurvedRows++;
-                        }
-
-                    }
-
-                    if (!overlap || !top) {
-                        indexCurvedRows++;
-                    }
-
-                    // indexCurvedRows++;
-                    if (!overflow) {
-                        indexEstacion++;
-                    }
-
-                    continue;
-                }
 
                 row.Update();
                 rowVariables.Update(indexRow);
