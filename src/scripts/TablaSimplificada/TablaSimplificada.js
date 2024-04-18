@@ -355,6 +355,7 @@ class TablaSimplificada {
         this.FiltrarSignals(EnumTipoSignal.Bomba);
         break;
       case EnumTipoFiltro.tiempo:
+        this.DATOS__AUX.sort((a, b) => new Date(a.tiempo) - new Date(b.tiempo));
         break;
       case EnumTipoFiltro.tipoEnlace:
         this.DATOS__AUX.sort((b, a) => a.enlace - b.enlace);
@@ -404,4 +405,3 @@ class TablaSimplificada {
 }
 
 export { TablaSimplificada };
-
