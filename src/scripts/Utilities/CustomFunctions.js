@@ -43,6 +43,7 @@ export const ObtenerWidthRender = function (idProyecto) {
         case EnumProyecto.Sectores: break;
         case EnumProyecto.Lumbreras: break;
         case EnumProyecto.SantaCatarina:
+        case EnumProyecto.Chiconautla:
             width = 1940;
             break;
     }
