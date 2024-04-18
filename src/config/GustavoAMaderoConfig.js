@@ -1,4 +1,8 @@
 export const GustavoAMaderoConfig = {
+    doPanX: false,
+    doPanY: false,
+    widthRender: 1920,
+    heightRender: 1080,
     perfil: {
         estilosEstacion: [
             { "IdEstacion": 1, "Imagen": "width:228px;height:106px;position:absolute;left:416px;top:187px;", "Etiqueta": "width:228px;position:absolute;left: 327px;top: 95px;", "Estado": "display:none;" },

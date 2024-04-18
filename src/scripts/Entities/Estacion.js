@@ -38,7 +38,10 @@ class Estacion {
     }
     ObtenerPrimerSignal() {
         if (this.Signals.length > 0) {
-            return this.Signals[0];
+            if (!this.Signals[0].Nombre.includes("Bomba"))
+                return this.Signals[0];
+            else
+                return 0
         }
     }
     /**
@@ -158,6 +161,12 @@ class Estacion {
     ObtenerPerillaGeneral(ordinalLinea = 0) {
         return this.Signals.filter(signal => signal.TipoSignal == EnumTipoSignal.PerillaGeneral)[ordinalLinea];
 
+    }
+
+    IsTimeout(){
+        let tolerancia = 15 * 60;
+        let diff = (new Date().getTime() - new Date(this.Tiempo).getTime()) / 1000;
+        return diff > tolerancia;
     }
 }
 

@@ -28,29 +28,6 @@ export const CreateElement = function ({ nodeElement, attributes = {}, innerText
 
 /**
  * 
- * @param {EnumProyecto} idProyecto 
- * @returns { number} 
- */
-export const ObtenerWidthRender = function (idProyecto) {
-    let width = 1920;
-    switch (idProyecto) {
-        case EnumProyecto.Default: break;
-        case EnumProyecto.GustavoAMadero: break;
-        case EnumProyecto.PozosSistemaLerma: break;
-        case EnumProyecto.Yaqui: break;
-        case EnumProyecto.Chalmita: break;
-        case EnumProyecto.Encharcamientos: break;
-        case EnumProyecto.Sectores: break;
-        case EnumProyecto.Lumbreras: break;
-        case EnumProyecto.SantaCatarina:
-            width = 1940;
-            break;
-    }
-    return width;
-}
-
-/**
- * 
  * @param {String} titulo 
  */
 export const ObtenerFormatoTituloProyecto = function (titulo) {

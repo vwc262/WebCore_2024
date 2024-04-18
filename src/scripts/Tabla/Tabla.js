@@ -311,10 +311,10 @@ class Tabla {
 
     update() {
 
-        let onlineCount = Core.Instance.data.filter(estacion => estacion.Enlace != EnumEnlace.FueraLinea).length;
-        let offlineCount = Core.Instance.data.length - onlineCount;
+        let offlineCount = Core.Instance.data.filter(estacion => estacion.IsTimeout() || estacion.Enlace == EnumEnlace.FueraLinea).length;
+        let onlineCount = Core.Instance.data.length - offlineCount;
 
-        this.online.innerHTML = onlineCount
+        this.online.innerHTML = onlineCount;
         this.offline.innerHTML = offlineCount;
         this.mantenimiento.innerHTML = 0;
     }

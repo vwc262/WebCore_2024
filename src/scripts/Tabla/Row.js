@@ -59,7 +59,7 @@ class Row {
 
     this.enlace.setAttribute(
       "src",
-      `${Core.Instance.ResourcesPath}General/state_${estacion.Enlace}.png?v=0`
+      `${Core.Instance.ResourcesPath}General/state_${estacion.IsTimeout() ? 't' : estacion.Enlace}.png?v=0`
     );
     this.fecha.innerText = `${estacion.ObtenerFecha()}`;
   }

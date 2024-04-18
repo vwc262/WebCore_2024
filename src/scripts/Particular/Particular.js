@@ -64,7 +64,7 @@ class Particular {
     );
 
     this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
-    this.setEnlaceParticular(estacionUpdate.Enlace);
+    this.setEnlaceParticular(estacionUpdate);
 
     estacionUpdate.Signals.forEach((signal) => {
       let signalActualizar =
@@ -104,6 +104,7 @@ class Particular {
     this.$headerDate = document.querySelector("#date__particular");
     this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
+    this.$particularCapaTextoImg = document.querySelector("#particularTextoImg");
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
     this.$panelBombas = document.querySelector(".arranqueParo__panelControl");
@@ -123,7 +124,7 @@ class Particular {
     this.$panelBombas.style.pointerEvents = "auto";
 
     // Cambiar el texto de acuerdo al estado de la estación
-    this.setEnlaceParticular(this.Estacion.Enlace);
+    this.setEnlaceParticular(this.Estacion);
 
     // Asignar la fecha formateada al elemento HTML
     this.$headerDate.innerText = this.Estacion.ObtenerFecha();
@@ -131,9 +132,11 @@ class Particular {
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
     const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=10`;
+    const urlImgParticularCapaTexto = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/capatexto.png?v=10`;
 
     // Asignar la URL de la imagen al atributo src del elemento de imagen
     this.$particularImg.src = urlImgParticular;
+    this.$particularCapaTextoImg.src = urlImgParticularCapaTexto;
 
     // Crear señales
     this.createSignals();
@@ -234,19 +237,24 @@ class Particular {
     panelControlElement.style.display = tipoSignal7Count >= 1 ? "flex" : "none";
   }
 
-  setEnlaceParticular(valorEnlace) {
+  setEnlaceParticular(estacion) {
+
+    let valorEnlace = estacion.Enlace;
+    let timeout = estacion.IsTimeout();
+
     // Cambiar el texto de acuerdo al estado de la estación
     const offline = valorEnlace == EnumEnlace.FueraLinea;
-    const online =
+    const tipoEnlace =
       valorEnlace == EnumEnlace.Celular
         ? "C"
         : valorEnlace == EnumEnlace.Radio
-        ? "R"
-        : "CR";
-    this.$headerStatus.innerHTML = offline
-      ? "Fuera de línea"
-      : `En línea (${online})`;
-    this.$headerStatus.style.color = offline ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)";
+          ? "R"
+          : "CR";
+    this.$headerStatus.innerHTML = timeout ? "Fuera de línea (Tiempo)" :
+      offline
+        ? "Fuera de línea"
+        : `En línea (${tipoEnlace})`;
+    this.$headerStatus.style.color = timeout ? 'rgb(129, 11, 11)' : offline ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)";
   }
 
   setNivelAgua() {

@@ -1,4 +1,8 @@
 export const SantaCatarinaConfig = {
+    doPanX: true,
+    doPanY: false,
+    widthRender: 1945,
+    heightRender: 1080,
     perfil: {
         estilosEstacion: [
             {
