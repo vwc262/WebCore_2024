@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pozos Sistema Chiconautla</title>
+
+  <link rel="stylesheet" href="../styles/TablaSimplificada/tablasimplificada.css">
+
+</head>
+
+<body>
+
+  <header>
+    <div class="header__title">
+      <h1>Pozos Sistema Padierna</h1>
+      <div class="pozos__enlinea">
+        <h2>Total en línea: </h2>
+        <span id="online"></span> / <span id="offline"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <table id="tabla">
+        <thead>
+          <tr id="tr_header">
+            <th id="enlace">E</th>
+            <th id="ordinal">#</th>
+            <th class="filtro__active" id="nombre">Nom</th>
+            <th id="nivel">N</th>
+            <th id="presion">P</th>
+            <!-- <th id="gasto">G</th> -->
+            <th id="bomba">Bba</th>
+            <th id="tiempo">Tiempo</th>
+            <th id="tipoEnlace">T.E.</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </article>
+  </main>
+
+</body>
+
+<script type="module" src="../scripts/TablaSimplificada/Core.js"></script>
+
+</html>
