@@ -1,4 +1,8 @@
 export const ChiconautlaConfig = {
+    doPanX: false,
+    doPanY: false,
+    widthRender: 1920,
+    heightRender: 1080,
     perfil: {
         estilosEstacion: [
             { "IdEstacion": 1, "Imagen": "position:absolute;width:33px;height:79px;left:682px;top:589px;", "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:925px;top:890px;", "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(-3deg) rotateZ(2deg)" },
