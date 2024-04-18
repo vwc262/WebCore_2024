@@ -1,6 +1,6 @@
 import SitioPerfil from "./SitioPerfil.js";
 import { Core } from "../Core.js";
-import { Clamp, CreateElement, ObtenerWidthRender } from "../Utilities/CustomFunctions.js";
+import { Clamp, CreateElement } from "../Utilities/CustomFunctions.js";
 import { Configuracion } from "../../config/config.js";
 import ParticlesAnimator from "./ParticlesAnimationManager.js";
 import Estacion from "../Entities/Estacion.js";
@@ -12,14 +12,18 @@ class Perfil {
         this.sitios = sitios;
         this.Panner = undefined;
         this.horizontalScroll;
+        this.verticalScroll;
         this.offSetTabla = 473; // se calculo a mano ya que la tabla mide 600 pero como es curva tiene un espacion a considerar
         this.moveX = 0;
-        this.maxPan = 0;
+        this.maxPanX = 0;
+        this.maxPanY = 0;
     }
 
     create() {
         const configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
-        const widthRenderPerfil = ObtenerWidthRender(Core.Instance.IdProyecto);
+        const widthRenderPerfil = configuracionProyecto.widthRender;
+        const heightRender = configuracionProyecto.heightRender;
+
         let perfil = document.querySelector(".section__home")
         this.Panner = CreateElement({
             nodeElement: "div",
@@ -43,12 +47,14 @@ class Perfil {
             attributes: { class: "perfilPanner" },
             events: new Map().set('mousemove', [this.#drag])
         });
+        this.Panner.doPanX = configuracionProyecto.doPanX;
+        this.Panner.doPanY = configuracionProyecto.doPanY;
 
         let backgroundPerfil = CreateElement({
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=0); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
             }
         });
 
@@ -56,7 +62,7 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=0); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
             }
         });
 
@@ -64,19 +70,34 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=0); width: ${widthRenderPerfil}px; height: 1080px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=0); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
             }
         });
 
-        this.maxPan = (widthRenderPerfil - 1920) + this.offSetTabla;
+        this.maxPanX = (widthRenderPerfil - 1920) + this.offSetTabla;
+        this.maxPanY = (heightRender);
 
         this.horizontalScroll = CreateElement({
             nodeElement: "input",
             attributes: {
+                id: "horizontalScroll",
                 class: "horizontalScroll",
                 value: 0,
                 min: 0,
-                max: this.maxPan,
+                max: this.maxPanX,
+                type: "range",
+                style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);`
+            },
+            events: new Map().set('input', [this.scroll])
+        });
+        this.verticalScroll = CreateElement({
+            nodeElement: "input",
+            attributes: {
+                id: "verticalScroll",
+                class: "verticalScroll",
+                value: 0,
+                min: 0,
+                max: this.maxPanY,
                 type: "range",
                 style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);`
             },
@@ -123,13 +144,22 @@ class Perfil {
 
         this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
-        perfil.append(this.Panner, this.horizontalScroll);
+        perfil.append(this.Panner);
+        if (configuracionProyecto.doPanX)
+            perfil.append(this.horizontalScroll);
+        if (configuracionProyecto.doPanY)
+            perfil.append(this.verticalScroll);
+
 
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
 
     }
     scroll = (e) => {
-        this.Panner.style.transform = `translateX(${-e.currentTarget.value}px)`;
+        if (e.currentTarget.id.includes('horizontal'))
+            this.Panner.style.transform = `translateX(${-e.currentTarget.value}px) translateY(${-this.verticalScroll.value}px)`;
+        else
+            this.Panner.style.transform = `translateX(${-this.horizontalScroll.value}px) translateY(${-e.currentTarget.value}px)`
+
     }
 
     InitTuberias(cssPipe, canvas, idEstacion) {
@@ -138,12 +168,17 @@ class Perfil {
     }
 
     #drag = (e) => {
-        if (e.which == 1) {
+        if (e.which == 1 && (e.currentTarget.doPanX || e.currentTarget.doPanY)) {
             this.moveX = parseInt(this.horizontalScroll.value);
-            this.moveX += -e.movementX;
-            this.moveX = Clamp(this.moveX, 0, this.maxPan);
-            this.Panner.style.transform = `translateX(${-this.moveX}px)`;
+            this.moveY = parseInt(this.verticalScroll.value);
+            this.moveX += -e.movementX
+            this.moveY += -e.movementY;
+            this.moveX = Clamp(this.moveX, 0, this.maxPanX);
+            this.moveY = Clamp(this.moveY, 0, this.maxPanY);
+
+            this.Panner.style.transform = `translateX(${e.currentTarget.doPanX ? -this.moveX : 0}px) translateY(${e.currentTarget.doPanY ? -this.moveY : 0}px)`;
             this.horizontalScroll.value = this.moveX;
+            this.verticalScroll.value = this.moveY;
         }
     }
 
