@@ -7,183 +7,183 @@ export const SantaCatarinaConfig = {
         estilosEstacion: [
             {
                 "IdEstacion": 1,
-                "Imagen": "position: absolute; width: 210px; height: 102px; left: 376px; top: 416px;",
-                "Etiqueta": "position: absolute; top: 330px; left: 334px;",
+                "Imagen": "position: absolute; left: 147px; top: 930px; width: 373px; height: 116px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 24px; top: 927px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 2,
-                "Imagen": "position: absolute; width: 199px; height: 122px; left: 221px; top: 691px;",
-                "Etiqueta": "position: absolute; top: 645px; left: 23px;",
+                "Imagen": "position: absolute; left: 0px; top: 792px; width: 254px; height: 101px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 174px; top: 739px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 3,
-                "Imagen": "position: absolute; width: 141px; height: 86px; left: 130px; top: 442px;",
-                "Etiqueta": "position: absolute; top: 335px; left:   44px;",
+                "Imagen": "position: absolute; left: 0px; top: 626px; width: 213px; height: 99px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 170px; top: 611px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 4,
-                "Imagen": "position: absolute; width: 300px; height: 131px; left: 328px; top: 596px;",
-                "Etiqueta": "position: absolute; top: 717px; left:  472px;",
+                "Imagen": "position: absolute; left: 0px; top: 232px; width: 190px; height: 96px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 23px; top: 166px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 5,
-                "Imagen": "position: absolute; width: 176px; height: 144px; left: 639px; top: 535px;",
-                "Etiqueta": "position: absolute; top: 438px; left:  640px;",
+                "Imagen": "position: absolute; left: 128px; top: 470px; width: 203px; height: 104px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 7px; top: 430px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 6,
-                "Imagen": "position: absolute; width: 210px; height: 102px; left: 376px; top: 416px;",
-                "Etiqueta": "position: absolute; top: 330px; left:  334px;",
+                "Imagen": "position: absolute; left: 632px; top: 910px; width: 215px; height: 101px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 862px; top: 997px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 7,
-                "Imagen": "position: absolute; width: 151px; height: 171px; left: 417px; top: 150px;",
-                "Etiqueta": "position: absolute; top:  74px; left: 550px;",
+                "Imagen": "position: absolute; left: 424px; top: 805px; width: 225px; height: 107px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 266px; top: 854px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 8,
-                "Imagen": "position: absolute; width: 0px; height: 0px; left: 0px; top: 0px; display:none;",
-                "Etiqueta": "position: absolute; top:  0px; left: 0px; display:none;",
+                "Imagen": "position: absolute; left: 351px; top: 597px; width: 217px; height: 128px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 483px; top: 541px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 9,
-                "Imagen": "position: absolute; width: 189px; height: 119px; left:  797px; top: 739px;",
-                "Etiqueta": "position: absolute; top: 735px; left: 694px;",
+                "Imagen": "position: absolute; left: 518px; top: 718px; width: 244px; height: 91px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 581px; top: 663px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 10,
-                "Imagen": "position: absolute; width: 81px; height: 116px; left:  854px; top: 532px;",
-                "Etiqueta": "position: absolute; top: 487px; left: 820px;",
+                "Imagen": "position: absolute; left: 345px; top: 407px; width: 227px; height: 104px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 383px; top: 355px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 11,
-                "Imagen": "position: absolute; width: 83px; height: 112px; left:  935px; top: 529px;",
-                "Etiqueta": "position: absolute; top: 640px; left:  923px;",
+                "Imagen": "position: absolute; left: 151px; top: 294px; width: 219px; height: 104px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 202px; top: 247px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 12,
-                "Imagen": "position: absolute; width: 213px; height: 104px; left:  693px; top: 306px;",
-                "Etiqueta": "position: absolute; top: 218px; left:  658px;",
+                "Imagen": "position: absolute; left: 1048px; top: 507px; width: 278px; height: 164px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1033px; top: 689px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 13,
-                "Imagen": "position: absolute; width: 155px; height: 139px; left: 1203px; top: 485px;",
-                "Etiqueta": "position: absolute; top: 419px; left: 1210px;",
+                "Imagen": "position: absolute; left: 1081px; top: 260px; width: 170px; height: 132px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1238px; top: 308px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 14,
-                "Imagen": "position: absolute; width: 103px; height: 128px; left: 1099px; top: 476px;",
-                "Etiqueta": "position: absolute; top: 573px; left: 1360px;",
+                "Imagen": "position: absolute; left: 1546px; top: 0px; width: 198px; height: 136px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1738px; top: 50px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 15,
-                "Imagen": "position: absolute; width: 201px; height: 111px; left: 1022px; top: 236px;",
-                "Etiqueta": "position: absolute; top: 155px; left: 972px;",
+                "Imagen": "position: absolute; left: 1205px; top: 739px; width: 189px; height: 123px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1376px; top: 710px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 16,
-                "Imagen": "position: absolute; width: 176px; height: 108px; left: 1163px; top: 127px;",
-                "Etiqueta": "position: absolute; top: 127px; left: 1338px;",
+                "Imagen": "position: absolute; left: 755px; top: 745px; width: 267px; height: 130px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1014px; top: 827px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 17,
-                "Imagen": "position: absolute; width: 287px; height: 157px; left: 1399px; top: 703px;",
-                "Etiqueta": "position: absolute; top: 822px; left: 1349px;",
+                "Imagen": "position: absolute; left: 757px; top: 623px; width: 215px; height: 109px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 865px; top: 567px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 18,
-                "Imagen": "position: absolute; width: 310px; height: 127px; left: 1492px; top: 496px;",
-                "Etiqueta": "position: absolute; top: 423px; left: 1761px;",
+                "Imagen": "position: absolute; left: 663px; top: 483px; width: 181px; height: 119px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 795px; top: 435px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 19,
-                "Imagen": "position: absolute; width: 296px; height: 133px; left: 1522px; top: 249px;",
-                "Etiqueta": "position: absolute; top: 203px; left: 1704px;",
+                "Imagen": "position: absolute; left: 1166px; top: 87px; width: 219px; height: 132px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 790px; top: 97px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 20,
-                "Imagen": "position: absolute; width: 65px; height: 67px; left: 1093px; top: 685px;",
-                "Etiqueta": "position: absolute; top: 678px; left: 1158px;",
+                "Imagen": "position: absolute; left: 960px; top: 73px; width: 208px; height: 107px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1343px; top: 80px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 21,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 1048px; top: 875px;",
-                "Etiqueta": "position: absolute; top: 938px; left: 930px;",
+                "Imagen": "position: absolute; left: 928px; top: 284px; width: 137px; height: 100px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 884px; top: 225px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 22,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
-                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Imagen": "position: absolute; left: 420px; top: 67px; width: 250px; height: 115px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 301px; top: 162px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 23,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
-                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Imagen": "position: absolute; left: 565px; top: 347px; width: 194px; height: 95px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 673px; top: 286px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 24,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
-                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Imagen": "position: absolute; left: 1350px; top: 205px; width: 209px; height: 112px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1549px; top: 308px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 25,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
-                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Imagen": "position: absolute; left: 1303px; top: 383px; width: 197px; height: 111px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1331px; top: 516px;",
                 "Estado": "display:none;"
 
             },
             {
                 "IdEstacion": 26,
-                "Imagen": "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
-                "Etiqueta": "position: absolute; left: 88px; top: 892px;",
+                "Imagen": "position: absolute; left: 1519px; top: 446px; width: 366px; height: 143px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1736px; top: 619px;",
                 "Estado": "display:none;"
 
             },
@@ -193,118 +193,178 @@ export const SantaCatarinaConfig = {
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "TC7_Gravedad",
-                    "css": "position: absolute; top: 277px; left: 1209px; transform: rotate(171deg); width: 93px; height: 14px;	border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;;"
+                    "Tag": "Canvas0",
+                    "css": "position: absolute; display:block; top:160px; left:1639px; border-radius: 15px; transform:rotate(413.5deg); width:120px; height:17px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "Sacalum_Gravedad",
-                    "css": "position: absolute;top: 672px;left: 1044px;transform: rotate(41deg);width: 66px;height: 20px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;opacity: 0.3;;"
+                    "Tag": "Canvas1",
+                    "css": "position: absolute; display:block; top:356px; left:1437px; border-radius: 15px; transform:rotate(54deg); width:104px; height:10px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "FuentesDelPedregal_Gravedad",
-                    "css": "position: absolute; top: 704px; left: 383px; transform: rotate(172deg);	width: 68px; height: 10px;	border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;"
+                    "Tag": "Canvas2",
+                    "css": "position: absolute; display:block; top:637px; left:1603px; border-radius: 15px; transform:rotate(53.5deg); width:120px; height:17px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "TC9_Gravedad",
-                    "css": "position: absolute; top: 735px; left: 1693px; transform: rotate(121deg); width: 46px; height: 10px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
+                    "Tag": "Canvas3",
+                    "css": "position: absolute; display:block; top:640px; left:1347px; border-radius: 15px; transform:rotate(349.5deg); width:201px; height:16px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "TC2-TC3_Gravedad",
-                    "css": "position: absolute; top: 672px; left: 811px; transform: rotate(-133deg); width: 70px; height: 10px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
+                    "Tag": "Canvas4",
+                    "css": "position: absolute; display:block; top:450px; left:1140px; border-radius: 15px; transform:rotate(53.5deg); width:147px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "TC2-TC1_Gravedad",
-                    "css": "position: absolute; top: 538px; left: 560px; transform: rotate(190deg); width: 60px; height: 7px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
+                    "Tag": "Canvas5",
+                    "css": "position: absolute; display:block; top:234px; left:1208px; border-radius: 15px; transform:rotate(122.5deg); width:65px; height:6px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "TC4-TC5_Gravedad",
-                    "css": "position: absolute; top: 502px; left: 949px; transform: rotate(43deg); width: 87px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
+                    "Tag": "Canvas6",
+                    "css": "position: absolute; display:block; top:214px; left:1037px; border-radius: 15px; transform:rotate(50.5deg); width:102px; height:9px;"
                 },
                 {
                     "IdLinea": 0,
                     "IdEstacion": 0,
-                    "Tag": "TC6-TC9_Gravedad",
-                    "css": "position: absolute; top: 666px; left: 1325px; transform: rotate(-139deg); width: 93px; height: 10px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
+                    "Tag": "Canvas7",
+                    "css": "position: absolute; display:block; top:449px; left:1012px; border-radius: 15px; transform:rotate(53.0deg); width:163px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas8",
+                    "css": "position: absolute; display:block; top:696px; left:1222px; border-radius: 15px; transform:rotate(55.5deg); width:74px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas9",
+                    "css": "position: absolute; display:block; top:869px; left:1328px; border-radius: 15px; transform:rotate(55.5deg);  width:74px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas10",
+                    "css": "position: absolute; display:block; top:939px; left:1221px; border-radius: 15px; transform:rotate(189.9deg); width:517px; height:34px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas11",
+                    "css": "position: absolute; display:block; top:350px; left:796px; border-radius: 15px; transform:rotate(53.6deg); width:254px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas12",
+                    "css": "position: absolute; display:block; top:300px; left:567px; border-radius: 15px; transform:rotate(237.3deg); width:79px; height:8px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas13",
+                    "css": "position: absolute; display:block; top:459px; left:669px; border-radius: 15px; transform:rotate(57.3deg); width:79px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas14",
+                    "css": "position: absolute; display:block; top:607px; left:774px; border-radius: 15px; transform:rotate(57.3deg); width:61px; height:10px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas15",
+                    "css": "position: absolute; display:block; top:736px; left:860px; border-radius: 15px; transform:rotate(57.3deg); width:54px; height:10px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas16",
+                    "css": "position: absolute; display:block; top:870px; left:959px; border-radius: 15px; transform:rotate(57.3deg); width:58px; height:17px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas17",
+                    "css": "position: absolute; display:block; top:460px; left:259px; border-radius: 15px; transform:rotate(55.3deg); width:139px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas18",
+                    "css": "position: absolute; display:block; top:512px; left:399px; border-radius: 15px; transform:rotate(128.9deg); width:50px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas19",
+                    "css": "position: absolute; display:block; top:750px; left:450px; border-radius: 15px; transform:rotate(54.9deg); width:71px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas20",
+                    "css": "position: absolute; display:block; top:802px; left:596px; border-radius: 15px; transform:rotate(128.9deg); width:33px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas21",
+                    "css": "position: absolute; display:block; top:899px; left:691px; border-radius: 15px; transform:rotate(56.9deg); width:39px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas22",
+                    "css": "position: absolute; display:block; top:919px; left:509px; border-radius: 15px; transform:rotate(56.9deg); width:45px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas23",
+                    "css": "position: absolute; display:block; top:382px; left:85px; border-radius: 15px; transform:rotate(58.5deg); width:151px; height:8px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas24",
+                    "css": "position: absolute; display:block; top:589px; left:110px; border-radius: 15px; transform:rotate(310.1deg); width:73px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas25",
+                    "css": "position: absolute; display:block; top:753px; left:81px; border-radius: 15px; transform:rotate(90.1deg); width:69px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "Canvas26",
+                    "css": "position: absolute; display:block; top:904px; left:205px; border-radius: 15px; transform:rotate(55.5deg); width:59px; height:9px;"
+                },
+                {
+                    "IdLinea": 0,
+                    "IdEstacion": 0,
+                    "Tag": "",
+                    "css": ""
                 },
             ],
             PorBombeo: [
                 {
                     "IdLinea": 3,
                     "IdEstacion": 3,
-                    "Tag": "Pozo_Padierna_CTL-15",
-                    "css": "position: absolute; top: 568px; left: 281px; transform: rotate(229deg); width: 59px; height: 7px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 4,
-                    "IdEstacion": 4,
-                    "Tag": "CTL-15_TC-2",
-                    "css": "position: absolute; top: 639px; left: 597px; transform: rotate(172deg); width: 59px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 5,
-                    "IdEstacion": 5,
-                    "Tag": "TC-2_TC-4",
-                    "css": "position: absolute; top: 608px; left: 808px; transform: rotate(172deg); width: 44px; height: 14px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 6,
-                    "IdEstacion": 7,
-                    "Tag": "Reino_Aventura_TC-2",
-                    "css": "position: absolute; top: 332px; left: 508px; transform: rotate(226deg); width: 59px; height: 7px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 8,
-                    "IdEstacion": 10,
-                    "Tag": "TC-4_TC6",
-                    "css": "position: absolute; top: 566px; left: 1012px; transform: rotate(171deg); width: 93px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 9,
-                    "IdEstacion": 11,
-                    "Tag": "TC-4_BIS_TC6_BIS",
-                    "css": "position: absolute; top: 593px; left: 1024px; transform: rotate(171deg); width: 93px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 11,
-                    "IdEstacion": 13,
-                    "Tag": "TC-6_TC-7",
-                    "css": "position: absolute; top: 461px;; left: 1035px; transform: rotate(43deg); width: 87px; height: 13px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important;"
-                },
-                {
-                    "IdLinea": 12,
-                    "IdEstacion": 14,
-                    "Tag": "TC-6_BIS_TC-13",
-                    "css": "position: absolute; top: 531px; left: 1336px; transform: rotate(171deg); width: 64px; height: 10px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 15,
-                    "IdEstacion": 17,
-                    "Tag": "TC-9_TC-13",
-                    "css": "position: absolute; top: 735px; left: 1693px; transform: rotate(121deg); width: 46px; height: 10px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 16,
-                    "IdEstacion": 18,
-                    "Tag": "TC-13_TC-14",
-                    "css": "position: absolute; top: 468px; left: 1578px; transform: rotate(40deg); width: 59px; height: 10px; border-radius: 15px; z-index: 1; border: 1px solid rgb(0, 168, 177); background-size: 100% 100% !important; display: none;"
-                },
-                {
-                    "IdLinea": 19,
-                    "IdEstacion": 21,
-                    "Tag": "San_Nicolas_TC-9",
-                    "css": "position: absolute;top: 843px;left: 1134px;transform: rotate(172.5deg);width: 89px;height: 11px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1; !important; display: none;"
+                    "Tag": "",
+                    "css": "display: none;"
                 },
             ]
         }
