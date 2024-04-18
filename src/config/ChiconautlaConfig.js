@@ -1,4 +1,8 @@
 export const ChiconautlaConfig = {
+    doPanX: false,
+    doPanY: false,
+    widthRender: 1920,
+    heightRender: 1080,
     perfil: {
         estilosEstacion: [
             { "IdEstacion": 1, "Imagen": "position:absolute;width:33px;height:79px;left:682px;top:589px;", "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:925px;top:890px;", "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(-3deg) rotateZ(2deg)" },
@@ -37,19 +41,19 @@ export const ChiconautlaConfig = {
         ],
         estilosTuberias: {
             PorGravedad: [
-                { "idLinea": 1, "idEstacion": 0, "Tag": "Gravedad_1", "css": "position:absolute;top: 269px; left: 1564px; transform: rotate(-8deg); width: 288px; height: 12px;border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 2, "idEstacion": 0, "Tag": "Gravedad_2", "css": "position:absolute;top: 343px; left: 1350px; transform: rotate(-26deg); width: 205px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 3, "idEstacion": 0, "Tag": "Gravedad_3", "css": "position:absolute;top: 431px; left: 1222px; transform: rotate(-30deg); width: 114px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 4, "idEstacion": 0, "Tag": "Gravedad_4", "css": "position:absolute;top: 562px; left: 1036px; transform: rotate(-48deg); width: 185px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 5, "idEstacion": 0, "Tag": "Gravedad_5", "css": "position:absolute;top: 572px; left: 377px; transform: rotate(-148deg); width: 222px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 6, "idEstacion": 0, "Tag": "Gravedad_6", "css": "position:absolute;top: 683px; left: 601px; transform: rotate(-150deg); width: 144px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 7, "idEstacion": 0, "Tag": "Gravedad_7", "css": "position:absolute;top: 761px; left: 755px; transform: rotate(-146deg); width: 81px; height: 12px;border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 8, "idEstacion": 0, "Tag": "Gravedad_8", "css": "position:absolute;top: 840px; left: 866px; transform: rotate(-146deg); width: 93px; height: 12px;border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 9, "idEstacion": 0, "Tag": "Gravedad_9", "css": "position:absolute;top: 929px; left: 1052px; transform: rotate(-180deg); width: 147px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 10, "idEstacion": 0, "Tag": "Gravedad_10", "css": "position:absolute;top: 950px; left: 1315px; transform: rotate(-198deg); width: 147px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 11, "idEstacion": 0, "Tag": "Gravedad_11", "css": "position:absolute;top: 806px; left: 770px; transform: rotate(-22deg); width: 48px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 12, "idEstacion": 0, "Tag": "Gravedad_12", "css": "position:absolute;top: 753px; left: 443px; transform: rotate(-21.5deg); width: 140px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
-                { "idLinea": 13, "idEstacion": 0, "Tag": "Gravedad_13", "css": "position:absolute;top: 718px; left: 884px; transform: rotate(-33deg); width: 142px; height: 12px; border-radius: 15px; background-size: 100% 100% !important; z-index: 1; border: 1px solid #00a8b1;" },
+                { "idLinea": 1, "idEstacion": 0, "Tag": "Gravedad_1", "css": "position: absolute;top: 411px;left: 1256px;transform: rotate(-8deg);width: 63px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 2, "idEstacion": 0, "Tag": "Gravedad_2", "css": "position: absolute;top: 435px;left: 1143px;transform: rotate(-17deg);width: 50px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 3, "idEstacion": 0, "Tag": "Gravedad_3", "css": "position: absolute;top: 469px;left: 1056px;transform: rotate(-27deg);width: 41px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 4, "idEstacion": 0, "Tag": "Gravedad_4", "css": "position: absolute;top: 526px;left: 948px;transform: rotate(-30deg);width: 52px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 5, "idEstacion": 0, "Tag": "Gravedad_5", "css": "position: absolute;top: 572px;left: 323px;transform: rotate(-149deg);width: 118px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 6, "idEstacion": 0, "Tag": "Gravedad_6", "css": "position: absolute;top: 672px;left: 584px;transform: rotate(-164deg);width: 47px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 7, "idEstacion": 0, "Tag": "Gravedad_7", "css": "position: absolute;top: 648px;left: 720px;transform: rotate(-25.5deg);width: 54px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 8, "idEstacion": 0, "Tag": "Gravedad_8", "css": "position: absolute;top: 583px;left: 839px;transform: rotate(-29deg);width: 57px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 9, "idEstacion": 0, "Tag": "Gravedad_9", "css": "position: absolute;top: 308px;left: 848px;transform: rotate(-201deg);width: 118px;height: 8px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 10, "idEstacion": 0, "Tag": "Gravedad_10", "css": "position: absolute;top: 361px;left: 722px;transform: rotate(-202deg);width: 100px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 11, "idEstacion": 0, "Tag": "Gravedad_11", "css": "position: absolute;top: 403px;left: 292px;transform: rotate(-20deg);width: 148px;height: 8px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 12, "idEstacion": 0, "Tag": "Gravedad_12", "css": "position: absolute;top: 749px;left: 443px;transform: rotate(-20deg);width: 100px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
+                { "idLinea": 13, "idEstacion": 0, "Tag": "Gravedad_13", "css": "position: absolute;top: 479px;left: 404px;transform: rotate(-200.5deg);width: 127px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" },
             ],
             PorBombeo: [
 
