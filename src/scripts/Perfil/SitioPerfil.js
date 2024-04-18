@@ -26,7 +26,7 @@ class SitioPerfil {
     createEtiqueta() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
-        console.log(signal)
+        //console.log(signal)
 
         let valorSignal;
         let nameSignal;

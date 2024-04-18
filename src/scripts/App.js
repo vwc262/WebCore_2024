@@ -8,7 +8,7 @@ import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunc
 class VwcApp {
 
   async Start() {
-    await Core.Instance.Init(EnumProyecto.Chiconautla); // Espera a que tenga la informacion
+    await Core.Instance.Init(EnumProyecto.SantaCatarina); // Espera a que tenga la informacion
     this.IniciarUI();
   }
 
