@@ -38,7 +38,10 @@ class Estacion {
     }
     ObtenerPrimerSignal() {
         if (this.Signals.length > 0) {
-            return this.Signals[0];
+            if (!this.Signals[0].Nombre.includes("Bomba"))
+                return this.Signals[0];
+            else
+                return 0
         }
     }
     /**
