@@ -2,7 +2,7 @@ import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import { Configuracion } from "../../config/config.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumTipoSignal } from "../Utilities/Enums.js";
+import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
 
@@ -47,7 +47,7 @@ class SitioPerfil {
             nodeElement: 'p',
             attributes: {
                 id: `idEstacion_${estacion.IdEstacion}`, class: 'estiloNombreEstacion',
-                style: `background: ${estacion.Enlace == 0 ? "red" : "green"}`
+                style: `background: ${estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)"}`
             },
             innerText: estacion.Nombre
         });
@@ -155,7 +155,7 @@ class SitioPerfil {
         const name = this.ElementosDinamicosHTML[`idEstacion_${estacion.IdEstacion}`];
         const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
 
-        name.style.background = estacion.Enlace != 0 ? "green" : "red";
+        name.style.background = estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)";
 
         if (signal) {
             const valor = `${signal.GetValorString(true, true)}`;

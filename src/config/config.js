@@ -1,4 +1,5 @@
 import { EnumProyecto } from "../scripts/Utilities/Enums.js";
+import { ChiconautlaConfig } from "./ChiconautlaConfig.js";
 import { GustavoAMaderoConfig } from "./GustavoAMaderoConfig.js";
 import { PadiernaConfig } from "./PadiernaConfig.js";
 import { SantaCatarinaConfig } from "./SantaCatarinaConfig.js";
@@ -20,6 +21,9 @@ var Configuracion = {
                 break;
             case EnumProyecto.GustavoAMadero:
                 config = GustavoAMaderoConfig;
+                break;
+            case EnumProyecto.Chiconautla:
+                config = ChiconautlaConfig;
                 break;
         }
 

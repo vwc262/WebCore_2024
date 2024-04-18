@@ -162,6 +162,12 @@ class Estacion {
         return this.Signals.filter(signal => signal.TipoSignal == EnumTipoSignal.PerillaGeneral)[ordinalLinea];
 
     }
+
+    IsTimeout(){
+        let tolerancia = 15 * 60;
+        let diff = (new Date().getTime() - new Date(this.Tiempo).getTime()) / 1000;
+        return diff > tolerancia;
+    }
 }
 
 export default Estacion;
