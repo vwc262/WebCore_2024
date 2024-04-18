@@ -404,3 +404,4 @@ class TablaSimplificada {
 }
 
 export { TablaSimplificada };
+
