@@ -11,8 +11,9 @@
   border-radius: 8px;
   color: #ffffff;
   font-size: 14px;
-  padding: 10px 15px;
+  padding: 5px;
   position: relative;
+  font-weight: bold;
 }
 
 .marker-tag::after {
@@ -26,4 +27,26 @@
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-top: 8px solid #4285f4;
+}
+
+.markerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.markerContainer img {
+  width: 30px;
+}
+
+.marker-imgG {
+  filter: invert(21%) sepia(83%) saturate(3474%) hue-rotate(100deg)
+    brightness(95%) contrast(102%);
+}
+
+.marker-imgR {
+  filter: invert(14%) sepia(77%) saturate(5044%) hue-rotate(356deg)
+    brightness(105%) contrast(123%);
 }
