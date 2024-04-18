@@ -40,8 +40,16 @@ class TablaSimplificada {
     this.$tbody = document.getElementById("tbody");
     this.$sitiosOnline = document.getElementById("online");
     this.$sitiosOffline = document.getElementById("offline");
+    this.$sitioRadio = document.querySelector("#sitioRadio");
+    this.$sitioCelular = document.querySelector("#sitioCelular");
+    this.$sitioRC = document.querySelector("#sitioRC");
+
     let totalOnline = 0;
     let totalOffline = 0;
+
+    let SitiosRadio = 0;
+    let SitiosCelular = 0;
+    let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
 
@@ -72,6 +80,7 @@ class TablaSimplificada {
         if (key === "Tiempo") {
           this.NEW__CELL.classList.add("time");
           value = this.FormatearFecha(value);
+          this.NEW__CELL.textContent = value;
         }
 
         if (key === "Nombre") {
@@ -184,6 +193,19 @@ class TablaSimplificada {
         totalOffline++;
       } else {
         totalOnline++;
+      }
+
+      if (ROW.enlace === EnumEnlace.Celular) {
+        SitiosCelular++;
+        this.$sitioCelular.innerText = `En línea por celular: ${SitiosCelular}`;
+      }
+      if (ROW.enlace === EnumEnlace.Radio) {
+        SitiosRadio++;
+        this.$sitioRadio.innerText = `En línea por radio: ${SitiosRadio}`;
+      }
+      if (ROW.enlace === EnumEnlace.Hibrido) {
+        SitiosHibridos++;
+        this.$sitioRC.innerText = `En línea por radio / celular: ${SitiosHibridos}`;
       }
 
       this.$tbody.append(this.NEW__ROW);
@@ -319,6 +341,9 @@ class TablaSimplificada {
         this.DATOS__AUX.sort((b, a) => b.idEstacion - a.idEstacion);
         break;
       case EnumTipoFiltro.nombre:
+        this.DATOS__AUX.sort((a, b) =>
+          this.CompareNamesWithNumbers(a.nombre, b.nombre)
+        );
         break;
       case EnumTipoFiltro.nivel:
         this.FiltrarSignals(EnumTipoSignal.Nivel);
