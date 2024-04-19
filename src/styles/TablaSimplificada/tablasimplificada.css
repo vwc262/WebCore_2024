@@ -153,3 +153,15 @@ tbody tr td {
   align-items: center;
   gap: 10px;
 }
+
+/* Cuando la pantalla es menor a 900px  (tablets y teléfonos inteligentes)*/
+@media only screen and (max-width: 900px) {
+  .valor-Bomba {
+    width: 7px;
+    height: 12px;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important;
+    margin: auto;
+  }
+}
