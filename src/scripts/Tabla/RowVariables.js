@@ -11,15 +11,15 @@ class RowVariables {
      * @param {int} IdEstacion 
      * @param {Map<string, [Signal]>} columns 
      * @param {int} ordinalSignal 
-     * @param {Object} offset object with offset.value
+     * @param {Object} expandRowPressed object with expandRowPressed
      * @param {int} actualIndex 
      * @param {Function} refreshTable callback
      */
-    constructor(IdEstacion, columns, ordinalSignal, offset, actualIndex, refreshTable) {
+    constructor(IdEstacion, columns, ordinalSignal, expandRowPressed, actualIndex, refreshTable) {
         this.IdEstacion = IdEstacion;
         this.columns = columns;
         this.ordinalSignal = ordinalSignal;
-        this.offset = offset;
+        this.expandRowPressed = expandRowPressed;
         this.refreshTable = refreshTable;
         this.actualIndex = actualIndex;
     }
@@ -71,7 +71,7 @@ class RowVariables {
 
             this.expandRow = CreateElement({
                 nodeElement: 'div',
-                attributes: { class: 'expand-btn-Row', maximized: 0, extraRows: extraRows - 1, rowIndex: this.actualIndex, style: `background: url(${Core.Instance.ResourcesPath}General/mas_nrm.png?v=10)` },
+                attributes: { class: 'expand-btn-Row', maximized: 0, extraRows: extraRows, rowIndex: this.actualIndex, style: `background: url(${Core.Instance.ResourcesPath}General/mas_nrm.png?v=${Core.Instance.version})` },
                 innerText: '',
                 events: new Map().set('click', [(event) => {
 
@@ -81,7 +81,7 @@ class RowVariables {
                     for (let btn of btns) {
                         let _rowIndex = parseInt(btn.getAttribute('rowIndex'));
                         if (rowIndex != _rowIndex) {
-                            btn.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/mas_nrm.png?v=10)`;
+                            btn.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/mas_nrm.png?v=${Core.Instance.version})`;
                             btn.setAttribute('maximized', '0');
                         }
                     }
@@ -92,12 +92,13 @@ class RowVariables {
                     else maximized = true;
 
                     event.currentTarget.setAttribute('maximized', `${maximized ? '0' : '1'}`);
-                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'mas_nrm' : 'menos_nrm'}.png?v=10)`;
+                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'mas_nrm' : 'menos_nrm'}.png?v=${Core.Instance.version})`;
 
                     let extraRows = maximized ? 0 : parseInt(event.currentTarget.getAttribute('extraRows'));
-                    this.offset.extraRows = extraRows;
-                    this.offset.actualIndex = maximized ? 0 : this.actualIndex;
-                    this.offset.btn = maximized ? null : event.currentTarget;
+                    this.expandRowPressed.extraRows = maximized ? 0 : extraRows;
+                    this.expandRowPressed.actualIndex = maximized ? 0 : this.actualIndex;
+                    this.expandRowPressed.btn = maximized ? null : event.currentTarget;
+                    this.expandRowPressed.IdEstacion = maximized ? 0 : this.IdEstacion;
 
                     this.refreshTable();
 
@@ -108,7 +109,7 @@ class RowVariables {
                     else if (maximized == '0') maximized = false;
                     else maximized = true;
 
-                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_ovr' : 'mas_ovr'}.png?v=10)`;
+                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_ovr' : 'mas_ovr'}.png?v=${Core.Instance.version})`;
                 }]).set('mouseout', [(event) => {
 
                     let maximized = event.currentTarget.getAttribute('maximized');
@@ -116,7 +117,7 @@ class RowVariables {
                     else if (maximized == '0') maximized = false;
                     else maximized = true;
 
-                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_nrm' : 'mas_nrm'}.png?v=10)`;
+                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_nrm' : 'mas_nrm'}.png?v=${Core.Instance.version})`;
                 }])
             });
 
