@@ -184,7 +184,6 @@
 }
 
 .arranqueParo__Encenderimg {
-  /* background: url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/Control/BTN_ON.png?v=-1); */
   background-repeat: no-repeat !important;
   background-size: contain !important;
   background-position-x: center !important;
@@ -220,7 +219,6 @@
 }
 
 .hologramaBase {
-  /* background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/General/dial.gif?v=-1); */
   width: 100px;
   height: 80px;
   background-repeat: no-repeat;

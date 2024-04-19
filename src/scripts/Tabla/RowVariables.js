@@ -81,7 +81,7 @@ class RowVariables {
                     for (let btn of btns) {
                         let _rowIndex = parseInt(btn.getAttribute('rowIndex'));
                         if (rowIndex != _rowIndex) {
-                            btn.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/mas_nrm.png?v=${Core.Instance.version})`;
+                            btn.style.background = `url(${Core.Instance.ResourcesPath}General/mas_nrm.png?v=${Core.Instance.version})`;
                             btn.setAttribute('maximized', '0');
                         }
                     }
@@ -92,7 +92,7 @@ class RowVariables {
                     else maximized = true;
 
                     event.currentTarget.setAttribute('maximized', `${maximized ? '0' : '1'}`);
-                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'mas_nrm' : 'menos_nrm'}.png?v=${Core.Instance.version})`;
+                    event.currentTarget.style.background = `url(${Core.Instance.ResourcesPath}General/${maximized ? 'mas_nrm' : 'menos_nrm'}.png?v=${Core.Instance.version})`;
 
                     let extraRows = maximized ? 0 : parseInt(event.currentTarget.getAttribute('extraRows'));
                     this.expandRowPressed.extraRows = maximized ? 0 : extraRows;
@@ -109,7 +109,7 @@ class RowVariables {
                     else if (maximized == '0') maximized = false;
                     else maximized = true;
 
-                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_ovr' : 'mas_ovr'}.png?v=${Core.Instance.version})`;
+                    event.currentTarget.style.background = `url(${Core.Instance.ResourcesPath}General/${maximized ? 'menos_ovr' : 'mas_ovr'}.png?v=${Core.Instance.version})`;
                 }]).set('mouseout', [(event) => {
 
                     let maximized = event.currentTarget.getAttribute('maximized');
@@ -117,7 +117,7 @@ class RowVariables {
                     else if (maximized == '0') maximized = false;
                     else maximized = true;
 
-                    event.currentTarget.style.background = `url(http://w1.doomdns.com:11002/RecursosWeb/WebCore24/TanquesPadierna/General/${maximized ? 'menos_nrm' : 'mas_nrm'}.png?v=${Core.Instance.version})`;
+                    event.currentTarget.style.background = `url(${Core.Instance.ResourcesPath}General/${maximized ? 'menos_nrm' : 'mas_nrm'}.png?v=${Core.Instance.version})`;
                 }])
             });
 
