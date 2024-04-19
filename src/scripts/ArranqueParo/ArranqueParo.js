@@ -293,9 +293,29 @@ class ArranqueParo {
     this.$btnPrev = document.querySelector(".arranqueParo__Prev");
     this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
     this.$btnPrev.style.backgroundSize = `contain`;
+
+    this.$btnPrev.addEventListener("mouseover", () => {
+      this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
+      this.$btnPrev.style.backgroundSize = `contain`;
+    })
+    this.$btnPrev.addEventListener("mouseout", () => {
+      this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
+      this.$btnPrev.style.backgroundSize = `contain`;
+    })
+
     this.$btnNext = document.querySelector(".arranqueParo__Next");
-    this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
+    this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
     this.$btnNext.style.backgroundSize = `contain`;
+
+    this.$btnNext.addEventListener("mouseover", () => {
+      this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
+      this.$btnNext.style.backgroundSize = `contain`;
+    })
+    this.$btnNext.addEventListener("mouseout", () => {
+      this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
+      this.$btnNext.style.backgroundSize = `contain`;
+    })
+
     const $closePanelArranqueParo = document.querySelector(
       ".arranqueParo__closePanel"
     );
