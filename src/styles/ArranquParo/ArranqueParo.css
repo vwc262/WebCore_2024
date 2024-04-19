@@ -113,6 +113,7 @@
 .arranqueParo__Prev {
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 .arranqueParo__Next {
