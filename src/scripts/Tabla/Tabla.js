@@ -144,6 +144,8 @@ class Tabla {
 
     refreshTable() {
 
+        // console.log(this.indice, -(this.cantidadElementos - this.elementosVisibles), (this.expandRowPressed.extraRows > 0 ? (- this.expandRowPressed.extraRows + 1) : 0));
+
         if (this.indice < -(this.cantidadElementos - this.elementosVisibles) + (this.expandRowPressed.extraRows > 0 ? (- this.expandRowPressed.extraRows + 1) : 0)) {
             this.indice = -(this.cantidadElementos - this.elementosVisibles) + (this.expandRowPressed.extraRows > 0 ? (- this.expandRowPressed.extraRows + 1) : 0);
         }
@@ -160,6 +162,7 @@ class Tabla {
         });
 
         let overflowOnTop = false;
+        let isTotallyOverflowed = false;
 
         let estacionOverflowed = Core.Instance.data.find(estacion => estacion.IdEstacion == this.expandRowPressed.IdEstacion);
         if (estacionOverflowed) {
@@ -169,6 +172,8 @@ class Tabla {
 
             if (overflowOnTop) {
                 indexEstacion = Core.Instance.data.indexOf(estacionOverflowed);
+            } else if (-this.indice > this.expandRowPressed.actualIndex) {
+                indexEstacion -= this.expandRowPressed.extraRows - 1;
             }
         }
 
@@ -215,7 +220,7 @@ class Tabla {
                             }
                         }
 
-                        // console.log('\t\t\t\t\t\t', 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indexCurvedRows', indexCurvedRows, 'indice', this.indice);
+                        // console.log('\t\t', 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indexCurvedRows', indexCurvedRows, 'indice', this.indice);
 
                         indexCurvedRows++;
                     }
