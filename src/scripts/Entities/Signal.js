@@ -186,7 +186,7 @@ class Signal {
         return color;
     }
     GetImagenBombaPanelControl() {
-        return `background: url(${Core.Instance.ResourcesPath}Control/btn_bomba.png) 100% 100%;filter: ${this.FilterPanelBombaColor(this.Valor)}`;
+        return `background: url(${Core.Instance.ResourcesPath}Control/btn_bomba.png?v=${Core.Instance.version}) 100% 100%;filter: ${this.FilterPanelBombaColor(this.Valor)}`;
     }
     FilterPanelBombaColor(valorBomba) {
         let filter = 'grayscale(2)';

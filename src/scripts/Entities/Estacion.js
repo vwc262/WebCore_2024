@@ -144,7 +144,7 @@ class Estacion {
 
         const url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
             }/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
-            }${signal.Ordinal + 1}_${indiceImagen}.png?v=10 `;
+            }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
 
         return url;
     }

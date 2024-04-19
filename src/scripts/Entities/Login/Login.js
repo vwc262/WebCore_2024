@@ -41,7 +41,7 @@ class Login {
     create() {
         if (!this.#isCreated) {
             const backgroundVideo = document.querySelector('#loginVid1');
-            backgroundVideo.setAttribute('src', `${Core.Instance.ResourcesPath}/Control/login_loop.mp4?v=-1`)
+            backgroundVideo.setAttribute('src', `${Core.Instance.ResourcesPath}/Control/login_loop.mp4?v=${Core.Instance.version}`)
             const mainContainer = document.querySelector('#section__login');
             // Si no se ha creado se crea el contenido
             const container = CustomFunctions.CreateElement({ nodeElement: 'div', attributes: { id: 'loginInputContainer', class: 'contenedorLogInInicial' } });

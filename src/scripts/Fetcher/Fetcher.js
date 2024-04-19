@@ -6,6 +6,7 @@ import { RequestType } from "../Utilities/Enums.js";
  */
 class Fetcher {
     #root = 'http://w1.doomdns.com:11000/vwctestapi/crud';
+    #rootVersion = 'http://w1.doomdns.com:11000/vwctestapi/proyecto';
     static #_instance = undefined;
     /**
      * @returns {Fetcher}
@@ -37,6 +38,20 @@ class Fetcher {
             delete config.headers;
         }
         const response = await fetch(`${this.#root}/${action}`, config);
+        return await response.json();
+    }
+
+    /**
+     * 
+     * @param {string} action 
+     * @returns {number} number
+     */
+    async RequestVersion(action){
+        const config = {
+            method: 'get',
+            mode: 'cors',
+        };
+        const response = await fetch(`${this.#rootVersion}/${action}`, config);
         return await response.json();
     }
 }

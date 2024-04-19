@@ -27,19 +27,19 @@
   <header>
     <nav class="header__buttons">
       <div class="headerBtn__Home header__active">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Iconos/home.png?v=undefined"
+        <img id="imgHome"
           alt="">Home
       </div>
       <div class="headerBtn__Mapa">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Iconos/icomapa.png?v=undefined"
+        <img id="imgMapa"
           alt="">Mapa
       </div>
       <div class="headerBtn__Graficador">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Reportes/graficador.png?v=undefined"
+        <img id="imgGraficador"
           alt="">Graficador
       </div>
       <div class="headerBtn__Login">
-        <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/login_btn.png?v=undefined"
+        <img id="imgLogin" 
           alt="">Login
       </div>
     </nav>
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="header__btnRegresar">
-      <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesMiguelHidalgo/General/ToPerfil.gif?v=10">
+      <img id="imgRegresar">
       <span>Regresar</span>
     </div>
   </header>
@@ -207,7 +207,7 @@
             </div>
             <div class="yearBtnsContainer">
               <button>
-                < </button>
+                  </button>
                   <span id="spanYear" class="spanYear">2024</span>
                   <button> > </button>
             </div>
@@ -281,13 +281,12 @@
       </div>
     </section>
     <section id="section__login" class="section__login">
-      <video id="loginVid1" class="loginVid" autoplay="autoplay" muted="" style="display: block;" loop="loop"
-        src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/login_loop.mp4?v=-1"></video>
+      <video id="loginVid1" class="loginVid" autoplay="autoplay" muted="" style="display: block;" loop="loop"></video>
     </section>
     <section id="section__particular" class="section__particular">
       <div class="particular__header">
         <div class="particular__panelControl">
-          <img src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/controlPanel.png?v=10">
+          <img id="imgContolPanel">
         </div>
         <div class="particular__ItemsContainer">
           <div class="particular__items">
@@ -316,8 +315,7 @@
         <div class="arranqueParo__Header">
           <div class="arranqueParo__title">Control Bombas</div>
           <div class="arranqueParo__closePanel">
-            <img
-              src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/General/close_nrm.png?v=-1">
+            <img id="imgClose">
           </div>
         </div>
         <div class="arranqueParo__modoControl">
@@ -337,7 +335,7 @@
           <div class="arranqueParo__encenderApagar">
             <div class="arranqueParo__encenderApagarBomba">
               <div class="arranqueParo__Apagartxt">Apagar</div>
-              <div class="arranqueParo__Encenderimg"></div>
+              <div id="imgEncender" class="arranqueParo__Encenderimg"></div>
               <div class="arranqueParo__Encendertxt">Encender</div>
             </div>
             <div class="arranqueParo__confirmarBomba">
@@ -347,12 +345,11 @@
           </div>
         </div>
       </div>
-      <img id="imgPanelArranqueParo"
-        src="http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=10">
+      <img id="imgPanelArranqueParo">
     </section>
 
     <section class="modal ">
-      <div class="modal__container">
+      <div id="imgModal" class="modal__container">
         <div class="modal__text">
           <h2 class="modal__title">Panel de control</h2>
           <p class="modal__paragraph">Debe iniciar sesión para acceder al control de bombas.</p>
