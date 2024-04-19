@@ -42,7 +42,7 @@ class Mapa {
 
     const styles = {
       hide: [
-        {
+        { 
           featureType: "poi",
           elementType: "labels",
           stylers: [{ visibility: "off" }],
