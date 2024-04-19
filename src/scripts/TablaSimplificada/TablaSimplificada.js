@@ -390,9 +390,17 @@ class TablaSimplificada {
       else this.SinSignals.push(estacion);
     });
 
-    this.DATOS__AUX = this.SignalsFiltro.sort((b, a) => a.Valor - b.Valor).map(
+    this.DATOS__AUX = this.SignalsFiltro.sort((b, a) => a.valor - b.valor).map(
       (nivel) => this.DATOS__AUX.find((e) => e.idEstacion == nivel.idEstacion)
     );
+
+    if (TipoSignal == EnumTipoSignal.Bomba) {
+      this.DATOS__AUX = this.SignalsFiltro.sort(
+        (b, a) => b.valor - a.valor
+      ).map((nivel) =>
+        this.DATOS__AUX.find((e) => e.idEstacion == nivel.idEstacion)
+      );
+    }
 
     this.DATOS__AUX = [...this.DATOS__AUX, ...this.SinSignals];
   }
