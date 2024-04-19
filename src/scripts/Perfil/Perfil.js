@@ -192,7 +192,7 @@ class Perfil {
         if (isMouseOut)
             this.hoverDiv.style = "dispaly: none;";
         else {
-            this.hoverDiv.style = `display: block; background: url(${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/${estacion.Abreviacion}.png?v=${Core.Instance.version}); ${css}`;
+            this.hoverDiv.style = `display: block; background: url(${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/fondo.png?v=${Core.Instance.version}); ${css}`;
         }
 
         if (!stopPropagation) {
