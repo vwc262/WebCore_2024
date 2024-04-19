@@ -29,11 +29,11 @@ $btnHeader.addEventListener("click", (ev) => {
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
-        section__home.style.zIndex = isParticularActive ? "5" : "10";
+        section__home.style.zIndex ="10";
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
-        section__particular.style.zIndex = isParticularActive ? "10" : "5";
+        section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
