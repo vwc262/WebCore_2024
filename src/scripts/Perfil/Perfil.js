@@ -54,7 +54,7 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=0); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
             }
         });
 
@@ -62,7 +62,7 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=0); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
             }
         });
 
@@ -70,7 +70,7 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=0); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
             }
         });
 
@@ -86,7 +86,7 @@ class Perfil {
                 min: 0,
                 max: this.maxPanX,
                 type: "range",
-                style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);`
+                style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=${Core.Instance.version});`
             },
             events: new Map().set('input', [this.scroll])
         });
@@ -99,7 +99,7 @@ class Perfil {
                 min: 0,
                 max: this.maxPanY,
                 type: "range",
-                style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=10);`
+                style: `--bola: url(${Core.Instance.ResourcesPath}General/idle.png); background: url(${Core.Instance.ResourcesPath}General/Barra.png?v=${Core.Instance.version});`
             },
             events: new Map().set('input', [this.scroll])
         });
@@ -192,7 +192,7 @@ class Perfil {
         if (isMouseOut)
             this.hoverDiv.style = "dispaly: none;";
         else {
-            this.hoverDiv.style = `display: block; background: url(${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/${estacion.Abreviacion}.png?v=10); ${css}`;
+            this.hoverDiv.style = `display: block; background: url(${Core.Instance.ResourcesPath}Sitios/${estacion.Abreviacion}/Perfil/${estacion.Abreviacion}.png?v=${Core.Instance.version}); ${css}`;
         }
 
         if (!stopPropagation) {

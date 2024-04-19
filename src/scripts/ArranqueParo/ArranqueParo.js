@@ -107,14 +107,14 @@ class ArranqueParo {
     $panelArranqueParo.style.opacity = "1";
 
     const $panelFondo = document.querySelector(".arranqueParo__Container");
-
+    
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
-
+    
     $imgArranqueParo.setAttribute(
       "src",
-      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/transition.gif?v=11"
+      `${Core.Instance.ResourcesPath}Control/transition.gif?v=${Core.Instance.version}`
     );
-
+    
     // Agregar un event listener para detectar cuando la transición ha terminado
     $panelArranqueParo.addEventListener("transitionend", () => {
       // Verificar si la opacidad es igual a 1 después de la transición
@@ -122,6 +122,8 @@ class ArranqueParo {
         parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 &&
         !this.#isCarouselCreated
       ) {
+        $panelFondo.style.background = `url(${Core.Instance.ResourcesPath}Control/panelControl.png?v=${Core.Instance.version}) no-repeat`;
+        $panelFondo.style.backgroundSize = `contain`;
         $panelFondo.style.transform = "translateY(16vh)";
         $panelFondo.style.opacity = "1";
         this.CrearCarrusel();
@@ -289,7 +291,11 @@ class ArranqueParo {
 
   agregarEventosClic() {
     this.$btnPrev = document.querySelector(".arranqueParo__Prev");
+    this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
+    this.$btnPrev.style.backgroundSize = `contain`;
     this.$btnNext = document.querySelector(".arranqueParo__Next");
+    this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
+    this.$btnNext.style.backgroundSize = `contain`;
     const $closePanelArranqueParo = document.querySelector(
       ".arranqueParo__closePanel"
     );
@@ -313,6 +319,17 @@ class ArranqueParo {
     const btnEnviarComando = document.querySelector(
       ".arranqueParo__confirmarimg"
     );
+    btnEnviarComando.style.background = `url(${Core.Instance.ResourcesPath}Control/btnConfirm.png?v=${Core.Instance.version}) no-repeat`;
+    btnEnviarComando.style.backgroundSize = `contain`;
+    btnEnviarComando.style.backgroundPositionX = `center`;
+    btnEnviarComando.addEventListener("mouseover", () => {
+      btnEnviarComando.style.background = `url(${Core.Instance.ResourcesPath}Control/btnConfirm_on.png?v=${Core.Instance.version}) no-repeat`;
+      btnEnviarComando.style.backgroundPositionX = `center`;
+    });
+    btnEnviarComando.addEventListener("mouseout", () => {
+      btnEnviarComando.style.background = `url(${Core.Instance.ResourcesPath}Control/btnConfirm.png?v=${Core.Instance.version}) no-repeat`;
+      btnEnviarComando.style.backgroundPositionX = `center`;
+    });
     btnEnviarComando.addEventListener("click", this.EnviarComando);
   }
   CambiarAccion = (e) => {
@@ -385,7 +402,9 @@ class ArranqueParo {
   SetSeleccionado(ContainerImagenBomba) {
     const hologram = CreateElement({
       nodeElement: "div",
-      attributes: { class: "hologramaBase" },
+      attributes: { 
+        class: "hologramaBase", 
+        style: `background: url(${Core.Instance.ResourcesPath}General/dial.gif?v=${Core.Instance.version})`},
     });
     if (this.#carruselContainer.children.length > 3) {
       if (ContainerImagenBomba.style.left == "100px") {
@@ -478,7 +497,7 @@ class ArranqueParo {
     $panelArranqueParo.style.transform = "translateY(100vh)";
     $imgArranqueParo.setAttribute(
       "src",
-      "http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesGustavoAMadero23/Control/transition_inicio.png?v=-1"
+      `${Core.Instance.ResourcesPath}Control/transition_inicio.png?v=${Core.Instance.version}`
     );
     this.ResetCarrusel();
   };

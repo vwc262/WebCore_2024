@@ -49,6 +49,7 @@ class Core {
   async Init(idProyecto) {
     console.info("Iniciando App");
     this.IdProyecto = idProyecto;
+    this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
 
     await this.Update();
     this.IdInterval = setInterval(() => this.Update(), 10 * 1000);

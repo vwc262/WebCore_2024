@@ -27,9 +27,6 @@
   width: 600px;
   max-width: 600px;
   max-height: 250px;
-  background: url(http://w1.doomdns.com:11002/RecursosWeb/Client/TanquesPadierna/Control/modalbackground.png?v=10);
-  background-repeat: no-repeat;
-  background-size: contain;
   border-radius: 6px;
   padding: 3em 2.5em;
   display: grid;
