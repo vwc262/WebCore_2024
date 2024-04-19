@@ -12,6 +12,7 @@ var EnumTipoFiltro = {
   nombre: "nombre",
   nivel: "nivel",
   presion: "presion",
+  gasto: "gasto",
   bomba: "bomba",
   tiempo: "tiempo",
   tipoEnlace: "tipoEnlace",
@@ -99,13 +100,14 @@ class TablaSimplificada {
             (bba) => bba.tipoSignal == EnumTipoSignal.Bomba
           );
 
+          const gastos = ROW.signals.filter(
+            (gastosSignal) => gastosSignal.tipoSignal == EnumTipoSignal.Gasto
+          );
+
           if (niveles.length > 0) {
             // Añade el <td> al <tr>
-            this.NEW__CELL.innerText = `${
-              EnumTipoSignalNomenclatura[niveles[0].tipoSignal]
-            }${niveles[0].ordinal + 1}: ${this.FormatearGasto(
-              niveles[0].valor
-            )}`;
+            this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
+
             this.NEW__ROW.appendChild(this.NEW__CELL);
           } else {
             this.NEW__CELL.innerText = "---";
@@ -116,12 +118,24 @@ class TablaSimplificada {
 
           if (presiones.length > 0) {
             // Añade el <td> al <tr>
-            this.NEW__CELL.innerText = `${
-              EnumTipoSignalNomenclatura[presiones[0].tipoSignal]
-            }${presiones[0].ordinal + 1} : ${this.ValidarPresion(
+            this.NEW__CELL.innerText = this.ValidarPresion(
               "ValorPresion",
               presiones[0].valor
-            )} `;
+            );
+
+            this.NEW__ROW.appendChild(this.NEW__CELL);
+          } else {
+            this.NEW__CELL.innerText = "---";
+            this.NEW__ROW.appendChild(this.NEW__CELL);
+          }
+
+          this.NEW__CELL = document.createElement("td");
+
+          if (gastos.length > 0 && gastos[0].valor > 0) {
+            this.NEW__CELL.innerText = this.ValidarPresion(
+              "ValorGasto",
+              gastos[0].valor
+            );
             this.NEW__ROW.appendChild(this.NEW__CELL);
           } else {
             this.NEW__CELL.innerText = "---";
@@ -170,7 +184,7 @@ class TablaSimplificada {
       // Pintar el texto basado en los valores del enlace
       switch (ROW.enlace) {
         case 0:
-          this.enlaceCell.textContent = "Fuera de Linea";
+          this.enlaceCell.textContent = "---";
           break;
         case 1:
           this.enlaceCell.textContent = "Radio";
@@ -354,8 +368,11 @@ class TablaSimplificada {
       case EnumTipoFiltro.bomba:
         this.FiltrarSignals(EnumTipoSignal.Bomba);
         break;
+      case EnumTipoFiltro.gasto:
+        this.FiltrarSignals(EnumTipoSignal.Gasto);
+        break;
       case EnumTipoFiltro.tiempo:
-        this.DATOS__AUX.sort((a, b) => new Date(a.tiempo) - new Date(b.tiempo));
+        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
         break;
       case EnumTipoFiltro.tipoEnlace:
         this.DATOS__AUX.sort((b, a) => a.enlace - b.enlace);
@@ -373,9 +390,10 @@ class TablaSimplificada {
       else this.SinSignals.push(estacion);
     });
 
-    this.DATOS__AUX = this.SignalsFiltro.sort((b, a) => b.Valor - a.Valor).map(
+    this.DATOS__AUX = this.SignalsFiltro.sort((b, a) => a.Valor - b.Valor).map(
       (nivel) => this.DATOS__AUX.find((e) => e.idEstacion == nivel.idEstacion)
     );
+
     this.DATOS__AUX = [...this.DATOS__AUX, ...this.SinSignals];
   }
 

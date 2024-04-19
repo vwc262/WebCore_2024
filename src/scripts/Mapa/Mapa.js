@@ -42,7 +42,7 @@ class Mapa {
 
     const styles = {
       hide: [
-        { 
+        {
           featureType: "poi",
           elementType: "labels",
           stylers: [{ visibility: "off" }],
@@ -96,7 +96,7 @@ class Mapa {
       marker.addEventListener("click", () => {
         map.setCenter({ lat: dataMarker.Latitud, lng: dataMarker.Longitud });
         map.setZoom(15);
-        console.log("Marker Click:", dataMarker);
+        //console.log("Marker Click:", dataMarker);
       });
     });
 
@@ -111,12 +111,12 @@ class Mapa {
     this.CrearPolylines(map);
   }
 
-  CalcularCentroMarkers(positions) {
-    if (positions.length === 0) {
+  CalcularCentroMarkers(markerPositions) {
+    if (markerPositions.length === 0) {
       return null;
     }
 
-    const centroid = positions.reduce(
+    const centroid = markerPositions.reduce(
       (acc, curr) => {
         acc.lat += curr.lat;
         acc.lng += curr.lng;
@@ -125,8 +125,8 @@ class Mapa {
       { lat: 0, lng: 0 }
     );
 
-    centroid.lat /= positions.length;
-    centroid.lng /= positions.length;
+    centroid.lat /= markerPositions.length;
+    centroid.lng /= markerPositions.length;
 
     return centroid;
   }
