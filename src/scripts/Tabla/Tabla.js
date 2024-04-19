@@ -31,7 +31,7 @@ class Tabla {
 
         this.cantidadElementos = Core.Instance.data.length;
         this.indice = 0;
-        this.offset = {
+        this.expandRowPressed = {
             extraRows: 0,
             actualIndex: 0,
             btn: null,
@@ -62,12 +62,12 @@ class Tabla {
         });
 
         this.btnTabla = document.querySelector('.btnTabla');
-        this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/btn_abrir.png?v=10")`;
+        this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/btn_abrir.png?v=${Core.Instance.version}")`;
         this.btnTabla.addEventListener('click', () => {
 
 
-            if (this.offset.btn != null) {
-                this.offset.btn.click();
+            if (this.expandRowPressed.btn != null) {
+                this.expandRowPressed.btn.click();
             }
 
             let visible = this.tBodyVariablesContainer.getAttribute('visible');
@@ -77,7 +77,7 @@ class Tabla {
 
             this.tBodyVariablesContainer.setAttribute('visible', `${visible ? '0' : '1'}`);
             this.tBodyVariablesContainer.style = `right:${visible ? `-455` : `${this.quantityColumns * 45}`}px;`;
-            this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/${visible ? 'btn_abrir' : 'btn_abrirrotate'}.png?v=10")`;
+            this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath}General/${visible ? 'btn_abrir' : 'btn_abrirrotate'}.png?v=${Core.Instance.version}")`;
         });
 
         this.columns = {
@@ -112,20 +112,22 @@ class Tabla {
             let th = document.querySelector(`.thContainer[tag="${EnumTipoSignal[key]}"]`);
             if (th != null) {
                 let img = th.firstElementChild;
-                img.setAttribute('src', `${Core.Instance.ResourcesPath}Encabezados/${key}.png?v=0`);
+                img.setAttribute('src', `${Core.Instance.ResourcesPath}Encabezados/${key}.png?v=${Core.Instance.version}`);
             }
         });
 
         let fondoTabla = document.querySelector(`.fondo-tabla`);
-        fondoTabla.setAttribute('src', `${Core.Instance.ResourcesPath}General/fondoTabla.png?v=0`);
+        fondoTabla.setAttribute('src', `${Core.Instance.ResourcesPath}General/fondoTabla.png?v=${Core.Instance.version}`);
 
         let fondoTablaVariables = document.querySelector(`.fondo-tabla-variables`);
-        fondoTablaVariables.setAttribute('src', `${Core.Instance.ResourcesPath}General/tablaVariables.png?v=0`);
+        fondoTablaVariables.setAttribute('src', `${Core.Instance.ResourcesPath}General/tablaVariables.png?v=${Core.Instance.version}`);
 
         let summaryFondo = document.querySelector(`.contenedor-resumen`);
-        summaryFondo.style.background = `url(${Core.Instance.ResourcesPath}General/Summary.png?v=0)`;
+        summaryFondo.style.background = `url(${Core.Instance.ResourcesPath}General/Summary.png?v=${Core.Instance.version})`;
 
         this.Configuracion = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+
+        this.upwards = true;
 
     }
 
@@ -134,16 +136,17 @@ class Tabla {
      * @param {boolean} upwards direccion (hacia arriba)
      */
     setScrollDirection(upwards) {
-        this.indice += upwards ? 1 : -1
+        this.indice += upwards ? 1 : -1;
+        this.upwards = upwards;
 
         this.refreshTable();
     }
 
     refreshTable() {
 
-        if (this.indice < -(this.cantidadElementos - this.elementosVisibles)) {
-            this.indice = -(this.cantidadElementos - this.elementosVisibles);
-        }
+        // if (this.indice < -(this.cantidadElementos - this.elementosVisibles)) {
+        //     this.indice = -(this.cantidadElementos - this.elementosVisibles);
+        // }
         if (this.indice > 0) {
             this.indice = 0;
         }
@@ -156,12 +159,24 @@ class Tabla {
             delete this.extraRows[key];
         });
 
-        for (let indexRow = 0; indexRow < this.cantidadElementos; indexRow++) {
-            indexRow = indexEstacion;
+        let overflowOnTop = false;
+
+        let estacionOverflowed = Core.Instance.data.find(estacion => estacion.IdEstacion == this.expandRowPressed.IdEstacion);
+        if (estacionOverflowed) {
+            overflowOnTop = -this.indice > this.expandRowPressed.actualIndex && this.expandRowPressed.extraRows + this.indice + this.expandRowPressed.actualIndex >= 0;
+
+            console.log(overflowOnTop, -this.indice, this.expandRowPressed.actualIndex, this.expandRowPressed.extraRows + this.indice + this.expandRowPressed.actualIndex);
+
+            if (overflowOnTop) {
+                indexEstacion = Core.Instance.data.indexOf(estacionOverflowed);
+            }
+        }
+
+        for (let indexRow = indexEstacion; indexRow < this.cantidadElementos; indexRow++) {
 
             if (this.curvedRows[indexCurvedRows] != undefined && this.rows[indexRow] != undefined) {
 
-                const estacion = Core.Instance.data[indexEstacion];
+                let estacion = Core.Instance.data[indexEstacion];
 
                 let row = this.rows[indexRow];
                 let rowVariables = this.rowVariables[indexRow];
@@ -171,6 +186,44 @@ class Tabla {
 
                 this.curvedRows[indexCurvedRows].innerHTML = '';
                 this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
+
+                if (estacion.IdEstacion == this.expandRowPressed.IdEstacion) {
+                    let startOrginal = 0 + overflowOnTop ? (- this.indice - this.expandRowPressed.actualIndex) : 0;
+                    for (let ordinalSignal = startOrginal; ordinalSignal < this.expandRowPressed.extraRows; ordinalSignal++) {
+                        console.log('\t', ordinalSignal, indexCurvedRows);
+
+
+
+                        const columns = {};
+                        Object.keys(this.columns).forEach(key => { columns[key] = []; });
+
+                        this.extraRows.push(new ExtraRowVariables(estacion.IdEstacion, columns, ordinalSignal));
+                        this.extraRows[this.extraRows.length - 1].create();
+
+                        this.curvedRows[indexCurvedRows].innerHTML = '';
+                        this.curvedRowsVariables[indexCurvedRows].innerHTML = '';
+
+                        if (ordinalSignal == 0) {
+
+                            this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
+
+                            this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
+                            this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%)';
+                        } else {
+
+                            this.curvedRowsVariables[indexCurvedRows].appendChild(this.extraRows[this.extraRows.length - 1].rowContainer);
+                            this.curvedRowsVariables[indexCurvedRows].style.background = 'linear-gradient(90deg, rgba(24, 64, 89, 0.5) 0%, rgba(24, 64, 89, 0.3) 60%, rgba(0, 0, 0, 0) 90%)';
+                        }
+
+
+                        indexCurvedRows++;
+                    }
+
+                    indexEstacion++;
+                    continue;
+                }
+
+                console.log('upwards', this.upwards, 'overflowOnTop', overflowOnTop, 'indexEstacion', indexEstacion, 'indexRow', indexRow, 'indexCurvedRows', indexCurvedRows, 'indice', this.indice);
 
                 this.curvedRows[indexCurvedRows].appendChild(row.rowContainer);
                 this.curvedRowsVariables[indexCurvedRows].appendChild(rowVariables.rowContainer);
@@ -187,7 +240,7 @@ class Tabla {
 
         }
 
-        //console.log('------------------------------------------------------');
+        console.log('------------------------------------------------------');
     }
 
     create() {
@@ -202,7 +255,7 @@ class Tabla {
                 function (mouseover, IdEstacion) {
                     this.hoverRow(mouseover, IdEstacion);
                 }.bind(this)));
-            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.offset, indexEstacion,
+            this.rowVariables.push(new RowVariables(estacion.IdEstacion, columns, 0, this.expandRowPressed, indexEstacion,
                 function () {
                     this.refreshTable();
                 }.bind(this), function (mouseover, IdEstacion) {
