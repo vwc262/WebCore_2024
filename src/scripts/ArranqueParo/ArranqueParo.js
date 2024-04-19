@@ -504,7 +504,7 @@ class ArranqueParo {
     // Logica para cerrar el modal
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
-    console.log("Cerrando panel MON AMI");
+    //console.log("Cerrando panel MON AMI");
     const $panelArranqueParoContainer = document.querySelector(
       ".arranqueParo__panelControl"
     );
