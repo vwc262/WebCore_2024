@@ -353,7 +353,7 @@ class ArranqueParo {
       `${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
       RequestType.POST,
       {
-        Usuario: Login.Instace.userName,
+        Usuario: `web24-${Login.Instace.userName}`,
         idEstacion: this.idEstacion,
         Codigo: this.ArmarCodigo(),
         RegModbus: 2020,
