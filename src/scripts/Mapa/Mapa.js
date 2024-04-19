@@ -22,6 +22,7 @@ class Mapa {
       center: this.initPosition,
       mapId: "DEMO_MAP_ID",
       mapTypeControl: true,
+      disableDefaultUI: false,
       mapTypeId: "terrain",
       mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -32,19 +33,24 @@ class Mapa {
         position: google.maps.ControlPosition.LEFT_CENTER,
       },
       scaleControl: true,
-      streetViewControl: true,
+      streetViewControl: false,
       streetViewControlOptions: {
         position: google.maps.ControlPosition.LEFT_BOTTOM,
       },
       fullscreenControl: false,
-      styles: [
+    });
+
+    const styles = {
+      hide: [
         {
           featureType: "poi",
-          elementType: "labels.icon",
+          elementType: "labels",
           stylers: [{ visibility: "off" }],
         },
       ],
-    });
+    };
+
+    map.setOptions({ styles: styles["hide"] });
 
     const markerPositions = Core.Instance.data.map((dataMarker) => ({
       lat: dataMarker.Latitud,
@@ -85,6 +91,12 @@ class Mapa {
         map: map,
         position: { lat: dataMarker.Latitud, lng: dataMarker.Longitud },
         content: this.markerContainer,
+      });
+
+      marker.addEventListener("click", () => {
+        map.setCenter({ lat: dataMarker.Latitud, lng: dataMarker.Longitud });
+        map.setZoom(15);
+        console.log("Marker Click:", dataMarker);
       });
     });
 
