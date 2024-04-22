@@ -134,7 +134,7 @@ class Estacion {
             }
         }
         else {
-            if (signal.DentroRango && signal.Valor <= 4) {
+            if (signal.Valor <= 4) {
                 indiceImagen = signal.Valor;
             }
             else {
