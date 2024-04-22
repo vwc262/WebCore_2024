@@ -4,6 +4,8 @@ import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { Particular } from "../Particular/Particular.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Tabla } from "./Tabla.js";
+import { Module, SetActualModule } from "../uiManager.js";
+import { EnumModule } from "../Utilities/Enums.js";
 
 class Row {
   /**
@@ -44,9 +46,17 @@ class Row {
     this.Update();
 
     this.rowContainer.addEventListener("click", (event) => {
+
       const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-      Particular.Instance.setEstacion(estacion);
-      Particular.Instance.mostrarDetalles();
+
+      if (Module == EnumModule.Perfil || Module == EnumModule.Particular) {
+        Particular.Instance.setEstacion(estacion);
+        Particular.Instance.mostrarDetalles();
+      } else if (Module == EnumModule.Mapa) {
+        EventsManager.Instance.EmitirEvento('OnClickTablaToMarker', { dataMarker: estacion });
+      }
+
+
     });
 
     this.suscribirEventos();
