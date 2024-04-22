@@ -10,10 +10,11 @@
   background-color: #4285f4;
   border-radius: 8px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 1em;
   padding: 5px;
   position: relative;
   font-weight: bold;
+  text-shadow: 1px 1px 1px black;
 }
 
 .marker-tag::after {
@@ -49,4 +50,25 @@
 .marker-imgR {
   filter: invert(14%) sepia(77%) saturate(5044%) hue-rotate(356deg)
     brightness(105%) contrast(123%);
+}
+
+.controlDiv{
+  z-index: 1 !important;
+  position: absolute;
+  top: 10px !important;
+  left: -545px !important;
+  z-index: 1 !important;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #d6d0d0;
+  color: rgb(123, 119, 119);
+  font-family: unset;
+  width: 90px;
+  height: 40px;
+  border-left: 1px solid #f4e7e7;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5em;
 }
