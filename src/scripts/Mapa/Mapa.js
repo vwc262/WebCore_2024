@@ -69,11 +69,11 @@ class Mapa {
       this.markerImg = document.createElement("img");
 
       this.markerContainer.className = "markerContainer";
+      this.markerContainer.setAttribute(`IdEstacion`, dataMarker.IdEstacion);
 
       this.markerTag.className = "marker-tag";
       this.markerTag.textContent = dataMarker.Nombre;
 
-      this.markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${dataMarker.IsTimeout() ? 't' : dataMarker.Enlace}.png`);
       this.markerImg.classList.add("marker-img");
 
       this.markerContainer.append(this.markerTag, this.markerImg);
@@ -88,6 +88,8 @@ class Mapa {
         // this.map.setZoom(15);
         //console.log("Marker Click:", dataMarker);
       });
+
+      this.markers.push(marker);
     });
 
     this.$CenterControlDiv = document.createElement("div");
@@ -100,9 +102,25 @@ class Mapa {
 
     this.CrearPolylines(this.map);
 
+    this.suscribirEventos();
+    this.Update();
+  }
+
+  suscribirEventos() {
+    EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     EventsManager.Instance.Suscribirevento('OnClickTablaToMarker', new EventoCustomizado((data) => {
       this.SetCenterMarker(data.dataMarker);
     }));
+  }
+
+  Update() {
+    this.markers.forEach(marker => {
+      let IdEstacion = parseInt(marker.firstChild.getAttribute('idestacion'));
+      let markerImg = marker.firstChild.getElementsByTagName('img')[0];
+
+      const estacion = Core.Instance.GetDatosEstacion(IdEstacion);
+      markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.Enlace}.png`);
+    });
   }
 
   SetCenterMarker(dataMarker) {
