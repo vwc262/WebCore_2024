@@ -1,6 +1,6 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
-import { EnumNombreProyecto } from "../Utilities/Enums.js";
+import { EnumEnlace, EnumNombreProyecto } from "../Utilities/Enums.js";
 
 class Mapa {
   constructor() {
@@ -13,11 +13,11 @@ class Mapa {
   }
 
   async initMap() {
-    let map;
+    this.map;
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
-    map = new Map(document.getElementById("map"), {
+    this.map = new Map(document.getElementById("map"), {
       zoom: 13,
       center: this.initPosition,
       mapId: "DEMO_MAP_ID",
@@ -50,16 +50,15 @@ class Mapa {
       ],
     };
 
-    map.setOptions({ styles: styles["hide"] });
+    this.map.setOptions({ styles: styles["hide"] });
 
-    const markerPositions = Core.Instance.data.map((dataMarker) => ({
+    this.markerPositions = Core.Instance.data.map((dataMarker) => ({
       lat: dataMarker.Latitud,
       lng: dataMarker.Longitud,
     }));
 
-    if (markerPositions.length > 0) {
-      this.centroid = this.CalcularCentroMarkers(markerPositions);
-      map.setCenter(this.centroid);
+    if (this.markerPositions.length > 0) {
+      this.CalcularCentroMarkers();
     }
 
     Core.Instance.data.forEach((dataMarker) => {
@@ -73,84 +72,57 @@ class Mapa {
       this.markerTag.className = "marker-tag";
       this.markerTag.textContent = dataMarker.Nombre;
 
-      this.markerImg.setAttribute("src", "../imgs/iconMarker.png");
+      this.markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${dataMarker.IsTimeout() ? 't' : dataMarker.Enlace}.png`);
       this.markerImg.classList.add("marker-img");
-
-      if (
-        dataMarker.Enlace === 1 ||
-        dataMarker.Enlace === 2 ||
-        dataMarker.Enlace === 3
-      ) {
-        this.markerImg.classList.add("marker-imgG");
-      } else {
-        this.markerImg.classList.add("marker-imgR");
-      }
 
       this.markerContainer.append(this.markerTag, this.markerImg);
       const marker = new AdvancedMarkerView({
-        map: map,
+        map: this.map,
         position: { lat: dataMarker.Latitud, lng: dataMarker.Longitud },
         content: this.markerContainer,
       });
 
       marker.addEventListener("click", () => {
-        map.setCenter({ lat: dataMarker.Latitud, lng: dataMarker.Longitud });
-        map.setZoom(15);
+        this.map.setCenter({ lat: dataMarker.Latitud, lng: dataMarker.Longitud });
+        this.map.setZoom(15);
         //console.log("Marker Click:", dataMarker);
       });
     });
 
     this.$CenterControlDiv = document.createElement("div");
-    this.$CenterControl = this.CrearBotonCentrar(map);
+    this.$CenterControl = this.CrearBotonCentrar(this.map);
 
     this.$CenterControlDiv.append(this.$CenterControl);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
       this.$CenterControlDiv
     );
 
-    this.CrearPolylines(map);
+    this.CrearPolylines(this.map);
   }
 
-  CalcularCentroMarkers(markerPositions) {
-    if (markerPositions.length === 0) {
+  CalcularCentroMarkers() {
+    if (this.markerPositions.length === 0) {
       return null;
     }
 
-    const centroid = markerPositions.reduce(
-      (acc, curr) => {
-        acc.lat += curr.lat;
-        acc.lng += curr.lng;
-        return acc;
-      },
-      { lat: 0, lng: 0 }
-    );
+    var limites = new google.maps.LatLngBounds();
+    this.markerPositions.forEach(marker => {
+      limites.extend({ lat: marker.lat, lng: marker.lng });
+    });
 
-    centroid.lat /= markerPositions.length;
-    centroid.lng /= markerPositions.length;
-
-    return centroid;
+    this.map.fitBounds(limites);
   }
 
   CrearBotonCentrar(map) {
     this.$CenterButton = document.createElement("button");
 
-    this.$CenterButton.style.backgroundColor = "#fff";
-    this.$CenterButton.style.border = "2px solid #fff";
-    this.$CenterButton.style.borderRadius = "3px";
-    this.$CenterButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-    this.$CenterButton.style.color = "rgb(25,25,25)";
-    this.$CenterButton.style.cursor = "pointer";
-    this.$CenterButton.style.fontFamily = "Roboto,Arial,sans-serif";
-    this.$CenterButton.style.fontSize = "16px";
-    this.$CenterButton.style.lineHeight = "38px";
-    this.$CenterButton.style.margin = "8px 0 22px";
-    this.$CenterButton.style.padding = "0 5px";
-    this.$CenterButton.style.textAlign = "center";
+    this.$CenterButton.classList = 'controlDiv';
+
     this.$CenterButton.textContent = "Centrar";
     this.$CenterButton.type = "button";
 
     this.$CenterButton.addEventListener("click", () => {
-      map.setCenter(this.centroid);
+      this.CalcularCentroMarkers();
     });
     return this.$CenterButton;
   }
