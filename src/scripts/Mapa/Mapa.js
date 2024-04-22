@@ -1,5 +1,6 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumEnlace, EnumNombreProyecto } from "../Utilities/Enums.js";
 
 class Mapa {
@@ -83,8 +84,8 @@ class Mapa {
       });
 
       marker.addEventListener("click", () => {
-        this.map.setCenter({ lat: dataMarker.Latitud, lng: dataMarker.Longitud });
-        this.map.setZoom(15);
+        this.SetCenterMarker(dataMarker);
+        // this.map.setZoom(15);
         //console.log("Marker Click:", dataMarker);
       });
     });
@@ -98,6 +99,14 @@ class Mapa {
     );
 
     this.CrearPolylines(this.map);
+
+    EventsManager.Instance.Suscribirevento('OnClickTablaToMarker', new EventoCustomizado((data) => {
+      this.SetCenterMarker(data.dataMarker);
+    }));
+  }
+
+  SetCenterMarker(dataMarker) {
+    this.map.panTo({ lat: dataMarker.Latitud, lng: dataMarker.Longitud });
   }
 
   CalcularCentroMarkers() {
