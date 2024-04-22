@@ -104,7 +104,9 @@ class Particular {
     this.$headerDate = document.querySelector("#date__particular");
     this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
-    this.$particularCapaTextoImg = document.querySelector("#particularTextoImg");
+    this.$particularCapaTextoImg = document.querySelector(
+      "#particularTextoImg"
+    );
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
     this.$panelBombas = document.querySelector(".arranqueParo__panelControl");
@@ -206,10 +208,18 @@ class Particular {
   slider() {
     const container = document.querySelector(".particular__ItemsContainer");
     const sliderInput = document.querySelector("#sliderInput");
+    const sliderInputBola = document.querySelector(
+      ".particular__slider input[type='range']"
+    );
 
     // Mostrar el control deslizante si los elementos se desbordan del contenedor
     document.querySelector(".particular__slider").style.display =
       container.scrollWidth > container.clientWidth ? "flex" : "none";
+
+    sliderInputBola.style.setProperty(
+      "--bolaSlider",
+      `url(${Core.Instance.ResourcesPath}General/esfera_slider.png?v=${Core.Instance.version})`
+    );
 
     if (
       document.querySelector(".particular__slider").style.display !== "none"
@@ -238,7 +248,6 @@ class Particular {
   }
 
   setEnlaceParticular(estacion) {
-
     let valorEnlace = estacion.Enlace;
     let timeout = estacion.IsTimeout();
 
@@ -248,13 +257,18 @@ class Particular {
       valorEnlace == EnumEnlace.Celular
         ? "C"
         : valorEnlace == EnumEnlace.Radio
-          ? "R"
-          : "CR";
-    this.$headerStatus.innerHTML = timeout ? "Fuera de línea (Tiempo)" :
-      offline
-        ? "Fuera de línea"
-        : `En línea (${tipoEnlace})`;
-    this.$headerStatus.style.color = timeout ? 'rgb(129, 11, 11)' : offline ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)";
+        ? "R"
+        : "CR";
+    this.$headerStatus.innerHTML = timeout
+      ? "Fuera de línea (Tiempo)"
+      : offline
+      ? "Fuera de línea"
+      : `En línea (${tipoEnlace})`;
+    this.$headerStatus.style.color = timeout
+      ? "rgb(129, 11, 11)"
+      : offline
+      ? "rgb(140, 13, 13)"
+      : "rgb(0, 128, 0)";
   }
 
   setNivelAgua() {

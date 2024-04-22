@@ -1,3 +1,7 @@
+:root {
+  --bolaSlider: url("");
+}
+
 .particular__header {
   position: absolute;
   top: 58px;
@@ -142,7 +146,7 @@
 .particular__slider input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   position: relative;
-  background: url(http://w1.doomdns.com:11000/RecursosWeb//Client//TanquesPadierna//General//esfera_slider.png);
+  background: var(--bolaSlider); 
   width: 22px;
   height: 22px;
   background-repeat: no-repeat;
@@ -179,6 +183,6 @@
   pointer-events: none;
 }
 
-#date__particular{
+#date__particular {
   color: #d09f24;
 }
