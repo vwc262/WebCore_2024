@@ -1,9 +1,7 @@
 #map {
   width: 1455px !important;
-  height: 1023px !important;
   position: relative;
   overflow: hidden;
-  top: 57px;
 }
 
 .marker-tag {

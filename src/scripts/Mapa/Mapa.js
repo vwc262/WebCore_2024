@@ -21,13 +21,13 @@ class Mapa {
     this.map = new Map(document.getElementById("map"), {
       zoom: 13,
       center: this.initPosition,
-      mapId: "DEMO_MAP_ID",
+      mapId: "219e5ba03781534c",
       mapTypeControl: true,
       disableDefaultUI: false,
-      mapTypeId: "terrain",
       mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
         position: google.maps.ControlPosition.LEFT_TOP,
+        mapTypeIds: ['terrain', 'satellite', '74130bcd25f050cd']
       },
       zoomControl: true,
       zoomControlOptions: {
@@ -40,18 +40,6 @@ class Mapa {
       },
       fullscreenControl: false,
     });
-
-    const styles = {
-      hide: [
-        {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [{ visibility: "off" }],
-        },
-      ],
-    };
-
-    this.map.setOptions({ styles: styles["hide"] });
 
     this.markerPositions = Core.Instance.data.map((dataMarker) => ({
       lat: dataMarker.Latitud,
@@ -83,7 +71,7 @@ class Mapa {
         content: this.markerContainer,
       });
 
-      marker.addEventListener("click", () => {
+      marker.addListener("gmp-click", () => {
         this.SetCenterMarker(dataMarker);
         // this.map.setZoom(15);
         //console.log("Marker Click:", dataMarker);
@@ -120,8 +108,6 @@ class Mapa {
 
       const estacion = Core.Instance.GetDatosEstacion(IdEstacion);
       markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.IsEnMantenimiento() ? 'm' : estacion.Enlace}.png`);
-
-      console.log(`${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.IsEnMantenimiento() ? 'm' : estacion.Enlace}.png`);
     });
   }
 
