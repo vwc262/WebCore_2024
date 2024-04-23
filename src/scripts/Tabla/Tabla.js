@@ -417,14 +417,6 @@ class Tabla {
       indexCurvedRows++;
     }
 
-    let onlineCount = Core.Instance.data.filter(
-      (estacion) => estacion.Enlace != EnumEnlace.FueraLinea
-    ).length;
-    let offlineCount = Core.Instance.data.length - onlineCount;
-
-    this.online.innerHTML = onlineCount;
-    this.offline.innerHTML = offlineCount;
-    this.mantenimiento.innerHTML = 0;
     this.UpdateNormalizedValue();
     this.suscribirEventos();
     this.update();
@@ -579,15 +571,18 @@ class Tabla {
   };
 
   update() {
-    let offlineCount = Core.Instance.data.filter(
-      (estacion) =>
-        estacion.IsTimeout() || estacion.Enlace == EnumEnlace.FueraLinea
+    let onlineCount = Core.Instance.data.filter(
+      (estacion) => estacion.Enlace != EnumEnlace.FueraLinea
     ).length;
-    let onlineCount = Core.Instance.data.length - offlineCount;
+    let offlineCount = Core.Instance.data.length - onlineCount;
+
+    let enMantenimiento = Core.Instance.data.filter((estacion) =>
+      estacion.IsEnMantenimiento()
+    ).length;
 
     this.online.innerHTML = onlineCount;
     this.offline.innerHTML = offlineCount;
-    this.mantenimiento.innerHTML = 0;
+    this.mantenimiento.innerHTML = enMantenimiento;
   }
 
   suscribirEventos() {
