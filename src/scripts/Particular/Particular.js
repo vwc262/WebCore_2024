@@ -250,6 +250,7 @@ class Particular {
   setEnlaceParticular(estacion) {
     let valorEnlace = estacion.Enlace;
     let timeout = estacion.IsTimeout();
+    let enMantenimiento = estacion.IsEnMantenimiento();
 
     // Cambiar el texto de acuerdo al estado de la estación
     const offline = valorEnlace == EnumEnlace.FueraLinea;
@@ -257,18 +258,23 @@ class Particular {
       valorEnlace == EnumEnlace.Celular
         ? "C"
         : valorEnlace == EnumEnlace.Radio
-        ? "R"
-        : "CR";
+          ? "R"
+          : "CR";
     this.$headerStatus.innerHTML = timeout
       ? "Fuera de línea (Tiempo)"
-      : offline
-      ? "Fuera de línea"
-      : `En línea (${tipoEnlace})`;
+      : enMantenimiento ?
+        'En Mantenimiento' :
+        offline
+          ? "Fuera de línea"
+          : `En línea (${tipoEnlace})`;
     this.$headerStatus.style.color = timeout
       ? "rgb(129, 11, 11)"
-      : offline
-      ? "rgb(140, 13, 13)"
-      : "rgb(0, 128, 0)";
+      :
+      enMantenimiento ?
+        "rgb(129, 129, 129)"
+        : offline
+          ? "rgb(140, 13, 13)"
+          : "rgb(0, 128, 0)";
   }
 
   setNivelAgua() {

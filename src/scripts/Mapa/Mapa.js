@@ -119,7 +119,9 @@ class Mapa {
       let markerImg = marker.firstChild.getElementsByTagName('img')[0];
 
       const estacion = Core.Instance.GetDatosEstacion(IdEstacion);
-      markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.Enlace}.png`);
+      markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.IsEnMantenimiento() ? 'm' : estacion.Enlace}.png`);
+
+      console.log(`${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.IsEnMantenimiento() ? 'm' : estacion.Enlace}.png`);
     });
   }
 
