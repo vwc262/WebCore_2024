@@ -268,7 +268,6 @@
 }
 
 .curvedScroll input[type="range"][orient="vertical"] {
-  appearance: slider-vertical;
   height: 900px;
   position: relative;
   left: -15px;

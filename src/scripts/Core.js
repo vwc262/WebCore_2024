@@ -47,7 +47,7 @@ class Core {
    * @param {EnumProyecto} idProyecto
    */
   async Init(idProyecto) {
-    console.info("Iniciando App");
+    console.log("Iniciando App");
     this.IdProyecto = idProyecto;
     this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
 
