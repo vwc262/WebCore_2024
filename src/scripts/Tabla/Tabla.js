@@ -313,12 +313,14 @@ class Tabla {
 
     update() {
 
+        
+        let enMantenimientoCount = Core.Instance.data.filter(estacion => estacion.IsEnMantenimiento()).length;
         let offlineCount = Core.Instance.data.filter(estacion => estacion.IsTimeout() || estacion.Enlace == EnumEnlace.FueraLinea).length;
         let onlineCount = Core.Instance.data.length - offlineCount;
 
         this.online.innerHTML = onlineCount;
         this.offline.innerHTML = offlineCount;
-        this.mantenimiento.innerHTML = 0;
+        this.mantenimiento.innerHTML = enMantenimientoCount;
     }
 
     suscribirEventos() {

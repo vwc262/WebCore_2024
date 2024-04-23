@@ -163,10 +163,19 @@ class Estacion {
 
     }
 
-    IsTimeout(){
+    IsTimeout() {
         let tolerancia = 15 * 60;
         let diff = (new Date().getTime() - new Date(this.Tiempo).getTime()) / 1000;
         return diff > tolerancia;
+    }
+
+    IsEnMantenimiento() {
+        let enMantenimiento = this.ObtenerSignalPorTipoSignal(EnumTipoSignal.Mantenimiento);
+
+        
+        if (enMantenimiento.length > 0) {
+            return enMantenimiento[0].Valor == 0;
+        } else return false;
     }
 }
 
