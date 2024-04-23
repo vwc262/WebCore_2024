@@ -1,6 +1,7 @@
 import { Core } from "./Core.js";
 import { TablaSimplificada } from "./TablaSimplificada.js";
-import { EnumProyecto } from "../Utilities/Enums.js";
+import { EnumNombreProyecto, EnumProyecto } from "../Utilities/Enums.js";
+import { ObtenerFormatoTituloProyecto } from "../Utilities/CustomFunctions.js";
 
 class VwcApp {
   async Start() {
@@ -8,6 +9,10 @@ class VwcApp {
     this.IniciarUI();
   }
   IniciarUI() {
+    const $titleHeader = document.querySelector(".titleProyecto");
+    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(
+      EnumNombreProyecto[Core.Instance.IdProyecto]
+    )}`;
     new TablaSimplificada().create();
   }
 }

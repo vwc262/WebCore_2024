@@ -27,20 +27,16 @@
   <header>
     <nav class="header__buttons">
       <div class="headerBtn__Home header__active">
-        <img id="imgHome"
-          alt="">Home
+        <img id="imgHome" alt="">Home
       </div>
       <div class="headerBtn__Mapa">
-        <img id="imgMapa"
-          alt="">Mapa
+        <img id="imgMapa" alt="">Mapa
       </div>
       <div class="headerBtn__Graficador">
-        <img id="imgGraficador"
-          alt="">Graficador
+        <img id="imgGraficador" alt="">Graficador
       </div>
       <div class="headerBtn__Login">
-        <img id="imgLogin" 
-          alt="">Login
+        <img id="imgLogin" alt="">Login
       </div>
     </nav>
     <div class="header__title">
@@ -83,47 +79,80 @@
         <div class="header-table-variables">
           <div class="thContainer" tag="1">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Nivel</div><div>[m]</div></div>
+            <div class="headerText">
+              <div>Nivel</div>
+              <div>[m]</div>
+            </div>
           </div>
           <div class="thContainer" tag="2">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Presión</div><div>[<sup>kg</sup>/<sub>cm<sup>2</sup></sub>]</div></div>
+            <div class="headerText">
+              <div>Presión</div>
+              <div>[<sup>kg</sup>/<sub>cm<sup>2</sup></sub>]</div>
+            </div>
           </div>
           <div class="thContainer" tag="3">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Gasto</div><div>[<sup>l</sup>/<sub>s</sub>]</div></div>
+            <div class="headerText">
+              <div>Gasto</div>
+              <div>[<sup>l</sup>/<sub>s</sub>]</div>
+            </div>
           </div>
           <div class="thContainer" tag="4">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Totalizado</div><div>[m<sup>3</sup>]</div></div>
+            <div class="headerText">
+              <div>Totalizado</div>
+              <div>[m<sup>3</sup>]</div>
+            </div>
           </div>
           <div class="thContainer" tag="5">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Válvula mariposa</div><div>[%]</div></div>
+            <div class="headerText">
+              <div>Válvula mariposa</div>
+              <div>[%]</div>
+            </div>
           </div>
           <div class="thContainer" tag="6">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Válvula flotador</div><div>&nbsp;</div></div>
+            <div class="headerText">
+              <div>Válvula flotador</div>
+              <div>&nbsp;</div>
+            </div>
           </div>
           <div class="thContainer" tag="7">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Bomba</div><div>&nbsp;</div></div>
+            <div class="headerText">
+              <div>Bomba</div>
+              <div>&nbsp;</div>
+            </div>
           </div>
           <div class="thContainer" tag="9">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Perilla General</div><div>&nbsp;</div></div>
+            <div class="headerText">
+              <div>Perilla General</div>
+              <div>&nbsp;</div>
+            </div>
           </div>
           <div class="thContainer" tag="10">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Voltaje</div><div>[V]</div></div>
+            <div class="headerText">
+              <div>Voltaje</div>
+              <div>[V]</div>
+            </div>
           </div>
           <div class="thContainer" tag="12">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Falla AC</div><div>&nbsp;</div></div>
+            <div class="headerText">
+              <div>Falla AC</div>
+              <div>&nbsp;</div>
+            </div>
           </div>
           <div class="thContainer" tag="15">
             <img class="iconthImage" src="">
-            <div class="headerText"><div>Puerta Abierta</div><div>&nbsp;</div></div>
+            <div class="headerText">
+              <div>Puerta Abierta</div>
+              <div>&nbsp;</div>
+            </div>
           </div>
         </div>
 
@@ -156,6 +185,56 @@
             <div class="texto-resumen" tag="mantenimiento">0</div>
           </div>
         </div>
+      </div>
+      <div class="curvedScroll">
+        <!-- <input class="sliderVertical" type="range" orient="vertical" value="0" min="0" step="1"> -->
+        <svg xmlns="http://www.w3.org/2000/svg" id="svgScroll" class="svgScrollContainer" viewBox="0 0 500 500"
+          preserveAspectRatio="xMidYMid meet">
+          <title>SVG curve</title>
+          <desc>example curves in SVG</desc>
+          <defs>
+            <radialGradient id="myGradient" gradientTransform="translate(-0.27 -0.62) scale(2, 1.7)">
+              <stop offset="7%" stop-color="#a0aec0" />
+              <stop offset="9.29%" stop-color="#8a9eb8" />
+              <stop offset="11.57%" stop-color="#788eab" />
+              <stop offset="13.86%" stop-color="#667f9e" />
+              <stop offset="16.14%" stop-color="#566f91" />
+              <stop offset="18.43%" stop-color="#466083" />
+              <stop offset="23%" stop-color="#2a4365" />
+              <stop offset="25.71%" stop-color="#2b4161" />
+              <stop offset="28.43%" stop-color="#2c405c" />
+              <stop offset="31.14%" stop-color="#2c3e58" />
+              <stop offset="33.86%" stop-color="#2d3c54" />
+              <stop offset="36.57%" stop-color="#2d3a50" />
+              <stop offset="42%" stop-color="#2d3748" />
+              <stop offset="47.86%" stop-color="#2a3444" />
+              <stop offset="53.71%" stop-color="#273040" />
+              <stop offset="59.57%" stop-color="#252d3c" />
+              <stop offset="65.43%" stop-color="#222a38" />
+              <stop offset="71.29%" stop-color="#1f2634" />
+              <stop offset="83%" stop-color="#1a202c" />
+            </radialGradient>
+            <linearGradient id="lnrGradient" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="19%" stop-color="#90cdf4" />
+              <stop offset="30.33%" stop-color="#52a4db" />
+              <stop offset="53%" stop-color="#2c5282" />
+              <stop offset="62.67%" stop-color="#3c71a6" />
+              <stop offset="82%" stop-color="#63b3ed" />
+            </linearGradient>
+            <linearGradient id="fakeGradient" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="26%" stop-color="#2c5282" />
+              <stop offset="35%" stop-color="#3f7aae" />
+              <stop offset="53%" stop-color="#90cdf4" />
+              <stop offset="62.67%" stop-color="#52a4db" />
+              <stop offset="82%" stop-color="#2c5282" />
+            </linearGradient>
+          </defs>
+          <path id="scrollCurve" d="M106,-992 C305,-100 283,765 110,1534" class="scrollCurve"></path>
+          <path id="filler" d="M106,-992 C305,-100 283,765 110,1534" fill="url('#lnrGradient')">
+          </path>
+          <!-- Follower -->
+          <circle r="28" cx="0" cy="0" class="follower" fill="url('#myGradient')" />
+        </svg>
       </div>
     </aside>
     <section id="section__home" class="section__home"></section>
@@ -207,9 +286,9 @@
             </div>
             <div class="yearBtnsContainer">
               <button>
-                  </button>
-                  <span id="spanYear" class="spanYear">2024</span>
-                  <button> > </button>
+              </button>
+              <span id="spanYear" class="spanYear">2024</span>
+              <button> > </button>
             </div>
             <div class="monthsContainer">
               <button class="mes" id="Ene" mesId="0">Ene</button>

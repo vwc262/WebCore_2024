@@ -80,8 +80,23 @@ class TablaSimplificada {
         // Validar y dar formato al valor si es la fecha
         if (key === "Tiempo") {
           this.NEW__CELL.classList.add("time");
-          value = this.FormatearFecha(value);
-          this.NEW__CELL.textContent = value;
+          let valorFormateado = this.FormatearFecha(value);
+          this.NEW__CELL.textContent = valorFormateado;
+
+          let tiempoActual = new Date(); // Hora actual
+          let tiempoFila = new Date(value); // Hora de la fila
+          let diferenciaTiempos = (tiempoActual - tiempoFila) / (1000 * 60); // Diferencia en minutos
+
+          // Redondear la diferencia de tiempos
+          let diferenciaRedondeada = Math.round(diferenciaTiempos);
+
+          if (diferenciaRedondeada > 15) {
+            this.NEW__ROW.style.background = "rgba(129, 11, 11,0.2)";
+            //console.log("Diferencia mayor a 15");
+          }
+          // console.log(tiempoActual);
+          // console.log(tiempoFila);
+          // console.log(diferenciaRedondeada);
         }
 
         if (key === "Nombre") {
