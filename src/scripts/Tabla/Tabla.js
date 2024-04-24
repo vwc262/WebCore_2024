@@ -83,8 +83,9 @@ class Tabla {
         "visible",
         `${visible ? "0" : "1"}`
       );
+      console.log(this.quantityColumns);
       this.tBodyVariablesContainer.style = `right:${
-        visible ? `-455` : `${this.quantityColumns * 45}`
+        visible ? `-455` : `${(this.quantityColumns * 86) - 455 + 55}`
       }px;`;
       this.btnTabla.style.background = `url("${
         Core.Instance.ResourcesPath
