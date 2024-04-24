@@ -224,12 +224,8 @@ export const EncharcamientosConfig = {
             },
         ],
         estilosTuberias: {
-            PorGravedad: [
-                
-            ],
-            PorBombeo: [
-
-            ]
+            PorGravedad: [],
+            PorBombeo: []
         }
     }
 }
