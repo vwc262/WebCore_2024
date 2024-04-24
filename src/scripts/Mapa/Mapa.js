@@ -27,7 +27,7 @@ class Mapa {
       mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
         position: google.maps.ControlPosition.LEFT_TOP,
-        mapTypeIds: ['terrain', 'satellite', '74130bcd25f050cd']
+        mapTypeIds: ["terrain", "satellite", "74130bcd25f050cd"],
       },
       zoomControl: true,
       zoomControlOptions: {
@@ -95,19 +95,34 @@ class Mapa {
   }
 
   suscribirEventos() {
-    EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
-    EventsManager.Instance.Suscribirevento('OnClickTablaToMarker', new EventoCustomizado((data) => {
-      this.SetCenterMarker(data.dataMarker);
-    }));
+    EventsManager.Instance.Suscribirevento(
+      "Update",
+      new EventoCustomizado(() => this.Update())
+    );
+    EventsManager.Instance.Suscribirevento(
+      "OnClickTablaToMarker",
+      new EventoCustomizado((data) => {
+        this.SetCenterMarker(data.dataMarker);
+      })
+    );
   }
 
   Update() {
-    this.markers.forEach(marker => {
-      let IdEstacion = parseInt(marker.firstChild.getAttribute('idestacion'));
-      let markerImg = marker.firstChild.getElementsByTagName('img')[0];
+    this.markers.forEach((marker) => {
+      let IdEstacion = parseInt(marker.firstChild.getAttribute("idestacion"));
+      let markerImg = marker.firstChild.getElementsByTagName("img")[0];
 
       const estacion = Core.Instance.GetDatosEstacion(IdEstacion);
-      markerImg.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout() ? 't' : estacion.IsEnMantenimiento() ? 'm' : estacion.Enlace}.png`);
+      markerImg.setAttribute(
+        "src",
+        `${Core.Instance.ResourcesPath}Iconos/pin_${
+          estacion.IsTimeout()
+            ? "t"
+            : estacion.IsEnMantenimiento()
+            ? "m"
+            : estacion.Enlace
+        }.png`
+      );
     });
   }
 
@@ -121,7 +136,7 @@ class Mapa {
     }
 
     var limites = new google.maps.LatLngBounds();
-    this.markerPositions.forEach(marker => {
+    this.markerPositions.forEach((marker) => {
       limites.extend({ lat: marker.lat, lng: marker.lng });
     });
 
@@ -131,7 +146,7 @@ class Mapa {
   CrearBotonCentrar(map) {
     this.$CenterButton = document.createElement("button");
 
-    this.$CenterButton.classList = 'controlDiv';
+    this.$CenterButton.classList = "controlDiv";
 
     this.$CenterButton.textContent = "Centrar";
     this.$CenterButton.type = "button";
@@ -147,7 +162,9 @@ class Mapa {
       Core.Instance.IdProyecto
     );
 
-    for (const polygon of this.CONFIG__PROYECTO.mapa.polygons) {
+    let poly = this.CONFIG__PROYECTO?.mapa?.polygons || [];
+
+    for (const polygon of poly) {
       this.estacionId = polygon.IdEstacion;
       this.aguasArribaIds = polygon.AguasArriba;
       this.estacionMarker = Core.Instance.data.find(
