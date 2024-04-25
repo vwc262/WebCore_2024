@@ -51,9 +51,10 @@ const rotates = [
 ];
 
 var SitioSeleccionado = {};
-
+var canMove = false;
 // Función para crear las variables en función de los datos proporcionados
 function CreateVariables(index, Sitio) {
+  canMove = true;
   SitioSeleccionado = Sitio;
   // Obtiene referencias a los elementos del DOM
   const signalsContainer = sitiosInfo[index].SignalsDescriptionContainer; // Contenedor de señales del sitio web
@@ -135,7 +136,7 @@ function createVariableElements(container, signalsByType) {
             UIReportes.idSignalsAGraficar.find(
               (signalSel) => signalSel.IdSignal == signal.IdSignal
             ) != undefined
-          )
+          )          
             moveImgClon();
           else disapir();
           // Cambia los colores de las dignals
@@ -157,19 +158,16 @@ function createVariableElements(container, signalsByType) {
   });
   return tolalSignals;
 }
-
 function moveImgClon() {
-  if (UIReportes.idSignalsAGraficar.length <= 6) {
-    var imgClon = document.querySelector(".imgClon");
-    // Obtener el destino
-    var destinoDeVariable = document.querySelector(".signalContent");
-    var coordsDestino = destinoDeVariable.getBoundingClientRect();
+  if (UIReportes.idSignalsAGraficar.length <= 6 && canMove) {
+    var imgClon = document.querySelector(".imgClon");        
     imgClon.style.transition = "none";
     imgClon.style.opacity = 1;
     imgClon.style.transform = `scale(${1}, ${1})`;
     imgClon.style.transition = "all 0.6s ease";
-    imgClon.style.left = 1420 + "px";
-    imgClon.style.top = 350 + "px";
+    imgClon.style.left = 1520 + "px";
+    imgClon.style.top =   (250 + (UIReportes.idSignalsAGraficar.length * 30)) +  "px";
+    canMove = UIReportes.idSignalsAGraficar.length == 6 ? false : true;
     setTimeout(() => {
       disapir();
     }, 500);
@@ -191,13 +189,13 @@ function cloneImageSignal(divElement, ev) {
   imgClon.style.transition = "none";
   imgClon.style.background = divElement.style.background;
   imgClon.style.opacity = 1;
-  imgClon.style.width = "200px";
-  imgClon.style.height = "200px";
+  imgClon.style.width = "100px";
+  imgClon.style.height = "100px";
   imgClon.style.position = "absolute";
   imgClon.style.zIndex = "12";
   imgClon.style.left = -100 + ev.x * difX + "px";
   imgClon.style.top = -100 + ev.y * difX + "px";
-  imgClon.style.transform = `scale(${1}, ${1})`;
+  imgClon.style.transform = `scale(${0}, ${0})`;
   imgClon.style.pointerEvents = "none";
 }
 
