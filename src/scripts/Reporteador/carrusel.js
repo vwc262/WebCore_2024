@@ -132,11 +132,7 @@ function createVariableElements(container, signalsByType) {
 
         divElement.addEventListener("pointerup", () => {
           // Valida si la signal existe para mover el ghost
-          if (
-            UIReportes.idSignalsAGraficar.find(
-              (signalSel) => signalSel.IdSignal == signal.IdSignal
-            ) != undefined
-          )          
+          if (UIReportes.idSignalsAGraficar.find((signalSel) => signalSel.IdSignal == signal.IdSignal) != undefined)
             moveImgClon();
           else disapir();
           // Cambia los colores de las dignals
@@ -159,14 +155,14 @@ function createVariableElements(container, signalsByType) {
   return tolalSignals;
 }
 function moveImgClon() {
-  if (UIReportes.idSignalsAGraficar.length <= 6 && canMove) {
-    var imgClon = document.querySelector(".imgClon");        
+  if (canMove) {
+    var imgClon = document.querySelector(".imgClon");
     imgClon.style.transition = "none";
     imgClon.style.opacity = 1;
     imgClon.style.transform = `scale(${1}, ${1})`;
     imgClon.style.transition = "all 0.6s ease";
     imgClon.style.left = 1520 + "px";
-    imgClon.style.top =   (250 + (UIReportes.idSignalsAGraficar.length * 30)) +  "px";
+    imgClon.style.top = (250 + (UIReportes.idSignalsAGraficar.length * 30)) + "px";
     canMove = UIReportes.idSignalsAGraficar.length == 6 ? false : true;
     setTimeout(() => {
       disapir();
@@ -354,13 +350,7 @@ function GetSitio(idEstacion) {
   return sitio;
 }
 function CreateSignalItem(signal, IdEstacion) {
-  if (UIReportes.idSignalsAGraficar.length >= 6) {
-    const modal = document.querySelector(".modalValidation");
-    modal.style.pointerEvents = "auto";
-    modal.style.opacity = 1;
-    return;
-  }
-
+  
   const signalContainer = document.querySelector(".signalContent");
   const signalItem = document.createElement("div");
   signalItem.classList.add("signalItem");
@@ -395,6 +385,13 @@ function CreateSignalItem(signal, IdEstacion) {
   if (existingItem) {
     borrarVariableAGraficar(existingItem);
   } else {
+    if (UIReportes.idSignalsAGraficar.length == 6) {
+      const modal = document.querySelector(".modalValidation");
+      modal.style.pointerEvents = "auto";
+      modal.style.opacity = 1;
+      canMove = false;
+      return;
+    }
     // Si el elemento no está apendizado, se crea y se agrega al contenedor
     signalItem.setAttribute("data-tipo", signal.IdSignal); // Se añade un atributo para identificar el tipo de señal
     signalItem.classList.add(`variable_${signal.IdSignal}`);
@@ -410,6 +407,7 @@ function CreateSignalItem(signal, IdEstacion) {
       Rotate: rotates[UIReportes.idSignalsAGraficar.length],
       Nombre: `${signal.Nombre} - (${sitio.Nombre})`,
     });
+    canMove = true;  
   }
 
   updateColors();
