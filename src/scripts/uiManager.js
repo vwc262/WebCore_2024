@@ -2,7 +2,10 @@ import { ArranqueParo } from "./ArranqueParo/ArranqueParo.js";
 import { Core } from "./Core.js";
 import Login from "./Entities/Login/Login.js";
 import { Particular } from "./Particular/Particular.js";
+import { FetcherGraficador } from "./Reporteador/Fetcher.js";
 import { inicializarReporteador } from "./Reporteador/Reportes.js";
+import UIControlador from "./Reporteador/videoUI.js";
+import controladorVideo from "./Reporteador/videos.js";
 import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { EnumModule, EnumNombreProyecto } from "./Utilities/Enums.js";
 
@@ -26,10 +29,12 @@ $btnHeader.addEventListener("click", (ev) => {
     const $btnBack = document.querySelector(".header__btnRegresar");
     const $panelBombas = document.querySelector(".arranqueParo__panelControl");
     const $asidetabla = document.querySelector(".aside__tabla");
+    $btnBack.removeEventListener('click', Particular.Instance.backParticular);
+    $btnBack.removeEventListener('click', backGraficador);
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
-        section__home.style.zIndex ="10";
+        section__home.style.zIndex = "10";
         section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "5";
         section__login.style.zIndex = "5";
@@ -41,6 +46,8 @@ $btnHeader.addEventListener("click", (ev) => {
         $datosHeader.style.display = "none";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "block";
+        if (isParticularActive)
+          $btnBack.addEventListener('click', Particular.Instance.backParticular);
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
@@ -65,8 +72,9 @@ $btnHeader.addEventListener("click", (ev) => {
         section__login.style.zIndex = "5";
         section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
-        // $btnBack.style.opacity = "1";
+        $btnBack.style.opacity = "0";
         $btnBack.style.pointerEvents = "none";
+        $btnBack.addEventListener('click', backGraficador);
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $datosHeader.style.display = "none";
@@ -135,6 +143,22 @@ var Module = EnumModule.Perfil;
 const SetActualModule = function (enumModule) {
   Module = EnumModule[enumModule];
 };
+
+
+const backGraficador = () => {
+  const $btnBack = document.querySelector(".header__btnRegresar");
+  $btnBack.style.opacity = 0;
+  $btnBack.style.pointerEvents = "none";
+  UIControlador.hideUIimmediately(Object.values(UIControlador.graficaUI));
+  document.querySelector(".sinHistoricos").style.opacity = 0;
+  controladorVideo.initVideo(
+    // URL del video a cargar
+    `${FetcherGraficador.getImage(EnumNombreProyecto[Core.Instance.IdProyecto], 'Reportes', '12-Cortinilla_Center_Return', 'mp4')}`,
+    // Función para mostrar la interfaz de usuario del video
+    UIControlador.showUIVideoInit
+  );
+
+}
 
 Modal();
 

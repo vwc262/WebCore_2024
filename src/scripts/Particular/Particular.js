@@ -151,11 +151,13 @@ class Particular {
 
     this.setNivelAgua(sitioAbrev);
 
-    const $btnBack = document.querySelector(".header__btnRegresar");
-    $btnBack.addEventListener("click", () => {
-      SetActualModule("Perfil");
+    const $btnBack = document.querySelector(".header__btnRegresar");    
+    $btnBack.addEventListener("click", this.backParticular);
+  }
+
+  backParticular = ()=>{
+    SetActualModule("Perfil");
       GoHome();
-    });
   }
 
   createSignals() {

@@ -37,20 +37,7 @@ class VwcApp {
     $imgLogin.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_btn.png?v=${Core.Instance.version}`);
 
     const $imgRegresar = document.getElementById("imgRegresar");
-    $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
-    $imgRegresar.addEventListener('click', () => {
-      $imgRegresar.parentNode.style.opacity = 0;
-      $imgRegresar.parentNode.style.pointerEvents = "none";
-      UIControlador.hideUIimmediately(Object.values(UIControlador.graficaUI));
-      document.querySelector(".sinHistoricos").style.opacity = 0;
-      controladorVideo.initVideo(
-        // URL del video a cargar
-        `${FetcherGraficador.getImage(this.projectName, 'Reportes', '12-Cortinilla_Center_Return', 'mp4')}`,
-        // Función para mostrar la interfaz de usuario del video
-        UIControlador.showUIVideoInit
-      );
-
-    })
+    $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);    
 
     const $loginVid1 = document.getElementById("loginVid1");
     $loginVid1.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_loop.mp4?v=${Core.Instance.version}`);
