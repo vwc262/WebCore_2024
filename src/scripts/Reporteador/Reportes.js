@@ -14,11 +14,11 @@ export var projectName = EnumNameProjecto.TanquesPadierna;
 
 export var sitiosInfo = [];
 
-export var isReporteadorCreated = { iscreated: false };
+export var isReporteadorCreated = { iscreated: false, secondPhase: false };
 
 // Cuando la ventana se carga completamente, ejecutar la siguiente función
 async function inicializarReporteador() {
-  if (!isReporteadorCreated.iscreated) {    
+  if (!isReporteadorCreated.iscreated) {
 
     inicializarImages();
     // peticion de estaciones del proyecto

@@ -1,7 +1,7 @@
 import UIReportes from "./UIReportes.js";
 import UIControlador from "./videoUI.js";
 import controladorVideo from "./videos.js";
-import { projectName } from "./Reportes.js";
+import { isReporteadorCreated, projectName } from "./Reportes.js";
 import { FetcherGraficador, getNombreProyectoIdProyecto } from "./Fetcher.js";
 import { PDFExporter } from "./PdfExporter.js";
 import ControladorCSV from "./CSVController.js";
@@ -30,6 +30,7 @@ function setBtnGraficar() {
     $imgRegresar.parentNode.style.pointerEvents = "auto";
     UIControlador.hideUIimmediately(Object.values(UIControlador.overlays));
     controladorVideo.initVideo(videoGraficador, UIControlador.showVideoGrafica);
+    isReporteadorCreated.secondPhase = true;
   });
 }
 

@@ -72,15 +72,15 @@ $btnHeader.addEventListener("click", (ev) => {
         section__login.style.zIndex = "5";
         section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
-        $btnBack.style.opacity = "0";
-        $btnBack.style.pointerEvents = "none";
+        $btnBack.style.opacity = isReporteadorCreated.secondPhase ? 1 : 0;
+        $btnBack.style.pointerEvents = isReporteadorCreated.secondPhase ? 'auto' : "none";
         $btnBack.addEventListener('click', backGraficador);
         $datosHeader.style.opacity = "0";
         $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
         $datosHeader.style.display = "none";
         $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "none";
-        backGraficador();
+        //backGraficador();
         inicializarReporteador();
         break;
       case "headerBtn__Login header__active":
@@ -158,6 +158,7 @@ const backGraficador = () => {
     // Función para mostrar la interfaz de usuario del video
     UIControlador.showUIVideoInit
   );
+  isReporteadorCreated.secondPhase = false;
 
 }
 
