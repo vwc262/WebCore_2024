@@ -36,7 +36,7 @@ var ControladorCSV = {
                 nombreArchivo += `${element.Nombre}, `;
         });
         // Se concatena el intervalo de la fecha del reporte
-        nombreArchivo += `de ${FechaInicial} a ${FechaFinal}`;
+        nombreArchivo += `de ${FechaInicial.toISOString()} a ${FechaFinal.toISOString()}`;
 
         // Se obtine el elemto del HTML
         let aCSV = document.getElementById("aCSV");

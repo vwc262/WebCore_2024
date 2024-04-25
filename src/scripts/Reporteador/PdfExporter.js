@@ -35,7 +35,7 @@ class PDFExporter {
         });
 
         // Se concatena el intervalo de la fecha del reporte
-        name += `de ${this.FechaInicial} a ${this.FechaFinal}`
+        name += `de ${this.FechaInicial.toISOString()} a ${this.FechaFinal.toISOString()}`
 
         // Se obtine el elemto del HTML
         let chart = document.getElementById("chartdiv");
