@@ -34,7 +34,7 @@ class Estacion {
         return lineasCrudas.map((lineaCruda) => new Linea(lineaCruda));
     }
     #EstablecerSignals(signalsCrudas) {
-        return signalsCrudas.map((signalCruda) => new Signal(signalCruda));
+        return signalsCrudas.filter(signalCruda => signalCruda.habilitar == 1).map((signalCruda) => new Signal(signalCruda));
     }
     ObtenerPrimerSignal() {
         if (this.Signals.length > 0) {
