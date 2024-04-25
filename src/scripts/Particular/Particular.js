@@ -58,42 +58,44 @@ class Particular {
   }
 
   Update = () => {
-    //console.log("particular Update");
-    const estacionUpdate = Core.Instance.GetDatosEstacion(
-      this.Estacion.IdEstacion
-    );
+    if (this.Estacion) {
+      //console.log("particular Update");
+      const estacionUpdate = Core.Instance.GetDatosEstacion(
+        this.Estacion.IdEstacion
+      );
 
-    this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
-    this.setEnlaceParticular(estacionUpdate);
+      this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
+      this.setEnlaceParticular(estacionUpdate);
 
-    estacionUpdate.Signals.forEach((signal) => {
-      let signalActualizar =
-        this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
+      estacionUpdate.Signals.forEach((signal) => {
+        let signalActualizar =
+          this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
 
-      if (signalActualizar) {
-        signalActualizar.innerHTML = signal.GetValorString(true, true);
-      }
+        if (signalActualizar) {
+          signalActualizar.innerHTML = signal.GetValorString(true, true);
+        }
 
-      let $imgNivelAgua =
-        this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
+        let $imgNivelAgua =
+          this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
 
-      if ($imgNivelAgua) {
-        $imgNivelAgua.setAttribute(
-          "src",
-          estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
-        );
-      }
+        if ($imgNivelAgua) {
+          $imgNivelAgua.setAttribute(
+            "src",
+            estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
+          );
+        }
 
-      let $imgBombaParticular =
-        this.HTMLUpdateElements[`particular_bomba_${signal.IdSignal}`];
+        let $imgBombaParticular =
+          this.HTMLUpdateElements[`particular_bomba_${signal.IdSignal}`];
 
-      if ($imgBombaParticular) {
-        $imgBombaParticular.setAttribute(
-          "src",
-          estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
-        );
-      }
-    });
+        if ($imgBombaParticular) {
+          $imgBombaParticular.setAttribute(
+            "src",
+            estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
+          );
+        }
+      });
+    }
   };
 
   mostrarDetalles() {
@@ -151,13 +153,13 @@ class Particular {
 
     this.setNivelAgua(sitioAbrev);
 
-    const $btnBack = document.querySelector(".header__btnRegresar");    
+    const $btnBack = document.querySelector(".header__btnRegresar");
     $btnBack.addEventListener("click", this.backParticular);
   }
 
-  backParticular = ()=>{
+  backParticular = () => {
     SetActualModule("Perfil");
-      GoHome();
+    GoHome();
   }
 
   createSignals() {
