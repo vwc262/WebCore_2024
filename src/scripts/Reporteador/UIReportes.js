@@ -11,6 +11,7 @@
  */
 
 import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
+import controladorVideo from "./videos.js";
 
 // Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
@@ -41,8 +42,6 @@ var UIReportes = {
     4: "m",
     10: "V"
   },
-
-  root: am5.Root.new("chartdiv"),
   data: [],
   dataCruda: [],
   fechaInicial: "",
@@ -57,6 +56,13 @@ var UIReportes = {
     await UIReportes.FetchAllSignals();
 
     UIReportes.ProcesarInformacion();
+  },
+  PrepararChart: function () {
+    this.root?.dispose();
+    this.root = am5.Root.new("chartdiv", {
+      autoResize: false,
+    });
+    this.root.autoResize = false;
   },
   FetchAllSignals: async function () {
     UIReportes.idSignalsAGraficar.forEach(async (signalObj, index) => {
@@ -86,8 +92,7 @@ var UIReportes = {
       return;
     }
 
-    this.root.dispose();
-    this.root = am5.Root.new("chartdiv");
+    this.PrepararChart();
 
     //  remove all elements from the root, simply clear children of its container
     this.root.container.children.clear();
@@ -134,6 +139,9 @@ var UIReportes = {
         wheelX: "panX",
         wheelY: "zoomX",
         pinchZoomX: true,
+        width: 1345,
+        height: 760,
+        autoResize: false,
       })
     );
 
