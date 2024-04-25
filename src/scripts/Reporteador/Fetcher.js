@@ -69,8 +69,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
     case EnumProyecto.GustavoAMadero: return "GustavoAMadero";
     case EnumProyecto.Chiconautla: return "Chiconautla";
     case EnumProyecto.Encharcamientos: return "Encharcamientos";
-
   }
 
 }
-export { FetcherGraficador, EnumPeticiones, EnumProyecto, EnumNameProjecto };
+export { FetcherGraficador, EnumPeticiones, EnumProyecto, EnumNameProjecto, getNombreProyectoIdProyecto };
