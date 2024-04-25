@@ -24,6 +24,9 @@ function setBtnGraficar() {
   )}`;
 
   btnGraficar.addEventListener("click", () => {
+    const $imgRegresar = document.getElementById("imgRegresar");
+    $imgRegresar.parentNode.style.opacity = 1;    
+    $imgRegresar.parentNode.style.pointerEvents = "auto";
     UIControlador.hideUIimmediately(Object.values(UIControlador.overlays));
     controladorVideo.initVideo(videoGraficador, UIControlador.showVideoGrafica);
   });

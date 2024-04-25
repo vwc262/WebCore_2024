@@ -4,11 +4,15 @@ import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
+import UIReportes from "./Reporteador/UIReportes.js";
+import { FetcherGraficador } from "./Reporteador/Fetcher.js";
+import UIControlador from "./Reporteador/videoUI.js";
+import controladorVideo from "./Reporteador/videos.js";
 
 class VwcApp {
-
+  projectName = EnumProyecto.GustavoAMadero;
   async Start() {
-    await Core.Instance.Init(EnumProyecto.GustavoAMadero); // Espera a que tenga la informacion
+    await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.IniciarUI();
   }
 
@@ -34,6 +38,19 @@ class VwcApp {
 
     const $imgRegresar = document.getElementById("imgRegresar");
     $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
+    $imgRegresar.addEventListener('click', () => {
+      $imgRegresar.parentNode.style.opacity = 0;
+      $imgRegresar.parentNode.style.pointerEvents = "none";
+      UIControlador.hideUIimmediately(Object.values(UIControlador.graficaUI));
+      document.querySelector(".sinHistoricos").style.opacity = 0;
+      controladorVideo.initVideo(
+        // URL del video a cargar
+        `${FetcherGraficador.getImage(this.projectName, 'Reportes', '12-Cortinilla_Center_Return', 'mp4')}`,
+        // Función para mostrar la interfaz de usuario del video
+        UIControlador.showUIVideoInit
+      );
+
+    })
 
     const $loginVid1 = document.getElementById("loginVid1");
     $loginVid1.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_loop.mp4?v=${Core.Instance.version}`);
