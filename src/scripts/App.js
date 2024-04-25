@@ -12,6 +12,7 @@ import controladorVideo from "./Reporteador/videos.js";
 class VwcApp {
   projectName = EnumProyecto.GustavoAMadero;
   async Start() {
+    UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.IniciarUI();
   }

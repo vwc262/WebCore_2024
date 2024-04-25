@@ -2,9 +2,10 @@ import UIReportes from "./UIReportes.js";
 import UIControlador from "./videoUI.js";
 import controladorVideo from "./videos.js";
 import { projectName } from "./Reportes.js";
-import { FetcherGraficador } from "./Fetcher.js";
+import { FetcherGraficador, getNombreProyectoIdProyecto } from "./Fetcher.js";
 import { PDFExporter } from "./PdfExporter.js";
 import ControladorCSV from "./CSVController.js";
+import { Core } from "../Core.js";
 
 function initGraficador() {
   setBtnGraficar();
@@ -59,11 +60,11 @@ function setEventsOfficeButtons() {
 
   //btnPDF.removeEventListener("click",)
   btnPDF.addEventListener("click", () => {
-    PDFExporter.INSTANCE.descargarPDF(UIReportes.root, "TanquesPadierna", UIReportes.fechaInicial, UIReportes.fechaFinal, UIReportes.idSignalsAGraficar);
+    PDFExporter.INSTANCE.descargarPDF(UIReportes.root, `${getNombreProyectoIdProyecto(Core.Instance.IdProyecto)}`, UIReportes.fechaInicial, UIReportes.fechaFinal, UIReportes.idSignalsAGraficar);
   });
 
   btnCSV.addEventListener("click", () => {
-    ControladorCSV.ObtenerCSV(UIReportes, "TanquesPadierna", UIReportes.fechaInicial, UIReportes.fechaFinal, UIReportes.idSignalsAGraficar);
+    ControladorCSV.ObtenerCSV(UIReportes, `${getNombreProyectoIdProyecto(Core.Instance.IdProyecto)}`, UIReportes.fechaInicial, UIReportes.fechaFinal, UIReportes.idSignalsAGraficar);
   });
 }
 
