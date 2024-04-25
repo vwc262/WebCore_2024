@@ -1,5 +1,5 @@
 .carrusel-Main__Container {
-  width: 830px;
+  width: 900px;
   height: 270px;
   position: absolute;
   top: 565px;
@@ -58,12 +58,10 @@
   color: #262424;
   text-align: center;
   background: rgb(212, 212, 213);
-  background: linear-gradient(
-    0deg,
-    rgba(212, 212, 213, 0.6563669413077731) 0%,
-    rgba(246, 246, 250, 1) 50%,
-    rgba(198, 201, 201, 1) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(212, 212, 213, 0.6563669413077731) 0%,
+      rgba(246, 246, 250, 1) 50%,
+      rgba(198, 201, 201, 1) 100%);
 }
 
 .variableSignal {
@@ -71,6 +69,7 @@
   --coordY: 0px;
   --coordX: 0px;
 }
+
 .variableSignal:hover .holo {
   opacity: 1;
 }
@@ -81,4 +80,38 @@
 
 .holo {
   opacity: 0;
+}
+
+
+.oneSignal { 
+  position: absolute;
+  left: 370px;
+  top: 65.2859px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  z-index: 11;  
+  background-size: contain !important;
+}
+
+.oneSignal::after {
+  content: attr(sname);
+  position: absolute;
+  top: var(--coordY);
+  left: var(--coordX);
+  border: 1px solid white;
+  border-radius: 10px;
+  background: #ababab47;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px;
+  font-size: 10pt;
+  width: 40%;
+  color: #262424;
+  text-align: center;
+  background: rgb(212, 212, 213);
+  background: linear-gradient(0deg,
+      rgba(212, 212, 213, 0.6563669413077731) 0%,
+      rgba(246, 246, 250, 1) 50%,
+      rgba(198, 201, 201, 1) 100%);
 }

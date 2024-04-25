@@ -168,7 +168,7 @@ function moveImgClon() {
     imgClon.style.opacity = 1;
     imgClon.style.transform = `scale(${1}, ${1})`;
     imgClon.style.transition = "all 0.6s ease";
-    imgClon.style.left = 1420  + "px";
+    imgClon.style.left = 1420 + "px";
     imgClon.style.top = 350 + "px";
     setTimeout(() => {
       disapir();
@@ -186,8 +186,8 @@ function disapir() {
 function cloneImageSignal(divElement, ev) {
   // buscar la imagen clon  
   var imgClon = document.querySelector(".imgClon");
-  var bodyScale = parseFloat(document.body.style.transform.split("(")[1].replace(")",""));
-  const difX = 1920 / (1920 * bodyScale);  
+  var bodyScale = parseFloat(document.body.style.transform.split("(")[1].replace(")", ""));
+  const difX = 1920 / (1920 * bodyScale);
   imgClon.style.transition = "none";
   imgClon.style.background = divElement.style.background;
   imgClon.style.opacity = 1;
@@ -195,8 +195,8 @@ function cloneImageSignal(divElement, ev) {
   imgClon.style.height = "200px";
   imgClon.style.position = "absolute";
   imgClon.style.zIndex = "12";
-  imgClon.style.left =  -100 + ev.x * difX  + "px";
-  imgClon.style.top =  -100 + ev.y * difX + "px";
+  imgClon.style.left = -100 + ev.x * difX + "px";
+  imgClon.style.top = -100 + ev.y * difX + "px";
   imgClon.style.transform = `scale(${1}, ${1})`;
   imgClon.style.pointerEvents = "none";
 }
@@ -242,8 +242,8 @@ function moveCarousel() {
   const container = document.querySelector(".variables__Container"); // Selección del contenedor de variables del carrusel
   const step = (360 * (Math.PI / 180)) / variables.length; // Calcula el ángulo de cada variable en radianes
   const dimensions = container.getBoundingClientRect(); // Obtiene las dimensiones y posición del contenedor de variables en relación con la ventana del navegador
-  var bodyScale = parseFloat(document.body.style.transform.split("(")[1].replace(")",""));
-  
+  var bodyScale = parseFloat(document.body.style.transform.split("(")[1].replace(")", ""));
+
 
   // Itera sobre todas las variables para calcular y establecer su posición en el carrusel
   variables.forEach((variable, index) => {
@@ -280,30 +280,39 @@ function setSignalsCarousel() {
   variables.forEach((variable, index) => {
     let positionX = 0;
     let positionY = 0;
-    if (variables.length == 3) {
-      positionX = threeSignals[i];
-      positionY = threeSignals[i + 1];
-      i = i + 2;
+    if (variables.length == 1) {
+      variable.classList.add('oneSignal');
+      variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
+      variable.style.setProperty("--coordX", "65px");
     }
-    if (variables.length == 2) {
-      positionX = twoSignals[i];
-      positionY = twoSignals[i + 1];
-      i = i + 2;
+    else {
+
+      if (variables.length == 3) {
+        positionX = threeSignals[i];
+        positionY = threeSignals[i + 1];
+        i = i + 2;
+      }
+      if (variables.length == 2) {
+        positionX = twoSignals[i];
+        positionY = twoSignals[i + 1];
+        i = i + 2;
+      }
+
+      // Establece las propiedades CSS del elemento div para posicionarlo en el carrusel
+      setElementProperty([variable], {
+        position: "absolute", // Posicionamiento absoluto
+        left: `${positionX}px`, // Posición horizontal
+        top: `${positionY}px`, // Posición vertical
+        width: "200px", // Ancho del elemento
+        height: "200px", // Altura del elemento
+        cursor: "pointer", // Cambia el cursor cuando se pasa sobre el elemento
+        backgroundSize: "contain", // Ajusta el tamaño del background dependiendo del contenedor
+        backgroundRepeat: "no-repeat", // Evita que el background se repita
+        "z-index": "11",
+      });
+      variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
+      variable.style.setProperty("--coordX", "65px");
     }
-    // Establece las propiedades CSS del elemento div para posicionarlo en el carrusel
-    setElementProperty([variable], {
-      position: "absolute", // Posicionamiento absoluto
-      left: `${positionX}px`, // Posición horizontal
-      top: `${positionY}px`, // Posición vertical
-      width: "200px", // Ancho del elemento
-      height: "200px", // Altura del elemento
-      cursor: "pointer", // Cambia el cursor cuando se pasa sobre el elemento
-      backgroundSize: "contain", // Ajusta el tamaño del background dependiendo del contenedor
-      backgroundRepeat: "no-repeat", // Evita que el background se repita
-      "z-index": "11",
-    });
-    variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
-    variable.style.setProperty("--coordX", "65px");
   });
 }
 
@@ -311,11 +320,12 @@ function setSignalsCarousel() {
 function onClickCarousel(e) {
   const documentButton = document.querySelector(".btnCarrusel");
   let urlButton = "";
-  // Incrementa o decrementa el movimiento dependiendo de la dirección
-  movimiento += (e.currentTarget.id == "next" ? 1 : -1) % e.currentTarget.total;
+
 
   switch (e.type) {
     case "pointerdown":
+      // Incrementa o decrementa el movimiento dependiendo de la dirección
+      movimiento += (e.currentTarget.id == "next" ? 1 : -1) % e.currentTarget.total;
       urlButton = `${FetcherGraficador.getImage(
         projectName,
         "Reportes",
