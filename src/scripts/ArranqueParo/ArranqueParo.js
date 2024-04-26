@@ -1,16 +1,6 @@
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import {
-  EnumAppEvents,
-  EnumControllerMapeo,
-  EnumPerillaBomba,
-  EnumPerillaBombaString,
-  EnumPerillaGeneral,
-  EnumPerillaGeneralString,
-  EnumTipoSignal,
-  EnumValorBomba,
-  RequestType,
-} from "../Utilities/Enums.js";
+import { EnumAppEvents, EnumControllerMapeo, EnumPerillaBomba, EnumPerillaBombaString, EnumPerillaGeneral, EnumPerillaGeneralString, EnumTipoSignal, EnumValorBomba, RequestType, } from "../Utilities/Enums.js";
 import Login from "../Entities/Login/Login.js";
 import { ShowModal } from "../uiManager.js";
 import Estacion from "../Entities/Estacion.js";
@@ -24,9 +14,8 @@ class ArranqueParo {
    * @returns {ArranqueParo}
    */
   static get Instance() {
-    if (!this.#instance) {
+    if (!this.#instance)
       this.#instance = new ArranqueParo();
-    }
     return this.#instance;
   }
   //#endregion
@@ -35,25 +24,11 @@ class ArranqueParo {
   constructor() {
     this.idEstacion = 0;
     // suscripcion al evento logout
-    EventsManager.Instance.Suscribirevento(
-      EnumAppEvents.LogOut,
-      new EventoCustomizado(this.CloseArranqueParo)
-    );
-    EventsManager.Instance.Suscribirevento(
-      EnumAppEvents.Update,
-      new EventoCustomizado(this.Update)
-    );
-    EventsManager.Instance.Suscribirevento(
-      EnumAppEvents.ParticularChanged,
-      new EventoCustomizado(this.CloseArranqueParo)
-    );
-
-    this.#carruselContainer = document.querySelector(
-      ".arranqueParo__itemsContainer"
-    );
-
+    EventsManager.Instance.Suscribirevento(EnumAppEvents.LogOut, new EventoCustomizado(this.CloseArranqueParo));
+    EventsManager.Instance.Suscribirevento(EnumAppEvents.Update, new EventoCustomizado(this.Update));
+    EventsManager.Instance.Suscribirevento(EnumAppEvents.ParticularChanged, new EventoCustomizado(this.CloseArranqueParo));
+    this.#carruselContainer = document.querySelector(".arranqueParo__itemsContainer");
     this.#PerillaGeneralText = document.querySelector(".arranqueParo__modoTxt");
-
     // Agregar eventos de clic una sola vez en el constructor
     this.agregarEventosClic();
   }
@@ -86,42 +61,26 @@ class ArranqueParo {
     this.idEstacion = idEstacion;
     const estacionActual = Core.Instance.GetDatosEstacion(this.idEstacion); // Se obtiene la estacion Actual
     // Si ya se complen las condiciones cambiar la bandera is visible a true
-
     // Validación
     if (sesionIniciada && estacionActual.EstaEnLinea()) {
       this.animPanel();
       this.isVisible = true;
     } else {
-      const mensaje = sesionIniciada
-        ? "El sitio debe de estar en línea"
-        : "Se debe de iniciar sesión";
-
+      const mensaje = sesionIniciada ? "El sitio debe de estar en línea" : "Se debe de iniciar sesión";
       ShowModal(mensaje, "Panel de control");
     }
   }
 
   animPanel() {
-    const $panelArranqueParo = document.querySelector(
-      ".arranqueParo__panelControl"
-    );
+    const $panelArranqueParo = document.querySelector(".arranqueParo__panelControl");
     $panelArranqueParo.style.opacity = "1";
-
     const $panelFondo = document.querySelector(".arranqueParo__Container");
-    
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
-    
-    $imgArranqueParo.setAttribute(
-      "src",
-      `${Core.Instance.ResourcesPath}Control/transition.gif?v=${Core.Instance.version}`
-    );
-    
+    $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition.gif?v=${Core.Instance.version}`);
     // Agregar un event listener para detectar cuando la transición ha terminado
     $panelArranqueParo.addEventListener("transitionend", () => {
       // Verificar si la opacidad es igual a 1 después de la transición
-      if (
-        parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 &&
-        !this.#isCarouselCreated
-      ) {
+      if (parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 && !this.#isCarouselCreated) {
         $panelFondo.style.background = `url(${Core.Instance.ResourcesPath}Control/panelControl.png?v=${Core.Instance.version}) no-repeat`;
         $panelFondo.style.backgroundSize = `contain`;
         $panelFondo.style.transform = "translateY(16vh)";
@@ -139,10 +98,7 @@ class ArranqueParo {
       const bombasPrimerLinea = estacion.ObtenerBombasPorLinea(1);
       this.CrearItemsCarrusel(bombasPrimerLinea);
     } else
-      this.CrearItemsCarrusel(
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba)
-      );
-
+      this.CrearItemsCarrusel(estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba));
     this.SetPerillaGeneral(0, estacion);
     this.SetIsCarouselCreated(true);
   }
@@ -172,8 +128,7 @@ class ArranqueParo {
   SetPerillaGeneral(idLinea = 0, estacion) {
     const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); //
     this.#PerillaGeneralText.mySignal = perillaGeneral;
-    this.#PerillaGeneralText.innerText =
-      perillaGeneral.GetValorPerillaGeneral();
+    this.#PerillaGeneralText.innerText = perillaGeneral.GetValorPerillaGeneral();
     this.setUpdateElements(this.#PerillaGeneralText);
   }
   /**
@@ -185,9 +140,7 @@ class ArranqueParo {
     this.ResetCarrusel();
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     bombas.forEach((bomba, index) => {
-      const signalPerillaBomba = estacion.ObtenerValorPerillaBomba(
-        bomba.Ordinal
-      );
+      const signalPerillaBomba = estacion.ObtenerValorPerillaBomba(bomba.Ordinal);
       const carruselItem = CreateElement({
         nodeElement: "div",
         attributes: { class: "controlParo__carruselItem" },
@@ -212,7 +165,6 @@ class ArranqueParo {
         },
       });
       bombaImg.mySignal = bomba;
-
       const bombaNum = CreateElement({
         nodeElement: "div",
         attributes: { class: "arranqueParo__bombaNum" },
@@ -270,7 +222,6 @@ class ArranqueParo {
       clone.mySignal = item.children[1].mySignal; // La posicion uno es el elemento bomba
       clone.style.left = `${(index + 1) * -100}px`;
       this.#carruselContainer.prepend(clone);
-
       const perillaClone = clone.children[0];
       perillaClone.id = perillaClone.id + "C";
       perillaClone.mySignal = item.children[0].mySignal;
@@ -290,35 +241,26 @@ class ArranqueParo {
   }
 
   agregarEventosClic() {
+    const urlIzqOff = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`
+    const urlizqOn = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
     this.$btnPrev = document.querySelector(".arranqueParo__Prev");
-    this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
-    this.$btnPrev.style.backgroundSize = `contain`;
+    this.$btnNext = document.querySelector(".arranqueParo__Next");
+    this.$btnPrev.style.background = urlIzqOff;
+    this.$btnNext.style.background = urlIzqOff;
 
     this.$btnPrev.addEventListener("mouseover", () => {
-      this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
-      this.$btnPrev.style.backgroundSize = `contain`;
+      this.$btnPrev.style.background = urlizqOn;
     })
     this.$btnPrev.addEventListener("mouseout", () => {
-      this.$btnPrev.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
-      this.$btnPrev.style.backgroundSize = `contain`;
+      this.$btnPrev.style.background = urlIzqOff;
     })
-
-    this.$btnNext = document.querySelector(".arranqueParo__Next");
-    this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
-    this.$btnNext.style.backgroundSize = `contain`;
-
     this.$btnNext.addEventListener("mouseover", () => {
-      this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_on.png?v=${Core.Instance.version}) no-repeat`;
-      this.$btnNext.style.backgroundSize = `contain`;
+      this.$btnNext.style.background = urlizqOn;
     })
     this.$btnNext.addEventListener("mouseout", () => {
-      this.$btnNext.style.background = `url(${Core.Instance.ResourcesPath}Control/izq_off.png?v=${Core.Instance.version}) no-repeat`;
-      this.$btnNext.style.backgroundSize = `contain`;
+      this.$btnNext.style.background = urlIzqOff;
     })
-
-    const $closePanelArranqueParo = document.querySelector(
-      ".arranqueParo__closePanel"
-    );
+    const $closePanelArranqueParo = document.querySelector(".arranqueParo__closePanel");
 
     // Agrega evento de click al boton de cerrar panel
     $closePanelArranqueParo.addEventListener("click", this.CloseArranqueParo);
@@ -422,9 +364,10 @@ class ArranqueParo {
   SetSeleccionado(ContainerImagenBomba) {
     const hologram = CreateElement({
       nodeElement: "div",
-      attributes: { 
-        class: "hologramaBase", 
-        style: `background: url(${Core.Instance.ResourcesPath}General/dial.gif?v=${Core.Instance.version})`},
+      attributes: {
+        class: "hologramaBase",
+        style: `background: url(${Core.Instance.ResourcesPath}General/dial.gif?v=${Core.Instance.version})`
+      },
     });
     if (this.#carruselContainer.children.length > 3) {
       if (ContainerImagenBomba.style.left == "100px") {
@@ -449,13 +392,10 @@ class ArranqueParo {
       this.BorrarSeleccion();
       this.transicionCarrusel(isAtras);
       if (!isAtras) {
-        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(
-          this.#carruselContainer.firstChild.style.left.replace("px", "") - 100
-        )}px;opacity:0;`;
+        this.#carruselContainer.lastChild.style.cssText = `transition:none;left:${parseFloat(this.#carruselContainer.firstChild.style.left.replace("px", "") - 100)}px;opacity:0;`;
         this.#carruselContainer.prepend(this.#carruselContainer.lastChild);
       } else {
-        this.#carruselContainer.firstChild.style.cssText =
-          "transition:none;left:300px;opacity:0;";
+        this.#carruselContainer.firstChild.style.cssText = "transition:none;left:300px;opacity:0;";
         this.#carruselContainer.append(this.#carruselContainer.firstChild);
       }
     }
@@ -464,8 +404,7 @@ class ArranqueParo {
   transicionCarrusel(isAtras) {
     [...this.#carruselContainer.children].forEach((item) => {
       const currentX = parseFloat(item.style.left.replace("px", ""));
-      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100
-        }px;opacity:1;`;
+      item.style.cssText = `transition:left ease .2s;left:${isAtras ? currentX - 100 : currentX + 100}px;opacity:1;`;
       this.SetSeleccionado(item);
     });
   }
@@ -482,10 +421,7 @@ class ArranqueParo {
           );
           switch (signalUpdate.TipoSignal) {
             case EnumTipoSignal.Bomba:
-              elemento.setAttribute(
-                "style",
-                signalUpdate.GetImagenBombaPanelControl()
-              );
+              elemento.setAttribute("style", signalUpdate.GetImagenBombaPanelControl());
               break;
             case EnumTipoSignal.PerillaBomba:
               elemento.innerText = signalUpdate.GetValorPerillaBomba();
@@ -495,30 +431,22 @@ class ArranqueParo {
               break;
           }
         });
-      } else {
+      } else
         this.CloseArranqueParo();
-      }
+
     }
   };
   CloseArranqueParo = () => {
     // Logica para cerrar el modal
     this.isVisible = false;
     this.SetIsCarouselCreated(false);
-    //console.log("Cerrando panel MON AMI");
-    const $panelArranqueParoContainer = document.querySelector(
-      ".arranqueParo__panelControl"
-    );
-    const $panelArranqueParo = document.querySelector(
-      ".arranqueParo__Container"
-    );
+    const $panelArranqueParoContainer = document.querySelector(".arranqueParo__panelControl");
+    const $panelArranqueParo = document.querySelector(".arranqueParo__Container");
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
     $panelArranqueParoContainer.style.opacity = "0";
     $panelArranqueParo.style.opacity = "0";
     $panelArranqueParo.style.transform = "translateY(100vh)";
-    $imgArranqueParo.setAttribute(
-      "src",
-      `${Core.Instance.ResourcesPath}Control/transition_inicio.png?v=${Core.Instance.version}`
-    );
+    $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition_inicio.png?v=${Core.Instance.version}`);
     this.ResetCarrusel();
   };
   ResetCarrusel() {

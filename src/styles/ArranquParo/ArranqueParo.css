@@ -114,6 +114,7 @@
   width: 30px;
   height: 30px;
   cursor: pointer;
+  background-size: contain !important;
 }
 
 .arranqueParo__Next {
@@ -221,8 +222,8 @@
 .hologramaBase {
   width: 100px;
   height: 80px;
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
   position: relative;
   top: -43px;
   left: -14px;
