@@ -17,9 +17,10 @@ const $titleHeader = document.querySelector("#title");
 let ultimoBotonSeleccionado = $btnHome;
 
 $btnHeader.addEventListener("click", (ev) => {
-  const table = document.querySelector(".aside__tabla");
-  table.style.display = "block";
+  console.log(ev.target);
+  const table = document.querySelector(".aside__tabla");  
   if (ev.target.nodeName == "DIV") {
+    table.style.display = "block";
     [...ev.currentTarget.children].forEach((element) => {
       element.classList.remove("header__active");
     });
