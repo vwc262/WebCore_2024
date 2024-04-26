@@ -140,8 +140,7 @@ article video {
 }
 
 .sitioImg {
-  background-color: antiquewhite;
-  width: 100%;
+  width: 110%;
   height: 100%;
 }
 
@@ -336,7 +335,6 @@ article video {
 .CSVContainer:hover .holoBntsReportes {
   opacity: 1;
 }
-
 
 .holoBntsReportes {
   opacity: 0;
