@@ -84,14 +84,11 @@ class Tabla {
         `${visible ? "0" : "1"}`
       );
       console.log(this.quantityColumns);
-      this.tBodyVariablesContainer.style = `right:${
-        visible ? `-455` : `${(this.quantityColumns * 86) - 455 + 55}`
-      }px;`;
-      this.btnTabla.style.background = `url("${
-        Core.Instance.ResourcesPath
-      }General/${visible ? "btn_abrir" : "btn_abrirrotate"}.png?v=${
-        Core.Instance.version
-      }")`;
+      this.tBodyVariablesContainer.style = `right:${visible ? `-455` : `${(this.quantityColumns * 86) - 455 + 55}`
+        }px;`;
+      this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath
+        }General/${visible ? "btn_abrir" : "btn_abrirrotate"}.png?v=${Core.Instance.version
+        }")`;
     });
 
     this.columns = {
@@ -214,9 +211,9 @@ class Tabla {
     if (
       this.indice <
       -(this.cantidadElementos - this.elementosVisibles) +
-        (this.expandRowPressed.extraRows > 0
-          ? -this.expandRowPressed.extraRows + 1
-          : 0)
+      (this.expandRowPressed.extraRows > 0
+        ? -this.expandRowPressed.extraRows + 1
+        : 0)
     ) {
       this.indice =
         -(this.cantidadElementos - this.elementosVisibles) +
@@ -246,9 +243,9 @@ class Tabla {
       overflowOnTop =
         -this.indice > this.expandRowPressed.actualIndex &&
         this.expandRowPressed.extraRows +
-          this.indice +
-          this.expandRowPressed.actualIndex >=
-          0;
+        this.indice +
+        this.expandRowPressed.actualIndex >=
+        0;
 
       // console.log(overflowOnTop, -this.indice, this.expandRowPressed.actualIndex, this.expandRowPressed.extraRows + this.indice + this.expandRowPressed.actualIndex);
 
@@ -436,12 +433,10 @@ class Tabla {
     let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
     let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
 
-    row.rowContainer.style.background = `${
-      mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-    } `;
-    rowVariable.rowContainer.style.background = `${
-      mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-    } `;
+    row.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
+      } `;
+    rowVariable.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
+      } `;
 
     if (!stopPropagation) {
       const estacion = Core.Instance.data.find(
@@ -573,12 +568,14 @@ class Tabla {
 
   update() {
     let onlineCount = Core.Instance.data.filter(
-      (estacion) => estacion.Enlace != EnumEnlace.FueraLinea
+      (estacion) => estacion.Enlace != EnumEnlace.FueraLinea && !estacion.IsTimeout() && !estacion.IsEnMantenimiento()
     ).length;
-    let offlineCount = Core.Instance.data.length - onlineCount;
+    let offlineCount = Core.Instance.data.filter(
+      (estacion) => estacion.Enlace == EnumEnlace.FueraLinea && estacion.IsTimeout()
+    ).length;
 
     let enMantenimiento = Core.Instance.data.filter((estacion) =>
-      estacion.IsEnMantenimiento()
+      estacion.IsEnMantenimiento() && !estacion.IsTimeout()
     ).length;
 
     this.online.innerHTML = onlineCount;
