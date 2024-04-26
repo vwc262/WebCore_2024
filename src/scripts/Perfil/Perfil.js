@@ -177,8 +177,8 @@ class Perfil {
             this.moveY = Clamp(this.moveY, 0, this.maxPanY);
 
             this.Panner.style.transform = `translateX(${e.currentTarget.doPanX ? -this.moveX : 0}px) translateY(${e.currentTarget.doPanY ? -this.moveY : 0}px)`;
-            this.horizontalScroll.value = this.moveX;
-            this.verticalScroll.value = this.moveY;
+            this.horizontalScroll.value = e.currentTarget.doPanX ? this.moveX : 0;
+            this.verticalScroll.value = e.currentTarget.doPanY ? this.moveY : 0;
         }
     }
 
