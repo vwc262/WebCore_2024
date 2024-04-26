@@ -10,40 +10,24 @@ function InicialSelector() {
   const selectBtn = optionMenu.querySelector(".select-btn"); // Botón de selección
   const options = optionMenu.querySelector(".options"); // Contenedor de opciones
   const nameSitio = document.querySelector(".sitioTitle"); // Elemento donde se mostrará el nombre del sitio
-  var imgSitio = document.querySelector(".sitioImgContainer");
-  //const imgSitioSeleccionado = document.querySelector(".sitioImg");
+  const imgSitioSeleccionado = document.querySelector(".sitioImg");
 
   // Crea la lista de opciones al cargar la página
-  createList(options, optionMenu, nameSitio, imgSitio);
+  createList(options, optionMenu, nameSitio, imgSitioSeleccionado);
 
   // Establece el sitio predeterminado
   const sitioPredeterminado = sitiosInfo[0]; // Cambia el índice si deseas seleccionar otro sitio por defecto
-
   nameSitio.textContent = sitioPredeterminado.Nombre;
-  imgSitio.style.background = `url(${FetcherGraficador.getImage(
-    projectName,
-    `Sitios/${sitioPredeterminado.Abreviacion}/Particular`,
-    "fondo",
-    "jpg"
-  )})`;
-  imgSitio.style.backgroundSize = "cover";
-  imgSitio.style.backgroundRepeat = "no-repeat";
+  imgSitioSeleccionado.setAttribute(
+    "src",
+    `${FetcherGraficador.getImage(projectName,`Sitios/${sitioPredeterminado.Abreviacion}/Particular`,'fondo','jpg')}`,
+  );
+
 
   // Agrega un event listener al botón de selección
   selectBtn.addEventListener("click", () => {
     // Alterna la clase 'active' en el menú de opciones para mostrar u ocultar las opciones
     optionMenu.classList.toggle("active");
-
-    var imgSitio = document.querySelector(".sitioImgContainer");
-
-    imgSitio.style.background = `url(${FetcherGraficador.getImage(
-      projectName,
-      `Sitios/${sitioPredeterminado.Abreviacion}/Particular`,
-      "fondo",
-      "jpg"
-    )})`;
-    imgSitio.style.backgroundSize = "cover";
-    imgSitio.style.backgroundRepeat = "no-repeat";
   });
 }
 
@@ -60,10 +44,7 @@ function createList(
     const option = document.createElement("li"); // Crea un elemento li para la opción
     option.classList.add("option");
     const optionText = document.createElement("span"); // Crea un elemento span para el texto de la opción
-    optionText.classList.add(
-      `option-text`,
-      `${index % 2 == 0 ? "normal" : "blue"}`
-    );
+    optionText.classList.add(`option-text`, `${index % 2 == 0 ? 'normal' : 'blue'}`);
     optionText.textContent = Sitio.Nombre; // Establece el texto de la opción como el nombre del sitio
     option.appendChild(optionText); // Agrega el elemento de texto como hijo del elemento li
     optionContainer.appendChild(option); // Agrega el elemento li al contenedor de opciones
@@ -77,14 +58,10 @@ function createList(
       // Llama a la función CreateVariables con el índice de la opción seleccionada para cargar el carrusel correspondiente
       CreateVariables(sitiosInfo.indexOf(Sitio), Sitio);
 
-      imgSitioSeleccionado.style.background = `url(${FetcherGraficador.getImage(
-        projectName,
-        `Sitios/${Sitio.Abreviacion}/Particular`,
-        "fondo",
-        "jpg"
-      )})`;
-      imgSitioSeleccionado.style.backgroundSize = "cover";
-      imgSitioSeleccionado.style.backgroundRepeat = "no-repeat";
+      imgSitioSeleccionado.setAttribute(
+        "src",
+        `${FetcherGraficador.getImage(projectName,`Sitios/${Sitio.Abreviacion}/Particular`,'fondo','jpg')}`,
+      );
     });
   });
 }
