@@ -16,9 +16,8 @@ const $titleHeader = document.querySelector("#title");
 
 let ultimoBotonSeleccionado = $btnHome;
 
-$btnHeader.addEventListener("click", (ev) => {
-  console.log(ev.target);
-  const table = document.querySelector(".aside__tabla");  
+$btnHeader.addEventListener("click", (ev) => {  
+  const table = document.querySelector(".aside__tabla");
   if (ev.target.nodeName == "DIV") {
     table.style.display = "block";
     [...ev.currentTarget.children].forEach((element) => {
@@ -32,70 +31,44 @@ $btnHeader.addEventListener("click", (ev) => {
     const $asidetabla = document.querySelector(".aside__tabla");
     $btnBack.removeEventListener('click', Particular.Instance.backParticular);
     $btnBack.removeEventListener('click', backGraficador);
+    section__home.style.zIndex = "5";
+    section__mapa.style.zIndex = "5";
+    section__graficador.style.zIndex = "5";
+    section__login.style.zIndex = "5";
+    section__particular.style.zIndex = "5";
+    $datosHeader.style.opacity = "0";
+    $datosHeader.style.display = "none";
+    $btnBack.style.opacity = "0";
+    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+    $panelBombas.style.pointerEvents = "none";
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
         section__home.style.zIndex = "10";
-        section__mapa.style.zIndex = "5";
-        section__graficador.style.zIndex = "5";
-        section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
-        $btnBack.style.opacity = "0";
-        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
-        $datosHeader.style.opacity = "0";
-        $datosHeader.style.display = "none";
-        $panelBombas.style.pointerEvents = "none";
         $asidetabla.style.display = "block";
         if (isParticularActive)
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
-        section__home.style.zIndex = "5";
         section__mapa.style.zIndex = "10";
-        section__graficador.style.zIndex = "5";
-        section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
-        ultimoBotonSeleccionado = actualTarger;
-        $btnBack.style.opacity = "0";
-        $datosHeader.style.opacity = "0";
-        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
-        $datosHeader.style.display = "none";
-        $panelBombas.style.pointerEvents = "none";
+        ultimoBotonSeleccionado = actualTarger;        
         $asidetabla.style.display = "block";
         break;
       case "headerBtn__Graficador header__active":
         SetActualModule("Graficador");
-        section__home.style.zIndex = "5";
-        section__mapa.style.zIndex = "5";
         section__graficador.style.zIndex = "10";
-        section__login.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = isReporteadorCreated.secondPhase ? 1 : 0;
         $btnBack.style.pointerEvents = isReporteadorCreated.secondPhase ? 'auto' : "none";
-        $btnBack.addEventListener('click', backGraficador);
-        $datosHeader.style.opacity = "0";
-        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
-        $datosHeader.style.display = "none";
-        $panelBombas.style.pointerEvents = "none";
-        $asidetabla.style.display = "none";
-        //backGraficador();
+        $btnBack.addEventListener('click', backGraficador);        
+        $asidetabla.style.display = "none";        
         inicializarReporteador();
         break;
-      case "headerBtn__Login header__active":
-        section__home.style.zIndex = "5";
-        section__mapa.style.zIndex = "5";
-        section__graficador.style.zIndex = "5";
-        section__particular.style.zIndex = "5";
+      case "headerBtn__Login header__active":        
         section__login.style.zIndex = "10";
-        table.style.display = "none";
-        $btnBack.style.opacity = "0";
-        $datosHeader.style.opacity = "0";
-        $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
-        $datosHeader.style.display = "none";
-        $panelBombas.style.pointerEvents = "none";
+        table.style.display = "none";        
         Login.Instace.create();
         break;
     }
@@ -120,8 +93,7 @@ function Modal() {
 
   $panelControl_Particulares.addEventListener("click", (e) => {
     e.preventDefault();
-    ArranqueParo.Instance.Create(Particular.Instance.Estacion.IdEstacion);
-    // $modal.classList.add("modal--show");
+    ArranqueParo.Instance.Create(Particular.Instance.Estacion.IdEstacion);    
   });
 
   $closeModal.addEventListener("click", (e) => {
