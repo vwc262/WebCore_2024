@@ -48,6 +48,7 @@ var UIReportes = {
   fechaFinal: "",
   idSignalsAGraficar: [],
   signalesFetcheadas: 0,
+  root: undefined,
   Peticion: async function () {
     this.data = [];
     this.dataCruda = [];
@@ -60,9 +61,14 @@ var UIReportes = {
   PrepararChart: function () {
     this.root?.dispose();
     this.root = am5.Root.new("chartdiv", {
-      autoResize: false,
+      calculateSize: (dimensions) => {                
+        return {
+          width: 1345,
+          height: 760
+        }
+      }
     });
-    this.root.autoResize = false;
+
   },
   FetchAllSignals: async function () {
     UIReportes.idSignalsAGraficar.forEach(async (signalObj, index) => {
@@ -124,10 +130,11 @@ var UIReportes = {
     // https://www.amcharts.com/docs/v5/getting-started/#Root_element
 
     var root = this.root;
-
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/
-    root.setThemes([am5themes_Animated.new(root)]);
+    root.setThemes([
+      am5themes_Animated.new(root),
+    ]);
 
     // Create chart
     // https://www.amcharts.com/docs/v5/charts/xy-chart/

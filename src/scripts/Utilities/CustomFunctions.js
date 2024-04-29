@@ -1,3 +1,4 @@
+import UIReportes from "../Reporteador/UIReportes.js";
 import { EnumProyecto } from "./Enums.js";
 HTMLElement.prototype.SetMultipleAttributes = function (attributes) {
     for (const [key, value] of Object.entries(attributes)) this.setAttribute(key, value);
@@ -54,6 +55,7 @@ export const AdjustSize = function () {
     } else {
         body.style = `transform: scale(${widthScale}); margin: 0px 0px 0px 0px; transform-origin: left top; width: 1920px; height: 1080px;`;
     }
+    
 }
 
 
