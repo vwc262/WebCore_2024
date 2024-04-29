@@ -48,6 +48,7 @@ class Row {
     this.rowContainer.addEventListener("click", (event) => {
 
       const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
+      const index = Core.Instance.data.indexOf(estacion);
 
       if (Module == EnumModule.Perfil || Module == EnumModule.Particular) {
         Particular.Instance.setEstacion(estacion);
@@ -56,6 +57,11 @@ class Row {
         EventsManager.Instance.EmitirEvento('OnClickTablaToMarker', { dataMarker: estacion });
       }
 
+      let options = document.querySelector('ul.options');
+      if (options.children.length > 0) {
+        let ul = options.children[index];
+        ul.click();
+      }
 
     });
 
