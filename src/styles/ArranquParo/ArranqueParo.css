@@ -37,7 +37,7 @@
 
 .arranqueParo__modoControl {
   width: 300px;
-  height: 50px;
+  height: 25px;
 }
 
 .arranqueParo__BtnsCarrusel {
@@ -228,4 +228,31 @@
   top: -43px;
   left: -14px;
   z-index: -1;
+}
+
+
+.arranqueParo__Lineas {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  width: 286px;
+
+}
+
+.botonLinea{
+  width: 57px;
+    font-size: 11px;
+    background: #3a2c2c;
+    padding: 3px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    text-wrap: wrap;
+}
+
+.botonLinea:hover{
+  width: 57px;    
+    background: #3e3131;
+    
 }

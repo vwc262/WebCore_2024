@@ -16,7 +16,7 @@ const $titleHeader = document.querySelector("#title");
 
 let ultimoBotonSeleccionado = $btnHome;
 
-$btnHeader.addEventListener("click", (ev) => {  
+$btnHeader.addEventListener("click", (ev) => {
   const table = document.querySelector(".aside__tabla");
   if (ev.target.nodeName == "DIV") {
     table.style.display = "block";
@@ -44,16 +44,20 @@ $btnHeader.addEventListener("click", (ev) => {
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
-        section__home.style.zIndex = "10";
+        section__home.style.zIndex = isParticularActive ? "5" : "10";
+        section__particular.style.zIndex = isParticularActive ? "10" : "5";
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
-        if (isParticularActive)
+        $panelBombas.style.pointerEvents = isParticularActive ? "all" : "none";
+        if (isParticularActive){
+          $btnBack.style.opacity = "1";
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
+        }
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
         section__mapa.style.zIndex = "10";
-        ultimoBotonSeleccionado = actualTarger;        
+        ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
         break;
       case "headerBtn__Graficador header__active":
@@ -62,13 +66,13 @@ $btnHeader.addEventListener("click", (ev) => {
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = isReporteadorCreated.secondPhase ? 1 : 0;
         $btnBack.style.pointerEvents = isReporteadorCreated.secondPhase ? 'auto' : "none";
-        $btnBack.addEventListener('click', backGraficador);        
-        $asidetabla.style.display = "none";        
+        $btnBack.addEventListener('click', backGraficador);
+        $asidetabla.style.display = "none";
         inicializarReporteador();
         break;
-      case "headerBtn__Login header__active":        
+      case "headerBtn__Login header__active":
         section__login.style.zIndex = "10";
-        table.style.display = "none";        
+        table.style.display = "none";
         Login.Instace.create();
         break;
     }
@@ -93,7 +97,7 @@ function Modal() {
 
   $panelControl_Particulares.addEventListener("click", (e) => {
     e.preventDefault();
-    ArranqueParo.Instance.Create(Particular.Instance.Estacion.IdEstacion);    
+    ArranqueParo.Instance.Create(Particular.Instance.Estacion.IdEstacion);
   });
 
   $closeModal.addEventListener("click", (e) => {

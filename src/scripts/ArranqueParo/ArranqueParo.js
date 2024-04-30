@@ -81,6 +81,7 @@ class ArranqueParo {
     $panelArranqueParo.addEventListener("transitionend", () => {
       // Verificar si la opacidad es igual a 1 después de la transición
       if (parseFloat(getComputedStyle($panelArranqueParo).opacity) === 1 && !this.#isCarouselCreated) {
+        this.SetIsCarouselCreated(true);
         $panelFondo.style.background = `url(${Core.Instance.ResourcesPath}Control/panelControl.png?v=${Core.Instance.version}) no-repeat`;
         $panelFondo.style.backgroundSize = `contain`;
         $panelFondo.style.transform = "translateY(16vh)";
@@ -93,7 +94,7 @@ class ArranqueParo {
   CrearCarrusel() {
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea
-    if (estacion.Lineas.length > 1) {
+    if (estacion.Lineas.length > 1) {      
       this.PintarBotonesLineasEstacion(estacion);
       const bombasPrimerLinea = estacion.ObtenerBombasPorLinea(1);
       this.CrearItemsCarrusel(bombasPrimerLinea);
@@ -107,13 +108,17 @@ class ArranqueParo {
    * @param {Estacion} estacion
    */
   PintarBotonesLineasEstacion(estacion) {
+    // estacion.Lineas
+    const lineasContainer = document.querySelector('.arranqueParo__Lineas');
+    lineasContainer.innerHTML = "";
     estacion.Lineas.forEach((linea) => {
       const divLinea = CreateElement({
         nodeElement: "div",
-        attributes: { id: `Linea__${linea.IdLinea}`, idLinea: linea.IdLinea },
+        attributes: { id: `Linea__${linea.IdLinea}`, idLinea: linea.IdLinea, class: 'botonLinea' },
         innerText: linea.Nombre,
         events: new Map().set("click", [this.CambiarLinea]),
       });
+      lineasContainer.append(divLinea);
       // TODO : Agregar al contenedor de botones de linea
     });
   }
