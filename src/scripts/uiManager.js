@@ -39,17 +39,23 @@ $btnHeader.addEventListener("click", (ev) => {
     $datosHeader.style.opacity = "0";
     $datosHeader.style.display = "none";
     $btnBack.style.opacity = "0";
-    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
-    $panelBombas.style.pointerEvents = "none";
+    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;    
+    if(!isParticularActive){
+      $panelBombas.style.pointerEvents = "none";
+      $panelBombas.style.opacity = 0;
+      ArranqueParo.Instance.CloseArranqueParo();
+    } 
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
         section__home.style.zIndex = isParticularActive ? "5" : "10";
         section__particular.style.zIndex = isParticularActive ? "10" : "5";
+        $datosHeader.style.display = "flex";
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
         $panelBombas.style.pointerEvents = isParticularActive ? "all" : "none";
         if (isParticularActive){
+          Particular.Instance.mostrarDetalles();
           $btnBack.style.opacity = "1";
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
         }
