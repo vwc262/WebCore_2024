@@ -59,17 +59,19 @@ class ArranqueParo {
 
   //#region Metodos
   Create(idEstacion) {
-    const sesionIniciada = Login.Instace.userIsLogged; // para saber si la sesion ya se inicio
-    this.idEstacion = idEstacion;
-    const estacionActual = Core.Instance.GetDatosEstacion(this.idEstacion); // Se obtiene la estacion Actual
-    // Si ya se complen las condiciones cambiar la bandera is visible a true
-    // Validación
-    if (sesionIniciada && estacionActual.EstaEnLinea()) {
-      this.animPanel();
-      this.isVisible = true;
-    } else {
-      const mensaje = sesionIniciada ? "El sitio debe de estar en línea" : "Se debe de iniciar sesión";
-      ShowModal(mensaje, "Panel de control");
+    if(!this.#isCarouselCreated){
+      const sesionIniciada = Login.Instace.userIsLogged; // para saber si la sesion ya se inicio
+      this.idEstacion = idEstacion;
+      const estacionActual = Core.Instance.GetDatosEstacion(this.idEstacion); // Se obtiene la estacion Actual
+      // Si ya se complen las condiciones cambiar la bandera is visible a true
+      // Validación
+      if (sesionIniciada && estacionActual.EstaEnLinea()) {
+        this.animPanel();
+        this.isVisible = true;
+      } else {
+        const mensaje = sesionIniciada ? "El sitio debe de estar en línea" : "Se debe de iniciar sesión";
+        ShowModal(mensaje, "Panel de control");
+      }
     }
   }
 
