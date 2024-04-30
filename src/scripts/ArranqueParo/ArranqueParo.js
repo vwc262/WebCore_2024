@@ -7,6 +7,7 @@ import Estacion from "../Entities/Estacion.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import Signal from "../Entities/Signal.js";
 import { Fetcher } from "../Fetcher/Fetcher.js";
+import { Particular } from "../Particular/Particular.js";
 
 class ArranqueParo {
   //#region Singleton
@@ -131,7 +132,7 @@ class ArranqueParo {
     const idLinea = parseInt(e.currentTarget.getAttribute("idLinea"));
     const bombasPorLinea = estacion.ObtenerBombasPorLinea(idLinea);
     this.CrearItemsCarrusel(bombasPorLinea);
-    this.SetPerillaGeneral(idLinea - 1,estacion);
+    this.SetPerillaGeneral(idLinea - 1, estacion);
   };
   SetPerillaGeneral(idLinea = 0, estacion) {
     const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); //
@@ -318,6 +319,7 @@ class ArranqueParo {
   }
   async RequestComando() {
     const alertTitle = "Control Bombas";
+    this.textoComando = `${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}, de la estación ${Particular.Instance.Estacion.Nombre}`;
     ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
     this.codigo = this.ArmarCodigo();
     const result = await Fetcher.Instance.RequestData(
@@ -468,26 +470,57 @@ class ArranqueParo {
     this.#bombaSeleccionada = undefined;
   }
   ObtenerEstadoComando() {
+    let estadoAux = EnumEstadoComando.Insertado;
+    let timepoIni = new Date();
+    let ticksPerMinute = 600000000;
+    let toleranciaMin = 3.5;
+    let modalSetted = false;
+    let usuario= Login.Instace.userName;
+    let idEstacion = this.idEstacion;
+    let codigo = this.codigo;
+    let textoComando = this.textoComando
+
     let _interval = setInterval(async () => {
 
       const result = await Fetcher.Instance.RequestData(
         `${EnumControllerMapeo.READESTADOCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
         RequestType.POST,
         {
-          Usuario: `web24-${Login.Instace.userName}`,
-          idEstacion: this.idEstacion,
-          Codigo: this.codigo,
+          Usuario: `web24-${usuario}`,
+          idEstacion: idEstacion,
+          Codigo: codigo,
           RegModbus: 2020,
         },
         true
       );
 
-      if (result.Estado == EnumEstadoComando.Leido) {
+      if (estadoAux == EnumEstadoComando.Leido) {
+        if (!modalSetted) {
+          ShowModal("El comando se leyó exitosamente para ser ejecutado.", "Estado Comando");
+          modalSetted = true;
+        }
+      } else if (estadoAux == EnumEstadoComando.Ejecutado) {
+        if (!modalSetted) {
+          ShowModal(`El comando ${textoComando} se ejecutó exitosamente.`, "Estado Comando");
+          clearInterval(_interval);
+          modalSetted = true;
+        }
+      } else if (estadoAux == EnumEstadoComando.Error) {
+        if (!modalSetted) {
+          ShowModal(`Hubo un error al ejecutar el comando ${textoComando}.`, "Estado Comando");
+          clearInterval(_interval);
+          modalSetted = true;
+        }
+      }
 
-      } else if (result.Estado == EnumEstadoComando.Ejecutado) {
+      if (estadoAux != result.estado) {
+        modalSetted = false;
+        estadoAux = result.estado;
+      }
 
-      } else if (result.Estado == EnumEstadoComando.Error) {
-
+      if (new Date().getDate() - timepoIni > toleranciaMin * ticksPerMinute) {
+        ShowModal(`Ejecutar el comando ${textoComando}, tomó más de lo esperado; Error al ejecutar comando.`, "Estado Comando");
+        clearInterval(_interval);
       }
     }, 2000);
 

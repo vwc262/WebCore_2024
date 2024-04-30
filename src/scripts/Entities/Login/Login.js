@@ -11,7 +11,7 @@ class Login {
     #isCreated = false;
     #btnConfirmar = undefined;
     #btnCancelar = undefined;
-    #inactivityMinutes = 1;
+    #inactivityMinutes = 5;
     userIsLogged = false;
     token = '';
     userName = '';
