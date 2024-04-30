@@ -54,6 +54,30 @@
   </header>
 
   <main>
+    <svg class="optimizedsvg" width="1920" height="1080" viewbox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <filter id="otherFilter3">
+          <feColorMatrix type="matrix" values="0 0 0 1 0
+                  0 0 0 1 0
+                  0 0 0 1 0
+                  0 0 0 1 1">
+          </feColorMatrix>
+      </filter>
+      <filter id="turbulence">
+          <feTurbulence id="sea-filter" result="turbulence" baseFrequency="0.025" numOctaves="4" seed="15">
+          </feTurbulence>
+          <feColorMatrix type="matrix" in="SourceGraphic" result="o_mascara" values="0 0 0 1 0
+                  0 0 0 1 0
+                  0 0 0 1 0
+                  0 0 0 1 0">
+          </feColorMatrix>
+          <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10">
+          </feDisplacementMap>
+          <feBlend in="SourceGraphic" in2="sea-filter" result="o_movida" mode="lighten" />
+          <feComposite operator="in" in2="o_mascara" in="o_movida" />
+          <animate xlink:href="#sea-filter" attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+              values="0.02 0.01; 0.01 0.02" keyTimes="0; 1"></animate>
+      </filter>
+  </svg>
     <aside class="aside__tabla">
       <div class="curved-table-variables-container">
         <img class="fondo-tabla-variables" src="">

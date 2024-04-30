@@ -104,6 +104,14 @@ class Estacion {
         return this.Enlace >= EnumEnlace.Radio && this.Enlace <= EnumEnlace.Hibrido;
     }
 
+    SetTurbulencia(signal, modulo) {
+        let claseTurbulencia = "turbulence";
+        if (!signal.DentroRango) {
+            claseTurbulencia = '';
+        }
+        return claseTurbulencia;
+    }
+
     /**
      *
      * @param {Signal} signal
@@ -172,7 +180,7 @@ class Estacion {
     IsEnMantenimiento() {
         let enMantenimiento = this.ObtenerSignalPorTipoSignal(EnumTipoSignal.Mantenimiento);
 
-        
+
         if (enMantenimiento.length > 0) {
             return enMantenimiento[0].Valor == 0;
         } else return false;
