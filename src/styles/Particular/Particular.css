@@ -186,3 +186,13 @@
 #date__particular {
   color: #d09f24;
 }
+
+
+.optimizedsvg {
+  shape-rendering: optimizeSpeed;
+  position: absolute;
+}
+
+.turbulence {
+  filter: url(#turbulence);
+}

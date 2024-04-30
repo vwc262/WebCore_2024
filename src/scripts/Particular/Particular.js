@@ -83,6 +83,8 @@ class Particular {
             "src",
             estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
           );
+          if(signal.DentroRango) $imgNivelAgua.classList.add('turbulence');
+          else $imgNivelAgua.classList.remove('turbulence')
         }
 
         let $imgBombaParticular =
@@ -302,7 +304,7 @@ class Particular {
           nodeElement: "img",
           attributes: {
             id: `particular_bomba_${bomba.IdSignal}`,
-            class: "bomba__Particular",
+            class: "bomba__Particular ",
             src: this.Estacion.ObtenerRenderNivelOBomba(bomba, "Particular"),
           },
         });
@@ -317,7 +319,7 @@ class Particular {
           nodeElement: "img",
           attributes: {
             id: `particular_nivel_${nivel.IdSignal}`,
-            class: "nivelAgua__Particular",
+            class: `nivelAgua__Particular ${this.Estacion.SetTurbulencia(nivel)}`,
             src: this.Estacion.ObtenerRenderNivelOBomba(nivel, "Particular"),
           },
         });
