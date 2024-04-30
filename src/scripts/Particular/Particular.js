@@ -172,7 +172,13 @@ class Particular {
 
     // Filtrar los signals con TipoSignal igual a 1, 3 o 4
     this.Estacion.Signals.filter((signal) =>
-      [1, 3, 4].includes(signal.TipoSignal)
+      signal.TipoSignal == EnumTipoSignal.Nivel ||
+      signal.TipoSignal == EnumTipoSignal.Presion ||
+      signal.TipoSignal == EnumTipoSignal.Gasto ||
+      signal.TipoSignal == EnumTipoSignal.Totalizado ||
+      signal.TipoSignal == EnumTipoSignal.ValvulaAnalogica ||
+      signal.TipoSignal == EnumTipoSignal.ValvulaDiscreta ||
+      signal.TipoSignal == EnumTipoSignal.Voltaje
     ).forEach((signal) => {
       const $signalItem = CreateElement({
         nodeElement: "div",
