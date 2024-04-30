@@ -23,9 +23,12 @@ function setBtnGraficar() {
     "10-Cortinilla_Center",
     "mp4"
   )}`;
-
+  
   btnGraficar.addEventListener("click", () => {
     const $imgRegresar = document.getElementById("imgRegresar");
+    const $btnGraficar = document.querySelector(".headerIcon");
+
+    $btnGraficar.style.pointerEvents="none"
     $imgRegresar.parentNode.style.opacity = 1;    
     $imgRegresar.parentNode.style.pointerEvents = "auto";
     UIControlador.hideUIimmediately(Object.values(UIControlador.overlays));

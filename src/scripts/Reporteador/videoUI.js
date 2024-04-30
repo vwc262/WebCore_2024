@@ -4,7 +4,6 @@ import UIReportes from "./UIReportes.js";
 import { CreateVariables } from "./carrusel.js"; // Importa CreateVariables del módulo carrusel.js
 import { setElementProperty } from "./utilities.js"; // Importa setElementProperty del módulo utilities.js
 
-
 // Definición del objeto UIControlador
 const UIControlador = {
   // Objeto que contiene referencias a elementos del DOM relacionados con la interfaz de usuario
@@ -15,7 +14,11 @@ const UIControlador = {
     seleccionarSitio: document.querySelector(".select-menu"), // Referencia al menú de selección del sitio
     carruselContainer: document.querySelector(".carrusel-Main__Container"), // Referencia al contenedor del carrusel
     variablesContainer: document.querySelector(".variables__Container"), // Referencia al contenedor del carrusel
-    bntGraficar: document.querySelector(".buttonGraficar"), // Referencias al boton de graficar
+    //bntGraficar: document.querySelector(".headerIcon"), // Referencias al boton de graficar
+  },
+
+  btnGraficar: {
+    bntGraficar: document.querySelector(".headerIcon"), // Referencias al boton de graficar
   },
 
   graficaUI: {
@@ -35,6 +38,13 @@ const UIControlador = {
       opacity: 1, // Establece la opacidad en 1
       "pointer-events": "auto", // Habilita eventos de puntero
     });
+
+    if (UIReportes.idSignalsAGraficar.length > 0) {
+      setElementProperty(Object.values(UIControlador.btnGraficar), {
+        opacity: 1, // Establece la opacidad en 1
+        "pointer-events": "auto", // Habilita eventos de puntero
+      });
+    }
   },
 
   // Método para ocultar inmediatamente la interfaz de usuario
@@ -48,7 +58,6 @@ const UIControlador = {
       opacity: 1, // Establece la opacidad en 1
       "pointer-events": "auto", // Habilita eventos de puntero
     });
-
     UIReportes.Peticion();
   },
 };

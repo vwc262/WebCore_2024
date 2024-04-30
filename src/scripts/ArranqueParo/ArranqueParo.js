@@ -88,7 +88,7 @@ class ArranqueParo {
         this.SetIsCarouselCreated(true);
         $panelFondo.style.background = `url(${Core.Instance.ResourcesPath}Control/panelControl.png?v=${Core.Instance.version}) no-repeat`;
         $panelFondo.style.backgroundSize = `contain`;
-        $panelFondo.style.transform = "translateY(16vh)";
+        $panelFondo.style.transform = "translateY(225px)";
         $panelFondo.style.opacity = "1";
         this.CrearCarrusel();
       }

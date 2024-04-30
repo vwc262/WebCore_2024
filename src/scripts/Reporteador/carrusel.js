@@ -132,7 +132,11 @@ function createVariableElements(container, signalsByType) {
 
         divElement.addEventListener("pointerup", () => {
           // Valida si la signal existe para mover el ghost
-          if (UIReportes.idSignalsAGraficar.find((signalSel) => signalSel.IdSignal == signal.IdSignal) != undefined)
+          if (
+            UIReportes.idSignalsAGraficar.find(
+              (signalSel) => signalSel.IdSignal == signal.IdSignal
+            ) != undefined
+          )
             moveImgClon();
           else disapir();
           // Cambia los colores de las dignals
@@ -162,7 +166,7 @@ function moveImgClon() {
     imgClon.style.transform = `scale(${1}, ${1})`;
     imgClon.style.transition = "all 0.6s ease";
     imgClon.style.left = 1520 + "px";
-    imgClon.style.top = (250 + (UIReportes.idSignalsAGraficar.length * 30)) + "px";
+    imgClon.style.top = 250 + UIReportes.idSignalsAGraficar.length * 30 + "px";
     canMove = UIReportes.idSignalsAGraficar.length == 6 ? false : true;
     setTimeout(() => {
       disapir();
@@ -174,13 +178,15 @@ function moveImgClon() {
 function disapir() {
   var imgClon = document.querySelector(".imgClon");
   imgClon.style.transform = `scale(${1}, ${0})`; // Escala la imagen de la signal
-  imgClon.style.opacity = 0; // Oculta la imagen de la signal  
+  imgClon.style.opacity = 0; // Oculta la imagen de la signal
 }
 
 function cloneImageSignal(divElement, ev) {
-  // buscar la imagen clon  
+  // buscar la imagen clon
   var imgClon = document.querySelector(".imgClon");
-  var bodyScale = parseFloat(document.body.style.transform.split("(")[1].replace(")", ""));
+  var bodyScale = parseFloat(
+    document.body.style.transform.split("(")[1].replace(")", "")
+  );
   const difX = 1920 / (1920 * bodyScale);
   imgClon.style.transition = "none";
   imgClon.style.background = divElement.style.background;
@@ -236,8 +242,9 @@ function moveCarousel() {
   const container = document.querySelector(".variables__Container"); // Selección del contenedor de variables del carrusel
   const step = (360 * (Math.PI / 180)) / variables.length; // Calcula el ángulo de cada variable en radianes
   const dimensions = container.getBoundingClientRect(); // Obtiene las dimensiones y posición del contenedor de variables en relación con la ventana del navegador
-  var bodyScale = parseFloat(document.body.style.transform.split("(")[1].replace(")", ""));
-
+  var bodyScale = parseFloat(
+    document.body.style.transform.split("(")[1].replace(")", "")
+  );
 
   // Itera sobre todas las variables para calcular y establecer su posición en el carrusel
   variables.forEach((variable, index) => {
@@ -275,12 +282,13 @@ function setSignalsCarousel() {
     let positionX = 0;
     let positionY = 0;
     if (variables.length == 1) {
-      variable.classList.add('oneSignal');
-      variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
+      variable.classList.add("oneSignal");
+      variable.style.setProperty(
+        "--coordY",
+        positionY >= 135 ? "195px" : "0px"
+      );
       variable.style.setProperty("--coordX", "65px");
-    }
-    else {
-
+    } else {
       if (variables.length == 3) {
         positionX = threeSignals[i];
         positionY = threeSignals[i + 1];
@@ -304,7 +312,10 @@ function setSignalsCarousel() {
         backgroundRepeat: "no-repeat", // Evita que el background se repita
         "z-index": "11",
       });
-      variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
+      variable.style.setProperty(
+        "--coordY",
+        positionY >= 135 ? "195px" : "0px"
+      );
       variable.style.setProperty("--coordX", "65px");
     }
   });
@@ -315,11 +326,11 @@ function onClickCarousel(e) {
   const documentButton = document.querySelector(".btnCarrusel");
   let urlButton = "";
 
-
   switch (e.type) {
     case "pointerdown":
       // Incrementa o decrementa el movimiento dependiendo de la dirección
-      movimiento += (e.currentTarget.id == "next" ? 1 : -1) % e.currentTarget.total;
+      movimiento +=
+        (e.currentTarget.id == "next" ? 1 : -1) % e.currentTarget.total;
       urlButton = `${FetcherGraficador.getImage(
         projectName,
         "Reportes",
@@ -350,7 +361,6 @@ function GetSitio(idEstacion) {
   return sitio;
 }
 function CreateSignalItem(signal, IdEstacion) {
-  
   const signalContainer = document.querySelector(".signalContent");
   const signalItem = document.createElement("div");
   signalItem.classList.add("signalItem");
@@ -407,11 +417,14 @@ function CreateSignalItem(signal, IdEstacion) {
       Rotate: rotates[UIReportes.idSignalsAGraficar.length],
       Nombre: `${signal.Nombre} - (${sitio.Nombre})`,
     });
-    canMove = true;  
+    canMove = true;
   }
 
   updateColors();
+  validarBtnGraficar();
+}
 
+function validarBtnGraficar() {
   const buttonGraficador = document.querySelector(".headerIcon");
 
   if (UIReportes.idSignalsAGraficar.length == 0) {
@@ -490,6 +503,7 @@ function cleanSignals() {
       signalContent.innerHTML = "";
       UIReportes.idSignalsAGraficar = [];
       updateColors();
+      validarBtnGraficar();
     }
   });
 }
@@ -499,6 +513,7 @@ function cleanSignal(ev) {
   borrarVariableAGraficar(signalContent);
   console.log(signalContent);
   updateColors();
+  validarBtnGraficar();
 }
 
 // Llama a la función para agregar el evento de clic al elemento signalFooterImg
