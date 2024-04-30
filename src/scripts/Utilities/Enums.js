@@ -45,7 +45,8 @@ const EnumControllerMapeo = {
   READ: "ReadSignalsEstacion",
   DELETE: "DeleteSignalMapeo",
   UPDATE: "UpdateSignalMapeo",
-  INSERTCOMANDO: "InsertComando"
+  INSERTCOMANDO: "InsertComando",
+  READESTADOCOMANDO: "ReadEstadoComandos"
 };
 /**
  * @returns {EnumTipoSignal}
@@ -227,6 +228,14 @@ const EnumModule = {
   Graficador: "Graficador",
 };
 
+const EnumEstadoComando = {
+  Default: 0,
+  Insertado: 1,
+  Leido: 2,
+  Ejecutado: 3,
+  Error: 4,
+}
+
 export {
   RequestType,
   EnumProyecto,
@@ -248,4 +257,5 @@ export {
   EnumDentroLimite,
   EnumAppEvents,
   EnumModule,
+  EnumEstadoComando,
 };

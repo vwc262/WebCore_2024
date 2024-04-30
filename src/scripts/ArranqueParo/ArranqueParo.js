@@ -1,12 +1,13 @@
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumAppEvents, EnumControllerMapeo, EnumPerillaBomba, EnumPerillaBombaString, EnumPerillaGeneral, EnumPerillaGeneralString, EnumTipoSignal, EnumValorBomba, RequestType, } from "../Utilities/Enums.js";
+import { EnumAppEvents, EnumControllerMapeo, EnumEstadoComando, EnumPerillaBomba, EnumPerillaBombaString, EnumPerillaGeneral, EnumPerillaGeneralString, EnumTipoSignal, EnumValorBomba, RequestType, } from "../Utilities/Enums.js";
 import Login from "../Entities/Login/Login.js";
 import { ShowModal } from "../uiManager.js";
 import Estacion from "../Entities/Estacion.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import Signal from "../Entities/Signal.js";
 import { Fetcher } from "../Fetcher/Fetcher.js";
+
 class ArranqueParo {
   //#region Singleton
   static #instance = undefined;
@@ -311,17 +312,22 @@ class ArranqueParo {
   async RequestComando() {
     const alertTitle = "Control Bombas";
     ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
+    this.codigo = this.ArmarCodigo();
     const result = await Fetcher.Instance.RequestData(
       `${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
       RequestType.POST,
       {
         Usuario: `web24-${Login.Instace.userName}`,
         idEstacion: this.idEstacion,
-        Codigo: this.ArmarCodigo(),
+        Codigo: this.codigo,
         RegModbus: 2020,
       },
       true
     );
+
+    if (result.exito) {
+      this.ObtenerEstadoComando();
+    }
   }
   EnviarComando = async (e) => {
     const alertTitle = "Control Bombas";
@@ -453,6 +459,32 @@ class ArranqueParo {
     this.deleteUpdateElements();
     this.#carruselContainer.innerHTML = "";
     this.#bombaSeleccionada = undefined;
+  }
+  ObtenerEstadoComando() {
+    let _interval = setInterval(async () => {
+
+      const result = await Fetcher.Instance.RequestData(
+        `${EnumControllerMapeo.READESTADOCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
+        RequestType.POST,
+        {
+          Usuario: `web24-${Login.Instace.userName}`,
+          idEstacion: this.idEstacion,
+          Codigo: this.codigo,
+          RegModbus: 2020,
+        },
+        true
+      );
+
+      if (result.Estado == EnumEstadoComando.Leido) {
+
+      } else if (result.Estado == EnumEstadoComando.Ejecutado) {
+
+      } else if (result.Estado == EnumEstadoComando.Error) {
+
+      }
+    }, 2000);
+
+
   }
   //#endregion
 }
