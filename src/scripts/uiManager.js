@@ -40,11 +40,6 @@ $btnHeader.addEventListener("click", (ev) => {
     $datosHeader.style.display = "none";
     $btnBack.style.opacity = "0";
     $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;    
-    if(!isParticularActive){
-      $panelBombas.style.pointerEvents = "none";
-      $panelBombas.style.opacity = 0;
-      ArranqueParo.Instance.CloseArranqueParo();
-    } 
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
@@ -54,17 +49,20 @@ $btnHeader.addEventListener("click", (ev) => {
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
         $panelBombas.style.pointerEvents = isParticularActive ? "all" : "none";
-        if (isParticularActive){
+        if (isParticularActive) {
           Particular.Instance.mostrarDetalles();
           $btnBack.style.opacity = "1";
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
-        }
+        } else 
+          CerrarPanelBombas($panelBombas);
+        
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
         section__mapa.style.zIndex = "10";
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
+        CerrarPanelBombas($panelBombas);
         break;
       case "headerBtn__Graficador header__active":
         SetActualModule("Graficador");
@@ -75,13 +73,21 @@ $btnHeader.addEventListener("click", (ev) => {
         $btnBack.addEventListener('click', backGraficador);
         $asidetabla.style.display = "none";
         inicializarReporteador();
+        CerrarPanelBombas($panelBombas);
         break;
       case "headerBtn__Login header__active":
         section__login.style.zIndex = "10";
         table.style.display = "none";
         Login.Instace.create();
+        CerrarPanelBombas($panelBombas);
         break;
     }
+  }
+
+  function CerrarPanelBombas($panelBombas) {
+    $panelBombas.style.pointerEvents = "none";
+    $panelBombas.style.opacity = 0;
+    ArranqueParo.Instance.CloseArranqueParo();
   }
 });
 
