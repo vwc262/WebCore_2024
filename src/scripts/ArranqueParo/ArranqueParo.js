@@ -93,8 +93,8 @@ class ArranqueParo {
 
   CrearCarrusel() {
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
-    // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea
-    if (estacion.Lineas.length > 1) {      
+    // Verificar que la estacion contenga mas de una linea y pintar por default la primer linea    
+    if (estacion.Lineas.length > 1) {
       this.PintarBotonesLineasEstacion(estacion);
       const bombasPrimerLinea = estacion.ObtenerBombasPorLinea(1);
       this.CrearItemsCarrusel(bombasPrimerLinea);
@@ -111,10 +111,10 @@ class ArranqueParo {
     // estacion.Lineas
     const lineasContainer = document.querySelector('.arranqueParo__Lineas');
     lineasContainer.innerHTML = "";
-    estacion.Lineas.forEach((linea) => {
+    estacion.Lineas.forEach((linea, index) => {
       const divLinea = CreateElement({
         nodeElement: "div",
-        attributes: { id: `Linea__${linea.IdLinea}`, idLinea: linea.IdLinea, class: 'botonLinea' },
+        attributes: { id: `Linea__${linea.IdLinea}`, idLinea: linea.IdLinea, class: `botonLinea ${index == 0 ? 'lineaActive' : ''}` },
         innerText: linea.Nombre,
         events: new Map().set("click", [this.CambiarLinea]),
       });
@@ -124,11 +124,13 @@ class ArranqueParo {
   }
 
   CambiarLinea = (e) => {
+    document.querySelectorAll('.botonLinea').forEach(e => e.classList.remove('lineaActive'));
+    e.currentTarget.classList.add('lineaActive')
     const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
     const idLinea = parseInt(e.currentTarget.getAttribute("idLinea"));
     const bombasPorLinea = estacion.ObtenerBombasPorLinea(idLinea);
     this.CrearItemsCarrusel(bombasPorLinea);
-    this.SetPerillaGeneral(idLinea - 1);
+    this.SetPerillaGeneral(idLinea - 1,estacion);
   };
   SetPerillaGeneral(idLinea = 0, estacion) {
     const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); //

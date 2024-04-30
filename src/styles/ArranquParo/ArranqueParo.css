@@ -237,22 +237,27 @@
   justify-content: center;
   align-items: center;
   width: 286px;
-
+  gap: 5px;
 }
 
-.botonLinea{
+.botonLinea {
+  width: 20%;
+  font-size: 11px;
+  background: #120f0f;
+  padding: 3px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  text-wrap: wrap;
+}
+
+.botonLinea:hover {
   width: 57px;
-    font-size: 11px;
-    background: #3a2c2c;
-    padding: 3px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    text-wrap: wrap;
+  background: #3e3131;
+
 }
 
-.botonLinea:hover{
-  width: 57px;    
-    background: #3e3131;
-    
+.lineaActive {
+  color: rgb(217, 155, 81);
+  background: #3a2c2c;
 }
