@@ -122,6 +122,7 @@ const EnumUnidadesSignal = {
   2: "<sup>kg</sup>/<sub>cm<sup>2</sup></sub>",
   3: "<sup>l</sup>/<sub>s</sub>",
   4: "m<sup>3</sup>",
+  5: "%",
   10: "V",
 };
 
