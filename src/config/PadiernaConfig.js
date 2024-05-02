@@ -155,7 +155,7 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 22,
                 Imagen:
-                    "position: absolute; width: 250px; height: 160px; left: 226px; top: 874px;",
+                    "position: absolute; width: 338px; height: 172px; left: 193px; top: 876px;",
                 Etiqueta: "position: absolute; left: 88px; top: 892px;",
                 Estado: "display:none;",
             },
