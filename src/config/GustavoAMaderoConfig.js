@@ -1,5 +1,5 @@
 export const GustavoAMaderoConfig = {
-  doPanX: false,
+  doPanX: true,
   doPanY: false,
   widthRender: 1920,
   heightRender: 1080,
