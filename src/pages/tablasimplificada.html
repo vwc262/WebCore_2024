@@ -14,7 +14,10 @@
 
   <header>
     <div class="header__title">
-      <h1 class="titleProyecto">Pozos Sistema Padierna</h1>
+      <div class="header_titleImg">
+        <h1 class="titleProyecto">Pozos Sistema Padierna</h1>
+        <img class="loginIcon" src="../imgs/loginIcon.png">
+      </div>
       <div class="pozos__enlinea">
         <h2>Total en línea: </h2>
         <span id="online"></span> / <span id="offline"></span>
@@ -48,6 +51,38 @@
       </table>
     </article>
   </main>
+
+  <section class="modalLogin">
+    <div id="imgModal" class="modal__container">
+      <div class="modal__text">
+        <h2 class="modal__title">Login</h2>
+        <div class="datosLoginContainer">
+          <div class="NombreUsuario">Usuario: <input id="usuario" type="text"></div>
+          <div class="ContraseñaUsuario">Contraseña: <input id="password" type="password"> </div>
+        </div>
+        <div class="modal__buttons">
+          <a href="#" class="modal__closeLogin">Cerrar</a>
+          <a href="#" class="modal__confirmarLogin">Confirmar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal">
+    <div id="imgModal" class="modal__container">
+      <div class="modal__text">
+        <h2 class="modal__title2"></h2>
+        <input class="modal__paragraph" id="notaInput" type="text">
+        <div class="modal__buttons">
+          <a href="#" class="modal__close">Cerrar</a>
+          <a href="#" class="modal__GuardarNota">Agregar</a>
+          <a href="#" class="modal__ConsultaNota">Consulta</a>
+        </div>
+        <h2 class="modal__title3"></h2>
+        <div class="notasContainer"></div>
+      </div>
+    </div>
+  </section>
 
 </body>
 
