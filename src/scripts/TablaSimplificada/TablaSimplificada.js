@@ -1,10 +1,14 @@
+import { Credentials } from "../Entities/Login/Credentials.js";
+import { Fetcher } from "../Fetcher/Fetcher.js";
 import { Core } from "../TablaSimplificada/Core.js";
 import {
   EnumEnlace,
   EnumProyecto,
   EnumTipoSignal,
   EnumTipoSignalNomenclatura,
+  RequestType,
 } from "../Utilities/Enums.js";
+import { Nota } from "./Nota.js";
 
 var EnumTipoFiltro = {
   enlace: "enlace",
@@ -23,6 +27,7 @@ class TablaSimplificada {
   constructor() {
     this.DATOS__AUX = Core.Instance.data;
     this.InitFiltros();
+    this.ModalLogin();
     setInterval(() => {
       this.Update();
     }, 10000);
@@ -102,6 +107,10 @@ class TablaSimplificada {
         if (key === "Nombre") {
           this.NEW__CELL.style.fontWeight = "bold";
           this.NEW__CELL.style.textTransform = "uppercase";
+          this.NEW__CELL.classList.add("log");
+          this.NEW__CELL.setAttribute("id", filteredRow.IdEstacion);
+          this.NEW__CELL.removeEventListener("click", this.ModalNotas);
+          this.NEW__CELL.addEventListener("click", this.ModalNotas);
         }
 
         if (key === "Signals") {
@@ -442,6 +451,137 @@ class TablaSimplificada {
 
     // regresa la diferencia entre las partes numéricas
     return numericA - numericB;
+  }
+
+  ModalLogin() {
+    this.USUARIO = document.querySelector("#usuario");
+    this.PASSWORD = document.querySelector("#password");
+    this.$imgLogin = document.querySelector(".loginIcon");
+    this.$modalLogin = document.querySelector(".modalLogin");
+    this.$closeLogin = document.querySelector(".modal__closeLogin");
+    this.$confirmarLogin = document.querySelector(".modal__confirmarLogin");
+
+    this.$imgLogin.addEventListener("click", () => {
+      this.$modalLogin.classList.add("modal--show");
+    });
+
+    this.$closeLogin.addEventListener("click", () => {
+      this.$modalLogin.classList.remove("modal--show");
+    });
+
+    this.$confirmarLogin.addEventListener("click", () => {
+      if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
+        alert("Los campos no deben de estar vacios");
+      }
+
+      this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);
+    });
+  }
+
+  ModalNotas = (ev) => {
+    if (Fetcher.Instance.isLogged) {
+      let NOMBRE_SITIO = ev.currentTarget.innerText;
+      let ID_ESTACION = ev.currentTarget.id;
+
+      this.$modal = document.querySelector(".modal");
+      this.$modalTitle = document.querySelector(".modal__title2");
+      this.$modalClose = document.querySelector(".modal__close");
+      this.$modalAgregar = document.querySelector(".modal__GuardarNota");
+      this.$modalConsulta = document.querySelector(".modal__ConsultaNota");
+      this.$notasContainer = document.querySelector(".notasContainer");
+
+      this.$notasContainer.innerHTML = "";
+
+      this.$modal.classList.add("modal--show");
+
+      this.$modalTitle.innerText = `Agregar nota a: ${NOMBRE_SITIO}`;
+
+      this.$modalClose.addEventListener("click", () => {
+        this.$modal.classList.remove("modal--show");
+      });
+
+      this.$modalAgregar.removeEventListener("click", this.EnviarNota);
+      this.$modalAgregar.addEventListener("click", this.EnviarNota);
+
+      this.$modalConsulta.removeEventListener("click", this.ConsultaNota);
+      this.$modalConsulta.addEventListener("click", this.ConsultaNota);
+
+      this.$modalConsulta.idEstacion = ID_ESTACION;
+      this.$modalConsulta.Nombre = NOMBRE_SITIO;
+      this.$modalAgregar.idEstacion = ID_ESTACION;
+
+      this.$modalConsulta.click();
+    }
+  };
+
+  async ConfirmarLogin(USUARIO, PASSWORD) {
+    this.$modalLogin = document.querySelector(".modalLogin");
+    this.$itemlog = document.querySelectorAll(".log");
+    this.loginIcon = document.querySelector(".loginIcon");
+
+    this.RESULT_LOGIN = await Fetcher.Instance.RequestData(
+      "login",
+      RequestType.POST,
+      new Credentials(USUARIO, PASSWORD, EnumProyecto.Padierna),
+      true
+    );
+
+    if (this.RESULT_LOGIN.response) {
+      Fetcher.Instance.isLogged = true;
+      this.$modalLogin.classList.remove("modal--show");
+      this.loginIcon.style.pointerEvents = "none";
+      this.$itemlog.forEach((item) => {
+        item.style.pointerEvents = "auto";
+      });
+    }
+  }
+
+  async EnviarNota(ev) {
+    this.$notaInput = document.querySelector("#notaInput");
+    this.USUARIO = document.querySelector("#usuario");
+
+    const idEstacion = ev.currentTarget.idEstacion;
+
+    if (this.$notaInput.value == "") {
+      alert("No se puede agregar una nota vacia");
+      return;
+    }
+
+    this.RESULT__NOTA = await Fetcher.Instance.RequestData(
+      "AgregarNota?idProyecto=2",
+      RequestType.POST,
+      new Nota(
+        idEstacion,
+        `${this.USUARIO.value} - ${this.$notaInput.value}`,
+        false
+      ),
+      true
+    );
+
+    if (this.RESULT__NOTA.response) {
+      this.$notaInput.value = "";
+    }
+  }
+
+  async ConsultaNota(ev) {
+    this.TARGET = ev.currentTarget.idEstacion;
+    this.NOMBRE_SITIO = ev.currentTarget.Nombre;
+    this.$modalTitle = document.querySelector(".modal__title3");
+    this.$notasContainer = document.querySelector(".notasContainer");
+
+    this.$modalTitle.innerText = `Notas sobre: ${this.NOMBRE_SITIO}`;
+    this.$notasContainer.innerHTML = "";
+
+    const RESULT_CONSULTA_NOTA = await Fetcher.Instance.RequestData(
+      "ConsultarNotas?idProyecto=2",
+      RequestType.POST,
+      new Nota(this.TARGET, "", false),
+      true
+    );
+
+    RESULT_CONSULTA_NOTA.forEach((notaText) => {
+      this.$notasContainer.innerHTML += `<p class="modal__paragraph2">${notaText.notaUsuario}</p>`;
+    });
   }
 }
 
