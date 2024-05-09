@@ -83,7 +83,7 @@ class Particular {
             "src",
             estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
           );
-          if(signal.DentroRango) $imgNivelAgua.classList.add('turbulence');
+          if (signal.DentroRango) $imgNivelAgua.classList.add('turbulence');
           else $imgNivelAgua.classList.remove('turbulence')
         }
 
@@ -97,6 +97,8 @@ class Particular {
           );
         }
       });
+
+      this.showHideSlider();
     }
   };
 
@@ -224,9 +226,7 @@ class Particular {
       ".particular__slider input[type='range']"
     );
 
-    // Mostrar el control deslizante si los elementos se desbordan del contenedor
-    document.querySelector(".particular__slider").style.display =
-      container.scrollWidth > container.clientWidth ? "flex" : "none";
+    this.showHideSlider();
 
     sliderInputBola.style.setProperty(
       "--bolaSlider",
@@ -236,8 +236,10 @@ class Particular {
     if (
       document.querySelector(".particular__slider").style.display !== "none"
     ) {
-      sliderInput.addEventListener("input", () => {
-        const currentValue = parseFloat(sliderInput.value);
+      sliderInput.addEventListener("input", (event) => {
+        const container = document.querySelector(".particular__ItemsContainer");
+
+        const currentValue = parseFloat(event.target.value);
         const containerWidth = container.offsetWidth;
         const scrollWidth = container.scrollWidth;
         const maxScrollLeft = scrollWidth - containerWidth;
@@ -246,6 +248,14 @@ class Particular {
         container.scrollLeft = scrollLeft;
       });
     }
+  }
+
+  showHideSlider() {
+    const container = document.querySelector(".particular__ItemsContainer");
+
+    // Mostrar el control deslizante si los elementos se desbordan del contenedor
+    document.querySelector(".particular__slider").style.display =
+      container.scrollWidth > container.offsetWidth ? "flex" : "none";
   }
 
   panelControl() {
