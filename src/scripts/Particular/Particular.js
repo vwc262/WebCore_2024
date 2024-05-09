@@ -130,6 +130,7 @@ class Particular {
     this.$btnBack.style.opacity = "1";
     this.$btnBack.style.pointerEvents = "auto";
     this.$panelBombas.style.pointerEvents = "auto";
+    this.$particularCapaTextoImg.style.zIndex = 1
 
     // Cambiar el texto de acuerdo al estado de la estación
     this.setEnlaceParticular(this.Estacion);
