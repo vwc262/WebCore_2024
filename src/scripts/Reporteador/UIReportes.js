@@ -10,6 +10,7 @@
  * ---------------------------------------
  */
 
+import { ArmarFechaSQL } from "../Utilities/CustomFunctions.js";
 import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
 import controladorVideo from "./videos.js";
 
@@ -61,7 +62,7 @@ var UIReportes = {
   PrepararChart: function () {
     this.root?.dispose();
     this.root = am5.Root.new("chartdiv", {
-      calculateSize: (dimensions) => {                
+      calculateSize: (dimensions) => {
         return {
           width: 1345,
           height: 760
@@ -74,8 +75,8 @@ var UIReportes = {
     UIReportes.idSignalsAGraficar.forEach(async (signalObj, index) => {
       var _data = {
         idSignal: signalObj.IdSignal,
-        fechaInicial: UIReportes.fechaInicial.toJSON(),
-        FechaFinal: UIReportes.fechaFinal.toJSON(),
+        fechaInicial: ArmarFechaSQL(UIReportes.fechaInicial, true),
+        FechaFinal: ArmarFechaSQL(UIReportes.fechaFinal, false),
       };
 
       var jsonDataReportes = await FetcherGraficador.request({

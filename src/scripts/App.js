@@ -10,7 +10,7 @@ import UIControlador from "./Reporteador/videoUI.js";
 import controladorVideo from "./Reporteador/videos.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Padierna;
+  projectName = EnumProyecto.GustavoAMadero;
   async Start() {
     //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
@@ -38,7 +38,7 @@ class VwcApp {
     $imgLogin.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_btn.png?v=${Core.Instance.version}`);
 
     const $imgRegresar = document.getElementById("imgRegresar");
-    $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);    
+    $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
 
     const $loginVid1 = document.getElementById("loginVid1");
     $loginVid1.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_loop.mp4?v=${Core.Instance.version}`);

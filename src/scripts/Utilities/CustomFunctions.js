@@ -62,6 +62,15 @@ export const AdjustSize = function () {
   }
 };
 
+export const ArmarFechaSQL = function (datetime, isInicio) {
+  //2024/05/14 00:00
+  const year = datetime.getFullYear();
+  const month = datetime.getMonth() + 1;
+  const day = datetime.getDate();
+  return `${year}/${month.toString().padStart(2, "0")}/${day.toString().padStart(2, "0")} ${isInicio ? "00:00" : "23:59"}`;
+
+}
+
 /**
  * Restringe un valor a un rango dado
  * @param {number} val
