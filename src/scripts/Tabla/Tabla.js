@@ -571,7 +571,7 @@ class Tabla {
       (estacion) => estacion.Enlace != EnumEnlace.FueraLinea && !estacion.IsTimeout() && !estacion.IsEnMantenimiento()
     ).length;
     let offlineCount = Core.Instance.data.filter(
-      (estacion) => estacion.Enlace == EnumEnlace.FueraLinea && estacion.IsTimeout()
+      (estacion) => estacion.Enlace == EnumEnlace.FueraLinea || estacion.IsTimeout()
     ).length;
 
     let enMantenimiento = Core.Instance.data.filter((estacion) =>
