@@ -47,7 +47,7 @@ class SitioPerfil {
             nodeElement: 'p',
             attributes: {
                 id: `idEstacion_${estacion.IdEstacion}`, class: 'estiloNombreEstacion',
-                style: `background: ${estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(140, 13, 13)" : "rgb(0, 128, 0)"}`
+                style: `background: ${estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)"}`
             },
             innerText: estacion.Nombre
         });
