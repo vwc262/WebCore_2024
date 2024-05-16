@@ -571,15 +571,21 @@ class Tabla {
       (estacion) => estacion.Enlace != EnumEnlace.FueraLinea && !estacion.IsTimeout() && !estacion.IsEnMantenimiento()
     ).length;
     let offlineCount = Core.Instance.data.filter(
-      (estacion) => estacion.Enlace == EnumEnlace.FueraLinea || estacion.IsTimeout()
+      (estacion) => {
+        if (estacion.IsTimeout()) return true;
+        else if( estacion.IsEnMantenimiento()) return false;
+        else if(estacion.Enlace == EnumEnlace.FueraLinea) return true
+      }
     ).length;
+    console.log(offlineCount)
 
     let enMantenimiento = Core.Instance.data.filter((estacion) =>
       estacion.IsEnMantenimiento() && !estacion.IsTimeout()
     ).length;
 
+
     this.online.innerHTML = onlineCount;
-    this.offline.innerHTML = offlineCount;
+    this.offline.innerHTML = offlineCount
     this.mantenimiento.innerHTML = enMantenimiento;
   }
 
