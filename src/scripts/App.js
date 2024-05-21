@@ -8,9 +8,13 @@ import UIReportes from "./Reporteador/UIReportes.js";
 import { FetcherGraficador } from "./Reporteador/Fetcher.js";
 import UIControlador from "./Reporteador/videoUI.js";
 import controladorVideo from "./Reporteador/videos.js";
+import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Padierna;
+  projectName = EnumProyecto.PozosSistemaLerma;
+  constructor() {
+    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('pozos');    
+  }
   async Start() {
     //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
@@ -60,7 +64,12 @@ class VwcApp {
     $imgModal.style.backgroundSize = `contain`;
 
     new Tabla().create(); // Inicio de tabla curva
-    new Perfil().create(); // Inicio del perfil
+    if(this.isPerfilTipoPozos){
+      new PerfilPozos();
+    }
+    else{
+      new Perfil().create(); // Inicio del perfil
+    }
     new Mapa().create();
 
     AdjustSize();

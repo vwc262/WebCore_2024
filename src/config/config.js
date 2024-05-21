@@ -3,6 +3,7 @@ import { ChiconautlaConfig } from "./ChiconautlaConfig.js";
 import { EncharcamientosConfig } from "./EncharcamientosConfig.js";
 import { GustavoAMaderoConfig } from "./GustavoAMaderoConfig.js";
 import { PadiernaConfig } from "./PadiernaConfig.js";
+import { PozosSistemaLermaConfig } from "./PozosSistemaLermaConfig.js";
 import { SantaCatarinaConfig } from "./SantaCatarinaConfig.js";
 
 
@@ -28,6 +29,9 @@ var Configuracion = {
                 break;
             case EnumProyecto.Encharcamientos:
                 config = EncharcamientosConfig;
+                break;
+            case EnumProyecto.PozosSistemaLerma:
+                config = PozosSistemaLermaConfig;
                 break;
         }
 
