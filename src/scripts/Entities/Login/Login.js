@@ -11,7 +11,7 @@ class Login {
     #isCreated = false;
     #btnConfirmar = undefined;
     #btnCancelar = undefined;
-    #inactivityMinutes = 5;
+    #inactivityMinutes = 10;
     userIsLogged = false;
     token = '';
     userName = '';
@@ -71,12 +71,13 @@ class Login {
             if (result.response) {
                 this.#lastInteraction = new Date();
                 this.CheckUserInteraction();
-                this.#verifySessionIntervalId = setInterval(this.#VerifyIfSessionIsValid, 15 * 1000);
+                // this.#verifySessionIntervalId = setInterval(this.#VerifyIfSessionIsValid, 15 * 1000);
+                setTimeout(this.#OnLogOut, 1000 * 60 * this.#inactivityMinutes ); // despues de 5 mints
                 this.userIsLogged = true;
                 this.token = result.token;
                 this.userName = this.inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
-                ShowModal(result.message, "Inicio sesión");
+                ShowModal(result.message + ' la sesión finalizara en 5 minutos', "Inicio sesión");
                 GoBack();
             } else {
                 ShowModal(`${result.message}`, "Inicio sesión");
@@ -99,15 +100,16 @@ class Login {
     #OnUserInteracion = () => {
         this.#lastInteraction = new Date();
     }
-    #OnLogOut = () => {
+    #OnLogOut = async () => {
         this.userIsLogged = false;
         this.token = '';
         this.userName = '';
         clearInterval(this.#verifySessionIntervalId);
         ['touchstart', 'click'].forEach(eventName => window.removeEventListener(eventName, this.#OnUserInteracion));
         this.btnHeaderLogin.style.display = 'flex';
-        ShowModal('Se cerro sesión por falta de interacción', "Inicio sesión");
+        ShowModal('La sesión ha finalizado', "Inicio sesión");
         EventsManager.Instance.EmitirEvento(EnumAppEvents.LogOut);
+        const result = await Fetcher.Instance.RequestData("Logout", RequestType.POST, new Credentials(Login.Instace.inputusuario.value, Login.Instace.inputContrasena.value, Core.Instance.IdProyecto), true);
     }
     #VerifyIfSessionIsValid = () => {
         const actualTime = new Date();
