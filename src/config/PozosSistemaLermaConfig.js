@@ -1,7 +1,7 @@
 export const PozosSistemaLermaConfig = {
-    doPanX: true,
+    doPanX: false,
     doPanY: false,
-    widthRender: 1945,
+    widthRender: 1920,
     heightRender: 1080,
     perfil: {
         estilosEstacion: [

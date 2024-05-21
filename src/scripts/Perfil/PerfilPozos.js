@@ -34,19 +34,19 @@ class PerfilPozos {
 
         let tuberiaEstacion;
 
-        // this.Panner = CreateElement({
-        //     nodeElement: "div",
-        //     attributes: { class: "perfilPanner" },
-        //     events: new Map().set('mousemove', [this.#drag])
-        // });
-        // this.Panner.doPanX = configuracionProyecto.doPanX;
-        // this.Panner.doPanY = configuracionProyecto.doPanY;
+        this.Panner = CreateElement({
+            nodeElement: "div",
+            attributes: { class: "perfilPanner" },
+            // events: new Map().set('mousemove', [this.#drag])
+        });
+        this.Panner.doPanX = configuracionProyecto.doPanX;
+        this.Panner.doPanY = configuracionProyecto.doPanY;
 
         let backgroundPerfil = CreateElement({
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
             }
         });
 
@@ -54,7 +54,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
             }
         });
 
@@ -62,7 +62,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
             }
         });
 
@@ -134,7 +134,7 @@ class PerfilPozos {
         //     }
         // })
 
-        // this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
+        this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner);
         if (configuracionProyecto.doPanX)
