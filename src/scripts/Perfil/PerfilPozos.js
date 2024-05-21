@@ -119,20 +119,20 @@ class PerfilPozos {
             }
         })
 
-        configuracionProyecto.perfil.estilosTuberias.PorGravedad.forEach(element => {
-            if (element != undefined) {
-                tuberiaEstacion = CreateElement({
-                    nodeElement: "canvas",
-                    attributes: {
-                        class: "tuberiaPerfil", id: `${element.Tag}_Gravedad`,
-                        style: element.css
-                    }
-                });
+        // configuracionProyecto.perfil.estilosTuberias.PorGravedad.forEach(element => {
+        //     if (element != undefined) {
+        //         tuberiaEstacion = CreateElement({
+        //             nodeElement: "canvas",
+        //             attributes: {
+        //                 class: "tuberiaPerfil", id: `${element.Tag}_Gravedad`,
+        //                 style: element.css
+        //             }
+        //         });
 
-                tuberiasDiv.appendChild(tuberiaEstacion);
-                this.InitTuberias(element.css, tuberiaEstacion);
-            }
-        })
+        //         tuberiasDiv.appendChild(tuberiaEstacion);
+        //         this.InitTuberias(element.css, tuberiaEstacion);
+        //     }
+        // })
 
         // this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
