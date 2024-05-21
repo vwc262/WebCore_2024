@@ -1,5 +1,5 @@
 import * as CustomFunctions from "../../Utilities/CustomFunctions.js";
-import {  EnumAppEvents, RequestType } from "../../Utilities/Enums.js";
+import { EnumAppEvents, RequestType } from "../../Utilities/Enums.js";
 import { GoBack, GoHome, ShowModal } from "../../uiManager.js";
 import { Core } from "../../Core.js"
 import { Fetcher } from "../../Fetcher/Fetcher.js";
@@ -23,8 +23,8 @@ class Login {
     /**
      * @type {HTMLElement}
      */
-    #inputusuario = undefined;
-    #inputContrasena = undefined;
+    inputusuario = undefined;
+    inputContrasena = undefined;
     static #instance = undefined;
     /**
      * @returns {Login}
@@ -49,9 +49,9 @@ class Login {
             const textoContrasena = CustomFunctions.CreateElement({ nodeElement: 'p', attributes: { class: 'loginInput', style: 'width: 184px; height: 22px; position: absolute; left: 305px; top: 82px; color: rgb(0, 229, 220); text-align: center;' }, innerText: 'Contraseña' });
             this.#btnCancelar = CustomFunctions.CreateElement({ nodeElement: 'button', attributes: { type: "button", class: "floatingBtnCancelar cancelarLogin loginInput", style: `background:url(${Core.Instance.ResourcesPath}Control/btn_cancelar.png) ` }, events: new Map().set('click', [this.#OnCancelar]) });
             this.#btnConfirmar = CustomFunctions.CreateElement({ nodeElement: 'button', attributes: { type: "button", class: "floatingBtn entrarContrasena loginInput", style: `background:url(${Core.Instance.ResourcesPath}Control/btn_entrar.png)` }, events: new Map().set('click', [this.#OnConfirmar]) });
-            this.#inputusuario = CustomFunctions.CreateElement({ nodeElement: 'input', attributes: { id: "loginPanneluserdiv", type: "text", class: "username loginInput", placeholder: "invitado" } });
-            this.#inputContrasena = CustomFunctions.CreateElement({ nodeElement: 'input', attributes: { id: "loginPannelpassdiv", type: "password", class: "passwordField  loginInput", placeholder: "****" }, events: new Map().set('keydown', [this.#OnConfirmarEnter]) });
-            container.append(textoUsuario, textoContrasena, this.#inputusuario, this.#inputContrasena, this.#btnCancelar, this.#btnConfirmar);
+            this.inputusuario = CustomFunctions.CreateElement({ nodeElement: 'input', attributes: { id: "loginPanneluserdiv", type: "text", class: "username loginInput", placeholder: "invitado" } });
+            this.inputContrasena = CustomFunctions.CreateElement({ nodeElement: 'input', attributes: { id: "loginPannelpassdiv", type: "password", class: "passwordField  loginInput", placeholder: "****" }, events: new Map().set('keydown', [this.#OnConfirmarEnter]) });
+            container.append(textoUsuario, textoContrasena, this.inputusuario, this.inputContrasena, this.#btnCancelar, this.#btnConfirmar);
             mainContainer.append(container);
             // Contenido creado
             this.#isCreated = true;
@@ -61,25 +61,25 @@ class Login {
         GoHome();
     }
     #OnConfirmar = async (e) => {
-        if (this.#inputusuario.value == '' && this.#inputContrasena.value == '') {
+        if (this.inputusuario.value == '' && this.inputContrasena.value == '') {
             ShowModal('Ingresar datos en los campos de usuario y contraseña', "Inicio sesión");
             return;
         }
         if (!this.userIsLogged) {
 
-            const result = await Fetcher.Instance.RequestData(this.action, RequestType.POST, new Credentials(this.#inputusuario.value, this.#inputContrasena.value, Core.Instance.IdProyecto), true);
+            const result = await Fetcher.Instance.RequestData(this.action, RequestType.POST, new Credentials(this.inputusuario.value, this.inputContrasena.value, Core.Instance.IdProyecto), true);
             if (result.response) {
                 this.#lastInteraction = new Date();
                 this.CheckUserInteraction();
                 this.#verifySessionIntervalId = setInterval(this.#VerifyIfSessionIsValid, 15 * 1000);
                 this.userIsLogged = true;
                 this.token = result.token;
-                this.userName = this.#inputusuario.value;
+                this.userName = this.inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
                 ShowModal(result.message, "Inicio sesión");
                 GoBack();
             } else {
-                ShowModal('Credenciales no autorizadas', "Inicio sesión");
+                ShowModal(`${result.message}`, "Inicio sesión");
             }
         }
         else {
@@ -118,5 +118,12 @@ class Login {
 
     }
 }
+
+
+window.onbeforeunload = async function (event) {
+    if (Login.Instace.userIsLogged) {
+        const result = await Fetcher.Instance.RequestData("Logout", RequestType.POST, new Credentials(Login.Instace.inputusuario.value, Login.Instace.inputContrasena.value, Core.Instance.IdProyecto), true);
+    }
+};
 
 export default Login;
