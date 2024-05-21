@@ -63,7 +63,7 @@ class Core {
     );
     this.data = this.GetData(data);
 
-    this.randomValues();
+    //this.randomValues();
     //console.log(this.data);
     EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
   }
