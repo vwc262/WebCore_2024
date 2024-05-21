@@ -8,13 +8,11 @@
   display: flex;
   width: 1455px;
   height: 50px;
-  background: linear-gradient(
-    90deg,
-    rgb(36 53 69) 0%,
-    rgb(21 21 22 / 94%) 35%,
-    rgb(14 83 97 / 99%) 70%,
-    rgb(36 49 52) 100%
-  );
+  background: linear-gradient(90deg,
+      rgb(36 53 69) 0%,
+      rgb(21 21 22 / 94%) 35%,
+      rgb(14 83 97 / 99%) 70%,
+      rgb(36 49 52) 100%);
   align-items: center;
   gap: 51px;
   z-index: 1;
@@ -63,10 +61,12 @@
   text-align: center;
   display: inline-block;
 }
+
 .etiqueta__Valor {
   text-align: center;
   display: inline-block;
 }
+
 .etiqueta__Unidad {
   color: goldenrod;
   text-align: center;
@@ -133,12 +133,10 @@
   height: 10px;
   display: inline-block;
   border-radius: 25px;
-  background: linear-gradient(
-    90deg,
-    rgb(24 49 57) 0%,
-    rgb(77 200 124) 50%,
-    rgb(20 45 53) 100%
-  );
+  background: linear-gradient(90deg,
+      rgb(24 49 57) 0%,
+      rgb(77 200 124) 50%,
+      rgb(20 45 53) 100%);
   transform: scale(0.65);
   box-shadow: 0px 4px 5px 0px #0000008f;
 }
@@ -146,7 +144,7 @@
 .particular__slider input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   position: relative;
-  background: var(--bolaSlider); 
+  background: var(--bolaSlider);
   width: 22px;
   height: 22px;
   background-repeat: no-repeat;
@@ -195,4 +193,10 @@
 
 .turbulence {
   filter: url(#turbulence);
+}
+
+.fallaAcParticular {
+  position: absolute;
+  left: 1250px;
+  width: 45px;
 }

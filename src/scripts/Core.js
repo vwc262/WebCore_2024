@@ -63,7 +63,7 @@ class Core {
     );
     this.data = this.GetData(data);
 
-   // this.randomValues();
+    this.randomValues();
     //console.log(this.data);
     EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
   }
@@ -74,7 +74,7 @@ class Core {
       let ss = time.getSeconds();
 
       estacion.Enlace =  ss > 45 ? 3 : ss > 30 ? 2 : ss > 15 ? 1 : 0;
-      //estacion.Tiempo = time.toISOString();
+      estacion.Tiempo = time.toISOString();
 
       estacion.Signals.forEach((signal) => {
         signal.DentroLimite = ss > 40 ? 2 : ss > 20 ? 1 : 0;
@@ -113,7 +113,7 @@ class Core {
         }
         else if (signal.TipoSignal == EnumTipoSignal.Mantenimiento) {
           signal.Valor = ss > 45 ? 1 : 0;
-        }
+        }        
         else {
           signal.Valor = ss;
         }

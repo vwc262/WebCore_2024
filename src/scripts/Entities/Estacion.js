@@ -185,6 +185,13 @@ class Estacion {
             return enMantenimiento[0].Valor == 0;
         } else return false;
     }
+
+    IsFallaAc() {
+        let fallaAc = this.ObtenerSignalPorTipoSignal(EnumTipoSignal.FallaAC);
+        if (fallaAc.length > 0)
+            return fallaAc[0].Valor == 0;
+        else return false;
+    }
 }
 
 export default Estacion;

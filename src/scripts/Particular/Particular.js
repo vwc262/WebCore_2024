@@ -55,8 +55,14 @@ class Particular {
       this.estacion = estacion;
     }
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
+    this.MostrarFallaAc(this.Estacion.IsFallaAc());
   }
-
+  MostrarFallaAc(mostrar) {
+    let urlFallaAc = `${Core.Instance.ResourcesPath}/Iconos/backupenergy.png?v=${Core.Instance.version}`
+    let imgFallaAc = document.querySelector('.fallaAcParticular');
+    imgFallaAc.setAttribute('src', urlFallaAc);
+    imgFallaAc.style.display = mostrar ? 'block' : 'none';
+  }
   Update = () => {
     if (this.Estacion) {
       //console.log("particular Update");
@@ -97,6 +103,8 @@ class Particular {
           );
         }
       });
+
+      this.MostrarFallaAc(estacionUpdate.IsFallaAc());
 
       this.showHideSlider();
     }

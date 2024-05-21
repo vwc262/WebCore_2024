@@ -348,6 +348,10 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
+      if(estacion.IsFallaAc()){
+        ShowModal("El sitio presenta falla en la energia", alertTitle);
+        return;
+      }
       if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]) {
         if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBombaString[EnumPerillaBomba.Remoto]) {
           if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {

@@ -17,6 +17,7 @@ const $titleHeader = document.querySelector("#title");
 let ultimoBotonSeleccionado = $btnHome;
 
 $btnHeader.addEventListener("click", (ev) => {
+  Particular.Instance.MostrarFallaAc(false);
   const table = document.querySelector(".aside__tabla");
   if (ev.target.nodeName == "DIV") {
     table.style.display = "block";
