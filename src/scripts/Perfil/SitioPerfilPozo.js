@@ -6,7 +6,7 @@ import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
 
-class SitioPerfil {
+class SitioPerfilPozo {
     /**
      * @type {HTMLElement}
      */
@@ -34,11 +34,20 @@ class SitioPerfil {
             nodeElement: 'div',
             attributes: {
                 id: `etiquetaSitioPerfil_${estacion.Nombre}`,
-                class: 'etiquetaSitioPerfil'
+                class: 'lblCirclePerfil'
             },
         });
 
-        
+        let circuloEnlace = CreateElement({
+            nodeElement: 'img',
+            attributes: {
+                id: `pl_Enlace${estacion.IdEstacion}`,
+                class: 'imLinkCircle',
+                src:`${Core.Instance.ResourcesPath}General/circlestate_2.png`
+            },
+        });
+
+
 
         let signalDiv = CreateElement({
             nodeElement: 'div',
@@ -81,7 +90,7 @@ class SitioPerfil {
             this.ElementosDinamicosHTML[valorSignal.id] = valorSignal;
         }
 
-        etiquetaDiv.append(nombreSitio, signalDiv);
+        etiquetaDiv.append(circuloEnlace);
         this.ponerPosiciones(etiquetaDiv, this.estilosEstacionEtiqueta);
 
         return etiquetaDiv;
@@ -183,4 +192,4 @@ class SitioPerfil {
     }
 }
 
-export default SitioPerfil;
+export default SitioPerfilPozo;

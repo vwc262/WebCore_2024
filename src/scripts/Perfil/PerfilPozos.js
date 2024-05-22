@@ -5,8 +5,20 @@ import { Configuracion } from "../../config/config.js";
 import ParticlesAnimator from "./ParticlesAnimationManager.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
+import SitioPerfilPozo from "./SitioPerfilPozo.js";
+
 
 class PerfilPozos {
+    //#region  Propiedades
+    PanzoomRef = undefined;
+    oldScrollValuePan = 0;
+    PanZoomConfig = {
+        maxScale: 5,
+        minScale: 1,
+        startScale: 1,
+        force: false
+    };
+    //#endregion
     constructor() {
         this.create();
     }
@@ -97,7 +109,7 @@ class PerfilPozos {
         });
 
         Core.Instance.data.forEach(estacion => {
-            const estacionPerfil = new SitioPerfil(estacion.IdEstacion, function (isMouseOut, estacion, css) {
+            const estacionPerfil = new SitioPerfilPozo(estacion.IdEstacion, function (isMouseOut, estacion, css) {
                 this.setHoverPerfil(isMouseOut, estacion, css);
             }.bind(this));
 
@@ -144,6 +156,83 @@ class PerfilPozos {
 
 
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
+
+        this.establecerPanzoom(this.Panner);
+
+    }
+
+    establecerPanzoom(elementoPanner) {
+        console.log(elementoPanner.parent);
+        this.PanzoomRef = Panzoom(elementoPanner, this.PanZoomConfig);
+        elementoPanner.addEventListener('wheel', this.PanzoomRef.zoomWithWheel);
+        elementoPanner.addEventListener('panzoomzoom', this.checarLimitesPanzoom);
+        elementoPanner.addEventListener('panzoompan', this.checarLimitesPanzoom);
+    }
+
+    checarLimitesPanzoom(e) {
+        let origenX = ((e.detail.scale * vwc.Settings.panWidth - vwc.Settings.panWidth) / (e.detail.scale * 2));
+        let origenY = (e.detail.scale * vwc.Settings.panHeight - vwc.Settings.panHeight) / (e.detail.scale * 2);
+        let limiteX = {
+            pos: origenX,
+            neg: - origenX
+        }
+        let limiteY = {
+            pos: origenY,
+            neg: - origenY
+        }        
+        let newX, newY;        
+        if (e.detail.scale === this.PanZoomConfig.minScale && (e.detail.x !== 0 || e.detail.y !== 0)) {
+            this.PanzoomRef.pan(origenX, origenY);
+            newX = origenX;
+            newY = origenY;
+        }
+        else if (e.detail.x > limiteX.pos || e.detail.x < (limiteX.neg) || e.detail.y > limiteY.pos || e.detail.y < limiteY.neg) {
+            newX =  e.detail.x <= limiteX.pos && e.detail.x >= limiteX.neg ? e.detail.x : e.detail.x > limiteX.pos ? limiteX.pos : limiteX.neg;
+            newY =  e.detail.y <= limiteY.pos && e.detail.y >= limiteY.neg ? e.detail.y : e.detail.y > limiteY.pos ? limiteY.pos : limiteY.neg;            
+            this.PanzoomRef.pan(newX, newY);
+            let dir = this.oldScrollValuePan > e.detail.x ? 1 : -1;
+            this.oldScrollValuePan = newX;            
+        }
+        else {
+            e.detail.x =  e.detail.x;
+            e.detail.y =  e.detail.y;
+            newX = e.detail.x;
+            newY = e.detail.y;
+        }          
+        // if (vwc.Settings.useShortCut) {
+        //     let areaVisual = Perfil.GetArea(e.detail.scale, newX, newY);
+        //     let idAreaNuevo = -1;
+        //     let EmpalmeNuevo = 0;
+        //     for (let i = 0; i < vwc.Settings.findShortCut; i++) {
+        //         let areaSeleccion = Perfil.GetArea(vwc.Settings.findSCZoom[i], vwc.Settings.findSCposX[i], vwc.Settings.findSCposY[i]);
+        //         let empalme = Perfil.CalcularEmpalme(areaVisual, areaSeleccion);
+        //         if (empalme > EmpalmeNuevo) {
+        //             EmpalmeNuevo = empalme;
+        //             idAreaNuevo = i;
+        //         }
+        //     }
+        //     if (!Perfil.SpinnerAction && idAreaNuevo >= 0 && EmpalmeNuevo > 0.3 && (Perfil.idArea === undefined || Perfil.idArea != idAreaNuevo)) {
+        //         Perfil.idArea = idAreaNuevo;
+
+        //         Table.scrollIndex = vwc.Settings.findSCTableIndex[idAreaNuevo];
+        //         if (Perfil.needSpinerValidation)
+        //             Table.UpdateContent();
+        //         Perfil.needSpinerValidation = true;
+        //         vwc.Settings.currentCellIndex = idAreaNuevo;
+
+        //         Perfil.updateSPinner(vwc.Settings.cellSelectorDegrees[vwc.Settings.currentCellIndex]);
+        //     }
+
+        //     let restablecerBtn = Perfil.DOMElements.restablecerBtn.HTML;
+        //     if (e.detail.scale <= 1)
+        //         restablecerBtn.attr({ isHide: true }).hide();
+        //     else {
+        //         if (!Perfil.googleMapActive)
+        //             restablecerBtn.attr({ isHide: false }).show();
+
+        //     }
+
+        // }
 
     }
 }

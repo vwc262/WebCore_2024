@@ -316,7 +316,7 @@ class ArranqueParo {
     return (
       (this.idEstacion << 8) |
       (this.#bombaSeleccionada.Ordinal << 4) |
-      (this.#prenderBomba ? 1 : 0)
+      (this.#prenderBomba ? 1 : 2)
     );
   }
   async RequestComando() {

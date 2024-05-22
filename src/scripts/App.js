@@ -13,7 +13,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 class VwcApp {
   projectName = EnumProyecto.PozosSistemaLerma;
   constructor() {
-    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('pozos');    
+    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');    
   }
   async Start() {
     //UIReportes.PrepararChart();
