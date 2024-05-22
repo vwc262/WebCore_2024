@@ -118,6 +118,7 @@ class SitioPerfilPozo {
         if (estacionUpdate) {
             const imagenBomba = this;
             imagenBomba.setAttribute('src', estacionUpdate.ObtenerRenderNivelOBombaLerma(imagenBomba.signal, "Perfil"));
+            imagenBomba.style.filter = imagenBomba.signal.Valor == 4 ? "hue-rotate(295deg)" : "[hue-rotate(0deg)";
         }
     }
     Update() {

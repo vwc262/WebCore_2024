@@ -13,7 +13,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 class VwcApp {
   projectName = EnumProyecto.PozosSistemaLerma;
   constructor() {
-    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');    
+    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
   async Start() {
     //UIReportes.PrepararChart();
@@ -64,10 +64,10 @@ class VwcApp {
     $imgModal.style.backgroundSize = `contain`;
 
     new Tabla().create(); // Inicio de tabla curva
-    if(this.isPerfilTipoPozos){
-      new PerfilPozos();
+    if (this.isPerfilTipoPozos) {
+      PerfilPozos.Instace.create();
     }
-    else{
+    else {
       new Perfil().create(); // Inicio del perfil
     }
     new Mapa().create();

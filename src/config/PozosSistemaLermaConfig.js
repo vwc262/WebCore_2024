@@ -3,6 +3,9 @@ export const PozosSistemaLermaConfig = {
     doPanY: false,
     widthRender: 1920,
     heightRender: 1080,
+    findSCZoom: [1, 4, 2.5, 3, 3],
+    findSCposX: [0, -395, -74, 273, 635],
+    findSCposY: [0, 183, 140, -41, -64],
     perfil: {
         estilosEstacion: [
             {

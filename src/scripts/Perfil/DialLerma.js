@@ -1,8 +1,11 @@
+import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
+import { PerfilPozos } from "./PerfilPozos.js";
 
 class DialLerma {
     //#region Propiedades
+    static #instance = undefined;
     currentDegree = 288;
     currentIndex = 0;
     spinnner = undefined;
@@ -13,6 +16,13 @@ class DialLerma {
         /*'Alzate':*/ 144,
         /*'Ixtlahuaca':*/ 216,
     ];
+    /**
+     * @returns {DialLerma}
+     */
+    static get Instance() {
+        if (!this.#instance) this.#instance = new DialLerma();
+        return this.#instance;
+    }
     //#endregion
     create() {
         const containerPerfil = document.querySelector('#section__home');
@@ -72,9 +82,14 @@ class DialLerma {
         this.currentIndex = this.currentIndex < 0 ? this.cellSelectorDegrees.length + this.currentIndex : this.currentIndex % this.cellSelectorDegrees.length;
         const inicio = isRight ? 10 : 23
         const fin = isRight ? 23 : 35;
-        let count = inicio;
-        this.AnimateButton(count, fin, animButtonsContainer);
+        this.AnimateButton(inicio, fin, animButtonsContainer);
         this.UpdateRueda(this.cellSelectorDegrees[this.currentIndex]);
+        this.IrARegion();
+    }
+    IrARegion() {
+        const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+        PerfilPozos.Instace.PanzoomRef.zoom(config.findSCZoom[this.currentIndex], { force: true });
+        PerfilPozos.Instace.PanzoomRef.pan(config.findSCposX[this.currentIndex], config.findSCposY[this.currentIndex], { animate: true, duration: 1000, force: true });
     }
     AnimateButton(i, fin, element) {
         element.style.background = `url(${Core.Instance.ResourcesPath}Secuencias/Click00${i}.png)`;

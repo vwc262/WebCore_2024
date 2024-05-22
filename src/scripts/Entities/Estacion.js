@@ -163,7 +163,7 @@ class Estacion {
     ObtenerRenderNivelOBombaLerma(signal) {        
         let indiceImagen = "";
         let bombaMorada = signal.Valor == 4;
-        indiceImagen = bombaMorada == 4 ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
+        indiceImagen = bombaMorada  ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
         const url = `${Core.Instance.ResourcesPath}Sitios/global/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
         return url;
     }

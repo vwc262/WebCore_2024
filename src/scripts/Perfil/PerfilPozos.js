@@ -11,6 +11,7 @@ import { DialLerma } from "./DialLerma.js";
 
 class PerfilPozos {
     //#region  Propiedades
+    static #instance = undefined;
     PanzoomRef = undefined;
     oldScrollValuePan = 0;
     renderWidth = 0;
@@ -23,8 +24,15 @@ class PerfilPozos {
     };
     //#endregion
     constructor() {
-        this.create();
-        new DialLerma().create();        
+        // this.create();
+        // new DialLerma().create();
+    }
+    /**     
+   * @returns {PerfilPozos}
+   */
+    static get Instace() {
+        if (!this.#instance) this.#instance = new PerfilPozos();
+        return this.#instance;
     }
 
     create() {
@@ -116,8 +124,8 @@ class PerfilPozos {
 
         Core.Instance.data.forEach(estacion => {
             const estacionPerfil = new SitioPerfilPozo(estacion.IdEstacion, function (isMouseOut, estacion, css) {
-                 this.setHoverPerfil(isMouseOut, estacion, css);
-            }.bind(this),this.hoverDiv);
+                this.setHoverPerfil(isMouseOut, estacion, css);
+            }.bind(this), this.hoverDiv);
 
             const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
             backgroundPerfil.appendChild(estacionPerfil.createSitio());
@@ -140,8 +148,9 @@ class PerfilPozos {
         this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner);
-        
+
         this.establecerPanzoom(this.Panner);
+        DialLerma.Instance.create();
 
     }
 
