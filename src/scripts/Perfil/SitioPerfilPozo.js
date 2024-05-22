@@ -47,7 +47,7 @@ class SitioPerfilPozo {
                 class: 'imLinkCircle',
                 src: `${Core.Instance.ResourcesPath}General/circlestate_2.png`
             },
-            events: new Map().set("mouseover", [() => {
+            events: new Map().set("click", [this.mostrarParticular]).set("mouseover", [() => {
                 this.HoverGeneral(false, estacion, '');
                 EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: true, IdEstacion: estacion.IdEstacion, stopPropagation: true });
             }]).set("mouseout", [() => { this.HoverGeneral(true, estacion, ''); EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: false, IdEstacion: estacion.IdEstacion, stopPropagation: true }); }])

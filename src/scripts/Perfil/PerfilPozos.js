@@ -192,41 +192,6 @@ class PerfilPozos {
             newX = e.detail.x;
             newY = e.detail.y;
         }
-        // if (vwc.Settings.useShortCut) {
-        //     let areaVisual = Perfil.GetArea(e.detail.scale, newX, newY);
-        //     let idAreaNuevo = -1;
-        //     let EmpalmeNuevo = 0;
-        //     for (let i = 0; i < vwc.Settings.findShortCut; i++) {
-        //         let areaSeleccion = Perfil.GetArea(vwc.Settings.findSCZoom[i], vwc.Settings.findSCposX[i], vwc.Settings.findSCposY[i]);
-        //         let empalme = Perfil.CalcularEmpalme(areaVisual, areaSeleccion);
-        //         if (empalme > EmpalmeNuevo) {
-        //             EmpalmeNuevo = empalme;
-        //             idAreaNuevo = i;
-        //         }
-        //     }
-        //     if (!Perfil.SpinnerAction && idAreaNuevo >= 0 && EmpalmeNuevo > 0.3 && (Perfil.idArea === undefined || Perfil.idArea != idAreaNuevo)) {
-        //         Perfil.idArea = idAreaNuevo;
-
-        //         Table.scrollIndex = vwc.Settings.findSCTableIndex[idAreaNuevo];
-        //         if (Perfil.needSpinerValidation)
-        //             Table.UpdateContent();
-        //         Perfil.needSpinerValidation = true;
-        //         vwc.Settings.currentCellIndex = idAreaNuevo;
-
-        //         Perfil.updateSPinner(vwc.Settings.cellSelectorDegrees[vwc.Settings.currentCellIndex]);
-        //     }
-
-        //     let restablecerBtn = Perfil.DOMElements.restablecerBtn.HTML;
-        //     if (e.detail.scale <= 1)
-        //         restablecerBtn.attr({ isHide: true }).hide();
-        //     else {
-        //         if (!Perfil.googleMapActive)
-        //             restablecerBtn.attr({ isHide: false }).show();
-
-        //     }
-
-        // }
-
     }
 }
 
