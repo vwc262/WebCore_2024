@@ -151,8 +151,25 @@ class Estacion {
         }
 
         const url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
-            }/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
-            }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
+            }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
+
+        return url;
+    }
+    /**
+     *
+     * @param {Signal} signal
+     * @param {keyof EnumModule} modulo
+     */
+    ObtenerRenderNivelOBombaLerma(signal, modulo) {    
+        let indiceImagen = "";
+        console.log("Puta madre");
+        if (signal.Valor <= 4) {
+            indiceImagen = signal.Valor;
+        }
+        else {
+            indiceImagen = "0";
+        }   
+        const url = `${Core.Instance.ResourcesPath}Sitios/global/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
 
         return url;
     }

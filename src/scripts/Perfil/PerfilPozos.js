@@ -114,7 +114,7 @@ class PerfilPozos {
 
         Core.Instance.data.forEach(estacion => {
             const estacionPerfil = new SitioPerfilPozo(estacion.IdEstacion, function (isMouseOut, estacion, css) {
-                this.setHoverPerfil(isMouseOut, estacion, css);
+                // this.setHoverPerfil(isMouseOut, estacion, css);
             }.bind(this));
 
             const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
@@ -159,7 +159,7 @@ class PerfilPozos {
             perfil.append(this.verticalScroll);
 
 
-        EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
+      //  EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
 
         this.establecerPanzoom(this.Panner);
 
@@ -183,26 +183,26 @@ class PerfilPozos {
         let limiteY = {
             pos: origenY,
             neg: - origenY
-        }        
-        let newX, newY;        
+        }
+        let newX, newY;
         if (e.detail.scale === this.PanZoomConfig.minScale && (e.detail.x !== 0 || e.detail.y !== 0)) {
             this.PanzoomRef.pan(origenX, origenY);
             newX = origenX;
             newY = origenY;
         }
         else if (e.detail.x > limiteX.pos || e.detail.x < (limiteX.neg) || e.detail.y > limiteY.pos || e.detail.y < limiteY.neg) {
-            newX =  e.detail.x <= limiteX.pos && e.detail.x >= limiteX.neg ? e.detail.x : e.detail.x > limiteX.pos ? limiteX.pos : limiteX.neg;
-            newY =  e.detail.y <= limiteY.pos && e.detail.y >= limiteY.neg ? e.detail.y : e.detail.y > limiteY.pos ? limiteY.pos : limiteY.neg;            
+            newX = e.detail.x <= limiteX.pos && e.detail.x >= limiteX.neg ? e.detail.x : e.detail.x > limiteX.pos ? limiteX.pos : limiteX.neg;
+            newY = e.detail.y <= limiteY.pos && e.detail.y >= limiteY.neg ? e.detail.y : e.detail.y > limiteY.pos ? limiteY.pos : limiteY.neg;
             this.PanzoomRef.pan(newX, newY);
             let dir = this.oldScrollValuePan > e.detail.x ? 1 : -1;
-            this.oldScrollValuePan = newX;            
+            this.oldScrollValuePan = newX;
         }
         else {
-            e.detail.x =  e.detail.x;
-            e.detail.y =  e.detail.y;
+            e.detail.x = e.detail.x;
+            e.detail.y = e.detail.y;
             newX = e.detail.x;
             newY = e.detail.y;
-        }          
+        }
         // if (vwc.Settings.useShortCut) {
         //     let areaVisual = Perfil.GetArea(e.detail.scale, newX, newY);
         //     let idAreaNuevo = -1;

@@ -120,22 +120,22 @@ class SitioPerfilPozo {
 
             let imagenEstacionBombaPerfil = CreateElement({
                 nodeElement: "img",
-                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio", src: estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil") }
+                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio", src: estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil") }
             });
 
             estacionPerfilDiv.append(imagenEstacionBombaPerfil);
             this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;
         })
 
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
-            let imagenEstacionNivelPerfil = CreateElement({
-                nodeElement: "img",
-                attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
-            });
+        // estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+        //     let imagenEstacionNivelPerfil = CreateElement({
+        //         nodeElement: "img",
+        //         attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
+        //     });
 
-            estacionPerfilDiv.append(imagenEstacionNivelPerfil);
-            this.ElementosDinamicosHTML[imagenEstacionNivelPerfil.id] = imagenEstacionNivelPerfil;
-        })
+        //     estacionPerfilDiv.append(imagenEstacionNivelPerfil);
+        //     this.ElementosDinamicosHTML[imagenEstacionNivelPerfil.id] = imagenEstacionNivelPerfil;
+        // })
 
 
         estacionDiv.append(estacionPerfilDiv);
@@ -161,6 +161,7 @@ class SitioPerfilPozo {
     }
 
     Update() {
+        console.log('Update');
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
 
@@ -175,13 +176,13 @@ class SitioPerfilPozo {
             valorSignal.innerHTML = valor;
         }
 
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
-            nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
-        })
+        // estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+        //     nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
+        // })
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
             const bomba = this.ElementosDinamicosHTML[`idBomba_${signalBomba.IdSignal}`];
-            bomba.src = estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil");
+            bomba.src = estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil");
         })
     }
 
