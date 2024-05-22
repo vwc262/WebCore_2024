@@ -167,9 +167,63 @@
     height: 16px;
 }
 
-.imgBck{
+.imgBck {
     background-size: contain !important;
     background-position: 0px 0px !important;
+}
+
+.DialContainerLerma {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    bottom: -13px;
+    left: -21px;
+    transform: scale(0.6);
+}
+
+.contenedorSecuenciasDialLerma {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 20px;
+    top: -5%;
+    left: -1px;
+    transform: perspective(200px) rotateX(20deg) rotateY(-1deg) rotateZ(648deg);
+    transition: all 1s ease-out 0s;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+.animButtonsContainer {
+    position: absolute;
+    width: 78%;
+    height: 78%;
+    top: 11%;
+    left: 11%;
+    display: flex;
+    flex-direction: row;
+    z-index: 200;
+    opacity: 1;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.rButtonPerilla {
+    position: absolute;
+    width: 125px;
+    height: 200px;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    opacity: 0.1;
+}
+
+.lButtonPerilla {
+    position: absolute;
+    width: 125px;
+    height: 200px;
+    cursor: pointer;
+    opacity: 0.1;
 }
 
 /*Fin Estilos Pozos Lerma*/

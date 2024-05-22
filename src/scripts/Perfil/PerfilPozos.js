@@ -6,6 +6,7 @@ import ParticlesAnimator from "./ParticlesAnimationManager.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import SitioPerfilPozo from "./SitioPerfilPozo.js";
+import { DialLerma } from "./DialLerma.js";
 
 
 class PerfilPozos {
@@ -23,6 +24,7 @@ class PerfilPozos {
     //#endregion
     constructor() {
         this.create();
+        new DialLerma().create();        
     }
 
     create() {
