@@ -12,6 +12,8 @@ class PerfilPozos {
     //#region  Propiedades
     PanzoomRef = undefined;
     oldScrollValuePan = 0;
+    renderWidth = 0;
+    renderHeight = 0;
     PanZoomConfig = {
         maxScale: 5,
         minScale: 1,
@@ -25,6 +27,8 @@ class PerfilPozos {
 
     create() {
         const configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+        this.renderHeight = configuracionProyecto.heightRender;
+        this.renderWidth = configuracionProyecto.widthRender;
         const widthRenderPerfil = configuracionProyecto.widthRender;
         const heightRender = configuracionProyecto.heightRender;
 
@@ -169,9 +173,9 @@ class PerfilPozos {
         elementoPanner.addEventListener('panzoompan', this.checarLimitesPanzoom);
     }
 
-    checarLimitesPanzoom(e) {
-        let origenX = ((e.detail.scale * vwc.Settings.panWidth - vwc.Settings.panWidth) / (e.detail.scale * 2));
-        let origenY = (e.detail.scale * vwc.Settings.panHeight - vwc.Settings.panHeight) / (e.detail.scale * 2);
+    checarLimitesPanzoom = (e) => {
+        let origenX = ((e.detail.scale * this.renderWidth - this.renderWidth) / (e.detail.scale * 2));
+        let origenY = (e.detail.scale * this.renderHeight - this.renderHeight) / (e.detail.scale * 2);
         let limiteX = {
             pos: origenX,
             neg: - origenX
