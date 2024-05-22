@@ -40,7 +40,7 @@ class DialLerma {
             }
         });
         contenedorSecuencias.style.background = `url(${Core.Instance.ResourcesPath}Secuencias/perillaSelectorCelulas2.png)`;
-        contenedorSecuencias.innerHTML = '<svg id="infoContainer" viewBox="0 0 300 300" width="300px" height="300px" class=""><path id="mainCurve" fill="#FFFFFF00" d="m 0 150 a 150 150 90 0 0 300 0 a 150 150 90 0 0 -300 0"></path><text id="General" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="rgb(51, 204, 255)" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="General" xlink:href="#mainCurve" startOffset="0%">General</textPath></text><text id="Almoloya" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="Almoloya" xlink:href="#mainCurve" startOffset="19%">Almoloya</textPath></text><text id="V. Carmela" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="V. Carmela" xlink:href="#mainCurve" startOffset="38.3%">V. Carmela</textPath></text><text id="Alzate" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="Alzate" xlink:href="#mainCurve" startOffset="62%">Alzate</textPath></text><text id="Ixtlahuaca" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="Ixtlahuaca" xlink:href="#mainCurve" startOffset="79.5%">Ixtlahuaca</textPath></text></svg>';
+        contenedorSecuencias.innerHTML = '<svg id="infoContainer" viewBox="0 0 300 300" width="300px" height="300px" class=""><path id="mainCurve" fill="#FFFFFF00" d="m 0 150 a 150 150 90 0 0 300 0 a 150 150 90 0 0 -300 0"></path><text id="General" class="dElement" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="rgb(51, 204, 255)" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="General" xlink:href="#mainCurve" startOffset="0%">General</textPath></text><text id="Almoloya" class="dElement" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="Almoloya" xlink:href="#mainCurve" startOffset="19%">Almoloya</textPath></text><text id="V. Carmela" class="dElement" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="V. Carmela" xlink:href="#mainCurve" startOffset="38.3%">V. Carmela</textPath></text><text id="Alzate" class="dElement" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="Alzate" xlink:href="#mainCurve" startOffset="62%">Alzate</textPath></text><text id="Ixtlahuaca" dy="-8px" width="300px" textAnchor="middle" height="300px" fill="white" font-size="28px" font-family="Roboto" style="transform-origin: center center; transform-box: fill-box;"><textPath id="Ixtlahuaca" class="dElement" xlink:href="#mainCurve" startOffset="79.5%">Ixtlahuaca</textPath></text></svg>';
         this.spinnner = contenedorSecuencias;
         this.spinnner.style.transform = `perspective(200px) rotateX(20deg) rotateY(-1deg) rotateZ(${288}deg)`;
         const animButtonsContainer = CreateElement({
@@ -85,6 +85,7 @@ class DialLerma {
         this.AnimateButton(inicio, fin, animButtonsContainer);
         this.UpdateRueda(this.cellSelectorDegrees[this.currentIndex]);
         this.IrARegion();
+        this.ActualizarLetrerosRuda();
     }
     IrARegion() {
         const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
@@ -114,6 +115,13 @@ class DialLerma {
 
         // Perfil.udpateFillColors();
         this.currentDegree = toDegrees;
+
+    }
+    ActualizarLetrerosRuda() {
+        const elementosTextoDial = document.querySelectorAll(".dElement");
+        elementosTextoDial.forEach((e, i) => {
+            e.setAttribute('fill', i == this.currentIndex ? 'rgb(51, 204, 255)' : 'rgb(255,255,255)');
+        });
 
     }
 
