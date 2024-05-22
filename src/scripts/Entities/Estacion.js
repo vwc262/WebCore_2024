@@ -160,17 +160,11 @@ class Estacion {
      * @param {Signal} signal
      * @param {keyof EnumModule} modulo
      */
-    ObtenerRenderNivelOBombaLerma(signal, modulo) {    
+    ObtenerRenderNivelOBombaLerma(signal) {        
         let indiceImagen = "";
-        console.log("Puta madre");
-        if (signal.Valor <= 4) {
-            indiceImagen = signal.Valor;
-        }
-        else {
-            indiceImagen = "0";
-        }   
+        let bombaMorada = signal.Valor == 4;
+        indiceImagen = bombaMorada == 4 ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
         const url = `${Core.Instance.ResourcesPath}Sitios/global/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
-
         return url;
     }
 

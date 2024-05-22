@@ -114,8 +114,8 @@ class PerfilPozos {
 
         Core.Instance.data.forEach(estacion => {
             const estacionPerfil = new SitioPerfilPozo(estacion.IdEstacion, function (isMouseOut, estacion, css) {
-                // this.setHoverPerfil(isMouseOut, estacion, css);
-            }.bind(this));
+                 this.setHoverPerfil(isMouseOut, estacion, css);
+            }.bind(this),this.hoverDiv);
 
             const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
             backgroundPerfil.appendChild(estacionPerfil.createSitio());
@@ -135,32 +135,10 @@ class PerfilPozos {
             }
         })
 
-        // configuracionProyecto.perfil.estilosTuberias.PorGravedad.forEach(element => {
-        //     if (element != undefined) {
-        //         tuberiaEstacion = CreateElement({
-        //             nodeElement: "canvas",
-        //             attributes: {
-        //                 class: "tuberiaPerfil", id: `${element.Tag}_Gravedad`,
-        //                 style: element.css
-        //             }
-        //         });
-
-        //         tuberiasDiv.appendChild(tuberiaEstacion);
-        //         this.InitTuberias(element.css, tuberiaEstacion);
-        //     }
-        // })
-
         this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner);
-        if (configuracionProyecto.doPanX)
-            perfil.append(this.horizontalScroll);
-        if (configuracionProyecto.doPanY)
-            perfil.append(this.verticalScroll);
-
-
-      //  EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
-
+        
         this.establecerPanzoom(this.Panner);
 
     }

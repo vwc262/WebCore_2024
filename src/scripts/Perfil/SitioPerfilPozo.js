@@ -10,7 +10,7 @@ class SitioPerfilPozo {
     /**
      * @type {HTMLElement}
      */
-    ElementosDinamicosHTML = {};
+    ElementosDinamicosHTML = [];
     /**
      * 
      * @param {Estacion} estacion 
@@ -20,16 +20,19 @@ class SitioPerfilPozo {
         this.Configuracion = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
         this.IdEstacion = IdEstacion;
         this.setHover = setHover;
+        this.elementoCirculo = undefined;
+        this.elementoBomba = undefined;
         this.estilosEstacionEtiqueta = this.Configuracion.perfil.estilosEstacion.find(element => element.IdEstacion == this.IdEstacion);
+        EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.HoverGeneral(data.isMouseOut, data.estacion, data.css)));
     }
-
+    HoverGeneral(isMouseOut, estacion, css) {
+        if (estacion.IdEstacion == this.IdEstacion) {
+            this.elementoCirculo.style.filter = isMouseOut ? '' : 'drop-shadow(rgb(0, 255, 231) 0px 0px 1px)';
+            this.elementoBomba.style.background = isMouseOut ? '' : `url(${Core.Instance.ResourcesPath}Sitios/Global/global.png) 100% 100%`;
+        }
+    }
     createEtiqueta() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        const signal = estacion.ObtenerPrimerSignal();
-        //console.log(signal)
-
-        let valorSignal;
-        let nameSignal;
         let etiquetaDiv = CreateElement({
             nodeElement: 'div',
             attributes: {
@@ -37,78 +40,48 @@ class SitioPerfilPozo {
                 class: 'lblCirclePerfil'
             },
         });
-
         let circuloEnlace = CreateElement({
             nodeElement: 'img',
             attributes: {
                 id: `pl_Enlace${estacion.IdEstacion}`,
                 class: 'imLinkCircle',
-                src:`${Core.Instance.ResourcesPath}General/circlestate_2.png`
+                src: `${Core.Instance.ResourcesPath}General/circlestate_2.png`
             },
+            events: new Map().set("mouseover", [() => {
+                this.HoverGeneral(false, estacion, '');
+                EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: true, IdEstacion: estacion.IdEstacion, stopPropagation: true });
+            }]).set("mouseout", [() => { this.HoverGeneral(true, estacion, ''); EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: false, IdEstacion: estacion.IdEstacion, stopPropagation: true }); }])
         });
-
-
-
-        let signalDiv = CreateElement({
-            nodeElement: 'div',
-            attributes: { class: 'signalSitioPerfil' }
-        });
-
-        let nombreSitio = CreateElement({
-            nodeElement: 'p',
+        this.elementoCirculo = circuloEnlace; // se guarda la referencia para cuestiones de hover
+        circuloEnlace.estacion = estacion;
+        circuloEnlace.update = this.ActualizarEnlaceLermaPerfil;
+        this.ElementosDinamicosHTML.push(circuloEnlace);
+        let textoCirculo = CreateElement({
+            nodeElement: "div",
             attributes: {
-                id: `idEstacion_${estacion.IdEstacion}`, class: 'estiloNombreEstacion',
-                style: `background: ${estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)"}`
+                abv: `${estacion.Abreviacion}`,
+                class: 'txtLinkCircle',
             },
-            innerText: estacion.Nombre
         });
-
-        if (signal) {
-            const valor = `${signal.GetValorString(true, true)}`;
-
-            valorSignal = CreateElement({
-                nodeElement: 'div',
-                attributes: {
-                    id: `valor_${signal.IdEstacion}`,
-                },
-                innerHTML: valor
-            });
-
-            nameSignal = CreateElement({
-                nodeElement: 'p',
-                attributes: {
-                    id: `name_${signal.Nombre}`,
-                },
-                innerText: `${signal.GetNomenclaturaSignal()}:  `
-            });
-
-            signalDiv.append(nameSignal, valorSignal)
-        }
-
-        this.ElementosDinamicosHTML[nombreSitio.id] = nombreSitio;
-        if (signal) {
-            this.ElementosDinamicosHTML[valorSignal.id] = valorSignal;
-        }
-
-        etiquetaDiv.append(circuloEnlace);
+        etiquetaDiv.append(circuloEnlace, textoCirculo);
         this.ponerPosiciones(etiquetaDiv, this.estilosEstacionEtiqueta);
-
+        circuloEnlace.update(estacion);
         return etiquetaDiv;
     }
-
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-
         let estacionDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
             events: new Map()
                 .set("click", [this.mostrarParticular])
                 .set("mouseover", [() => {
-                    this.setHover(false, estacion, this.estilosEstacionEtiqueta.Imagen);
+                    this.HoverGeneral(false, estacion, '');
+                    EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: true, IdEstacion: estacion.IdEstacion, stopPropagation: true });
                 }])
                 .set("mouseout", [() => {
-                    this.setHover(true, estacion);
+                    this.HoverGeneral(true, estacion, '');
+                    EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: false, IdEstacion: estacion.IdEstacion, stopPropagation: true });
                 }])
         });
         let estacionPerfilDiv = CreateElement({
@@ -117,75 +90,51 @@ class SitioPerfilPozo {
         });
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
-
             let imagenEstacionBombaPerfil = CreateElement({
                 nodeElement: "img",
-                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio", src: estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil") }
+                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio imgBck", src: estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil") }
             });
-
+            imagenEstacionBombaPerfil.signal = signalBomba;
+            imagenEstacionBombaPerfil.update = this.ActualizarImagenBombaPerfilLerma;
             estacionPerfilDiv.append(imagenEstacionBombaPerfil);
-            this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;
+            imagenEstacionBombaPerfil.estacion = estacion;
+            imagenEstacionBombaPerfil.update(estacion);
+            this.elementoBomba = imagenEstacionBombaPerfil; //  se guarda referencia para cuestiones de hover
+            this.ElementosDinamicosHTML.push(imagenEstacionBombaPerfil);
         })
-
-        // estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
-        //     let imagenEstacionNivelPerfil = CreateElement({
-        //         nodeElement: "img",
-        //         attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
-        //     });
-
-        //     estacionPerfilDiv.append(imagenEstacionNivelPerfil);
-        //     this.ElementosDinamicosHTML[imagenEstacionNivelPerfil.id] = imagenEstacionNivelPerfil;
-        // })
-
-
         estacionDiv.append(estacionPerfilDiv);
-
         this.suscribirEventos();
-
         return estacionDiv;
     }
-
+    //#region Perfil Elementos Lerma
+    ActualizarEnlaceLermaPerfil(estacionUpdate) {
+        if (estacionUpdate) {
+            const imgCirculo = this;
+            const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 0}.png`;
+            imgCirculo.setAttribute('src', url);
+        }
+    }
+    ActualizarImagenBombaPerfilLerma(estacionUpdate) {
+        if (estacionUpdate) {
+            const imagenBomba = this;
+            imagenBomba.setAttribute('src', estacionUpdate.ObtenerRenderNivelOBombaLerma(imagenBomba.signal, "Perfil"));
+        }
+    }
+    Update() {
+        const estacionUpdate = Core.Instance.GetDatosEstacion(this.IdEstacion);
+        this.ElementosDinamicosHTML.forEach(element => {
+            element.update(estacionUpdate);
+        });
+    }
+    //#endregion
     ponerPosiciones(etiquetaDiv, estilosEstacionEtiqueta) {
         if (estilosEstacionEtiqueta != undefined) {
             etiquetaDiv.style = estilosEstacionEtiqueta.Etiqueta;
         }
     }
-
-    onMouseUp(idHover) {
-        const elementHover = document.getElementById(idHover);
-        elementHover.style.display = "block";
-    }
-
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     }
-
-    Update() {
-        console.log('Update');
-        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        const signal = estacion.ObtenerPrimerSignal();
-
-        const name = this.ElementosDinamicosHTML[`idEstacion_${estacion.IdEstacion}`];
-        const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
-
-        name.style.background = estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)";
-
-        if (signal) {
-            const valor = `${signal.GetValorString(true, true)}`;
-            const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdEstacion}`];
-            valorSignal.innerHTML = valor;
-        }
-
-        // estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
-        //     nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
-        // })
-
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
-            const bomba = this.ElementosDinamicosHTML[`idBomba_${signalBomba.IdSignal}`];
-            bomba.src = estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil");
-        })
-    }
-
     mostrarParticular = () => {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         Particular.Instance.setEstacion(estacion);

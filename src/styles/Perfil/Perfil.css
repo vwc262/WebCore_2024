@@ -102,6 +102,8 @@
 }
 
 
+/*Estilos Pozos Lerma*/
+
 .lblCirclePerfil {
     pointer-events: none;
     color: white;
@@ -133,3 +135,41 @@
     transform: scale(1.1);
     cursor: pointer;
 }
+
+.imLinkCircle:hover {
+    filter: drop-shadow(rgb(0, 255, 231) 0px 0px 1px);
+}
+
+.txtLinkCircle {
+    width: 12.5px;
+    height: 12.5px;
+    background-size: 100% 100% !important;
+    transform-origin: center;
+    transform: scale(1.2);
+    position: absolute;
+    top: 1.85px;
+    padding-left: 0.5px;
+}
+
+.txtLinkCircle:after {
+    content: attr(abv);
+    font-size: 3px;
+    text-align: center;
+    vertical-align: 3px;
+}
+
+
+.sitioPerfilLerma {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 10px;
+    height: 16px;
+}
+
+.imgBck{
+    background-size: contain !important;
+    background-position: -9px 0px !important;
+}
+
+/*Fin Estilos Pozos Lerma*/
