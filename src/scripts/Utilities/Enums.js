@@ -19,7 +19,8 @@ const EnumProyecto = {
   Sectores: 7,
   Lumbreras: 8,
   SantaCatarina: 9,
-  Chiconautla: 10
+  Chiconautla: 10,
+  LermaAnexo: 11
 };
 /**
  * @returns NombreProyecto
