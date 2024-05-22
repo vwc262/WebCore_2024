@@ -134,7 +134,7 @@ class Estacion {
             url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
             }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${isBombaPurple ? 2 : indiceImagen}.png?v=${Core.Instance.version}`;
         }
-        else{
+        else{            
             if (
                 signal.TipoSignal != EnumTipoSignal.Nivel &&
                 signal.TipoSignal != EnumTipoSignal.Bomba
@@ -165,7 +165,8 @@ class Estacion {
             }
             
             url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
-            }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
+            }/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
+            }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
         }
 
         return url;
