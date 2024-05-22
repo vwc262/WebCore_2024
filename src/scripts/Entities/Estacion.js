@@ -7,6 +7,7 @@ import {
     EnumTipoSignalNomenclatura,
     EnumDentroLimite,
     EnumEnlace,
+    EnumProyecto,
 } from "../Utilities/Enums.js";
 
 class Estacion {
@@ -118,40 +119,54 @@ class Estacion {
      * @param {keyof EnumModule} modulo
      */
     ObtenerRenderNivelOBomba(signal, modulo) {
-        if (
-            signal.TipoSignal != EnumTipoSignal.Nivel &&
-            signal.TipoSignal != EnumTipoSignal.Bomba
-        ) {
-            return "";
-        }
-
+        
+        let url = "";
         const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "l" : "b";
-        let indiceImagen = "";
-
-        if (signal.TipoSignal == EnumTipoSignal.Nivel) {
-            if (signal.DentroRango) {
-                if (signal.DentroLimite == EnumDentroLimite.Alto) {
-                    indiceImagen = "10r";
-                }
-                else {
-                    indiceImagen = signal.IndiceImagen;
-                }
-            }
-            else {
-                indiceImagen = "r";
-            }
-        }
-        else {
+            let indiceImagen = "";
+        if (Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma) {
+            const isBombaPurple = signal.Valor == 4;
             if (signal.Valor <= 4) {
                 indiceImagen = signal.Valor;
             }
             else {
                 indiceImagen = "0";
             }
+            url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
+            }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${isBombaPurple ? 2 : indiceImagen}.png?v=${Core.Instance.version}`;
         }
-
-        const url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
+        else{
+            if (
+                signal.TipoSignal != EnumTipoSignal.Nivel &&
+                signal.TipoSignal != EnumTipoSignal.Bomba
+            ) {
+                return "";
+            }
+            
+            if (signal.TipoSignal == EnumTipoSignal.Nivel) {
+                if (signal.DentroRango) {
+                    if (signal.DentroLimite == EnumDentroLimite.Alto) {
+                        indiceImagen = "10r";
+                    }
+                    else {
+                        indiceImagen = signal.IndiceImagen;
+                    }
+                }
+                else {
+                    indiceImagen = "r";
+                }
+            }
+            else {
+                if (signal.Valor <= 4) {
+                    indiceImagen = signal.Valor;
+                }
+                else {
+                    indiceImagen = "0";
+                }
+            }
+            
+            url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
             }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
+        }
 
         return url;
     }
@@ -160,10 +175,10 @@ class Estacion {
      * @param {Signal} signal
      * @param {keyof EnumModule} modulo
      */
-    ObtenerRenderNivelOBombaLerma(signal) {        
+    ObtenerRenderNivelOBombaLerma(signal) {
         let indiceImagen = "";
         let bombaMorada = signal.Valor == 4;
-        indiceImagen = bombaMorada  ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
+        indiceImagen = bombaMorada ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
         const url = `${Core.Instance.ResourcesPath}Sitios/global/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
         return url;
     }

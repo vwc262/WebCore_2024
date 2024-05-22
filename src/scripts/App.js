@@ -11,7 +11,7 @@ import controladorVideo from "./Reporteador/videos.js";
 import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 
 class VwcApp {
-  projectName = EnumProyecto.PozosSistemaLerma;
+  projectName = EnumProyecto.Padierna;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
@@ -74,6 +74,8 @@ class VwcApp {
 
     AdjustSize();
   }
+
+
 }
 
 export { VwcApp };

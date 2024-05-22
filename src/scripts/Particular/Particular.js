@@ -9,6 +9,7 @@ import {
   EnumModule,
   EnumTipoSignal,
   EnumEnlace,
+  EnumProyecto,
 } from "../Utilities/Enums.js";
 import { GoBack, GoHome, Module, SetActualModule } from "../uiManager.js";
 
@@ -101,6 +102,7 @@ class Particular {
             "src",
             estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
           );
+          this.ponerBombaPurple(signal, $imgBombaParticular);
         }
       });
 
@@ -110,6 +112,11 @@ class Particular {
     }
   };
 
+  ponerBombaPurple(signal, $imgBombaParticular ){
+    if(Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma){
+      $imgBombaParticular.style.filter = signal.Valor == 4 ? "hue-rotate(295deg)" : "hue-rotate(0deg)";
+    }
+  }
   mostrarDetalles() {
     SetActualModule("Particular");
     // Elementos del DOM
@@ -329,6 +336,7 @@ class Particular {
           },
         });
         this.HTMLUpdateElements[$imgBombaParticular.id] = $imgBombaParticular;
+        this.ponerBombaPurple(bomba, $imgBombaParticular);
         $bombasContainer.append($imgBombaParticular);
       }
     );
