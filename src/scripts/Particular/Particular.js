@@ -65,6 +65,7 @@ class Particular {
     imgFallaAc.style.display = mostrar ? 'block' : 'none';
   }
   Update = () => {
+    console.log("update particular")
     if (this.Estacion) {
       //console.log("particular Update");
       const estacionUpdate = Core.Instance.GetDatosEstacion(
@@ -105,8 +106,9 @@ class Particular {
           this.ponerBombaPurple(signal, $imgBombaParticular);
         }
       });
-
-      this.MostrarFallaAc(estacionUpdate.IsFallaAc());
+      if(Module == EnumModule.Particular){
+        this.MostrarFallaAc(estacionUpdate.IsFallaAc());
+      }
 
       this.showHideSlider();
     }
