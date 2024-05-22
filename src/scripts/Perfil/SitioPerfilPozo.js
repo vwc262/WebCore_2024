@@ -63,7 +63,18 @@ class SitioPerfilPozo {
                 class: 'txtLinkCircle',
             },
         });
-        etiquetaDiv.append(circuloEnlace, textoCirculo);
+        let imagenRayo = CreateElement({
+            nodeElement: 'img',
+            attributes: {
+                class: 'xSmallIcon thunderPosition',
+                src: `${Core.Instance.ResourcesPath}Iconos/thunder.png`
+            }
+        });
+        imagenRayo.estacion = estacion;
+        imagenRayo.update = this.ActualizarFallaEnergia;
+        this.ElementosDinamicosHTML.push(imagenRayo);
+        imagenRayo.update(estacion);
+        etiquetaDiv.append(circuloEnlace, textoCirculo, imagenRayo);
         this.ponerPosiciones(etiquetaDiv, this.estilosEstacionEtiqueta);
         circuloEnlace.update(estacion);
         return etiquetaDiv;
@@ -106,7 +117,13 @@ class SitioPerfilPozo {
         this.suscribirEventos();
         return estacionDiv;
     }
+
     //#region Perfil Elementos Lerma
+    ActualizarFallaEnergia(estacionUpdate) {
+        if (estacionUpdate) {
+            this.style.display = estacionUpdate.IsFallaAc() ? 'inline' : 'none';
+        }
+    }
     ActualizarEnlaceLermaPerfil(estacionUpdate) {
         if (estacionUpdate) {
             const imgCirculo = this;

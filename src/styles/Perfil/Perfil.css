@@ -226,4 +226,15 @@
     opacity: 0.1;
 }
 
+.thunderPosition {
+    position: relative;
+    left: -5px;
+    top: 2px;
+}
+
+.xSmallIcon {
+    width: 6px;
+    height: 6px;
+}
+
 /*Fin Estilos Pozos Lerma*/

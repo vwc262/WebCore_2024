@@ -80,7 +80,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/agua.gif?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
             }
         });
 
@@ -88,7 +88,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/sitios.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
             }
         });
 
@@ -145,7 +145,7 @@ class PerfilPozos {
             }
         })
 
-        this.Panner.append(capaTubos, capaSitios, backgroundPerfil)
+        this.Panner.append(capaTubos,backgroundPerfil, capaSitios )
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner);
 
