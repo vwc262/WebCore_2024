@@ -34,11 +34,20 @@ $btnHeader.addEventListener("click", (ev) => {
     const $asidetabla = document.querySelector(".aside__tabla");
     $btnBack.removeEventListener('click', Particular.Instance.backParticular);
     $btnBack.removeEventListener('click', backGraficador);
-    section__home.style.zIndex = "5";
-    section__mapa.style.zIndex = "5";
-    section__graficador.style.zIndex = "5";
-    section__login.style.zIndex = "5";
-    section__particular.style.zIndex = "5";
+    
+    section__home.style.display = "none";
+    section__mapa.style.display = "none";
+    section__graficador.style.display = "none";
+    section__login.style.display = "none";
+    section__particular.style.display= "none";
+
+
+    // section__home.style.zIndex = "5";
+    // section__mapa.style.zIndex = "5";
+    // section__graficador.style.zIndex = "5";
+    // section__login.style.zIndex = "5";
+    // section__particular.style.zIndex = "5";
+
     $datosHeader.style.opacity = "0";
     $datosHeader.style.display = "none";
     $btnBack.style.opacity = "0";
@@ -46,8 +55,13 @@ $btnHeader.addEventListener("click", (ev) => {
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
-        section__home.style.zIndex = isParticularActive ? "5" : "10";
-        section__particular.style.zIndex = isParticularActive ? "10" : "5";
+        
+        // section__home.style.zIndex = isParticularActive ? "5" : "10";
+        // section__particular.style.zIndex = isParticularActive ? "10" : "5";
+
+        section__home.style.display= isParticularActive ? "none" : "block";
+        section__particular.style.display = isParticularActive ? "block" : "none";
+
         $datosHeader.style.display = "flex";
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
@@ -62,7 +76,10 @@ $btnHeader.addEventListener("click", (ev) => {
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
-        section__mapa.style.zIndex = "10";
+
+        // section__mapa.style.zIndex = "10";
+        section__mapa.style.display = "block";
+
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
         CerrarPanelBombas($panelBombas);
@@ -70,7 +87,10 @@ $btnHeader.addEventListener("click", (ev) => {
       case "headerBtn__Graficador header__active":
         SetActualModule("Graficador");
         btnCarruselGraficador.style.display="block";
-        section__graficador.style.zIndex = "10";
+
+        // section__graficador.style.zIndex = "10";
+        section__graficador.style.display = "block";
+
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = isReporteadorCreated.secondPhase ? 1 : 0;
         $btnBack.style.pointerEvents = isReporteadorCreated.secondPhase ? 'auto' : "none";
@@ -80,7 +100,8 @@ $btnHeader.addEventListener("click", (ev) => {
         CerrarPanelBombas($panelBombas);
         break;
       case "headerBtn__Login header__active":
-        section__login.style.zIndex = "10";
+        // section__login.style.zIndex = "10";
+        section__login.style.display = "block";
         table.style.display = "none";
         Login.Instace.create();
         CerrarPanelBombas($panelBombas);
