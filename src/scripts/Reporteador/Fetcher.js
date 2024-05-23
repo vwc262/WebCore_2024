@@ -66,7 +66,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
   switch (idProyecto) {
     case EnumProyecto.GustavoAMadero: return "GustavoAMadero";
     case EnumProyecto.Padierna: return "Padierna";
-    case EnumProyecto.PozosSistemaLerma: return "PozosSistemaLerma";
+    case EnumProyecto.PozosSistemaLerma: return "Lerma";
     case EnumProyecto.Yaqui: return "Yaqui";
     case EnumProyecto.Chalmita: return "Chalmita";
     case EnumProyecto.Encharcamientos: return "Encharcamientos";
@@ -74,7 +74,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
     case EnumProyecto.Lumbreras: return "Lumbreras";
     case EnumProyecto.SantaCatarina: return "SantaCatarina";
     case EnumProyecto.Chiconautla: return "Chiconautla";
-    case EnumProyecto.LermaAnexo: return "Lerma Anexo";
+    case EnumProyecto.LermaAnexo: return "LermaAnexo";
   }
 
 }
