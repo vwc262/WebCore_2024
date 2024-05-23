@@ -510,8 +510,7 @@ function cleanSignals() {
 
 function cleanSignal(ev) {
   const signalContent = ev.currentTarget;
-  borrarVariableAGraficar(signalContent);
-  console.log(signalContent);
+  borrarVariableAGraficar(signalContent);  
   updateColors();
   validarBtnGraficar();
 }

@@ -59,7 +59,7 @@ class ArranqueParo {
 
   //#region Metodos
   Create(idEstacion) {
-    if(!this.#isCarouselCreated){
+    if (!this.#isCarouselCreated) {
       const sesionIniciada = Login.Instace.userIsLogged; // para saber si la sesion ya se inicio
       this.idEstacion = idEstacion;
       const estacionActual = Core.Instance.GetDatosEstacion(this.idEstacion); // Se obtiene la estacion Actual
@@ -188,6 +188,12 @@ class ArranqueParo {
       this.#carruselContainer.append(carruselItem);
     });
     if (bombas.length > 3) this.refillCarrusel();
+    else {
+      document.querySelectorAll('.flechaControl').forEach(flecha => flecha.style.display = "none");
+      if(bombas.length == 1){
+        document.querySelector('.controlParo__carruselItem').style.left = "105px";
+      }
+    }
   }
   clickBomba = (e) => {
     /**
@@ -348,7 +354,7 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      if(estacion.IsFallaAc()){
+      if (estacion.IsFallaAc()) {
         ShowModal("El sitio presenta falla en la energia", alertTitle);
         return;
       }
@@ -481,7 +487,7 @@ class ArranqueParo {
     let ticksPerMinute = 600000000;
     let toleranciaMin = 3.5;
     let modalSetted = false;
-    let usuario= Login.Instace.userName;
+    let usuario = Login.Instace.userName;
     let idEstacion = this.idEstacion;
     let codigo = this.codigo;
     let textoComando = this.textoComando

@@ -11,7 +11,7 @@ class Login {
     #isCreated = false;
     #btnConfirmar = undefined;
     #btnCancelar = undefined;
-    #inactivityMinutes = 10;
+    #inactivityMinutes = 10; // toleracion de 10 minutos de inactividad
     userIsLogged = false;
     token = '';
     userName = '';
@@ -71,13 +71,13 @@ class Login {
             if (result.response) {
                 this.#lastInteraction = new Date();
                 this.CheckUserInteraction();
-                // this.#verifySessionIntervalId = setInterval(this.#VerifyIfSessionIsValid, 15 * 1000);
-                setTimeout(this.#OnLogOut, 1000 * 60 * this.#inactivityMinutes ); // despues de 5 mints
+                this.#verifySessionIntervalId = setInterval(this.#VerifyIfSessionIsValid, 15 * 1000); // cada 15s
+                //setTimeout(this.#OnLogOut, 1000 * 60 * this.#inactivityMinutes ); // despues de 5 mints
                 this.userIsLogged = true;
                 this.token = result.token;
                 this.userName = this.inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
-                ShowModal(result.message + ` la sesión finalizara en ${this.#inactivityMinutes} minutos`, "Inicio sesión");
+                ShowModal(result.message , "Inicio sesión");
                 GoBack();
             } else {
                 ShowModal(`${result.message}`, "Inicio sesión");
