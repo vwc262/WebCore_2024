@@ -27,7 +27,7 @@ $btnHeader.addEventListener("click", (ev) => {
     const btnCarruselGraficador = document.querySelector('.btnCarrusel');
     btnCarruselGraficador.style.display = "none";
     const actualTarger = ev.target;
-    actualTarger.classList.add("header__active");
+    actualTarger.classList.add("header__active");    
     const isParticularActive = Module == EnumModule.Particular;
     const $btnBack = document.querySelector(".header__btnRegresar");
     const $panelBombas = document.querySelector(".arranqueParo__panelControl");

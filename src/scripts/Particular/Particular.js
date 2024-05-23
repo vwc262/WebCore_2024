@@ -137,11 +137,12 @@ class Particular {
     this.$headerTitle.innerText = this.Estacion.Nombre;
 
     // Maneja los zIndex al cambiar de "paginas"
-    section__home.style.zIndex = "5";
-    section__mapa.style.zIndex = "5";
-    section__graficador.style.zIndex = "5";
-    section__login.style.zIndex = "5";
-    section__particular.style.zIndex = "10";
+    section__home.style.display = "none";
+    section__mapa.style.display = "none";
+    section__graficador.style.display = "none";
+    section__login.style.display = "none";
+    section__particular.style.display =  "block";
+    
     this.$datosHeader.style.opacity = "1";
     this.$datosHeader.style.display = "block";
     this.$btnBack.style.opacity = "1";
@@ -181,6 +182,7 @@ class Particular {
   }
 
   backParticular = () => {
+
     SetActualModule("Perfil");
     GoHome();
   }
