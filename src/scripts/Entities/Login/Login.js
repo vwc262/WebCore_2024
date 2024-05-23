@@ -77,7 +77,7 @@ class Login {
                 this.token = result.token;
                 this.userName = this.inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
-                ShowModal(result.message , "Inicio sesión", false);
+                ShowModal(result.message, "Inicio sesión", false);
                 GoBack();
             } else {
                 ShowModal(`${result.message}`, "Inicio sesión", false);
@@ -120,12 +120,14 @@ class Login {
 
     }
 }
-
-
-window.onbeforeunload = async function (event) {
+var onUnload = function () {
+    window.removeEventListener('beforeunload', onUnload);
     if (Login.Instace.userIsLogged) {
-        const result = await Fetcher.Instance.RequestData("Logout", RequestType.POST, new Credentials(Login.Instace.inputusuario.value, Login.Instace.inputContrasena.value, Core.Instance.IdProyecto), true);
+        Fetcher.Instance.RequestData("Logout", RequestType.POST, new Credentials(Login.Instace.inputusuario.value, Login.Instace.inputContrasena.value, Core.Instance.IdProyecto), true);
     }
-};
+    return undefined;
+}
+
+window.onbeforeunload = onUnload;
 
 export default Login;
