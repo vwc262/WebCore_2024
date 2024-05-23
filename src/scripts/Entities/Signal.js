@@ -97,7 +97,7 @@ class Signal {
             // }
         }
         else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
-            if (this.DentroRango) {
+            if (this.DentroRango == 1) {
                 let value = `${parseFloat(this.Valor).toFixed(0)}`;
                 let _unidades = '';
 
@@ -106,6 +106,8 @@ class Signal {
                 }
 
                 return `<label style="color: ${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+            } else if (this.DentroRango == -1) {
+                return `<label style="color: ${this.GetValorColor()};">nan</label>`;
             } else {
                 return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
             }
@@ -123,7 +125,7 @@ class Signal {
 
         }
         else {
-            if (this.DentroRango) {
+            if (this.DentroRango == 1) {
                 let value = `${parseFloat(this.Valor).toFixed(2)}`;
                 let _unidades = '';
 
@@ -132,7 +134,10 @@ class Signal {
                 }
 
                 return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
-            } else {
+            } else if (this.DentroRango == -1) {
+                return `<label style="color: ${this.GetValorColor()};">nan</label>`;
+            }
+            else {
                 return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
             }
         }
@@ -175,7 +180,7 @@ class Signal {
             case EnumTipoSignal.Totalizado:
             case EnumTipoSignal.ValvulaAnalogica:
 
-                if (this.DentroRango)
+                if (this.DentroRango == 1)
                     color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'rgb(203, 185, 136)' : this.DentroLimite == EnumDentroLimite.Alto ? '#fa8c8c' : 'rgb(255, 255, 255)'}`;
 
                 break;
