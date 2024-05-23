@@ -13,7 +13,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.PozosSistemaLerma;
+  projectName = EnumProyecto.GustavoAMadero;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
@@ -22,6 +22,11 @@ class VwcApp {
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
     this.IniciarUI();
+  }
+
+  isApple() {
+    const expression = /(iPhone|iPod|iPad)/i;
+    return expression.test(navigator.platform);
   }
 
   IniciarUI() {
@@ -64,6 +69,15 @@ class VwcApp {
     const $imgModal = document.getElementById("imgModal");
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
     $imgModal.style.backgroundSize = `contain`;
+
+    if (this.isApple()) {
+      let html = document.getElementsByTagName('html')[0];
+
+      html.style['-webkit-user-drag'] = 'auto';
+      html.style['-moz-user-drag'] = 'auto';
+      html.style['-o-user-drag'] = 'auto';
+      html.style['-webkit-user-drag'] = 'auto';
+    }
 
     new Tabla().create(); // Inicio de tabla curva
     if (this.isPerfilTipoPozos) {

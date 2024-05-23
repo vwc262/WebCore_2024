@@ -116,8 +116,7 @@ class SitioPerfil {
             this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;
         })
 
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {            
-            debugger
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {                        
             let imagenEstacionNivelPerfil = CreateElement({
                 nodeElement: "img",
                 attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },

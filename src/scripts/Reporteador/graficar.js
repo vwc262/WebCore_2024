@@ -87,8 +87,8 @@ function GhostVariable() {
   variablesAMover.forEach((variable) => {
     // Agregar un event listener para el clic en cada elemento
     variable.addEventListener("click", function () {
-      console.log(coordsDestino);
-      console.log(variable.getBoundingClientRect());
+      // console.log(coordsDestino);
+      // console.log(variable.getBoundingClientRect());
 
       variable.style.left = 1920 - coordsDestino.x + 500 + "px";
       variable.style.top = coordsDestino.y - 615 + "px";

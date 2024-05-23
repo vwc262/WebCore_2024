@@ -154,8 +154,7 @@ class PerfilPozos {
 
     }
 
-    establecerPanzoom(elementoPanner) {
-        console.log(elementoPanner.parent);
+    establecerPanzoom(elementoPanner) {        
         this.PanzoomRef = Panzoom(elementoPanner, this.PanZoomConfig);
         elementoPanner.addEventListener('wheel', this.PanzoomRef.zoomWithWheel);
         elementoPanner.addEventListener('panzoomzoom', this.checarLimitesPanzoom);

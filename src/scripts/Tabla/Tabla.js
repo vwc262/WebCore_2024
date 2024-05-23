@@ -576,8 +576,7 @@ class Tabla {
         else if( estacion.IsEnMantenimiento()) return false;
         else if(estacion.Enlace == EnumEnlace.FueraLinea) return true
       }
-    ).length;
-    console.log(offlineCount)
+    ).length;    
 
     let enMantenimiento = Core.Instance.data.filter((estacion) =>
       estacion.IsEnMantenimiento() && !estacion.IsTimeout()
