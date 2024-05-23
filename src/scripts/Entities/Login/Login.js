@@ -62,7 +62,7 @@ class Login {
     }
     #OnConfirmar = async (e) => {
         if (this.inputusuario.value == '' && this.inputContrasena.value == '') {
-            ShowModal('Ingresar datos en los campos de usuario y contraseña', "Inicio sesión");
+            ShowModal('Ingresar datos en los campos de usuario y contraseña', "Inicio sesión", false);
             return;
         }
         if (!this.userIsLogged) {
@@ -77,14 +77,14 @@ class Login {
                 this.token = result.token;
                 this.userName = this.inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
-                ShowModal(result.message , "Inicio sesión");
+                ShowModal(result.message , "Inicio sesión", false);
                 GoBack();
             } else {
-                ShowModal(`${result.message}`, "Inicio sesión");
+                ShowModal(`${result.message}`, "Inicio sesión", false);
             }
         }
         else {
-            ShowModal('Ya hay una sesion activa', "Inicio sesión");
+            ShowModal('Ya hay una sesion activa', "Inicio sesión", false);
         }
     }
     #OnConfirmarEnter = (e) => {
@@ -107,7 +107,7 @@ class Login {
         clearInterval(this.#verifySessionIntervalId);
         ['touchstart', 'click'].forEach(eventName => window.removeEventListener(eventName, this.#OnUserInteracion));
         this.btnHeaderLogin.style.display = 'flex';
-        ShowModal('La sesión ha finalizado', "Inicio sesión");
+        ShowModal('La sesión ha finalizado', "Inicio sesión", false);
         EventsManager.Instance.EmitirEvento(EnumAppEvents.LogOut);
         const result = await Fetcher.Instance.RequestData("Logout", RequestType.POST, new Credentials(Login.Instace.inputusuario.value, Login.Instace.inputContrasena.value, Core.Instance.IdProyecto), true);
     }

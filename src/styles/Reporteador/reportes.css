@@ -285,19 +285,6 @@ article video {
   z-index: 15;
 }
 
-.modalVersion {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  left: 715px;
-  top: 400px;
-  font-size: 18pt;
-  background-size: 100% 100% !important;
-  width: 580px;
-  height: 235px;
-  z-index: 15;
-}
-
 .headerModal {
   display: block;
   margin: auto;

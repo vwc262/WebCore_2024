@@ -42,7 +42,7 @@ $btnHeader.addEventListener("click", (ev) => {
     $datosHeader.style.opacity = "0";
     $datosHeader.style.display = "none";
     $btnBack.style.opacity = "0";
-    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;    
+    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
@@ -56,9 +56,9 @@ $btnHeader.addEventListener("click", (ev) => {
           Particular.Instance.mostrarDetalles();
           $btnBack.style.opacity = "1";
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
-        } else 
+        } else
           CerrarPanelBombas($panelBombas);
-        
+
         break;
       case "headerBtn__Mapa header__active":
         SetActualModule("Mapa");
@@ -110,6 +110,7 @@ function Modal() {
 
   const $modal = document.querySelector(".modal");
   const $closeModal = document.querySelector(".modal__close");
+  const $aceptarModal = document.querySelector(".modal__Aceptar");
 
   $panelControl_Particulares.addEventListener("click", (e) => {
     e.preventDefault();
@@ -120,13 +121,29 @@ function Modal() {
     e.preventDefault();
     $modal.classList.remove("modal--show");
   });
+
+  $aceptarModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    $modal.classList.remove("modal--show");
+    location.reload();
+  });
 }
 
-const ShowModal = (txtToShow, title) => {
+const ShowModal = (txtToShow, title, flag) => {
   const $modal = document.querySelector(".modal");
   $modal.classList.add("modal--show");
   $modal.querySelector(".modal__title").innerText = title;
   $modal.querySelector(".modal__paragraph").innerText = txtToShow;
+  if (flag) {
+    $modal.querySelector(".modal__Aceptar").style.display = "block";
+    $modal.querySelector(".modal__Aceptar").style.pointerEvents = "auto";
+  }
+  else{
+    {
+      $modal.querySelector(".modal__close").style.display = "block";
+      $modal.querySelector(".modal__close").style.pointerEvents = "auto";
+    }
+  }
 };
 
 var Module = EnumModule.Perfil;

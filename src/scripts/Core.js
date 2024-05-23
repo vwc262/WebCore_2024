@@ -15,6 +15,7 @@ import {
  * Clase Base de la App Web
  */
 class Core {
+  version = 0;
   /**
    * Retorna la ruta de resources
    * @returns {string }
@@ -61,6 +62,7 @@ class Core {
       undefined,
       false
     );
+    this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
     this.data = this.GetData(data);
 
     //this.randomValues();
