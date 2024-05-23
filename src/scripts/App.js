@@ -2,6 +2,7 @@ import { Core } from "./Core.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
+import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js"; 
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import UIReportes from "./Reporteador/UIReportes.js";
@@ -9,15 +10,17 @@ import { FetcherGraficador } from "./Reporteador/Fetcher.js";
 import UIControlador from "./Reporteador/videoUI.js";
 import controladorVideo from "./Reporteador/videos.js";
 import { PerfilPozos } from "./Perfil/PerfilPozos.js";
+import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.GustavoAMadero;
+  projectName = EnumProyecto.PozosSistemaLerma;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
   async Start() {
     //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
+    this.version = Core.Instance.version;
     this.IniciarUI();
   }
 
@@ -27,7 +30,6 @@ class VwcApp {
   }
 
   IniciarUI() {
-
     let title = document.getElementById('title__page');
     title.innerText = `VWC - ${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
 
@@ -87,6 +89,19 @@ class VwcApp {
     new Mapa().create();
 
     AdjustSize();
+    this.suscribirEventos();
+  }
+
+  suscribirEventos() {
+    EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.update()));
+  }
+
+  update() {
+    if (Core.Instance.version != this.version) {
+      this.version = Core.Instance.version;
+
+      ShowModal("Se ha detectado un cambio de versión","Cambio de versión", true);
+    }
   }
 }
 

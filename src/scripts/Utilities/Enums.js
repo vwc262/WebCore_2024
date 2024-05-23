@@ -36,7 +36,8 @@ const EnumNombreProyecto = {
   7: "Sectores",
   8: "Lumbreras",
   9: "TanquesSantaCatarina",
-  10: "PozosChiconautla"
+  10: "PozosChiconautla",
+  10: "LermaAnexo"
 };
 
 /**
