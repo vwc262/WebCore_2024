@@ -14,10 +14,10 @@ body {
   height: 1080px;
   color: white;
   user-select: none;
-  -webkit-user-drag: 'auto' !important;
-  -moz-user-drag: 'auto' !important;
-  -o-user-drag: 'auto' !important;
-  -webkit-user-drag: 'auto' !important;
+  -webkit-user-drag: auto !important;
+  -moz-user-drag: auto !important;
+  -o-user-drag: auto !important;
+  -webkit-user-drag: auto !important;
 }
 
 header {
@@ -71,7 +71,7 @@ aside {
   left: 1320px;
 }
 
-.Content_on_load{
+.Content_on_load {
   display: none;
 }
 
@@ -168,6 +168,7 @@ aside {
 :root {
   --border-width: 7px;
 }
+
 .sec-loading {
   z-index: 6;
   height: 70vh;
@@ -186,6 +187,7 @@ aside {
   position: relative;
   animation: move 0.5s linear infinite alternate-reverse;
 }
+
 .sec-loading .one::before {
   content: "";
   position: absolute;
@@ -201,14 +203,14 @@ aside {
   animation: rotate 1s linear infinite;
 }
 
-.textloading{
+.textloading {
   align-content: center;
   text-align-last: center;
   font-size: xx-large;
   margin-left: -40px;
 }
 
-.containerLoading{
+.containerLoading {
   display: none;
 }
 
@@ -217,6 +219,7 @@ aside {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
 @keyframes move {
   to {
     transform: translateY(15px) rotate(45deg);
