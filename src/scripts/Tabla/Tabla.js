@@ -520,7 +520,7 @@ class Tabla {
       let yValNormalized = this.SVGScrollHandler.getNormalizedValue(
         touchEvent.touches[0].clientY
       );
-      thi.setFollowerPosition(yValNormalized, true);
+      this.SVGScrollHandler.setFollowerPosition(yValNormalized, true);
     },
     getNormalizedValue: (yVal) => {
       return (

@@ -14,10 +14,10 @@ body {
   height: 1080px;
   color: white;
   user-select: none;
-  -webkit-user-drag: auto !important;
-  -moz-user-drag: auto !important;
-  -o-user-drag: auto !important;
-  -webkit-user-drag: auto !important;
+  -webkit-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  -webkit-user-drag: none !important;
 }
 
 header {
