@@ -30,14 +30,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
-  width: 225px;
-  height: 225px;
+  width: 210px;
+  height: 210px;
   opacity: 0;
   pointer-events: none;
   /* transition: all 0.63s ease; */
   position: absolute;
-  left: 352px;
-  top: 172px;
+  left: 358px;
+  top: 170px;
   background-size: contain;
   background-repeat: no-repeat;
 }

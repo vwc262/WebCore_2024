@@ -24,6 +24,8 @@ $btnHeader.addEventListener("click", (ev) => {
     [...ev.currentTarget.children].forEach((element) => {
       element.classList.remove("header__active");
     });
+    const btnCarruselGraficador = document.querySelector('.btnCarrusel');
+    btnCarruselGraficador.style.display = "none";
     const actualTarger = ev.target;
     actualTarger.classList.add("header__active");
     const isParticularActive = Module == EnumModule.Particular;
@@ -67,6 +69,7 @@ $btnHeader.addEventListener("click", (ev) => {
         break;
       case "headerBtn__Graficador header__active":
         SetActualModule("Graficador");
+        btnCarruselGraficador.style.display="block";
         section__graficador.style.zIndex = "10";
         ultimoBotonSeleccionado = actualTarger;
         $btnBack.style.opacity = isReporteadorCreated.secondPhase ? 1 : 0;
