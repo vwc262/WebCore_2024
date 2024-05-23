@@ -97,7 +97,6 @@ class VwcApp {
   }
 
   update() {
-    debugger;
     if (Core.Instance.version != this.version) {
       this.version = Core.Instance.version;
 

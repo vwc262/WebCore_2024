@@ -62,6 +62,7 @@ class Core {
       undefined,
       false
     );
+    this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
     this.data = this.GetData(data);
 
     //this.randomValues();
