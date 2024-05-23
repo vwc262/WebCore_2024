@@ -2,13 +2,9 @@ import { Core } from "./Core.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
-import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js"; 
+import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
-import UIReportes from "./Reporteador/UIReportes.js";
-import { FetcherGraficador } from "./Reporteador/Fetcher.js";
-import UIControlador from "./Reporteador/videoUI.js";
-import controladorVideo from "./Reporteador/videos.js";
 import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
@@ -21,21 +17,47 @@ class VwcApp {
     //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
-    this.IniciarUI();
+    this.IniciarHeader();
+
+    if (this.version != -99) {
+      this.IniciarUI();
+      this.onLoad();
+    }
+    else {
+      const tabla = document.querySelector(".aside__tabla");
+      tabla.remove();
+
+      const buttonHeader = document.querySelector(".header__buttons");
+      buttonHeader.remove();
+      
+      const containerLoading = document.querySelector(".containerLoading");
+      containerLoading.remove();
+    }
+  }
+
+  onLoad(){
+    const loadscreen = document.querySelector(".sec-loading");
+    loadscreen.style.display = 'none';
+
+    const Content_on_load = document.querySelector(".Content_on_load");
+    Content_on_load.style.display = 'flex';
   }
 
   isApple() {
-    const expression = /(iPhone|iPod|iPad)/i;
-    return expression.test(navigator.platform);
+    return (/iPad|iPhone|iPod/.test(navigator.userAgent));
   }
 
-  IniciarUI() {
-    let title = document.getElementById('title__page');
-    title.innerText = `VWC - ${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+  IniciarHeader() {
+    let $title = document.getElementById('title__page');
+    $title.innerText = `VWC - ${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
 
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
 
+    AdjustSize();
+  }
+
+  IniciarUI() {
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
 
@@ -79,6 +101,7 @@ class VwcApp {
       html.style['-webkit-user-drag'] = 'auto';
     }
 
+
     new Tabla().create(); // Inicio de tabla curva
     if (this.isPerfilTipoPozos) {
       PerfilPozos.Instace.create();
@@ -88,7 +111,8 @@ class VwcApp {
     }
     new Mapa().create();
 
-    AdjustSize();
+
+
     this.suscribirEventos();
   }
 
@@ -99,8 +123,7 @@ class VwcApp {
   update() {
     if (Core.Instance.version != this.version) {
       this.version = Core.Instance.version;
-
-      ShowModal("Se ha detectado un cambio de versión","Cambio de versión", true);
+      ShowModal("Se ha detectado un cambio de versión", "Cambio de versión", true);
     }
   }
 }

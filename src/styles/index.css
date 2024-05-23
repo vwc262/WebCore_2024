@@ -67,6 +67,10 @@ aside {
   left: 1320px;
 }
 
+.Content_on_load{
+  display: none;
+}
+
 .headerBtn__Home,
 .headerBtn__Mapa,
 .headerBtn__Graficador,
@@ -153,4 +157,64 @@ aside {
   color: white !important;
   font-size: 0.75em;
   letter-spacing: 1px;
+}
+
+/* loading Screen */
+
+:root {
+  --border-width: 7px;
+}
+.sec-loading {
+  z-index: 6;
+  height: 70vh;
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sec-loading .one {
+  height: 80px;
+  width: 80px;
+  border: var(--border-width) solid white;
+  transform: rotate(45deg);
+  border-radius: 0 50% 50% 50%;
+  position: relative;
+  animation: move 0.5s linear infinite alternate-reverse;
+}
+.sec-loading .one::before {
+  content: "";
+  position: absolute;
+  height: 55%;
+  width: 55%;
+  border-radius: 50%;
+  border: var(--border-width) solid transparent;
+  border-top-color: white;
+  border-bottom-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate 1s linear infinite;
+}
+
+.textloading{
+  align-content: center;
+  text-align-last: center;
+  font-size: xx-large;
+  margin-left: -40px;
+}
+
+.containerLoading{
+  display: none;
+}
+
+@keyframes rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes move {
+  to {
+    transform: translateY(15px) rotate(45deg);
+  }
 }
