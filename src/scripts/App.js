@@ -25,15 +25,7 @@ class VwcApp {
   }
 
   isApple() {
-    return [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ].includes(navigator.userAgentData.platform)
-      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    return (/iPad|iPhone|iPod/.test(navigator.userAgent));
   }
 
   IniciarUI() {
