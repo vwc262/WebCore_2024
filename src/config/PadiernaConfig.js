@@ -22,8 +22,8 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 3,
                 Imagen:
-                    "position: absolute; width: 141px; height: 86px; left: 130px; top: 442px;",
-                Etiqueta: "position: absolute; top: 335px; left:   44px;",
+                    "display:none;",
+                Etiqueta: "position: absolute; top: 395px; left: 95px;",
                 Estado: "display:none;",
             },
             {
@@ -57,8 +57,8 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 8,
                 Imagen:
-                    "position: absolute; width: 0px; height: 0px; left: 0px; top: 0px; display:none;",
-                Etiqueta: "position: absolute; top:  0px; left: 0px; display:none;",
+                    "display:none;",
+                Etiqueta: "position: absolute; top: 180px; left: 143px;",
                 Estado: "display:none;",
             },
             {
