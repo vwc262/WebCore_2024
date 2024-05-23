@@ -15,6 +15,7 @@ import {
  * Clase Base de la App Web
  */
 class Core {
+  version = 0;
   /**
    * Retorna la ruta de resources
    * @returns {string }

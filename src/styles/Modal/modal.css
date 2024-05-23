@@ -54,6 +54,8 @@
 }
 
 .modal__close {
+  display: none;
+  pointer-events: none;
   transition: all ease 1s;
   position: absolute;
   top: 186px;
@@ -75,6 +77,34 @@
 }
 
 .modal__close:hover {
+  color: goldenrod;
+  background-color: #fff;
+}
+
+.modal__Aceptar {
+  display: none;
+  pointer-events: none;
+  transition: all ease 1s;
+  position: absolute;
+  top: 186px;
+  left: 455px;
+  background: linear-gradient(
+    0deg,
+    rgb(234 234 234) 0%,
+    rgb(47 45 45) 14%,
+    rgb(67 67 67) 57%,
+    rgb(133 141 135) 100%
+  );
+  border-radius: 10px;
+  color: white;
+  box-shadow: 1px 4px 12px black;
+  width: 80px;
+  height: 25px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.modal__Aceptar:hover {
   color: goldenrod;
   background-color: #fff;
 }

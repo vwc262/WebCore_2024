@@ -70,7 +70,7 @@ class ArranqueParo {
         this.isVisible = true;
       } else {
         const mensaje = sesionIniciada ? "El sitio debe de estar en línea" : "Se debe de iniciar sesión";
-        ShowModal(mensaje, "Panel de control");
+        ShowModal(mensaje, "Panel de control", false);
       }
     }
   }
@@ -322,7 +322,7 @@ class ArranqueParo {
   async RequestComando() {
     const alertTitle = "Control Bombas";
     this.textoComando = `${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}, de la estación ${Particular.Instance.Estacion.Nombre}`;
-    ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle);
+    ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle, false);
     this.codigo = this.ArmarCodigo();
     const result = await Fetcher.Instance.RequestData(
       `${EnumControllerMapeo.INSERTCOMANDO}?IdProyecto=${Core.Instance.IdProyecto}`,
@@ -349,7 +349,7 @@ class ArranqueParo {
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
       if(estacion.IsFallaAc()){
-        ShowModal("El sitio presenta falla en la energia", alertTitle);
+        ShowModal("El sitio presenta falla en la energia", alertTitle, false);
         return;
       }
       if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]) {
@@ -357,21 +357,23 @@ class ArranqueParo {
           if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {
             if (this.#prenderBomba && signalBomba.Valor != EnumValorBomba.Arrancada) this.RequestComando();
             else if (!this.#prenderBomba && signalBomba.Valor != EnumValorBomba.Apagada) this.RequestComando();
-            else ShowModal(this.#prenderBomba ? 'La bomba ya esta encendida' : 'La bomba ya esta apagada', alertTitle);
+            else ShowModal(this.#prenderBomba ? 'La bomba ya esta encendida' : 'La bomba ya esta apagada', alertTitle, false);
           } else
-            ShowModal("La bomba debe estar encendida o apagada", alertTitle);
+            ShowModal("La bomba debe estar encendida o apagada", alertTitle, false);
         } else
           ShowModal(
             `La perilla de la bomba debe estar en ${EnumPerillaBombaString[1]}`,
-            alertTitle
+            alertTitle,
+            false
           );
       } else {
-        ShowModal("La perilla general debe estar en Remoto", alertTitle);
+        ShowModal("La perilla general debe estar en Remoto", alertTitle, false);
       }
     } else
       ShowModal(
         enLinea ? "Debe seleccionar una bomba" : "El sitio debe estar en linea",
-        alertTitle
+        alertTitle,
+        false
       );
   };
   BorrarSeleccion() {
@@ -502,18 +504,18 @@ class ArranqueParo {
 
       if (estadoAux == EnumEstadoComando.Leido) {
         if (!modalSetted) {
-          ShowModal("El comando se leyó exitosamente para ser ejecutado.", "Estado Comando");
+          ShowModal("El comando se leyó exitosamente para ser ejecutado.", "Estado Comando", false);
           modalSetted = true;
         }
       } else if (estadoAux == EnumEstadoComando.Ejecutado) {
         if (!modalSetted) {
-          ShowModal(`El comando ${textoComando} se ejecutó exitosamente.`, "Estado Comando");
+          ShowModal(`El comando ${textoComando} se ejecutó exitosamente.`, "Estado Comando", false);
           clearInterval(_interval);
           modalSetted = true;
         }
       } else if (estadoAux == EnumEstadoComando.Error) {
         if (!modalSetted) {
-          ShowModal(`Hubo un error al ejecutar el comando ${textoComando}.`, "Estado Comando");
+          ShowModal(`Hubo un error al ejecutar el comando ${textoComando}.`, "Estado Comando", false);
           clearInterval(_interval);
           modalSetted = true;
         }
@@ -525,7 +527,7 @@ class ArranqueParo {
       }
 
       if (new Date().getDate() - timepoIni > toleranciaMin * ticksPerMinute) {
-        ShowModal(`Ejecutar el comando ${textoComando}, tomó más de lo esperado; Error al ejecutar comando.`, "Estado Comando");
+        ShowModal(`Ejecutar el comando ${textoComando}, tomó más de lo esperado; Error al ejecutar comando.`, "Estado Comando", false);
         clearInterval(_interval);
       }
     }, 2000);
