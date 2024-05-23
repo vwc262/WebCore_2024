@@ -66,7 +66,7 @@ class Core {
     this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
     this.data = this.GetData(data);
 
-    //this.randomValues();
+    // this.randomValues();
     //console.log(this.data);
     EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
   }

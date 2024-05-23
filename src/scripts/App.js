@@ -9,7 +9,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.PozosSistemaLerma;
+  projectName = EnumProyecto.GustavoAMadero;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
@@ -44,8 +44,7 @@ class VwcApp {
   }
 
   isApple() {
-    const expression = /(iPhone|iPod|iPad)/i;
-    return expression.test(navigator.platform);
+    return (/iPad|iPhone|iPod/.test(navigator.userAgent));
   }
 
   IniciarHeader() {
@@ -100,7 +99,11 @@ class VwcApp {
       html.style['-moz-user-drag'] = 'auto';
       html.style['-o-user-drag'] = 'auto';
       html.style['-webkit-user-drag'] = 'auto';
+
+      alert('si');
+      alert(html.style['-webkit-user-drag']);
     }
+
 
     new Tabla().create(); // Inicio de tabla curva
     if (this.isPerfilTipoPozos) {

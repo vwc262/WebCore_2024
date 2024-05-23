@@ -91,7 +91,7 @@ class Particular {
             "src",
             estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
           );
-          if (signal.DentroRango) $imgNivelAgua.classList.add('turbulence');
+          if (signal.DentroRango == 1) $imgNivelAgua.classList.add('turbulence');
           else $imgNivelAgua.classList.remove('turbulence')
         }
 
