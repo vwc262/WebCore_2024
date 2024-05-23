@@ -8,6 +8,7 @@ import { CreateElement } from "../Utilities/CustomFunctions.js";
 import Signal from "../Entities/Signal.js";
 import { Fetcher } from "../Fetcher/Fetcher.js";
 import { Particular } from "../Particular/Particular.js";
+import { Configuracion } from "../../config/config.js";
 
 class ArranqueParo {
   //#region Singleton
@@ -33,6 +34,8 @@ class ArranqueParo {
     this.#PerillaGeneralText = document.querySelector(".arranqueParo__modoTxt");
     // Agregar eventos de clic una sola vez en el constructor
     this.agregarEventosClic();
+
+    this.configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
   }
   //#endregion
 
@@ -190,7 +193,7 @@ class ArranqueParo {
     if (bombas.length > 3) this.refillCarrusel();
     else {
       document.querySelectorAll('.flechaControl').forEach(flecha => flecha.style.display = "none");
-      if(bombas.length == 1){
+      if (bombas.length == 1) {
         document.querySelector('.controlParo__carruselItem').style.left = "105px";
       }
     }
@@ -319,8 +322,18 @@ class ArranqueParo {
     this.#prenderBomba = btnAccion.prender;
   };
   ArmarCodigo() {
+
+    var _idEstacion = this.idEstacion;
+
+    //TODO: PROBAR ARRANQUE Y PARO CON LERMA!!!
+    if (this.configuracionProyecto != undefined && this.configuracionProyecto.ArranqueParo != undefined) {
+      if (this.configuracionProyecto.ArranqueParo[this.idEstacion] != undefined) {
+        _idEstacion = this.configuracionProyecto.ArranqueParo[this.idEstacion].IdMapeo;
+      }
+    }
+
     return (
-      (this.idEstacion << 8) |
+      (_idEstacion << 8) |
       (this.#bombaSeleccionada.Ordinal << 4) |
       (this.#prenderBomba ? 1 : 2)
     );
@@ -354,7 +367,7 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      if(estacion.IsFallaAc()){
+      if (estacion.IsFallaAc()) {
         ShowModal("El sitio presenta falla en la energia", alertTitle, false);
       }
       if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]) {
