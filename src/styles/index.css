@@ -14,6 +14,10 @@ body {
   height: 1080px;
   color: white;
   user-select: none;
+  -webkit-user-drag: auto !important;
+  -moz-user-drag: auto !important;
+  -o-user-drag: auto !important;
+  -webkit-user-drag: auto !important;
 }
 
 header {
@@ -265,6 +269,10 @@ aside {
   text-align-last: center;
   font-size: xx-large;
   margin-left: -40px;
+}
+
+.containerLoading {
+  display: none;
 }
 
 @keyframes rotate {

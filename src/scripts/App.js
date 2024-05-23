@@ -108,9 +108,6 @@ class VwcApp {
       html.style['-moz-user-drag'] = 'auto';
       html.style['-o-user-drag'] = 'auto';
       html.style['-webkit-user-drag'] = 'auto';
-
-      alert('si');
-      alert(html.style['-webkit-user-drag']);
     }
 
 

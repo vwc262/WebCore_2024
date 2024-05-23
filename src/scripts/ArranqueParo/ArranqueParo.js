@@ -484,8 +484,8 @@ class ArranqueParo {
   }
   ObtenerEstadoComando() {
     let estadoAux = EnumEstadoComando.Insertado;
-    let timepoIni = new Date();
-    let ticksPerMinute = 600000000;
+    let timepoIni = new Date().getTime();
+    let ticksPerMinute = 1000 * 60;
     let toleranciaMin = 3.5;
     let modalSetted = false;
     let usuario = Login.Instace.userName;
@@ -531,7 +531,7 @@ class ArranqueParo {
         estadoAux = result.estado;
       }
 
-      if (new Date().getDate() - timepoIni > toleranciaMin * ticksPerMinute) {
+      if (new Date().getTime() - timepoIni > toleranciaMin * ticksPerMinute) {
         ShowModal(`Ejecutar el comando ${textoComando}, tomó más de lo esperado; Error al ejecutar comando.`, "Estado Comando", false);
         clearInterval(_interval);
       }
