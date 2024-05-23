@@ -51,7 +51,6 @@ class Core {
     console.log("Iniciando App");
     this.IdProyecto = idProyecto;
     this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
-    //this.version = -99;
 
     await this.Update();
     this.IdInterval = setInterval(() => this.Update(), 10 * 1000);
@@ -63,7 +62,8 @@ class Core {
       undefined,
       false
     );
-    this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
+    //this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
+    this.version = -99;
     this.data = this.GetData(data);
 
     // this.randomValues();

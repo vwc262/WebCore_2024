@@ -9,19 +9,25 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.GustavoAMadero;
+  projectName = EnumProyecto.PozosSistemaLerma;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
   async Start() {
+    AdjustSize();
+
     //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
+    
     this.IniciarHeader();
 
     if (this.version != -99) {
-      this.IniciarUI();
+      const containerProximamente = document.querySelector(".Proximamente");
+      containerProximamente.remove();
+
       this.onLoad();
+      this.IniciarUI();
     }
     else {
       const tabla = document.querySelector(".aside__tabla");
@@ -32,6 +38,9 @@ class VwcApp {
       
       const containerLoading = document.querySelector(".containerLoading");
       containerLoading.remove();
+
+      const containerProximamente = document.querySelector(".txtProximamnete");
+      containerProximamente.style.display = "flex";
     }
   }
 
@@ -54,7 +63,7 @@ class VwcApp {
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
 
-    AdjustSize();
+    
   }
 
   IniciarUI() {
@@ -113,8 +122,6 @@ class VwcApp {
       new Perfil().create(); // Inicio del perfil
     }
     new Mapa().create();
-
-
 
     this.suscribirEventos();
   }
