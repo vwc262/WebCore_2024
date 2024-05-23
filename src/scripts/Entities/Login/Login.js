@@ -77,7 +77,7 @@ class Login {
                 this.token = result.token;
                 this.userName = this.inputusuario.value;
                 this.btnHeaderLogin.style.display = 'none';
-                ShowModal(result.message + ` la sesión finalizara en ${this.#inactivityMinutes} minutos`, "Inicio sesión", false);
+                ShowModal(result.message , "Inicio sesión", false);
                 GoBack();
             } else {
                 ShowModal(`${result.message}`, "Inicio sesión", false);
