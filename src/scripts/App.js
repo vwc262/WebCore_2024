@@ -2,7 +2,7 @@ import { Core } from "./Core.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
-import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js"; 
+import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import UIReportes from "./Reporteador/UIReportes.js";
@@ -25,8 +25,15 @@ class VwcApp {
   }
 
   isApple() {
-    const expression = /(iPhone|iPod|iPad)/i;
-    return expression.test(navigator.platform);
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.userAgentData.platform)
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
   }
 
   IniciarUI() {
@@ -77,7 +84,11 @@ class VwcApp {
       html.style['-moz-user-drag'] = 'auto';
       html.style['-o-user-drag'] = 'auto';
       html.style['-webkit-user-drag'] = 'auto';
+
+      alert('si');
+      alert(html.style['-webkit-user-drag']);
     }
+
 
     new Tabla().create(); // Inicio de tabla curva
     if (this.isPerfilTipoPozos) {
@@ -100,7 +111,7 @@ class VwcApp {
     if (Core.Instance.version != this.version) {
       this.version = Core.Instance.version;
 
-      ShowModal("Se ha detectado un cambio de versión","Cambio de versión", true);
+      ShowModal("Se ha detectado un cambio de versión", "Cambio de versión", true);
     }
   }
 }
