@@ -104,7 +104,7 @@ class Perfil {
             events: new Map().set('input', [this.scroll])
         });
 
-        Core.Instance.data.forEach(estacion => {
+        Core.Instance.data.forEach(estacion => {        
             const estacionPerfil = new SitioPerfil(estacion.IdEstacion, function (isMouseOut, estacion, css) {
                 this.setHoverPerfil(isMouseOut, estacion, css);
             }.bind(this));

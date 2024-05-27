@@ -5,6 +5,7 @@ import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
+import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 
 class SitioPerfilPozo {
     /**
@@ -153,7 +154,7 @@ class SitioPerfilPozo {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     }
-    mostrarParticular = () => {
+    mostrarParticular = () => {           
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         Particular.Instance.setEstacion(estacion);
         Particular.Instance.mostrarDetalles();

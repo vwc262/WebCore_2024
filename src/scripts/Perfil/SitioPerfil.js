@@ -5,6 +5,9 @@ import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
+import Login from "../Entities/Login/Login.js";
+import { ShowModal } from "../uiManager.js";
+import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 
 class SitioPerfil {
     /**
@@ -38,7 +41,7 @@ class SitioPerfil {
             },
         });
 
-        
+
 
         let signalDiv = CreateElement({
             nodeElement: 'div',
@@ -87,14 +90,33 @@ class SitioPerfil {
         return etiquetaDiv;
     }
 
+    SetEventoClick(estacion) {
+        let eventoClick = this.mostrarParticular;
+        const configProyectoPerfil = Configuracion.GetConfiguracion(Core.Instance.IdProyecto).perfil;
+        if (configProyectoPerfil.estacionesSinParticular)
+            eventoClick = configProyectoPerfil.estacionesSinParticular.includes(estacion.IdEstacion) ? this.MostrarArranqueYparo : eventoClick;
+        return eventoClick;
+    }
+
+    MostrarArranqueYparo(ev) {
+        if (!Login.Instace.userIsLogged) {
+            ShowModal('Primero debe inicar sesión para realizar control de bombas', "Aviso");
+            return;
+        }
+        const elementoTarget = ev.currentTarget;
+        ArranqueParo.Instance.Create(elementoTarget.IdEstacion);
+
+    }
+
     createSitio() {
+
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
 
         let estacionDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
             events: new Map()
-                .set("click", [this.mostrarParticular])
+                .set("click", [this.SetEventoClick(estacion)])
                 .set("mouseover", [() => {
                     this.setHover(false, estacion, this.estilosEstacionEtiqueta.Imagen);
                 }])
@@ -102,6 +124,7 @@ class SitioPerfil {
                     this.setHover(true, estacion);
                 }])
         });
+        estacionDiv.IdEstacion = estacion.IdEstacion;
         let estacionPerfilDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `estacionPerfil_${estacion.Nombre}`, class: 'estacionPerfil' }
@@ -116,7 +139,7 @@ class SitioPerfil {
             this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;
         })
 
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {                        
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
             let imagenEstacionNivelPerfil = CreateElement({
                 nodeElement: "img",
                 attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
@@ -173,7 +196,7 @@ class SitioPerfil {
         })
     }
 
-    mostrarParticular = () => {
+    mostrarParticular = () => {        
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         Particular.Instance.setEstacion(estacion);
         Particular.Instance.mostrarDetalles();

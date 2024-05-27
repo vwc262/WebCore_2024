@@ -4,8 +4,10 @@ import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { Particular } from "../Particular/Particular.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Tabla } from "./Tabla.js";
-import { Module, SetActualModule } from "../uiManager.js";
+import { GoHome, Module, SetActualModule } from "../uiManager.js";
 import { EnumModule } from "../Utilities/Enums.js";
+import { Configuracion } from "../../config/config.js";
+import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 
 class Row {
   /**
@@ -45,14 +47,14 @@ class Row {
 
     this.Update();
 
+
     this.rowContainer.addEventListener("click", (event) => {
 
       const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
       const index = Core.Instance.data.indexOf(estacion);
 
       if (Module == EnumModule.Perfil || Module == EnumModule.Particular) {
-        Particular.Instance.setEstacion(estacion);
-        Particular.Instance.mostrarDetalles();
+        this.ElegirPanelOParticular(estacion);
       } else if (Module == EnumModule.Mapa) {
         EventsManager.Instance.EmitirEvento('OnClickTablaToMarker', { dataMarker: estacion });
       }
@@ -68,6 +70,22 @@ class Row {
     this.suscribirEventos();
 
     return this.rowContainer;
+  }
+  ElegirPanelOParticular(estacion) {
+    const configProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto).perfil;
+    let mostrarPanel = false;
+    if (configProyecto.estacionesSinParticular) {
+      mostrarPanel = configProyecto.estacionesSinParticular.includes(estacion.IdEstacion);
+    }
+    if (mostrarPanel) {
+      SetActualModule("Perfil");
+      GoHome();
+      ArranqueParo.Instance.Create(estacion.IdEstacion);
+    }
+    else {
+      Particular.Instance.setEstacion(estacion);
+      Particular.Instance.mostrarDetalles();
+    }
   }
 
   Update() {
