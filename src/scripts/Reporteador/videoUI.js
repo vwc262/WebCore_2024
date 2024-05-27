@@ -6,6 +6,7 @@ import { setElementProperty } from "./utilities.js"; // Importa setElementProper
 
 // Definición del objeto UIControlador
 const UIControlador = {
+  indexSitio:0,
   // Objeto que contiene referencias a elementos del DOM relacionados con la interfaz de usuario
   overlays: {
     calendario: document.querySelector(".calendarioContainer"), // Referencia al contenedor del calendario
@@ -31,7 +32,7 @@ const UIControlador = {
 
   // Método para mostrar la interfaz de usuario del video
   showUIVideoInit: function () {
-    CreateVariables(0, sitiosInfo[0]); // Llama a CreateVariables con el índice del sitio predeterminado
+    CreateVariables(UIControlador.indexSitio, sitiosInfo[UIControlador.indexSitio]); // Llama a CreateVariables con el índice del sitio predeterminado
 
     // Llama a la función setElementProperty para establecer la propiedad de opacidad en 1 para los elementos seleccionados
     setElementProperty(Object.values(UIControlador.overlays), {

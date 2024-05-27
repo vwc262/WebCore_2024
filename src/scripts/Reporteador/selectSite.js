@@ -3,8 +3,9 @@ import { sitiosInfo } from "./Reportes.js"; // Importa la variable sitiosInfo de
 import { CreateVariables } from "./carrusel.js"; // Importa la función CreateVariables desde carrusel.js
 import { projectName } from "./Reportes.js";
 import { FetcherGraficador } from "./Fetcher.js";
+import UIControlador from "./videoUI.js";
 
-function InicialSelector() {
+function InicialSelector() {  
   // Obtiene referencias a los elementos del DOM relacionados con el selector
   const optionMenu = document.querySelector(".select-menu"); // Menú de opciones
   const selectBtn = optionMenu.querySelector(".select-btn"); // Botón de selección
@@ -56,6 +57,7 @@ function createList(
       // Establece el nombre del sitio seleccionado en el elemento nameSitio
       nameSitio.textContent = Sitio.Nombre;
       // Llama a la función CreateVariables con el índice de la opción seleccionada para cargar el carrusel correspondiente
+      UIControlador.indexSitio = sitiosInfo.indexOf(Sitio);
       CreateVariables(sitiosInfo.indexOf(Sitio), Sitio);
 
       imgSitioSeleccionado.setAttribute(
