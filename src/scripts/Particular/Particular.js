@@ -50,9 +50,12 @@ class Particular {
 
   //#region Metodos
   setEstacion(estacion) {
-    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {
+    ArranqueParo.Instance.CloseArranqueParo();
+    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {      
+      
       // Hay Cambio de particular
       EventsManager.Instance.EmitirEvento("ParticularChanged");
+      
       this.estacion = estacion;
     }
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
@@ -147,7 +150,7 @@ class Particular {
     this.$datosHeader.style.display = "block";
     this.$btnBack.style.opacity = "1";
     this.$btnBack.style.pointerEvents = "auto";
-    this.$panelBombas.style.pointerEvents = "auto";
+    //this.$panelBombas.style.pointerEvents = "auto";
     this.$particularCapaTextoImg.style.zIndex = 1;
     this.$particularCapaTextoImg.style.pointerEvents = "none";
 

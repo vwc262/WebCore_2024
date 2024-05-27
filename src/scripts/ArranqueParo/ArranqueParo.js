@@ -81,6 +81,7 @@ class ArranqueParo {
   animPanel() {
     const $panelArranqueParo = document.querySelector(".arranqueParo__panelControl");
     $panelArranqueParo.style.opacity = "1";
+    $panelArranqueParo.style.pointerEvents = "auto";
     const $panelFondo = document.querySelector(".arranqueParo__Container");
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
     $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition.gif?v=${Core.Instance.version}`);
@@ -236,6 +237,7 @@ class ArranqueParo {
     this.#UpdateableElements = {};
   }
   refillCarrusel() {
+    document.querySelectorAll('.flechaControl').forEach(flecha => flecha.style.display = "flex");
     [...this.#carruselContainer.children].reverse().forEach((item, index) => {
       const clone = item.cloneNode(true);
       clone.addEventListener("click", this.clickBomba);
@@ -485,6 +487,7 @@ class ArranqueParo {
     const $panelArranqueParo = document.querySelector(".arranqueParo__Container");
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
     $panelArranqueParoContainer.style.opacity = "0";
+    $panelArranqueParoContainer.style.pointerEvents = "none";
     $panelArranqueParo.style.opacity = "0";
     $panelArranqueParo.style.transform = "translateY(100vh)";
     $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition_inicio.png?v=${Core.Instance.version}`);

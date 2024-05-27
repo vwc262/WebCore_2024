@@ -22,7 +22,9 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 3,
                 Imagen:
-                    "display:none;",
+                    "position: absolute; width: 141px; height: 86px; left:  130px; top: 442px;",
+                // Imagen:
+                //     "display:none",
                 Etiqueta: "position: absolute; top: 395px; left: 95px;",
                 Estado: "display:none;",
             },
@@ -280,6 +282,8 @@ export const PadiernaConfig = {
                 },
             ],
         },
+        // pozo padierna 2 y pozo reino aventura
+        estacionesSinParticular: [3, 8]
     },
 
     mapa: {
