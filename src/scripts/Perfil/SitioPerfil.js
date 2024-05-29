@@ -104,7 +104,13 @@ class SitioPerfil {
             return;
         }
         const elementoTarget = ev.currentTarget;
-        ArranqueParo.Instance.Create(elementoTarget.IdEstacion);
+
+        // setTimeout(() => {
+            // if (ArranqueParo.Instance.idEstacion != elementoTarget.IdEstacion){
+            ArranqueParo.Instance.CloseArranqueParo();
+            ArranqueParo.Instance.Create(elementoTarget.IdEstacion);
+            // }
+        // }, 1000);
 
     }
 
@@ -196,7 +202,7 @@ class SitioPerfil {
         })
     }
 
-    mostrarParticular = () => {        
+    mostrarParticular = () => {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         Particular.Instance.setEstacion(estacion);
         Particular.Instance.mostrarDetalles();

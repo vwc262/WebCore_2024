@@ -492,6 +492,7 @@ class ArranqueParo {
     $panelArranqueParo.style.transform = "translateY(100vh)";
     $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition_inicio.png?v=${Core.Instance.version}`);
     this.ResetCarrusel();
+    this.idEstacion = -1;
   };
   ResetCarrusel() {
     this.deleteUpdateElements();

@@ -59,7 +59,7 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 8,
                 Imagen:
-                    "display:none;",
+                "position: absolute; width: 136px; height: 72px; left:  165px; top: 225px;",
                 Etiqueta: "position: absolute; top: 180px; left: 143px;",
                 Estado: "display:none;",
             },

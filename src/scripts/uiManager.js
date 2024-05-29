@@ -71,7 +71,7 @@ $btnHeader.addEventListener("click", (ev) => {
           $btnBack.style.opacity = "1";
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
         } else
-          CerrarPanelBombas($panelBombas);
+           CerrarPanelBombas($panelBombas);
 
         break;
       case "headerBtn__Mapa header__active":

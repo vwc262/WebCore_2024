@@ -61,7 +61,7 @@ class Row {
 
       let options = document.querySelector('ul.options');
       if (options.children.length > 0) {
-        let ul = options.children[index];
+        let ul = options.children[index];      
         ul.click();
       }
 
@@ -80,7 +80,9 @@ class Row {
     if (mostrarPanel) {
       SetActualModule("Perfil");
       GoHome();
+
       ArranqueParo.Instance.Create(estacion.IdEstacion);
+
     }
     else {
       Particular.Instance.setEstacion(estacion);

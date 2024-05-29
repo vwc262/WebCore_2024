@@ -51,8 +51,7 @@ class Particular {
   //#region Metodos
   setEstacion(estacion) {
     ArranqueParo.Instance.CloseArranqueParo();
-    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {      
-      
+    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {            
       // Hay Cambio de particular
       EventsManager.Instance.EmitirEvento("ParticularChanged");
       
