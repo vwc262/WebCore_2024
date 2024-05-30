@@ -80,6 +80,7 @@ class SitioPerfilPozo {
         circuloEnlace.update(estacion);
         return etiquetaDiv;
     }
+
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         let estacionDiv = CreateElement({
@@ -96,6 +97,7 @@ class SitioPerfilPozo {
                     EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: false, IdEstacion: estacion.IdEstacion, stopPropagation: true });
                 }])
         });
+
         let estacionPerfilDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `estacionPerfil_${estacion.Nombre}`, class: 'estacionPerfil' }
@@ -114,6 +116,7 @@ class SitioPerfilPozo {
             this.elementoBomba = imagenEstacionBombaPerfil; //  se guarda referencia para cuestiones de hover
             this.ElementosDinamicosHTML.push(imagenEstacionBombaPerfil);
         })
+        
         estacionDiv.append(estacionPerfilDiv);
         this.suscribirEventos();
         return estacionDiv;

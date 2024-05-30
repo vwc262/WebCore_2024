@@ -148,7 +148,7 @@ class SitioPerfil {
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
             let imagenEstacionNivelPerfil = CreateElement({
                 nodeElement: "img",
-                attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
+                attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}${signalNivel.IdSignal}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
             });
             estacionPerfilDiv.append(imagenEstacionNivelPerfil);
             this.ElementosDinamicosHTML[imagenEstacionNivelPerfil.id] = imagenEstacionNivelPerfil;
@@ -182,7 +182,7 @@ class SitioPerfil {
         const signal = estacion.ObtenerPrimerSignal();
 
         const name = this.ElementosDinamicosHTML[`idEstacion_${estacion.IdEstacion}`];
-        const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
+        let nivel = "";
 
         name.style.background = estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)";
 
@@ -193,6 +193,7 @@ class SitioPerfil {
         }
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+            nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}${signalNivel.IdSignal}`];
             nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
         })
 
