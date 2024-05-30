@@ -131,7 +131,7 @@ class SitioPerfilPozo {
     ActualizarEnlaceLermaPerfil(estacionUpdate) {
         if (estacionUpdate) {
             const imgCirculo = this;
-            const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 0}.png`;
+            const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 3}.png`;
             imgCirculo.setAttribute('src', url);
         }
     }
