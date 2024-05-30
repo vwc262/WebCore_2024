@@ -5,7 +5,7 @@ import { ObtenerFormatoTituloProyecto } from "../Utilities/CustomFunctions.js";
 
 class VwcApp {
   async Start() {
-    await Core.Instance.Init(EnumProyecto.Padierna); // Espera a que tenga la informacion
+    await Core.Instance.Init(EnumProyecto.PozosSistemaLerma); // Espera a que tenga la informacion
     this.IniciarUI();
   }
   IniciarUI() {
