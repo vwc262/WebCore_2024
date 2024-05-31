@@ -11,6 +11,7 @@
  */
 
 import { ArmarFechaSQL } from "../Utilities/CustomFunctions.js";
+import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
 import controladorVideo from "./videos.js";
 
@@ -115,6 +116,7 @@ var UIReportes = {
               date: d.Tiempo,
             };
 
+            debugger
           UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor;
         });
       });
@@ -280,6 +282,9 @@ var UIReportes = {
             renderer: am5xy.AxisRendererY.new(root, {}),
           })
         );
+
+        if (signalObj.IdTipoSignal == EnumTipoSignal.Bomba) {
+        }
       }
 
       var sbseries = scrollbarX.chart.series.push(
@@ -430,6 +435,7 @@ var UIReportes = {
     var seriesData = [];
 
     for (var d in UIReportes.data) {
+      debugger
       var data = {
         date: new Date(UIReportes.data[d].date),
         value: UIReportes.data[d][`${signalObj.IdSignal}`],
