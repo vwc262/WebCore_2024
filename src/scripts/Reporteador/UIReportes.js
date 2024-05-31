@@ -11,6 +11,7 @@
  */
 
 import { ArmarFechaSQL } from "../Utilities/CustomFunctions.js";
+import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
 import controladorVideo from "./videos.js";
 
@@ -313,13 +314,48 @@ var UIReportes = {
   },
   CreateYAxis: function (chart, root, yRenderer, yAxis, signalObj) {
     if (yAxis[signalObj.IdTipoSignal] == undefined) {
+      const valueAxisConfig = {
+        maxDeviation: 1,
+        renderer: yRenderer,
+        color: am5.color(signalObj.Color),
+      };
+
+      if (signalObj.IdTipoSignal == EnumTipoSignal.Bomba) {
+        valueAxisConfig.min = 0;
+        valueAxisConfig.max = 3;
+        valueAxisConfig.extraTooltipPrecision = 1;
+        valueAxisConfig.baseValue = 1;
+      }
+
+
       yAxis[signalObj.IdTipoSignal] = chart.yAxes.push(
-        am5xy.ValueAxis.new(root, {
-          maxDeviation: 1,
-          renderer: yRenderer,
-          color: am5.color(signalObj.Color),
-        })
+        am5xy.ValueAxis.new(root, valueAxisConfig)
       );
+      if (signalObj.IdTipoSignal == EnumTipoSignal.Bomba) {
+        const labels = yAxis[signalObj.IdTipoSignal].get("renderer").labels;
+        labels.template.adapters.add("text", function (text, target) {
+          if (text) {
+            let textoAPoner = '';
+            let value = parseInt(text);            
+            switch (value) {
+              case 0:
+                textoAPoner = 'Mantenimento';
+                break;
+              case 1:
+                textoAPoner = 'Arrancada';
+                break;
+              case 2:
+                textoAPoner = 'Apagada';
+                break;
+              case 3:
+                textoAPoner = 'Falla';
+                break;
+            }
+            return text % 1 != 0 ? '' : textoAPoner;
+          }
+        });
+      }
+
 
       let label = am5.Label.new(root, {
         name: signalObj.Nombre,
