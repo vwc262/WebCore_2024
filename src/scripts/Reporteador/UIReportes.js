@@ -116,8 +116,11 @@ var UIReportes = {
               date: d.Tiempo,
             };
 
-            debugger
           UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor;
+
+          if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
+            UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
+          }
         });
       });
 
@@ -326,7 +329,7 @@ var UIReportes = {
 
       if (signalObj.IdTipoSignal == EnumTipoSignal.Bomba) {
         valueAxisConfig.min = 0;
-        valueAxisConfig.max = 3;
+        valueAxisConfig.max = 4;
         valueAxisConfig.extraTooltipPrecision = 1;
         valueAxisConfig.baseValue = 1;
       }
@@ -340,16 +343,16 @@ var UIReportes = {
         labels.template.adapters.add("text", function (text, target) {
           if (text) {
             let textoAPoner = '';
-            let value = parseInt(text);            
+            let value = parseInt(text);
             switch (value) {
               case 0:
                 textoAPoner = 'Mantenimento';
                 break;
               case 1:
-                textoAPoner = 'Arrancada';
+                textoAPoner = 'Apagada';
                 break;
               case 2:
-                textoAPoner = 'Apagada';
+                textoAPoner = 'Arrancada';
                 break;
               case 3:
                 textoAPoner = 'Falla';
@@ -470,7 +473,6 @@ var UIReportes = {
     var seriesData = [];
 
     for (var d in UIReportes.data) {
-      debugger
       var data = {
         date: new Date(UIReportes.data[d].date),
         value: UIReportes.data[d][`${signalObj.IdSignal}`],
