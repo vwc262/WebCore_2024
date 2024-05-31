@@ -172,6 +172,7 @@ class TablaSimplificada {
             bombas.forEach((bba) => {
               this.$imgBBA = document.createElement("img");
               this.$imgBBA.classList.add("valor-Bomba");
+              this.$imgBBA.style.filter = "hue-rotate(0deg)";
               switch (bba.valor) {
                 case 0:
                   this.$imgBBA.setAttribute("src", "../imgs/b_g_s.png");
@@ -184,6 +185,10 @@ class TablaSimplificada {
                   break;
                 case 3:
                   this.$imgBBA.setAttribute("src", "../imgs/b_g_b.png");
+                  break;
+                case 4:
+                  this.$imgBBA.setAttribute("src", "../imgs/b_g_r.png");
+                  this.$imgBBA.style.filter = "hue-rotate(295deg)";
                   break;
               }
               this.NEW__CELL.appendChild(this.$imgBBA);
@@ -462,20 +467,40 @@ class TablaSimplificada {
     this.$confirmarLogin = document.querySelector(".modal__confirmarLogin");
 
     this.$imgLogin.addEventListener("click", () => {
-      this.$modalLogin.classList.add("modal--show");
+      if(!Fetcher.Instance.isLogged)
+        this.$modalLogin.classList.add("modal--show");
+      else 
+      this.LogOut();      
     });
 
     this.$closeLogin.addEventListener("click", () => {
       this.$modalLogin.classList.remove("modal--show");
     });
 
-    this.$confirmarLogin.addEventListener("click", () => {
-      if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
-        alert("Los campos no deben de estar vacios");
-      }
-
-      this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);
+    this.$confirmarLogin.addEventListener("click", () => {      
+        if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
+          alert("Los campos no deben de estar vacios");
+          return;
+        }
+        this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);      
     });
+  }
+  LogOut = async (ev) => {
+    this.loginIcon = document.querySelector(".loginIcon");
+    const RESULT_LOGOUT = await Fetcher.Instance.RequestData(
+      "logout",
+      RequestType.POST,
+      new Credentials(this.USUARIO.value, this.PASSWORD.value, Core.Instance.IdProyecto),
+      true
+    );
+
+    if (RESULT_LOGOUT.response == false) {
+      alert("Sesión cerrada!");
+      this.loginIcon.setAttribute('src','../imgs/loginIcon.png');      
+      Fetcher.Instance.isLogged = false;
+    }
+
+    console.log(RESULT_LOGOUT);
   }
 
   ModalNotas = (ev) => {
@@ -522,14 +547,15 @@ class TablaSimplificada {
     this.RESULT_LOGIN = await Fetcher.Instance.RequestData(
       "login",
       RequestType.POST,
-      new Credentials(USUARIO, PASSWORD, EnumProyecto.Padierna),
+      new Credentials(USUARIO, PASSWORD, Core.Instance.IdProyecto),
       true
     );
 
     if (this.RESULT_LOGIN.response) {
+      this.loginIcon.setAttribute('src', '../imgs/logout.png');
       Fetcher.Instance.isLogged = true;
       this.$modalLogin.classList.remove("modal--show");
-      this.loginIcon.style.pointerEvents = "none";
+      // this.loginIcon.style.pointerEvents = "none";
       this.$itemlog.forEach((item) => {
         item.style.pointerEvents = "auto";
       });

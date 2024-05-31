@@ -5,6 +5,7 @@ import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
+import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 
 class SitioPerfilPozo {
     /**
@@ -79,6 +80,7 @@ class SitioPerfilPozo {
         circuloEnlace.update(estacion);
         return etiquetaDiv;
     }
+
     createSitio() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         let estacionDiv = CreateElement({
@@ -95,6 +97,7 @@ class SitioPerfilPozo {
                     EventsManager.Instance.EmitirEvento('OnMouseHoverPerfil', { mouseover: false, IdEstacion: estacion.IdEstacion, stopPropagation: true });
                 }])
         });
+
         let estacionPerfilDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `estacionPerfil_${estacion.Nombre}`, class: 'estacionPerfil' }
@@ -113,6 +116,7 @@ class SitioPerfilPozo {
             this.elementoBomba = imagenEstacionBombaPerfil; //  se guarda referencia para cuestiones de hover
             this.ElementosDinamicosHTML.push(imagenEstacionBombaPerfil);
         })
+        
         estacionDiv.append(estacionPerfilDiv);
         this.suscribirEventos();
         return estacionDiv;
@@ -127,7 +131,7 @@ class SitioPerfilPozo {
     ActualizarEnlaceLermaPerfil(estacionUpdate) {
         if (estacionUpdate) {
             const imgCirculo = this;
-            const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 0}.png`;
+            const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 3}.png`;
             imgCirculo.setAttribute('src', url);
         }
     }
@@ -153,7 +157,7 @@ class SitioPerfilPozo {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     }
-    mostrarParticular = () => {
+    mostrarParticular = () => {           
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         Particular.Instance.setEstacion(estacion);
         Particular.Instance.mostrarDetalles();

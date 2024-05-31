@@ -22,8 +22,10 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 3,
                 Imagen:
-                    "position: absolute; width: 141px; height: 86px; left: 130px; top: 442px;",
-                Etiqueta: "position: absolute; top: 335px; left:   44px;",
+                    "position: absolute; width: 141px; height: 86px; left:  130px; top: 442px;",
+                // Imagen:
+                //     "display:none",
+                Etiqueta: "position: absolute; top: 395px; left: 95px;",
                 Estado: "display:none;",
             },
             {
@@ -57,8 +59,8 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 8,
                 Imagen:
-                    "position: absolute; width: 0px; height: 0px; left: 0px; top: 0px; display:none;",
-                Etiqueta: "position: absolute; top:  0px; left: 0px; display:none;",
+                "position: absolute; width: 136px; height: 72px; left:  165px; top: 225px;",
+                Etiqueta: "position: absolute; top: 180px; left: 143px;",
                 Estado: "display:none;",
             },
             {
@@ -280,6 +282,8 @@ export const PadiernaConfig = {
                 },
             ],
         },
+        // pozo padierna 2 y pozo reino aventura
+        estacionesSinParticular: [3, 8]
     },
 
     mapa: {

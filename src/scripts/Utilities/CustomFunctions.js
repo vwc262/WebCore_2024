@@ -43,6 +43,12 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
 };
 
 export const AdjustSize = function () {
+  if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")){
+   ajustador(); 
+  }  
+};
+
+const ajustador = () => {
   const contentWidth = 1920;
   const contentHeight = 1080;
 
@@ -60,7 +66,7 @@ export const AdjustSize = function () {
   } else {
     body.style = `transform: scale(${widthScale}); margin: 0px 0px 0px 0px; transform-origin: left top; width: 1920px; height: 1080px;`;
   }
-};
+}
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
   //2024/05/14 00:00

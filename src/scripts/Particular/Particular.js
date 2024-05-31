@@ -50,9 +50,11 @@ class Particular {
 
   //#region Metodos
   setEstacion(estacion) {
-    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {
+    ArranqueParo.Instance.CloseArranqueParo();
+    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {            
       // Hay Cambio de particular
       EventsManager.Instance.EmitirEvento("ParticularChanged");
+      
       this.estacion = estacion;
     }
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
@@ -137,16 +139,17 @@ class Particular {
     this.$headerTitle.innerText = this.Estacion.Nombre;
 
     // Maneja los zIndex al cambiar de "paginas"
-    section__home.style.zIndex = "5";
-    section__mapa.style.zIndex = "5";
-    section__graficador.style.zIndex = "5";
-    section__login.style.zIndex = "5";
-    section__particular.style.zIndex = "10";
+    section__home.style.display = "none";
+    section__mapa.style.display = "none";
+    section__graficador.style.display = "none";
+    section__login.style.display = "none";
+    section__particular.style.display =  "block";
+    
     this.$datosHeader.style.opacity = "1";
     this.$datosHeader.style.display = "block";
     this.$btnBack.style.opacity = "1";
     this.$btnBack.style.pointerEvents = "auto";
-    this.$panelBombas.style.pointerEvents = "auto";
+    //this.$panelBombas.style.pointerEvents = "auto";
     this.$particularCapaTextoImg.style.zIndex = 1;
     this.$particularCapaTextoImg.style.pointerEvents = "none";
 
@@ -181,6 +184,7 @@ class Particular {
   }
 
   backParticular = () => {
+
     SetActualModule("Perfil");
     GoHome();
   }

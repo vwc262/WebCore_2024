@@ -181,7 +181,7 @@ class Signal {
             case EnumTipoSignal.ValvulaAnalogica:
 
                 if (this.DentroRango == 1)
-                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'rgb(203, 185, 136)' : this.DentroLimite == EnumDentroLimite.Alto ? '#fa8c8c' : 'rgb(255, 255, 255)'}`;
+                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'rgb(201 137 59)' : this.DentroLimite == EnumDentroLimite.Alto ? '#fa8c8c' : 'rgb(255, 255, 255)'}`;
 
                 break;
             default:

@@ -5,6 +5,9 @@ import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Particular } from "../Particular/Particular.js";
+import Login from "../Entities/Login/Login.js";
+import { ShowModal } from "../uiManager.js";
+import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 
 class SitioPerfil {
     /**
@@ -38,7 +41,7 @@ class SitioPerfil {
             },
         });
 
-        
+
 
         let signalDiv = CreateElement({
             nodeElement: 'div',
@@ -87,14 +90,39 @@ class SitioPerfil {
         return etiquetaDiv;
     }
 
+    SetEventoClick(estacion) {
+        let eventoClick = this.mostrarParticular;
+        const configProyectoPerfil = Configuracion.GetConfiguracion(Core.Instance.IdProyecto).perfil;
+        if (configProyectoPerfil.estacionesSinParticular)
+            eventoClick = configProyectoPerfil.estacionesSinParticular.includes(estacion.IdEstacion) ? this.MostrarArranqueYparo : eventoClick;
+        return eventoClick;
+    }
+
+    MostrarArranqueYparo(ev) {
+        if (!Login.Instace.userIsLogged) {
+            ShowModal('Primero debe inicar sesión para realizar control de bombas', "Aviso");
+            return;
+        }
+        const elementoTarget = ev.currentTarget;
+
+        // setTimeout(() => {
+            // if (ArranqueParo.Instance.idEstacion != elementoTarget.IdEstacion){
+            ArranqueParo.Instance.CloseArranqueParo();
+            ArranqueParo.Instance.Create(elementoTarget.IdEstacion);
+            // }
+        // }, 1000);
+
+    }
+
     createSitio() {
+
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
 
         let estacionDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
             events: new Map()
-                .set("click", [this.mostrarParticular])
+                .set("click", [this.SetEventoClick(estacion)])
                 .set("mouseover", [() => {
                     this.setHover(false, estacion, this.estilosEstacionEtiqueta.Imagen);
                 }])
@@ -102,6 +130,7 @@ class SitioPerfil {
                     this.setHover(true, estacion);
                 }])
         });
+        estacionDiv.IdEstacion = estacion.IdEstacion;
         let estacionPerfilDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `estacionPerfil_${estacion.Nombre}`, class: 'estacionPerfil' }
@@ -116,10 +145,10 @@ class SitioPerfil {
             this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;
         })
 
-        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {                        
+        estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
             let imagenEstacionNivelPerfil = CreateElement({
                 nodeElement: "img",
-                attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
+                attributes: { class: "renderImagesSitio", id: `idEstacionNivel_${estacion.Abreviacion}${signalNivel.IdSignal}`, src: estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil") },
             });
             estacionPerfilDiv.append(imagenEstacionNivelPerfil);
             this.ElementosDinamicosHTML[imagenEstacionNivelPerfil.id] = imagenEstacionNivelPerfil;
@@ -153,7 +182,7 @@ class SitioPerfil {
         const signal = estacion.ObtenerPrimerSignal();
 
         const name = this.ElementosDinamicosHTML[`idEstacion_${estacion.IdEstacion}`];
-        const nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}`];
+        let nivel = "";
 
         name.style.background = estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)";
 
@@ -164,6 +193,7 @@ class SitioPerfil {
         }
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
+            nivel = this.ElementosDinamicosHTML[`idEstacionNivel_${estacion.Abreviacion}${signalNivel.IdSignal}`];
             nivel.src = estacion.ObtenerRenderNivelOBomba(signalNivel, "Perfil");
         })
 

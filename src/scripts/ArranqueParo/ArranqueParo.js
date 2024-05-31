@@ -8,6 +8,7 @@ import { CreateElement } from "../Utilities/CustomFunctions.js";
 import Signal from "../Entities/Signal.js";
 import { Fetcher } from "../Fetcher/Fetcher.js";
 import { Particular } from "../Particular/Particular.js";
+import { Configuracion } from "../../config/config.js";
 
 class ArranqueParo {
   //#region Singleton
@@ -33,6 +34,8 @@ class ArranqueParo {
     this.#PerillaGeneralText = document.querySelector(".arranqueParo__modoTxt");
     // Agregar eventos de clic una sola vez en el constructor
     this.agregarEventosClic();
+
+    this.configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
   }
   //#endregion
 
@@ -78,6 +81,7 @@ class ArranqueParo {
   animPanel() {
     const $panelArranqueParo = document.querySelector(".arranqueParo__panelControl");
     $panelArranqueParo.style.opacity = "1";
+    $panelArranqueParo.style.pointerEvents = "auto";
     const $panelFondo = document.querySelector(".arranqueParo__Container");
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
     $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition.gif?v=${Core.Instance.version}`);
@@ -190,7 +194,7 @@ class ArranqueParo {
     if (bombas.length > 3) this.refillCarrusel();
     else {
       document.querySelectorAll('.flechaControl').forEach(flecha => flecha.style.display = "none");
-      if(bombas.length == 1){
+      if (bombas.length == 1) {
         document.querySelector('.controlParo__carruselItem').style.left = "105px";
       }
     }
@@ -233,6 +237,7 @@ class ArranqueParo {
     this.#UpdateableElements = {};
   }
   refillCarrusel() {
+    document.querySelectorAll('.flechaControl').forEach(flecha => flecha.style.display = "flex");
     [...this.#carruselContainer.children].reverse().forEach((item, index) => {
       const clone = item.cloneNode(true);
       clone.addEventListener("click", this.clickBomba);
@@ -319,8 +324,18 @@ class ArranqueParo {
     this.#prenderBomba = btnAccion.prender;
   };
   ArmarCodigo() {
+
+    var _idEstacion = this.idEstacion;
+
+    //TODO: PROBAR ARRANQUE Y PARO CON LERMA!!!
+    if (this.configuracionProyecto != undefined && this.configuracionProyecto.ArranqueParo != undefined) {
+      if (this.configuracionProyecto.ArranqueParo[this.idEstacion] != undefined) {
+        _idEstacion = this.configuracionProyecto.ArranqueParo[this.idEstacion].IdMapeo;
+      }
+    }
+
     return (
-      (this.idEstacion << 8) |
+      (_idEstacion << 8) |
       (this.#bombaSeleccionada.Ordinal << 4) |
       (this.#prenderBomba ? 1 : 2)
     );
@@ -354,7 +369,7 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      if(estacion.IsFallaAc()){
+      if (estacion.IsFallaAc()) {
         ShowModal("El sitio presenta falla en la energia", alertTitle, false);
       }
       if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]) {
@@ -472,10 +487,12 @@ class ArranqueParo {
     const $panelArranqueParo = document.querySelector(".arranqueParo__Container");
     const $imgArranqueParo = document.getElementById("imgPanelArranqueParo");
     $panelArranqueParoContainer.style.opacity = "0";
+    $panelArranqueParoContainer.style.pointerEvents = "none";
     $panelArranqueParo.style.opacity = "0";
     $panelArranqueParo.style.transform = "translateY(100vh)";
     $imgArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition_inicio.png?v=${Core.Instance.version}`);
     this.ResetCarrusel();
+    this.idEstacion = -1;
   };
   ResetCarrusel() {
     this.deleteUpdateElements();
@@ -484,8 +501,8 @@ class ArranqueParo {
   }
   ObtenerEstadoComando() {
     let estadoAux = EnumEstadoComando.Insertado;
-    let timepoIni = new Date();
-    let ticksPerMinute = 600000000;
+    let timepoIni = new Date().getTime();
+    let ticksPerMinute = 1000 * 60;
     let toleranciaMin = 3.5;
     let modalSetted = false;
     let usuario = Login.Instace.userName;
@@ -531,7 +548,7 @@ class ArranqueParo {
         estadoAux = result.estado;
       }
 
-      if (new Date().getDate() - timepoIni > toleranciaMin * ticksPerMinute) {
+      if (new Date().getTime() - timepoIni > toleranciaMin * ticksPerMinute) {
         ShowModal(`Ejecutar el comando ${textoComando}, tomó más de lo esperado; Error al ejecutar comando.`, "Estado Comando", false);
         clearInterval(_interval);
       }

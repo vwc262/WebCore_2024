@@ -14,6 +14,10 @@ body {
   height: 1080px;
   color: white;
   user-select: none;
+  -webkit-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  -webkit-user-drag: none !important;
 }
 
 header {
@@ -65,6 +69,10 @@ aside {
   width: 600px;
   height: 1080px;
   left: 1320px;
+}
+
+.Content_on_load {
+  display: none;
 }
 
 .headerBtn__Home,
@@ -153,4 +161,128 @@ aside {
   color: white !important;
   font-size: 0.75em;
   letter-spacing: 1px;
+}
+
+/*Texto Mantenimeinto*/
+
+@keyframes lights {
+  0% {
+    color: hsl(230, 40%, 80%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+  
+  30% { 
+    color: hsl(230, 80%, 90%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+  
+  40% { 
+    color: hsl(230, 100%, 95%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 90%, 0.5),
+      -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+      0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+  }
+  
+  70% {
+    color: hsl(230, 80%, 90%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+  
+  100% {
+    color: hsl(230, 40%, 80%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+  
+}
+
+.txtProximamnete {
+  height: 70vh;
+  width: 70vw;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 150px;
+  color: hsl(230, 100%, 95%);
+  animation: lights 5s 750ms linear infinite;
+}
+
+/* loading Screen */
+:root {
+  --border-width: 7px;
+}
+
+.sec-loading {
+  z-index: 6;
+  height: 70vh;
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sec-loading .one {
+  height: 80px;
+  width: 80px;
+  border: var(--border-width) solid white;
+  transform: rotate(45deg);
+  border-radius: 0 50% 50% 50%;
+  position: relative;
+  animation: move 0.5s linear infinite alternate-reverse;
+}
+
+.sec-loading .one::before {
+  content: "";
+  position: absolute;
+  height: 55%;
+  width: 55%;
+  border-radius: 50%;
+  border: var(--border-width) solid transparent;
+  border-top-color: white;
+  border-bottom-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate 1s linear infinite;
+}
+
+.textloading {
+  align-content: center;
+  text-align-last: center;
+  font-size: xx-large;
+  margin-left: -40px;
+}
+
+.containerLoading {
+  display: none;
+}
+
+@keyframes rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes move {
+  to {
+    transform: translateY(15px) rotate(45deg);
+  }
 }
