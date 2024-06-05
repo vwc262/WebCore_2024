@@ -5,8 +5,8 @@ import { RequestType } from "../Utilities/Enums.js";
  */
 class Fetcher {
   isLogged = false;
-  #root = "http://w1.doomdns.com:11000/vwctestapi/crud";
-  #rootVersion = "http://w1.doomdns.com:11000/vwctestapi/proyecto";
+  #root = "https://virtualwavecontrol.com.mx/Core24/crud";
+  #rootVersion = "https://virtualwavecontrol.com.mx/Core24/proyecto";
   static #_instance = undefined;
   /**
    * @returns {Fetcher}

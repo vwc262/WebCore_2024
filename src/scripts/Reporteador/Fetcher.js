@@ -8,8 +8,8 @@ const FetcherGraficador = {
     POST: "POST",
   },
   version: 0,
-  uriAssets: "http://w1.doomdns.com:11000/RecursosWeb/WebCore24/",
-  uri: "http://w1.doomdns.com:11000/api24/VWC/Unreal/",
+  uriAssets: "https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/",
+  uri: "https://virtualwavecontrol.com.mx/api24/VWC/Unreal/",
   /**
    * Funcion para hacer request del tipo get y post , Nota : Si es tipo Post jsonizar debe estar en true
    * @param {{action : string, method : string, data = {}, jsonizar = boolean}} ParametrosOpcionales

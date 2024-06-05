@@ -20,7 +20,7 @@ class Core {
    * @returns {string }
    */
   get ResourcesPath() {
-    return `http://w1.doomdns.com:11000/RecursosWeb/WebCore24/${
+    return `https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/${
       EnumNombreProyecto[this.IdProyecto]
     }/`;
   }
