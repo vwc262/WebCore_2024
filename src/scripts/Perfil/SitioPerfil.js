@@ -93,8 +93,9 @@ class SitioPerfil {
     SetEventoClick(estacion) {
         let eventoClick = this.mostrarParticular;
         const configProyectoPerfil = Configuracion.GetConfiguracion(Core.Instance.IdProyecto).perfil;
-        if (configProyectoPerfil.estacionesSinParticular)
+        if (configProyectoPerfil.estacionesSinParticular) {
             eventoClick = configProyectoPerfil.estacionesSinParticular.includes(estacion.IdEstacion) ? this.MostrarArranqueYparo : eventoClick;
+        }
         return eventoClick;
     }
 
@@ -106,10 +107,10 @@ class SitioPerfil {
         const elementoTarget = ev.currentTarget;
 
         // setTimeout(() => {
-            // if (ArranqueParo.Instance.idEstacion != elementoTarget.IdEstacion){
-            ArranqueParo.Instance.CloseArranqueParo();
-            ArranqueParo.Instance.Create(elementoTarget.IdEstacion);
-            // }
+        // if (ArranqueParo.Instance.idEstacion != elementoTarget.IdEstacion){
+        ArranqueParo.Instance.CloseArranqueParo();
+        ArranqueParo.Instance.Create(elementoTarget.IdEstacion);
+        // }
         // }, 1000);
 
     }

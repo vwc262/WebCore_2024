@@ -342,7 +342,8 @@ class ArranqueParo {
   }
   async RequestComando() {
     const alertTitle = "Control Bombas";
-    this.textoComando = `${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}, de la estación ${Particular.Instance.Estacion.Nombre}`;
+    const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
+    this.textoComando = `${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}, de la estación ${estacion.Nombre}`;
     ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle, false);
     this.codigo = this.ArmarCodigo();
     const result = await Fetcher.Instance.RequestData(
