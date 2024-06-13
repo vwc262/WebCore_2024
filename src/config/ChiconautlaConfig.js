@@ -91,7 +91,7 @@ export const ChiconautlaConfig = {
 
             { 
                 "IdEstacion": 15, // PLANTA 1
-                "Imagen": "position:absolute;width:202px;height:168px;left:47px;top:518px;", 
+                "Imagen": "position:absolute;width:213px;height:176px;left:41px;top:513px;", 
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:47px;top:691px;", 
                 "Estado": "width:384px;height:175px;transform:scale(0.8) perspective(3000px) rotateY(-26deg) rotateX(-36deg) rotateZ(17deg)" 
             },
