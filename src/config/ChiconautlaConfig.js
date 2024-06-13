@@ -99,7 +99,7 @@ export const ChiconautlaConfig = {
             { 
                 "IdEstacion": 16, // VENTA DE CARPIO
                 "Imagen": "position:absolute;width:37px;height:75px;left:0px;top:0px;display:none", 
-                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:0px;top:0px;display:none", 
+                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:622px;top:520px;", 
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)" 
             },
 
@@ -197,7 +197,7 @@ export const ChiconautlaConfig = {
             { 
                 "IdEstacion": 30, // KM25
                 "Imagen": "position:absolute;width:37px;height:75px;left: 584px;top:375px;", 
-                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:509px;top:375px;display:none", 
+                "Etiqueta": "position: absolute;height: auto;left: 638px;top: 440px;width: 140px !important;", 
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)" 
             },
 
@@ -311,13 +311,13 @@ export const ChiconautlaConfig = {
                 { 
                     "idLinea": 9, 
                     "idEstacion": 0, 
-                    "Tag": "Gravedad_9", "css": "position: absolute;top: 308px;left: 848px;transform: rotate(-201deg);width: 118px;height: 8px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
+                    "Tag": "Gravedad_9", "css": "position: absolute;top: 310px;left: 848px;transform: rotate(159deg) scale(-1);width: 118px;height: 8px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
                 },
 
                 { 
                     "idLinea": 10, 
                     "idEstacion": 0, 
-                    "Tag": "Gravedad_10", "css": "position: absolute;top: 361px;left: 722px;transform: rotate(-202deg);width: 100px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
+                    "Tag": "Gravedad_10", "css": "position: absolute;top: 362px;left: 722px;transform: rotate(159deg) scale(-1);width: 100px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
                 },
 
                 { 
@@ -335,7 +335,7 @@ export const ChiconautlaConfig = {
                 { 
                     "idLinea": 13, 
                     "idEstacion": 0, 
-                    "Tag": "Gravedad_13", "css": "position: absolute;top: 479px;left: 404px;transform: rotate(-200.5deg);width: 127px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
+                    "Tag": "Gravedad_13", "css": "position: absolute;top: 479px;left: 404px;transform: rotate(-200.5deg) scale(-1);width: 127px;height: 9px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
                 },
 
             ],
