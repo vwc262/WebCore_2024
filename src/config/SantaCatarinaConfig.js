@@ -134,14 +134,13 @@ export const SantaCatarinaConfig = {
             {
                 "IdEstacion": 19,
                 "Imagen": "position: absolute; left: 1166px; top: 87px; width: 219px; height: 132px;",
-                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 790px; top: 97px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1343px; top: 80px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 20,
                 "Imagen": "position: absolute; left: 960px; top: 73px; width: 208px; height: 107px;",
-                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1343px; top: 80px;",
+                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 790px; top: 97px;",
                 "Estado": "display:none;"
 
             },
