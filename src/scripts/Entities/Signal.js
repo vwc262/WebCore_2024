@@ -86,15 +86,15 @@ class Signal {
         }
         else if (this.TipoSignal == EnumTipoSignal.PuertaAbierta) {
             // if (this.DentroRango) {
-            if (this.Valor) {
-                return '';
-            } else {
+            if (this.Valor >= 250 && this.Valor <= 259) {
                 return 'Abierta';
+            } if (this.Valor >= 510 && this.Valor <= 519) {
+                return 'Cerrada';
+            } if (this.Valor >= 760 && this.Valor <= 779) {
+                return 'Alarmada';
+            } else {
+                return '---';
             }
-            // }
-            // else {
-            //     return '---';
-            // }
         }
         else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
             if (this.DentroRango == 1) {
@@ -169,7 +169,9 @@ class Signal {
                 color = `${parseInt(this.Valor) == EnumFallaAC.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.PuertaAbierta:
-                color = `${parseInt(this.Valor) == EnumPuertaAbierta.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
+                // color = `${parseInt(this.Valor) == EnumPuertaAbierta.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
+                var aux = parseInt(this.Valor);
+                color = `${aux >= 250 && aux <= 259 ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.Voltaje:
                 color = `rgb(255, 255, 255)`;
