@@ -287,7 +287,7 @@ export const ChiconautlaConfig = {
                 { 
                     "idLinea": 5, 
                     "idEstacion": 0, 
-                    "Tag": "Gravedad_5", "css": "position: absolute;top: 572px;left: 323px;transform: rotate(-149deg);width: 118px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
+                    "Tag": "Gravedad_5", "css": "position: absolute;top: 574px;left: 323px;transform: rotate(31deg);width: 118px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
                 },
 
                 { 
