@@ -54,7 +54,8 @@ $btnHeader.addEventListener("click", (ev) => {
     $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
-        SetActualModule(isParticularActive ? "Particular" : "Perfil");
+         SetActualModule(isParticularActive ? "Particular" : "Perfil");
+        //isParticularActive = false;
         
         // section__home.style.zIndex = isParticularActive ? "5" : "10";
         // section__particular.style.zIndex = isParticularActive ? "10" : "5";

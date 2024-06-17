@@ -179,6 +179,8 @@ class Particular {
 
     this.setNivelAgua(sitioAbrev);
 
+    this.MostrarFallaAc(this.Estacion.IsFallaAc());
+
     const $btnBack = document.querySelector(".header__btnRegresar");
     $btnBack.addEventListener("click", this.backParticular);
   }
