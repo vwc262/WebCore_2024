@@ -9,9 +9,9 @@ class PDFExporter {
     IdSegnales = null;
     _instance = null;
     constructor() {
-        this.Exporting = am5plugins_exporting.Exporting.new(UIReportes.root, {
-            menu: am5plugins_exporting.ExportingMenu.new(UIReportes.root, {})
-        })
+        // this.Exporting = am5plugins_exporting.Exporting.new(UIReportes.root, {
+        //     menu: am5plugins_exporting.ExportingMenu.new(UIReportes.root, {})
+        // })
     }
     /**
      * Retorna la instance
@@ -24,6 +24,9 @@ class PDFExporter {
         return this._instance;
     }
     async export() {
+        this.Exporting = am5plugins_exporting.Exporting.new(UIReportes.root, {
+            menu: am5plugins_exporting.ExportingMenu.new(UIReportes.root, {})
+        })
         // se obtiuene referencia a pdfmake
         const pdfmakeInstance = await this.Exporting.getPdfmake();
         // Variable para el nombre del reporte
