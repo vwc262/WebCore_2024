@@ -91,7 +91,7 @@ export const ChiconautlaConfig = {
 
             { 
                 "IdEstacion": 15, // PLANTA 1
-                "Imagen": "position:absolute;width:213px;height:176px;left:41px;top:513px;", 
+                "Imagen": "position:absolute;width:217px;height:197px;left:42px;top:499px;", 
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:47px;top:691px;", 
                 "Estado": "width:384px;height:175px;transform:scale(0.8) perspective(3000px) rotateY(-26deg) rotateX(-36deg) rotateZ(17deg)" 
             },
@@ -202,22 +202,22 @@ export const ChiconautlaConfig = {
             },
 
             { 
-                "IdEstacion": 31, //TC-1
+                "IdEstacion": 31, //TS-1
                 "Imagen": "position:absolute;width:37px;height:75px;left:903px;top:225px;", 
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:965px;top:158px", 
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)" 
             },
 
             { 
-                "IdEstacion": 32, //TC-2
+                "IdEstacion": 32, //TS-2
                 "Imagen": "position:absolute;width:37px;height:75px;left:860px;top:242px;", 
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:864px;top:102px", 
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)" 
             },
 
             { 
-                "IdEstacion": 33, // TC-3
-                "Imagen": "position:absolute;width:37px;height:75px;left:226px;top:493px;", 
+                "IdEstacion": 33, // TS-3
+                "Imagen": "position:absolute;width:37px;height:75px;left:270px;top:476px;", 
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:84px;top:458px", 
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)" 
             },
@@ -287,7 +287,7 @@ export const ChiconautlaConfig = {
                 { 
                     "idLinea": 5, 
                     "idEstacion": 0, 
-                    "Tag": "Gravedad_5", "css": "position: absolute;top: 572px;left: 323px;transform: rotate(-149deg);width: 118px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
+                    "Tag": "Gravedad_5", "css": "position: absolute;top: 574px;left: 323px;transform: rotate(31deg);width: 118px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;" 
                 },
 
                 { 

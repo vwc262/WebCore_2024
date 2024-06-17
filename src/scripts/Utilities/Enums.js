@@ -149,7 +149,8 @@ const EnumFallaAC = {
  * @returns {EnumPuertaAbierta}
  */
 const EnumPuertaAbierta = {
-  Alarmado: 0,
+  // Alarmado: 0,
+  Alarmado: 511,
   Normal: 1,
 };
 
