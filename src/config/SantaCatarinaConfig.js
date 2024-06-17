@@ -331,7 +331,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas23",
-                    css: "position: absolute; display:block; top:382px; left:85px; border-radius: 15px; transform:rotate(58.5deg); width:151px; height:8px;"
+                    css: "position: absolute;display:block;top: 534px;left: 37px;border-radius: 15px;transform: rotate(90.5deg);width: 92px;height:8px;"
                 },
                 {
                     IdLinea: 0,
