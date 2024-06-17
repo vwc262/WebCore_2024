@@ -142,9 +142,11 @@ class ArranqueParo {
   };
   SetPerillaGeneral(idLinea = 0, estacion) {
     const perillaGeneral = estacion.ObtenerPerillaGeneral(idLinea); //
-    this.#PerillaGeneralText.mySignal = perillaGeneral;
-    this.#PerillaGeneralText.innerText = perillaGeneral.GetValorPerillaGeneral();
-    this.setUpdateElements(this.#PerillaGeneralText);
+    if (perillaGeneral != undefined) {
+      this.#PerillaGeneralText.mySignal = perillaGeneral;
+      this.#PerillaGeneralText.innerText = perillaGeneral.GetValorPerillaGeneral();
+      this.setUpdateElements(this.#PerillaGeneralText);
+    }
   }
   /**
    *
@@ -342,7 +344,8 @@ class ArranqueParo {
   }
   async RequestComando() {
     const alertTitle = "Control Bombas";
-    this.textoComando = `${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}, de la estación ${Particular.Instance.Estacion.Nombre}`;
+    const estacion = Core.Instance.GetDatosEstacion(this.idEstacion);
+    this.textoComando = `${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}, de la estación ${estacion.Nombre}`;
     ShowModal(`Mandando a ${this.#prenderBomba ? "prender" : "apagar"} la ${this.#bombaSeleccionada.Nombre}`, alertTitle, false);
     this.codigo = this.ArmarCodigo();
     const result = await Fetcher.Instance.RequestData(
@@ -369,10 +372,14 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
+      
       if (estacion.IsFallaAc()) {
         ShowModal("El sitio presenta falla en la energia", alertTitle, false);
       }
-      if (perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto]) {
+
+      let isPerillaGeneralOk = perillaGeneral == undefined ? true : perillaGeneral.GetValorPerillaGeneral() == EnumPerillaGeneralString[EnumPerillaGeneral.Remoto];
+
+      if (isPerillaGeneralOk) {
         if (perillaBomba.GetValorPerillaBomba() == EnumPerillaBombaString[EnumPerillaBomba.Remoto]) {
           if (signalBomba.Valor == EnumValorBomba.Arrancada || signalBomba.Valor == EnumValorBomba.Apagada) {
             if (this.#prenderBomba && signalBomba.Valor != EnumValorBomba.Arrancada) this.RequestComando();
