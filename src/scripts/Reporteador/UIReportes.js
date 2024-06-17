@@ -111,15 +111,17 @@ var UIReportes = {
           if (
             UIReportes.data[d.Tiempo] == undefined ||
             UIReportes.data[d.Tiempo] == null
-          )
+          ) {
+
             UIReportes.data[d.Tiempo] = {
               date: d.Tiempo,
             };
 
-          UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor;
+            UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor;
 
-          if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
-            UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
+            if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
+              UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
+            }
           }
         });
       });
@@ -480,6 +482,7 @@ var UIReportes = {
 
       seriesData.push(data);
     }
+
 
     series.data.setAll(seriesData);
 
