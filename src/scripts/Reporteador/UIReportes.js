@@ -106,25 +106,36 @@ var UIReportes = {
     this.root.container.children.clear();
 
     if (UIReportes.dataCruda.length > 0) {
+      let aux = [];
       UIReportes.dataCruda.forEach((infoSignal) => {
-        infoSignal.forEach((d) => {
+        infoSignal.forEach((d, index) => {
+          let _d = new Date(new Date(d.Tiempo).setSeconds(0));
+          let minutos = _d.getMinutes();
+          let minutosRedondeados = Math.round(minutos / 5) * 5
+          _d.setMinutes(minutosRedondeados);
           if (
-            UIReportes.data[d.Tiempo] == undefined ||
-            UIReportes.data[d.Tiempo] == null
+            UIReportes.data[_d] == undefined ||
+            UIReportes.data[_d] == null
           ) {
-            UIReportes.data[d.Tiempo] = {
-              date: d.Tiempo,
+            UIReportes.data[_d] = {
+              date: _d,
             };
+            aux.push(UIReportes.data[_d]);
+            // UIReportes.idSignalsAGraficar.forEach(signalObj => {
+            //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
+            // });
           }
-          UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor;
-
+          UIReportes.data[_d][d.IdSignal] = d.Valor;
           if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
-            UIReportes.data[d.Tiempo][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
+            UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
           }
         });
       });
-      UIReportes.data = Object.values(UIReportes.data).filter(val => {if(Object.keys(val).length > UIReportes.dataCruda.length) return val });
+      aux.sort((a,b)=> new Date(a.date) - new Date(b.date));
+      UIReportes.data = aux;
+      //console.log(UIReportes.data);
       UIReportes.SetChart();
+
     }
     else {
       const txtSinHistoricos = document.querySelector(".sinHistoricos");
@@ -166,10 +177,10 @@ var UIReportes = {
     var xAxis = chart.xAxes.push(
       am5xy.DateAxis.new(root, {
         maxDeviation: 0.1,
-        groupData: false,
+        groupData: true,
         baseInterval: {
           timeUnit: "minute",
-          count: 1,
+          count: 5,
         },
         renderer: am5xy.AxisRendererX.new(root, {
           minGridDistance: 80,
@@ -240,9 +251,9 @@ var UIReportes = {
 
     var sbxAxis = scrollbarX.chart.xAxes.push(
       am5xy.DateAxis.new(root, {
-        // groupData: true,
-        // groupIntervals: [{ timeUnit: "minute", count: 1 }],
-        baseInterval: { timeUnit: "minute", count: 1 },
+        groupData: true,
+        groupIntervals: [{ timeUnit: "minute", count: 5 }],
+        baseInterval: { timeUnit: "minute", count: 5 },
         renderer: am5xy.AxisRendererX.new(root, {
           opposite: false,
           strokeOpacity: 0,
@@ -471,15 +482,13 @@ var UIReportes = {
     });
 
     var seriesData = [];
-
-    for (var d in UIReportes.data) {
+    Object.values(UIReportes.data).forEach(k => {
       var data = {
-        date: new Date(UIReportes.data[d].date),
-        value: UIReportes.data[d][`${signalObj.IdSignal}`],
+        date: k.date,
+        value: k[`${signalObj.IdSignal}`],
       };
-
       seriesData.push(data);
-    }
+    });
 
 
     series.data.setAll(seriesData);
