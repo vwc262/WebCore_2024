@@ -239,6 +239,11 @@ const EnumEstadoComando = {
   Ejecutado: 3,
   Error: 4,
 }
+const EnumTipoPolygon = {
+  Default: 0,
+  Hidraulico: 1,
+  Radio: 2, 
+}
 
 export {
   RequestType,
@@ -262,4 +267,6 @@ export {
   EnumAppEvents,
   EnumModule,
   EnumEstadoComando,
+  EnumTipoPolygon,
 };
+

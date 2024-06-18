@@ -1,7 +1,7 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumEnlace, EnumNombreProyecto } from "../Utilities/Enums.js";
+import { EnumEnlace, EnumNombreProyecto, EnumTipoPolygon } from "../Utilities/Enums.js";
 
 class Mapa {
   constructor() {
@@ -162,7 +162,9 @@ class Mapa {
       Core.Instance.IdProyecto
     );
 
-    let poly = this.CONFIG__PROYECTO?.mapa?.polygons || [];
+    let poly = this.CONFIG__PROYECTO?.mapa?.polygons || this.CONFIG__PROYECTO?.mapa?.EnlacePolygons || [];
+
+    let tipoPoligon = this.CONFIG__PROYECTO?.mapa?.polygons?.length > 0 ? EnumTipoPolygon.Hidraulico :  this.CONFIG__PROYECTO?.mapa?.EnlacePolygons?.length > 0 ? EnumTipoPolygon.Radio : EnumTipoPolygon.Default;
 
     for (const polygon of poly) {
       this.estacionId = polygon.IdEstacion;
@@ -181,7 +183,7 @@ class Mapa {
             const lineSymbol = {
               path: google.maps.SymbolPath.CIRCLE,
               scale: 3,
-              fillColor: "cyan",
+              fillColor: tipoPoligon == EnumTipoPolygon.Hidraulico? "cyan" : "green",
               fillOpacity: 1,
               strokeColor: "#282c41",
               strokeWeight: 2,
@@ -198,7 +200,7 @@ class Mapa {
                 },
               ],
               geodesic: true,
-              strokeColor: "#00DBCCFF",
+              strokeColor: tipoPoligon == EnumTipoPolygon.Hidraulico? "#00DBCCFF": "#008F39",
               strokeOpacity: 1.0,
               strokeWeight: 2.5,
               icons: [{ icon: lineSymbol, offset: "100%" }],
