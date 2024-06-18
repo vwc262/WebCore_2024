@@ -361,5 +361,34 @@ export const SantaCatarinaConfig = {
                 },
             ]
         }
-    }
+    },
+    mapa: {
+        EnlacePolygons: [
+            { IdEstacion: 1,  AguasArriba: [2]  }, // TCIA-11 La Caldera a TCIA-12 Miguel de la Madrid
+            { IdEstacion: 2,  AguasArriba: [15] }, // TCIA-12 Miguel de la Madrid a CIA 2
+            { IdEstacion: 3,  AguasArriba: [15] }, // TCIA-13 Huitzico a CIA 2
+            { IdEstacion: 4,  AguasArriba: [2]  }, // Palmillas a TCIA-12 Miguel de la Madrid
+            { IdEstacion: 5,  AguasArriba: [15] }, // Zapata a CIA 2
+            { IdEstacion: 6,  AguasArriba: [15] }, // CIA-8 B a CIA 2
+            { IdEstacion: 7,  AguasArriba: [15] }, // TCIA-8 a CIA 2
+            { IdEstacion: 8,  AguasArriba: [15] }, // TCIA-9 a CIA 2
+            { IdEstacion: 9,  AguasArriba: [15] }, // R-12 a CIA 2
+            { IdEstacion: 10, AguasArriba: [15] }, // R-11 a CIA 2
+            { IdEstacion: 11, AguasArriba: [15] }, // TIA-10 a CIA 2
+            { IdEstacion: 12, AguasArriba: [15] }, // TCIA-2 a CIA 2
+            { IdEstacion: 13, AguasArriba: [15] }, // TCIA-3 a CIA 2
+            { IdEstacion: 14, AguasArriba: [15] }, // Bellavista a CIA 2
+            { IdEstacion: 16, AguasArriba: [15] }, // CIA 6B a CIA 2
+            { IdEstacion: 17, AguasArriba: [15] }, // TCIA-6 a CIA 2
+            { IdEstacion: 18, AguasArriba: [15] }, // Colosio a CIA 2
+            { IdEstacion: 19, AguasArriba: [15] }, // Huecampool 1 a CIA 2
+            { IdEstacion: 20, AguasArriba: [15] }, // Huecampool 2 a CIA 2
+            { IdEstacion: 21, AguasArriba: [15] }, // San Pablo a CIA 2
+            { IdEstacion: 22, AguasArriba: [15] }, // Miravalle a CIA 2
+            { IdEstacion: 23, AguasArriba: [15] }, // Corrales a CIA 2
+            { IdEstacion: 24, AguasArriba: [15] }, // Cabras a CIA 2
+            { IdEstacion: 25, AguasArriba: [15] }, // TCIA-5 a CIA 2
+            { IdEstacion: 26, AguasArriba: [15] }, // Tanque Minas a CIA 2
+        ],
+    },
 }
