@@ -131,7 +131,7 @@ var UIReportes = {
           }
         });
       });
-      aux.sort((a,b)=> new Date(a.date) - new Date(b.date));
+      aux.sort((a, b) => new Date(a.date) - new Date(b.date));
       UIReportes.data = aux;
       //console.log(UIReportes.data);
       UIReportes.SetChart();
@@ -169,6 +169,7 @@ var UIReportes = {
       })
     );
 
+
     var easing = am5.ease.linear;
     chart.get("colors").set("step", 3);
 
@@ -177,11 +178,12 @@ var UIReportes = {
     var xAxis = chart.xAxes.push(
       am5xy.DateAxis.new(root, {
         maxDeviation: 0.1,
-        groupData: true,
+        groupData: false,
         baseInterval: {
           timeUnit: "minute",
           count: 5,
         },
+
         renderer: am5xy.AxisRendererX.new(root, {
           minGridDistance: 80,
           minorGridEnabled: true,
@@ -211,10 +213,12 @@ var UIReportes = {
       "cursor",
       am5xy.XYCursor.new(root, {
         xAxis: xAxis,
-        behavior: "none",
+        behavior: "panXY",
       })
     );
-
+    // cursor.events.on('cursormoved', (ev) => {
+    //   console.log(ev.target)      
+    // })
     cursor.lineY.set("visible", false);
 
     // add scrollbar
@@ -251,7 +255,7 @@ var UIReportes = {
 
     var sbxAxis = scrollbarX.chart.xAxes.push(
       am5xy.DateAxis.new(root, {
-        groupData: true,
+        groupData: false,
         groupIntervals: [{ timeUnit: "minute", count: 5 }],
         baseInterval: { timeUnit: "minute", count: 5 },
         renderer: am5xy.AxisRendererX.new(root, {
