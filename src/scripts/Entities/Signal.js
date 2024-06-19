@@ -87,13 +87,13 @@ class Signal {
         else if (this.TipoSignal == EnumTipoSignal.PuertaAbierta) {
             // if (this.DentroRango) {
             if (this.Valor >= 250 && this.Valor <= 259) {
-                return 'Abierta';
-            } if (this.Valor >= 510 && this.Valor <= 519) {
                 return 'Cerrada';
+            } if (this.Valor >= 510 && this.Valor <= 519) {
+                return 'Abierta';
             } if (this.Valor >= 760 && this.Valor <= 779) {
                 return 'Alarmada';
             } else {
-                return '---';
+                return '';
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
