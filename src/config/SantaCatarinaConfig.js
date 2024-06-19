@@ -10,126 +10,108 @@ export const SantaCatarinaConfig = {
                 "Imagen": "position: absolute; left: 147px; top: 930px; width: 373px; height: 116px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 24px; top: 927px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 2,
                 "Imagen": "position: absolute; left: 0px; top: 792px; width: 254px; height: 101px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 174px; top: 739px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 3,
                 "Imagen": "position: absolute; left: 0px; top: 626px; width: 213px; height: 99px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 170px; top: 611px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 4,
                 "Imagen": "position: absolute; left: 0px; top: 232px; width: 190px; height: 96px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 23px; top: 166px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 5,
                 "Imagen": "position: absolute; left: 128px; top: 470px; width: 203px; height: 104px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 7px; top: 430px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 6,
                 "Imagen": "position: absolute; left: 632px; top: 910px; width: 215px; height: 101px;",
-                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 862px; top: 997px;",
+                "Etiqueta": "position: absolute;width: 174px;height: 57px;left: 731px;top: 986px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 7,
                 "Imagen": "position: absolute; left: 424px; top: 805px; width: 225px; height: 107px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 266px; top: 854px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 8,
                 "Imagen": "position: absolute; left: 351px; top: 597px; width: 217px; height: 128px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 483px; top: 541px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 9,
                 "Imagen": "position: absolute; left: 518px; top: 718px; width: 244px; height: 91px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 581px; top: 663px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 10,
                 "Imagen": "position: absolute; left: 345px; top: 407px; width: 227px; height: 104px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 383px; top: 355px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 11,
                 "Imagen": "position: absolute; left: 151px; top: 294px; width: 219px; height: 104px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 202px; top: 247px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 12,
                 "Imagen": "position: absolute; left: 1048px; top: 507px; width: 278px; height: 164px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1033px; top: 689px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 13,
                 "Imagen": "position: absolute; left: 1081px; top: 260px; width: 170px; height: 132px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1238px; top: 308px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 14,
-                "Imagen": "position: absolute; left: 1546px; top: 0px; width: 198px; height: 136px;",
-                "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1738px; top: 50px;",
+                "Imagen": "position: absolute; left: 1578px; top: 45px; width: 198px; height: 136px;",
+                "Etiqueta": "position: absolute;width: 174px;height: 57px;left: 1530px;top: 179px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 15,
                 "Imagen": "position: absolute; left: 1205px; top: 739px; width: 189px; height: 123px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1376px; top: 710px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 16,
                 "Imagen": "position: absolute; left: 755px; top: 745px; width: 267px; height: 130px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1014px; top: 827px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 17,
                 "Imagen": "position: absolute; left: 757px; top: 623px; width: 215px; height: 109px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 865px; top: 567px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 18,
                 "Imagen": "position: absolute; left: 663px; top: 483px; width: 181px; height: 119px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 795px; top: 435px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 19,
@@ -142,49 +124,42 @@ export const SantaCatarinaConfig = {
                 "Imagen": "position: absolute; left: 960px; top: 73px; width: 208px; height: 107px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 790px; top: 97px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 21,
                 "Imagen": "position: absolute; left: 928px; top: 284px; width: 137px; height: 100px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 884px; top: 225px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 22,
                 "Imagen": "position: absolute; left: 420px; top: 67px; width: 250px; height: 115px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 301px; top: 162px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 23,
                 "Imagen": "position: absolute; left: 565px; top: 347px; width: 194px; height: 95px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 673px; top: 286px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 24,
                 "Imagen": "position: absolute; left: 1350px; top: 205px; width: 209px; height: 112px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1549px; top: 308px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 25,
                 "Imagen": "position: absolute; left: 1303px; top: 383px; width: 197px; height: 111px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1331px; top: 516px;",
                 "Estado": "display:none;"
-
             },
             {
                 "IdEstacion": 26,
                 "Imagen": "position: absolute; left: 1519px; top: 446px; width: 366px; height: 143px;",
                 "Etiqueta": "position: absolute; width: 174px; height: 57px; left: 1736px; top: 619px;",
                 "Estado": "display:none;"
-
             },
         ],
         estilosTuberias: {
@@ -193,7 +168,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas0",
-                    css: "position: absolute; display:block; top:160px; left:1639px; border-radius: 15px; transform:rotate(413.5deg); width:120px; height:17px;"
+                    css: "position: absolute;display:block;top: 194px;left: 1681px;border-radius: 15px;transform:rotate(413.5deg);width: 88px;height: 18px;"
                 },
                 {
                     IdLinea: 0,
@@ -253,7 +228,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas10",
-                    css: "position: absolute; display:block; top:939px; left:1221px; border-radius: 15px; transform:rotate(189.9deg); width:517px; height:34px;"
+                    css: "position: absolute;display:block;top:939px;left: 1225px;border-radius: 15px;transform:rotate(189.9deg);width: 506px;height:34px;"
                 },
                 {
                     IdLinea: 0,
