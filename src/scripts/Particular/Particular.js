@@ -1,3 +1,4 @@
+import { Configuracion } from "../../config/config.js";
 import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
@@ -51,10 +52,10 @@ class Particular {
   //#region Metodos
   setEstacion(estacion) {
     ArranqueParo.Instance.CloseArranqueParo();
-    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {            
+    if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {
       // Hay Cambio de particular
       EventsManager.Instance.EmitirEvento("ParticularChanged");
-      
+
       this.estacion = estacion;
     }
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
@@ -108,7 +109,7 @@ class Particular {
           this.ponerBombaPurple(signal, $imgBombaParticular);
         }
       });
-      if(Module == EnumModule.Particular){
+      if (Module == EnumModule.Particular) {
         this.MostrarFallaAc(estacionUpdate.IsFallaAc());
       }
 
@@ -116,8 +117,8 @@ class Particular {
     }
   };
 
-  ponerBombaPurple(signal, $imgBombaParticular ){
-    if(Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma){
+  ponerBombaPurple(signal, $imgBombaParticular) {
+    if (Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma) {
       $imgBombaParticular.style.filter = signal.Valor == 4 ? "hue-rotate(295deg)" : "hue-rotate(0deg)";
     }
   }
@@ -135,16 +136,16 @@ class Particular {
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
     this.$panelBombas = document.querySelector(".arranqueParo__panelControl");
-
-    this.$headerTitle.innerText = this.Estacion.Nombre;
+    let nombresLargos = Configuracion.GetNombresLargos(Core.Instance.IdProyecto);
+    this.$headerTitle.innerText = nombresLargos ? nombresLargos[this.Estacion.IdEstacion] : this.Estacion.Nombre;
 
     // Maneja los zIndex al cambiar de "paginas"
     section__home.style.display = "none";
     section__mapa.style.display = "none";
     section__graficador.style.display = "none";
     section__login.style.display = "none";
-    section__particular.style.display =  "block";
-    
+    section__particular.style.display = "block";
+
     this.$datosHeader.style.opacity = "1";
     this.$datosHeader.style.display = "block";
     this.$btnBack.style.opacity = "1";
