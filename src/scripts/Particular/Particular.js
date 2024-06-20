@@ -126,6 +126,7 @@ class Particular {
     SetActualModule("Particular");
     // Elementos del DOM
     //console.log("Detalles de la estación:", this.Estacion.Signals);
+    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
     this.$headerTitle = document.querySelector("#title");
     this.$headerDate = document.querySelector("#date__particular");
     this.$headerStatus = document.querySelector("#state_particular");
@@ -155,10 +156,10 @@ class Particular {
     this.$particularCapaTextoImg.style.pointerEvents = "none";
 
     // Cambiar el texto de acuerdo al estado de la estación
-    this.setEnlaceParticular(this.Estacion);
+    this.setEnlaceParticular(estacionUpdate);
 
     // Asignar la fecha formateada al elemento HTML
-    this.$headerDate.innerText = this.Estacion.ObtenerFecha();
+    this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
@@ -180,7 +181,7 @@ class Particular {
 
     this.setNivelAgua(sitioAbrev);
 
-    this.MostrarFallaAc(this.Estacion.IsFallaAc());
+    this.MostrarFallaAc(estacionUpdate.IsFallaAc());
 
     const $btnBack = document.querySelector(".header__btnRegresar");
     $btnBack.addEventListener("click", this.backParticular);
