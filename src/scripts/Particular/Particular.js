@@ -200,9 +200,10 @@ class Particular {
 
     this.$signalsContainer.innerHTML = "";
     this.HTMLUpdateElements = {};
+    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
 
     // Filtrar los signals con TipoSignal igual a 1, 3 o 4
-    this.Estacion.Signals.filter((signal) =>
+    estacionUpdate.Signals.filter((signal) =>
       signal.TipoSignal == EnumTipoSignal.Nivel ||
       signal.TipoSignal == EnumTipoSignal.Presion ||
       signal.TipoSignal == EnumTipoSignal.Gasto ||
@@ -286,7 +287,8 @@ class Particular {
   }
 
   panelControl() {
-    const signals = this.Estacion.Signals;
+    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
+    const signals = estacionUpdate.Signals;
     const tipoSignal7Count = signals.filter(
       (signal) => signal.TipoSignal === 7
     ).length;
@@ -327,6 +329,7 @@ class Particular {
   }
 
   setNivelAgua() {
+    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
     const $nivelContainer = document.getElementById("particular__aguaNivel");
     const $bombasContainer = document.getElementById(
       "particular__bombasEstado"
@@ -342,7 +345,7 @@ class Particular {
           attributes: {
             id: `particular_bomba_${bomba.IdSignal}`,
             class: "bomba__Particular ",
-            src: this.Estacion.ObtenerRenderNivelOBomba(bomba, "Particular"),
+            src: estacionUpdate.ObtenerRenderNivelOBomba(bomba, "Particular"),
           },
         });
         this.HTMLUpdateElements[$imgBombaParticular.id] = $imgBombaParticular;
@@ -351,14 +354,14 @@ class Particular {
       }
     );
 
-    this.Estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(
+    estacionUpdate.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(
       (nivel) => {
         const $nivelAgua = CreateElement({
           nodeElement: "img",
           attributes: {
             id: `particular_nivel_${nivel.IdSignal}`,
-            class: `nivelAgua__Particular ${this.Estacion.SetTurbulencia(nivel)}`,
-            src: this.Estacion.ObtenerRenderNivelOBomba(nivel, "Particular"),
+            class: `nivelAgua__Particular ${estacionUpdate.SetTurbulencia(nivel)}`,
+            src: estacionUpdate.ObtenerRenderNivelOBomba(nivel, "Particular"),
           },
         });
         this.HTMLUpdateElements[$nivelAgua.id] = $nivelAgua;
