@@ -32,6 +32,7 @@ const UIControlador = {
 
   // Método para mostrar la interfaz de usuario del video
   showUIVideoInit: function () {
+    debugger
     CreateVariables(UIControlador.indexSitio, sitiosInfo[UIControlador.indexSitio]); // Llama a CreateVariables con el índice del sitio predeterminado
 
     // Llama a la función setElementProperty para establecer la propiedad de opacidad en 1 para los elementos seleccionados

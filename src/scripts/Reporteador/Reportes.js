@@ -9,6 +9,7 @@ import { setStyleProperty } from "./utilities.js";
 
 // Importar el módulo controladorVideo desde videos.js
 import controladorVideo from "./videos.js";
+import { moveCarousel } from "./carrusel.js";
 
 export var projectName = EnumNameProjecto.TanquesPadierna;
 
@@ -41,6 +42,8 @@ async function inicializarReporteador() {
     initCalendario();
     initGraficador();
   }
+  moveCarousel();
+  // CreateVariables(UIControlador.indexSitio, sitiosInfo[UIControlador.indexSitio]); // Llama a CreateVariables con el índice del sitio predeterminado
   isReporteadorCreated.iscreated = true;
 };
 

@@ -519,4 +519,4 @@ function cleanSignal(ev) {
 cleanSignals();
 
 // Exporta la función CreateVariables para ser utilizada en otros archivos
-export { CreateVariables };
+export { CreateVariables,moveCarousel };
