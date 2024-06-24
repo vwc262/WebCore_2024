@@ -328,12 +328,12 @@ export const SantaCatarinaConfig = {
                 },
             ],
             PorBombeo: [
-                {
-                    IdLinea: 3,
-                    IdEstacion: 3,
-                    Tag: "",
-                    css: "display: none;"
-                },
+                // {
+                //     IdLinea: 3,
+                //     IdEstacion: 3,
+                //     Tag: "",
+                //     css: "display: none;"
+                // },
             ]
         }
     },
