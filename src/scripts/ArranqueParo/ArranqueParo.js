@@ -198,6 +198,8 @@ class ArranqueParo {
       document.querySelectorAll('.flechaControl').forEach(flecha => flecha.style.display = "none");
       if (bombas.length == 1) {
         document.querySelector('.controlParo__carruselItem').style.left = "105px";
+        document.querySelector('.controlParo__carruselItem').click();
+        // this.SetSeleccionado();
       }
     }
   }
