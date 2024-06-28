@@ -115,6 +115,10 @@ class Signal {
         else if (this.TipoSignal == EnumTipoSignal.Voltaje) {
 
             let value = `${parseFloat(this.Valor).toFixed(2)}`;
+
+            if(value < 0)
+                value = `${parseFloat(0).toFixed(2)}`;
+
             let _unidades = '';
 
             if (unidades) {
