@@ -309,5 +309,6 @@ export const PadiernaConfig = {
             { IdEstacion: 20, AguasArriba: [] }, //	Sacalum a
             { IdEstacion: 21, AguasArriba: [17] }, //	San Nicolás a TC-9
         ],
+        ExtraPolygons: []
     },
 };

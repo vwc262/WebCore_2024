@@ -500,7 +500,7 @@ class TablaSimplificada {
       Fetcher.Instance.isLogged = false;
     }
 
-    console.log(RESULT_LOGOUT);
+    //console.log(RESULT_LOGOUT);
   }
 
   ModalNotas = (ev) => {

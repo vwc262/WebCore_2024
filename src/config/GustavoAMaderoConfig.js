@@ -306,5 +306,6 @@ export const GustavoAMaderoConfig = {
       { IdEstacion: 4, AguasArriba: [3] }, //GM14 a GM15,}
       { IdEstacion: 21, AguasArriba: [22] },
     ],
+    ExtraPolygons: []
   },
 };

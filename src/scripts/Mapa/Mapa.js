@@ -6,6 +6,7 @@ import { EnumEnlace, EnumNombreProyecto, EnumTipoPolygon } from "../Utilities/En
 class Mapa {
   constructor() {
     this.polygons = []; // se guarda la referencia a cada polilyne
+    this.extraPolyLines = [];
     this.markers = [];
     this.initPosition = { lat: 19.42883139576554, lng: -99.13096374906871 };
     this.optionDiagrama = 0;
@@ -102,6 +103,7 @@ class Mapa {
     );
 
     this.CrearPolylines(this.map);
+    this.CrearExtraPolylines();
 
     this.suscribirEventos();
     this.Update();
@@ -232,7 +234,7 @@ class Mapa {
               geodesic: true,
               strokeColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "#00DBCCFF" : "#008F39",
               strokeOpacity: 1.0,
-              strokeWeight: 2.5,
+              strokeWeight: 5,
               icons: [{ icon: lineSymbol, offset: "100%" }],
             });
             polyline.setMap(map);
@@ -247,6 +249,38 @@ class Mapa {
       }
     }
   }
+
+  CrearExtraPolylines() {
+    this.CONFIG__PROYECTO = Configuracion.GetConfiguracion(
+      Core.Instance.IdProyecto
+    );
+
+    const extraPolygons = this.CONFIG__PROYECTO?.mapa?.ExtraPolygons ?? [];
+
+    const lineSymbol = {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 3,
+      fillColor: "#5453c6",
+      fillOpacity: 1,
+      strokeColor: "#282c41",
+      strokeWeight: 10,
+    };
+
+    const polyline = new google.maps.Polyline({
+      path: extraPolygons,
+      geodesic: true,
+      strokeColor: "#5453c6",
+      strokeOpacity: 1.0,
+      strokeWeight: 5.5,
+      icons: [{ icon: lineSymbol, offset: "100%" }],
+    });
+    polyline.setMap(this.map);
+    this.AnimarIconoPolyline(polyline, 0.2);
+
+    this.extraPolyLines.push(polyline);
+
+  }
+
 
   InitAnimPathPolyline(polyline, map, latlngGoal) {
     requestAnimationFrame(this.step.bind(this, polyline, map, latlngGoal, { acum: 0 }));
@@ -282,9 +316,9 @@ class Mapa {
   }
 
 
-  AnimarIconoPolyline(polyline) {
+  AnimarIconoPolyline(polyline, speed) {
     var LineOffset = 0;
-    var IconSpeed = 0.7;
+    var IconSpeed = speed ?? 0.7;
 
     setInterval(() => {
       LineOffset = (LineOffset + IconSpeed) % 200;
@@ -304,6 +338,9 @@ class Mapa {
   PintarDiagrama(isPH) {
     this.BorrarLineas();
     this.optionDiagrama = isPH ? 0 : 1;
+    this.extraPolyLines.forEach(p => {
+      p.setMap(isPH ? this.map : null);
+    });
     this.CrearPolylines(this.map);
   };
 }
