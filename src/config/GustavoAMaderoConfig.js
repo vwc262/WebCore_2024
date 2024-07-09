@@ -286,17 +286,19 @@ export const GustavoAMaderoConfig = {
   },
 
   mapa: {
+
+    dobleDiagrama: false,
     polygons: [
       {
         IdEstacion: 15,
         AguasArriba: [1, 5, 12, 19, 22, 23, 24],
-      }, 
+      },
       { IdEstacion: 7, AguasArriba: [6] }, // zacatenco2 a zac1}
       { IdEstacion: 16, AguasArriba: [13] }, // Chiconautla 1 a Chiconautla 2}
       { IdEstacion: 13, AguasArriba: [14, 15] }, // Chiconautla 2 a Chiconautla 2 auxiliar y Santa Isabel}
       { IdEstacion: 14, AguasArriba: [15] }, // Chiconautla 2 Aux a Santa Isabel}
-       { IdEstacion: 12, AguasArriba: [19] }, // Chiconautla 2 Aux a Santa Isabel}
-   // Santa Isabel a Gustavo a madeo,CTM,GM14a,Ixuatepec, gabriel hernandez , tanques de oscilacion}
+      { IdEstacion: 12, AguasArriba: [19] }, // Chiconautla 2 Aux a Santa Isabel}
+      // Santa Isabel a Gustavo a madeo,CTM,GM14a,Ixuatepec, gabriel hernandez , tanques de oscilacion}
       { IdEstacion: 1, AguasArriba: [2] }, // CTM a Vicente Guerrero}
       { IdEstacion: 2, AguasArriba: [3] }, //Vicente guerrero a gm-15}
       { IdEstacion: 18, AguasArriba: [17] }, //Gm12a a gm12}

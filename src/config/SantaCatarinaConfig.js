@@ -338,16 +338,17 @@ export const SantaCatarinaConfig = {
         }
     },
     mapa: {
+        dobleDiagrama: true,
         EnlacePolygons: [
-            { IdEstacion: 1,  AguasArriba: [2]  }, // TCIA-11 La Caldera a TCIA-12 Miguel de la Madrid
-            { IdEstacion: 2,  AguasArriba: [15] }, // TCIA-12 Miguel de la Madrid a CIA 2
-            { IdEstacion: 3,  AguasArriba: [15] }, // TCIA-13 Huitzico a CIA 2
-            { IdEstacion: 4,  AguasArriba: [2]  }, // Palmillas a TCIA-12 Miguel de la Madrid
-            { IdEstacion: 5,  AguasArriba: [15] }, // Zapata a CIA 2
-            { IdEstacion: 6,  AguasArriba: [15] }, // CIA-8 B a CIA 2
-            { IdEstacion: 7,  AguasArriba: [15] }, // TCIA-8 a CIA 2
-            { IdEstacion: 8,  AguasArriba: [15] }, // TCIA-9 a CIA 2
-            { IdEstacion: 9,  AguasArriba: [15] }, // R-12 a CIA 2
+            { IdEstacion: 1, AguasArriba: [2] }, // TCIA-11 La Caldera a TCIA-12 Miguel de la Madrid
+            { IdEstacion: 2, AguasArriba: [15] }, // TCIA-12 Miguel de la Madrid a CIA 2
+            { IdEstacion: 3, AguasArriba: [15] }, // TCIA-13 Huitzico a CIA 2
+            { IdEstacion: 4, AguasArriba: [2] }, // Palmillas a TCIA-12 Miguel de la Madrid
+            { IdEstacion: 5, AguasArriba: [15] }, // Zapata a CIA 2
+            { IdEstacion: 6, AguasArriba: [15] }, // CIA-8 B a CIA 2
+            { IdEstacion: 7, AguasArriba: [15] }, // TCIA-8 a CIA 2
+            { IdEstacion: 8, AguasArriba: [15] }, // TCIA-9 a CIA 2
+            { IdEstacion: 9, AguasArriba: [15] }, // R-12 a CIA 2
             { IdEstacion: 10, AguasArriba: [15] }, // R-11 a CIA 2
             { IdEstacion: 11, AguasArriba: [15] }, // TIA-10 a CIA 2
             { IdEstacion: 12, AguasArriba: [15] }, // TCIA-2 a CIA 2
@@ -365,5 +366,24 @@ export const SantaCatarinaConfig = {
             { IdEstacion: 25, AguasArriba: [15] }, // TCIA-5 a CIA 2
             { IdEstacion: 26, AguasArriba: [15] }, // Tanque Minas a CIA 2
         ],
+        polygons: [
+            { IdEstacion: 1, AguasArriba: [2] }, // tcia11 -> tcia12
+            { IdEstacion: 2, AguasArriba: [3,] }, // tcia12 -> tcia13
+            { IdEstacion: 3, AguasArriba: [4, 5] }, // tcia12 -> pamillaz , zapata
+            { IdEstacion: 6, AguasArriba: [7] }, // cia8b-> tcia8
+            { IdEstacion: 7, AguasArriba: [8, 9] }, // tcia8 -> r-12,tcia9
+            { IdEstacion: 8, AguasArriba: [9, 10, 11] }, // tcia9 -> r12,r11,tia10
+            { IdEstacion: 16, AguasArriba: [17] }, // cia6b -> tcia6
+            { IdEstacion: 17, AguasArriba: [18] }, // tcia6 -> Colosio
+            { IdEstacion: 18, AguasArriba: [23] }, // Colosio -> Corrales
+            { IdEstacion: 23, AguasArriba: [22] }, // Colosio -> Miravalle
+            { IdEstacion: 15, AguasArriba: [12] }, // cia2 -> tcia2
+            { IdEstacion: 12, AguasArriba: [22, 21, 13] }, // tcia2 -> miravalle,sanpablo , tcia3 
+            { IdEstacion: 13, AguasArriba: [19, 20] }, // tcia3 -> huecampol 2 , huecampol 1  
+
+            { IdEstacion: 26, AguasArriba: [24, 25] }, // minas -> cabras,tia5b 
+
+
+        ]
     },
 }

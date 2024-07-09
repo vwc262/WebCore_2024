@@ -5,8 +5,10 @@ import { EnumEnlace, EnumNombreProyecto, EnumTipoPolygon } from "../Utilities/En
 
 class Mapa {
   constructor() {
+    this.polygons = []; // se guarda la referencia a cada polilyne
     this.markers = [];
     this.initPosition = { lat: 19.42883139576554, lng: -99.13096374906871 };
+    this.optionDiagrama = 0;
   }
 
   create() {
@@ -83,7 +85,18 @@ class Mapa {
     this.$CenterControlDiv = document.createElement("div");
     this.$CenterControl = this.CrearBotonCentrar(this.map);
 
+
     this.$CenterControlDiv.append(this.$CenterControl);
+    this.CONFIG__PROYECTO = Configuracion.GetConfiguracion(
+      Core.Instance.IdProyecto
+    );
+
+    if (this.CONFIG__PROYECTO.mapa?.dobleDiagrama) {
+      const botones = this.CrearBotonesDiagramas(this.map);
+      botones.forEach(btn => {
+        this.$CenterControlDiv.append(btn);
+      });
+    }
     this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
       this.$CenterControlDiv
     );
@@ -115,10 +128,9 @@ class Mapa {
       const estacion = Core.Instance.GetDatosEstacion(IdEstacion);
       markerImg.setAttribute(
         "src",
-        `${Core.Instance.ResourcesPath}Iconos/pin_${
-          estacion.IsTimeout()
-            ? "t"
-            : estacion.IsEnMantenimiento()
+        `${Core.Instance.ResourcesPath}Iconos/pin_${estacion.IsTimeout()
+          ? "t"
+          : estacion.IsEnMantenimiento()
             ? "m"
             : estacion.Enlace
         }.png`
@@ -157,14 +169,32 @@ class Mapa {
     return this.$CenterButton;
   }
 
+  CrearBotonesDiagramas() {
+    this.$PH_Buttton = document.createElement("button");
+    this.$Enlaces_Button = document.createElement("button");
+
+    this.$PH_Buttton.classList = "controlDivPH";
+    this.$Enlaces_Button.classList = "controlDivE";
+
+    this.$PH_Buttton.textContent = "Perfil Hidraulico";
+    this.$Enlaces_Button.textContent = "Enlace";
+
+    this.$PH_Buttton.type = "button";
+    this.$Enlaces_Button.type = "button";
+
+    this.$PH_Buttton.addEventListener("click", this.PintarDiagrama.bind(this, true));
+    this.$Enlaces_Button.addEventListener("click", this.PintarDiagrama.bind(this, false));
+    return [this.$PH_Buttton, this.$Enlaces_Button];
+  }
+
   CrearPolylines(map) {
     this.CONFIG__PROYECTO = Configuracion.GetConfiguracion(
       Core.Instance.IdProyecto
     );
 
-    let poly = this.CONFIG__PROYECTO?.mapa?.polygons || this.CONFIG__PROYECTO?.mapa?.EnlacePolygons || [];
+    let poly = this.optionDiagrama == 0 ? this.CONFIG__PROYECTO?.mapa?.polygons ?? [] : this.CONFIG__PROYECTO?.mapa?.EnlacePolygons ?? [];
 
-    let tipoPoligon = this.CONFIG__PROYECTO?.mapa?.polygons?.length > 0 ? EnumTipoPolygon.Hidraulico :  this.CONFIG__PROYECTO?.mapa?.EnlacePolygons?.length > 0 ? EnumTipoPolygon.Radio : EnumTipoPolygon.Default;
+    let tipoPoligon = this.optionDiagrama == 0 ? EnumTipoPolygon.Hidraulico : EnumTipoPolygon.Radio;
 
     for (const polygon of poly) {
       this.estacionId = polygon.IdEstacion;
@@ -183,7 +213,7 @@ class Mapa {
             const lineSymbol = {
               path: google.maps.SymbolPath.CIRCLE,
               scale: 3,
-              fillColor: tipoPoligon == EnumTipoPolygon.Hidraulico? "cyan" : "green",
+              fillColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "cyan" : "green",
               fillOpacity: 1,
               strokeColor: "#282c41",
               strokeWeight: 2,
@@ -200,18 +230,57 @@ class Mapa {
                 },
               ],
               geodesic: true,
-              strokeColor: tipoPoligon == EnumTipoPolygon.Hidraulico? "#00DBCCFF": "#008F39",
+              strokeColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "#00DBCCFF" : "#008F39",
               strokeOpacity: 1.0,
               strokeWeight: 2.5,
               icons: [{ icon: lineSymbol, offset: "100%" }],
             });
             polyline.setMap(map);
             this.AnimarIconoPolyline(polyline);
+            this.InitAnimPathPolyline(polyline, map, {
+              lat: AguasArribaMarker.Latitud,
+              lng: AguasArribaMarker.Longitud,
+            });
+            this.polygons.push(polyline);
           }
         }
       }
     }
   }
+
+  InitAnimPathPolyline(polyline, map, latlngGoal) {
+    requestAnimationFrame(this.step.bind(this, polyline, map, latlngGoal, { acum: 0 }));
+
+  }
+
+  step = (polyline, map, latlngGoal, acumulation) => {
+    this.AnimarPolyLine(polyline, map, latlngGoal, acumulation);
+    if (acumulation.acum <= 1)
+      requestAnimationFrame(this.step.bind(this, polyline, map, latlngGoal, acumulation));
+  }
+
+  AnimarPolyLine(polyline, map, targetLatLng, acumulation) {
+    const step = .010;
+    const result = this.lerp({ lat: polyline.getPath().getAt(0).lat(), lng: polyline.getPath().getAt(0).lng() }, targetLatLng, acumulation.acum);
+    polyline.getPath().removeAt(1)
+    polyline.getPath().push(new google.maps.LatLng(result.lat, result.lng));
+    return acumulation.acum += step;
+  }
+
+
+
+  lerp(a, b, alpha) {
+    return this.sumLatLng(a, this.multiplyLatLngAlpha(alpha, { lat: b.lat - a.lat, lng: b.lng - a.lng }));
+  }
+
+  multiplyLatLngAlpha(alpha, dif) {
+    return { lat: dif.lat * alpha, lng: dif.lng * alpha }
+  }
+
+  sumLatLng(LatLngA, LatLngB) {
+    return { lat: LatLngA.lat + LatLngB.lat, lng: LatLngA.lng + LatLngB.lng };
+  }
+
 
   AnimarIconoPolyline(polyline) {
     var LineOffset = 0;
@@ -224,6 +293,19 @@ class Mapa {
       polyline.set("icons", LineIcon);
     }, 20);
   }
+
+  BorrarLineas() {
+    this.polygons.forEach(polyline => {
+      polyline.setMap(null);
+    });
+    this.polygons = [];
+  }
+
+  PintarDiagrama(isPH) {
+    this.BorrarLineas();
+    this.optionDiagrama = isPH ? 0 : 1;
+    this.CrearPolylines(this.map);
+  };
 }
 
 export { Mapa };

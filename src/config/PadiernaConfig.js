@@ -59,7 +59,7 @@ export const PadiernaConfig = {
             {
                 IdEstacion: 8,
                 Imagen:
-                "position: absolute; width: 136px; height: 72px; left:  165px; top: 225px;",
+                    "position: absolute; width: 136px; height: 72px; left:  165px; top: 225px;",
                 Etiqueta: "position: absolute; top: 180px; left: 143px;",
                 Estado: "display:none;",
             },
@@ -287,6 +287,7 @@ export const PadiernaConfig = {
     },
 
     mapa: {
+        dobleDiagrama: false,
         polygons: [
             { IdEstacion: 2, AguasArriba: [4] }, // Fuentes del Pedregal a CTL-15
             { IdEstacion: 3, AguasArriba: [4] }, // Pozo Padierna II a CTL-15

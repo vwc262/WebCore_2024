@@ -9,7 +9,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Chiconautla;
+  projectName = EnumProyecto.SantaCatarina;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
@@ -29,13 +29,13 @@ class VwcApp {
 
       const buttonHeader = document.querySelector(".header__buttons");
       buttonHeader.remove();
-      
+
       const containerLoading = document.querySelector(".containerLoading");
       containerLoading.remove();
     }
   }
 
-  onLoad(){
+  onLoad() {
     const loadscreen = document.querySelector(".sec-loading");
     loadscreen.style.display = 'none';
 
