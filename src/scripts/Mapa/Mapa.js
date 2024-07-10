@@ -179,7 +179,7 @@ class Mapa {
     this.$Enlaces_Button.classList = "controlDivE";
 
     this.$PH_Buttton.textContent = "Perfil Hidraulico";
-    this.$Enlaces_Button.textContent = "Enlace";
+    this.$Enlaces_Button.textContent = "Diagrama Radio";
 
     this.$PH_Buttton.type = "button";
     this.$Enlaces_Button.type = "button";
@@ -214,11 +214,11 @@ class Mapa {
           if (AguasArribaMarker) {
             const lineSymbol = {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: 3,
-              fillColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "cyan" : "green",
+              scale: 4,
+              fillColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "cyan" : "yellow",
               fillOpacity: 1,
               strokeColor: "#282c41",
-              strokeWeight: 2,
+              strokeWeight: 3,
             };
             const polyline = new google.maps.Polyline({
               path: [
@@ -232,7 +232,7 @@ class Mapa {
                 },
               ],
               geodesic: true,
-              strokeColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "#00DBCCFF" : "#008F39",
+              strokeColor: tipoPoligon == EnumTipoPolygon.Hidraulico ? "#00DBCCFF" : "#000",
               strokeOpacity: 1.0,
               strokeWeight: 5,
               icons: [{ icon: lineSymbol, offset: "100%" }],
@@ -294,10 +294,11 @@ class Mapa {
   }
 
   AnimarPolyLine(polyline, map, targetLatLng, acumulation) {
+    const polylinePath = polyline.getPath();
     const step = .010;
-    const result = this.lerp({ lat: polyline.getPath().getAt(0).lat(), lng: polyline.getPath().getAt(0).lng() }, targetLatLng, acumulation.acum);
-    polyline.getPath().removeAt(1)
-    polyline.getPath().push(new google.maps.LatLng(result.lat, result.lng));
+    const result = this.lerp({ lat: polylinePath.getAt(0).lat(), lng: polylinePath.getAt(0).lng() }, targetLatLng, acumulation.acum);
+    polylinePath.removeAt(1)
+    polylinePath.push(new google.maps.LatLng(result.lat, result.lng));
     return acumulation.acum += step;
   }
 
