@@ -245,31 +245,34 @@ function moveCarousel() {
   var bodyScale = parseFloat(
     document.body.style.transform.split("(")[1].replace(")", "")
   );
+  if (variables.length > 3) {
 
-  // Itera sobre todas las variables para calcular y establecer su posición en el carrusel
-  variables.forEach((variable, index) => {
-    // Calcula la posición X e Y de la variable en función de su índice y el movimiento actual del carrusel
-    const widthMedios = (dimensions.width / bodyScale) * 0.4; // Mitad del ancho del contenedor de variables
-    const hegihtMedios = (dimensions.height / bodyScale) * 0.4; // Mitad de la altura del contenedor de variables
-    const positionX =
-      widthMedios * Math.cos(step * (index - movimiento)) + widthMedios; // Calcula la posición X usando la fórmula de la circunferencia
-    const positionY =
-      hegihtMedios * Math.sin(step * (index - movimiento)) + hegihtMedios; // Calcula la posición Y usando la fórmula de la circunferencia
-    // Establece las propiedades CSS del elemento div para posicionarlo en el carrusel
-    setElementProperty([variable], {
-      position: "absolute", // Posicionamiento absoluto
-      left: `${positionX}px`, // Posición horizontal
-      top: `${positionY}px`, // Posición vertical
-      width: "200px", // Ancho del elemento
-      height: "200px", // Altura del elemento
-      cursor: "pointer", // Cambia el cursor cuando se pasa sobre el elemento
-      backgroundSize: "contain", // Ajusta el tamaño del background dependiendo del contenedor
-      backgroundRepeat: "no-repeat", // Evita que el background se repita
-      "z-index": "11",
+
+    // Itera sobre todas las variables para calcular y establecer su posición en el carrusel
+    variables.forEach((variable, index) => {
+      // Calcula la posición X e Y de la variable en función de su índice y el movimiento actual del carrusel
+      const widthMedios = (dimensions.width / bodyScale) * 0.4; // Mitad del ancho del contenedor de variables
+      const hegihtMedios = (dimensions.height / bodyScale) * 0.4; // Mitad de la altura del contenedor de variables
+      const positionX =
+        widthMedios * Math.cos(step * (index - movimiento)) + widthMedios; // Calcula la posición X usando la fórmula de la circunferencia
+      const positionY =
+        hegihtMedios * Math.sin(step * (index - movimiento)) + hegihtMedios; // Calcula la posición Y usando la fórmula de la circunferencia
+      // Establece las propiedades CSS del elemento div para posicionarlo en el carrusel
+      setElementProperty([variable], {
+        position: "absolute", // Posicionamiento absoluto
+        left: `${positionX}px`, // Posición horizontal
+        top: `${positionY}px`, // Posición vertical
+        width: "200px", // Ancho del elemento
+        height: "200px", // Altura del elemento
+        cursor: "pointer", // Cambia el cursor cuando se pasa sobre el elemento
+        backgroundSize: "contain", // Ajusta el tamaño del background dependiendo del contenedor
+        backgroundRepeat: "no-repeat", // Evita que el background se repita
+        "z-index": "11",
+      });
+      variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
+      variable.style.setProperty("--coordX", "65px");
     });
-    variable.style.setProperty("--coordY", positionY >= 135 ? "195px" : "0px");
-    variable.style.setProperty("--coordX", "65px");
-  });
+  }
 }
 
 function setSignalsCarousel() {
@@ -510,7 +513,7 @@ function cleanSignals() {
 
 function cleanSignal(ev) {
   const signalContent = ev.currentTarget;
-  borrarVariableAGraficar(signalContent);  
+  borrarVariableAGraficar(signalContent);
   updateColors();
   validarBtnGraficar();
 }
@@ -519,4 +522,4 @@ function cleanSignal(ev) {
 cleanSignals();
 
 // Exporta la función CreateVariables para ser utilizada en otros archivos
-export { CreateVariables,moveCarousel };
+export { CreateVariables, moveCarousel };
