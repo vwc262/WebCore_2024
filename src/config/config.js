@@ -33,6 +33,9 @@ var Configuracion = {
             case EnumProyecto.PozosSistemaLerma:
                 config = PozosSistemaLermaConfig;
                 break;
+            case EnumProyecto.PlantasPotabilizadoras:
+                config = SantaCatarinaConfig;
+                break;
         }
 
         return config;
@@ -57,6 +60,9 @@ var Configuracion = {
                 nombres = undefined;
                 break;
             case EnumProyecto.PozosSistemaLerma:
+                nombres = undefined;
+                break;
+            case EnumProyecto.PlantasPotabilizadoras:
                 nombres = undefined;
                 break;
         }
