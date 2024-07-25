@@ -125,7 +125,7 @@ class Estacion {
             let indiceImagen = "";
         if (Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma) {
             const isBombaPurple = signal.Valor == 4;
-            if (signal.Valor <= 4) {
+            if (signal.Valor >= 0 && signal.Valor <= 4) {
                 indiceImagen = signal.Valor;
             }
             else {
@@ -156,7 +156,7 @@ class Estacion {
                 }
             }
             else {
-                if (signal.Valor <= 4) {
+                if (signal.Valor >= 0 && signal.Valor <= 4) {
                     indiceImagen = signal.Valor;
                 }
                 else {
