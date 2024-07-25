@@ -174,13 +174,13 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas1",
-                    css: "position: absolute; display:block; top:356px; left:1437px; border-radius: 15px; transform:rotate(54deg); width:104px; height:10px;"
+                    css: "position: absolute;display:block;top: 354px;left: 1441px;border-radius: 15px;transform:rotate(54deg);width: 92px;height:10px;"
                 },
                 {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas2",
-                    css: "position: absolute; display:block; top:637px; left:1603px; border-radius: 15px; transform:rotate(53.5deg); width:120px; height:17px;"
+                    css: "position: absolute;display:block;top: 636px;left: 1609px;border-radius: 15px;transform:rotate(53.5deg);width: 107px;height:17px;"
                 },
                 {
                     IdLinea: 0,
@@ -240,7 +240,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas12",
-                    css: "position: absolute; display:block; top:300px; left:567px; border-radius: 15px; transform:rotate(237.3deg); width:79px; height:8px;"
+                    css: "position: absolute; display:block; top:300px; left:567px; border-radius: 15px; transform:rotate(237.3deg); width:79px; height:9px;"
                 },
                 {
                     IdLinea: 0,
@@ -264,7 +264,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas16",
-                    css: "position: absolute; display:block; top:870px; left:959px; border-radius: 15px; transform:rotate(57.3deg); width:58px; height:17px;"
+                    css: "position: absolute;display:block;top: 869px;left: 957px;border-radius: 15px;transform:rotate(57.3deg);width: 60px;height:17px;"
                 },
                 {
                     IdLinea: 0,
@@ -276,7 +276,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas18",
-                    css: "position: absolute; display:block; top:512px; left:399px; border-radius: 15px; transform:rotate(128.9deg); width:50px; height:9px;"
+                    css: "position: absolute;display:block;top: 511px;left: 400px;border-radius: 15px;transform:rotate(128.9deg);width:50px;height: 10px;"
                 },
                 {
                     IdLinea: 0,
@@ -288,7 +288,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas20",
-                    css: "position: absolute; display:block; top:802px; left:596px; border-radius: 15px; transform:rotate(128.9deg); width:33px; height:9px;"
+                    css: "position: absolute;display:block;top: 801px;left: 596px;border-radius: 15px;transform:rotate(128.9deg);width: 35px;height: 10px;"
                 },
                 {
                     IdLinea: 0,
@@ -312,7 +312,7 @@ export const SantaCatarinaConfig = {
                     IdLinea: 0,
                     IdEstacion: 0,
                     Tag: "Canvas24",
-                    css: "position: absolute; display:block; top:589px; left:110px; border-radius: 15px; transform:rotate(310.1deg); width:73px; height:9px;"
+                    css: "position: absolute; display:block; top:589px; left:110px; border-radius: 15px; transform:rotate(129.9deg); width:73px; height:9px;"
                 },
                 {
                     IdLinea: 0,
@@ -325,6 +325,18 @@ export const SantaCatarinaConfig = {
                     IdEstacion: 0,
                     Tag: "Canvas26",
                     css: "position: absolute; display:block; top:904px; left:205px; border-radius: 15px; transform:rotate(55.5deg); width:59px; height:9px;"
+                },
+                {
+                    IdLinea: 0,
+                    IdEstacion: 0,
+                    Tag: "Canvas27",
+                    css: "position: absolute;display:block;top: 716px;left: 531px;border-radius: 15px;transform: rotate(214.5deg);width: 51px;height:9px;"
+                },
+                {
+                    IdLinea: 0,
+                    IdEstacion: 0,
+                    Tag: "Canvas28",
+                    css: "position: absolute;display:block;top: 829px;left: 1362px;border-radius: 15px;transform: rotate(53deg);width: 90px;height: 9px;"
                 },
             ],
             PorBombeo: [
