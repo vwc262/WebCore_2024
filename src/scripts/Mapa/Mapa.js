@@ -24,7 +24,8 @@ class Mapa {
     this.map = new Map(document.getElementById("map"), {
       zoom: 13,
       center: this.initPosition,
-      mapId: "219e5ba03781534c",
+      //219e5ba03781534c
+      mapId: "AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98",
       mapTypeControl: true,
       disableDefaultUI: false,
       mapTypeControlOptions: {
