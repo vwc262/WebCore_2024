@@ -282,8 +282,8 @@ export const PadiernaConfig = {
                 },
             ],
         },
-        // pozo padierna 2 y pozo reino aventura
-        estacionesSinParticular: [3, 8]
+        // antes: pozo padierna 2 y pozo reino aventura
+        estacionesSinParticular: []
     },
 
     mapa: {
