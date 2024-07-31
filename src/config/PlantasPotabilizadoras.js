@@ -13,31 +13,31 @@ export const PlantasPotabilizadoras = {
             },
             {
                 "IdEstacion": 2,
-                "Imagen": "position: absolute; left: 164px; top: 581px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 164px; top: 581px; width: 156px; height: 100px;",
                 "Etiqueta": "position: absolute;left: 281px;top: 644px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 3,
-                "Imagen": "position: absolute; left: 297px; top: 491px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 297px; top: 491px; width: 125px; height: 93px;",
                 "Etiqueta": "position: absolute;left: 197px;top: 491px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 4,
-                "Imagen": "position: absolute; left: 405px; top: 445px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 405px; top: 445px; width: 134px; height: 78px;",
                 "Etiqueta": "position: absolute;left: 504px;top: 496px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 5,
-                "Imagen": "position: absolute; left: 517px; top: 395px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 517px; top: 395px; width: 140px; height: 64px;",
                 "Etiqueta": "position: absolute;left: 502px;top: 350px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 6,
-                "Imagen": "position: absolute; left: 206px; top: 425px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 206px; top: 425px; width: 156px; height: 63px;",
                 "Etiqueta": "position: absolute; left: 206px; top: 374px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
