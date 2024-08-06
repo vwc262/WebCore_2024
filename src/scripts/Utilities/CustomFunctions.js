@@ -37,7 +37,10 @@ export const CreateElement = function ({
  * @param {String} titulo
  */
 export const ObtenerFormatoTituloProyecto = function (titulo) {
-  titulo = titulo.replace(/([A-Z])/g, " $1").trim();
+  if(titulo == 'PlantasPotabilizadoras')
+    titulo = 'Sistema Cutzamala';
+  else
+    titulo = titulo.replace(/([A-Z])/g, " $1").trim();
 
   return titulo;
 };

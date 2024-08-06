@@ -48,11 +48,12 @@ class VwcApp {
   }
 
   IniciarHeader() {
+    const titulo = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     let $title = document.getElementById('title__page');
-    $title.innerText = `VWC - ${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+    $title.innerText = `VWC - ${titulo}`;
 
     const $titleHeader = document.querySelector("#title");
-    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
+    $titleHeader.innerText = titulo;
 
     AdjustSize();
   }
