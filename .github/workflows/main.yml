@@ -1,8 +1,9 @@
 name: Say-Hello
+
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -11,3 +12,8 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+        
+      - name: Say-Hello
+        run: |
+         echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+         echo "Tag name from github.ref_name: ${{  github.ref_name }} vwc"
