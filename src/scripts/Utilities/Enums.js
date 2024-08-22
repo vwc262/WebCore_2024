@@ -33,7 +33,7 @@ const EnumNombreProyecto = {
   4: "TanquesYaqui",
   5: "TanquesChalmita",
   6: "Encharcamientos",
-  7: "PlantasPotabilizadoras",
+  7: "PlantasPotabilizadoras", //PlantasPotabilizadoras
   8: "Lumbreras",
   9: "TanquesSantaCatarina",
   10: "PozosChiconautla",
