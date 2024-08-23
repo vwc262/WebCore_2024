@@ -54,7 +54,7 @@ const EnumNombreProyectoFolder = {
   "PlantasPotabilizadoras": 7,
   "Lumbreras": 8,
   "TanquesSantaCatarina": 9,
-  "PozosChiconautla": 10,
+  "Chiconautla2024": 10,
   "LermaAnexo": 11
 };
 
