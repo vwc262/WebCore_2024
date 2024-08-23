@@ -41,6 +41,24 @@ const EnumNombreProyecto = {
 };
 
 /**
+ * @returns NombreProyectoFolder
+ */
+const EnumNombreProyectoFolder = {
+  "Default": 0,
+  "TanquesGustavoAMadero": 1,
+  "TanquesPadierna": 2,
+  "PozosSistemaLerma": 3,
+  "TanquesYaqui": 4,
+  "TanquesChalmita": 5,
+  "Encharcamientos": 6,
+  "PlantasPotabilizadoras": 7,
+  "Lumbreras": 8,
+  "TanquesSantaCatarina": 9,
+  "PozosChiconautla": 10,
+  "LermaAnexo": 11
+};
+
+/**
  * @returns {EnumControllerMapeo}
  */
 const EnumControllerMapeo = {
@@ -268,5 +286,6 @@ export {
   EnumModule,
   EnumEstadoComando,
   EnumTipoPolygon,
+  EnumNombreProyectoFolder,
 };
 

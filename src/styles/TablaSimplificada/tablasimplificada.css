@@ -149,7 +149,7 @@ tbody tr td {
 
 .totalTipo {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
@@ -169,7 +169,7 @@ tbody tr td {
 .header_titleImg {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
