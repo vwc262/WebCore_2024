@@ -45,15 +45,15 @@ const EnumNombreProyecto = {
  */
 const EnumNombreProyectoFolder = {
   "Default": 0,
-  "TanquesGustavoAMadero": 1,
-  "TanquesPadierna": 2,
-  "Lerma": 3,
-  "TanquesYaqui": 4,
-  "TanquesChalmita": 5,
+  "GustavoAMadero2024": 1,
+  "Padierna2024": 2,
+  "PozosSistemaLerma2024": 3,
+  "Yaqui2024": 4,
+  "prueba": 5,
   "Encharcamientos": 6,
   "PlantasPotabilizadoras": 7,
   "Lumbreras": 8,
-  "TanquesSantaCatarina": 9,
+  "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
   "LermaAnexo": 11
 };
