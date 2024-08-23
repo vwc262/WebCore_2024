@@ -279,7 +279,7 @@ class TablaSimplificada {
   }
 
   ValidarPresion(key, value) {
-    if ((key === "ValorPresion" || key === "ValorGasto") && value == -99) {
+    if ((key === "ValorPresion" || key === "ValorGasto") && value < 0) {
       return "---";
     }
     return value;
