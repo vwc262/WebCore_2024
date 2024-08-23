@@ -88,7 +88,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "capasitios",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/tubos.png?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover; z-index: -1;`
             }
         });
 
@@ -141,7 +141,7 @@ class PerfilPozos {
                 });
 
                 tuberiasDiv.appendChild(tuberiaEstacion);
-                this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion, estacion.IdEstacion);
+                //this.InitTuberias(estilosEstacionTuberias.css, tuberiaEstacion, estacion.IdEstacion);
             }
         })
 

@@ -31,7 +31,7 @@ var Configuracion = {
             case EnumProyecto.Encharcamientos:
                 config = EncharcamientosConfig;
                 break;
-            case EnumProyecto.PozosSistemaLerma:
+            case EnumProyecto.Lerma:
                 config = PozosSistemaLermaConfig;
                 break;
             case EnumProyecto.PlantasPotabilizadoras:

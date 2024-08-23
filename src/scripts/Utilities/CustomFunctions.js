@@ -39,6 +39,8 @@ export const CreateElement = function ({
 export const ObtenerFormatoTituloProyecto = function (titulo) {
   if(titulo == 'PlantasPotabilizadoras')
     titulo = 'Sistema Cutzamala';
+  else if(titulo == 'Lerma')
+    titulo = 'Pozos Sistema Lerma';
   else
     titulo = titulo.replace(/([A-Z])/g, " $1").trim();
 
