@@ -1,4 +1,5 @@
 import { Core } from "./Core.js";
+import { Configuracion } from "../../config/config.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
@@ -9,7 +10,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Lerma;
+  projectName = EnumProyecto.PlantasPotabilizadoras;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
@@ -18,6 +19,10 @@ class VwcApp {
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
     this.IniciarHeader();
+    
+    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+
+    AdjustSize();
 
     if (this.version != -99) {
       this.IniciarUI();
@@ -33,6 +38,26 @@ class VwcApp {
       const containerLoading = document.querySelector(".containerLoading");
       containerLoading.remove();
     }
+    if(EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto){
+      const $titleHeader = document.querySelector("#title");
+      $titleHeader.classList = `${$titleHeader.classList} Cutzamala_Title`;
+
+      document.body.classList = `${document.body.classList} Cutzamala_Body`;
+
+      const header = document.getElementsByTagName("header")[0]
+      header.classList = `${header.classList} Cutzamala_Header`;
+      
+      const conagua_logos = document.getElementsByClassName("conagua_logos")[0];
+      conagua_logos.classList = `${conagua_logos.classList} display_logos_cutzamala`;
+      
+      const conagua_med_amb_logo = document.getElementById("conagua_med_amb_logo");
+      conagua_med_amb_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Logo_Medio_Amb_conagua.png?v=${Core.Instance.version}`);
+      
+      const header__buttons = document.getElementsByClassName("header__buttons")[0];
+      header__buttons.classList = `${header__buttons.classList} header__buttons_cutzamala`;
+
+
+     }
   }
 
   onLoad() {
@@ -55,7 +80,6 @@ class VwcApp {
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = titulo;
 
-    AdjustSize();
   }
 
   IniciarUI() {
