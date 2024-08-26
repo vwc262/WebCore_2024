@@ -66,3 +66,56 @@
     display: flex;
     text-shadow: 1px 1px 1px black;
 }
+
+.Cutzamala_controlDivE {
+    z-index: 1 !important;
+    position: absolute;
+    top: 10px !important;
+    left: 410px !important;
+    z-index: 1 !important;
+    background: #f4efdf;
+    border-radius: 3px;
+    border: 1px solid #d6d0d0;
+    color: black;
+    font-family: unset;
+    width: 90px;
+    height: 40px;
+    border-left: 1px solid #f4e7e7;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.Cutzamala_controlDivPH {
+    z-index: 1 !important;
+    position: absolute;
+    top: 10px !important;
+    left: 500px !important;
+    z-index: 1 !important;
+    background: #f4efde;
+    border-radius: 3px;
+    border: 1px solid #d6d0d0;
+    color: black;
+    font-family: unset;
+    width: 90px;
+    height: 40px;
+    border-left: 1px solid #f4e7e7;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.Cutzamala_marker-tag{
+    background-color: #520000;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 5px;
+    position: relative;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
+}

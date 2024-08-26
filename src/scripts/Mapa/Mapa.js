@@ -1,7 +1,7 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumEnlace, EnumNombreProyecto, EnumTipoPolygon } from "../Utilities/Enums.js";
+import { EnumEnlace, EnumNombreProyecto, EnumProyecto, EnumTipoPolygon } from "../Utilities/Enums.js";
 
 class Mapa {
   constructor() {
@@ -63,7 +63,7 @@ class Mapa {
       this.markerContainer.className = "markerContainer";
       this.markerContainer.setAttribute(`IdEstacion`, dataMarker.IdEstacion);
 
-      this.markerTag.className = "marker-tag";
+      this.markerTag.className = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto ? "Cutzamala_marker-tag" : "marker-tag";
       this.markerTag.textContent = dataMarker.Nombre;
 
       this.markerImg.classList.add("marker-img");
@@ -176,8 +176,8 @@ class Mapa {
     this.$PH_Buttton = document.createElement("button");
     this.$Enlaces_Button = document.createElement("button");
 
-    this.$PH_Buttton.classList = "controlDivPH";
-    this.$Enlaces_Button.classList = "controlDivE";
+    this.$PH_Buttton.classList = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto ? "Cutzamala_controlDivPH" : "controlDivPH";
+    this.$Enlaces_Button.classList = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto ? "Cutzamala_controlDivE" : "controlDivE";
 
     this.$PH_Buttton.textContent = "Perfil Hidraulico";
     this.$Enlaces_Button.textContent = "Diagrama Radio";
