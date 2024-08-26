@@ -56,7 +56,23 @@ class VwcApp {
       const header__buttons = document.getElementsByClassName("header__buttons")[0];
       header__buttons.classList = `${header__buttons.classList} header__buttons_cutzamala`;
 
+      const particular__header = document.getElementsByClassName("particular__header")[0];
+      particular__header.classList = `${particular__header.classList} Cutzamala_particular__header`;
+      
+      const etiquetaSitioPerfil = document.getElementsByClassName("etiquetaSitioPerfil");
+      for(var element of etiquetaSitioPerfil) {
+        element.classList = `${element.classList} etiquetaSitioPerfil_Cutzamala`;
+      };
 
+      const bottomGlowColumn = document.getElementsByClassName("bottomGlowColumn");
+      for(var element of bottomGlowColumn) {
+        element.classList = `${element.classList} bottomGlowColumn_Cutzamala`;
+      };
+
+      const curved_Row_variables = document.getElementsByClassName("curved-Row-variables");
+      for(var element of curved_Row_variables) {
+        element.classList = `${element.classList} Cutzamala_curved-Row-variables`;
+      };
      }
   }
 
