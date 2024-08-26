@@ -2,7 +2,7 @@ import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumEnlace, EnumTipoSignal } from "../Utilities/Enums.js";
+import { EnumEnlace, EnumTipoSignal, EnumProyecto } from "../Utilities/Enums.js";
 import { ExtraRowVariables } from "./ExtraRowVariables.js";
 import { Row } from "./Row.js";
 import { RowVariables } from "./RowVariables.js";
@@ -48,7 +48,7 @@ class Tabla {
 
     let configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
 
-    if (configuracionProyecto.customPositionsTable){
+    if (configuracionProyecto.customPositionsTable) {
       let svgScroll = document.querySelector("#svgScroll");
       svgScroll.style.display = 'none';
 
@@ -56,8 +56,8 @@ class Tabla {
       let curvedRowVariables = document.getElementsByClassName('curved-Row-variables');
 
       let h = 960 / this.cantidadElementos - 30;
-      
-      for (let index = 14; index > this.cantidadElementos -1; index--) {
+
+      for (let index = 14; index > this.cantidadElementos - 1; index--) {
         curvedRow[index].remove();
         curvedRowVariables[index].remove();
       }
@@ -464,11 +464,20 @@ class Tabla {
   hoverRow(mouseover, IdEstacion, stopPropagation) {
     let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
     let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
+    const cutzamalaFlag = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto;
 
-    row.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-      } `;
-    rowVariable.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-      } `;
+    if (cutzamalaFlag) {
+      row.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(182,141,76,0.15) 0%, rgba(189,151,99,0.85) 30%, rgba(189,151,99,0.85) 67%, rgba(182,141,76,0.15) 100%)" : "rgba(87,168,152,0.0)"
+        } `;
+      rowVariable.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(182,141,76,0.15) 0%, rgba(189,151,99,0.85) 30%, rgba(189,151,99,0.85) 67%, rgba(182,141,76,0.15) 100%)" : "rgba(87,168,152,0.0)"
+        } `;
+    }
+    else {
+      row.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
+        } `;
+      rowVariable.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
+        } `;
+    }
 
     if (!stopPropagation) {
       const estacion = Core.Instance.data.find(

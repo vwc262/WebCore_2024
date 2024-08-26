@@ -1,8 +1,11 @@
-
-
 .Cutzamala_Header {
     background: rgb(245, 239, 230);
-    background: linear-gradient(90deg, rgba(245, 239, 230, 1) 0%, rgba(251, 249, 244, 1) 28%, rgba(244, 239, 222, 1) 35%, rgba(241, 234, 215, 1) 46%, rgba(152, 127, 90, 1) 98%);
+    background: linear-gradient(90deg, rgb(255 255 255) 0%, rgba(251, 249, 244, 1) 28%, rgba(244, 239, 222, 1) 35%, rgba(241, 234, 215, 1) 46%, rgba(152, 127, 90, 1) 98%);
+}
+
+.Cutzamala_particular__header {
+    background: rgb(245, 239, 230);
+    background: linear-gradient(90deg, rgba(152, 127, 90, 1) 15%, rgba(245, 239, 230, 1) 46%, rgba(251, 249, 244, 1) 35%, rgba(244, 239, 222, 1) 28%, rgba(241, 234, 215, 1) 0%);
 }
 
 .Cutzamala_Body {
@@ -14,19 +17,43 @@
     color: black;
 }
 
-.conagua_logos{
+.conagua_logos {
     display: none;
 }
 
-.display_logos_cutzamala{
+.display_logos_cutzamala {
     display: flex;
 }
 
-#conagua_med_amb_logo{
-    height: 50px;    
+#conagua_med_amb_logo {
+    height: 50px;
 }
 
 .header__buttons_cutzamala {
     padding-left: 811px;
     -webkit-text-stroke: 0.2px black;
+}
+
+.etiquetaSitioPerfil_Cutzamala {
+    background: linear-gradient(180deg, rgba(182, 141, 76, 1) 0%, rgba(128, 98, 54, 1) 51%, rgba(182, 141, 76, 1) 100%);
+    border: 2px solid goldenrod;
+}
+
+.bottomGlowColumn_Cutzamala {
+    box-shadow: 2px 10px 6px 1px #d9c793;
+}
+
+.Cutzamala_etiqueta__Nombre {
+    color: #751616;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+}
+
+.Cutzamala_curved-Row-variables{
+    width: 950px;
+    height: 42px;
+    border-radius: 5px;
+    background: none;
+    outline: none;
 }
