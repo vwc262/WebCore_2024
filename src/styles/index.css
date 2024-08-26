@@ -27,7 +27,6 @@
 
 html,
 body {
-  background-color: #00001c;
   font-family: "Roboto", sans-serif;
   width: 1920px;
   height: 1080px;
@@ -37,6 +36,10 @@ body {
   -moz-user-drag: none !important;
   -o-user-drag: none !important;
   -webkit-user-drag: none !important;
+}
+
+body{
+  background-color: #00001c;
 }
 
 header {
