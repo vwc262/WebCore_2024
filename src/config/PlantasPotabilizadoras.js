@@ -66,7 +66,7 @@ export const PlantasPotabilizadoras = {
     estacionesSinParticular: [1, 2, 3, 4, 6],
     customPositionsTable: {
         offsetLeft: 50,
-        offsetTop: -2,
-        curvatura: 7,
+        offsetTop: -2.5,
+        curvatura: 4,
     }
 }

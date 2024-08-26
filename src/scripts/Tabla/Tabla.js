@@ -46,16 +46,16 @@ class Tabla {
       "curved-Row-variables"
     );
 
-    this.configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+    let configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
 
-    if (this.configuracionProyecto.customPositionsTable){
+    if (configuracionProyecto.customPositionsTable){
       let svgScroll = document.querySelector("#svgScroll");
       svgScroll.style.display = 'none';
 
       let curvedRow = document.getElementsByClassName('curved-Row');
       let curvedRowVariables = document.getElementsByClassName('curved-Row-variables');
 
-      let h = 960 / this.cantidadElementos;
+      let h = 960 / this.cantidadElementos - 30;
       
       for (let index = 14; index > this.cantidadElementos -1; index--) {
         curvedRow[index].remove();
@@ -63,9 +63,9 @@ class Tabla {
       }
 
       // estos valores estan actualmente para plantas potabilizadoras
-      let offsetLeft = this.configuracionProyecto.offsetLeft;
-      let offsetTop = this.configuracionProyecto.offsetTop;
-      let curvatura = this.configuracionProyecto.curvatura;
+      let offsetLeft = configuracionProyecto.customPositionsTable.offsetLeft;
+      let offsetTop = configuracionProyecto.customPositionsTable.offsetTop;
+      let curvatura = configuracionProyecto.customPositionsTable.curvatura;
 
       for (let index = 0; index < this.cantidadElementos; index++) {
         curvedRow[index].style.height = `${h}px`;
@@ -74,6 +74,7 @@ class Tabla {
         let l = offsetLeft - (curvatura * Math.pow((index + offsetTop), 2));
 
         curvedRow[index].style.transform = `translate(${l}px, ${index}px)`;
+        curvedRowVariables[index].style.transform = `translate(${l}px, ${index}px)`;
       }
     }
 
