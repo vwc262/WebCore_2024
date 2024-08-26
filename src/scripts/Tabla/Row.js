@@ -5,7 +5,7 @@ import { Particular } from "../Particular/Particular.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import { Tabla } from "./Tabla.js";
 import { GoHome, Module, SetActualModule } from "../uiManager.js";
-import { EnumModule } from "../Utilities/Enums.js";
+import { EnumModule, EnumTipoSignal } from "../Utilities/Enums.js";
 import { Configuracion } from "../../config/config.js";
 import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 
@@ -47,7 +47,6 @@ class Row {
 
     this.Update();
 
-
     this.rowContainer.addEventListener("click", (event) => {
 
       const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
@@ -61,7 +60,7 @@ class Row {
 
       let options = document.querySelector('ul.options');
       if (options.children.length > 0) {
-        let ul = options.children[index];      
+        let ul = options.children[index];
         ul.click();
       }
 
@@ -72,17 +71,22 @@ class Row {
     return this.rowContainer;
   }
   ElegirPanelOParticular(estacion) {
-    const configProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto).perfil;
+    const configProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
     let mostrarPanel = false;
+
     if (configProyecto.estacionesSinParticular) {
       mostrarPanel = configProyecto.estacionesSinParticular.includes(estacion.IdEstacion);
     }
+
+    let tieneBombas = estacion.Signals.filter(s => s.TipoSignal == EnumTipoSignal.Bomba)?.length > 0;
+
     if (mostrarPanel) {
       SetActualModule("Perfil");
       GoHome();
 
-      ArranqueParo.Instance.Create(estacion.IdEstacion);
-
+      if (tieneBombas){
+        ArranqueParo.Instance.Create(estacion.IdEstacion);
+      }
     }
     else {
       Particular.Instance.setEstacion(estacion);

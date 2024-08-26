@@ -29,7 +29,6 @@ class SitioPerfil {
     createEtiqueta() {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         const signal = estacion.ObtenerPrimerSignal();
-        //console.log(signal)
 
         let valorSignal;
         let nameSignal;
@@ -92,10 +91,15 @@ class SitioPerfil {
 
     SetEventoClick(estacion) {
         let eventoClick = this.mostrarParticular;
-        const configProyectoPerfil = Configuracion.GetConfiguracion(Core.Instance.IdProyecto).perfil;
+        const configProyectoPerfil = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+
+        let tieneBombas = estacion.Signals.filter(s => s.TipoSignal == EnumTipoSignal.Bomba)?.length > 0;
+
         if (configProyectoPerfil.estacionesSinParticular) {
-            eventoClick = configProyectoPerfil.estacionesSinParticular.includes(estacion.IdEstacion) ? this.MostrarArranqueYparo : eventoClick;
+            let noParticular = configProyectoPerfil.estacionesSinParticular.includes(estacion.IdEstacion)
+            eventoClick = noParticular ? tieneBombas ? this.MostrarArranqueYparo : () => { } : eventoClick;
         }
+
         return eventoClick;
     }
 
