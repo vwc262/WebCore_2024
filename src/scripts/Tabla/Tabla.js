@@ -46,6 +46,37 @@ class Tabla {
       "curved-Row-variables"
     );
 
+    this.configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+
+    if (this.configuracionProyecto.customPositionsTable){
+      let svgScroll = document.querySelector("#svgScroll");
+      svgScroll.style.display = 'none';
+
+      let curvedRow = document.getElementsByClassName('curved-Row');
+      let curvedRowVariables = document.getElementsByClassName('curved-Row-variables');
+
+      let h = 960 / this.cantidadElementos;
+      
+      for (let index = 14; index > this.cantidadElementos -1; index--) {
+        curvedRow[index].remove();
+        curvedRowVariables[index].remove();
+      }
+
+      // estos valores estan actualmente para plantas potabilizadoras
+      let offsetLeft = this.configuracionProyecto.offsetLeft;
+      let offsetTop = this.configuracionProyecto.offsetTop;
+      let curvatura = this.configuracionProyecto.curvatura;
+
+      for (let index = 0; index < this.cantidadElementos; index++) {
+        curvedRow[index].style.height = `${h}px`;
+        curvedRowVariables[index].style.height = `${h}px`;
+
+        let l = offsetLeft - (curvatura * Math.pow((index + offsetTop), 2));
+
+        curvedRow[index].style.transform = `translate(${l}px, ${index}px)`;
+      }
+    }
+
     // Mouse wheel event
     this.tBody.addEventListener("wheel", (event) => {
       let upwards = event.wheelDelta > 0 || event.detail < 0;
@@ -573,10 +604,10 @@ class Tabla {
     let offlineCount = Core.Instance.data.filter(
       (estacion) => {
         if (estacion.IsTimeout()) return true;
-        else if( estacion.IsEnMantenimiento()) return false;
-        else if(estacion.Enlace == EnumEnlace.FueraLinea) return true
+        else if (estacion.IsEnMantenimiento()) return false;
+        else if (estacion.Enlace == EnumEnlace.FueraLinea) return true
       }
-    ).length;    
+    ).length;
 
     let enMantenimiento = Core.Instance.data.filter((estacion) =>
       estacion.IsEnMantenimiento() && !estacion.IsTimeout()

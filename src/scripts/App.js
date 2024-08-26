@@ -1,5 +1,5 @@
 import { Core } from "./Core.js";
-import { Configuracion } from "../../config/config.js";
+import { Configuracion } from "../config/config.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
