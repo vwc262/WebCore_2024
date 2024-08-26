@@ -31,7 +31,7 @@
 
 .header__buttons_cutzamala {
     padding-left: 811px;
-    -webkit-text-stroke: 0.2px black;
+    text-shadow: 1px 1px 1px black;
 }
 
 .etiquetaSitioPerfil_Cutzamala {
@@ -50,10 +50,19 @@
     display: inline-block;
 }
 
-.Cutzamala_curved-Row-variables{
+.Cutzamala_curved-Row-variables {
     width: 950px;
     height: 42px;
     border-radius: 5px;
     background: none;
     outline: none;
+}
+
+.Cutzamala_contenedor-resumen {
+    background-size: cover !important;
+    color: white;
+    padding: 3.5px;
+    width: 237px;
+    display: flex;
+    text-shadow: 1px 1px 1px black;
 }

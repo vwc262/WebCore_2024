@@ -73,6 +73,10 @@ class VwcApp {
       for(var element of curved_Row_variables) {
         element.classList = `${element.classList} Cutzamala_curved-Row-variables`;
       };
+
+      const contenedor_resumen = document.getElementsByClassName("contenedor-resumen")[0];
+      contenedor_resumen.classList = `${contenedor_resumen.classList} Cutzamala_contenedor-resumen`;
+
      }
   }
 
