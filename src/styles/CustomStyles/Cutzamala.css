@@ -1,0 +1,32 @@
+
+
+.Cutzamala_Header {
+    background: rgb(245, 239, 230);
+    background: linear-gradient(90deg, rgba(245, 239, 230, 1) 0%, rgba(251, 249, 244, 1) 28%, rgba(244, 239, 222, 1) 35%, rgba(241, 234, 215, 1) 46%, rgba(152, 127, 90, 1) 98%);
+}
+
+.Cutzamala_Body {
+    font-family: Montserrat;
+}
+
+.Cutzamala_Title {
+    font-family: GMX;
+    color: black;
+}
+
+.conagua_logos{
+    display: none;
+}
+
+.display_logos_cutzamala{
+    display: flex;
+}
+
+#conagua_med_amb_logo{
+    height: 50px;    
+}
+
+.header__buttons_cutzamala {
+    padding-left: 811px;
+    -webkit-text-stroke: 0.2px black;
+}
