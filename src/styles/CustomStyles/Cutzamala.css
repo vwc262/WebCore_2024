@@ -5,7 +5,11 @@
 
 .Cutzamala_particular__header {
     background: rgb(245, 239, 230);
-    background: linear-gradient(90deg, rgba(152, 127, 90, 1) 15%, rgba(245, 239, 230, 1) 46%, rgba(251, 249, 244, 1) 35%, rgba(244, 239, 222, 1) 28%, rgba(241, 234, 215, 1) 0%);
+    background: linear-gradient(90deg,  rgba(87,81,72,1) 0%, rgba(155,141,117,1) 40%, rgba(167,155,131,1) 68%, rgba(167,155,131,1) 100%);
+}
+
+.Cutzamala_header__datos-particular {
+    text-shadow: none;
 }
 
 .Cutzamala_Body {
@@ -45,7 +49,7 @@
 }
 
 .Cutzamala_etiqueta__Nombre {
-    color: #751616;
+    color: #d6d0d0;
     font-weight: bold;
     text-align: center;
     display: inline-block;
@@ -110,7 +114,7 @@
     font-size: 1.2em;
 }
 
-.Cutzamala_marker-tag{
+.Cutzamala_marker-tag {
     background-color: #520000;
     border-radius: 8px;
     color: #ffffff;
