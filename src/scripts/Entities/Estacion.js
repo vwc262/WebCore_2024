@@ -40,14 +40,27 @@ class Estacion {
     ObtenerPrimerSignal() {
         // Parche para cutzamala
         const isCutzamala = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto
+        const isChico = EnumProyecto.Chiconautla == Core.Instance.IdProyecto
         if (!isCutzamala) {
-            if (this.Signals.length > 0) {
-                if (!this.Signals[0].Nombre.includes("Bomba"))
-                    return this.Signals[0];
+            if (!isChico) {
+                if (this.Signals.length > 0) {
+                    if (!this.Signals[0].Nombre.includes("Bomba"))
+                        return this.Signals[0];
+                    else
+                        return 0
+                }
+            } else {
+                if (!this.Signals[0].Nombre.includes("Bomba")) {
+                    var signal = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Gasto);
+                    if (signal != null && signal != undefined)
+                        return signal;
+                    else
+                        return this.signals[0]
+                }
                 else
                     return 0
             }
-        }else{
+        } else {
             return this.Signals[2];
         }
     }
