@@ -38,11 +38,30 @@ class Estacion {
         return signalsCrudas.filter(signalCruda => signalCruda.habilitar == 1).map((signalCruda) => new Signal(signalCruda));
     }
     ObtenerPrimerSignal() {
-        if (this.Signals.length > 0) {
-            if (!this.Signals[0].Nombre.includes("Bomba"))
-                return this.Signals[0];
-            else
-                return 0
+        // Parche para cutzamala
+        const isCutzamala = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto
+        const isChico = EnumProyecto.Chiconautla == Core.Instance.IdProyecto
+        if (!isCutzamala) {
+            if (!isChico) {
+                if (this.Signals.length > 0) {
+                    if (!this.Signals[0].Nombre.includes("Bomba"))
+                        return this.Signals[0];
+                    else
+                        return 0
+                }
+            } else {
+                if (!this.Signals[0].Nombre.includes("Bomba")) {
+                    var signal = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Gasto);
+                    if (signal != null && signal != undefined)
+                        return signal;
+                    else
+                        return this.signals[0]
+                }
+                else
+                    return 0
+            }
+        } else {
+            return this.Signals[2];
         }
     }
     /**
@@ -119,10 +138,10 @@ class Estacion {
      * @param {keyof EnumModule} modulo
      */
     ObtenerRenderNivelOBomba(signal, modulo) {
-        
+
         let url = "";
         const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "l" : "b";
-            let indiceImagen = "";
+        let indiceImagen = "";
         if (Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma) {
             const isBombaPurple = signal.Valor == 4;
             if (signal.Valor >= 0 && signal.Valor <= 4) {
@@ -132,16 +151,16 @@ class Estacion {
                 indiceImagen = "0";
             }
             url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
-            }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${isBombaPurple ? 2 : indiceImagen}.png?v=${Core.Instance.version}`;
+                }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${isBombaPurple ? 2 : indiceImagen}.png?v=${Core.Instance.version}`;
         }
-        else{            
+        else {
             if (
                 signal.TipoSignal != EnumTipoSignal.Nivel &&
                 signal.TipoSignal != EnumTipoSignal.Bomba
             ) {
                 return "";
             }
-            
+
             if (signal.TipoSignal == EnumTipoSignal.Nivel) {
                 if (signal.DentroRango) {
                     if (signal.DentroLimite == EnumDentroLimite.Alto) {
@@ -163,10 +182,10 @@ class Estacion {
                     indiceImagen = "0";
                 }
             }
-            
+
             url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
-            }/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
-            }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
+                }/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
+                }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
         }
 
         return url;

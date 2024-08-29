@@ -77,6 +77,8 @@ class VwcApp {
       const contenedor_resumen = document.getElementsByClassName("contenedor-resumen")[0];
       contenedor_resumen.classList = `${contenedor_resumen.classList} Cutzamala_contenedor-resumen`;
 
+      const Cutzamala_header__datos_particular = document.getElementsByClassName("header__datos-particular")[0];
+      Cutzamala_header__datos_particular.classList = `${Cutzamala_header__datos_particular.classList} Cutzamala_header__datos-particular`;
      }
   }
 
