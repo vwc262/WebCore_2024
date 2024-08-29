@@ -7,10 +7,10 @@ class VwcApp {
   async Start() {
     const href = window.location.href;
     let idProyecto = 0;
-    if(href.includes("localhost") || href.includes("127.0.0")){
+    if (href.includes("localhost") || href.includes("127.0.0")) {
       idProyecto = EnumProyecto.PozosSistemaLerma; // Cambiar a mano para debug
     }
-    else{
+    else {
       let localHostSplit = href.split("/");
       let localHostFolder = localHostSplit[3];
       idProyecto = EnumNombreProyectoFolder[localHostFolder]
@@ -20,9 +20,11 @@ class VwcApp {
   }
   IniciarUI() {
     const $titleHeader = document.querySelector(".titleProyecto");
-    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(
+    var title = `${ObtenerFormatoTituloProyecto(
       EnumNombreProyecto[Core.Instance.IdProyecto]
     )}`;
+    $titleHeader.innerText = title;
+    document.title = title
     new TablaSimplificada().create();
   }
 }
