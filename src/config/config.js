@@ -43,7 +43,7 @@ var Configuracion = {
     },
 
     GetNombresLargos(enumProyecto) {
-        let nombres = {};
+        let nombres = undefined;
         switch (enumProyecto) {
             case EnumProyecto.Padierna:
                 nombres = undefined;
