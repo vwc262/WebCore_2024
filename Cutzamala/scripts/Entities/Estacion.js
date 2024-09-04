@@ -38,36 +38,41 @@ class Estacion {
         return signalsCrudas.filter(signalCruda => signalCruda.habilitar == 1).map((signalCruda) => new Signal(signalCruda));
     }
     ObtenerPrimerSignal() {
-        // Parche para chiconautla
+        // Parche para cutzamala y chiconautla
+        const isCutzamala = EnumProyecto.SistemaCutzamala == Core.Instance.IdProyecto
         const isChico = EnumProyecto.Chiconautla == Core.Instance.IdProyecto
-        if (isChico) {
-            if (!this.Signals[0].Nombre.includes("Bomba")) {
-                var nivel = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel);
-                var signal = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Gasto);
-
-                if (nivel != null && nivel != undefined) {
-                    return signal;
-                } else {
-                    if (signal != null && signal != undefined)
-                        return signal;
-                    else
+        if (!isCutzamala) {
+            if (!isChico) {
+                if (this.Signals.length > 0) {
+                    if (!this.Signals[0].Nombre.includes("Bomba"))
                         return this.Signals[0];
+                    else
+                        return 0
                 }
+            } else {
+                // Parche para Chiconautla, para mostrar solo gastos y nivel 
+                if (!this.Signals[0].Nombre.includes("Bomba")) {
+                    var nivel = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel);
+                    var signal = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Gasto);
 
-            }
-            else {
-
-                return 0
-            }
-        } else {
-            if (this.Signals.length > 0) {
-                if (!this.Signals[0].Nombre.includes("Bomba"))
-                    return this.Signals[0];
-                else {
-
+                    if (nivel != null && nivel != undefined) {
+                        // return nivel;
+                        return signal;
+                    } else {
+                        if (signal != null && signal != undefined)
+                            return signal;
+                        else
+                            return this.signals[0];
+                    }
+                    
+                }
+                else
                     return 0
-                }
             }
+        } 
+        // Parche para Cutzamala y solo mostrar gasto
+        else {
+            return this.Signals[2];
         }
     }
     /**

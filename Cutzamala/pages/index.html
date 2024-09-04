@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="title__page">VWC</title>
+  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
+  <link rel="stylesheet" href="../styles/Particular/Particular.css">
+  <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
+  <link rel="stylesheet" href="../styles/Login/Login.css">
+  <link rel="stylesheet" href="../styles/Modal/modal.css">
+  <link rel="stylesheet" href="../styles/ArranquParo/ArranqueParo.css">
+  <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
+  <!-- reportes -->
+  <link rel="stylesheet" href="../styles/Reporteador/reportes.css">
+  <link rel="stylesheet" href="../styles/Reporteador/selectSite.css">
+  <link rel="stylesheet" href="../styles/Reporteador/carrusel.css">
+  <link rel="stylesheet" href="../styles/Reporteador/signalAGraficar.css">
+  <link rel="stylesheet" href="../styles/Reporteador/hologram.css">
+  <link rel="stylesheet" href="../styles/Reporteador/calendario.css">
+  <!-- CustomStyles -->
+  <link rel="stylesheet" href="../styles/CustomStyles/Cutzamala.css">
+  <script src="../scripts/Core.js" type="module"></script>
+</head>
+
+<body>
+  <header>
+    <div class="conagua_logos">
+      <img id="conagua_med_amb_logo">
+    </div>
+    <nav class="header__buttons">
+      <div class="headerBtn__Home header__active">
+        <img id="imgHome" alt="">Home
+      </div>
+      <div class="headerBtn__Mapa">
+        <img id="imgMapa" alt="">Mapa
+      </div>
+      <div class="headerBtn__Graficador">
+        <img id="imgGraficador" alt="">Graficador
+      </div>
+      <div class="headerBtn__Login">
+        <img id="imgLogin" alt="">Login
+      </div>
+    </nav>
+    <div class="header__title">
+      <h1 id="title"></h1>
+      <div class="header__datos-particular">
+        <span id="date__particular">00/00/0000</span>
+        &nbsp;
+        <span id="state_particular">Fuera de línea</span>
+      </div>
+    </div>
+    <img class="fallaAcParticular">
+    <div class="header__btnRegresar">
+      <img id="imgRegresar">
+      <span>Regresar</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Loading screen -->
+    <container class="containerLoading">
+      <section class="sec-loading">
+        <div class="one">
+        </div>
+      </section>
+      <section class="textloading">
+        <div class="textloading">
+          <a>Cargando sitio</a>
+        </div>
+      </section>
+    </container>
+
+    <container class="Proximamente">
+      <section class="sProx">
+        <div class="txtProximamnete">
+          <h2>Sitio en Mantenimiento</h2>
+        </div>
+      </section>
+    </container>
+
+    <container class="Content_on_load">
+      <svg class="optimizedsvg" width="1920" height="1080" viewbox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+        <filter id="otherFilter3">
+            <feColorMatrix type="matrix" values="0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 1">
+            </feColorMatrix>
+        </filter>
+        <filter id="turbulence">
+            <feTurbulence id="sea-filter" result="turbulence" baseFrequency="0.025" numOctaves="4" seed="15">
+            </feTurbulence>
+            <feColorMatrix type="matrix" in="SourceGraphic" result="o_mascara" values="0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 0">
+            </feColorMatrix>
+            <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10">
+            </feDisplacementMap>
+            <feBlend in="SourceGraphic" in2="sea-filter" result="o_movida" mode="lighten" />
+            <feComposite operator="in" in2="o_mascara" in="o_movida" />
+            <animate xlink:href="#sea-filter" attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+                values="0.02 0.01; 0.01 0.02" keyTimes="0; 1"></animate>
+        </filter>
+    </svg>
+  
+      <aside class="aside__tabla">
+        <div class="curved-table-variables-container">
+          <img class="fondo-tabla-variables" src="">
+  
+          <div class="curved-tBody-variables">
+            <div class="curved-Row-variables" style="transform: translate(28px,   0px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(34px,  12px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(40px,  24px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(43px,  36px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(48px,  48px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(52px,  60px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(53px,  72px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(53px,  84px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(52px,  96px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(48px, 108px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(44px, 120px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(40px, 132px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(34px, 144px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(26px, 156px);"></div>
+            <div class="curved-Row-variables" style="transform: translate(18px, 168px);"></div>
+          </div>
+  
+          <div class="header-table-variables">
+            <div class="thContainer" tag="1">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Nivel</div>
+                <div>[m]</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="2">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Presión</div>
+                <div>[<sup>kg</sup>/<sub>cm<sup>2</sup></sub>]</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="3">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Gasto</div>
+                <div>[<sup>l</sup>/<sub>s</sub>]</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="4">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Totalizado</div>
+                <div>[m<sup>3</sup>]</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="5">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Válvula mariposa</div>
+                <div>[%]</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="6">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Válvula flotador</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="7">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Bomba</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="9">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Perilla General</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="10">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Voltaje</div>
+                <div>[V]</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="12">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Falla AC</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+            <div class="thContainer" tag="15">
+              <img class="iconthImage" src="">
+              <div class="headerText">
+                <div>Puerta Abierta</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="btnTabla"></div>
+        </div>
+        <div class="curved-table-container">
+          <img class="fondo-tabla" src="">
+          <label class="title-table">Sitios</label>
+          <div class="curved-tBody">
+            <div class="curved-Row" style="transform: translate( 25px,   0px);"></div>
+            <div class="curved-Row" style="transform: translate(36px,  12px);"></div>
+            <div class="curved-Row" style="transform: translate(46px,  24px);"></div>
+            <div class="curved-Row" style="transform: translate(51px,  36px);"></div>
+            <div class="curved-Row" style="transform: translate(56px,  48px);"></div>
+            <div class="curved-Row" style="transform: translate(59px,  60px);"></div>
+            <div class="curved-Row" style="transform: translate(60px,  72px);"></div>
+            <div class="curved-Row" style="transform: translate(62px,  84px);"></div>
+            <div class="curved-Row" style="transform: translate(59px,  96px);"></div>
+            <div class="curved-Row" style="transform: translate(56px, 108px);"></div>
+            <div class="curved-Row" style="transform: translate(52px, 120px);"></div>
+            <div class="curved-Row" style="transform: translate(46px, 132px);"></div>
+            <div class="curved-Row" style="transform: translate(38px, 144px);"></div>
+            <div class="curved-Row" style="transform: translate( 28px, 156px);"></div>
+            <div class="curved-Row" style="transform: translate( 15px, 168px);"></div>
+          </div>
+          <div class="resumen-tabla">
+            <div class="contenedor-resumen">
+              <div class="texto-resumen" tag="online">5</div>
+              <div class="texto-resumen" tag="offline">20</div>
+              <div class="texto-resumen" tag="mantenimiento">0</div>
+            </div>
+          </div>
+        </div>
+        <div class="curvedScroll">
+          <!-- <input class="sliderVertical" type="range" orient="vertical" value="0" min="0" step="1"> -->
+          <svg xmlns="http://www.w3.org/2000/svg" id="svgScroll" class="svgScrollContainer" viewBox="0 0 500 500"
+            preserveAspectRatio="xMidYMid meet">
+            <title>SVG curve</title>
+            <desc>example curves in SVG</desc>
+            <defs>
+              <radialGradient id="myGradient" gradientTransform="translate(-0.27 -0.62) scale(2, 1.7)">
+                <stop offset="7%" stop-color="#a0aec0" />
+                <stop offset="9.29%" stop-color="#8a9eb8" />
+                <stop offset="11.57%" stop-color="#788eab" />
+                <stop offset="13.86%" stop-color="#667f9e" />
+                <stop offset="16.14%" stop-color="#566f91" />
+                <stop offset="18.43%" stop-color="#466083" />
+                <stop offset="23%" stop-color="#2a4365" />
+                <stop offset="25.71%" stop-color="#2b4161" />
+                <stop offset="28.43%" stop-color="#2c405c" />
+                <stop offset="31.14%" stop-color="#2c3e58" />
+                <stop offset="33.86%" stop-color="#2d3c54" />
+                <stop offset="36.57%" stop-color="#2d3a50" />
+                <stop offset="42%" stop-color="#2d3748" />
+                <stop offset="47.86%" stop-color="#2a3444" />
+                <stop offset="53.71%" stop-color="#273040" />
+                <stop offset="59.57%" stop-color="#252d3c" />
+                <stop offset="65.43%" stop-color="#222a38" />
+                <stop offset="71.29%" stop-color="#1f2634" />
+                <stop offset="83%" stop-color="#1a202c" />
+              </radialGradient>
+              <linearGradient id="lnrGradient" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="19%" stop-color="#90cdf4" />
+                <stop offset="30.33%" stop-color="#52a4db" />
+                <stop offset="53%" stop-color="#2c5282" />
+                <stop offset="62.67%" stop-color="#3c71a6" />
+                <stop offset="82%" stop-color="#63b3ed" />
+              </linearGradient>
+              <linearGradient id="fakeGradient" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="26%" stop-color="#2c5282" />
+                <stop offset="35%" stop-color="#3f7aae" />
+                <stop offset="53%" stop-color="#90cdf4" />
+                <stop offset="62.67%" stop-color="#52a4db" />
+                <stop offset="82%" stop-color="#2c5282" />
+              </linearGradient>
+            </defs>
+            <path id="scrollCurve" d="M106,-992 C305,-100 283,765 110,1534" class="scrollCurve"></path>
+            <path id="filler" d="M106,-992 C305,-100 283,765 110,1534" fill="url('#lnrGradient')">
+            </path>
+            <!-- Follower -->
+            <circle r="28" cx="0" cy="0" class="follower" fill="url('#myGradient')" />
+          </svg>
+        </div>
+      </aside>
+      <section id="section__home" class="section__home"></section>
+      <section id="section__mapa" class="section__mapa">
+        <div id="map" style="width: 1920px; height: 1080px;"></div>
+      </section>
+      <section id="section__graficador" class="section__graficador">
+  
+        <div class="MainContainer">
+  
+          <div class="btnReturn">
+            <img class="btnReturnImage">
+            <label class="shadowIcon"> Regresar </label>
+          </div>
+  
+          <div class="btn__graficar">
+            <div class="btnPDFContainer">
+              <img class="btnPDF">
+              <div class="holoBntsReportes"></div>
+            </div>
+  
+            <div class="CSVContainer">
+              <img class="btnCSV"> <a id="aCSV"></a>
+              <div class="holoBntsReportes"></div>
+            </div>
+          </div>
+  
+          <main>
+            <!-- ========== Video ========== -->
+            <article>
+              <video class="videoInicio" muted>
+            </article>
+  
+            <!-- ========== Btn Seleccionar Sitio ========== -->
+            <div class="select-menu">
+              <div class="select-btn">
+                <span class="sBtn-text">Elige un Sitio</span>
+                <img class="sBtn-Select" alt="">
+              </div>
+  
+              <ul class="options">
+  
+              </ul>
+            </div>
+  
+            <!-- ========== Overlays ========== -->
+            <!-- ========== Calendiario ========== -->
+            <div class="calendarioContainer">
+              <div class="dateContainer">
+                <button id="btnInitDate" class="btnFechaSeleccionada">
+                  <label for=""><span>Fecha inicial: </span id="initDate"></label>
+                </button>
+                <button id="btnEndDate">
+                  <label for=""><span id="endDate">Fecha final: </span></label>
+                </button>
+              </div>
+              <div class="yearBtnsContainer">
+                <button>
+                </button>
+                <span id="spanYear" class="spanYear">2024</span>
+                <button> > </button>
+              </div>
+              <div class="monthsContainer">
+                <button class="mes" id="Ene" mesId="0">Ene</button>
+                <button class="mes" id="Feb" mesId="1">Feb</button>
+                <button class="mes" id="Mar" mesId="2">Mar</button>
+                <button class="mes" id="Abr" mesId="3">Abr</button>
+                <button class="mes" id="May" mesId="4">May</button>
+                <button class="mes" id="Jun" mesId="5">Jun</button>
+                <button class="mes" id="Jul" mesId="6">Jul</button>
+                <button class="mes" id="Ago" mesId="7">Ago</button>
+                <button class="mes" id="Sep" mesId="8">Sep</button>
+                <button class="mes" id="Oct" mesId="9">Oct</button>
+                <button class="mes" id="Nov" mesId="10">Nov</button>
+                <button class="mes" id="Dic" mesId="11">Dic</button>
+              </div>
+              <div class="daysContainer"></div>
+            </div>
+  
+            <!-- ========== Sitio ========== -->
+            <div class="SitioContainer">
+              <div class="sitioTitleContainer">
+                <h1 class="sitioTitle"></h1>
+              </div>
+              <div class="sitioImgContainer">
+                <img class="sitioImg" src="" alt="">
+              </div>
+            </div>
+  
+            <!-- ========== Signals Graficar ========== -->
+            <div class="listaSignalsContainer">
+              <div class="signalHeader">
+                <div class="headerTitleSignal">
+                  <span>Variables a Graficar</span>
+                </div>
+                <div class="headerIcon">
+                  <img class="buttonGraficar" alt="">
+                  <span>Graficar</span>
+                </div>
+              </div>
+              <div class="signalContent">
+              </div>
+              <div class="signalFooter">
+                <div class="signalFooterImg"></div>
+              </div>
+            </div>
+  
+            <!-- ========== Carrusel ========== -->
+            <div class="carrusel-Main__Container">
+              <div class="variables__Container"></div>
+  
+              <div class="btnCarrusel">
+                <button class="btnMoverCarrusel" id="next"></button>
+                <button class="btnMoverCarrusel" id="prev"></button>
+              </div>
+            </div>
+          </main>
+  
+          <div class="modalValidation">
+            <h3 class="headerModal">Limite de variables</h3>
+            <p class="textModal">Máximo 6 variables</p>
+            <button class="btnCloseModal" id="closeModal">Cerrar</button>
+          </div>
+  
+          <div id="chartdiv"></div>
+          <div class="sinHistoricos">
+            <h3> NO SE OBTUVIERON HISTÓRICOS </h3>
+          </div>
+          <div class="imgClon"></div>
+        </div>
+      </section>
+      <section id="section__login" class="section__login">
+        <video id="loginVid1" class="loginVid" autoplay="autoplay" muted="" style="display: block;" loop="loop"></video>
+      </section>
+      <section id="section__particular" class="section__particular">
+        <div class="particular__header">
+          <div class="particular__panelControl">
+            <img id="imgContolPanel">
+          </div>
+          <div class="particular__ItemsContainer">
+            <div class="particular__items">
+              <div class="particular__item">
+                <div class="etiqueta__Nombre">N1</div>
+                <div class="etiqueta__Valor">3.08</div>
+                <div class="etiqueta__Unidad">m</div>
+              </div>
+            </div>
+          </div>
+          <div class="particular__slider">
+            <input id="sliderInput" type="range" style="display: inline-block" value="0" min="0" max="3" step="0.1">
+          </div>
+        </div>
+        <div class="particular__imgSitio">
+          <img src="" id="particularImg">
+          <img src="" id="particularTextoImg">
+        </div>
+  
+        <div id="particular__aguaNivel"></div>
+        <div id="particular__bombasEstado"></div>
+      </section>
+      <section class="arranqueParo__panelControl">
+        <div class="arranqueParo__Container">
+          <div class="arranqueParo__Header">
+            <div class="arranqueParo__title">Control Bombas</div>
+            <div class="arranqueParo__closePanel">
+              <img id="imgClose">
+            </div>
+          </div>
+          <div class="arranqueParo__modoControl">
+            <span>Modo control bombas: </span>
+            <span class="arranqueParo__modoTxt">Remoto</span>
+          </div>
+          <div class="arranqueParo__Lineas">          
+          </div>
+          <div class="arranqueParo__BtnsCarrusel">
+            <div id="carruselPrev_AP" class="arranqueParo__Prev flechaControl"></div>
+            <span>Selecciona bomba</span>
+            <div id="carruselNext_AP" class="arranqueParo__Next flechaControl"></div>
+          </div>
+          <div class="arranqueParo__carruselBombas">
+            <div class="arranqueParo__itemsContainer">
+            </div>
+          </div>
+          <div class="arranqueParo__BtnsEncender">
+            <div class="arranqueParo__encenderApagar">
+              <div class="arranqueParo__encenderApagarBomba">
+                <div class="arranqueParo__Encendertxt">Encender</div>
+                <div id="imgEncender" class="arranqueParo__Encenderimg"></div>
+                <div class="arranqueParo__Apagartxt">Apagar</div>
+              </div>
+              <div class="arranqueParo__confirmarBomba">
+                <div class="arranqueParo__confirmarimg"></div>
+                <div class="arranqueParo__confirmartxt">Ejecutar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img id="imgPanelArranqueParo">
+      </section>
+  
+      <section class="modal ">
+        <div id="imgModal" class="modal__container">
+          <div class="modal__text">
+            <h2 class="modal__title">Panel de control</h2>
+            <p class="modal__paragraph">Debe iniciar sesión para acceder al control de bombas.</p>
+            <a href="#" class="modal__close">Cerrar</a>
+            <a href="#" class="modal__Aceptar">Aceptar</a>
+          </div>
+        </div>
+      </section>
+    </container>
+  </main>
+</body>
+
+<script type="module" src="../scripts/uiManager.js"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.47&key=AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98">
+</script> -->
+
+<script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+    ({ key: "AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98", v: "beta" });</script>
+
+<!-- reportes -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Responsive.js"></script>
+<script  src="../scripts/Reporteador/External/pdfmake.js"></script>
+<script type="module" src="../scripts/Reporteador/CSVController.js"></script>
+<script src="../scripts/External/PanZoom.js"></script>
+
+</html>
