@@ -1,0 +1,263 @@
+.arranqueParo__panelControl {
+  width: 450px;
+  height: 700px;
+  z-index: 10;
+  top: 380px;
+  left: 50px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none; 
+}
+
+.arranqueParo__panelControl img {
+  width: 445px;
+  position: relative;
+  top: 90px;
+}
+
+.arranqueParo__Container {
+  position: relative;
+  width: 69%;
+  height: 63%;
+  z-index: 1;
+  opacity: 1;
+  transform: translateY(100vh);
+  transition: all 2s ease-in-out;
+  left: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arranqueParo__Header {
+  height: 50px;
+  width: 300px;
+}
+
+.arranqueParo__modoControl {
+  width: 300px;
+  height: 25px;
+}
+
+.arranqueParo__BtnsCarrusel {
+  width: 300px;
+  height: 50px;
+}
+
+.arranqueParo__carruselBombas {
+  width: 235px;
+  height: 200px;
+  padding: 10px;
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; */
+  max-width: 235px;
+  overflow: hidden;
+}
+
+.arranqueParo__BtnsEncender {
+  width: 300px;
+  height: 120px;
+}
+
+.arranqueParo__title {
+  color: goldenrod;
+  font-weight: 700;
+  text-align: center;
+  margin: auto;
+  font-size: 25px;
+  position: relative;
+  top: 15px;
+}
+
+.arranqueParo__closePanel {
+  position: relative;
+  left: 255px;
+  top: -100px;
+}
+
+.arranqueParo__closePanel img {
+  width: 30px;
+  opacity: 0.7;
+  transition: all 0.4s ease;
+}
+
+.arranqueParo__closePanel img:hover {
+  opacity: 1;
+}
+
+.arranqueParo__modoControl {
+  text-align: center;
+  margin: auto;
+}
+
+.arranqueParo__modoControl span {
+  font-size: 15px;
+}
+
+.arranqueParo__modoControl .arranqueParo__modoTxt {
+  color: goldenrod;
+}
+
+.arranqueParo__BtnsCarrusel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 15px;
+}
+
+.arranqueParo__Next,
+.arranqueParo__Prev {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-size: contain !important;
+}
+
+.arranqueParo__Next {
+  transform: rotate(180deg);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.arranqueParo__Next:hover,
+.arranqueParo__Prev:hover {
+  width: 30px;
+  height: 30px;
+}
+
+.controlParo__carruselItem {
+  width: 100px;
+  height: 100%;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  transition: all ease 0.2s;
+  /* transition-delay: 500ms; */
+}
+
+.arranqueParo__itemsContainer {
+  position: absolute;
+  overflow: hidden;
+  width: 302px;
+  height: 180px;
+  left: 0px;
+}
+
+.arranqueParo__modo {
+  color: gray;
+}
+
+.arranqueParo__bombaImg {
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position-x: center !important;
+  width: 100%;
+  height: 90px;
+}
+
+.arranqueParo__bombaNum {
+  color: white;
+}
+
+.arranqueParo__encenderApagar {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-around;
+}
+
+.arranqueParo__encenderApagarBomba {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.arranqueParo__Apagartxt {
+  /* color: gray; */
+}
+
+.arranqueParo__Encenderimg {
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position-x: center !important;
+  width: 100%;
+  height: 50px;
+}
+
+.arranqueParo__confirmarimg {
+  transition: all 0.4s ease;
+  width: 100%;
+  height: 35px;
+}
+
+.arranqueParo__confirmarimg:hover {
+  transition: all 0.4s ease;
+  width: 100%;
+  height: 35px;
+}
+
+.arranqueParo__confirmartxt {
+  /* color: gray; */
+}
+
+.arranqueParo__confirmarBomba {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.midItem {
+  transform: scale(1.25);
+}
+
+.hologramaBase {
+  width: 100px;
+  height: 80px;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  position: relative;
+  top: -43px;
+  left: -14px;
+  z-index: -1;
+}
+
+
+.arranqueParo__Lineas {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  width: 286px;
+  gap: 5px;
+}
+
+.botonLinea {
+  width: 20%;
+  font-size: 11px;
+  background: #120f0f;
+  padding: 3px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  text-wrap: wrap;
+}
+
+.botonLinea:hover {
+  width: 57px;
+  background: #3e3131;
+
+}
+
+.lineaActive {
+  color: rgb(217, 155, 81);
+  background: #3a2c2c;
+}

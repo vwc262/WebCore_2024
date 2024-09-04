@@ -39,7 +39,7 @@ class Estacion {
     }
     ObtenerPrimerSignal() {
         // Parche para cutzamala y chiconautla
-        const isCutzamala = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto
+        const isCutzamala = EnumProyecto.SistemaCutzamala == Core.Instance.IdProyecto
         const isChico = EnumProyecto.Chiconautla == Core.Instance.IdProyecto
         if (!isCutzamala) {
             if (!isChico) {
