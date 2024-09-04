@@ -54,7 +54,8 @@
 }
 
 .etiqueta__Nombre {
-  color: cyan;
+  color: #d6d0d0;
+  font-weight: bold;
   text-align: center;
   display: inline-block;
 }
@@ -120,7 +121,7 @@
   transition: all 0.4s ease;
   font-size: 12pt;
   font-weight: bold;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: none;
   display: none;
 }
 

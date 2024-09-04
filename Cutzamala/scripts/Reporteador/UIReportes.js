@@ -22,7 +22,7 @@ var UIReportes = {
   tipoSignalName: {
     1: "Nivel (m)",
     2: "Presion (kg/cm2)",
-    3: "Gasto (l/s)",
+    3: "Gasto (m3/s)",
     4: "Totalizado (m3)",
     5: "ValvulaAnalogica",
     6: "ValvulaDiscreta",
@@ -40,7 +40,7 @@ var UIReportes = {
   unidades: {
     1: "m",
     2: "kg/cm",
-    3: "l/s",
+    3: "m3/s",
     4: "m",
     10: "V"
   },

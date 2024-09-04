@@ -52,10 +52,11 @@
 
 .contenedor-resumen {
   background-size: cover !important;
-  color: #dda65e;
-  padding: 3.5px;
-  width: 237px;
-  display: flex;
+    color: #350000;
+    padding: 3.5px;
+    width: 237px;
+    display: flex;
+    text-shadow: 1px 1px 1px black;
 }
 
 .curved-Row {
@@ -146,13 +147,8 @@
 .curved-Row-variables {
   width: 950px;
   height: 42px;
-  background: linear-gradient(
-    90deg,
-    rgba(70, 95, 138, 0.35) 0%,
-    rgba(70, 95, 138, 0.35) 60%,
-    rgba(0, 0, 0, 0.75) 90%
-  );
-  outline: 1px solid rgb(115 140 187 / 50%);
+  background: none;
+  outline: none;
   border-radius: 5px;
 }
 
@@ -251,7 +247,7 @@
 .bottomGlowColumn {
   width: 250px;
   height: 2px;
-  box-shadow: 2px 9px 6px 2px #5a71a2;
+  box-shadow: 2px 10px 6px 1px #d9c793;
   position: absolute;
   top: 35px;
   left: 6px;

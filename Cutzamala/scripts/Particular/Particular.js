@@ -219,7 +219,7 @@ class Particular {
 
       const $etiquetaNombre = CreateElement({
         nodeElement: "div",
-        attributes: { class: EnumProyecto.SistemaCutzamala == Core.Instance.IdProyecto ? "Cutzamala_etiqueta__Nombre" : "etiqueta__Nombre"},
+        attributes: { class: "etiqueta__Nombre"},
         innerText: `${signal.GetNomenclaturaSignal()}: `,
       });
 

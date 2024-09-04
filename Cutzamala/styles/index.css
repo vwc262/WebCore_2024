@@ -90,6 +90,10 @@ aside {
   left: 1320px;
 }
 
+#conagua_med_amb_logo {
+  height: 50px;
+}
+
 .Content_on_load {
   display: none;
 }

@@ -1,5 +1,4 @@
 import { Core } from "./Core.js";
-import { Configuracion } from "../config/config.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
@@ -19,8 +18,6 @@ class VwcApp {
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
     this.IniciarHeader();
-    
-    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
 
     AdjustSize();
 
@@ -39,31 +36,6 @@ class VwcApp {
       containerLoading.remove();
     }
 
-    if(EnumProyecto.SistemaCutzamala == Core.Instance.IdProyecto){
-      
-      
-      
-      const etiquetaSitioPerfil = document.getElementsByClassName("etiquetaSitioPerfil");
-      for(var element of etiquetaSitioPerfil) {
-        element.classList = `${element.classList} etiquetaSitioPerfil_Cutzamala`;
-      };
-
-      const bottomGlowColumn = document.getElementsByClassName("bottomGlowColumn");
-      for(var element of bottomGlowColumn) {
-        element.classList = `${element.classList} bottomGlowColumn_Cutzamala`;
-      };
-
-      const curved_Row_variables = document.getElementsByClassName("curved-Row-variables");
-      for(var element of curved_Row_variables) {
-        element.classList = `${element.classList} Cutzamala_curved-Row-variables`;
-      };
-
-      const contenedor_resumen = document.getElementsByClassName("contenedor-resumen")[0];
-      contenedor_resumen.classList = `${contenedor_resumen.classList} Cutzamala_contenedor-resumen`;
-
-      const Cutzamala_header__datos_particular = document.getElementsByClassName("header__datos-particular")[0];
-      Cutzamala_header__datos_particular.classList = `${Cutzamala_header__datos_particular.classList} Cutzamala_header__datos-particular`;
-     }
   }
 
   onLoad() {
