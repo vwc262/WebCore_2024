@@ -464,20 +464,11 @@ class Tabla {
   hoverRow(mouseover, IdEstacion, stopPropagation) {
     let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
     let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
-    const cutzamalaFlag = EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto;
 
-    if (cutzamalaFlag) {
-      row.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(182,141,76,0.15) 0%, rgba(189,151,99,0.85) 30%, rgba(189,151,99,0.85) 67%, rgba(182,141,76,0.15) 100%)" : "rgba(87,168,152,0.0)"
-        } `;
-      rowVariable.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(182,141,76,0.15) 0%, rgba(189,151,99,0.85) 30%, rgba(189,151,99,0.85) 67%, rgba(182,141,76,0.15) 100%)" : "rgba(87,168,152,0.0)"
-        } `;
-    }
-    else {
-      row.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-        } `;
-      rowVariable.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-        } `;
-    }
+    row.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
+      } `;
+    rowVariable.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
+      } `;
 
     if (!stopPropagation) {
       const estacion = Core.Instance.data.find(
