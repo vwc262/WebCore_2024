@@ -38,7 +38,7 @@ class Estacion {
         return signalsCrudas.filter(signalCruda => signalCruda.habilitar == 1).map((signalCruda) => new Signal(signalCruda));
     }
     ObtenerPrimerSignal() {
-            return this.Signals[2];
+            return this.Signals[0];
     }
     /**
      *
