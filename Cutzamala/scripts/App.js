@@ -10,7 +10,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Padierna;
+  projectName = EnumProyecto.SistemaCutzamala;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
@@ -39,26 +39,9 @@ class VwcApp {
       containerLoading.remove();
     }
 
-    if(EnumProyecto.PlantasPotabilizadoras == Core.Instance.IdProyecto){
-      const $titleHeader = document.querySelector("#title");
-      $titleHeader.classList = `${$titleHeader.classList} Cutzamala_Title`;
-
-      document.body.classList = `${document.body.classList} Cutzamala_Body`;
-
-      const header = document.getElementsByTagName("header")[0]
-      header.classList = `${header.classList} Cutzamala_Header`;
+    if(EnumProyecto.SistemaCutzamala == Core.Instance.IdProyecto){
       
-      const conagua_logos = document.getElementsByClassName("conagua_logos")[0];
-      conagua_logos.classList = `${conagua_logos.classList} display_logos_cutzamala`;
       
-      const conagua_med_amb_logo = document.getElementById("conagua_med_amb_logo");
-      conagua_med_amb_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Logo_Medio_Amb_conagua.png?v=${Core.Instance.version}`);
-      
-      const header__buttons = document.getElementsByClassName("header__buttons")[0];
-      header__buttons.classList = `${header__buttons.classList} header__buttons_cutzamala`;
-
-      const particular__header = document.getElementsByClassName("particular__header")[0];
-      particular__header.classList = `${particular__header.classList} Cutzamala_particular__header`;
       
       const etiquetaSitioPerfil = document.getElementsByClassName("etiquetaSitioPerfil");
       for(var element of etiquetaSitioPerfil) {
@@ -106,6 +89,9 @@ class VwcApp {
   }
 
   IniciarUI() {
+    const $conagua_med_amb_logo = document.getElementById("conagua_med_amb_logo");
+    $conagua_med_amb_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Logo_Medio_Amb_conagua.png?v=${Core.Instance.version}`);
+
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
 
