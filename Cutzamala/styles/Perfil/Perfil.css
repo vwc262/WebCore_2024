@@ -3,7 +3,8 @@
 }
 
 .etiquetaSitioPerfil {
-    background: linear-gradient(180deg, rgb(183 190 197) 0%, rgb(88 108 134) 11%, rgb(27 56 87) 49%, rgb(81 102 138) 94%, rgb(0 0 0) 100%);
+    background: linear-gradient(180deg, rgba(182, 141, 76, 1) 0%, rgba(128, 98, 54, 1) 51%, rgba(182, 141, 76, 1) 100%);
+    border: 2px solid goldenrod;
     box-shadow: inset 2px 2px 2px rgb(0 0 0 / 40%), inset -2px -2px 2px rgb(0 0 0);
     font-size: 12px;
     border-radius: 8px;

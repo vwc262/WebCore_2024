@@ -5,14 +5,14 @@
 }
 
 .marker-tag {
-  background-color: #4285f4;
-  border-radius: 8px;
-  color: #ffffff;
-  font-size: 1em;
-  padding: 5px;
-  position: relative;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px black;
+  background-color: #520000;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 5px;
+    position: relative;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
 }
 
 .marker-tag::after {
@@ -94,21 +94,21 @@
 
 .controlDivE{  
   z-index: 1 !important;
-  position: absolute;
-  top: 10px !important;
-  left: 410px !important;
-  z-index: 1 !important;
-  background: #12274b;
-  border-radius: 3px;
-  border: 1px solid #d6d0d0;
-  color: white;
-  font-family: unset;
-  width: 90px;
-  height: 40px;
-  border-left: 1px solid #f4e7e7;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  outline: none;
-  cursor: pointer;
-  font-size: 1.2em;  
+    position: absolute;
+    top: 10px !important;
+    left: 410px !important;
+    z-index: 1 !important;
+    background: #f4efdf;
+    border-radius: 3px;
+    border: 1px solid #d6d0d0;
+    color: black;
+    font-family: unset;
+    width: 90px;
+    height: 40px;
+    border-left: 1px solid #f4e7e7;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2em;  
 }
