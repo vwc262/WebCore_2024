@@ -54,10 +54,6 @@ const EnumPeticiones = {
   HISTORICOS: "GetReportes",
 };
 
-// const EnumProyecto = {
-//   Padierna: 'Padierna',
-// };
-
 const EnumNameProjecto = {
   TanquesPadierna: 'TanquesPadierna',
 }
