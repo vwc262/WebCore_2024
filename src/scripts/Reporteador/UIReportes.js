@@ -106,13 +106,14 @@ var UIReportes = {
     this.root.container.children.clear();
 
     if (UIReportes.dataCruda.length > 0) {
-      let aux = [];
+      let aux = [];      
       UIReportes.dataCruda.forEach((infoSignal) => {
         infoSignal.forEach((d, index) => {
-          let _d = new Date(new Date(d.Tiempo).setSeconds(0));
-          let minutos = _d.getMinutes();
-          let minutosRedondeados = Math.round(minutos / 5) * 5
-          _d.setMinutes(minutosRedondeados);
+          // let _d = new Date(new Date(d.Tiempo).setSeconds(0));
+          // let minutos = _d.getMinutes();
+          // let minutosRedondeados = Math.round(minutos / 5) * 5
+          // _d.setMinutes(minutosRedondeados);
+          let _d = new Date(new Date(d.Tiempo))
           if (
             UIReportes.data[_d] == undefined ||
             UIReportes.data[_d] == null
@@ -125,7 +126,7 @@ var UIReportes = {
             //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
             // });
           }
-          UIReportes.data[_d][d.IdSignal] = d.Valor;
+          UIReportes.data[_d][d.IdSignal]  = d.Valor < 0 ? 0 : d.Valor;
           if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
             UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
           }
@@ -181,7 +182,7 @@ var UIReportes = {
         groupData: false,
         baseInterval: {
           timeUnit: "minute",
-          count: 5,
+          count: 1,
         },
 
         renderer: am5xy.AxisRendererX.new(root, {
@@ -256,8 +257,8 @@ var UIReportes = {
     var sbxAxis = scrollbarX.chart.xAxes.push(
       am5xy.DateAxis.new(root, {
         groupData: false,
-        groupIntervals: [{ timeUnit: "minute", count: 5 }],
-        baseInterval: { timeUnit: "minute", count: 5 },
+        groupIntervals: [{ timeUnit: "minute", count: 1 }],
+        baseInterval: { timeUnit: "minute", count: 1 },
         renderer: am5xy.AxisRendererX.new(root, {
           opposite: false,
           strokeOpacity: 0,
