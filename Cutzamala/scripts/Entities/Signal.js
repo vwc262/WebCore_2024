@@ -130,7 +130,7 @@ class Signal {
         }
         else {
             if (this.DentroRango == 1) {
-                let value = `${parseFloat(this.Valor).toFixed(2)}`;
+                let value = `${parseFloat(this.Valor).toFixed(3)}`;
                 let _unidades = '';
 
                 if (unidades) {
