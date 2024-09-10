@@ -62,7 +62,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
   switch (idProyecto) {
     case EnumProyecto.GustavoAMadero: return "GustavoAMadero";
     case EnumProyecto.Padierna: return "Padierna";
-    case EnumProyecto.PozosSistemaLerma: return "Lerma";
+    case EnumProyecto.Lerma: return "Lerma";
     case EnumProyecto.Yaqui: return "Yaqui";
     case EnumProyecto.Chalmita: return "Chalmita";
     case EnumProyecto.Encharcamientos: return "Encharcamientos";
