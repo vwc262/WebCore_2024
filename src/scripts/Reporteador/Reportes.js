@@ -27,7 +27,7 @@ async function inicializarReporteador() {
       action: `${EnumPeticiones.READ}`,
     });
 
-    sitiosInfo = jsonData.Sites;
+    sitiosInfo = jsonData.Sites.filter( s => s.SignalsDescriptionContainer.length > 0);
 
     // Inicializar el video utilizando el método initVideo del controladorVideo
     // Se pasa la URL del video y la función showUIVideo del UIControlador como argumentos
