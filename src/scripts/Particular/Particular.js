@@ -118,7 +118,7 @@ class Particular {
   };
 
   ponerBombaPurple(signal, $imgBombaParticular) {
-    if (Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma) {
+    if (Core.Instance.IdProyecto == EnumProyecto.Lerma) {
       $imgBombaParticular.style.filter = signal.Valor == 4 ? "hue-rotate(295deg)" : "hue-rotate(0deg)";
     }
   }
