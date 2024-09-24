@@ -82,8 +82,7 @@ class SitioPerfilPozo {
     }
 
     createSitio() {
-        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-        console.log(this.IdEstacion , estacion.Nombre)
+        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);        
         let estacionDiv = CreateElement({
             nodeElement: 'div',
             attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen ?? ""}` },
