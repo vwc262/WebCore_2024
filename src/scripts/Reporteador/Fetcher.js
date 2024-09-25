@@ -72,6 +72,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
     case EnumProyecto.Chiconautla: return "Chiconautla";
     case EnumProyecto.LermaAnexo: return "LermaAnexo";
     case EnumProyecto.PlantasPotabilizadoras: return "PlantasPotabilizadoras";
+    case EnumProyecto.ClimatologicasHidrometricas: return "Climatológicas Hidrométricas";
   }
 
 }

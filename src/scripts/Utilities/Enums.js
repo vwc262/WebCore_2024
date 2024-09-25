@@ -20,7 +20,9 @@ const EnumProyecto = {
   Lumbreras: 8,
   SantaCatarina: 9,
   Chiconautla: 10,
-  LermaAnexo: 11
+  LermaAnexo: 11,
+  EscudoNacional: 12,
+  ClimatologicasHidrometricas: 13,
 };
 /**
  * @returns NombreProyecto
@@ -37,7 +39,9 @@ const EnumNombreProyecto = {
   8: "Lumbreras",
   9: "TanquesSantaCatarina",
   10: "PozosChiconautla",
-  11: "LermaAnexo"
+  11: "LermaAnexo",
+  12: "EscudoNacional",
+  13: "ClimatologicasHidrometricas"
 };
 
 /**
@@ -55,7 +59,9 @@ const EnumNombreProyectoFolder = {
   "Lumbreras": 8,
   "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
-  "LermaAnexo": 11
+  "LermaAnexo": 11,
+  "EscudoNacional": 12,
+  "ClimatologicasHidrometricas": 13
 };
 
 /**
@@ -88,6 +94,16 @@ var EnumTipoSignal = {
   Tiempo: 13,
   Mantenimiento: 14,
   PuertaAbierta: 15,
+  VoltajeRango: 16,
+  CorrienteRango: 17,
+  PotenciaTotal: 18,
+  FactorPotencia: 19,
+  Precipitacion: 20,
+  Temperatura: 21,
+  Humedad: 22,
+  Evaporacion: 23,
+  Intensidad: 24,
+  Direccion: 25,
 };
 
 /**
@@ -110,6 +126,16 @@ var EnumTipoSignalString = {
   13: "Tiempo",
   14: "Mantenimiento",
   15: "PuertaAbierta",
+  16: "VoltajeRango",
+  17: "CorrienteRango",
+  18: "Potencia Total",
+  19: "Factor Potencia",
+  20: "Precipitacion",
+  21: "Temperatura",
+  22: "Humedad",
+  23: "Evaporacion",
+  24: "Intensidad",
+  25: "Direccion",
 };
 
 /**
@@ -132,6 +158,16 @@ var EnumTipoSignalNomenclatura = {
   13: "T",
   14: "M",
   15: "PA",
+  16: "VR",
+  17: "CR",
+  18: "PT",
+  19: "FP",
+  20: "PRP",
+  21: "TEMP",
+  22: "HUM",
+  23: "EVA",
+  24: "INTS",
+  25: "DIR",
 };
 
 /**
@@ -144,6 +180,16 @@ const EnumUnidadesSignal = {
   4: "m<sup>3</sup>",
   5: "%",
   10: "V",
+  16: "V",
+  17: "A",
+  18: "W",
+  19: "%",
+  20: "<sup>mm</sup>/<sup>H</sup>",
+  21: "°C",
+  22: "%",
+  23: "%",
+  24: "<sup>Km</sup>/<sup>H</sup>",
+  25: "°",
 };
 
 /**
@@ -260,7 +306,7 @@ const EnumEstadoComando = {
 const EnumTipoPolygon = {
   Default: 0,
   Hidraulico: 1,
-  Radio: 2, 
+  Radio: 2,
 }
 
 export {
