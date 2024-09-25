@@ -26,6 +26,12 @@ const tipoSignalImagenMap = {
   // 13: `tiempo`, // Tiempo (no se grafican)
   // 14: `nivel`, // Mantenimiento (no se grafican)
   // 15: `nivel`, // Puerta Abierta (no se grafican)
+  20:'Precipitacion',
+  21:'Temperatura',
+  22:'Humedad',
+  23:'Evaporacion',
+  24:'Intensidad',
+  25:'Direccion'
 };
 
 const threeSignals = [740, 135, 18, 135, 362, -19.9134];
@@ -56,7 +62,7 @@ var canMove = false;
 function CreateVariables(index, Sitio) {
   canMove = true;
   SitioSeleccionado = Sitio;
-  // Obtiene referencias a los elementos del DOM
+  // Obtiene referencias a los elementos del DOM  
   const signalsContainer = sitiosInfo[index].SignalsDescriptionContainer; // Contenedor de señales del sitio web
   const variablesContainer = document.querySelector(".variables__Container"); // Contenedor de variables
   const variablesContainerMain = document.querySelector(

@@ -210,7 +210,14 @@ class Particular {
       signal.TipoSignal == EnumTipoSignal.Totalizado ||
       signal.TipoSignal == EnumTipoSignal.ValvulaAnalogica ||
       signal.TipoSignal == EnumTipoSignal.ValvulaDiscreta ||
-      signal.TipoSignal == EnumTipoSignal.Voltaje
+      signal.TipoSignal == EnumTipoSignal.Voltaje ||
+      signal.TipoSignal == EnumTipoSignal.Precipitacion ||
+      signal.TipoSignal == EnumTipoSignal.Temperatura ||
+      signal.TipoSignal == EnumTipoSignal.Humedad ||
+      signal.TipoSignal == EnumTipoSignal.Evaporacion ||
+      signal.TipoSignal == EnumTipoSignal.Intensidad ||
+      signal.TipoSignal == EnumTipoSignal.Direccion
+
     ).forEach((signal) => {
       const $signalItem = CreateElement({
         nodeElement: "div",
