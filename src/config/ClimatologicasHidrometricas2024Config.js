@@ -6,42 +6,56 @@ export const ClimatologicasHidrometricasConfig = {
     perfil: {
         estilosEstacion: [
             {
-                "IdEstacion": 1, // VO-01
+                "IdEstacion": 1, // Campamento los berros
                 "Imagen": "position:absolute; width:37px;height:75px; left:732px; top:565px;",
                 "Etiqueta": "position:absolute;width:140px !important; height:auto;left:908px;top:637px;",
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(-3deg) rotateZ(2deg)"
             },
 
             {
-                "IdEstacion": 3, // VO-03
+                "IdEstacion": 2, // Presa Chilesdo
                 "Imagen": "position:absolute;width:37px;height:75px;left: 222px;top: 869px;",
                 "Etiqueta": "position:absolute;width:140px !important; height:auto;left:100px;top:821px;",
                 "Estado": "width:384px;height:175px;transform:perspective(2000px) rotateY(11deg) rotateX(-15deg) rotateZ(-2deg)"
             },
 
             {
-                "IdEstacion": 4, // TN-02
+                "IdEstacion": 3, // Presa Colorines
                 "Imagen": "position:absolute;width:37px;height:75px;left:678px;top:593px;",
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:832px;top:679px;",
                 "Estado": "width:384px;height:175px;transform:perspective(5000px) rotateY(23deg) rotateX(-13deg) rotateZ(-7deg)"
             },
 
             {
-                "IdEstacion": 6, // VO-06
+                "IdEstacion": 4, // Presa Valle de bravo
                 "Imagen": "position:absolute;width:37px;height:75px;left:874px;top:488px;",
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:981px;top:590px;",
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)"
             },
 
             {
-                "IdEstacion": 7, // VO-07
+                "IdEstacion": 5, // Presa Villa Victoria
                 "Imagen": "position:absolute;width:37px;height:75px;left:920px;top:463px;",
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:1068px;top:549px;",
                 "Estado": "width:384px;height:175px;transform:perspective(3000px) rotateY(-20deg) rotateX(-19deg) rotateZ(9deg)"
             },
 
             {
-                "IdEstacion": 8, // VO-08
+                "IdEstacion": 6, // Presa el Bosque
+                "Imagen": "position:absolute;width:37px;height:75px;left:965px;top:441px;",
+                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:1137px;top:507px;",
+                "Estado": "width:384px;height:175px;transform:perspective(4002px) rotateY(-6deg) rotateX(-20deg) rotateZ(3deg)"
+            },
+            
+            {
+                "IdEstacion": 7, // Presa tuxpan
+                "Imagen": "position:absolute;width:37px;height:75px;left:965px;top:441px;",
+                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:1137px;top:507px;",
+                "Estado": "width:384px;height:175px;transform:perspective(4002px) rotateY(-6deg) rotateX(-20deg) rotateZ(3deg)"
+            },
+            
+            {
+                "IdEstacion": 8, // Huehuetoca
                 "Imagen": "position:absolute;width:37px;height:75px;left:965px;top:441px;",
                 "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:1137px;top:507px;",
                 "Estado": "width:384px;height:175px;transform:perspective(4002px) rotateY(-6deg) rotateX(-20deg) rotateZ(3deg)"
