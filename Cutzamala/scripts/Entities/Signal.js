@@ -97,7 +97,7 @@ class Signal {
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
-            if (this.DentroRango == 1) {
+            if (this.IndiceImagen == 1) {
                 let value = `${parseFloat(this.Valor).toFixed(0)}`;
                 let _unidades = '';
 
