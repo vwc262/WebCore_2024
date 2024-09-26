@@ -35,7 +35,16 @@ var UIReportes = {
     13: "Tiempo",
     14: "Mantenimiento",
     15: "Puerta Abierta",
-  },
+    16:"VoltajeRango",
+    17:"CorrienteRango",
+    18:"PotenciaTotal",
+    19:"FactorPotencia",
+    20:"Precipitacion",
+    21:"Temperatura",
+    22:"Humedad",
+    23:"Evaporacion",
+    24:"Intensidad",
+    25:"Direccion"  },
 
   unidades: {
     1: "m",

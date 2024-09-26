@@ -37,7 +37,7 @@ class Tabla {
       actualIndex: 0,
       btn: null,
     };
-    this.elementosVisibles = 15;
+    this.elementosVisibles = 15 ; /*Cantidad de elementos visibles verticalmente*/
 
     this.extraRows = [];
 
@@ -116,7 +116,7 @@ class Tabla {
         `${visible ? "0" : "1"}`
       );
       console.log(this.quantityColumns);
-      this.tBodyVariablesContainer.style = `right:${visible ? `-455` : `${(this.quantityColumns * 86) - 455 + 55}`
+      this.tBodyVariablesContainer.style = `right:${visible ? `-634` : `${(this.quantityColumns * 86) - 634 + 55}` /*-450 anterior a -650 para definir ancho del contenedor de la tabla*/
         }px;`;
       this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath
         }General/${visible ? "btn_abrir" : "btn_abrirrotate"}.png?v=${Core.Instance.version
@@ -171,6 +171,36 @@ class Tabla {
       15: Core.Instance.data.filter(
         (estacion) =>
           estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PuertaAbierta)
+            .length > 0
+      ),
+      20: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Precipitacion)
+            .length > 0
+      ),
+      21: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Temperatura)
+            .length > 0
+      ),
+      22: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Humedad)
+            .length > 0
+      ),
+      23: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Evaporacion)
+            .length > 0
+      ),
+      24: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Intensidad)
+            .length > 0
+      ),
+      25: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Direccion)
             .length > 0
       ),
     };

@@ -108,6 +108,7 @@ class SitioPerfilPozo {
                 nodeElement: "img",
                 attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio imgBck", src: estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil") }
             });
+
             imagenEstacionBombaPerfil.signal = signalBomba;
             imagenEstacionBombaPerfil.update = this.ActualizarImagenBombaPerfilLerma;
             estacionPerfilDiv.append(imagenEstacionBombaPerfil);
@@ -116,7 +117,7 @@ class SitioPerfilPozo {
             this.elementoBomba = imagenEstacionBombaPerfil; //  se guarda referencia para cuestiones de hover
             this.ElementosDinamicosHTML.push(imagenEstacionBombaPerfil);
         })
-        
+
         estacionDiv.append(estacionPerfilDiv);
         this.suscribirEventos();
         return estacionDiv;
@@ -157,7 +158,7 @@ class SitioPerfilPozo {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.Update()));
     }
-    mostrarParticular = () => {           
+    mostrarParticular = () => {
         const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
         Particular.Instance.setEstacion(estacion);
         Particular.Instance.mostrarDetalles();

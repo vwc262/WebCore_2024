@@ -148,7 +148,7 @@ class Estacion {
         let url = "";
         const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "l" : "b";
         let indiceImagen = "";
-        if (Core.Instance.IdProyecto == EnumProyecto.PozosSistemaLerma) {
+        if (Core.Instance.IdProyecto == EnumProyecto.Lerma) {
             const isBombaPurple = signal.Valor == 4;
             if (signal.Valor >= 0 && signal.Valor <= 4) {
                 indiceImagen = signal.Valor;

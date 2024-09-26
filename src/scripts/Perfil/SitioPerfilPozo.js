@@ -82,10 +82,10 @@ class SitioPerfilPozo {
     }
 
     createSitio() {
-        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
+        const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);        
         let estacionDiv = CreateElement({
             nodeElement: 'div',
-            attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
+            attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen ?? ""}` },
             events: new Map()
                 .set("click", [this.mostrarParticular])
                 .set("mouseover", [() => {
