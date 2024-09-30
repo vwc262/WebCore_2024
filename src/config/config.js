@@ -2,6 +2,7 @@ import { EnumProyecto } from "../scripts/Utilities/Enums.js";
 import { ChiconautlaConfig, NombresLargosChiconautla } from "./ChiconautlaConfig.js";
 import { ClimatologicasHidrometricasConfig } from "./ClimatologicasHidrometricas2024Config.js";
 import { EncharcamientosConfig } from "./EncharcamientosConfig.js";
+import { GAMPonchoConfig } from "./GAMPonchoConfig.js";
 import { GustavoAMaderoConfig } from "./GustavoAMaderoConfig.js";
 import { PadiernaConfig } from "./PadiernaConfig.js";
 import { PlantasPotabilizadoras } from "./PlantasPotabilizadoras.js";
@@ -40,6 +41,9 @@ var Configuracion = {
                 break;
             case EnumProyecto.ClimatologicasHidrometricas:
                 config = ClimatologicasHidrometricasConfig
+                break;
+            case EnumProyecto.Lumbreras:
+                config = GAMPonchoConfig;
         }
 
         return config;
