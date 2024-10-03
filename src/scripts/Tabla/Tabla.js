@@ -173,6 +173,26 @@ class Tabla {
           estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PuertaAbierta)
             .length > 0
       ),
+      16: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.VoltajeRango)
+            .length > 0
+      ),
+      17: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.CorrienteRango)
+            .length > 0
+      ),
+      18: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PotenciaTotal)
+            .length > 0
+      ),
+      19: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.FactorPotencia)
+            .length > 0
+      ),
       20: Core.Instance.data.filter(
         (estacion) =>
           estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Precipitacion)
