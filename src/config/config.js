@@ -8,6 +8,7 @@ import { PadiernaConfig } from "./PadiernaConfig.js";
 import { PlantasPotabilizadoras } from "./PlantasPotabilizadoras.js";
 import { PozosSistemaLermaConfig } from "./PozosSistemaLermaConfig.js";
 import { SantaCatarinaConfig } from "./SantaCatarinaConfig.js";
+import { TeoloyucanConfig } from "./Teoloyucan.js";
 
 
 var Configuracion = {
@@ -44,6 +45,8 @@ var Configuracion = {
                 break;
             case EnumProyecto.Lumbreras:
                 config = GAMPonchoConfig;
+            case EnumProyecto.Teoloyucan:
+                    config = TeoloyucanConfig;
         }
 
         return config;

@@ -23,6 +23,7 @@ const EnumProyecto = {
   LermaAnexo: 11,
   EscudoNacional: 12,
   ClimatologicasHidrometricas: 13,
+  Teoloyucan: 14
 };
 /**
  * @returns NombreProyecto
@@ -41,7 +42,8 @@ const EnumNombreProyecto = {
   10: "PozosChiconautla",
   11: "LermaAnexo",
   12: "EscudoNacional",
-  13: "ClimatologicasHidrometricas"
+  13: "ClimatologicasHidrometricas",
+  14: "Teoloyucan"
 };
 
 /**
@@ -61,7 +63,8 @@ const EnumNombreProyectoFolder = {
   "Chiconautla2024": 10,
   "LermaAnexo": 11,
   "EscudoNacional": 12,
-  "ClimatologicasHidrometricas": 13
+  "ClimatologicasHidrometricas": 13,
+  "Teoloyucan": 14
 };
 
 /**
