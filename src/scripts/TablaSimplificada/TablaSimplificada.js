@@ -5,7 +5,6 @@ import {
   EnumEnlace,
   EnumProyecto,
   EnumTipoSignal,
-  EnumTipoSignalNomenclatura,
   RequestType,
 } from "../Utilities/Enums.js";
 import { Nota } from "./Nota.js";
@@ -58,9 +57,10 @@ class TablaSimplificada {
     let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
+    // console.log(this.DATOS__AUX);
 
     this.DATOS__AUX.forEach((ROW) => {
-      //console.log(ROW);
+      // console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
@@ -114,9 +114,27 @@ class TablaSimplificada {
         }
 
         if (key === "Signals") {
-          const niveles = ROW.signals.filter(
-            (nivel) => nivel.tipoSignal == EnumTipoSignal.Nivel
-          );
+          if (Core.Instance.IdProyecto !== EnumProyecto.Lerma) {
+            const niveles = ROW.signals.filter(
+              (nivel) => nivel.tipoSignal == EnumTipoSignal.Nivel
+            );
+            if (niveles.length > 0) {
+              // Añade el <td> al <tr>
+              this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
+              this.NEW__ROW.appendChild(this.NEW__CELL);
+            } else {
+              this.NEW__CELL.innerText = "---";
+              this.NEW__ROW.appendChild(this.NEW__CELL);
+            }
+            this.NEW__CELL = document.createElement("td");
+          } else {
+            // Elimina el encabezado de la tabla con id "nivel"
+            const headerNivel = document.getElementById("nivel");
+            if (headerNivel) {
+              headerNivel.style.display = "none";
+            }
+          }
+
           const presiones = ROW.signals.filter(
             (presion) => presion.tipoSignal == EnumTipoSignal.Presion
           );
@@ -127,18 +145,6 @@ class TablaSimplificada {
           const gastos = ROW.signals.filter(
             (gastosSignal) => gastosSignal.tipoSignal == EnumTipoSignal.Gasto
           );
-
-          if (niveles.length > 0) {
-            // Añade el <td> al <tr>
-            this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
-
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          } else {
-            this.NEW__CELL.innerText = "---";
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          }
-
-          this.NEW__CELL = document.createElement("td");
 
           if (presiones.length > 0) {
             // Añade el <td> al <tr>
@@ -201,7 +207,7 @@ class TablaSimplificada {
         }
 
         // Agregar clase según la clave y valor
-        this.addClassBombaYEnlace(this.NEW__CELL, key, value);
+        this.addClassBombaYEnlace(this.NEW__CELL, key, value, ROW);
 
         // Añade el <td> al <tr>
         this.NEW__ROW.appendChild(this.NEW__CELL);
@@ -224,19 +230,24 @@ class TablaSimplificada {
         case 3:
           this.enlaceCell.textContent = "Radio / Celular";
           break;
-        default:
-          this.enlaceCell.textContent = ROW.enlace;
-          break;
       }
 
       // Añadir la nueva celda al <tr>
       this.NEW__ROW.appendChild(this.enlaceCell);
 
-      if (ROW.enlace === EnumEnlace.FueraLinea) {
+      const currentTIME = new Date();
+      const dataTIME = new Date(ROW.tiempo);
+      const timeDIFERENCIA = Math.abs(currentTIME - dataTIME);
+      const diferenciaMINUTOS = Math.floor(timeDIFERENCIA / (1000 * 60));
+
+      if (diferenciaMINUTOS > 15) {
         totalOffline++;
       } else {
         totalOnline++;
       }
+
+      this.$sitiosOnline.textContent = totalOnline.toString();
+      this.$sitiosOffline.textContent = Core.Instance.data.length;
 
       if (ROW.enlace === EnumEnlace.Celular) {
         SitiosCelular++;
@@ -253,8 +264,6 @@ class TablaSimplificada {
 
       this.$tbody.append(this.NEW__ROW);
     });
-    this.$sitiosOnline.textContent = totalOnline.toString();
-    this.$sitiosOffline.textContent = Core.Instance.data.length;
   }
 
   FormatearFecha(value) {
@@ -292,16 +301,22 @@ class TablaSimplificada {
     return value;
   }
 
-  addClassBombaYEnlace(element, key, value) {
+  addClassBombaYEnlace(element, key, value, ROW) {
     switch (key) {
       case "Enlace":
         element.textContent = "";
         this.NEW__DIV = document.createElement("div");
-        if (value === 1 || value === 3 || value === 2) {
-          this.NEW__DIV.classList.add("enlace-activo");
-          element.appendChild(this.NEW__DIV);
-        } else if (value === 0) {
+
+        const currentTIME = new Date();
+        const dataTIME = new Date(ROW.tiempo);
+        const timeDIFERENCIA = Math.abs(currentTIME - dataTIME);
+        const diferenciaMINUTOS = Math.floor(timeDIFERENCIA / (1000 * 60));
+
+        if (diferenciaMINUTOS > 15) {
           this.NEW__DIV.classList.add("enlace-inactivo");
+          element.appendChild(this.NEW__DIV);
+        } else {
+          this.NEW__DIV.classList.add("enlace-activo");
           element.appendChild(this.NEW__DIV);
         }
         break;
@@ -467,22 +482,21 @@ class TablaSimplificada {
     this.$confirmarLogin = document.querySelector(".modal__confirmarLogin");
 
     this.$imgLogin.addEventListener("click", () => {
-      if(!Fetcher.Instance.isLogged)
+      if (!Fetcher.Instance.isLogged)
         this.$modalLogin.classList.add("modal--show");
-      else 
-      this.LogOut();      
+      else this.LogOut();
     });
 
     this.$closeLogin.addEventListener("click", () => {
       this.$modalLogin.classList.remove("modal--show");
     });
 
-    this.$confirmarLogin.addEventListener("click", () => {      
-        if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
-          alert("Los campos no deben de estar vacios");
-          return;
-        }
-        this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);      
+    this.$confirmarLogin.addEventListener("click", () => {
+      if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
+        alert("Los campos no deben de estar vacios");
+        return;
+      }
+      this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);
     });
   }
   LogOut = async (ev) => {
@@ -490,18 +504,22 @@ class TablaSimplificada {
     const RESULT_LOGOUT = await Fetcher.Instance.RequestData(
       "logout",
       RequestType.POST,
-      new Credentials(this.USUARIO.value, this.PASSWORD.value, Core.Instance.IdProyecto),
+      new Credentials(
+        this.USUARIO.value,
+        this.PASSWORD.value,
+        Core.Instance.IdProyecto
+      ),
       true
     );
 
     if (RESULT_LOGOUT.response == false) {
       alert("Sesión cerrada!");
-      this.loginIcon.setAttribute('src','../imgs/loginIcon.png');      
+      this.loginIcon.setAttribute("src", "../imgs/loginIcon.png");
       Fetcher.Instance.isLogged = false;
     }
 
     //console.log(RESULT_LOGOUT);
-  }
+  };
 
   ModalNotas = (ev) => {
     if (Fetcher.Instance.isLogged) {
@@ -552,7 +570,7 @@ class TablaSimplificada {
     );
 
     if (this.RESULT_LOGIN.response) {
-      this.loginIcon.setAttribute('src', '../imgs/logout.png');
+      this.loginIcon.setAttribute("src", "../imgs/logout.png");
       Fetcher.Instance.isLogged = true;
       this.$modalLogin.classList.remove("modal--show");
       // this.loginIcon.style.pointerEvents = "none";
