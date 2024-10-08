@@ -7,7 +7,7 @@ class Signal {
         this.IdSignal = signalCruda.idSignal;
         this.IdEstacion = signalCruda.idEstacion;
         this.Nombre = signalCruda.nombre;
-        this.Valor = signalCruda.valor;
+        this.Valor = this.#ProcesarValoresMenoresACero(signalCruda);
         this.TipoSignal = signalCruda.tipoSignal;
         this.Ordinal = signalCruda.ordinal;
         this.IndiceImagen = signalCruda.indiceImagen;
@@ -16,10 +16,40 @@ class Signal {
         this.Linea = signalCruda.linea;
         this.Semaforo = this.#EstablecerSemaforo(signalCruda.semaforo);
     }
+
+    /**
+     * 
+     * @param {*} signal 
+     * @returns 
+     */
+    #ProcesarValoresMenoresACero(signal) {
+        let valorReturn = signal.valor;
+        switch (signal.tipoSignal) {
+            case EnumTipoSignal.Nivel:
+            case EnumTipoSignal.Presion:
+            case EnumTipoSignal.Gasto:
+            case EnumTipoSignal.Totalizado:
+            case EnumTipoSignal.ValvulaAnalogica:
+            case EnumTipoSignal.Voltaje:
+            case EnumTipoSignal.VoltajeRango:
+            case EnumTipoSignal.CorrienteRango:
+            case EnumTipoSignal.PotenciaTotal:
+            case EnumTipoSignal.FactorPotencia:
+            case EnumTipoSignal.Precipitacion:
+            case EnumTipoSignal.Temperatura:
+            case EnumTipoSignal.Humedad:
+            case EnumTipoSignal.Evaporacion:
+            case EnumTipoSignal.Intensidad:
+            case EnumTipoSignal.Direccion:
+                valorReturn = signal.valor < 0 ? 0 : signal.valor;
+                break;
+        }
+        return valorReturn;
+    }
+
     #EstablecerSemaforo(semaforoCrudo) {
         return new Semaforo(semaforoCrudo);
     }
-
     /**
      * 
      * @param {boolean} unidades si requiere unidades
@@ -116,7 +146,7 @@ class Signal {
 
             let value = `${parseFloat(this.Valor).toFixed(2)}`;
 
-            if(value < 0)
+            if (value < 0)
                 value = `${parseFloat(0).toFixed(2)}`;
 
             let _unidades = '';
@@ -147,7 +177,6 @@ class Signal {
         }
 
     }
-
     /**
      * @returns {string} nomenclatura (ejem. N1)
      */
