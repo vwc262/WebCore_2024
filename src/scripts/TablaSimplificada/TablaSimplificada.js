@@ -57,9 +57,10 @@ class TablaSimplificada {
     let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
+    // console.log(this.DATOS__AUX);
 
     this.DATOS__AUX.forEach((ROW) => {
-      //console.log(ROW);
+      // console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
@@ -206,7 +207,7 @@ class TablaSimplificada {
         }
 
         // Agregar clase según la clave y valor
-        this.addClassBombaYEnlace(this.NEW__CELL, key, value);
+        this.addClassBombaYEnlace(this.NEW__CELL, key, value, ROW);
 
         // Añade el <td> al <tr>
         this.NEW__ROW.appendChild(this.NEW__CELL);
@@ -229,19 +230,24 @@ class TablaSimplificada {
         case 3:
           this.enlaceCell.textContent = "Radio / Celular";
           break;
-        default:
-          this.enlaceCell.textContent = ROW.enlace;
-          break;
       }
 
       // Añadir la nueva celda al <tr>
       this.NEW__ROW.appendChild(this.enlaceCell);
 
-      if (ROW.enlace === EnumEnlace.FueraLinea) {
+      const currentTIME = new Date();
+      const dataTIME = new Date(ROW.tiempo);
+      const timeDIFERENCIA = Math.abs(currentTIME - dataTIME);
+      const diferenciaMINUTOS = Math.floor(timeDIFERENCIA / (1000 * 60));
+
+      if (diferenciaMINUTOS > 15) {
         totalOffline++;
       } else {
         totalOnline++;
       }
+
+      this.$sitiosOnline.textContent = totalOnline.toString();
+      this.$sitiosOffline.textContent = Core.Instance.data.length;
 
       if (ROW.enlace === EnumEnlace.Celular) {
         SitiosCelular++;
@@ -258,8 +264,6 @@ class TablaSimplificada {
 
       this.$tbody.append(this.NEW__ROW);
     });
-    this.$sitiosOnline.textContent = totalOnline.toString();
-    this.$sitiosOffline.textContent = Core.Instance.data.length;
   }
 
   FormatearFecha(value) {
@@ -297,16 +301,22 @@ class TablaSimplificada {
     return value;
   }
 
-  addClassBombaYEnlace(element, key, value) {
+  addClassBombaYEnlace(element, key, value, ROW) {
     switch (key) {
       case "Enlace":
         element.textContent = "";
         this.NEW__DIV = document.createElement("div");
-        if (value === 1 || value === 3 || value === 2) {
-          this.NEW__DIV.classList.add("enlace-activo");
-          element.appendChild(this.NEW__DIV);
-        } else if (value === 0) {
+
+        const currentTIME = new Date();
+        const dataTIME = new Date(ROW.tiempo);
+        const timeDIFERENCIA = Math.abs(currentTIME - dataTIME);
+        const diferenciaMINUTOS = Math.floor(timeDIFERENCIA / (1000 * 60));
+
+        if (diferenciaMINUTOS > 15) {
           this.NEW__DIV.classList.add("enlace-inactivo");
+          element.appendChild(this.NEW__DIV);
+        } else {
+          this.NEW__DIV.classList.add("enlace-activo");
           element.appendChild(this.NEW__DIV);
         }
         break;
