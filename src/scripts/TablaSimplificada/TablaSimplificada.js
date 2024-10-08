@@ -5,7 +5,6 @@ import {
   EnumEnlace,
   EnumProyecto,
   EnumTipoSignal,
-  EnumTipoSignalNomenclatura,
   RequestType,
 } from "../Utilities/Enums.js";
 import { Nota } from "./Nota.js";
@@ -114,9 +113,27 @@ class TablaSimplificada {
         }
 
         if (key === "Signals") {
-          const niveles = ROW.signals.filter(
-            (nivel) => nivel.tipoSignal == EnumTipoSignal.Nivel
-          );
+          if (Core.Instance.IdProyecto !== EnumProyecto.Lerma) {
+            const niveles = ROW.signals.filter(
+              (nivel) => nivel.tipoSignal == EnumTipoSignal.Nivel
+            );
+            if (niveles.length > 0) {
+              // Añade el <td> al <tr>
+              this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
+              this.NEW__ROW.appendChild(this.NEW__CELL);
+            } else {
+              this.NEW__CELL.innerText = "---";
+              this.NEW__ROW.appendChild(this.NEW__CELL);
+            }
+            this.NEW__CELL = document.createElement("td");
+          } else {
+            // Elimina el encabezado de la tabla con id "nivel"
+            const headerNivel = document.getElementById("nivel");
+            if (headerNivel) {
+              headerNivel.style.display = "none";
+            }
+          }
+
           const presiones = ROW.signals.filter(
             (presion) => presion.tipoSignal == EnumTipoSignal.Presion
           );
@@ -127,18 +144,6 @@ class TablaSimplificada {
           const gastos = ROW.signals.filter(
             (gastosSignal) => gastosSignal.tipoSignal == EnumTipoSignal.Gasto
           );
-
-          if (niveles.length > 0) {
-            // Añade el <td> al <tr>
-            this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
-
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          } else {
-            this.NEW__CELL.innerText = "---";
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          }
-
-          this.NEW__CELL = document.createElement("td");
 
           if (presiones.length > 0) {
             // Añade el <td> al <tr>
@@ -467,22 +472,21 @@ class TablaSimplificada {
     this.$confirmarLogin = document.querySelector(".modal__confirmarLogin");
 
     this.$imgLogin.addEventListener("click", () => {
-      if(!Fetcher.Instance.isLogged)
+      if (!Fetcher.Instance.isLogged)
         this.$modalLogin.classList.add("modal--show");
-      else 
-      this.LogOut();      
+      else this.LogOut();
     });
 
     this.$closeLogin.addEventListener("click", () => {
       this.$modalLogin.classList.remove("modal--show");
     });
 
-    this.$confirmarLogin.addEventListener("click", () => {      
-        if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
-          alert("Los campos no deben de estar vacios");
-          return;
-        }
-        this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);      
+    this.$confirmarLogin.addEventListener("click", () => {
+      if (this.USUARIO.value == "" && this.PASSWORD.value == "") {
+        alert("Los campos no deben de estar vacios");
+        return;
+      }
+      this.ConfirmarLogin(this.USUARIO.value, this.PASSWORD.value);
     });
   }
   LogOut = async (ev) => {
@@ -490,18 +494,22 @@ class TablaSimplificada {
     const RESULT_LOGOUT = await Fetcher.Instance.RequestData(
       "logout",
       RequestType.POST,
-      new Credentials(this.USUARIO.value, this.PASSWORD.value, Core.Instance.IdProyecto),
+      new Credentials(
+        this.USUARIO.value,
+        this.PASSWORD.value,
+        Core.Instance.IdProyecto
+      ),
       true
     );
 
     if (RESULT_LOGOUT.response == false) {
       alert("Sesión cerrada!");
-      this.loginIcon.setAttribute('src','../imgs/loginIcon.png');      
+      this.loginIcon.setAttribute("src", "../imgs/loginIcon.png");
       Fetcher.Instance.isLogged = false;
     }
 
     //console.log(RESULT_LOGOUT);
-  }
+  };
 
   ModalNotas = (ev) => {
     if (Fetcher.Instance.isLogged) {
@@ -552,7 +560,7 @@ class TablaSimplificada {
     );
 
     if (this.RESULT_LOGIN.response) {
-      this.loginIcon.setAttribute('src', '../imgs/logout.png');
+      this.loginIcon.setAttribute("src", "../imgs/logout.png");
       Fetcher.Instance.isLogged = true;
       this.$modalLogin.classList.remove("modal--show");
       // this.loginIcon.style.pointerEvents = "none";
