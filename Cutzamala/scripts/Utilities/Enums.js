@@ -195,9 +195,9 @@ const EnumPerillaBombaString = {
  * @returns {EnumPerillaGeneral}
  */
 const EnumPerillaGeneralString = {
-  0: 'Manual',
-  1: 'Remoto',
-  2: 'Automatismo',
+  0: 'Manual', // variador
+  1: 'Remoto', // apagado
+  2: 'Automatismo', // UTR
 };
 
 /**

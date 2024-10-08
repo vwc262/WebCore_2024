@@ -63,7 +63,7 @@ export const SistemaCutzamala = {
 
         ]
     },
-    estacionesSinParticular: [1, 2, 3, 4, 6],
+    estacionesSinParticular: [],
     customPositionsTable: {
         offsetLeft: 50,
         offsetTop: -2.5,
