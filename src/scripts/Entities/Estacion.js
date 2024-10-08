@@ -230,12 +230,15 @@ class Estacion {
     }
 
     IsEnMantenimiento() {
-        let enMantenimiento = this.ObtenerSignalPorTipoSignal(EnumTipoSignal.Mantenimiento);
+        // let enMantenimiento = this.ObtenerSignalPorTipoSignal(EnumTipoSignal.Mantenimiento);
 
 
-        if (enMantenimiento.length > 0) {
-            return enMantenimiento[0].Valor == 0;
-        } else return false;
+        // if (enMantenimiento.length > 0) {
+        //     return enMantenimiento[0].Valor == 0;
+        // } else return false;
+
+        // el mantenimiento se quita a peticion del doc -- 08/10/2024
+        return false;
     }
 
     IsFallaAc() {
