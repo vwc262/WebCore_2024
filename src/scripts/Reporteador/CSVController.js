@@ -18,7 +18,7 @@ var ControladorCSV = {
         datos.forEach(dato => {
             const keys = Object.keys(dato);
             keys.forEach((key,index) => {
-                csv += `${dato[key]}${index < keys.length - 1 ? ',':'\r\n'}`
+               csv += `${key.includes('date') ? this.ObtenerFechaCSV(dato[key]) : dato[key]}${index < keys.length - 1 ? ',' : '\r\n'}`
             });
         });
 
@@ -57,7 +57,7 @@ var ControladorCSV = {
 
     // Funcion para obtener la fecha
     ObtenerFechaCSV: function (date) {
-        return `${date.getFullYear()}/${date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1}/${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()} ${date.getHours() < 10 ? ("0" + date.getHours()) : date.getHours()}:${date.getMinutes() < 10 ? ("0" + date.getMinutes()) : date.getMinutes()}`;
+        return `${date.getFullYear()}-${ (date.getMonth()+1).toString().padStart(2,'0') }-${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()} ${date.getHours() < 10 ? ("0" + date.getHours()) : date.getHours()}:${date.getMinutes() < 10 ? ("0" + date.getMinutes()) : date.getMinutes()}`;
     },
 
     // Funcion para colocar el encabezado
