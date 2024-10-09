@@ -217,23 +217,23 @@ class TablaSimplificada {
       this.enlaceCell = document.createElement("td");
 
       // Pintar el texto basado en los valores del enlace
-      switch (ROW.enlace) {
-        case 0:
-          this.enlaceCell.textContent = "---";
-          break;
-        case 1:
-          this.enlaceCell.textContent = "Radio";
-          break;
-        case 2:
-          this.enlaceCell.textContent = "Celular";
-          break;
-        case 3:
-          this.enlaceCell.textContent = "Radio / Celular";
-          break;
-      }
+      // switch (ROW.enlace) {
+      //   case 0:
+      //     this.enlaceCell.textContent = "---";
+      //     break;
+      //   case 1:
+      //     this.enlaceCell.textContent = "Radio";
+      //     break;
+      //   case 2:
+      //     this.enlaceCell.textContent = "Celular";
+      //     break;
+      //   case 3:
+      //     this.enlaceCell.textContent = "Radio / Celular";
+      //     break;
+      // }
 
       // Añadir la nueva celda al <tr>
-      this.NEW__ROW.appendChild(this.enlaceCell);
+      // this.NEW__ROW.appendChild(this.enlaceCell);
 
       const currentTIME = new Date();
       const dataTIME = new Date(ROW.tiempo);
@@ -417,9 +417,6 @@ class TablaSimplificada {
         break;
       case EnumTipoFiltro.tiempo:
         this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
-        break;
-      case EnumTipoFiltro.tipoEnlace:
-        this.DATOS__AUX.sort((b, a) => a.enlace - b.enlace);
         break;
     }
     this.create();
