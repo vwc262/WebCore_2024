@@ -23,7 +23,9 @@ const EnumProyecto = {
   LermaAnexo: 11,
   EscudoNacional: 12,
   ClimatologicasHidrometricas: 13,
-  Teoloyucan: 14
+  Teoloyucan: 14,
+  Pruebas: 15,
+  LineaMorada: 16,
 };
 /**
  * @returns NombreProyecto
@@ -43,7 +45,9 @@ const EnumNombreProyecto = {
   11: "LermaAnexo",
   12: "EscudoNacional",
   13: "ClimatologicasHidrometricas",
-  14: "Teoloyucan"
+  14: "Teoloyucan",
+  15: "Pruebas",
+  16: "LineaMorada"
 };
 
 /**
@@ -64,7 +68,9 @@ const EnumNombreProyectoFolder = {
   "LermaAnexo": 11,
   "EscudoNacional": 12,
   "ClimatologicasHidrometricas": 13,
-  "Teoloyucan": 14
+  "Teoloyucan": 14,
+  "Pruebas": 15,
+  "LineaMorada": 16,
 };
 
 /**

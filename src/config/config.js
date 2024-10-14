@@ -4,6 +4,7 @@ import { ClimatologicasHidrometricasConfig } from "./ClimatologicasHidrometricas
 import { EncharcamientosConfig } from "./EncharcamientosConfig.js";
 import { GAMPonchoConfig } from "./GAMPonchoConfig.js";
 import { GustavoAMaderoConfig } from "./GustavoAMaderoConfig.js";
+import { LineaMoradaConfig } from "./LineaMorada.js";
 import { PadiernaConfig } from "./PadiernaConfig.js";
 import { PlantasPotabilizadoras } from "./PlantasPotabilizadoras.js";
 import { PozosSistemaLermaConfig } from "./PozosSistemaLermaConfig.js";
@@ -46,7 +47,9 @@ var Configuracion = {
             case EnumProyecto.Lumbreras:
                 config = GAMPonchoConfig;
             case EnumProyecto.Teoloyucan:
-                    config = TeoloyucanConfig;
+                config = TeoloyucanConfig;
+            case EnumProyecto.LineaMorada:
+                config = LineaMoradaConfig;
         }
 
         return config;
