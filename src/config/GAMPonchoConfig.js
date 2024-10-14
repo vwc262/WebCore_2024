@@ -55,7 +55,7 @@ export const GAMPonchoConfig = {
           Estado: "display:none;",
         },
         {
-          IdEstacion: 12,
+          IdEstacion: 8,
           Imagen:
             "width:143px;height:99px;position:absolute;left:513px;top:383px;",
           Etiqueta: "width:143px;position:absolute;left: 407px;top: 348px;",
