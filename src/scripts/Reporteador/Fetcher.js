@@ -9,7 +9,7 @@ const FetcherGraficador = {
   },
   version: 0,
   uriAssets: "https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/",
-  uri: "https://virtualwavecontrol.com.mx/api24/VWC/Unreal/",
+  uri: "https://virtualwavecontrol.com.mx/api24/VWC/app2024/", 
   /**
    * Funcion para hacer request del tipo get y post , Nota : Si es tipo Post jsonizar debe estar en true
    * @param {{action : string, method : string, data = {}, jsonizar = boolean}} ParametrosOpcionales
@@ -20,7 +20,7 @@ const FetcherGraficador = {
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
-    project = getNombreProyectoIdProyecto(Core.Instance.IdProyecto),
+    project = Core.Instance.IdProyecto,
   }) {
     const options = {
       method: method,
@@ -38,7 +38,7 @@ const FetcherGraficador = {
       delete options.headers;
     }
 
-    const fetchresult = await fetch(`${this.uri}/${project}2024/${action}`, options);
+    const fetchresult = await fetch(`${this.uri}/${action}?idProyecto=${Core.Instance.IdProyecto}`, options);
     let jsonData = null;
 
     jsonData = await fetchresult.json();
@@ -70,9 +70,11 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
     case EnumProyecto.Lumbreras: return "Lumbreras";
     case EnumProyecto.SantaCatarina: return "SantaCatarina";
     case EnumProyecto.Chiconautla: return "Chiconautla";
-    case EnumProyecto.LermaAnexo: return "LermaAnexo";
-    case EnumProyecto.PlantasPotabilizadoras: return "PlantasPotabilizadoras";
+    case EnumProyecto.Sorpasso: return "Sorpasso";
+    case EnumProyecto.SistemaCutzamala: return "SistemaCutzamala";
     case EnumProyecto.ClimatologicasHidrometricas: return "ClimatologicasHidrometricas";
+    case EnumProyecto.Pruebas: return "Pruebas";
+    case EnumProyecto.LineaMorada: return "LineaMorada";
   }
 
 }
