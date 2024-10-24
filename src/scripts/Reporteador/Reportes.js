@@ -83,7 +83,7 @@ function inicializarImages() {
   })
 
   const btnPromedios = document.querySelector(".promedios")
-  btnPromedios.setStyleProperty({ 'background-image': `url(${FetcherGraficador.getImage(projectName, 'Reportes', `${config.promedios? 'borrar' : 'borrar_h'}`, 'png')})`, 'background-size': "cover" });
+  btnPromedios.setStyleProperty({ 'background-image': `url(${FetcherGraficador.getImage(projectName, 'Reportes', `${config.promedios? 'borrar' : 'borrar_h'}`, 'png')})`, 'background-size': "cover", 'display':  `${config.promedios != undefined? 'block' : 'none'}`});
 
   // Agrega un event listener para el evento de clic
   btnPromedios.addEventListener("click", function () {
