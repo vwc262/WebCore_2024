@@ -9,6 +9,7 @@ import { projectName } from "./Reportes.js";
 // Variable global para el movimiento del carrusel
 let movimiento = 0;
 
+
 // Definir la correspondencia entre TipoSignal y la ruta de la imagen
 const tipoSignalImagenMap = {
   1: `nivel`, // Nivel
