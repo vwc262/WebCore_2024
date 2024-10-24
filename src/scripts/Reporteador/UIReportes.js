@@ -14,6 +14,8 @@ import { ArmarFechaSQL } from "../Utilities/CustomFunctions.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
 import controladorVideo from "./videos.js";
+import { Configuracion } from "../../config/config.js";
+import { Core } from "../Core.js";
 
 // Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
@@ -35,16 +37,17 @@ var UIReportes = {
     13: "Tiempo",
     14: "Mantenimiento",
     15: "Puerta Abierta",
-    16:"VoltajeRango",
-    17:"CorrienteRango",
-    18:"PotenciaTotal",
-    19:"FactorPotencia",
-    20:"Precipitacion",
-    21:"Temperatura",
-    22:"Humedad",
-    23:"Evaporacion",
-    24:"Intensidad",
-    25:"Direccion"  },
+    16: "VoltajeRango",
+    17: "CorrienteRango",
+    18: "PotenciaTotal",
+    19: "FactorPotencia",
+    20: "Precipitacion",
+    21: "Temperatura",
+    22: "Humedad",
+    23: "Evaporacion",
+    24: "Intensidad",
+    25: "Direccion"
+  },
 
   unidades: {
     1: "m",
@@ -115,14 +118,19 @@ var UIReportes = {
     this.root.container.children.clear();
 
     if (UIReportes.dataCruda.length > 0) {
-      let aux = [];      
+      let aux = [];
+      let config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
       UIReportes.dataCruda.forEach((infoSignal) => {
         infoSignal.forEach((d, index) => {
-          // let _d = new Date(new Date(d.Tiempo).setSeconds(0));
-          // let minutos = _d.getMinutes();
-          // let minutosRedondeados = Math.round(minutos / 5) * 5
-          // _d.setMinutes(minutosRedondeados);
           let _d = new Date(new Date(d.Tiempo))
+
+          if (config.promedios) {
+            _d = new Date(new Date(d.Tiempo).setSeconds(0));
+            let minutos = _d.getMinutes();
+            let minutosRedondeados = Math.round(minutos / 5) * 5
+            _d.setMinutes(minutosRedondeados);
+          }
+
           if (
             UIReportes.data[_d] == undefined ||
             UIReportes.data[_d] == null
@@ -135,7 +143,7 @@ var UIReportes = {
             //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
             // });
           }
-          UIReportes.data[_d][d.IdSignal]  = d.Valor < 0 ? 0 : d.Valor;
+          UIReportes.data[_d][d.IdSignal] = d.Valor < 0 ? 0 : d.Valor;
           if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
             UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
           }

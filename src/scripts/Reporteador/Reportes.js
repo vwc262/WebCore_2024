@@ -6,10 +6,12 @@ import { initGraficador } from "./graficar.js";
 import InicialSelector from "./selectSite.js";
 import UIControlador from "./videoUI.js";
 import { setStyleProperty } from "./utilities.js";
+import { Configuracion } from "../../config/config.js";
 
 // Importar el módulo controladorVideo desde videos.js
 import controladorVideo from "./videos.js";
 import { moveCarousel } from "./carrusel.js";
+import { Core } from "../Core.js";
 
 export var projectName = EnumNameProjecto.TanquesPadierna;
 
@@ -27,7 +29,7 @@ async function inicializarReporteador() {
       action: `${EnumPeticiones.READ}`,
     });
 
-    sitiosInfo = jsonData.Sites.filter( s => s.SignalsDescriptionContainer.length > 0);
+    sitiosInfo = jsonData.Sites.filter(s => s.SignalsDescriptionContainer.length > 0);
 
     // Inicializar el video utilizando el método initVideo del controladorVideo
     // Se pasa la URL del video y la función showUIVideo del UIControlador como argumentos
@@ -49,6 +51,8 @@ async function inicializarReporteador() {
 
 function inicializarImages() {
   const modal = document.querySelector(".modalValidation");
+
+  let config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
   modal.style.background = `url(${FetcherGraficador.getImage(projectName, 'Control', 'modalbackground', 'png')})`;
 
   const returnImage = document.querySelector(".btnReturnImage")
@@ -76,6 +80,22 @@ function inicializarImages() {
   })
   btnSignalFooterImg.addEventListener('mouseleave', () => {
     btnSignalFooterImg.setStyleProperty({ 'background-image': `url(${FetcherGraficador.getImage(projectName, 'Reportes', 'borrar', 'png')})`, 'background-size': "cover" });
+  })
+
+  const btnPromedios = document.querySelector(".promedios")
+  btnPromedios.setStyleProperty({ 'background-image': `url(${FetcherGraficador.getImage(projectName, 'Reportes', `${config.promedios? 'borrar' : 'borrar_h'}`, 'png')})`, 'background-size': "cover" });
+
+  // Agrega un event listener para el evento de clic
+  btnPromedios.addEventListener("click", function () {
+
+    if (config.promedios != undefined) {
+      config.promedios = !config.promedios;
+    }
+    else {
+      config.promedios = true;
+    }
+
+    btnPromedios.setStyleProperty({ 'background-image': `url(${FetcherGraficador.getImage(projectName, 'Reportes', `${config.promedios? 'borrar' : 'borrar_h'}`, 'png')})`, 'background-size': "cover" });
   })
 
   const btnSitios = document.querySelector(".select-menu .options")
