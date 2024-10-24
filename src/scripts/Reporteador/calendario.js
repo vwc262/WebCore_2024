@@ -358,11 +358,6 @@ function establecerFecha(event) {
     );
     UIReportes.fechaFinal = fechas.final;
   }
-
-  console.log("******************************");
-  console.log("FECHA INICIAL EN CALENDARIO:", fechas.inicio);
-  console.log("FECHA FINAL EN CALENDARIO:", fechas.final);
-  console.log("******************************");
 }
 
 // Función para manejar el clic en los botones de fecha inicial y final
