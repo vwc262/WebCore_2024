@@ -89,6 +89,9 @@ var UIReportes = {
         FechaFinal: ArmarFechaSQL(UIReportes.fechaFinal, false),
       };
 
+      console.log(UIReportes.fechaInicial)
+      console.log(_data)
+
       var jsonDataReportes = await FetcherGraficador.request({
         action: `${EnumPeticiones.HISTORICOS}`,
         method: FetcherGraficador.methodType.POST,
