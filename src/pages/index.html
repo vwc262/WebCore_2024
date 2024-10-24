@@ -80,33 +80,33 @@
     <container class="Content_on_load">
       <svg class="optimizedsvg" width="1920" height="1080" viewbox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
         <filter id="otherFilter3">
-            <feColorMatrix type="matrix" values="0 0 0 1 0
+          <feColorMatrix type="matrix" values="0 0 0 1 0
                     0 0 0 1 0
                     0 0 0 1 0
                     0 0 0 1 1">
-            </feColorMatrix>
+          </feColorMatrix>
         </filter>
         <filter id="turbulence">
-            <feTurbulence id="sea-filter" result="turbulence" baseFrequency="0.025" numOctaves="4" seed="15">
-            </feTurbulence>
-            <feColorMatrix type="matrix" in="SourceGraphic" result="o_mascara" values="0 0 0 1 0
+          <feTurbulence id="sea-filter" result="turbulence" baseFrequency="0.025" numOctaves="4" seed="15">
+          </feTurbulence>
+          <feColorMatrix type="matrix" in="SourceGraphic" result="o_mascara" values="0 0 0 1 0
                     0 0 0 1 0
                     0 0 0 1 0
                     0 0 0 1 0">
-            </feColorMatrix>
-            <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10">
-            </feDisplacementMap>
-            <feBlend in="SourceGraphic" in2="sea-filter" result="o_movida" mode="lighten" />
-            <feComposite operator="in" in2="o_mascara" in="o_movida" />
-            <animate xlink:href="#sea-filter" attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
-                values="0.02 0.01; 0.01 0.02" keyTimes="0; 1"></animate>
+          </feColorMatrix>
+          <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10">
+          </feDisplacementMap>
+          <feBlend in="SourceGraphic" in2="sea-filter" result="o_movida" mode="lighten" />
+          <feComposite operator="in" in2="o_mascara" in="o_movida" />
+          <animate xlink:href="#sea-filter" attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+            values="0.02 0.01; 0.01 0.02" keyTimes="0; 1"></animate>
         </filter>
-    </svg>
-  
+      </svg>
+
       <aside class="aside__tabla">
         <div class="curved-table-variables-container">
           <img class="fondo-tabla-variables" src="">
-  
+
           <div class="curved-tBody-variables">
             <div class="curved-Row-variables" style="transform: translate(28px,   0px);"></div>
             <div class="curved-Row-variables" style="transform: translate(34px,  12px);"></div>
@@ -124,7 +124,7 @@
             <div class="curved-Row-variables" style="transform: translate(26px, 156px);"></div>
             <div class="curved-Row-variables" style="transform: translate(18px, 168px);"></div>
           </div>
-  
+
           <div class="header-table-variables">
             <div class="thContainer" tag="1">
               <img class="iconthImage" src="">
@@ -276,7 +276,7 @@
             </div>
 
           </div>
-  
+
           <div class="btnTabla"></div>
         </div>
         <div class="curved-table-container">
@@ -363,44 +363,44 @@
         <div id="map" style="width: 1920px; height: 1080px;"></div>
       </section>
       <section id="section__graficador" class="section__graficador">
-  
+
         <div class="MainContainer">
-  
+
           <div class="btnReturn">
             <img class="btnReturnImage">
             <label class="shadowIcon"> Regresar </label>
           </div>
-  
+
           <div class="btn__graficar">
             <div class="btnPDFContainer">
               <img class="btnPDF">
               <div class="holoBntsReportes"></div>
             </div>
-  
+
             <div class="CSVContainer">
               <img class="btnCSV"> <a id="aCSV"></a>
               <div class="holoBntsReportes"></div>
             </div>
           </div>
-  
+
           <main>
             <!-- ========== Video ========== -->
             <article>
               <video class="videoInicio" muted>
             </article>
-  
+
             <!-- ========== Btn Seleccionar Sitio ========== -->
             <div class="select-menu">
               <div class="select-btn">
                 <span class="sBtn-text">Elige un Sitio</span>
                 <img class="sBtn-Select" alt="">
               </div>
-  
+
               <ul class="options">
-  
+
               </ul>
             </div>
-  
+
             <!-- ========== Overlays ========== -->
             <!-- ========== Calendiario ========== -->
             <div class="calendarioContainer">
@@ -414,9 +414,9 @@
               </div>
               <div class="yearBtnsContainer">
                 <button>
-                </button>
-                <span id="spanYear" class="spanYear">2024</span>
-                <button> > </button>
+                  < </button>
+                    <span id="spanYear" class="spanYear">2024</span>
+                    <button> > </button>
               </div>
               <div class="monthsContainer">
                 <button class="mes" id="Ene" mesId="0">Ene</button>
@@ -434,7 +434,7 @@
               </div>
               <div class="daysContainer"></div>
             </div>
-  
+
             <!-- ========== Sitio ========== -->
             <div class="SitioContainer">
               <div class="sitioTitleContainer">
@@ -444,7 +444,7 @@
                 <img class="sitioImg" src="" alt="">
               </div>
             </div>
-  
+
             <!-- ========== Signals Graficar ========== -->
             <div class="listaSignalsContainer">
               <div class="signalHeader">
@@ -463,24 +463,24 @@
                 <div class="signalFooterImg"></div>
               </div>
             </div>
-  
+
             <!-- ========== Carrusel ========== -->
             <div class="carrusel-Main__Container">
               <div class="variables__Container"></div>
-  
+
               <div class="btnCarrusel">
                 <button class="btnMoverCarrusel" id="next"></button>
                 <button class="btnMoverCarrusel" id="prev"></button>
               </div>
             </div>
           </main>
-  
+
           <div class="modalValidation">
             <h3 class="headerModal">Limite de variables</h3>
             <p class="textModal">Máximo 6 variables</p>
             <button class="btnCloseModal" id="closeModal">Cerrar</button>
           </div>
-  
+
           <div id="chartdiv"></div>
           <div class="sinHistoricos">
             <h3> NO SE OBTUVIERON HISTÓRICOS </h3>
@@ -513,7 +513,7 @@
           <img src="" id="particularImg">
           <img src="" id="particularTextoImg">
         </div>
-  
+
         <div id="particular__aguaNivel"></div>
         <div id="particular__bombasEstado"></div>
       </section>
@@ -529,7 +529,7 @@
             <span>Modo control bombas: </span>
             <span class="arranqueParo__modoTxt">Remoto</span>
           </div>
-          <div class="arranqueParo__Lineas">          
+          <div class="arranqueParo__Lineas">
           </div>
           <div class="arranqueParo__BtnsCarrusel">
             <div id="carruselPrev_AP" class="arranqueParo__Prev flechaControl"></div>
@@ -556,7 +556,7 @@
         </div>
         <img id="imgPanelArranqueParo">
       </section>
-  
+
       <section class="modal ">
         <div id="imgModal" class="modal__container">
           <div class="modal__text">
@@ -583,7 +583,7 @@
 <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/themes/Responsive.js"></script>
-<script  src="../scripts/Reporteador/External/pdfmake.js"></script>
+<script src="../scripts/Reporteador/External/pdfmake.js"></script>
 <script type="module" src="../scripts/Reporteador/CSVController.js"></script>
 <script src="../scripts/External/PanZoom.js"></script>
 
