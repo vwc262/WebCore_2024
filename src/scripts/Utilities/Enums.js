@@ -70,7 +70,7 @@ const EnumNombreProyectoFolder = {
   "ClimatologicasHidrometricas": 13,
   "Teoloyucan": 14,
   "Pruebas": 15,
-  "LineaMorada": 16,
+  "LineaMorada2024": 16,
 };
 
 /**
