@@ -61,6 +61,7 @@ var UIReportes = {
   fechaInicial: "",
   fechaFinal: "",
   idSignalsAGraficar: [],
+  idSignalsABorrar: [],
   signalesFetcheadas: 0,
   root: undefined,
   Peticion: async function () {
@@ -69,8 +70,6 @@ var UIReportes = {
     this.signalesFetcheadas = 0;
 
     await UIReportes.FetchAllSignals();
-
-    UIReportes.ProcesarInformacion();
   },
   PrepararChart: function () {
     this.root?.dispose();
@@ -84,6 +83,7 @@ var UIReportes = {
     });
   },
   FetchAllSignals: async function () {
+    UIReportes.idSignalsABorrar = [];
     UIReportes.idSignalsAGraficar.forEach(async (signalObj, index) => {
       var _data = {
         idSignal: signalObj.IdSignal,
@@ -101,60 +101,70 @@ var UIReportes = {
       if (jsonDataReportes.Reporte.length > 0) {
         UIReportes.dataCruda.push(jsonDataReportes.Reporte);
       }
+      else {
+        UIReportes.idSignalsABorrar.push(index);
+      }
 
       UIReportes.ProcesarInformacion();
     });
   },
   ProcesarInformacion: function () {
-    if (UIReportes.signalesFetcheadas != UIReportes.idSignalsAGraficar.length) {
-      UIReportes.signalesFetcheadas++;
+    UIReportes.signalesFetcheadas++;
+    if (UIReportes.signalesFetcheadas < UIReportes.idSignalsAGraficar.length) {
       return;
     }
+    else if (UIReportes.signalesFetcheadas == UIReportes.idSignalsAGraficar.length) {
+      UIReportes.idSignalsABorrar.forEach((index) => {
+        const signalItem = document.getElementsByClassName(`variable_${UIReportes.idSignalsAGraficar[index].IdSignal}`)[0];
+        signalItem.remove();
+        UIReportes.idSignalsAGraficar.splice(index, 1)
+      })
 
-    this.PrepararChart();
+      this.PrepararChart();
 
-    //  remove all elements from the root, simply clear children of its container
-    this.root.container.children.clear();
+      //  remove all elements from the root, simply clear children of its container
+      this.root.container.children.clear();
 
-    if (UIReportes.dataCruda.length > 0) {
-      let aux = [];
-      let config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
-      UIReportes.dataCruda.forEach((infoSignal) => {
-        infoSignal.forEach((d, index) => {
-          let _d = new Date(new Date(d.Tiempo))
+      if (UIReportes.dataCruda.length > 0) {
+        let aux = [];
+        let config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+        UIReportes.dataCruda.forEach((infoSignal) => {
+          infoSignal.forEach((d, index) => {
+            let _d = new Date(new Date(d.Tiempo))
 
-          if (config.promedios) {
-            _d = new Date(new Date(d.Tiempo).setSeconds(0));
-            let minutos = _d.getMinutes();
-            let minutosRedondeados = Math.round(minutos / 5) * 5
-            _d.setMinutes(minutosRedondeados);
-          }
+            if (config.promedios) {
+              _d = new Date(new Date(d.Tiempo).setSeconds(0));
+              let minutos = _d.getMinutes();
+              let minutosRedondeados = Math.round(minutos / 5) * 5
+              _d.setMinutes(minutosRedondeados);
+            }
 
-          if (
-            UIReportes.data[_d] == undefined ||
-            UIReportes.data[_d] == null
-          ) {
-            UIReportes.data[_d] = {
-              date: _d,
-            };
-            aux.push(UIReportes.data[_d]);
-            // UIReportes.idSignalsAGraficar.forEach(signalObj => {
-            //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
-            // });
-          }
-          UIReportes.data[_d][d.IdSignal] = d.Valor < 0 ? 0 : d.Valor;
-          if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
-            UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
-          }
+            if (
+              UIReportes.data[_d] == undefined ||
+              UIReportes.data[_d] == null
+            ) {
+              UIReportes.data[_d] = {
+                date: _d,
+              };
+              aux.push(UIReportes.data[_d]);
+              // UIReportes.idSignalsAGraficar.forEach(signalObj => {
+              //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
+              // });
+            }
+            UIReportes.data[_d][d.IdSignal] = d.Valor < 0 ? 0 : d.Valor;
+            if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
+              UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
+            }
+          });
         });
-      });
-      aux.sort((a, b) => new Date(a.date) - new Date(b.date));
-      UIReportes.data = aux;
-      //console.log(UIReportes.data);
-      UIReportes.SetChart();
-    } else {
-      const txtSinHistoricos = document.querySelector(".sinHistoricos");
-      txtSinHistoricos.style.opacity = "1";
+        aux.sort((a, b) => new Date(a.date) - new Date(b.date));
+        UIReportes.data = aux;
+        //console.log(UIReportes.data);
+        UIReportes.SetChart();
+      } else {
+        const txtSinHistoricos = document.querySelector(".sinHistoricos");
+        txtSinHistoricos.style.opacity = "1";
+      }
     }
   },
   SetChart: function () {

@@ -460,10 +460,12 @@ function borrarVariableAGraficar(elemeoABorrar) {
 
 function updateColors() {
   const iconSignalCarrusel = document.querySelectorAll(".variableSignal");
+
   iconSignalCarrusel.forEach((iconSignal) => {
     iconSignal.style.filter = "grayscale(1)";
   });
   UIReportes.idSignalsAGraficar.forEach((signalColor, index) => {
+    
     signalColor.Color = coloresSignals[index];
     signalColor.Rotate = rotates[index];
 
@@ -512,6 +514,7 @@ function cleanSignals() {
       // Limpia el contenido de signalContent
       signalContent.innerHTML = "";
       UIReportes.idSignalsAGraficar = [];
+      UIReportes.idSignalsABorrar = [];
       updateColors();
       validarBtnGraficar();
     }
