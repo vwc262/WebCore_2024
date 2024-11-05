@@ -113,7 +113,7 @@ var EnumTipoSignal = {
   Precipitacion: 20,
   Temperatura: 21,
   Humedad: 22,
-  Evaporacion: 23,
+  RadiacionSolar: 23,
   Intensidad: 24,
   Direccion: 25,
 };
@@ -145,7 +145,7 @@ var EnumTipoSignalString = {
   20: "Precipitacion",
   21: "Temperatura",
   22: "Humedad",
-  23: "Evaporacion",
+  23: "RadiacionSolar",
   24: "Intensidad",
   25: "Direccion",
 };
