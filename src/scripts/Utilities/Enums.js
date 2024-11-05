@@ -61,19 +61,19 @@ const EnumNombreProyectoFolder = {
   "Padierna2024": 2,
   "PozosSistemaLerma2024": 3,
   "Yaqui2024": 4,
-  "prueba": 5,
-  "Encharcamientos": 6,
-  "SistemaCutzamala": 7,
-  "Lumbreras": 8,
+  "Lerma2024": 5,
+  "Encharcamientos2024": 6,
+  "SistemaCutzamala2024": 7,
+  "Lumbreras2024": 8,
   "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
-  "Sorpasso": 11,
-  "EscudoNacional": 12,
-  "ClimatologicasHidrometricas": 13,
-  "Teoloyucan": 14,
-  "Pruebas": 15,
+  "Sorpasso2024": 11,
+  "EscudoNacional2024": 12,
+  "ClimatologicasHidrometricas2024": 13,
+  "Teoloyucan2024": 14,
+  "Pruebas2024": 15,
   "LineaMorada2024": 16,
-  "PozosAIFA": 17
+  "PozosAIFA2024": 17
 };
 
 /**
