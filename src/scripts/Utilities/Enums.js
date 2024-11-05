@@ -26,6 +26,7 @@ const EnumProyecto = {
   Teoloyucan: 14,
   Pruebas: 15,
   LineaMorada: 16,
+  PozosAIFA: 17,
 };
 /**
  * @returns NombreProyecto
@@ -47,7 +48,8 @@ const EnumNombreProyecto = {
   13: "ClimatologicasHidrometricas",
   14: "Teoloyucan",
   15: "Pruebas",
-  16: "LineaMorada"
+  16: "LineaMorada",
+  17: "PozosAIFA"
 };
 
 /**
@@ -71,6 +73,7 @@ const EnumNombreProyectoFolder = {
   "Teoloyucan": 14,
   "Pruebas": 15,
   "LineaMorada2024": 16,
+  "PozosAIFA": 17
 };
 
 /**

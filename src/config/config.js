@@ -1,4 +1,5 @@
 import { EnumProyecto } from "../scripts/Utilities/Enums.js";
+import { PozosAIFAConfig } from "./AIFA.js";
 import { ChiconautlaConfig, NombresLargosChiconautla } from "./ChiconautlaConfig.js";
 import { ClimatologicasHidrometricasConfig } from "./ClimatologicasHidrometricas2024Config.js";
 import { EncharcamientosConfig } from "./EncharcamientosConfig.js";
@@ -46,10 +47,16 @@ var Configuracion = {
                 break;
             case EnumProyecto.Lumbreras:
                 config = GAMPonchoConfig;
+                break;
             case EnumProyecto.Teoloyucan:
                 config = TeoloyucanConfig;
+                break;
             case EnumProyecto.LineaMorada:
                 config = LineaMoradaConfig;
+                break;
+            case EnumProyecto.PozosAIFA:
+                config = PozosAIFAConfig;
+                break;
         }
 
         return config;
