@@ -1,5 +1,6 @@
 import { EnumProyecto } from "../scripts/Utilities/Enums.js";
 import { PozosAIFAConfig } from "./AIFA.js";
+import { ChalmitaConfig } from "./ChalmitaConfig.js";
 import { ChiconautlaConfig, NombresLargosChiconautla } from "./ChiconautlaConfig.js";
 import { ClimatologicasHidrometricasConfig } from "./ClimatologicasHidrometricas2024Config.js";
 import { EncharcamientosConfig } from "./EncharcamientosConfig.js";
@@ -57,6 +58,9 @@ var Configuracion = {
             case EnumProyecto.PozosAIFA:
                 config = PozosAIFAConfig;
                 break;
+            case EnumProyecto.Chalmita:
+                config = ChalmitaConfig;
+                break;
         }
 
         return config;
@@ -87,6 +91,9 @@ var Configuracion = {
                 nombres = undefined;
                 break;
             case EnumProyecto.ClimatologicasHidrometricas:
+                nombres = undefined;
+                break;
+            case EnumProyecto.Chalmita:
                 nombres = undefined;
                 break;
         }
