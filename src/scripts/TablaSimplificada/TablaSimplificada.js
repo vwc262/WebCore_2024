@@ -19,6 +19,7 @@ var EnumTipoFiltro = {
   bomba: "bomba",
   tiempo: "tiempo",
   tipoEnlace: "tipoEnlace",
+  totalizado: "totalizado",
 };
 
 class TablaSimplificada {
@@ -57,7 +58,7 @@ class TablaSimplificada {
     let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
-    // console.log(this.DATOS__AUX);
+    console.log(this.DATOS__AUX);
 
     this.DATOS__AUX.forEach((ROW) => {
       // console.log(ROW);
@@ -118,14 +119,21 @@ class TablaSimplificada {
             const niveles = ROW.signals.filter(
               (nivel) => nivel.tipoSignal == EnumTipoSignal.Nivel
             );
+
             if (niveles.length > 0) {
-              // Añade el <td> al <tr>
-              this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
-              this.NEW__ROW.appendChild(this.NEW__CELL);
+              niveles.forEach((nivel) => {
+                // Crea una nueva celda para cada nivel
+                const nivelCell = document.createElement("td");
+                nivelCell.innerText = this.FormatearGasto(nivel.valor);
+                this.NEW__ROW.appendChild(nivelCell);
+              });
             } else {
+              // Si no hay niveles, agrega una celda con "---"
               this.NEW__CELL.innerText = "---";
               this.NEW__ROW.appendChild(this.NEW__CELL);
             }
+
+            // Resetea para nuevas celdas
             this.NEW__CELL = document.createElement("td");
           } else {
             // Elimina el encabezado de la tabla con id "nivel"
@@ -141,10 +149,13 @@ class TablaSimplificada {
           const bombas = ROW.signals.filter(
             (bba) => bba.tipoSignal == EnumTipoSignal.Bomba
           );
-
           const gastos = ROW.signals.filter(
             (gastosSignal) => gastosSignal.tipoSignal == EnumTipoSignal.Gasto
           );
+          const totalizados = ROW.signals.filter(
+            (totalizadoSignal) => totalizadoSignal.tipoSignal == EnumTipoSignal.Totalizado
+          );
+
 
           if (presiones.length > 0) {
             // Añade el <td> al <tr>
@@ -173,6 +184,36 @@ class TablaSimplificada {
           }
 
           this.NEW__CELL = document.createElement("td");
+
+          if (totalizados.length > 0 && totalizados[0].valor > 0) {
+            this.NEW__CELL.innerText = this.ValidarPresion(
+              "ValorGasto",
+              totalizados[0].valor
+            );
+            this.NEW__ROW.appendChild(this.NEW__CELL);
+          } else {
+            this.NEW__CELL.innerText = "---";
+            this.NEW__ROW.appendChild(this.NEW__CELL);
+          }
+
+          this.NEW__CELL = document.createElement("td");
+
+          const voltajes = ROW.signals.filter(
+            (voltajeSignal) => voltajeSignal.tipoSignal == EnumTipoSignal.Voltaje
+          );
+
+          if (voltajes.length > 0) {
+            voltajes.forEach((voltaje) => {
+              // Crea una nueva celda para cada nivel
+              const voltajeCell = document.createElement("td");
+              voltajeCell.innerText = this.FormatearGasto(voltaje.valor);
+              this.NEW__ROW.appendChild(voltajeCell);
+            });
+          } else {
+            // Si no hay niveles, agrega una celda con "---"
+            this.NEW__CELL.innerText = "---";
+            this.NEW__ROW.appendChild(this.NEW__CELL);
+          }
 
           if (bombas.length > 0) {
             bombas.forEach((bba) => {

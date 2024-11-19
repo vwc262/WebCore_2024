@@ -8,7 +8,7 @@ class VwcApp {
     const href = window.location.href;
     let idProyecto = 0;
     if (href.includes("localhost") || href.includes("127.0.0")) {
-      idProyecto = EnumProyecto.LineaMorada; // Cambiar a mano para debug
+      idProyecto = EnumProyecto.PozosAIFA; // Cambiar a mano para debug
     }
     else {
       let localHostSplit = href.split("/");
