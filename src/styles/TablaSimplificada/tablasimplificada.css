@@ -164,6 +164,9 @@ tbody tr td {
     background-position: center !important;
     margin: auto;
   }
+  tbody tr td {
+    min-width: 50px;
+}
 }
 
 .header_titleImg {

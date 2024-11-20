@@ -28,9 +28,9 @@ class TablaSimplificada {
     this.DATOS__AUX = Core.Instance.data;
     this.InitFiltros();
     this.ModalLogin();
-    setInterval(() => {
-      this.Update();
-    }, 10000);
+    // setInterval(() => {
+    //   this.Update();
+    // }, 10000);
   }
 
   Update = () => {
@@ -49,6 +49,7 @@ class TablaSimplificada {
     this.$sitioRadio = document.querySelector("#sitioRadio");
     this.$sitioCelular = document.querySelector("#sitioCelular");
     this.$sitioRC = document.querySelector("#sitioRC");
+    this.$thead_tr = document.querySelector("#tr_header");
 
     let totalOnline = 0;
     let totalOffline = 0;
@@ -124,7 +125,7 @@ class TablaSimplificada {
               niveles.forEach((nivel) => {
                 // Crea una nueva celda para cada nivel
                 const nivelCell = document.createElement("td");
-                nivelCell.innerText = this.FormatearGasto(nivel.valor);
+                nivelCell.innerText = this.FormatearGasto(`${nivel.valor} m.`);
                 this.NEW__ROW.appendChild(nivelCell);
               });
             } else {
@@ -153,16 +154,24 @@ class TablaSimplificada {
             (gastosSignal) => gastosSignal.tipoSignal == EnumTipoSignal.Gasto
           );
           const totalizados = ROW.signals.filter(
-            (totalizadoSignal) => totalizadoSignal.tipoSignal == EnumTipoSignal.Totalizado
+            (totalizadoSignal) =>
+              totalizadoSignal.tipoSignal == EnumTipoSignal.Totalizado
           );
-
+          const voltajes = ROW.signals.filter(
+            (voltajeSignal) =>
+              voltajeSignal.tipoSignal == EnumTipoSignal.Voltaje
+          );
+          const corrientes = ROW.signals.filter(
+            (corrientesSignal) =>
+              corrientesSignal.tipoSignal == EnumTipoSignal.CorrienteRango
+          );
 
           if (presiones.length > 0) {
             // Añade el <td> al <tr>
             this.NEW__CELL.innerText = this.ValidarPresion(
               "ValorPresion",
               presiones[0].valor
-            );
+            ) + " Kg/cm²";
 
             this.NEW__ROW.appendChild(this.NEW__CELL);
           } else {
@@ -176,7 +185,7 @@ class TablaSimplificada {
             this.NEW__CELL.innerText = this.ValidarPresion(
               "ValorGasto",
               gastos[0].valor
-            );
+            ) + " l/s";
             this.NEW__ROW.appendChild(this.NEW__CELL);
           } else {
             this.NEW__CELL.innerText = "---";
@@ -189,7 +198,7 @@ class TablaSimplificada {
             this.NEW__CELL.innerText = this.ValidarPresion(
               "ValorGasto",
               totalizados[0].valor
-            );
+            ) + " m³";
             this.NEW__ROW.appendChild(this.NEW__CELL);
           } else {
             this.NEW__CELL.innerText = "---";
@@ -198,16 +207,25 @@ class TablaSimplificada {
 
           this.NEW__CELL = document.createElement("td");
 
-          const voltajes = ROW.signals.filter(
-            (voltajeSignal) => voltajeSignal.tipoSignal == EnumTipoSignal.Voltaje
-          );
-
           if (voltajes.length > 0) {
             voltajes.forEach((voltaje) => {
               // Crea una nueva celda para cada nivel
               const voltajeCell = document.createElement("td");
-              voltajeCell.innerText = this.FormatearGasto(voltaje.valor);
+              voltajeCell.innerText = this.FormatearGasto(`${voltaje.valor} V`);
               this.NEW__ROW.appendChild(voltajeCell);
+            });
+          } else {
+            // Si no hay niveles, agrega una celda con "---"
+            this.NEW__CELL.innerText = "---";
+            this.NEW__ROW.appendChild(this.NEW__CELL);
+          }
+
+          if (corrientes.length > 0) {
+            corrientes.forEach((corriente) => {
+              // Crea una nueva celda para cada nivel
+              const corrienteCell = document.createElement("td");
+              corrienteCell.innerText = this.FormatearGasto(`${corriente.valor} A`);
+              this.NEW__ROW.appendChild(corrienteCell);
             });
           } else {
             // Si no hay niveles, agrega una celda con "---"
