@@ -125,7 +125,7 @@ class TablaSimplificada {
               niveles.forEach((nivel) => {
                 // Crea una nueva celda para cada nivel
                 const nivelCell = document.createElement("td");
-                nivelCell.innerText = this.FormatearGasto(`${nivel.valor} m.`);
+                nivelCell.innerText = this.FormatearGasto(`${nivel.valor} m`);
                 this.NEW__ROW.appendChild(nivelCell);
               });
             } else {
