@@ -8,7 +8,7 @@ class VwcApp {
     const href = window.location.href;
     let idProyecto = 0;
     if (href.includes("localhost") || href.includes("127.0.0")) {
-      idProyecto = EnumProyecto.Teoloyucan; // Cambiar a mano para debug
+      idProyecto = EnumProyecto.ClimatologicasHidrometricas; // Cambiar a mano para debug
     }
     else {
       let localHostSplit = href.split("/");
