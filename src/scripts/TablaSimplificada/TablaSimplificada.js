@@ -43,17 +43,17 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    const SIGNALS_FILTRADAS = [1, 2, 10, 20, 21, 22, 23, 24, 25];
+    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 10, 16, ,17, 18, 19];
     const SIGNALS_UNIDADES = {
       1: "m",
-      2: "kg/m2",
+      2: "kg/m²",
+      3: "l/s",
+      4: "m³",
       10: "V",
-      20: "l/m²",
-      21: "°",
-      22: "g/m³",
-      23: "W/m²",
-      24: "A",
-      25: "°",
+      16: "V",
+      17: "A",
+      18: "W",
+      19: "%"
     };
 
     this.$tbody = document.getElementById("tbody");
@@ -72,7 +72,7 @@ class TablaSimplificada {
     let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
-    //console.log(this.DATOS__AUX);
+    console.log(this.DATOS__AUX);
 
     this.DATOS__AUX.forEach((ROW) => {
       // console.log(ROW);
