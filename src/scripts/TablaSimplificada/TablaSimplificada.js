@@ -43,12 +43,13 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 10, 16, ,17, 18, 19];
+    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 7, 10, 16, ,17, 18, 19];
     const SIGNALS_UNIDADES = {
       1: "m",
       2: "kg/m²",
       3: "l/s",
       4: "m³",
+      7: "",
       10: "V",
       16: "V",
       17: "A",
