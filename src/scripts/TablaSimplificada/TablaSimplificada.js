@@ -118,7 +118,7 @@ class TablaSimplificada {
               if (SIGNALS_FILTRADAS.includes(signal.tipoSignal)) {
                 this.NEW__CELL = document.createElement("td");
 
-                if (signal.tipoSignal == 7) {
+                if (signal.tipoSignal === 7) {
                   // Mapeo de imágenes según el valor
                   const imagenesBomba = {
                     0: "../imgs/b_g_s.png", // no disponible
@@ -127,19 +127,17 @@ class TablaSimplificada {
                     3: "../imgs/b_g_b.png", // sobrecarga
                   };
 
-                  // Crear elemento de imagen
+                  // Crear elemento de imagen para tipoSignal 7
                   const imgElement = document.createElement("img");
-                  imgElement.src = imagenesBomba[signal.valor]
-                  imgElement.style.width = "15px"; // Ajustar tamaño si es necesario
+                  imgElement.src = imagenesBomba[signal.valor];
+                  imgElement.style.width = "15px";
                   imgElement.style.height = "24px";
-
-                  // Agregar la imagen a la celda
                   this.NEW__CELL.appendChild(imgElement);
                 } else {
-                  // Si no es la señal de tipo "Bomba", usa el valor original
-                  this.NEW__CELL.innerText = `${signal.valor} ${
-                    SIGNALS_UNIDADES[signal.tipoSignal]
-                  }`;
+                  // Para las demás señales, verificar DentroRango
+                  this.NEW__CELL.innerText = signal.dentroRango
+                    ? `${signal.valor} ${SIGNALS_UNIDADES[signal.tipoSignal]}`
+                    : "---";
                 }
 
                 this.NEW__ROW.appendChild(this.NEW__CELL);
