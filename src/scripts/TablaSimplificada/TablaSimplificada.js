@@ -47,10 +47,11 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 7, 10, 16, , 17, 18, 19];
+    const SIGNALS_FILTRADAS = [1, 2, 10, 20, 21, 22, 23, 24, 25];
     const SIGNALS_UNIDADES = {
       1: "m",
-      2: "kg/m²",
+      // 2: "kg/m²", // HIDROSTATICA
+      2: "hPa", // para climatologicas unicamente
       3: "l/s",
       4: "m³",
       7: "",
@@ -59,6 +60,12 @@ class TablaSimplificada {
       17: "A",
       18: "W",
       19: "%",
+      20: "mm",
+      21: "°",
+      22: "%",
+      23: "W/m²",
+      24: "k/h",
+      25: "°",
     };
 
     this.$tbody = document.getElementById("tbody");
@@ -107,8 +114,28 @@ class TablaSimplificada {
             this.NEW__CELL.classList.add(key);
             this.NEW__ROW.appendChild(this.NEW__CELL);
 
-            if (key == "Enlace") {
+            // EN CASO DE QUE SOLO SE QUIERA EL CIRCULO DEL ENLACE
+            // if (key == "Enlace") {
+            //   this.setCirculoEnlace(this.NEW__CELL, filteredRow.Tiempo);
+            // }
+
+            // EN CASO DE QUERER EL TIPO DE ENLACE
+            if (key === "Enlace") {
+              // Crear una celda para el círculo
+              this.NEW__CELL.classList.add(key);
               this.setCirculoEnlace(this.NEW__CELL, filteredRow.Tiempo);
+              this.NEW__ROW.appendChild(this.NEW__CELL);
+
+              // Crear una celda separada para el valor
+              const enlaceValorCell = document.createElement("td");
+              enlaceValorCell.innerText = value; // Mostrar el valor de Enlace
+              enlaceValorCell.classList.add(`${key}-valor`);
+              this.NEW__ROW.appendChild(enlaceValorCell);
+            } else {
+              this.NEW__CELL.innerText =
+                key == "Tiempo" ? this.FormatearFecha(value) : value;
+              this.NEW__CELL.classList.add(key);
+              this.NEW__ROW.appendChild(this.NEW__CELL);
             }
 
             break;
@@ -311,7 +338,7 @@ class TablaSimplificada {
       else this.SinSignals.push(estacion);
     });
 
-    this.DATOS__AUX = this.SignalsFiltro.sort((b, a) => a.valor - b.valor).map(
+    this.DATOS__AUX = this.SignalsFiltro.sort((a, b) => a.valor - b.valor).map(
       (nivel) => this.DATOS__AUX.find((e) => e.idEstacion == nivel.idEstacion)
     );
 
