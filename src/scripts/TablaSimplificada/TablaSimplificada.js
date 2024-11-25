@@ -64,11 +64,11 @@ class TablaSimplificada {
       18: "W",
       19: "%",
       20: "mm",
-      21: "°",
+      21: "°C",
       22: "%",
       23: "W/m²",
-      24: "k/h",
-      25: "°",
+      24: "km/h",
+      25: "°N",
     };
 
     this.$tbody = document.getElementById("tbody");
@@ -89,7 +89,7 @@ class TablaSimplificada {
     this.$tbody.innerHTML = "";
 
     this.DATOS__AUX.forEach((ROW) => {
-      console.log(ROW);
+      //console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
