@@ -13,7 +13,7 @@ body, html {
 .fondo {
     width: 100%;
     height: 100%;
-    background: url('../../../Planta5Resources/fondoPlanta5.jpg') no-repeat ;
+    background: url('../../Planta5Resources/fondoPlanta5.jpg') no-repeat ;
     background-size: cover;
 
 }
@@ -38,20 +38,21 @@ body, html {
     font-weight: bold;
 }
 
-.datosContainer{
-    position: absolute;
+.datosContainer{        
     font-size: 24pt;
-    display: flex;    
+    display: flex;
     top: 80px;
     left: 896px;
-    width: 781px;    
+    width: 350px;
     flex-direction: column;
-    align-items: center;
-    margin: 0;
+    align-items: flex-start;
+    margin-top: 90px;
     padding: 0;
+    background: #0000008f;
 }
 .gapSignals{
-    gap:100px !important;
+    flex-direction: column !important;
+    margin-left: 20px;
 }
 .textoBlanco{
     color: white;
@@ -59,10 +60,15 @@ body, html {
 
 .rowDatos{
     display: flex;
-    gap:20px;
+    gap: 20px;
+    flex-direction: row;
 }
 .enlace{
-    position: absolute;
-    right: 65px;
-    top: 35px;
+	margin-top: 30px;
+    width: 100px;
+    height: 25px;
+}
+
+.tiempo{
+	margin-left: 20px;
 }
