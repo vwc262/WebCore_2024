@@ -47,7 +47,7 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    const SIGNALS_FILTRADAS = [1, 2, 10, 20, 21, 22, 23, 24, 25];
+    const SIGNALS_FILTRADAS = [1, 2, 10, 12, 14, 15, 20, 21, 22, 23, 24, 25]; // Climatologicas
     const SIGNALS_UNIDADES = {
       1: "m",
       // 2: "kg/m²", // HIDROSTATICA
@@ -56,6 +56,9 @@ class TablaSimplificada {
       4: "m³",
       7: "",
       10: "V",
+      12: "",
+      14: "",
+      15: "",
       16: "V",
       17: "A",
       18: "W",
@@ -84,10 +87,9 @@ class TablaSimplificada {
     let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
-    console.log(this.DATOS__AUX);
 
     this.DATOS__AUX.forEach((ROW) => {
-      // console.log(ROW);
+      console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
@@ -148,7 +150,7 @@ class TablaSimplificada {
                   imgElement.style.width = "15px";
                   imgElement.style.height = "24px";
                   this.NEW__CELL.appendChild(imgElement);
-                } else if (signal.tipoSignal === 10) {
+                } else if (signal.tipoSignal === 10 || signal.tipoSignal === 12 || signal.tipoSignal === 14 || signal.tipoSignal === 15) {
                   // Para Voltaje (tipoSignal 10), ignorar DentroRango
                   this.NEW__CELL.innerText = `${signal.valor} ${
                     SIGNALS_UNIDADES[signal.tipoSignal]
