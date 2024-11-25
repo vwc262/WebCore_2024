@@ -109,17 +109,6 @@ class TablaSimplificada {
           case "IdEstacion":
           case "Nombre":
           case "Tiempo":
-            this.NEW__CELL.innerText =
-              key == "Tiempo" ? this.FormatearFecha(value) : value;
-            this.NEW__CELL.classList.add(key);
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-
-            // EN CASO DE QUE SOLO SE QUIERA EL CIRCULO DEL ENLACE
-            // if (key == "Enlace") {
-            //   this.setCirculoEnlace(this.NEW__CELL, filteredRow.Tiempo);
-            // }
-
-            // EN CASO DE QUERER EL TIPO DE ENLACE
             if (key === "Enlace") {
               // Crear una celda para el círculo
               this.NEW__CELL.classList.add(key);
@@ -137,7 +126,6 @@ class TablaSimplificada {
               this.NEW__CELL.classList.add(key);
               this.NEW__ROW.appendChild(this.NEW__CELL);
             }
-
             break;
 
           case "Signals":
@@ -160,6 +148,11 @@ class TablaSimplificada {
                   imgElement.style.width = "15px";
                   imgElement.style.height = "24px";
                   this.NEW__CELL.appendChild(imgElement);
+                } else if (signal.tipoSignal === 10) {
+                  // Para Voltaje (tipoSignal 10), ignorar DentroRango
+                  this.NEW__CELL.innerText = `${signal.valor} ${
+                    SIGNALS_UNIDADES[signal.tipoSignal]
+                  }`;
                 } else {
                   // Para las demás señales, verificar DentroRango
                   this.NEW__CELL.innerText = signal.dentroRango

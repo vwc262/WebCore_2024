@@ -33,5 +33,3 @@ class VwcApp {
 }
 
 export { VwcApp };
-
-//
