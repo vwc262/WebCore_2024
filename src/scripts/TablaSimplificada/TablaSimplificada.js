@@ -20,6 +20,10 @@ var EnumTipoFiltro = {
   tiempo: "tiempo",
   tipoEnlace: "tipoEnlace",
   totalizado: "totalizado",
+  voltaje: "voltaje",
+  correinte: "correinte",
+  potenciaT: "potenciaT",
+  factorP: "factorP",
 };
 
 class TablaSimplificada {
@@ -43,7 +47,7 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 7, 10, 16, ,17, 18, 19];
+    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 7, 10, 16, , 17, 18, 19];
     const SIGNALS_UNIDADES = {
       1: "m",
       2: "kg/m²",
@@ -54,7 +58,7 @@ class TablaSimplificada {
       16: "V",
       17: "A",
       18: "W",
-      19: "%"
+      19: "%",
     };
 
     this.$tbody = document.getElementById("tbody");
@@ -90,7 +94,6 @@ class TablaSimplificada {
 
       this.NEW__ROW = document.createElement("tr");
 
-      // Itera sobre cada valor en el objeto de Row
       Object.entries(filteredRow).forEach(([key, value]) => {
         this.NEW__CELL = document.createElement("td");
 
@@ -115,9 +118,30 @@ class TablaSimplificada {
               if (SIGNALS_FILTRADAS.includes(signal.tipoSignal)) {
                 this.NEW__CELL = document.createElement("td");
 
-                this.NEW__CELL.innerText = `${signal.valor} ${
-                  SIGNALS_UNIDADES[signal.tipoSignal]
-                }`;
+                if (signal.tipoSignal == 7) {
+                  // Mapeo de imágenes según el valor
+                  const imagenesBomba = {
+                    0: "../imgs/b_g_s.png", // no disponible
+                    1: "../imgs/b_g_g.png", // encendida
+                    2: "../imgs/b_g_r.png", // apagada
+                    3: "../imgs/b_g_b.png", // sobrecarga
+                  };
+
+                  // Crear elemento de imagen
+                  const imgElement = document.createElement("img");
+                  imgElement.src = imagenesBomba[signal.valor]
+                  imgElement.style.width = "15px"; // Ajustar tamaño si es necesario
+                  imgElement.style.height = "24px";
+
+                  // Agregar la imagen a la celda
+                  this.NEW__CELL.appendChild(imgElement);
+                } else {
+                  // Si no es la señal de tipo "Bomba", usa el valor original
+                  this.NEW__CELL.innerText = `${signal.valor} ${
+                    SIGNALS_UNIDADES[signal.tipoSignal]
+                  }`;
+                }
+
                 this.NEW__ROW.appendChild(this.NEW__CELL);
               }
             });
@@ -141,15 +165,15 @@ class TablaSimplificada {
 
       if (ROW.enlace === EnumEnlace.Celular) {
         SitiosCelular++;
-        this.$sitioCelular.innerText = `En línea por celular: ${SitiosCelular}`;
+        // this.$sitioCelular.innerText = `En línea por celular: ${SitiosCelular}`;
       }
       if (ROW.enlace === EnumEnlace.Radio) {
         SitiosRadio++;
-        this.$sitioRadio.innerText = `En línea por radio: ${SitiosRadio}`;
+        // this.$sitioRadio.innerText = `En línea por radio: ${SitiosRadio}`;
       }
       if (ROW.enlace === EnumEnlace.Hibrido) {
         SitiosHibridos++;
-        this.$sitioRC.innerText = `En línea por radio / celular: ${SitiosHibridos}`;
+        // this.$sitioRC.innerText = `En línea por radio / celular: ${SitiosHibridos}`;
       }
 
       this.$tbody.append(this.NEW__ROW);
@@ -259,6 +283,21 @@ class TablaSimplificada {
         this.FiltrarSignals(EnumTipoSignal.Gasto);
         break;
       case EnumTipoFiltro.tiempo:
+        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        break;
+      case EnumTipoFiltro.totalizado:
+        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        break;
+      case EnumTipoFiltro.voltaje:
+        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        break;
+      case EnumTipoFiltro.correinte:
+        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        break;
+      case EnumTipoFiltro.potenciaT:
+        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        break;
+      case EnumTipoFiltro.factorP:
         this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
         break;
     }
