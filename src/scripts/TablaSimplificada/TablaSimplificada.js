@@ -94,7 +94,7 @@ class TablaSimplificada {
     this.$tbody.innerHTML = "";
 
     this.DATOS__AUX.forEach((ROW) => {
-      console.log(ROW);
+      //console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
