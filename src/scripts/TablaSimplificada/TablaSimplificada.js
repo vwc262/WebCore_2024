@@ -24,6 +24,9 @@ var EnumTipoFiltro = {
   correinte: "correinte",
   potenciaT: "potenciaT",
   factorP: "factorP",
+  valvula: "valvula",
+  mantenimiento: "mantenimiento",
+  puerta: "puerta",
 };
 
 class TablaSimplificada {
@@ -47,13 +50,15 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    const SIGNALS_FILTRADAS = [1, 2, 10, 12, 14, 15, 20, 21, 22, 23, 24, 25]; // Climatologicas
+    // const SIGNALS_FILTRADAS = [1, 2, 10, 12, 14, 15, 20, 21, 22, 23, 24, 25]; // Climatologicas
+    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 5, 6, 7, 10, 14, 15]; // LINEA MORADA
     const SIGNALS_UNIDADES = {
       1: "m",
-      // 2: "kg/m²", // HIDROSTATICA
-      2: "hPa", // para climatologicas unicamente
+      2: "kg/m²", // HIDROSTATICA
+      // 2: "hPa", // para climatologicas unicamente
       3: "l/s",
       4: "m³",
+      6: "",
       7: "",
       10: "V",
       12: "",
@@ -89,7 +94,7 @@ class TablaSimplificada {
     this.$tbody.innerHTML = "";
 
     this.DATOS__AUX.forEach((ROW) => {
-      //console.log(ROW);
+      console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
@@ -116,12 +121,6 @@ class TablaSimplificada {
               this.NEW__CELL.classList.add(key);
               this.setCirculoEnlace(this.NEW__CELL, filteredRow.Tiempo);
               this.NEW__ROW.appendChild(this.NEW__CELL);
-
-              // Crear una celda separada para el valor
-              const enlaceValorCell = document.createElement("td");
-              enlaceValorCell.innerText = value; // Mostrar el valor de Enlace
-              enlaceValorCell.classList.add(`${key}-valor`);
-              this.NEW__ROW.appendChild(enlaceValorCell);
             } else {
               this.NEW__CELL.innerText =
                 key == "Tiempo" ? this.FormatearFecha(value) : value;
@@ -131,39 +130,71 @@ class TablaSimplificada {
             break;
 
           case "Signals":
-            filteredRow.Signals.forEach((signal) => {
-              if (SIGNALS_FILTRADAS.includes(signal.tipoSignal)) {
-                this.NEW__CELL = document.createElement("td");
+            SIGNALS_FILTRADAS.forEach((tipoSignal) => {
+              this.NEW__CELL = document.createElement("td");
 
-                if (signal.tipoSignal === 7) {
-                  // Mapeo de imágenes según el valor
-                  const imagenesBomba = {
-                    0: "../imgs/b_g_s.png", // no disponible
-                    1: "../imgs/b_g_g.png", // encendida
-                    2: "../imgs/b_g_r.png", // apagada
-                    3: "../imgs/b_g_b.png", // sobrecarga
-                  };
+              if (tipoSignal === 7) {
+                // Contenedor para múltiples bombas dentro del mismo td
+                const bombasContainer = document.createElement("div");
+                bombasContainer.classList.add("bombas-container");
 
-                  // Crear elemento de imagen para tipoSignal 7
-                  const imgElement = document.createElement("img");
-                  imgElement.src = imagenesBomba[signal.valor];
-                  imgElement.style.width = "15px";
-                  imgElement.style.height = "24px";
-                  this.NEW__CELL.appendChild(imgElement);
-                } else if (signal.tipoSignal === 10 || signal.tipoSignal === 12 || signal.tipoSignal === 14 || signal.tipoSignal === 15) {
-                  // Para Voltaje (tipoSignal 10), ignorar DentroRango
-                  this.NEW__CELL.innerText = `${signal.valor} ${
-                    SIGNALS_UNIDADES[signal.tipoSignal]
-                  }`;
+                // Filtrar todas las señales de tipoSignal 7
+                const bombas = filteredRow.Signals.filter(
+                  (s) => s.tipoSignal === tipoSignal
+                );
+
+                if (bombas.length > 0) {
+                  bombas.forEach((bomba) => {
+                    const imagenesBomba = {
+                      0: "../imgs/b_g_s.png", // no disponible
+                      1: "../imgs/b_g_g.png", // encendida
+                      2: "../imgs/b_g_r.png", // apagada
+                      3: "../imgs/b_g_b.png", // sobrecarga
+                    };
+
+                    // Crear elemento de imagen para cada bomba
+                    const imgElement = document.createElement("img");
+                    imgElement.src = imagenesBomba[bomba.valor];
+                    imgElement.style.width = "15px";
+                    imgElement.style.height = "24px";
+                    bombasContainer.appendChild(imgElement);
+                  });
+
+                  this.NEW__CELL.appendChild(bombasContainer);
                 } else {
-                  // Para las demás señales, verificar DentroRango
-                  this.NEW__CELL.innerText = signal.dentroRango
-                    ? `${signal.valor} ${SIGNALS_UNIDADES[signal.tipoSignal]}`
-                    : "---";
+                  // Si no hay bombas, mostrar "N/A"
+                  this.NEW__CELL.innerText = "N/A";
                 }
+              } else {
+                const signal = filteredRow.Signals.find(
+                  (s) => s.tipoSignal === tipoSignal
+                );
 
-                this.NEW__ROW.appendChild(this.NEW__CELL);
+                if (signal) {
+                  if (
+                    signal.tipoSignal === 6 ||
+                    signal.tipoSignal === 10 ||
+                    signal.tipoSignal === 12 ||
+                    signal.tipoSignal === 14 ||
+                    signal.tipoSignal === 15
+                  ) {
+                    // Ignorar DentroRango
+                    this.NEW__CELL.innerText = `${signal.valor} ${
+                      SIGNALS_UNIDADES[signal.tipoSignal]
+                    }`;
+                  } else {
+                    // Para las demás señales, verificar DentroRango
+                    this.NEW__CELL.innerText = signal.dentroRango
+                      ? `${signal.valor} ${SIGNALS_UNIDADES[signal.tipoSignal]}`
+                      : "---";
+                  }
+                } else {
+                  // Si no hay señal, mostrar "N/A"
+                  this.NEW__CELL.innerText = "N/A";
+                }
               }
+
+              this.NEW__ROW.appendChild(this.NEW__CELL);
             });
             break;
         }
@@ -306,19 +337,28 @@ class TablaSimplificada {
         this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
         break;
       case EnumTipoFiltro.totalizado:
-        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        this.FiltrarSignals(EnumTipoSignal.Totalizado);
         break;
       case EnumTipoFiltro.voltaje:
-        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        this.FiltrarSignals(EnumTipoSignal.Voltaje);
         break;
       case EnumTipoFiltro.correinte:
-        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        this.FiltrarSignals(EnumTipoSignal.CorrienteRango);
         break;
       case EnumTipoFiltro.potenciaT:
-        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        this.FiltrarSignals(EnumTipoSignal.PotenciaTotal);
         break;
       case EnumTipoFiltro.factorP:
-        this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
+        this.FiltrarSignals(EnumTipoSignal.PotenciaTotal);
+        break;
+      case EnumTipoFiltro.valvula:
+        this.FiltrarSignals(EnumTipoSignal.ValvulaAnalogica);
+        break;
+      case EnumTipoFiltro.mantenimiento:
+        this.FiltrarSignals(EnumTipoSignal.Mantenimiento);
+        break;
+      case EnumTipoFiltro.puerta:
+        this.FiltrarSignals(EnumTipoSignal.PuertaAbierta);
         break;
     }
     this.create();
@@ -333,7 +373,7 @@ class TablaSimplificada {
       else this.SinSignals.push(estacion);
     });
 
-    this.DATOS__AUX = this.SignalsFiltro.sort((a, b) => a.valor - b.valor).map(
+    this.DATOS__AUX = this.SignalsFiltro.sort((a, b) => b.valor - a.valor).map(
       (nivel) => this.DATOS__AUX.find((e) => e.idEstacion == nivel.idEstacion)
     );
 
