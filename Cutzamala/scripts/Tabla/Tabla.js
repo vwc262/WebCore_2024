@@ -173,6 +173,56 @@ class Tabla {
           estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PuertaAbierta)
             .length > 0
       ),
+      16: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.VoltajeRango)
+            .length > 0
+      ),
+      17: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.CorrienteRango)
+            .length > 0
+      ),
+      18: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.PotenciaTotal)
+            .length > 0
+      ),
+      19: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.FactorPotencia)
+            .length > 0
+      ),
+      20: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Precipitacion)
+            .length > 0
+      ),
+      21: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Temperatura)
+            .length > 0
+      ),
+      22: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Humedad)
+            .length > 0
+      ),
+      23: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Evaporacion)
+            .length > 0
+      ),
+      24: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Intensidad)
+            .length > 0
+      ),
+      25: Core.Instance.data.filter(
+        (estacion) =>
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Direccion)
+            .length > 0
+      ),
     };
 
     Object.keys(this.columns).forEach((key) => {
