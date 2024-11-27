@@ -50,8 +50,8 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
-    // const SIGNALS_FILTRADAS = [1, 2, 10, 12, 14, 15, 20, 21, 22, 23, 24, 25]; // Climatologicas
-    const SIGNALS_FILTRADAS = [1, 2, 3, 4, 5, 6, 7, 10, 14, 15]; // LINEA MORADA
+    const SIGNALS_FILTRADAS = [1, 2, 10, 12, 14, 15, 20, 21, 22, 23, 24, 25]; // Climatologicas
+    // const SIGNALS_FILTRADAS = [1, 2, 3, 4, 5, 6, 7, 10, 14, 15]; // LINEA MORADA
     const SIGNALS_UNIDADES = {
       1: "m",
       2: "kg/m²", // HIDROSTATICA
@@ -94,7 +94,7 @@ class TablaSimplificada {
     this.$tbody.innerHTML = "";
 
     this.DATOS__AUX.forEach((ROW) => {
-      //console.log(ROW);
+      console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
@@ -131,20 +131,20 @@ class TablaSimplificada {
 
           case "Signals":
             SIGNALS_FILTRADAS.forEach((tipoSignal) => {
-              this.NEW__CELL = document.createElement("td");
+              // Filtrar todas las señales que coincidan con el tipoSignal actual
+              const señales = filteredRow.Signals.filter(
+                (s) => s.tipoSignal === tipoSignal
+              );
 
-              if (tipoSignal === 7) {
-                // Contenedor para múltiples bombas dentro del mismo td
-                const bombasContainer = document.createElement("div");
-                bombasContainer.classList.add("bombas-container");
+              if (señales.length > 0) {
+                señales.forEach((signal) => {
+                  this.NEW__CELL = document.createElement("td");
 
-                // Filtrar todas las señales de tipoSignal 7
-                const bombas = filteredRow.Signals.filter(
-                  (s) => s.tipoSignal === tipoSignal
-                );
+                  if (tipoSignal === 7) {
+                    // Contenedor para múltiples bombas dentro del mismo td
+                    const bombasContainer = document.createElement("div");
+                    bombasContainer.classList.add("bombas-container");
 
-                if (bombas.length > 0) {
-                  bombas.forEach((bomba) => {
                     const imagenesBomba = {
                       0: "../imgs/b_g_s.png", // no disponible
                       1: "../imgs/b_g_g.png", // encendida
@@ -154,47 +154,43 @@ class TablaSimplificada {
 
                     // Crear elemento de imagen para cada bomba
                     const imgElement = document.createElement("img");
-                    imgElement.src = imagenesBomba[bomba.valor];
+                    imgElement.src = imagenesBomba[signal.valor];
                     imgElement.style.width = "15px";
                     imgElement.style.height = "24px";
                     bombasContainer.appendChild(imgElement);
-                  });
 
-                  this.NEW__CELL.appendChild(bombasContainer);
-                } else {
-                  // Si no hay bombas, mostrar "N/A"
-                  this.NEW__CELL.innerText = "N/A";
-                }
-              } else {
-                const signal = filteredRow.Signals.find(
-                  (s) => s.tipoSignal === tipoSignal
-                );
-
-                if (signal) {
-                  if (
-                    signal.tipoSignal === 6 ||
-                    signal.tipoSignal === 10 ||
-                    signal.tipoSignal === 12 ||
-                    signal.tipoSignal === 14 ||
-                    signal.tipoSignal === 15
-                  ) {
-                    // Ignorar DentroRango
-                    this.NEW__CELL.innerText = `${signal.valor} ${
-                      SIGNALS_UNIDADES[signal.tipoSignal]
-                    }`;
+                    this.NEW__CELL.appendChild(bombasContainer);
                   } else {
-                    // Para las demás señales, verificar DentroRango
-                    this.NEW__CELL.innerText = signal.dentroRango
-                      ? `${signal.valor} ${SIGNALS_UNIDADES[signal.tipoSignal]}`
-                      : "---";
+                    if (
+                      signal.tipoSignal === 6 ||
+                      signal.tipoSignal === 10 ||
+                      signal.tipoSignal === 12 ||
+                      signal.tipoSignal === 14 ||
+                      signal.tipoSignal === 15
+                    ) {
+                      // Ignorar DentroRango
+                      this.NEW__CELL.innerText = `${signal.valor} ${
+                        SIGNALS_UNIDADES[signal.tipoSignal]
+                      }`;
+                    } else {
+                      // Para las demás señales, verificar DentroRango
+                      this.NEW__CELL.innerText = signal.dentroRango
+                        ? `${signal.valor} ${
+                            SIGNALS_UNIDADES[signal.tipoSignal]
+                          }`
+                        : "---";
+                    }
                   }
-                } else {
-                  // Si no hay señal, mostrar "N/A"
-                  this.NEW__CELL.innerText = "N/A";
-                }
-              }
 
-              this.NEW__ROW.appendChild(this.NEW__CELL);
+                  this.NEW__CELL.classList.add(`signal-${tipoSignal}`);
+                  this.NEW__ROW.appendChild(this.NEW__CELL);
+                });
+              } else {
+                // Si no hay señales de este tipo, agregar una celda vacía
+                this.NEW__CELL = document.createElement("td");
+                this.NEW__CELL.innerText = "N/A";
+                this.NEW__ROW.appendChild(this.NEW__CELL);
+              }
             });
             break;
         }
