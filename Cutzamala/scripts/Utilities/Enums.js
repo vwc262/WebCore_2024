@@ -174,7 +174,7 @@ var EnumTipoSignalNomenclatura = {
   17: "CR",
   18: "PT",
   19: "FP",
-  20: "PRP",
+  20: "Pcpt",
   21: "TEMP",
   22: "HUM",
   23: "EVA",

@@ -7,50 +7,50 @@ export const Climatologicas = {
         estilosEstacion: [
             {
                 "IdEstacion": 1,
-                "Imagen": "position: absolute; left: 5px; top: 672px; width: 151px; height: 102px;",
-                "Etiqueta": "position: absolute;left: 124px;top: 738px;width: 151px;height: 102px;",
+                "Imagen": "position: absolute; left: 881px; top: 451px; width: 134px; height: 135px;",
+                "Etiqueta": "position: absolute;left: 900px;top: 571px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 2,
-                "Imagen": "position: absolute; left: 164px; top: 581px; width: 156px; height: 100px;",
-                "Etiqueta": "position: absolute;left: 281px;top: 644px;width: 151px;height: 102px;",
+                "Imagen": "position: absolute; left: 705px; top: 541px; width: 130px; height: 115px;",
+                "Etiqueta": "position: absolute;left: 705px;top: 641px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 3,
-                "Imagen": "position: absolute; left: 297px; top: 491px; width: 125px; height: 93px;",
-                "Etiqueta": "position: absolute;left: 197px;top: 491px;width: 151px;height: 102px;",
+                "Imagen": "position: absolute; left: 324px; top: 570px; width: 131px; height: 104px;",
+                "Etiqueta": "position: absolute;left: 324px;top: 670px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 4,
-                "Imagen": "position: absolute; left: 405px; top: 445px; width: 134px; height: 78px;",
-                "Etiqueta": "position: absolute;left: 504px;top: 496px;width: 151px;height: 102px;",
+                "Imagen": "position: absolute; left: 573px; top: 740px; width: 162px; height: 138px;",
+                "Etiqueta": "position: absolute;left: 593px;top: 860px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 5,
-                "Imagen": "position: absolute; left: 517px; top: 395px; width: 140px; height: 64px;",
-                "Etiqueta": "position: absolute;left: 502px;top: 350px;width: 151px;height: 102px;",
+                "Imagen": "position: absolute; left: 919px; top: 380px; width: 117px; height: 96px;",
+                "Etiqueta": "position: absolute;left: 919px;top: 280px;width: 151px;height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 6,
-                "Imagen": "position: absolute; left: 206px; top: 425px; width: 156px; height: 63px;",
-                "Etiqueta": "position: absolute; left: 206px; top: 374px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 94px; top: 491px; width: 129px; height: 100px;",
+                "Etiqueta": "position: absolute; left: 94px; top: 591px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 7,
-                "Imagen": "position: absolute; left: 206px; top: 425px; width: 156px; height: 63px;",
-                "Etiqueta": "position: absolute; left: 206px; top: 374px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 33px; top: 408px; width: 117px; height: 89px;",
+                "Etiqueta": "position: absolute; left: 33px; top: 308px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 8,
-                "Imagen": "position: absolute; left: 206px; top: 425px; width: 156px; height: 63px;",
-                "Etiqueta": "position: absolute; left: 206px; top: 374px; width: 151px; height: 102px;",
+                "Imagen": "position: absolute; left: 1283px; top: 406px; width: 131px; height: 128px;",
+                "Etiqueta": "position: absolute; left: 1283px; top: 526px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
         ],

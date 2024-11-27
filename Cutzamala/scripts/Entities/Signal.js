@@ -152,7 +152,7 @@ class Signal {
      * @returns {string} nomenclatura (ejem. N1)
      */
     GetNomenclaturaSignal() {
-        return `${EnumTipoSignalNomenclatura[this.TipoSignal]}${this.Ordinal + 1}`;
+        return `${this.Nombre}`;
     }
 
     GetValorColor() {
