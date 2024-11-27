@@ -204,6 +204,25 @@ const EnumUnidadesSignal = {
   25: "°",
 };
 
+const EnumUnidadesSignalClima = {
+  1: "m",
+  2: "hPA",
+  3: "<sup>l</sup>/<sub>s</sub>",
+  4: "m<sup>3</sup>",
+  5: "%",
+  10: "V",
+  16: "V",
+  17: "A",
+  18: "W",
+  19: "%",
+  20: "<sup>mm</sup>/<sup>H</sup>",
+  21: "°C",
+  22: "%",
+  23: "%",
+  24: "km/h",
+  25: "°N",
+};
+
 /**
  * @returns {EnumValorValvulaDiscreta}
  */
@@ -326,6 +345,7 @@ export {
   EnumProyecto,
   EnumControllerMapeo,
   EnumUnidadesSignal,
+  EnumUnidadesSignalClima,
   EnumNombreProyecto,
   EnumTipoSignal,
   EnumTipoSignalString,
