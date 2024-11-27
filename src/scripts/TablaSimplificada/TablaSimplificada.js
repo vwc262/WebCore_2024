@@ -19,6 +19,14 @@ var EnumTipoFiltro = {
   bomba: "bomba",
   tiempo: "tiempo",
   tipoEnlace: "tipoEnlace",
+  totalizado: "totalizado",
+  voltaje: "voltaje",
+  correinte: "correinte",
+  potenciaT: "potenciaT",
+  factorP: "factorP",
+  valvula: "valvula",
+  mantenimiento: "mantenimiento",
+  puerta: "puerta",
 };
 
 class TablaSimplificada {
@@ -42,12 +50,39 @@ class TablaSimplificada {
   }
 
   CrearTabla() {
+    const SIGNALS_FILTRADAS = [1, 2, 10, 12, 14, 15, 20, 21, 22, 23, 24, 25]; // Climatologicas
+    // const SIGNALS_FILTRADAS = [1, 2, 3, 4, 5, 6, 7, 10, 14, 15]; // LINEA MORADA
+    const SIGNALS_UNIDADES = {
+      1: "m",
+      2: "kg/m²", // HIDROSTATICA
+      // 2: "hPa", // para climatologicas unicamente
+      3: "l/s",
+      4: "m³",
+      6: "",
+      7: "",
+      10: "V",
+      12: "",
+      14: "",
+      15: "",
+      16: "V",
+      17: "A",
+      18: "W",
+      19: "%",
+      20: "mm",
+      21: "°C",
+      22: "%",
+      23: "W/m²",
+      24: "km/h",
+      25: "°N",
+    };
+
     this.$tbody = document.getElementById("tbody");
     this.$sitiosOnline = document.getElementById("online");
     this.$sitiosOffline = document.getElementById("offline");
     this.$sitioRadio = document.querySelector("#sitioRadio");
     this.$sitioCelular = document.querySelector("#sitioCelular");
     this.$sitioRC = document.querySelector("#sitioRC");
+    this.$thead_tr = document.querySelector("#tr_header");
 
     let totalOnline = 0;
     let totalOffline = 0;
@@ -57,10 +92,9 @@ class TablaSimplificada {
     let SitiosHibridos = 0;
 
     this.$tbody.innerHTML = "";
-    // console.log(this.DATOS__AUX);
 
     this.DATOS__AUX.forEach((ROW) => {
-      // console.log(ROW);
+      console.log(ROW);
 
       // Crear un objeto con los campos deseados
       const filteredRow = {
@@ -74,166 +108,93 @@ class TablaSimplificada {
 
       this.NEW__ROW = document.createElement("tr");
 
-      // Itera sobre cada valor en el objeto de Row
       Object.entries(filteredRow).forEach(([key, value]) => {
-        // Crea un nuevo elemento del tipo <td>
         this.NEW__CELL = document.createElement("td");
 
-        // Asigna el valor del contenido del <td> después de la validación
-        this.NEW__CELL.textContent = this.ValidarPresion(key, value);
-
-        // Validar y dar formato al valor si es la fecha
-        if (key === "Tiempo") {
-          this.NEW__CELL.classList.add("time");
-          let valorFormateado = this.FormatearFecha(value);
-          this.NEW__CELL.textContent = valorFormateado;
-
-          let tiempoActual = new Date(); // Hora actual
-          let tiempoFila = new Date(value); // Hora de la fila
-          let diferenciaTiempos = (tiempoActual - tiempoFila) / (1000 * 60); // Diferencia en minutos
-
-          // Redondear la diferencia de tiempos
-          let diferenciaRedondeada = Math.round(diferenciaTiempos);
-
-          if (diferenciaRedondeada > 15) {
-            this.NEW__ROW.style.background = "rgba(129, 11, 11,0.2)";
-            //console.log("Diferencia mayor a 15");
-          }
-          // console.log(tiempoActual);
-          // console.log(tiempoFila);
-          // console.log(diferenciaRedondeada);
-        }
-
-        if (key === "Nombre") {
-          this.NEW__CELL.style.fontWeight = "bold";
-          this.NEW__CELL.style.textTransform = "uppercase";
-          this.NEW__CELL.classList.add("log");
-          this.NEW__CELL.setAttribute("id", filteredRow.IdEstacion);
-          this.NEW__CELL.removeEventListener("click", this.ModalNotas);
-          this.NEW__CELL.addEventListener("click", this.ModalNotas);
-        }
-
-        if (key === "Signals") {
-          if (Core.Instance.IdProyecto !== EnumProyecto.Lerma) {
-            const niveles = ROW.signals.filter(
-              (nivel) => nivel.tipoSignal == EnumTipoSignal.Nivel
-            );
-            if (niveles.length > 0) {
-              // Añade el <td> al <tr>
-              this.NEW__CELL.innerText = this.FormatearGasto(niveles[0].valor);
+        switch (key) {
+          case "Enlace":
+          case "IdEstacion":
+          case "Nombre":
+          case "Tiempo":
+            if (key === "Enlace") {
+              // Crear una celda para el círculo
+              this.NEW__CELL.classList.add(key);
+              this.setCirculoEnlace(this.NEW__CELL, filteredRow.Tiempo);
               this.NEW__ROW.appendChild(this.NEW__CELL);
             } else {
-              this.NEW__CELL.innerText = "---";
+              this.NEW__CELL.innerText =
+                key == "Tiempo" ? this.FormatearFecha(value) : value;
+              this.NEW__CELL.classList.add(key);
               this.NEW__ROW.appendChild(this.NEW__CELL);
             }
-            this.NEW__CELL = document.createElement("td");
-          } else {
-            // Elimina el encabezado de la tabla con id "nivel"
-            const headerNivel = document.getElementById("nivel");
-            if (headerNivel) {
-              headerNivel.style.display = "none";
-            }
-          }
+            break;
 
-          const presiones = ROW.signals.filter(
-            (presion) => presion.tipoSignal == EnumTipoSignal.Presion
-          );
-          const bombas = ROW.signals.filter(
-            (bba) => bba.tipoSignal == EnumTipoSignal.Bomba
-          );
+          case "Signals":
+            SIGNALS_FILTRADAS.forEach((tipoSignal) => {
+              // Filtrar todas las señales que coincidan con el tipoSignal actual
+              const señales = filteredRow.Signals.filter(
+                (s) => s.tipoSignal === tipoSignal
+              );
 
-          const gastos = ROW.signals.filter(
-            (gastosSignal) => gastosSignal.tipoSignal == EnumTipoSignal.Gasto
-          );
+              if (señales.length > 0) {
+                señales.forEach((signal) => {
+                  this.NEW__CELL = document.createElement("td");
 
-          if (presiones.length > 0) {
-            // Añade el <td> al <tr>
-            this.NEW__CELL.innerText = this.ValidarPresion(
-              "ValorPresion",
-              presiones[0].valor
-            );
+                  if (tipoSignal === 7) {
+                    // Contenedor para múltiples bombas dentro del mismo td
+                    const bombasContainer = document.createElement("div");
+                    bombasContainer.classList.add("bombas-container");
 
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          } else {
-            this.NEW__CELL.innerText = "---";
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          }
+                    const imagenesBomba = {
+                      0: "../imgs/b_g_s.png", // no disponible
+                      1: "../imgs/b_g_g.png", // encendida
+                      2: "../imgs/b_g_r.png", // apagada
+                      3: "../imgs/b_g_b.png", // sobrecarga
+                    };
 
-          this.NEW__CELL = document.createElement("td");
+                    // Crear elemento de imagen para cada bomba
+                    const imgElement = document.createElement("img");
+                    imgElement.src = imagenesBomba[signal.valor];
+                    imgElement.style.width = "15px";
+                    imgElement.style.height = "24px";
+                    bombasContainer.appendChild(imgElement);
 
-          if (gastos.length > 0 && gastos[0].valor > 0) {
-            this.NEW__CELL.innerText = this.ValidarPresion(
-              "ValorGasto",
-              gastos[0].valor
-            );
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          } else {
-            this.NEW__CELL.innerText = "---";
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          }
+                    this.NEW__CELL.appendChild(bombasContainer);
+                  } else {
+                    if (
+                      signal.tipoSignal === 6 ||
+                      signal.tipoSignal === 10 ||
+                      signal.tipoSignal === 12 ||
+                      signal.tipoSignal === 14 ||
+                      signal.tipoSignal === 15
+                    ) {
+                      // Ignorar DentroRango
+                      this.NEW__CELL.innerText = `${signal.valor} ${
+                        SIGNALS_UNIDADES[signal.tipoSignal]
+                      }`;
+                    } else {
+                      // Para las demás señales, verificar DentroRango
+                      this.NEW__CELL.innerText = signal.dentroRango
+                        ? `${signal.valor} ${
+                            SIGNALS_UNIDADES[signal.tipoSignal]
+                          }`
+                        : "---";
+                    }
+                  }
 
-          this.NEW__CELL = document.createElement("td");
-
-          if (bombas.length > 0) {
-            bombas.forEach((bba) => {
-              this.$imgBBA = document.createElement("img");
-              this.$imgBBA.classList.add("valor-Bomba");
-              this.$imgBBA.style.filter = "hue-rotate(0deg)";
-              switch (bba.valor) {
-                case 0:
-                  this.$imgBBA.setAttribute("src", "../imgs/b_g_s.png");
-                  break;
-                case 1:
-                  this.$imgBBA.setAttribute("src", "../imgs/b_g_g.png");
-                  break;
-                case 2:
-                  this.$imgBBA.setAttribute("src", "../imgs/b_g_r.png");
-                  break;
-                case 3:
-                  this.$imgBBA.setAttribute("src", "../imgs/b_g_b.png");
-                  break;
-                case 4:
-                  this.$imgBBA.setAttribute("src", "../imgs/b_g_r.png");
-                  this.$imgBBA.style.filter = "hue-rotate(295deg)";
-                  break;
+                  this.NEW__CELL.classList.add(`signal-${tipoSignal}`);
+                  this.NEW__ROW.appendChild(this.NEW__CELL);
+                });
+              } else {
+                // Si no hay señales de este tipo, agregar una celda vacía
+                this.NEW__CELL = document.createElement("td");
+                this.NEW__CELL.innerText = "N/A";
+                this.NEW__ROW.appendChild(this.NEW__CELL);
               }
-              this.NEW__CELL.appendChild(this.$imgBBA);
             });
-          } else {
-            this.NEW__CELL.innerText = "---";
-            this.NEW__CELL.style.height = "20px";
-            this.NEW__ROW.appendChild(this.NEW__CELL);
-          }
+            break;
         }
-
-        // Agregar clase según la clave y valor
-        this.addClassBombaYEnlace(this.NEW__CELL, key, value, ROW);
-
-        // Añade el <td> al <tr>
-        this.NEW__ROW.appendChild(this.NEW__CELL);
       });
-
-      // Crear una nueva celda <td> para el campo de Enlace
-      this.enlaceCell = document.createElement("td");
-
-      // Pintar el texto basado en los valores del enlace
-      // switch (ROW.enlace) {
-      //   case 0:
-      //     this.enlaceCell.textContent = "---";
-      //     break;
-      //   case 1:
-      //     this.enlaceCell.textContent = "Radio";
-      //     break;
-      //   case 2:
-      //     this.enlaceCell.textContent = "Celular";
-      //     break;
-      //   case 3:
-      //     this.enlaceCell.textContent = "Radio / Celular";
-      //     break;
-      // }
-
-      // Añadir la nueva celda al <tr>
-      // this.NEW__ROW.appendChild(this.enlaceCell);
 
       const currentTIME = new Date();
       const dataTIME = new Date(ROW.tiempo);
@@ -251,15 +212,15 @@ class TablaSimplificada {
 
       if (ROW.enlace === EnumEnlace.Celular) {
         SitiosCelular++;
-        this.$sitioCelular.innerText = `En línea por celular: ${SitiosCelular}`;
+        // this.$sitioCelular.innerText = `En línea por celular: ${SitiosCelular}`;
       }
       if (ROW.enlace === EnumEnlace.Radio) {
         SitiosRadio++;
-        this.$sitioRadio.innerText = `En línea por radio: ${SitiosRadio}`;
+        // this.$sitioRadio.innerText = `En línea por radio: ${SitiosRadio}`;
       }
       if (ROW.enlace === EnumEnlace.Hibrido) {
         SitiosHibridos++;
-        this.$sitioRC.innerText = `En línea por radio / celular: ${SitiosHibridos}`;
+        // this.$sitioRC.innerText = `En línea por radio / celular: ${SitiosHibridos}`;
       }
 
       this.$tbody.append(this.NEW__ROW);
@@ -301,68 +262,21 @@ class TablaSimplificada {
     return value;
   }
 
-  addClassBombaYEnlace(element, key, value, ROW) {
-    switch (key) {
-      case "Enlace":
-        element.textContent = "";
-        this.NEW__DIV = document.createElement("div");
+  setCirculoEnlace(element, value) {
+    element.textContent = "";
+    this.NEW__DIV = document.createElement("div");
 
-        const currentTIME = new Date();
-        const dataTIME = new Date(ROW.tiempo);
-        const timeDIFERENCIA = Math.abs(currentTIME - dataTIME);
-        const diferenciaMINUTOS = Math.floor(timeDIFERENCIA / (1000 * 60));
+    const currentTIME = new Date();
+    const dataTIME = new Date(value);
+    const timeDIFERENCIA = Math.abs(currentTIME - dataTIME);
+    const diferenciaMINUTOS = Math.floor(timeDIFERENCIA / (1000 * 60));
 
-        if (diferenciaMINUTOS > 15) {
-          this.NEW__DIV.classList.add("enlace-inactivo");
-          element.appendChild(this.NEW__DIV);
-        } else {
-          this.NEW__DIV.classList.add("enlace-activo");
-          element.appendChild(this.NEW__DIV);
-        }
-        break;
-
-      case "ValorBomba":
-        if (value >= 0 && value <= 3) {
-          element.classList.add(`valor-Bomba`);
-          element.textContent = "";
-          const newDiv = document.createElement("div");
-          switch (value) {
-            case 0:
-              element.appendChild(newDiv);
-              newDiv.classList.add("valor-Bomba");
-              newDiv.style.background =
-                "url('../tablasimplificada/assets/b_g_s.png')";
-              break;
-            case 1:
-              element.appendChild(newDiv);
-              newDiv.classList.add("valor-Bomba");
-              newDiv.style.background =
-                "url('../tablasimplificada/assets/b_g_g.png')";
-              break;
-            case 2:
-              element.appendChild(newDiv);
-              newDiv.classList.add("valor-Bomba");
-              newDiv.style.background =
-                "url('../tablasimplificada/assets/b_g_r.png')";
-              break;
-            case 3:
-              element.appendChild(newDiv);
-              newDiv.classList.add("valor-Bomba");
-              newDiv.style.background =
-                "url('../tablasimplificada/assets/b_g_b.png')";
-              break;
-            default:
-              break;
-          }
-        } else if (value === -9) {
-          const newDiv = document.createElement("div");
-          element.appendChild(newDiv);
-          element.textContent = "---";
-          element.style.height = "20px";
-        }
-        break;
-      default:
-        break;
+    if (diferenciaMINUTOS > 15) {
+      this.NEW__DIV.classList.add("enlace-inactivo");
+      element.appendChild(this.NEW__DIV);
+    } else {
+      this.NEW__DIV.classList.add("enlace-activo");
+      element.appendChild(this.NEW__DIV);
     }
   }
 
@@ -418,6 +332,30 @@ class TablaSimplificada {
       case EnumTipoFiltro.tiempo:
         this.DATOS__AUX.sort((a, b) => new Date(b.tiempo) - new Date(a.tiempo));
         break;
+      case EnumTipoFiltro.totalizado:
+        this.FiltrarSignals(EnumTipoSignal.Totalizado);
+        break;
+      case EnumTipoFiltro.voltaje:
+        this.FiltrarSignals(EnumTipoSignal.Voltaje);
+        break;
+      case EnumTipoFiltro.correinte:
+        this.FiltrarSignals(EnumTipoSignal.CorrienteRango);
+        break;
+      case EnumTipoFiltro.potenciaT:
+        this.FiltrarSignals(EnumTipoSignal.PotenciaTotal);
+        break;
+      case EnumTipoFiltro.factorP:
+        this.FiltrarSignals(EnumTipoSignal.PotenciaTotal);
+        break;
+      case EnumTipoFiltro.valvula:
+        this.FiltrarSignals(EnumTipoSignal.ValvulaAnalogica);
+        break;
+      case EnumTipoFiltro.mantenimiento:
+        this.FiltrarSignals(EnumTipoSignal.Mantenimiento);
+        break;
+      case EnumTipoFiltro.puerta:
+        this.FiltrarSignals(EnumTipoSignal.PuertaAbierta);
+        break;
     }
     this.create();
   }
@@ -431,7 +369,7 @@ class TablaSimplificada {
       else this.SinSignals.push(estacion);
     });
 
-    this.DATOS__AUX = this.SignalsFiltro.sort((b, a) => a.valor - b.valor).map(
+    this.DATOS__AUX = this.SignalsFiltro.sort((a, b) => b.valor - a.valor).map(
       (nivel) => this.DATOS__AUX.find((e) => e.idEstacion == nivel.idEstacion)
     );
 

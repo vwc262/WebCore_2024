@@ -84,7 +84,7 @@ tbody tr {
 }
 
 tbody tr td {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .pozos__enlinea {
@@ -164,6 +164,9 @@ tbody tr td {
     background-position: center !important;
     margin: auto;
   }
+  tbody tr td {
+    min-width: 50px;
+}
 }
 
 .header_titleImg {
@@ -314,4 +317,10 @@ tbody tr td {
 .log {
   cursor: pointer;
   pointer-events: auto;
+}
+
+.Nombre {
+  font-weight: bolder;
+  font-size: 15px;
+  cursor: pointer;
 }
