@@ -77,8 +77,8 @@ export const Climatologicas = {
     },
     estacionesSinParticular: [],
     customPositionsTable: {
-        offsetLeft: 50,
-        offsetTop: -2.5,
-        curvatura: 4,
+        offsetLeft: 60,
+        offsetTop: -3.5,
+        curvatura: 2.2,
     }
 }

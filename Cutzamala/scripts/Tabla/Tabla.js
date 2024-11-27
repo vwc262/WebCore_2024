@@ -396,13 +396,13 @@ class Tabla {
                   rowVariables.rowContainer
                 );
                 this.curvedRowsVariables[indexCurvedRows].style.background =
-                  "linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%)";
+                  "transparent";
               } else {
                 this.curvedRowsVariables[indexCurvedRows].appendChild(
                   this.extraRows[this.extraRows.length - 1].rowContainer
                 );
                 this.curvedRowsVariables[indexCurvedRows].style.background =
-                  "linear-gradient(90deg, rgba(24, 64, 89, 0.5) 0%, rgba(24, 64, 89, 0.3) 60%, rgba(0, 0, 0, 0) 90%)";
+                  "transparent";
               }
             }
 
@@ -423,7 +423,7 @@ class Tabla {
         );
 
         this.curvedRowsVariables[indexCurvedRows].style.background =
-          "linear-gradient(90deg, rgba(70, 95, 138, 0.35) 0%, rgba(70, 95, 138, 0.35) 60%, rgba(0, 0, 0, 0.75) 90%)";
+          "transparent"
 
         row.Update();
         rowVariables.Update(indexRow);
