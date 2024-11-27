@@ -20,7 +20,13 @@ const EnumProyecto = {
   Lumbreras: 8,
   SantaCatarina: 9,
   Chiconautla: 10,
-  LermaAnexo: 11
+  Sorpasso: 11,
+  EscudoNacional: 12,
+  ClimatologicasHidrometricas: 13,
+  Teoloyucan: 14,
+  Pruebas: 15,
+  LineaMorada: 16,
+  PozosAIFA: 17,
 };
 /**
  * @returns NombreProyecto
@@ -34,10 +40,16 @@ const EnumNombreProyecto = {
   5: "TanquesChalmita",
   6: "Encharcamientos",
   7: "SistemaCutzamala", //SistemaCutzamala
-  8: "Lumbreras",
+  8: "PonchoGAM",
   9: "TanquesSantaCatarina",
   10: "PozosChiconautla",
-  11: "LermaAnexo"
+  11: "Sorpasso",
+  12: "EscudoNacional",
+  13: "ClimatologicasHidrometricas",
+  14: "Teoloyucan",
+  15: "Pruebas",
+  16: "LineaMorada",
+  17: "PozosAIFA"
 };
 
 /**
@@ -49,13 +61,19 @@ const EnumNombreProyectoFolder = {
   "Padierna2024": 2,
   "PozosSistemaLerma2024": 3,
   "Yaqui2024": 4,
-  "prueba": 5,
-  "Encharcamientos": 6,
-  "SistemaCutzamala": 7,
-  "Lumbreras": 8,
+  "Lerma2024": 5,
+  "Encharcamientos2024": 6,
+  "SistemaCutzamala2024": 7,
+  "Lumbreras2024": 8,
   "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
-  "LermaAnexo": 11
+  "Sorpasso2024": 11,
+  "EscudoNacional2024": 12,
+  "ClimatologicasHidrometricas2024": 13,
+  "Teoloyucan2024": 14,
+  "Pruebas2024": 15,
+  "LineaMorada2024": 16,
+  "PozosAIFA2024": 17
 };
 
 /**
@@ -88,6 +106,16 @@ var EnumTipoSignal = {
   Tiempo: 13,
   Mantenimiento: 14,
   PuertaAbierta: 15,
+  VoltajeRango: 16,
+  CorrienteRango: 17,
+  PotenciaTotal: 18,
+  FactorPotencia: 19,
+  Precipitacion: 20,
+  Temperatura: 21,
+  Humedad: 22,
+  RadiacionSolar: 23,
+  Intensidad: 24,
+  Direccion: 25,
 };
 
 /**
@@ -110,6 +138,16 @@ var EnumTipoSignalString = {
   13: "Tiempo",
   14: "Mantenimiento",
   15: "PuertaAbierta",
+  16: "VoltajeRango",
+  17: "CorrienteRango",
+  18: "Potencia Total",
+  19: "Factor Potencia",
+  20: "Precipitacion",
+  21: "Temperatura",
+  22: "Humedad",
+  23: "RadiacionSolar",
+  24: "Intensidad",
+  25: "Direccion",
 };
 
 /**
@@ -119,7 +157,7 @@ var EnumTipoSignalNomenclatura = {
   0: "D",
   1: "N",
   2: "P",
-  3: "Q",
+  3: "G",
   4: "T",
   5: "VA",
   6: "VD",
@@ -132,6 +170,16 @@ var EnumTipoSignalNomenclatura = {
   13: "T",
   14: "M",
   15: "PA",
+  16: "VR",
+  17: "CR",
+  18: "PT",
+  19: "FP",
+  20: "PRP",
+  21: "TEMP",
+  22: "HUM",
+  23: "EVA",
+  24: "INTS",
+  25: "DIR",
 };
 
 /**
@@ -140,10 +188,20 @@ var EnumTipoSignalNomenclatura = {
 const EnumUnidadesSignal = {
   1: "m",
   2: "<sup>kg</sup>/<sub>cm<sup>2</sup></sub>",
-  3: "m<sup>3</sup>/s",
+  3: "<sup>l</sup>/<sub>s</sub>",
   4: "m<sup>3</sup>",
   5: "%",
   10: "V",
+  16: "V",
+  17: "A",
+  18: "W",
+  19: "%",
+  20: "<sup>mm</sup>/<sup>H</sup>",
+  21: "°C",
+  22: "%",
+  23: "%",
+  24: "<sup>Km</sup>/<sup>H</sup>",
+  25: "°",
 };
 
 /**
@@ -195,9 +253,9 @@ const EnumPerillaBombaString = {
  * @returns {EnumPerillaGeneral}
  */
 const EnumPerillaGeneralString = {
-  0: 'Manual', // variador
-  1: 'Remoto', // apagado
-  2: 'Automatismo', // UTR
+  0: 'Manual',
+  1: 'Remoto',
+  2: 'Automatismo',
 };
 
 /**
@@ -260,7 +318,7 @@ const EnumEstadoComando = {
 const EnumTipoPolygon = {
   Default: 0,
   Hidraulico: 1,
-  Radio: 2, 
+  Radio: 2,
 }
 
 export {
