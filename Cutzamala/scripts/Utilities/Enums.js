@@ -187,7 +187,7 @@ var EnumTipoSignalNomenclatura = {
  */
 const EnumUnidadesSignal = {
   1: "m",
-  2: "<sup>kg</sup>/<sub>cm<sup>2</sup></sub>",
+  2: "hPA",
   3: "<sup>l</sup>/<sub>s</sub>",
   4: "m<sup>3</sup>",
   5: "%",
@@ -196,12 +196,12 @@ const EnumUnidadesSignal = {
   17: "A",
   18: "W",
   19: "%",
-  20: "<sup>mm</sup>/<sup>H</sup>",
+  20: "mm",
   21: "°C",
   22: "%",
   23: "%",
-  24: "<sup>Km</sup>/<sup>H</sup>",
-  25: "°",
+  24: "Km/h",
+  25: "°N",
 };
 
 const EnumUnidadesSignalClima = {
@@ -215,7 +215,7 @@ const EnumUnidadesSignalClima = {
   17: "A",
   18: "W",
   19: "%",
-  20: "<sup>mm</sup>/<sup>H</sup>",
+  20: "mm",
   21: "°C",
   22: "%",
   23: "%",
