@@ -128,9 +128,37 @@ class Signal {
             return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
 
         }
+        else if(this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad ||  this.TipoSignal == EnumTipoSignal.Direccion){
+            let value = `${parseFloat(this.Valor).toFixed(0)}`;
+
+            if (value < 0)
+                value = `${parseFloat(0).toFixed(2)}`;
+
+            let _unidades = '';
+
+            if (unidades) {
+                _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+            }
+
+            return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+        }
+        else if(this.TipoSignal == EnumTipoSignal.Temperatura || this.TipoSignal == EnumTipoSignal.Intensidad){
+            let value = `${parseFloat(this.Valor).toFixed(1)}`;
+
+            if (value < 0)
+                value = `${parseFloat(0).toFixed(1)}`;
+
+            let _unidades = '';
+
+            if (unidades) {
+                _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+            }
+
+            return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+        }
         else {
             if (this.DentroRango == 1) {
-                let value = `${parseFloat(this.Valor).toFixed(3)}`;
+                let value = `${parseFloat(this.Valor).toFixed(2)}`;
                 let _unidades = '';
 
                 if (unidades) {
@@ -192,7 +220,7 @@ class Signal {
             case EnumTipoSignal.Intensidad:
             case EnumTipoSignal.Direccion:
                 if (this.DentroRango == 1)
-                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'black' : this.DentroLimite == EnumDentroLimite.Alto ? 'black' : 'black'}`;
+                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'white' : this.DentroLimite == EnumDentroLimite.Alto ? 'white' : 'white'}`;
 
                 break;
             default:
