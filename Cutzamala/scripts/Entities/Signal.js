@@ -192,7 +192,7 @@ class Signal {
             case EnumTipoSignal.Intensidad:
             case EnumTipoSignal.Direccion:
                 if (this.DentroRango == 1)
-                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'black' : this.DentroLimite == EnumDentroLimite.Alto ? '#fa8c8c' : 'rgb(255, 255, 255)'}`;
+                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'black' : this.DentroLimite == EnumDentroLimite.Alto ? 'black' : 'black'}`;
 
                 break;
             default:
