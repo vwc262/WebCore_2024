@@ -210,7 +210,7 @@ class Tabla {
       ),
       23: Core.Instance.data.filter(
         (estacion) =>
-          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Evaporacion)
+          estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.RadiacionSolar)
             .length > 0
       ),
       24: Core.Instance.data.filter(

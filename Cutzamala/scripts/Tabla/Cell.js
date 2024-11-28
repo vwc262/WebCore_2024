@@ -26,7 +26,7 @@ class Cell {
 
         this.signalNombre = CreateElement({
             nodeElement: 'div',
-            attributes: { class: 'signal-nombre', style: `color: ${this.moreThanOne ? 'cyan' : 'white'};` },
+            attributes: { class: 'signal-nombre', style: `color: ${this.moreThanOne ? 'goldenrod' : 'white'};` },
             innerText: `${this.moreThanOne ? this.signal.GetNomenclaturaSignal() : ''}`,
         });
 

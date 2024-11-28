@@ -38,7 +38,7 @@ class Signal {
             case EnumTipoSignal.Precipitacion:
             case EnumTipoSignal.Temperatura:
             case EnumTipoSignal.Humedad:
-            case EnumTipoSignal.Evaporacion:
+            case EnumTipoSignal.RadiacionSolar:
             case EnumTipoSignal.Intensidad:
             case EnumTipoSignal.Direccion:
                 valorReturn = signal.valor < 0 ? 0 : signal.valor;

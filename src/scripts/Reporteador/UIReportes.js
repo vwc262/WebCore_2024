@@ -44,7 +44,7 @@ var UIReportes = {
     20: "Precipitacion",
     21: "Temperatura",
     22: "Humedad",
-    23: "Evaporacion",
+    23: "Radiacion",
     24: "Intensidad",
     25: "Direccion",
   },

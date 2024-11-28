@@ -214,7 +214,7 @@ class Particular {
       signal.TipoSignal == EnumTipoSignal.Precipitacion ||
       signal.TipoSignal == EnumTipoSignal.Temperatura ||
       signal.TipoSignal == EnumTipoSignal.Humedad ||
-      signal.TipoSignal == EnumTipoSignal.Evaporacion ||
+      signal.TipoSignal == EnumTipoSignal.RadiacionSolar ||
       signal.TipoSignal == EnumTipoSignal.Intensidad ||
       signal.TipoSignal == EnumTipoSignal.Direccion
 
