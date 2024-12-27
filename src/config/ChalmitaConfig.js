@@ -2,7 +2,7 @@ export const ChalmitaConfig = {
     doPanX: true,
     doPanY: true,
     widthRender: 1920,
-    heightRender: 1080,
+    heightRender: 2500,
     perfil: {
         estilosEstacion: [
             {
