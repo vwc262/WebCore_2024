@@ -1,6 +1,6 @@
 export const ChalmitaConfig = {
-    doPanX: false,
-    doPanY: false,
+    doPanX: true,
+    doPanY: true,
     widthRender: 1920,
     heightRender: 1080,
     perfil: {
