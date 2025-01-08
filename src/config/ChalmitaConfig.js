@@ -437,5 +437,29 @@ export const ChalmitaConfig = {
                     css: "position:absolute;top: 1213px;left: 1265px;transform: rotate(133deg);border:solid transparent;border-radius:10px;width: 120px;height: 15px" },
             ],
         },
+        Patch: function () {
+            const containerPadre = document.querySelector(".estacionesContainer")
+            let bombasParche = [{ids: [247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262]}, {ids: [27, 28, 29, 30]}];
+            let sitiosParchecss = [{position: 'absolute', top: '1551px', left: '493px', width: '373px', height: '206px', pointerEvents: 'none'}, {position: 'absolute', top: '972px', left: '1225px', width: '72px', height: '28px', pointerEvents: 'none'}];
+
+            bombasParche.forEach((bombasSitio, index) => {
+                var contenedor = document.createElement('div');
+                const css = sitiosParchecss[index];
+                let keys = Object.keys(css);
+
+                keys.forEach((k) => {
+                    contenedor.style[k] = css[k];
+                })
+
+                var idBombas = bombasSitio.ids;
+                idBombas.forEach((idBomba) => {
+                    var bomba = document.querySelector(`#idBomba_${idBomba}`);
+                    contenedor.append(bomba);
+                } )
+                
+                containerPadre.append(contenedor);
+            })
+
+        }
     },
 };
