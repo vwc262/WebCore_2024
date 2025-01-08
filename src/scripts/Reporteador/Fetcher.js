@@ -67,7 +67,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
     case EnumProyecto.Chalmita: return "Chalmita";
     case EnumProyecto.Encharcamientos: return "Encharcamientos";
     case EnumProyecto.Sectores: return "Sectores";
-    case EnumProyecto.Lumbreras: return "Lumbreras";
+    case EnumProyecto.PruebasCampo: return "PruebasCampo";
     case EnumProyecto.SantaCatarina: return "SantaCatarina";
     case EnumProyecto.Chiconautla: return "Chiconautla";
     case EnumProyecto.Sorpasso: return "Sorpasso";

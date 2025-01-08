@@ -17,7 +17,7 @@ const EnumProyecto = {
   Chalmita: 5,
   Encharcamientos: 6,
   SistemaCutzamala: 7,
-  Lumbreras: 8,
+  PruebasCampo: 8,
   SantaCatarina: 9,
   Chiconautla: 10,
   Sorpasso: 11,
@@ -27,6 +27,7 @@ const EnumProyecto = {
   Pruebas: 15,
   LineaMorada: 16,
   PozosAIFA: 17,
+  PozosZumpango: 18,
 };
 /**
  * @returns NombreProyecto
@@ -49,7 +50,8 @@ const EnumNombreProyecto = {
   14: "Teoloyucan",
   15: "Pruebas",
   16: "LineaMorada",
-  17: "PozosAIFA"
+  17: "PozosAIFA",
+  18: "PozosZumpango",
 };
 
 /**
@@ -64,7 +66,7 @@ const EnumNombreProyectoFolder = {
   "Lerma2024": 5,
   "Encharcamientos2024": 6,
   "SistemaCutzamala2024": 7,
-  "Lumbreras2024": 8,
+  "PruebasCampo2024": 8,
   "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
   "Sorpasso2024": 11,
@@ -73,7 +75,8 @@ const EnumNombreProyectoFolder = {
   "Teoloyucan2024": 14,
   "Pruebas2024": 15,
   "LineaMorada2024": 16,
-  "PozosAIFA2024": 17
+  "PozosAIFA2024": 17,
+  "PozosZumpango2024": 18
 };
 
 /**

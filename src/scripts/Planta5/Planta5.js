@@ -6,7 +6,7 @@ async function Update() {
     let enlaceImg = document.querySelector('.enlace')
     textTiempo.innerHTML = FormatearFecha(result.Sites[4].Tiempo);
     
-    enlaceImg.setAttribute('src',result.Sites[4].Enlace >= 1 && result.Sites[4].Enlace <= 3 ? '../../Planta5Resources/en_linea.png' : '../../Planta5Resources/fuera_linea.png'  );
+    enlaceImg.setAttribute('src',result.Sites[4].Enlace >= 1 && result.Sites[4].Enlace <= 3 ? '../PlantaBerros/Planta5Resources/en_linea.png' : '../PlantaBerros/Planta5Resources/fuera_linea.png'  );
     
     const signals = result.Sites[4].SignalsContainer.filter(s => s.TipoSignal == 3 || s.TipoSignal == 4);
     signals.forEach(s => {
@@ -34,7 +34,7 @@ window.onload = () => {
 function FormatearFecha(value) {
     let date = new Date(value);
     let Opciones = {
-        year: "2-digit", //numeric
+        year: "4-digit", //numeric
         month: "2-digit",
         day: "2-digit",
         hour: "2-digit",

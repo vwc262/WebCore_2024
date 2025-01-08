@@ -46,7 +46,7 @@ var Configuracion = {
             case EnumProyecto.ClimatologicasHidrometricas:
                 config = ClimatologicasHidrometricasConfig
                 break;
-            case EnumProyecto.Lumbreras:
+            case EnumProyecto.PruebasCampo:
                 config = GAMPonchoConfig;
                 break;
             case EnumProyecto.Teoloyucan:

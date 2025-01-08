@@ -1,8 +1,8 @@
 export const ChalmitaConfig = {
-    doPanX: false,
-    doPanY: false,
+    doPanX: true,
+    doPanY: true,
     widthRender: 1920,
-    heightRender: 1080,
+    heightRender: 2500,
     perfil: {
         estilosEstacion: [
             {
@@ -114,6 +114,18 @@ export const ChalmitaConfig = {
                 Estado: "display:block"
             },
             {
+                IdEstacion: 19, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
+            },
+            {
+                IdEstacion: 20, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
+            },
+            {
                 IdEstacion: 21,
                 Imagen: "position:absolute;top:1851px;left:297px;width:298px;height:285px",
                 Etiqueta: "position: absolute;top: 2095px;left: 230px;width: 0px;height: 0px;background: none;",
@@ -174,6 +186,30 @@ export const ChalmitaConfig = {
                 Estado: "display:block"
             },
             {
+                IdEstacion: 31, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
+            },
+            {
+                IdEstacion: 32, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
+            },
+            {
+                IdEstacion: 33, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
+            },
+            {
+                IdEstacion: 34, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
+            },
+            {
                 IdEstacion: 35,
                 Imagen: "position:absolute;top:1307px;left:1666px;width:193px;height:94px",
                 Etiqueta: "position:absolute;top:1237px;left:1708px;width:193px;height:94px",
@@ -220,6 +256,12 @@ export const ChalmitaConfig = {
                 Imagen: "position:absolute;top:1372px;left:1377px;width:231px;height:175px",
                 Etiqueta: "position:absolute;top:1565px;left:1473px;width:231px;height:175px",
                 Estado: "display:block"
+            },
+            {
+                IdEstacion: 44, // No Aplica
+                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
+                Estado: "display:none"
             },
         ],
         estilosTuberias: {
