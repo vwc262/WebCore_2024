@@ -150,7 +150,8 @@ class Perfil {
         if (configuracionProyecto.doPanY)
             perfil.append(this.verticalScroll);
 
-
+        if(configuracionProyecto.perfil.Patch != undefined)
+            configuracionProyecto.perfil.Patch();
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
 
     }
