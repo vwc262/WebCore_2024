@@ -181,7 +181,7 @@ export const ChalmitaConfig = {
             },
             {
                 IdEstacion: 30,
-                Imagen: "position:absolute;top:1659px;left:1157px;width:258px;height:154px",
+                Imagen: "position:absolute;top:1664px;left:1161px;width:199px;height:111px",
                 Etiqueta: "position: absolute;top: 1756px;left: 1353px;width: 208px;height: 115px;background: none;",
                 Estado: "display:block"
             },
