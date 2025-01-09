@@ -110,7 +110,7 @@ class ParticlesAnimator {
             if (signalBomba.Valor == EnumValorBomba.Arrancada)
                 bombaEncendidas = 1;
         });
-
+        this.Canvas.style.display = "block";
         if (bombaEncendidas > 0)
             this.Canvas.style.display = "block";
         else
