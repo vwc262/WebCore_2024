@@ -110,6 +110,7 @@ class Perfil {
             }.bind(this));
 
             const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
+
             backgroundPerfil.appendChild(estacionPerfil.createSitio());
             backgroundPerfil.appendChild(estacionPerfil.createEtiqueta());
 
