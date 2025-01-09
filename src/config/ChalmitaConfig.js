@@ -258,10 +258,10 @@ export const ChalmitaConfig = {
                 Estado: "display:block"
             },
             {
-                IdEstacion: 44, // No Aplica
+                IdEstacion: 44,
                 Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
-                Etiqueta: "position:absolute;top:141px;left:1184px;width:145px;height:74px",
-                Estado: "display:none"
+                Etiqueta: "position:absolute;top:1400px;left:129px;width:145px;height:74px",
+                Estado: "display:block"
             },
         ],
         estilosTuberias: {
