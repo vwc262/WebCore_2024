@@ -74,6 +74,17 @@ function seleccionarMesActual() {
   });
 }
 
+function updateCurrendDate(){
+  const currentDate = document.querySelector('.btnFechaSeleccionada');       
+  const fechaContenedor = currentDate.textContent.split('/')
+  const dia = fechaContenedor[0].split(":")[1].trim();
+  const mes = fechaContenedor[1];
+  const ano = fechaContenedor[2]; 
+
+  currentDate.textContent = `${fechaContenedor[0]}: ${dia}/${mes}/${añoActual}`;
+  currentDate.click();
+}
+
 function crearCalendario(año, mes) {
   const daysContainer = document.querySelector(".daysContainer"); // Obtener el contenedor de días del calendario
 
@@ -131,6 +142,8 @@ function crearCalendario(año, mes) {
   // Agregar la tabla al contenedor de días del calendario
   daysContainer.appendChild(table);
 
+  
+
   function setFechasIniciales() {
     isFirstCreation = false;
     const fechaInicial = document.querySelector("#btnInitDate");
@@ -157,12 +170,13 @@ function crearCalendario(año, mes) {
   }
 
   if (isFirstCreation) setFechasIniciales();
+  //setFechasIniciales()
 }
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
+var añoActual = undefined;
 function onClickEventMes() {
   const meses = Array.from(document.querySelectorAll(".mes")); // Convertir los botones de mes en un array
   const spanYear = document.querySelector(".spanYear"); // Obtener el elemento span que muestra el año
@@ -178,7 +192,7 @@ function onClickEventMes() {
       this.classList.add("mesSeleccionado");
 
       const mesSeleccionado = this.id; // Obtener el ID del mes seleccionado
-      const añoActual = new Date(parseInt(spanYear.innerText), index + 1, 1).getFullYear(); // Obtener el año actual como entero
+     //añoActual = new Date(parseInt(spanYear.innerText), index + 1, 1).getFullYear(); // Obtener el año actual como entero
 
       // Limpiar y actualizar la tabla con los días del nuevo año
       limpiarYActualizarTabla(añoActual, index);
@@ -186,6 +200,8 @@ function onClickEventMes() {
       if(dia){
         document.querySelector(`.d${dia}`).click();
         e.currentTarget.diaSeleccionado = undefined;
+      }else{
+        document.querySelector(`.d1`).click();
       }
     });
   });
@@ -200,7 +216,7 @@ function onClickEventYear() {
     ".yearBtnsContainer button:last-child"
   ); // Botón para el año siguiente
 
-  let añoActual = new Date().getFullYear(); // Obtener el año actual como entero
+  añoActual = new Date().getFullYear(); // Obtener el año actual como entero
 
   // Evento de clic para el botón del año anterior
   btnAnioAnterior.addEventListener("click", function () {
@@ -211,20 +227,25 @@ function onClickEventYear() {
     añoActual--; // Decrementar el año actual
     spanYear.textContent = añoActual; // Actualizar el año mostrado en el calendario
     // Limpiar y actualizar la tabla con los días del nuevo año
-    limpiarYActualizarTabla(añoActual, mesParseado);
+    limpiarYActualizarTabla(añoActual, mesParseado);    
+    updateCurrendDate();
+    document.querySelector(".d1").click();
   });
 
   // Evento de clic para el botón del año siguiente
   btnAñoSiguiente.addEventListener("click", function () {
-    const añoSiguiente = añoActual + 1; // Calcular el año siguiente
+    const añoSiguiente = parseInt(añoActual) + 1; // Calcular el año siguiente
     const ultimoMesSeleccionado = document.querySelector(".mesSeleccionado");
     const mesParseado = parseInt(ultimoMesSeleccionado.getAttribute("mesId"));
     // Verificar si el año siguiente es menor o igual al año actual real
     if (añoSiguiente <= new Date().getFullYear()) {
-      añoActual = añoSiguiente; // Actualizar el año actual
+      añoActual =  añoSiguiente > new Date().getFullYear() ? new Date().getFullYear() : añoSiguiente; // Actualizar el año actual
       spanYear.textContent = añoActual; // Actualizar el año mostrado en el calendario
       // Limpiar y actualizar la tabla con los días del nuevo año
       limpiarYActualizarTabla(añoActual, mesParseado);
+      updateCurrendDate();
+      document.querySelector(".d1").click();
+      // 
     } else {
       console.log("No se puede seleccionar un año futuro");
     }
@@ -282,7 +303,7 @@ function establecerFecha(event) {
   const añoSeleccionado = document.querySelector(".spanYear").textContent;
 
   // Obtener la fecha en el formato deseado (dia/mes/año)
-  const fechaSeleccionada = `${diaSeleccionado.textContent}/${mesSeleccionado.id}/${añoSeleccionado}`;
+  const fechaSeleccionada = `${diaSeleccionado.textContent}/${mesSeleccionado.id}/${añoActual}`;
 
   // Remover la clase "btnFechaSeleccionada" de todos los botones de fecha
   const btnInitDate = document.getElementById("btnInitDate");
@@ -339,6 +360,7 @@ function onClickEventFechaSeleccionada() {
     const meses = [...document.querySelectorAll('.mes')];
     const elementoMes = meses.find(m => m.id == mes);
     spanYear.textContent = ano;
+    añoActual = ano;
     elementoMes.diaSeleccionado = dia;
     elementoMes.click();
   }
