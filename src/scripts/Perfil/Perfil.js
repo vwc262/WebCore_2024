@@ -110,6 +110,7 @@ class Perfil {
             }.bind(this));
 
             const estilosEstacionTuberias = configuracionProyecto.perfil.estilosTuberias.PorBombeo.find(element => element.IdEstacion == estacion.IdEstacion);
+
             backgroundPerfil.appendChild(estacionPerfil.createSitio());
             backgroundPerfil.appendChild(estacionPerfil.createEtiqueta());
 
@@ -150,7 +151,8 @@ class Perfil {
         if (configuracionProyecto.doPanY)
             perfil.append(this.verticalScroll);
 
-
+        if(configuracionProyecto.perfil.Patch != undefined)
+            configuracionProyecto.perfil.Patch();
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
 
     }
