@@ -127,8 +127,8 @@ export const ChalmitaConfig = {
             },
             {
                 IdEstacion: 21,
-                Imagen: "position:absolute;top:1851px;left:297px;width:298px;height:285px",
-                Etiqueta: "position: absolute;top: 2095px;left: 230px;width: 0px;height: 0px;background: none;",
+                Imagen: "position:absolute;top:1550px;left:297px;width:101px;height:81px",
+                Etiqueta: "position: absolute;top: 1628px;left: 237px;width: 154px;height: 74px;",
                 Estado: "display:block"
             },
             {
@@ -182,7 +182,7 @@ export const ChalmitaConfig = {
             {
                 IdEstacion: 30,
                 Imagen: "position:absolute;top:1664px;left:1161px;width:199px;height:111px",
-                Etiqueta: "position: absolute;top: 1756px;left: 1353px;width: 208px;height: 115px;background: none;",
+                Etiqueta: "position: absolute;top: 1756px;left: 1353px;width: 208px;height: 115px;",
                 Estado: "display:block"
             },
             {
@@ -259,7 +259,7 @@ export const ChalmitaConfig = {
             },
             {
                 IdEstacion: 44,
-                Imagen: "position:absolute;top:208px;left:1175px;width:145px;height:74px",
+                Imagen: "position:absolute;top:1435px;left:205px;width:101px;height:81px",
                 Etiqueta: "position:absolute;top:1400px;left:129px;width:145px;height:74px",
                 Estado: "display:block"
             },
