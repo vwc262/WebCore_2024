@@ -1,4 +1,5 @@
 import { EnumProyecto } from "../scripts/Utilities/Enums.js";
+import { AduanaConfig } from "./AduanaConfig.js";
 import { PozosAIFAConfig } from "./AIFA.js";
 import { ChalmitaConfig } from "./ChalmitaConfig.js";
 import { ChiconautlaConfig, NombresLargosChiconautla } from "./ChiconautlaConfig.js";
@@ -60,6 +61,12 @@ var Configuracion = {
                 break;
             case EnumProyecto.Chalmita:
                 config = ChalmitaConfig;
+                break;
+            case EnumProyecto.PozosReyesFerrocarril:
+                config = undefined;
+                break;
+            case EnumProyecto.Aduana:
+                config = AduanaConfig;
                 break;
         }
 

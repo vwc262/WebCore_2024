@@ -28,6 +28,8 @@ const EnumProyecto = {
   LineaMorada: 16,
   PozosAIFA: 17,
   PozosZumpango: 18,
+  PozosReyesFerrocarril: 19,
+  Aduana: 20,
 };
 /**
  * @returns NombreProyecto
@@ -52,6 +54,8 @@ const EnumNombreProyecto = {
   16: "LineaMorada",
   17: "PozosAIFA",
   18: "PozosZumpango",
+  19: "PozosReyesFerrocarril",
+  20: "TanquesAduana",
 };
 
 /**
