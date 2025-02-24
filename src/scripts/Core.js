@@ -65,6 +65,21 @@ class Core {
     this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
     this.data = this.GetData(data);
 
+    /* BOMBERAZO CHALMITA P2 */
+    if (this.IdProyecto == EnumProyecto.Chalmita) {
+      console.log(this.data);
+      let p2 = this.data[1].Signals;
+      p2.forEach(s => {
+        if(s.TipoSignal != EnumTipoSignal.Enlace && s.TipoSignal != EnumTipoSignal.Tiempo)
+          s.IdEstacion = 1;
+          this.data[0].Signals.push(s);
+      });
+      
+      //delete this.data[1];
+      this.data.splice(1,1);
+      console.log(this.data);
+    }
+
     // this.randomValues();
     //console.log(this.data);
     EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
@@ -80,7 +95,7 @@ class Core {
 
       estacion.Signals.forEach((signal) => {
         signal.DentroLimite = ss > 40 ? 2 : ss > 20 ? 1 : 0;
-        signal.DentroRango = ss > 50 ? 0 : ss > 10 ? 1 : -1; 
+        signal.DentroRango = ss > 50 ? 0 : ss > 10 ? 1 : -1;
         signal.IndiceImagen = parseInt((ss / 60.0) * 10);
 
         if (signal.TipoSignal == EnumTipoSignal.Nivel) {
@@ -115,7 +130,7 @@ class Core {
         }
         else if (signal.TipoSignal == EnumTipoSignal.Mantenimiento) {
           signal.Valor = ss > 45 ? 1 : 0;
-        }        
+        }
         else {
           signal.Valor = ss;
         }

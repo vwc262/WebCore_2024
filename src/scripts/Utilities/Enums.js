@@ -17,7 +17,7 @@ const EnumProyecto = {
   Chalmita: 5,
   Encharcamientos: 6,
   SistemaCutzamala: 7,
-  Lumbreras: 8,
+  PruebasCampo: 8,
   SantaCatarina: 9,
   Chiconautla: 10,
   Sorpasso: 11,
@@ -26,6 +26,10 @@ const EnumProyecto = {
   Teoloyucan: 14,
   Pruebas: 15,
   LineaMorada: 16,
+  PozosAIFA: 17,
+  PozosZumpango: 18,
+  PozosReyesFerrocarril: 19,
+  Aduana: 20,
 };
 /**
  * @returns NombreProyecto
@@ -47,7 +51,11 @@ const EnumNombreProyecto = {
   13: "ClimatologicasHidrometricas",
   14: "Teoloyucan",
   15: "Pruebas",
-  16: "LineaMorada"
+  16: "LineaMorada",
+  17: "PozosAIFA",
+  18: "PozosZumpango",
+  19: "PozosReyesFerrocarril",
+  20: "TanquesAduana",
 };
 
 /**
@@ -59,18 +67,20 @@ const EnumNombreProyectoFolder = {
   "Padierna2024": 2,
   "PozosSistemaLerma2024": 3,
   "Yaqui2024": 4,
-  "prueba": 5,
-  "Encharcamientos": 6,
-  "SistemaCutzamala": 7,
-  "Lumbreras": 8,
+  "Lerma2024": 5,
+  "Encharcamientos2024": 6,
+  "SistemaCutzamala2024": 7,
+  "PruebasCampo2024": 8,
   "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
-  "Sorpasso": 11,
-  "EscudoNacional": 12,
-  "ClimatologicasHidrometricas": 13,
-  "Teoloyucan": 14,
-  "Pruebas": 15,
-  "LineaMorada": 16,
+  "Sorpasso2024": 11,
+  "EscudoNacional2024": 12,
+  "ClimatologicasHidrometricas2024": 13,
+  "Teoloyucan2024": 14,
+  "Pruebas2024": 15,
+  "LineaMorada2024": 16,
+  "PozosAIFA2024": 17,
+  "PozosZumpango2024": 18
 };
 
 /**
@@ -110,7 +120,7 @@ var EnumTipoSignal = {
   Precipitacion: 20,
   Temperatura: 21,
   Humedad: 22,
-  Evaporacion: 23,
+  RadiacionSolar: 23,
   Intensidad: 24,
   Direccion: 25,
 };
@@ -142,7 +152,7 @@ var EnumTipoSignalString = {
   20: "Precipitacion",
   21: "Temperatura",
   22: "Humedad",
-  23: "Evaporacion",
+  23: "RadiacionSolar",
   24: "Intensidad",
   25: "Direccion",
 };

@@ -14,6 +14,8 @@ import { ArmarFechaSQL } from "../Utilities/CustomFunctions.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
 import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
 import controladorVideo from "./videos.js";
+import { Configuracion } from "../../config/config.js";
+import { Core } from "../Core.js";
 
 // Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
@@ -35,29 +37,31 @@ var UIReportes = {
     13: "Tiempo",
     14: "Mantenimiento",
     15: "Puerta Abierta",
-    16:"VoltajeRango",
-    17:"CorrienteRango",
-    18:"PotenciaTotal",
-    19:"FactorPotencia",
-    20:"Precipitacion",
-    21:"Temperatura",
-    22:"Humedad",
-    23:"Evaporacion",
-    24:"Intensidad",
-    25:"Direccion"  },
+    16: "VoltajeRango",
+    17: "CorrienteRango",
+    18: "PotenciaTotal",
+    19: "FactorPotencia",
+    20: "Precipitacion",
+    21: "Temperatura",
+    22: "Humedad",
+    23: "Evaporacion",
+    24: "Intensidad",
+    25: "Direccion",
+  },
 
   unidades: {
     1: "m",
     2: "kg/cm",
     3: "l/s",
     4: "m",
-    10: "V"
+    10: "V",
   },
   data: [],
   dataCruda: [],
   fechaInicial: "",
   fechaFinal: "",
   idSignalsAGraficar: [],
+  idSignalsABorrar: [],
   signalesFetcheadas: 0,
   root: undefined,
   Peticion: async function () {
@@ -66,8 +70,6 @@ var UIReportes = {
     this.signalesFetcheadas = 0;
 
     await UIReportes.FetchAllSignals();
-
-    UIReportes.ProcesarInformacion();
   },
   PrepararChart: function () {
     this.root?.dispose();
@@ -75,13 +77,13 @@ var UIReportes = {
       calculateSize: (dimensions) => {
         return {
           width: 1345,
-          height: 760
-        }
-      }
+          height: 760,
+        };
+      },
     });
-
   },
   FetchAllSignals: async function () {
+    UIReportes.idSignalsABorrar = [];
     UIReportes.idSignalsAGraficar.forEach(async (signalObj, index) => {
       var _data = {
         idSignal: signalObj.IdSignal,
@@ -99,57 +101,70 @@ var UIReportes = {
       if (jsonDataReportes.Reporte.length > 0) {
         UIReportes.dataCruda.push(jsonDataReportes.Reporte);
       }
+      else {
+        UIReportes.idSignalsABorrar.push(index);
+      }
 
       UIReportes.ProcesarInformacion();
     });
   },
   ProcesarInformacion: function () {
-    if (UIReportes.signalesFetcheadas != UIReportes.idSignalsAGraficar.length) {
-      UIReportes.signalesFetcheadas++;
+    UIReportes.signalesFetcheadas++;
+    if (UIReportes.signalesFetcheadas < UIReportes.idSignalsAGraficar.length) {
       return;
     }
+    else if (UIReportes.signalesFetcheadas == UIReportes.idSignalsAGraficar.length) {
+      UIReportes.idSignalsABorrar.forEach((index) => {
+        const signalItem = document.getElementsByClassName(`variable_${UIReportes.idSignalsAGraficar[index].IdSignal}`)[0];
+        signalItem.remove();
+        UIReportes.idSignalsAGraficar.splice(index, 1)
+      })
 
-    this.PrepararChart();
+      this.PrepararChart();
 
-    //  remove all elements from the root, simply clear children of its container
-    this.root.container.children.clear();
+      //  remove all elements from the root, simply clear children of its container
+      this.root.container.children.clear();
 
-    if (UIReportes.dataCruda.length > 0) {
-      let aux = [];      
-      UIReportes.dataCruda.forEach((infoSignal) => {
-        infoSignal.forEach((d, index) => {
-          // let _d = new Date(new Date(d.Tiempo).setSeconds(0));
-          // let minutos = _d.getMinutes();
-          // let minutosRedondeados = Math.round(minutos / 5) * 5
-          // _d.setMinutes(minutosRedondeados);
-          let _d = new Date(new Date(d.Tiempo))
-          if (
-            UIReportes.data[_d] == undefined ||
-            UIReportes.data[_d] == null
-          ) {
-            UIReportes.data[_d] = {
-              date: _d,
-            };
-            aux.push(UIReportes.data[_d]);
-            // UIReportes.idSignalsAGraficar.forEach(signalObj => {
-            //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
-            // });
-          }
-          UIReportes.data[_d][d.IdSignal]  = d.Valor < 0 ? 0 : d.Valor;
-          if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
-            UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
-          }
+      if (UIReportes.dataCruda.length > 0) {
+        let aux = [];
+        let config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+        UIReportes.dataCruda.forEach((infoSignal) => {
+          infoSignal.forEach((d, index) => {
+            let _d = new Date(new Date(d.Tiempo))
+
+            if (config.promedios) {
+              _d = new Date(new Date(d.Tiempo).setSeconds(0));
+              let minutos = _d.getMinutes();
+              let minutosRedondeados = Math.round(minutos / 5) * 5
+              _d.setMinutes(minutosRedondeados);
+            }
+
+            if (
+              UIReportes.data[_d] == undefined ||
+              UIReportes.data[_d] == null
+            ) {
+              UIReportes.data[_d] = {
+                date: _d,
+              };
+              aux.push(UIReportes.data[_d]);
+              // UIReportes.idSignalsAGraficar.forEach(signalObj => {
+              //   UIReportes.data[_d][signalObj.IdSignal] = undefined;
+              // });
+            }
+            UIReportes.data[_d][d.IdSignal] = d.Valor < 0 ? 0 : d.Valor;
+            if (UIReportes.idSignalsAGraficar.find(s => s.IdSignal == d.IdSignal).IdTipoSignal == EnumTipoSignal.Bomba) {
+              UIReportes.data[_d][d.IdSignal] = d.Valor == 1 ? 2 : d.Valor == 2 ? 1 : d.Valor;
+            }
+          });
         });
-      });
-      aux.sort((a, b) => new Date(a.date) - new Date(b.date));
-      UIReportes.data = aux;
-      //console.log(UIReportes.data);
-      UIReportes.SetChart();
-
-    }
-    else {
-      const txtSinHistoricos = document.querySelector(".sinHistoricos");
-      txtSinHistoricos.style.opacity = "1";
+        aux.sort((a, b) => new Date(a.date) - new Date(b.date));
+        UIReportes.data = aux;
+        //console.log(UIReportes.data);
+        UIReportes.SetChart();
+      } else {
+        const txtSinHistoricos = document.querySelector(".sinHistoricos");
+        txtSinHistoricos.style.opacity = "1";
+      }
     }
   },
   SetChart: function () {
@@ -159,9 +174,7 @@ var UIReportes = {
     var root = this.root;
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/
-    root.setThemes([
-      am5themes_Animated.new(root),
-    ]);
+    root.setThemes([am5themes_Animated.new(root)]);
 
     // Create chart
     // https://www.amcharts.com/docs/v5/charts/xy-chart/
@@ -178,7 +191,6 @@ var UIReportes = {
         autoResize: false,
       })
     );
-
 
     var easing = am5.ease.linear;
     chart.get("colors").set("step", 3);
@@ -227,7 +239,7 @@ var UIReportes = {
       })
     );
     // cursor.events.on('cursormoved', (ev) => {
-    //   console.log(ev.target)      
+    //   console.log(ev.target)
     // })
     cursor.lineY.set("visible", false);
 
@@ -359,7 +371,6 @@ var UIReportes = {
         valueAxisConfig.baseValue = 1;
       }
 
-
       yAxis[signalObj.IdTipoSignal] = chart.yAxes.push(
         am5xy.ValueAxis.new(root, valueAxisConfig)
       );
@@ -367,27 +378,26 @@ var UIReportes = {
         const labels = yAxis[signalObj.IdTipoSignal].get("renderer").labels;
         labels.template.adapters.add("text", function (text, target) {
           if (text) {
-            let textoAPoner = '';
+            let textoAPoner = "";
             let value = parseInt(text);
             switch (value) {
               case 0:
-                textoAPoner = 'Mantenimento';
+                textoAPoner = "Mantenimento";
                 break;
               case 1:
-                textoAPoner = 'Apagada';
+                textoAPoner = "Apagada";
                 break;
               case 2:
-                textoAPoner = 'Arrancada';
+                textoAPoner = "Arrancada";
                 break;
               case 3:
-                textoAPoner = 'Falla';
+                textoAPoner = "Falla";
                 break;
             }
-            return text % 1 != 0 ? '' : textoAPoner;
+            return text % 1 != 0 ? "" : textoAPoner;
           }
         });
       }
-
 
       let label = am5.Label.new(root, {
         name: signalObj.Nombre,
@@ -424,13 +434,13 @@ var UIReportes = {
     return this.tipoSignalName[tipoSignal];
   },
   SetUnities: function (idTipoSignal) {
-    let unidades = UIReportes.unidades[idTipoSignal] ?? '';
+    let unidades = UIReportes.unidades[idTipoSignal] ?? "";
     switch (idTipoSignal) {
       case 2:
-        unidades += "[baseline-shift:super;font-size:10]2"
+        unidades += "[baseline-shift:super;font-size:10]2";
         break;
       case 4:
-        unidades += "[baseline-shift:super;font-size:10]3"
+        unidades += "[baseline-shift:super;font-size:10]3";
         break;
     }
     return unidades;
@@ -496,14 +506,13 @@ var UIReportes = {
     });
 
     var seriesData = [];
-    Object.values(UIReportes.data).forEach(k => {
+    Object.values(UIReportes.data).forEach((k) => {
       var data = {
         date: k.date,
         value: k[`${signalObj.IdSignal}`],
       };
       seriesData.push(data);
     });
-
 
     series.data.setAll(seriesData);
 

@@ -343,7 +343,8 @@ export const ChiconautlaConfig = {
 
             ]
         }
-    }
+    },
+    promedios: true
 }
 
 
