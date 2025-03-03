@@ -17,7 +17,7 @@ const EnumProyecto = {
   Chalmita: 5,
   Encharcamientos: 6,
   SistemaCutzamala: 7,
-  Lumbreras: 8,
+  PruebasCampo: 8,
   SantaCatarina: 9,
   Chiconautla: 10,
   Sorpasso: 11,
@@ -28,6 +28,8 @@ const EnumProyecto = {
   LineaMorada: 16,
   PozosAIFA: 17,
   PozosZumpango: 18,
+  PozosReyesFerrocarril: 19,
+  Aduana: 20,
 };
 /**
  * @returns NombreProyecto
@@ -52,6 +54,8 @@ const EnumNombreProyecto = {
   16: "LineaMorada",
   17: "PozosAIFA",
   18: "PozosZumpango",
+  19: "PozosReyesFerrocarril",
+  20: "TanquesAduana",
 };
 
 /**
@@ -66,7 +70,7 @@ const EnumNombreProyectoFolder = {
   "Lerma2024": 5,
   "Encharcamientos2024": 6,
   "SistemaCutzamala2024": 7,
-  "Lumbreras2024": 8,
+  "PruebasCampo2024": 8,
   "SantaCatarina2024": 9,
   "Chiconautla2024": 10,
   "Sorpasso2024": 11,

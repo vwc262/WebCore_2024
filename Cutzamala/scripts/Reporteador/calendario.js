@@ -5,8 +5,12 @@ var fechas = {
   final: new Date(),
 };
 
+var isFirstCreation = true;
+
 function initCalendario() {
   const FechaHoy = new Date();
+  establecer_fecha_inicial(FechaHoy);
+
   // Llamar a la función para crear el calendario con el año
   crearCalendario(FechaHoy.getFullYear(), FechaHoy.getMonth() + 1);
   // Configurar eventos de clic para los botones de mes y año
@@ -22,6 +26,13 @@ function initCalendario() {
     .addEventListener("click", onClickDay);
 
   onClickEventFechaSeleccionada();
+}
+
+function establecer_fecha_inicial(fechaHoy) {
+  const spawnYear = document.querySelector('.spanYear');
+  const year = fechaHoy.getFullYear();
+  spawnYear.textContent = year;
+
 }
 
 function seleccionarPrimerDiaMes() {
@@ -61,6 +72,17 @@ function seleccionarMesActual() {
       mes.classList.add("mesSeleccionado");
     }
   });
+}
+
+function updateCurrendDate(){
+  const currentDate = document.querySelector('.btnFechaSeleccionada');       
+  const fechaContenedor = currentDate.textContent.split('/')
+  const dia = fechaContenedor[0].split(":")[1].trim();
+  const mes = fechaContenedor[1];
+  const ano = fechaContenedor[2]; 
+
+  currentDate.textContent = `${fechaContenedor[0]}: ${dia}/${mes}/${añoActual}`;
+  currentDate.click();
 }
 
 function crearCalendario(año, mes) {
@@ -107,6 +129,7 @@ function crearCalendario(año, mes) {
     }
     if (i >= primerDiaSemana && i - primerDiaSemana < numeroDias) {
       td.textContent = i - primerDiaSemana + 1;
+      td.classList.add(`d${td.textContent}`);
     } else {
       td.classList.add("empty");
     }
@@ -119,7 +142,10 @@ function crearCalendario(año, mes) {
   // Agregar la tabla al contenedor de días del calendario
   daysContainer.appendChild(table);
 
+  
+
   function setFechasIniciales() {
+    isFirstCreation = false;
     const fechaInicial = document.querySelector("#btnInitDate");
     const fechaFinal = document.querySelector("#btnEndDate");
     var fechaHoy = new Date();
@@ -143,13 +169,14 @@ function crearCalendario(año, mes) {
     UIReportes.fechaFinal = new Date(anio, mes, dia, 23, 59, 59);
   }
 
-  setFechasIniciales();
+  if (isFirstCreation) setFechasIniciales();
+  //setFechasIniciales()
 }
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
+var añoActual = undefined;
 function onClickEventMes() {
   const meses = Array.from(document.querySelectorAll(".mes")); // Convertir los botones de mes en un array
   const spanYear = document.querySelector(".spanYear"); // Obtener el elemento span que muestra el año
@@ -157,7 +184,7 @@ function onClickEventMes() {
   // Iterar sobre los botones de mes
   meses.forEach((mes, index) => {
     // Agregar un evento de clic a cada botón de mes
-    mes.addEventListener("click", function () {
+    mes.addEventListener("click", function (e) {
       // Remover la clase "mesSeleccionado" de todos los meses
       meses.forEach((mes) => mes.classList.remove("mesSeleccionado"));
 
@@ -165,21 +192,16 @@ function onClickEventMes() {
       this.classList.add("mesSeleccionado");
 
       const mesSeleccionado = this.id; // Obtener el ID del mes seleccionado
-      const añoActual = new Date(
-        parseInt(spanYear.innerText),
-        index + 1,
-        1
-      ).getFullYear(); // Obtener el año actual como entero
+     //añoActual = new Date(parseInt(spanYear.innerText), index + 1, 1).getFullYear(); // Obtener el año actual como entero
 
       // Limpiar y actualizar la tabla con los días del nuevo año
       limpiarYActualizarTabla(añoActual, index);
-
-      // Restaurar la fecha seleccionada después de actualizar el calendario
-      if (fechas.inicio && fechas.inicio.getMonth() === index) {
-        restaurarFechaSeleccionada(fechas.inicio, "inicio");
-      }
-      if (fechas.final && fechas.final.getMonth() === index) {
-        restaurarFechaSeleccionada(fechas.final, "final");
+      let dia = e.currentTarget.diaSeleccionado
+      if(dia){
+        document.querySelector(`.d${dia}`).click();
+        e.currentTarget.diaSeleccionado = undefined;
+      }else{
+        document.querySelector(`.d1`).click();
       }
     });
   });
@@ -194,7 +216,7 @@ function onClickEventYear() {
     ".yearBtnsContainer button:last-child"
   ); // Botón para el año siguiente
 
-  let añoActual = new Date().getFullYear(); // Obtener el año actual como entero
+  añoActual = new Date().getFullYear(); // Obtener el año actual como entero
 
   // Evento de clic para el botón del año anterior
   btnAnioAnterior.addEventListener("click", function () {
@@ -205,20 +227,25 @@ function onClickEventYear() {
     añoActual--; // Decrementar el año actual
     spanYear.textContent = añoActual; // Actualizar el año mostrado en el calendario
     // Limpiar y actualizar la tabla con los días del nuevo año
-    limpiarYActualizarTabla(añoActual, mesParseado);
+    limpiarYActualizarTabla(añoActual, mesParseado);    
+    updateCurrendDate();
+    document.querySelector(".d1").click();
   });
 
   // Evento de clic para el botón del año siguiente
   btnAñoSiguiente.addEventListener("click", function () {
-    const añoSiguiente = añoActual + 1; // Calcular el año siguiente
+    const añoSiguiente = parseInt(añoActual) + 1; // Calcular el año siguiente
     const ultimoMesSeleccionado = document.querySelector(".mesSeleccionado");
     const mesParseado = parseInt(ultimoMesSeleccionado.getAttribute("mesId"));
     // Verificar si el año siguiente es menor o igual al año actual real
     if (añoSiguiente <= new Date().getFullYear()) {
-      añoActual = añoSiguiente; // Actualizar el año actual
+      añoActual =  añoSiguiente > new Date().getFullYear() ? new Date().getFullYear() : añoSiguiente; // Actualizar el año actual
       spanYear.textContent = añoActual; // Actualizar el año mostrado en el calendario
       // Limpiar y actualizar la tabla con los días del nuevo año
       limpiarYActualizarTabla(añoActual, mesParseado);
+      updateCurrendDate();
+      document.querySelector(".d1").click();
+      // 
     } else {
       console.log("No se puede seleccionar un año futuro");
     }
@@ -243,58 +270,8 @@ function limpiarYActualizarTabla(anio, mes) {
     // Seleccionar automáticamente el primer día del mes en el nuevo año
     seleccionarPrimerDiaMes();
   }
-
-  // Restaurar las fechas seleccionadas si existen y corresponden al mes actual
-  if (fechaInicialSeleccionada) {
-    restaurarFechaSeleccionada(fechaInicialSeleccionada, "inicio");
-  }
-  if (fechaFinalSeleccionada) {
-    restaurarFechaSeleccionada(fechaFinalSeleccionada, "final");
-  }
 }
 
-function restaurarFechaSeleccionada(fecha, tipo) {
-  const diasTD = Array.from(document.querySelectorAll(".daysContainer td")); // Obtener todos los TDs de los días
-
-  // Remover cualquier selección previa antes de restaurar solo si no está seleccionada otra fecha
-  if (
-    (tipo === "inicio" &&
-      !document
-        .getElementById("btnEndDate")
-        .classList.contains("btnFechaSeleccionada")) ||
-    (tipo === "final" &&
-      !document
-        .getElementById("btnInitDate")
-        .classList.contains("btnFechaSeleccionada"))
-  ) {
-    diasTD.forEach((dia) => dia.classList.remove("diaSeleccionado"));
-  }
-
-  // Restaurar la fecha seleccionada solo si corresponde
-  diasTD.forEach((dia) => {
-    if (
-      parseInt(dia.textContent) === fecha.getDate() &&
-      !dia.classList.contains("empty")
-    ) {
-      dia.classList.add("diaSeleccionado");
-
-      // Actualizar la interfaz con la fecha restaurada solo si no hay selección previa
-      if (tipo === "inicio") {
-        document.getElementById(
-          "btnInitDate"
-        ).innerHTML = `<label style="color:goldenrod; cursor: pointer;">Fecha inicial : </label> ${fecha.getDate()}/${capitalizeFirstLetter(
-          fecha.toLocaleString("default", { month: "short" })
-        )}/${fecha.getFullYear()}`;
-      } else if (tipo === "final") {
-        document.getElementById(
-          "btnEndDate"
-        ).innerHTML = `<label style="color:goldenrod; cursor: pointer;">Fecha final : </label> ${fecha.getDate()}/${capitalizeFirstLetter(
-          fecha.toLocaleString("default", { month: "short" })
-        )}/${fecha.getFullYear()}`;
-      }
-    }
-  });
-}
 
 // Función para manejar el clic en un día del calendario
 function onClickDay(event) {
@@ -326,7 +303,7 @@ function establecerFecha(event) {
   const añoSeleccionado = document.querySelector(".spanYear").textContent;
 
   // Obtener la fecha en el formato deseado (dia/mes/año)
-  const fechaSeleccionada = `${diaSeleccionado.textContent}/${mesSeleccionado.id}/${añoSeleccionado}`;
+  const fechaSeleccionada = `${diaSeleccionado.textContent}/${mesSeleccionado.id}/${añoActual}`;
 
   // Remover la clase "btnFechaSeleccionada" de todos los botones de fecha
   const btnInitDate = document.getElementById("btnInitDate");
@@ -335,7 +312,7 @@ function establecerFecha(event) {
   // Agregar la clase "btnFechaSeleccionada" al botón clicado
   event.currentTarget.classList.add("btnFechaSeleccionada");
 
-  // Modificar el texto del botón dependiendo de cuál tenga la clase "btnFechaSeleccionada"
+  // Modificar el texto del botón dependiendo de cuál tenga la clase "btnFechaSeleccionada"  
   if (btnInitDate.classList.contains("btnFechaSeleccionada")) {
     btnInitDate.innerHTML = `<label style="color:goldenrod; cursor: pointer;">Fecha inicial : </label> ${fechaSeleccionada}`;
     fechas.inicio = new Date(
@@ -374,6 +351,18 @@ function onClickEventFechaSeleccionada() {
 
     // Agregar la clase "btnFechaSeleccionada" al botón clicado
     event.currentTarget.classList.add("btnFechaSeleccionada");
+
+    const fechaContenedor = event.currentTarget.textContent.split('/')
+    const dia = fechaContenedor[0].split(":")[1].trim();
+    const mes = fechaContenedor[1];
+    const ano = fechaContenedor[2];
+
+    const meses = [...document.querySelectorAll('.mes')];
+    const elementoMes = meses.find(m => m.id == mes);
+    spanYear.textContent = ano;
+    añoActual = ano;
+    elementoMes.diaSeleccionado = dia;
+    elementoMes.click();
   }
 
   // Agregar event listener a los botones de fecha
