@@ -91,12 +91,12 @@ var UIReportes = {
         FechaFinal: ArmarFechaSQL(UIReportes.fechaFinal, false),
       };
 
-      var jsonDataReportes = await FetcherGraficador.request({
+      var jsonDataReportes = await FetcherGraficador.requestGraficador({
         action: `${EnumPeticiones.HISTORICOS}`,
         method: FetcherGraficador.methodType.POST,
         data: _data,
         jsonizar: true,
-        project: getNombreProyectoIdProyecto(this.GetIDProyecto(signalObj.IdEstacion)),
+        idProyecto: this.GetIDProyecto(signalObj.IdEstacion),
       });
 
       if (jsonDataReportes.Reporte.length > 0) {

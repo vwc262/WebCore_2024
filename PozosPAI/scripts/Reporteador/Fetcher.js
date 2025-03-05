@@ -9,7 +9,7 @@ const FetcherGraficador = {
   },
   version: 0,
   uriAssets: "https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/",
-  uri: "https://virtualwavecontrol.com.mx/api24/VWC/Unreal/",
+  uri: "https://virtualwavecontrol.com.mx/API24/VWC/APP2024/",
   /**
    * Funcion para hacer request del tipo get y post , Nota : Si es tipo Post jsonizar debe estar en true
    * @param {{action : string, method : string, data = {}, jsonizar = boolean}} ParametrosOpcionales
@@ -46,6 +46,35 @@ const FetcherGraficador = {
   },
   getImage: function (projectName, folderRoot, assetName, ext) {
     return `${Core.Instance.ResourcesPath}${folderRoot}/${assetName}.${ext}?v=${this.version}`;
+  },
+  requestGraficador: async function ({
+    action = EnumControllerPoleo.CONSULTAR,
+    method = this.methodType.GET,
+    data = this.SinData,
+    jsonizar = true,
+    idProyecto = Core.Instance.IdProyecto,
+  }) {
+    const options = {
+      method: method,
+      mode: "cors",
+      headers: {
+        // 'Accept':'text/plain',
+        "Content-Type": "application/json",
+      },
+      body: jsonizar ? JSON.stringify(data) : data,
+    };
+
+    //Los metodos get no aceptan body
+    if (method == "GET") {
+      delete options.body;
+      delete options.headers;
+    }
+
+    const fetchresult = await fetch(`${this.uri}/${action}?idProyecto=${idProyecto}`, options);
+    let jsonData = null;
+
+    jsonData = await fetchresult.json();
+    return jsonData;
   },
   requestInfaestructuraReportes: async function ({
     method = this.methodType.GET,
