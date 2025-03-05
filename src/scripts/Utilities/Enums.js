@@ -35,15 +35,15 @@ const EnumProyecto = {
  * @returns NombreProyecto
  */
 const EnumNombreProyecto = {
-  Default: 0,
+  0: "Default",
   1: "TanquesGustavoAMadero",
   2: "TanquesPadierna",
   3: "Lerma",
-  4: "TanquesYaqui",
+  4: "Libre1",
   5: "TanquesChalmita",
-  6: "Encharcamientos",
-  7: "SistemaCutzamala", //SistemaCutzamala
-  8: "PonchoGAM",
+  6: "Libre2",
+  7: "SistemaCutzamala",
+  8: "PruebasCampo",
   9: "TanquesSantaCatarina",
   10: "PozosChiconautla",
   11: "Sorpasso",
@@ -54,8 +54,9 @@ const EnumNombreProyecto = {
   16: "LineaMorada",
   17: "PozosAIFA",
   18: "PozosZumpango",
-  19: "PozosReyesFerrocarril",
+  19: "Libre3",
   20: "TanquesAduana",
+  21: "PozosPAI",
 };
 
 /**
@@ -66,9 +67,9 @@ const EnumNombreProyectoFolder = {
   "GustavoAMadero2024": 1,
   "Padierna2024": 2,
   "PozosSistemaLerma2024": 3,
-  "Yaqui2024": 4,
+  "Libre1": 4,
   "Lerma2024": 5,
-  "Encharcamientos2024": 6,
+  "Libre2": 6,
   "SistemaCutzamala2024": 7,
   "PruebasCampo2024": 8,
   "SantaCatarina2024": 9,
@@ -80,7 +81,10 @@ const EnumNombreProyectoFolder = {
   "Pruebas2024": 15,
   "LineaMorada2024": 16,
   "PozosAIFA2024": 17,
-  "PozosZumpango2024": 18
+  "PozosZumpango2024": 18,
+  "Libre3": 19,
+  "Aduana2024": 20,
+  "PozosPAI2024": 21
 };
 
 /**
