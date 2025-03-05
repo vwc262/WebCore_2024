@@ -420,12 +420,14 @@ function CreateSignalItem(signal, IdEstacion) {
     signalItem.appendChild(itemSignalName);
     signalItem.appendChild(icon2);
     const sitio = GetSitio(IdEstacion);
+    
     UIReportes.idSignalsAGraficar.push({
       IdSignal: signal.IdSignal,
       IdTipoSignal: signal.IdTipoSignal,
       Color: coloresSignals[UIReportes.idSignalsAGraficar.length],
       Rotate: rotates[UIReportes.idSignalsAGraficar.length],
       Nombre: `${signal.Nombre} - (${sitio.Nombre})`,
+      IdEstacion: IdEstacion
     });
     canMove = true;
   }

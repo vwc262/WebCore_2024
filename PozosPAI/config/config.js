@@ -1,6 +1,5 @@
 import { EnumProyecto } from "../scripts/Utilities/Enums.js";
-import { Climatologicas } from "./Climatologicas.js";
-import { SistemaCutzamala } from "./SistemaCutzamala.js";
+import { PozosPAI } from "./PozosPAI.js";
 
 var Configuracion = {
     /**
@@ -8,10 +7,10 @@ var Configuracion = {
      * @param {EnumProyecto} EnumProyecto 
      */
     GetConfiguracion(enumProyecto) {
-        let config = SistemaCutzamala;
+        let config = PozosPAI;
         switch (enumProyecto) {            
-            case EnumProyecto.ClimatologicasHidrometricas:
-                config = Climatologicas;
+            case EnumProyecto.PozosPAI:
+                config = PozosPAI;
                 break;
         }
         return config;

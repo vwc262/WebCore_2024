@@ -9,9 +9,9 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.ClimatologicasHidrometricas;
+  projectName = EnumProyecto.PozosPAI;
   constructor() {
-    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
+    
   }
   async Start() {
     //UIReportes.PrepararChart();

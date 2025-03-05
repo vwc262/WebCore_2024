@@ -11,8 +11,8 @@
  */
 
 import { ArmarFechaSQL } from "../Utilities/CustomFunctions.js";
-import { EnumTipoSignal } from "../Utilities/Enums.js";
-import { FetcherGraficador, EnumPeticiones } from "./Fetcher.js";
+import { EnumProyecto, EnumTipoSignal } from "../Utilities/Enums.js";
+import { FetcherGraficador, EnumPeticiones, getNombreProyectoIdProyecto } from "./Fetcher.js";
 import controladorVideo from "./videos.js";
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
@@ -96,6 +96,7 @@ var UIReportes = {
         method: FetcherGraficador.methodType.POST,
         data: _data,
         jsonizar: true,
+        project: getNombreProyectoIdProyecto(this.GetIDProyecto(signalObj.IdEstacion)),
       });
 
       if (jsonDataReportes.Reporte.length > 0) {
@@ -107,6 +108,23 @@ var UIReportes = {
 
       UIReportes.ProcesarInformacion();
     });
+  },
+  GetIDProyecto: function (IdEstacion) {
+    var cociente = IdEstacion % (EnumProyecto.PozosTeoloyucan * 100) < 100;
+
+    if (cociente) {
+      return EnumProyecto.PozosTeoloyucan;
+    }
+    else {
+      cociente = IdEstacion % (EnumProyecto.PozosAIFA * 100) < 100;
+
+      if (cociente) {
+        return EnumProyecto.PozosAIFA;
+      }
+      else { 
+        return EnumProyecto.PozosZumpango;
+      }
+    }
   },
   ProcesarInformacion: function () {
     UIReportes.signalesFetcheadas++;

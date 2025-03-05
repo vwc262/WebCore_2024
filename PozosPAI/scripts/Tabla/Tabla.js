@@ -67,11 +67,12 @@ class Tabla {
       let offsetTop = configuracionProyecto.customPositionsTable.offsetTop;
       let curvatura = configuracionProyecto.customPositionsTable.curvatura;
 
-      for (let index = 0; index < this.cantidadElementos; index++) {
+      for (let index = 0; index < this.cantidadElementos && index < 15; index++) {
         curvedRow[index].style.height = `${h}px`;
         curvedRowVariables[index].style.height = `${h}px`;
 
         let l = offsetLeft - (curvatura * Math.pow((index + offsetTop), 2));
+        console.log(offsetLeft, curvatura, offsetTop, l);
 
         curvedRow[index].style.transform = `translate(${l}px, ${index}px)`;
         curvedRowVariables[index].style.transform = `translate(${l}px, ${index}px)`;
@@ -116,7 +117,7 @@ class Tabla {
         `${visible ? "0" : "1"}`
       );
       console.log(this.quantityColumns);
-      this.tBodyVariablesContainer.style = `right:${visible ? `-455` : `${(this.quantityColumns * 86) - 455 + 55}`
+      this.tBodyVariablesContainer.style = `right:${visible ? `-530` : `${(this.quantityColumns * 86) - 550 + 55}`
         }px;`;
       this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath
         }General/${visible ? "btn_abrir" : "btn_abrirrotate"}.png?v=${Core.Instance.version
@@ -514,20 +515,9 @@ class Tabla {
   hoverRow(mouseover, IdEstacion, stopPropagation) {
     let row = this.rows.find((f) => f.IdEstacion == IdEstacion);
     let rowVariable = this.rowVariables.find((f) => f.IdEstacion == IdEstacion);
-    const cutzamalaFlag = EnumProyecto.SistemaCutzamala == Core.Instance.IdProyecto;
 
-    if (cutzamalaFlag) {
-      row.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(182,141,76,0.15) 0%, rgba(189,151,99,0.85) 30%, rgba(189,151,99,0.85) 67%, rgba(182,141,76,0.15) 100%)" : "rgba(87,168,152,0.0)"
-        } `;
-      rowVariable.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(182,141,76,0.15) 0%, rgba(189,151,99,0.85) 30%, rgba(189,151,99,0.85) 67%, rgba(182,141,76,0.15) 100%)" : "rgba(87,168,152,0.0)"
-        } `;
-    }
-    else {
-      row.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-        } `;
-      rowVariable.rowContainer.style.background = `${mouseover ? "rgba(87,168,152,0.35)" : "rgba(87,168,152,0.0)"
-        } `;
-    }
+    row.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(243, 183, 87, 0.41) 0%, rgba(189, 151, 99, 0.65) 30%, rgba(243, 183, 87, 0.41) 66%, rgba(189, 151, 99, 0.65) 100%)" : "rgba(87,168,152,0.0)"} `;
+    rowVariable.rowContainer.style.background = `${mouseover ? "linear-gradient(to right, rgba(243, 183, 87, 0.41) 0%, rgba(189, 151, 99, 0.65) 30%, rgba(243, 183, 87, 0.41) 66%, rgba(189, 151, 99, 0.65) 100%)" : "rgba(87,168,152,0.0)"} `;
 
     if (!stopPropagation) {
       const estacion = Core.Instance.data.find(

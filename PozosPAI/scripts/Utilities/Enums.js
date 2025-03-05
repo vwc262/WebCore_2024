@@ -10,46 +10,17 @@ const RequestType = {
  */
 const EnumProyecto = {
   Default: 0,
-  GustavoAMadero: 1,
-  Padierna: 2,
-  Lerma: 3,
-  Yaqui: 4,
-  Chalmita: 5,
-  Encharcamientos: 6,
-  SistemaCutzamala: 7,
-  Lumbreras: 8,
-  SantaCatarina: 9,
-  Chiconautla: 10,
-  Sorpasso: 11,
-  EscudoNacional: 12,
-  ClimatologicasHidrometricas: 13,
-  Teoloyucan: 14,
-  Pruebas: 15,
-  LineaMorada: 16,
+  PozosTeoloyucan: 14,
   PozosAIFA: 17,
+  PozosZumpango: 18,
+  PozosPAI: 21,
 };
 /**
  * @returns NombreProyecto
  */
 const EnumNombreProyecto = {
   Default: 0,
-  1: "TanquesGustavoAMadero",
-  2: "TanquesPadierna",
-  3: "Lerma",
-  4: "TanquesYaqui",
-  5: "TanquesChalmita",
-  6: "Encharcamientos",
-  7: "SistemaCutzamala", //SistemaCutzamala
-  8: "PonchoGAM",
-  9: "TanquesSantaCatarina",
-  10: "PozosChiconautla",
-  11: "Sorpasso",
-  12: "EscudoNacional",
-  13: "ClimatologicasHidrometricas",
-  14: "Teoloyucan",
-  15: "Pruebas",
-  16: "LineaMorada",
-  17: "PozosAIFA"
+  21: "PozosPAI"
 };
 
 /**
@@ -57,23 +28,7 @@ const EnumNombreProyecto = {
  */
 const EnumNombreProyectoFolder = {
   "Default": 0,
-  "GustavoAMadero2024": 1,
-  "Padierna2024": 2,
-  "PozosSistemaLerma2024": 3,
-  "Yaqui2024": 4,
-  "Lerma2024": 5,
-  "Encharcamientos2024": 6,
-  "SistemaCutzamala2024": 7,
-  "Lumbreras2024": 8,
-  "SantaCatarina2024": 9,
-  "Chiconautla2024": 10,
-  "Sorpasso2024": 11,
-  "EscudoNacional2024": 12,
-  "ClimatologicasHidrometricas2024": 13,
-  "Teoloyucan2024": 14,
-  "Pruebas2024": 15,
-  "LineaMorada2024": 16,
-  "PozosAIFA2024": 17
+  "PozosPAI2024": 21
 };
 
 /**

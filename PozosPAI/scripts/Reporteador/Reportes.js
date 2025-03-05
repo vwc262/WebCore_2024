@@ -23,9 +23,7 @@ async function inicializarReporteador() {
 
     inicializarImages();
     // peticion de estaciones del proyecto
-    const jsonData = await FetcherGraficador.request({
-      action: `${EnumPeticiones.READ}`,
-    });
+    const jsonData = await FetcherGraficador.requestInfaestructuraReportes({});
 
     sitiosInfo = jsonData.Sites;
 

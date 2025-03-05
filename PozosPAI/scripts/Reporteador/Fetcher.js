@@ -46,6 +46,34 @@ const FetcherGraficador = {
   },
   getImage: function (projectName, folderRoot, assetName, ext) {
     return `${Core.Instance.ResourcesPath}${folderRoot}/${assetName}.${ext}?v=${this.version}`;
+  },
+  requestInfaestructuraReportes: async function ({
+    method = this.methodType.GET,
+  }) {
+    const options = {
+      method: method,
+      mode: "cors",
+      headers: {
+        // 'Accept':'text/plain',
+        "Content-Type": "application/json",
+      },
+      body: {},
+    };
+
+    //Los metodos get no aceptan body
+    if (method == "GET") {
+      delete options.body;
+      delete options.headers;
+    }
+
+    const fetchresult = await fetch(`https://virtualwavecontrol.com.mx/API24/VWC/APP2024/GetInfraestructuraPozosPai`, options);
+    let jsonData = null;
+
+    jsonData = await fetchresult.json();
+    return jsonData;
+  },
+  getImage: function (projectName, folderRoot, assetName, ext) {
+    return `${Core.Instance.ResourcesPath}${folderRoot}/${assetName}.${ext}?v=${this.version}`;
   }
 };
 
@@ -54,9 +82,6 @@ const EnumPeticiones = {
   HISTORICOS: "GetReportes",
 };
 
-// const EnumProyecto = {
-//   Padierna: 'Padierna',
-// };
 
 const EnumNameProjecto = {
   TanquesPadierna: 'TanquesPadierna',
@@ -64,19 +89,11 @@ const EnumNameProjecto = {
 
 const getNombreProyectoIdProyecto = (idProyecto) => {
   switch (idProyecto) {
-    case EnumProyecto.GustavoAMadero: return "GustavoAMadero";
-    case EnumProyecto.Padierna: return "Padierna";
-    case EnumProyecto.PozosSistemaLerma: return "Lerma";
-    case EnumProyecto.Yaqui: return "Yaqui";
-    case EnumProyecto.Chalmita: return "Chalmita";
-    case EnumProyecto.Encharcamientos: return "Encharcamientos";
-    case EnumProyecto.Sectores: return "Sectores";
-    case EnumProyecto.Lumbreras: return "Lumbreras";
-    case EnumProyecto.SantaCatarina: return "SantaCatarina";
-    case EnumProyecto.Chiconautla: return "Chiconautla";
-    case EnumProyecto.LermaAnexo: return "LermaAnexo";
-    case EnumProyecto.SistemaCutzamala: return "SistemaCutzamala";
-    case EnumProyecto.ClimatologicasHidrometricas: return "ClimatologicasHidrometricas";
+    case EnumProyecto.PozosPAI: return "PozosPAI";
+    case EnumProyecto.PozosTeoloyucan: return "Teoloyucan";
+    case EnumProyecto.PozosAIFA: return "PozosAIFA";
+    case EnumProyecto.PozosZumpango: return "PozosZumpango";
+    default: return "NA";
   }
 
 }
