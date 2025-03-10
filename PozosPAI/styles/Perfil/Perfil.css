@@ -79,13 +79,13 @@
 }
 
 .renderImagesSitio {
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
+    pointer-events: none;  
+    width: 25px;
+    height: 47px;
     position: absolute;
     top: 0px;
     left: 0px;
-    display: none;
+    
 }
 
 .estacionPerfil {
@@ -131,11 +131,11 @@
 
 .imLinkCircle {
     pointer-events: auto;
-    width: 12.5px;
-    height: 12.5px;
+    width: 56px;
+    height: 50px;
     background-size: 100% 100% !important;
     transform-origin: center;
-    transform: scale(1.1);
+    transform: scale(1);
     cursor: pointer;
 }
 
@@ -144,8 +144,8 @@
 }
 
 .txtLinkCircle {
-    width: 12.5px;
-    height: 12.5px;
+    width: 56px;
+    height: 50px;
     background-size: 100% 100% !important;
     transform-origin: center;
     transform: scale(1.2);
@@ -156,9 +156,10 @@
 
 .txtLinkCircle:after {
     content: attr(abv);
-    font-size: 3px;
+    font-size: 9px;
     text-align: center;
     vertical-align: 3px;
+    vertical-align: -12px;
 }
 
 

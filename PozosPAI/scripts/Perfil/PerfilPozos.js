@@ -72,7 +72,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;background-size:cover`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); background-size:cover; width: ${widthRenderPerfil}px; height: ${heightRender}px; left: -270px; position: absolute;`
             }
         });
 
@@ -150,7 +150,7 @@ class PerfilPozos {
         perfil.append(this.Panner);
 
         this.establecerPanzoom(this.Panner);
-        DialLerma.Instance.create();
+        //DialLerma.Instance.create();
 
     }
 

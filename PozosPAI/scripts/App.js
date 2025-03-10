@@ -109,12 +109,12 @@ class VwcApp {
 
 
     new Tabla().create(); // Inicio de tabla curva
-    if (this.isPerfilTipoPozos) {
+    //if (this.isPerfilTipoPozos) {
       PerfilPozos.Instace.create();
-    }
-    else {
-      new Perfil().create(); // Inicio del perfil
-    }
+    //}
+    //else {
+    //  new Perfil().create(); // Inicio del perfil
+    //}
     new Mapa().create();
 
 

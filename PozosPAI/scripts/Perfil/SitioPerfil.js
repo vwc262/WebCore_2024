@@ -89,6 +89,8 @@ class SitioPerfil {
         return etiquetaDiv;
     }
 
+    
+
     SetEventoClick(estacion) {
         let eventoClick = this.mostrarParticular;
         const configProyectoPerfil = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
@@ -153,7 +155,12 @@ class SitioPerfil {
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
             let imagenEstacionBombaPerfil = CreateElement({
                 nodeElement: "img",
-                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio", src: estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil") }
+                attributes: { 
+                    id: `idBomba_${signalBomba.IdSignal}`, 
+                    class: "renderImagesSitio", 
+                    src: estacion.ObtenerRenderNivelOBomba(signalBomba, "Perfil") ,
+                    style: "display: block; width: 25px; height: 46px;"
+                }
             });
             estacionPerfilDiv.append(imagenEstacionBombaPerfil);
             this.ElementosDinamicosHTML[imagenEstacionBombaPerfil.id] = imagenEstacionBombaPerfil;

@@ -54,7 +54,7 @@ class Perfil {
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); width: ${widthRenderPerfil}px; height: ${heightRender}px; background-size: cover; position: absolute;`
             }
         });
 

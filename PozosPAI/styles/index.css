@@ -111,7 +111,7 @@ aside {
 
 .headerBtn__Login {
   border: none;
-  display: none;
+  display: flex;
 }
 
 .header__active {
