@@ -154,7 +154,7 @@ export const PozosPAI = {
             {
                 "IdEstacion": 1706,
                 "Imagen": "position: absolute; left: 1381.5px; top: 834.5px; width: 134px; height: 135px;",
-                "Etiqueta": "position: absolute; left: 1382px; top: 941.5px; width: 151px; height: 102px;",
+                "Etiqueta": "position: absolute; left: 1382px; top: 879px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
             {
@@ -183,7 +183,7 @@ export const PozosPAI = {
             },
             {
                 "IdEstacion": 1711,
-                "Imagen": "position: absolute; left: 982px; top: 663px; width: 134px; height: 135px;",
+                "Imagen": "position: absolute; left: 1482px; top: 663px; width: 134px; height: 135px;",
                 "Etiqueta": "position: absolute; left: 1435px; top: 623.5px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
