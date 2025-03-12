@@ -331,7 +331,17 @@ class ArranqueParo {
 
     var _idEstacion = this.idEstacion;
 
-    //TODO: PROBAR ARRANQUE Y PARO CON LERMA!!!
+    if (_idEstacion % (14 * 100) < 100) {
+      _idEstacion = _idEstacion % (14 * 100);
+    } else if (_idEstacion % (17 * 100) < 100) {
+      _idEstacion = _idEstacion % (17 * 100);
+    }
+    else {
+      _idEstacion = _idEstacion % (18 * 100);
+    }
+
+    debugger
+
     if (this.configuracionProyecto != undefined && this.configuracionProyecto.ArranqueParo != undefined) {
       if (this.configuracionProyecto.ArranqueParo[this.idEstacion] != undefined) {
         _idEstacion = this.configuracionProyecto.ArranqueParo[this.idEstacion].IdMapeo;
@@ -374,7 +384,7 @@ class ArranqueParo {
       const signalBomba = estacion.ObtenerSignal(this.#bombaSeleccionada.IdSignal);
       const perillaBomba = estacion.ObtenerValorPerillaBomba(signalBomba.Ordinal);
       const perillaGeneral = estacion.ObtenerPerillaGeneral(0); //signalBomba.Lineas - 1
-      
+
       if (estacion.IsFallaAc()) {
         ShowModal("El sitio presenta falla en la energia", alertTitle, false);
       }
