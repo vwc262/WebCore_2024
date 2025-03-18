@@ -110,12 +110,10 @@
 .lblCirclePerfil {
     pointer-events: none;
     color: white;
-    font-size: 11px;
     text-align: center;
     padding-top: 3px;
     font-size: 12px;
     width: auto !important;
-    height: 31px;
     border-radius: 8px;
     padding-left: 10px;
     padding-right: 10px;
