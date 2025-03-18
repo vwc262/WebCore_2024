@@ -17,7 +17,7 @@ class PerfilPozos {
     renderWidth = 0;
     renderHeight = 0;
     PanZoomConfig = {
-        maxScale: 5,
+        maxScale: 2,
         minScale: 1,
         startScale: 1,
         force: false
