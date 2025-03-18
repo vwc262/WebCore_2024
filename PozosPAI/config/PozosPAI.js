@@ -154,7 +154,7 @@ export const PozosPAI = {
             {
                 "IdEstacion": 1706,
                 "Imagen": "position: absolute; left: 1381.5px; top: 756px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 1382px; top: 863px; ",
+                "Etiqueta": "position: absolute; left: 1375px; top: 800px; ",
                 "Estado": "display:none;"
             },
             {
