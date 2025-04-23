@@ -61,11 +61,21 @@ class Estacion {
             }
         } else {
             if (this.Signals.length > 0) {
-                if (!this.Signals[0].Nombre.includes("Bomba"))
-                    return this.Signals[0];
-                else {
+                var nivel = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel);
+                var gasto = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Gasto);
+                var presion = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Presion);
 
-                    return 0
+                if (nivel != null)
+                    return nivel;
+                else if (gasto != null)
+                    return gasto;
+                else if (presion != null)
+                    return presion;
+                else {
+                    if (!this.Signals[0].Nombre.includes("Bomba"))
+                        this.Signals[0]
+                    else
+                        return 0
                 }
             }
         }
