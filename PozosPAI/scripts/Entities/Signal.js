@@ -96,22 +96,22 @@ class Signal {
                 return '';
             }
         }
-        else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
-            if (this.IndiceImagen == 1) {
-                let value = `${parseFloat(this.Valor).toFixed(0)}`;
-                let _unidades = '';
+        // else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
+        //     if (this.IndiceImagen == 1) {
+        //         let value = `${parseFloat(this.Valor).toFixed(0)}`;
+        //         let _unidades = '';
 
-                if (unidades) {
-                    _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
-                }
+        //         if (unidades) {
+        //             _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+        //         }
 
-                return `<label style="color: ${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
-            } else if (this.DentroRango == -1) {
-                return `<label style="color: ${this.GetValorColor()};">nan</label>`;
-            } else {
-                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
-            }
-        }
+        //         return `<label style="color: ${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+        //     } else if (this.DentroRango == -1) {
+        //         return `<label style="color: ${this.GetValorColor()};">nan</label>`;
+        //     } else {
+        //         return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
+        //     }
+        // }
         else if (this.TipoSignal == EnumTipoSignal.Voltaje) {
 
             let value = `${parseFloat(this.Valor).toFixed(2)}`;
@@ -128,7 +128,7 @@ class Signal {
             return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
 
         }
-        else if(this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad ||  this.TipoSignal == EnumTipoSignal.Direccion){
+        else if(this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad ||  this.TipoSignal == EnumTipoSignal.Direccion || this.TipoSignal == EnumTipoSignal.Totalizado){
             let value = `${parseFloat(this.Valor).toFixed(0)}`;
 
             if (value < 0)

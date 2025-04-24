@@ -159,8 +159,7 @@ class Estacion {
                 }
             }
 
-            url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
-                }/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
+            url = `${Core.Instance.ResourcesPath}Sitios/global/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
                 }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
         }
 
