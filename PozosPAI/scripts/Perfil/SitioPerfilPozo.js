@@ -60,7 +60,8 @@ class SitioPerfilPozo {
         let textoCirculo = CreateElement({
             nodeElement: "div",
             attributes: {
-                abv: `${estacion.Abreviacion.split("-")[1]}`,
+                //abv: `${estacion.Abreviacion.split("-")[1]}`,
+                abv: `${estacion.Abreviacion}`,
                 class: 'txtLinkCircle',
             },
         });

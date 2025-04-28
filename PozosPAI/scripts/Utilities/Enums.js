@@ -14,13 +14,15 @@ const EnumProyecto = {
   PozosAIFA: 17,
   PozosZumpango: 18,
   PozosPAI: 21,
+  PozosCoyoacan: 22
 };
 /**
  * @returns NombreProyecto
  */
 const EnumNombreProyecto = {
   Default: 0,
-  21: "PozosPAI"
+  21: "PozosPAI",
+  22: "PozosCoyoacan"
 };
 
 /**
@@ -28,7 +30,8 @@ const EnumNombreProyecto = {
  */
 const EnumNombreProyectoFolder = {
   "Default": 0,
-  "PozosPAI2024": 21
+  "PozosPAI2024": 21,
+  "PozosCoyoacan2025": 22
 };
 
 /**

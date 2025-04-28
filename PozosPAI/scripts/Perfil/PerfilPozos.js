@@ -72,7 +72,7 @@ class PerfilPozos {
             nodeElement: "div",
             attributes: {
                 class: "estacionesContainer",
-                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); background-size:cover; width: ${widthRenderPerfil}px; height: ${heightRender}px; left: -270px; position: absolute;`
+                style: `background: url(${Core.Instance.ResourcesPath}Perfil/background.jpg?v=${Core.Instance.version}); background-size:cover; width: ${widthRenderPerfil}px; height: ${heightRender}px; position: absolute;`
             }
         });
 
