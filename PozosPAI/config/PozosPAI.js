@@ -8,92 +8,92 @@ export const PozosPAI = {
             /* pozos coyoacan*/
 			{ 
                 "IdEstacion": 1, 
-                "Imagen": "position: absolute; left: 501px; top: 601px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 459px; top: 648px; ",
+                "Imagen": "position: absolute; left: 753px; top: 997px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 753px; top: 967px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 2,
-                "Imagen": "position: absolute; left: 479.5px; top: 547.5px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 432px; top: 578px; ",
+                "Imagen": "position: absolute; left: 717px; top: 882px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 727px; top: 852px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 3,
-                "Imagen": "position: absolute; left: 458.5px; top: 489px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 410px; top: 517px; ",
+                "Imagen": "position: absolute; left: 603px; top: 978px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 603px; top: 948px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 4,
-                "Imagen": "position: absolute; left: 444.5px; top: 437px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 393.5px; top: 459px; ",
+                "Imagen": "position: absolute; left: 512px; top: 961px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 512px; top: 931px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 5,
-                "Imagen": "position: absolute; left: 485px; top: 408px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 508px; top: 407px; ",
+                "Imagen": "position: absolute; left: 449px; top: 969px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 449px; top: 939px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 6,
-                "Imagen": "position: absolute; left: 466.5px; top: 358px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 493px; top: 347px; ",
+                "Imagen": "position: absolute; left: 325px; top: 985px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 325px; top: 955px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 7,
-                "Imagen": "position: absolute; left: 407.5px; top: 331px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 350.5px; top: 347px; ",
+                "Imagen": "position: absolute; left: 267px; top: 986px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 267px; top: 956px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 8,
-                "Imagen": "position: absolute; left: 446px; top: 312px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 467px; top: 299px; ",
+                "Imagen": "position: absolute; left: 786px; top: 180px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 796px; top: 170px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 9,
-                "Imagen": "position: absolute; left: 425px; top: 264px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 443.5px; top: 240px; ",
+                "Imagen": "position: absolute; left: 1088px; top: 750px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 1098px; top: 740px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 10,
-                "Imagen": "position: absolute; left: 369.5px; top: 226px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 306px; top: 226px; ",
+                "Imagen": "position: absolute; left: 749px; top: 906px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 759px; top: 896px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 11,
-                "Imagen": "position: absolute; left: 404.5px; top: 215px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 423px; top: 179px; ",
+                "Imagen": "position: absolute; left: 351px; top: 426px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 361px; top: 416px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 12,
-                "Imagen": "position: absolute; left: 352.5px; top: 173px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 291px; top: 154px; ",
+                "Imagen": "position: absolute; left: 480px; top: 366px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 490px; top: 356px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 13,
-                "Imagen": "position: absolute; left: 387.5px; top: 162px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 398.5px; top: 120px; ",
+                "Imagen": "position: absolute; left: 924px; top: 531px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 934px; top: 521px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 14,
-                "Imagen": "position: absolute; left: 370px; top: 106px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 373px; top: 58px; ",
+                "Imagen": "position: absolute; left: 799px; top: 638px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 809px; top: 628px; ",
                 "Estado": "display:none;"
             },
             {
                 "IdEstacion": 15,
-                "Imagen": "position: absolute; left: 515px; top: 513px; width: 30px; height: 50px;",
-                "Etiqueta": "position: absolute; left: 543.5px; top: 515px; ",
+                "Imagen": "position: absolute; left: 813px; top: 708px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 823px; top: 698px; ",
                 "Estado": "display:none;"
             }
 
