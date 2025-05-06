@@ -1,4 +1,4 @@
-export const AduanaConfig = {
+export const IztapalapaConfig = {
     doPanX: false,
     doPanY: false,
     widthRender: 1920,
@@ -20,7 +20,7 @@ export const AduanaConfig = {
             },
 
             {
-                "IdEstacion": 3,
+                "IdEstacion": 3, // TN-02
                 "Imagen": "position:absolute;top:735px;left:960px;width:385px;height:212px;",
                 "Etiqueta": "position:absolute;top: 775px;left:1314px;width:225px;height:73px;",
                 "Estado": "width:384px;height:175px;transform:perspective(5000px) rotateY(23deg) rotateX(-13deg) rotateZ(-7deg)"
@@ -34,7 +34,7 @@ export const AduanaConfig = {
             },
 
             {
-                "IdEstacion":5,
+                "IdEstacion": 5,
                 "Imagen": "position:absolute;top:462px;left:650px;width:450px;height:180px;",
                 "Etiqueta": "position:absolute;top:420px;left:768px;width:225px;height:73px;",
                 "Estado": "width:384px;height:175px;transform:perspective(3000px) rotateY(-20deg) rotateX(-19deg) rotateZ(9deg)"
@@ -61,6 +61,18 @@ export const AduanaConfig = {
             },
             {
                 "IdEstacion": 9,
+                "Imagen": "position:absolute;top:145px;left:556px;width:298px;height:153px;background-size:cover;",
+                "Etiqueta": "position:absolute;top: 95px;left: 670px;width: 140px !important;height:73px;",
+                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
+            },
+            {
+                "IdEstacion": 10,
+                "Imagen": "position:absolute;top:145px;left:556px;width:298px;height:153px;background-size:cover;",
+                "Etiqueta": "position:absolute;top: 95px;left: 670px;width: 140px !important;height:73px;",
+                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
+            },
+            {
+                "IdEstacion": 11,
                 "Imagen": "position:absolute;top:145px;left:556px;width:298px;height:153px;background-size:cover;",
                 "Etiqueta": "position:absolute;top: 95px;left: 670px;width: 140px !important;height:73px;",
                 "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
