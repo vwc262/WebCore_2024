@@ -53,6 +53,30 @@ export const Climatologicas = {
                 "Etiqueta": "position: absolute; left: 1283px; top: 526px; width: 151px; height: 102px;",
                 "Estado": "display:none;"
             },
+            {
+                "IdEstacion": 9,
+                "Imagen": "display:none;position: absolute; left: 1283px; top: 406px; width: 131px; height: 128px;",
+                "Etiqueta": "display:none;position: absolute; left: 1283px; top: 526px; width: 151px; height: 102px;",
+                "Estado": "display:none;"
+            },
+            {
+                "IdEstacion": 10,
+                "Imagen": "display:none;position: absolute; left: 1283px; top: 406px; width: 131px; height: 128px;",
+                "Etiqueta": "display:none;position: absolute; left: 1283px; top: 526px; width: 151px; height: 102px;",
+                "Estado": "display:none;"
+            },
+            {
+                "IdEstacion":11,
+                "Imagen": "display:none;position: absolute; left: 1283px; top: 406px; width: 131px; height: 128px;",
+                "Etiqueta": "display:none;position: absolute; left: 1283px; top: 526px; width: 151px; height: 102px;",
+                "Estado": "display:none;"
+            },
+            {
+                "IdEstacion": 12,
+                "Imagen": "display:none;position: absolute; left: 1283px; top: 406px; width: 131px; height: 128px;",
+                "Etiqueta": "display:none;position: absolute; left: 1283px; top: 526px; width: 151px; height: 102px;",
+                "Estado": "display:none;"
+            },
         ],
         estilosTuberias: {
             PorGravedad: [
