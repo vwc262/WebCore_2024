@@ -12,6 +12,7 @@ import { PadiernaConfig } from "./PadiernaConfig.js";
 import { PozosSistemaLermaConfig } from "./PozosSistemaLermaConfig.js";
 import { SantaCatarinaConfig } from "./SantaCatarinaConfig.js";
 import { TeoloyucanConfig } from "./Teoloyucan.js";
+import { YaquiConfig } from "./YaquiConfig.js";
 
 
 var Configuracion = {
@@ -38,7 +39,7 @@ var Configuracion = {
                 config = ChalmitaConfig;
                 break;
             case EnumProyecto.Yaqui:
-                config = undefined;
+                config = YaquiConfig;
                 break;
             case EnumProyecto.SistemaCutzamala:
                 config = undefined;
