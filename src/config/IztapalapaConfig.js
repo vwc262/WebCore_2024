@@ -85,13 +85,8 @@ export const IztapalapaConfig = {
 
         ],
         estilosTuberias: {
-            PorGravedad: [
-                
-
-            ],
-            PorBombeo: [
-
-            ]
+            PorGravedad: [],
+            PorBombeo: []
         }
     },
     promedios: true
