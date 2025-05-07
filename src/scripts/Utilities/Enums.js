@@ -348,6 +348,12 @@ const EnumTipoPolygon = {
   Radio: 2,
 }
 
+const EnumTipoHeader = {
+  Deafult: 0,
+  Sacmex: 1,
+  Seguiagua: 2,
+}
+
 export {
   RequestType,
   EnumProyecto,
@@ -372,5 +378,6 @@ export {
   EnumEstadoComando,
   EnumTipoPolygon,
   EnumNombreProyectoFolder,
+  EnumTipoHeader,
 };
 

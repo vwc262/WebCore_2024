@@ -3,131 +3,90 @@ export const IztapalapaConfig = {
     doPanY: false,
     widthRender: 1920,
     heightRender: 1080,
+    tipoHeader: "Segiagua",
     perfil: {
         estilosEstacion: [
-            {
-                "IdEstacion": 1,
-                "Imagen": "position:absolute;top:679px;left:32px;width:380px;height:365px;",
-                "Etiqueta": "position:absolute;top: 691px;left: 322px;width:225px;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(-3deg) rotateZ(2deg)"
+            { 
+                IdEstacion: 1, 
+                Imagen: "width:216px;height:152px;position: absolute; left: 858px; top: 152px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 928px; top: 155px;", 
+                Estado: "display:block" 
             },
 
-            {
-                "IdEstacion": 2,
-                "Imagen": "position:absolute;top:724px;left:561px;width:354px;height:265px;",
-                "Etiqueta": "position:absolute;top: 691px;left: 599px;width:225px;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(2000px) rotateY(11deg) rotateX(-15deg) rotateZ(-2deg)"
+            { 
+                IdEstacion: 2, 
+                Imagen: "width:230px;height:209px;position: absolute; left: 1140px; top: 228px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 1207px; top: 230px;", 
+                Estado: "display:block" 
             },
 
-            {
-                "IdEstacion": 3, // TN-02
-                "Imagen": "position:absolute;top:735px;left:960px;width:385px;height:212px;",
-                "Etiqueta": "position:absolute;top: 775px;left:1314px;width:225px;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(5000px) rotateY(23deg) rotateX(-13deg) rotateZ(-7deg)"
+            { 
+                IdEstacion: 3, 
+                Imagen: "width:330px;height:183px;position: absolute; left: 714px; top: 338px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 772px; top: 352px;", 
+                Estado: "display:block" 
             },
 
-            {
-                "IdEstacion": 4,
-                "Imagen": "position:absolute;top:439px;left:1124px;width:287px;height:154px;",
-                "Etiqueta": "position:absolute;top: 400px;left: 1314px;width:225px;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg)"
+            { 
+                IdEstacion: 4, 
+                Imagen: "width:224px;height:217px;position: absolute; left: 470px; top: 415px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 620px; top: 618px;", 
+                Estado: "display:block" 
             },
 
-            {
-                "IdEstacion": 5,
-                "Imagen": "position:absolute;top:462px;left:650px;width:450px;height:180px;",
-                "Etiqueta": "position:absolute;top:420px;left:768px;width:225px;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(3000px) rotateY(-20deg) rotateX(-19deg) rotateZ(9deg)"
+            { 
+                IdEstacion: 5, 
+                Imagen: "width:215px;height:162px;position: absolute; left: 1177px; top: 636px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 1190px; top: 576px;", 
+                Estado: "display:block" 
             },
 
-            {
-                "IdEstacion": 6,
-                "Imagen": "position:absolute;top:236px;left:53px;width:364px;height:221px;",
-                "Etiqueta": "position:absolute;top: 175px;left: 170px;width: 149px !important;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(4002px) rotateY(-6deg) rotateX(-20deg) rotateZ(3deg)"
+            { 
+                IdEstacion: 6, 
+                Imagen: "width:220px;height:218px;position: absolute; left: 917px; top: 681px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 998px; top: 910px;", 
+                Estado: "display:block" 
             },
 
-            {
-                "IdEstacion": 7,
-                "Imagen": "position:absolute;top:444px;left:444px;width:298px;height:153px;",
-                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:444px;top:444px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
+            { 
+                IdEstacion: 7, 
+                Imagen: "width:324px;height:232px;position: absolute; left: 465px; top: 725px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 454px; top: 756px;", 
+                Estado: "display:block" 
             },
-            {
-                "IdEstacion": 8,
-                "Imagen": "position:absolute;top:500px;left:444px;width:298px;height:153px;",
-                "Etiqueta": "position:absolute;width:140px !important ;height:auto;left:444px;top:500px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rota   teX(-17deg) rotateZ(-2deg)"
+
+            { 
+                IdEstacion: 8, 
+                Imagen: "width:198px;height:171px;position: absolute; left: 130px; top: 612px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 135px; top: 806px;", 
+                Estado: "display:block" 
             },
-            {
-                "IdEstacion": 9,
-                "Imagen": "position:absolute;top:145px;left:556px;width:298px;height:153px;background-size:cover;",
-                "Etiqueta": "position:absolute;top: 95px;left: 670px;width: 140px !important;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
+
+            { 
+                IdEstacion: 9, 
+                Imagen: "width:432px;height:190px;position: absolute; left: 121px; top: 236px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 84px; top: 229px;", 
+                Estado: "display:block" 
             },
-            {
-                "IdEstacion": 10,
-                "Imagen": "position:absolute;top:145px;left:556px;width:298px;height:153px;background-size:cover;",
-                "Etiqueta": "position:absolute;top: 95px;left: 670px;width: 140px !important;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
+
+            { 
+                IdEstacion: 10, 
+                Imagen: "width:159px;height:174px;position: absolute; left: 563px; top: 68px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 388px; top: 84px;", 
+                Estado: "display:block" 
             },
-            {
-                "IdEstacion": 11,
-                "Imagen": "position:absolute;top:145px;left:556px;width:298px;height:153px;background-size:cover;",
-                "Etiqueta": "position:absolute;top: 95px;left: 670px;width: 140px !important;height:73px;",
-                "Estado": "width:384px;height:175px;transform:perspective(1000px) rotateY(10deg) rotateX(-17deg) rotateZ(-2deg)"
-            },
+
+            { 
+                IdEstacion: 11, 
+                Imagen: "width:159px;height:174px;position: absolute; left: 563px; top: 68px;", 
+                Etiqueta: "width:92px;height:50px;position: absolute; left: 1154px; top: 125px;", 
+                Estado: "display:block" 
+            }, 
+
         ],
         estilosTuberias: {
             PorGravedad: [
-                {
-                    "idLinea": 1,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_1", "css": "position: absolute;top: 186px;left: 852px;transform: rotate(-3deg);width: 153px;height: 12px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 2,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_2", "css": "position: absolute;top: 209px;left: 869px;transform: rotate(-4deg);width: 118px;height: 10px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 3,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_3", "css": "position: absolute;top: 291px;left: 412px;transform: rotate(-195deg);width: 156px;height: 12px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 4,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_4", "css": "position: absolute;top: 557px;left: 158px;transform: rotate(90.5deg);width: 154px;height: 12px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 5,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_5", "css": "position: absolute;top: 814px;left: 382px;transform: rotate(180deg);width: 166px;height: 20px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 6,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_6", "css": "position: absolute;top: 786px;left: 872px;transform: rotate(180deg);width: 156px;height: 15px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 7,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_7", "css": "position: absolute;top: 695px;left: 1007px;transform: rotate(38deg);width: 155px;height: 13px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
-                {
-                    "idLinea": 8,
-                    "idEstacion": 0,
-                    "Tag": "Gravedad_8", "css": "position: absolute;top: 667px;left: 1178px;transform: rotate(91deg);width: 154px;height: 14px;border-radius: 15px;background-size: 100% 100% !important;z-index: 1;border: 1px solid #00a8b1;"
-                },
-
+                
 
             ],
             PorBombeo: [
