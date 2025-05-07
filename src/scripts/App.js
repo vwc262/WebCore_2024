@@ -1,7 +1,7 @@
 import { Core } from "./Core.js";
 import { Configuracion } from "../config/config.js";
 import { Tabla } from "./Tabla/Tabla.js";
-import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
+import { EnumNombreProyecto, EnumProyecto, EnumTipoHeader } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
@@ -18,10 +18,8 @@ class VwcApp {
     //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
-    this.IniciarHeader();
-    
-    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
 
+    this.IniciarHeader();
     AdjustSize();
 
     if (this.version != -99) {
@@ -53,16 +51,27 @@ class VwcApp {
   }
 
   IniciarHeader() {
+    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+
     const titulo = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     let $title = document.getElementById('title__page');
+    let $header_image = document.getElementById('header_image');
+    let $headerImagen = document.getElementsByClassName('headerImagen')[0];
     $title.innerText = `VWC - ${titulo}`;
 
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = titulo;
 
+    if (config.tipoHeader)
+      $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/${config.tipoHeader}.png?v=${Core.Instance.version}`);
+    else
+      $headerImagen.style.display = "none"
+
   }
 
   IniciarUI() {
+
+
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
 
