@@ -67,7 +67,6 @@ class Core {
 
     /* BOMBERAZO CHALMITA P2 */
     if (this.IdProyecto == EnumProyecto.Chalmita) {
-      console.log(this.data);
       let p2 = this.data[1].Signals;
       p2.forEach(s => {
         if(s.TipoSignal != EnumTipoSignal.Enlace && s.TipoSignal != EnumTipoSignal.Tiempo)
@@ -77,7 +76,6 @@ class Core {
       
       //delete this.data[1];
       this.data.splice(1,1);
-      console.log(this.data);
     }
 
     // this.randomValues();

@@ -3,8 +3,8 @@
 @font-face {
   font-family: Montserrat;
   src:
-  url(../assets/fonts/Moserrat/Montserrat-Medium.ttf),
-  url(../assets/fonts/Moserrat/Montserrat-Light.ttf),
+    url(../assets/fonts/Moserrat/Montserrat-Medium.ttf),
+    url(../assets/fonts/Moserrat/Montserrat-Light.ttf),
     url(../assets/fonts/Moserrat/Montserrat-Black.ttf),
     url(../assets/fonts/Moserrat/Montserrat-Bold.ttf),
     url(../assets/fonts/Moserrat/Montserrat-Italic.ttf);
@@ -13,7 +13,7 @@
 @font-face {
   font-family: GMX;
   src:
-  url(../assets/fonts/GMX/GMX-Regular.ttf),
+    url(../assets/fonts/GMX/GMX-Regular.ttf),
     url(../assets/fonts/GMX/GMX-Black.ttf),
     url(../assets/fonts/GMX/GMX-Bold.ttf),
     url(../assets/fonts/GMX/GMX-Light.ttf);
@@ -38,11 +38,11 @@ body {
   -webkit-user-drag: none !important;
 }
 
-body{
+body {
   background-color: #00001c;
 }
 
-header {
+.header {
   width: 1920px;
   height: 58px;
   display: flex;
@@ -58,6 +58,12 @@ header {
       rgb(132 162 217) 100%);
   align-items: center;
   justify-content: space-between;
+}
+
+.headerImagen {
+  display: flex;
+  width: 983px;
+  height: 57px;
 }
 
 nav {
@@ -158,6 +164,9 @@ aside {
 
 .header__btnRegresar {
   display: flex;
+  position: absolute;
+  left: 1162px;
+  width: 45px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
