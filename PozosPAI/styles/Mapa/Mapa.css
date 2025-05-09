@@ -1,0 +1,116 @@
+#map {
+  width: 1455px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.marker-tag {
+  background-color: #520000;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 5px;
+    position: relative;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
+}
+
+.marker-tag::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #4285f4;
+}
+
+.markerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.markerContainer img {
+  width: 30px;
+}
+
+.marker-imgG {
+  filter: invert(21%) sepia(83%) saturate(3474%) hue-rotate(100deg)
+    brightness(95%) contrast(102%);
+}
+
+.marker-imgR {
+  filter: invert(14%) sepia(77%) saturate(5044%) hue-rotate(356deg)
+    brightness(105%) contrast(123%);
+}
+
+.controlDiv{
+  z-index: 1 !important;
+  position: absolute;
+  top: 10px !important;
+  left: -533px !important;
+  z-index: 1 !important;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #d6d0d0;
+  color: rgb(123, 119, 119);
+  font-family: unset;
+  width: 90px;
+  height: 40px;
+  border-left: 1px solid #f4e7e7;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.controlDivPH{
+  z-index: 1 !important;
+  position: absolute;
+  top: 10px !important;
+  left: 500px !important;
+  z-index: 1 !important;
+  background: #12274b;
+  border-radius: 3px;
+  border: 1px solid #d6d0d0;
+  color: white;
+  font-family: unset;
+  width: 90px;
+  height: 40px;
+  border-left: 1px solid #f4e7e7;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.2em;  
+  display: none;
+}
+
+.controlDivE{  
+  z-index: 1 !important;
+    position: absolute;
+    top: 10px !important;
+    left: 410px !important;
+    z-index: 1 !important;
+    background: #f4efdf;
+    border-radius: 3px;
+    border: 1px solid #d6d0d0;
+    color: black;
+    font-family: unset;
+    width: 90px;
+    height: 40px;
+    border-left: 1px solid #f4e7e7;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2em;  
+    display: none;
+}
