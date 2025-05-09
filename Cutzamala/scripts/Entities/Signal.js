@@ -1,5 +1,5 @@
 import { Core } from "../Core.js";
-import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBombaString, EnumPerillaGeneralString } from "../Utilities/Enums.js";
+import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBombaString, EnumPerillaGeneralString, EnumUnidadesSignalClima } from "../Utilities/Enums.js";
 import Linea from "./Linea.js";
 import Semaforo from "./Semaforo.js";
 class Signal {
@@ -116,7 +116,7 @@ class Signal {
 
             let value = `${parseFloat(this.Valor).toFixed(2)}`;
 
-            if(value < 0)
+            if (value < 0)
                 value = `${parseFloat(0).toFixed(2)}`;
 
             let _unidades = '';
@@ -128,13 +128,41 @@ class Signal {
             return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
 
         }
+        else if(this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad ||  this.TipoSignal == EnumTipoSignal.Direccion){
+            let value = `${parseFloat(this.Valor).toFixed(0)}`;
+
+            if (value < 0)
+                value = `${parseFloat(0).toFixed(2)}`;
+
+            let _unidades = '';
+
+            if (unidades) {
+                _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+            }
+
+            return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+        }
+        else if(this.TipoSignal == EnumTipoSignal.Temperatura || this.TipoSignal == EnumTipoSignal.Intensidad){
+            let value = `${parseFloat(this.Valor).toFixed(1)}`;
+
+            if (value < 0)
+                value = `${parseFloat(0).toFixed(1)}`;
+
+            let _unidades = '';
+
+            if (unidades) {
+                _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+            }
+
+            return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+        }
         else {
             if (this.DentroRango == 1) {
-                let value = `${parseFloat(this.Valor).toFixed(3)}`;
+                let value = `${parseFloat(this.Valor).toFixed(2)}`;
                 let _unidades = '';
 
                 if (unidades) {
-                    _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
+                    _unidades = `[${Core.Instance.IdProyecto == 13 ? EnumUnidadesSignalClima[this.TipoSignal] : EnumUnidadesSignal[this.TipoSignal]}]`;
                 }
 
                 return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
@@ -152,7 +180,7 @@ class Signal {
      * @returns {string} nomenclatura (ejem. N1)
      */
     GetNomenclaturaSignal() {
-        return `${EnumTipoSignalNomenclatura[this.TipoSignal]}${this.Ordinal + 1}`;
+        return `${this.Nombre}`;
     }
 
     GetValorColor() {
@@ -185,9 +213,14 @@ class Signal {
             case EnumTipoSignal.Gasto:
             case EnumTipoSignal.Totalizado:
             case EnumTipoSignal.ValvulaAnalogica:
-
+            case EnumTipoSignal.Precipitacion:
+            case EnumTipoSignal.Temperatura:
+            case EnumTipoSignal.Humedad:
+            case EnumTipoSignal.RadiacionSolar:
+            case EnumTipoSignal.Intensidad:
+            case EnumTipoSignal.Direccion:
                 if (this.DentroRango == 1)
-                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'rgb(201 137 59)' : this.DentroLimite == EnumDentroLimite.Alto ? '#fa8c8c' : 'rgb(255, 255, 255)'}`;
+                    color = `${this.DentroLimite == EnumDentroLimite.Bajo ? 'white' : this.DentroLimite == EnumDentroLimite.Alto ? 'white' : 'white'}`;
 
                 break;
             default:
