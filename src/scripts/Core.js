@@ -65,21 +65,7 @@ class Core {
     this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
     this.data = this.GetData(data);
 
-    /* BOMBERAZO CHALMITA P2 */
-    if (this.IdProyecto == EnumProyecto.Chalmita) {
-      let p2 = this.data[1].Signals;
-      p2.forEach(s => {
-        if(s.TipoSignal != EnumTipoSignal.Enlace && s.TipoSignal != EnumTipoSignal.Tiempo)
-          s.IdEstacion = 1;
-          this.data[0].Signals.push(s);
-      });
-      
-      //delete this.data[1];
-      this.data.splice(1,1);
-    }
-
     // this.randomValues();
-    //console.log(this.data);
     EventsManager.Instance.EmitirEvento(EnumAppEvents.Update); // Manda mensaje de update a todos los elementos que necesiten actualizar
   }
 

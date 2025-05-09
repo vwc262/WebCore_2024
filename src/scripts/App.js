@@ -10,12 +10,12 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Yaqui;
+  projectName = EnumProyecto.Lumbreras;
   constructor() {
-    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
+
   }
   async Start() {
-    //UIReportes.PrepararChart();
+
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
 
@@ -117,15 +117,10 @@ class VwcApp {
 
 
     new Tabla().create(); // Inicio de tabla curva
-    if (this.isPerfilTipoPozos) {
-      PerfilPozos.Instace.create();
-    }
-    else {
-      new Perfil().create(); // Inicio del perfil
-    }
+
+    new Perfil().create(); // Inicio del perfil
+
     new Mapa().create();
-
-
 
     this.suscribirEventos();
   }
