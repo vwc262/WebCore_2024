@@ -143,6 +143,7 @@ var EnumTipoSignal = {
   RadiacionSolar: 23,
   Intensidad: 24,
   Direccion: 25,
+  Compuerta: 26
 };
 
 /**
@@ -175,6 +176,7 @@ var EnumTipoSignalString = {
   23: "RadiacionSolar",
   24: "Intensidad",
   25: "Direccion",
+  26: "Compuerta"
 };
 
 /**
@@ -207,6 +209,7 @@ var EnumTipoSignalNomenclatura = {
   23: "EVA",
   24: "INTS",
   25: "DIR",
+  26: "COM"
 };
 
 /**
@@ -229,6 +232,7 @@ const EnumUnidadesSignal = {
   23: "%",
   24: "<sup>Km</sup>/<sup>H</sup>",
   25: "°",
+  26: "°",
 };
 
 /**

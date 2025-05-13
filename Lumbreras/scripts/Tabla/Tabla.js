@@ -436,7 +436,6 @@ class Tabla {
   }
 
   create() {
-    this.curvedScroll();
 
     let canvas = document.querySelector("#svgScroll");
     this.SVGScrollHandler.init(canvas);
@@ -520,37 +519,23 @@ class Tabla {
       } `;
 
     if (!stopPropagation) {
-      const estacion = Core.Instance.data.find(
-        (estacion) => estacion.IdEstacion == IdEstacion
-      );
-      const estilosEstacionEtiqueta =
-        this.Configuracion.perfil.estilosEstacion.find(
-          (element) => element.IdEstacion == IdEstacion
-        );
+      // const estacion = Core.Instance.data.find(
+      //   (estacion) => estacion.IdEstacion == IdEstacion
+      // );
+      // const estilosEstacionEtiqueta =
+      //   this.Configuracion.perfil.estilosEstacion.find(
+      //     (element) => element.IdEstacion == IdEstacion
+      //   );
 
-      EventsManager.Instance.EmitirEvento("OnMouseHoverTabla", {
-        isMouseOut: !mouseover,
-        estacion: estacion,
-        css: estilosEstacionEtiqueta.Imagen,
-        stopPropagation: true,
-      });
+      // EventsManager.Instance.EmitirEvento("OnMouseHoverTabla", {
+      //   isMouseOut: !mouseover,
+      //   estacion: estacion,
+      //   css: estilosEstacionEtiqueta.Imagen,
+      //   stopPropagation: true,
+      // });
     }
   }
 
-  curvedScroll() {
-    // // value="0" min="0" max="3"
-    // let $slider = document.querySelector(".sliderVertical");
-    // this.scrollValue = 0;
-    // $slider.setAttribute(
-    //   "max",
-    //   `${this.cantidadElementos - this.elementosVisibles}`
-    // );
-    // $slider.addEventListener("input", (event) => {
-    //   console.log(event.currentTarget.value);
-    //   this.setScrollDirection(event.currentTarget.value < this.scrollValue);
-    //   this.scrollValue = event.currentTarget.value;
-    // });
-  }
   normalizedTableOffset = 0;
   SVGScrollHandler = {
     minY: 169,

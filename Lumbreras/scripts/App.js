@@ -6,16 +6,15 @@ import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
-import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Yaqui;
+  projectName = EnumProyecto.Lumbreras;
   constructor() {
     this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
   async Start() {
-    //UIReportes.PrepararChart();
+
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
 
@@ -62,15 +61,11 @@ class VwcApp {
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = titulo;
 
-    if (config.tipoHeader)
-      $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/${config.tipoHeader}.png?v=${Core.Instance.version}`);
-    else
-      $headerImagen.style.display = "none"
+    $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/${config.tipoHeader}.png?v=${Core.Instance.version}`);
 
   }
 
   IniciarUI() {
-
 
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
@@ -115,17 +110,9 @@ class VwcApp {
       html.style['-webkit-user-drag'] = 'auto';
     }
 
-
     new Tabla().create(); // Inicio de tabla curva
-    if (this.isPerfilTipoPozos) {
-      PerfilPozos.Instace.create();
-    }
-    else {
-      new Perfil().create(); // Inicio del perfil
-    }
+    new Perfil().create(); // Inicio del perfil
     new Mapa().create();
-
-
 
     this.suscribirEventos();
   }
