@@ -38,9 +38,6 @@ class VwcApp {
   }
 
   onLoad() {
-    const loadscreen = document.querySelector(".sec-loading");
-    loadscreen.style.display = 'none';
-
     const Content_on_load = document.querySelector(".Content_on_load");
     Content_on_load.style.display = 'flex';
   }
