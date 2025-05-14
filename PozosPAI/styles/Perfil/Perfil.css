@@ -80,8 +80,8 @@
 
 .renderImagesSitio {
     pointer-events: none;  
-    width: 25px;
-    height: 47px;
+    width: 35px;
+    height: 60px;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -129,8 +129,8 @@
 
 .imLinkCircle {
     pointer-events: auto;
-    width: 56px;
-    height: 50px;
+    width: 40px;
+    height: 66px;
     background-size: 100% 100% !important;
     transform-origin: center;
     transform: scale(1);
@@ -146,18 +146,18 @@
     height: 50px;
     background-size: 100% 100% !important;
     transform-origin: center;
-    transform: scale(1.2);
+    transform: scale(1);
     position: absolute;
-    top: 1.85px;
+    top: -9px;
     padding-left: 0.5px;
+    left: 1px;
 }
 
 .txtLinkCircle:after {
     content: attr(abv);
-    font-size: 9px;
+    font-size: 18px;
     text-align: center;
-    vertical-align: 3px;
-    vertical-align: -12px;
+    vertical-align: -33px;
 }
 
 
@@ -230,8 +230,8 @@
 
 .thunderPosition {
     position: relative;
-    left: -18px;
-    top: -10px;
+    left: -29px;
+    top: 34px;
 }
 
 .xSmallIcon {

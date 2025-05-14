@@ -61,7 +61,7 @@ class SitioPerfilPozo {
             nodeElement: "div",
             attributes: {
                 //abv: `${estacion.Abreviacion.split("-")[1]}`,
-                abv: `${estacion.Abreviacion}`,
+                abv: `${estacion.IdEstacion}`,
                 class: 'txtLinkCircle',
             },
         });

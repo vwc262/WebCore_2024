@@ -5,7 +5,7 @@
 }
 
 .marker-tag {
-  background-color: #520000;
+  background-color: hsl(184, 100%, 20%);
     border-radius: 8px;
     color: #ffffff;
     font-size: 1em;

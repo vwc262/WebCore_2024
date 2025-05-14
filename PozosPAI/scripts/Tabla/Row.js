@@ -39,7 +39,7 @@ class Row {
     let bottomGlowColumn = CreateElement({ nodeElement: 'div', attributes: { class: 'bottomGlowColumn' } });
     this.enlace = CreateElement({ nodeElement: 'img', attributes: { class: `enlace-tabla` } });
     let nombreFechaContainer = CreateElement({ nodeElement: 'div', attributes: { class: `nombre-Fecha-Container` } });;
-    this.nombre = CreateElement({ nodeElement: 'div', attributes: { class: `nombre-tabla` }, innerText: `${estacion.Nombre}` });
+    this.nombre = CreateElement({ nodeElement: 'div', attributes: { class: `nombre-tabla` }, innerText: `${estacion.IdEstacion} - ${estacion.Nombre}` });
     this.fecha = CreateElement({ nodeElement: 'div', attributes: { class: `fecha-tabla` } });
 
     this.rowContainer.append(this.enlace, nombreFechaContainer, bottomGlowColumn);
