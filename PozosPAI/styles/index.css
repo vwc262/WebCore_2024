@@ -3,8 +3,8 @@
 @font-face {
   font-family: Montserrat;
   src:
-  url(../assets/fonts/Moserrat/Montserrat-Medium.ttf),
-  url(../assets/fonts/Moserrat/Montserrat-Light.ttf),
+    url(../assets/fonts/Moserrat/Montserrat-Medium.ttf),
+    url(../assets/fonts/Moserrat/Montserrat-Light.ttf),
     url(../assets/fonts/Moserrat/Montserrat-Black.ttf),
     url(../assets/fonts/Moserrat/Montserrat-Bold.ttf),
     url(../assets/fonts/Moserrat/Montserrat-Italic.ttf);
@@ -13,7 +13,7 @@
 @font-face {
   font-family: GMX;
   src:
-  url(../assets/fonts/GMX/GMX-Regular.ttf),
+    url(../assets/fonts/GMX/GMX-Regular.ttf),
     url(../assets/fonts/GMX/GMX-Black.ttf),
     url(../assets/fonts/GMX/GMX-Bold.ttf),
     url(../assets/fonts/GMX/GMX-Light.ttf);
@@ -38,9 +38,9 @@ body {
   -webkit-user-drag: none !important;
 }
 
-body{
+body {
   font-family: Roboto;
-  background: #085050 ;
+  background: #085050;
 }
 
 header {
@@ -113,26 +113,26 @@ aside {
   cursor: pointer;
 }
 
-.headerBtn__Graficador{
-  position: absolute; 
-  left: 1703px;
+.headerBtn__Graficador {
+  position: absolute;
+  left: 1681px;
 }
 
-.headerBtn__Mapa{
-  position: absolute; 
-  left: 1600px;
+.headerBtn__Mapa {
+  position: absolute;
+  left: 1566px;
 }
 
-.headerBtn__Home{
-  position: absolute; 
-  left: 1488px;
+.headerBtn__Home {
+  position: absolute;
+  left: 1432px;
 }
 
 .headerBtn__Login {
   border: none;
   display: flex;
   position: absolute;
-  left: 1832px;
+  left: 1830px;
 }
 
 .header__active {
@@ -146,19 +146,22 @@ aside {
   justify-content: center;
   font-family: GMX;
   /*color: black;*/
-  color:cyan;
+  color: cyan;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
   z-index: 10;
-  /* top: 0; */
-  /*left: 695px;*/
-  left: 856px;
+  /*top: 10px;*/
+  left: 835px;
 }
 
 .header__title h1 {
   font-size: 25px;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-transform: uppercase;
+  top: 50px;
 }
 
 .conagua_logos {
@@ -199,6 +202,9 @@ aside {
   transition: opacity 0.4s ease;
   text-shadow: 1px 1px 2px black;
   cursor: pointer;
+  position: absolute;
+    left: 1180px;
+    top: 40px;
 }
 
 .header__btnRegresar img {
