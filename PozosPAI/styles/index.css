@@ -91,7 +91,11 @@ aside {
 }
 
 #conagua_med_amb_logo {
-  height: 50px;
+  height: 90px;
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+
 }
 
 .Content_on_load {
@@ -109,9 +113,26 @@ aside {
   cursor: pointer;
 }
 
+.headerBtn__Graficador{
+  position: absolute; 
+  left: 1703px;
+}
+
+.headerBtn__Mapa{
+  position: absolute; 
+  left: 1600px;
+}
+
+.headerBtn__Home{
+  position: absolute; 
+  left: 1488px;
+}
+
 .headerBtn__Login {
   border: none;
   display: flex;
+  position: absolute;
+  left: 1832px;
 }
 
 .header__active {
@@ -124,14 +145,16 @@ aside {
   text-align: center;
   justify-content: center;
   font-family: GMX;
-  color: black;
+  /*color: black;*/
+  color:cyan;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
   z-index: 10;
   /* top: 0; */
-  left: 695px;
+  /*left: 695px;*/
+  left: 856px;
 }
 
 .header__title h1 {

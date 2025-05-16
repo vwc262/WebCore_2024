@@ -62,7 +62,11 @@ class VwcApp {
 
   IniciarUI() {
     const $conagua_med_amb_logo = document.getElementById("conagua_med_amb_logo");
-    $conagua_med_amb_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Logo_Medio_Amb_conagua.png?v=${Core.Instance.version}`);
+    //$conagua_med_amb_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Logo_Medio_Amb_conagua.png?v=${Core.Instance.version}`);
+    $conagua_med_amb_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Header.png?v=${Core.Instance.version}`);
+
+    //const $imagen_header = document.getElementById("imagen_header_logo");
+    //$imagen_header_logo.setAttribute("src", `${Core.Instance.ResourcesPath}General/Header.png?v=${Core.Instance.version}`);
 
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);

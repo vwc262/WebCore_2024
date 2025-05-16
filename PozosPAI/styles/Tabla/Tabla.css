@@ -90,8 +90,9 @@
   flex-wrap: nowrap;
   align-content: center;
   justify-content: center;
-  align-items: center;
+  /*align-items: center;*/
   pointer-events: none;
+  margin: auto;
 }
 
 .nombre-tabla {
