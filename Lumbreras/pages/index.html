@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
   <link rel="stylesheet" href="../styles/Modal/modal.css">
   <!-- reportes -->
+  <link rel="stylesheet" href="../styles/reportes/reportes.css">
   <!-- CustomStyles -->
   <script src="../scripts/Core.js" type="module"></script>
 </head>
@@ -83,6 +84,157 @@
       </section>
       <section id="section__graficador" class="section__graficador" style="display: none;">
 
+        <div class="main_graficador">
+          <div class="menu_chart" id="menu_chart">
+            <div class="chartdivContainer fondo_panel">
+              <div id="chartdiv"></div>
+
+              <div class="popUp" id="popUpContainer">
+                <h3>¡Descarga completada!</h3>
+                <p>El archivo se ha descargado correctamente.</p>
+                <button class="popUp-button" id="popUpAceptar">Aceptar</button>
+              </div>
+
+            </div>
+            <div id="noDatadiv" class="fondo_panel"><label>Sin históricos...</label></div>
+            <div class="menu_csv">
+              <div class="botones_descarga_graficador" id="containerCSV">
+                <input id="descargarCSV" type="button">
+                <label class="textButtonDescarga">Descargar CSV</label>
+              </div>
+
+              <div class="botones_descarga_graficador" id="containerPDF">
+                <input id="descargarPDF" type="button">
+                <label class="textButtonDescarga">Descargar PDF</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="pantalla_inicial" class="pantalla_inicial">
+            <div class="lista_sitios_container">
+              <div class="menu menu_estacion fondo_panel">
+
+                <div id="headerParametros" class="Parametros">
+                  Parámetros:
+                </div>
+
+                <div class="contenedor_signals fondo_panel">
+                  <div class="rowEstacionSignal signal_1">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #1f77b4;" type="text" class="nameSignalCont" id="nameSignal_1"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_2">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #ff7f0e;" type="text" class="nameSignalCont" id="nameSignal_2"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_3">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #2ca02c;" type="text" class="nameSignalCont" id="nameSignal_3"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_4">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #d62728;" type="text" class="nameSignalCont" id="nameSignal_4"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_5">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #9467bd;" type="text" class="nameSignalCont" id="nameSignal_5"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_6">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #8c564b;" type="text" class="nameSignalCont" id="nameSignal_6"
+                      readonly disabled="disabled">
+                  </div>
+                </div>
+
+                <div id="headerSignalsParametros" class="ParametrosSignals">
+                  <input name="cerrar" id="btnCerrarSignals">
+                  <p>Selecciona un Parámetro:</p>
+                </div>
+
+                <div class="contenedor_lista_sitios fondo_panel">
+                  <div id="lista_sitios" class="lista_sitios"></div>
+                </div>
+
+                <div id="headerParametros" class="Parametros">
+                  Rango de tiempo:
+                </div>
+                <div class="contenedor_Date fondo_panel">
+                  <div class="contenedor_DateTime">
+
+                    <div class="Date_Date">
+                      <div>
+                        <p>Fecha inicial:</p>
+                        <input id="dateLeft" readonly />
+                      </div>
+                      <div id="dateDRigth">
+                        <p>Fecha final:</p>
+                        <input id="dateRigth" readonly />
+                      </div>
+                    </div>
+
+                    <div class="Date_Time">
+                      <div class="FristTime">
+                        Inicio:
+                        <select class="slide" id="FirstHours">
+                        </select>h
+                        <select class="slide" id="FirstMinuts">
+                        </select>m
+                      </div>
+                      <div class="SecondTime">
+                        Fin:
+                        <select class="slide" id="SecondHours">
+                        </select>h
+                        <select class="slide" id="SecondMinuts">
+                        </select>m
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="forHora fondo_panel">
+                    Validar por Hora <input name="Validar_por_Hora" id="porHora">
+                  </div>
+                </div>
+
+
+                <!-- ============== Calnedario ================ -->
+                <div class="contenedor_fecha_estacion" id="calendarioDate">
+                  <div class="menu menu_fechas">
+                    <div class="fechas">
+                      <div id="calendar"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="botones_del_graficador" id="menu_graficador">
+                  <div class="botones_acciones_graficador fondo_panel" style="display: none;">
+                    <input id="borrar" type="button">
+                    <label>BORRAR</label>
+                  </div>
+                  <div class="botones_acciones_graficador">
+                    <input id="regresar" type="button">
+                    <label class="textButton">Regresar</label>
+                  </div>
+                  <div class="botones_acciones_graficador">
+                    <input id="graficar" type="button">
+                    <label class="textButton">Graficar</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
       </section>
 
