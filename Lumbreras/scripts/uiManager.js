@@ -2,10 +2,6 @@ import { ArranqueParo } from "./ArranqueParo/ArranqueParo.js";
 import { Core } from "./Core.js";
 import Login from "./Entities/Login/Login.js";
 import { Particular } from "./Particular/Particular.js";
-import { FetcherGraficador } from "./Reporteador/Fetcher.js";
-import { inicializarReporteador, isReporteadorCreated } from "./Reporteador/Reportes.js";
-import UIControlador from "./Reporteador/videoUI.js";
-import controladorVideo from "./Reporteador/videos.js";
 import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { EnumModule, EnumNombreProyecto } from "./Utilities/Enums.js";
 

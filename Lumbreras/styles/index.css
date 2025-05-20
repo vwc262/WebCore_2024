@@ -93,10 +93,10 @@ section {
 
 aside {
   position: absolute;
-  z-index: 110;
   width: 600px;
   height: 1080px;
-  left: 1320px;
+  left: 0px;
+  z-index: 4;
 }
 
 .Content_on_load {
@@ -245,18 +245,6 @@ aside {
 
 }
 
-.txtProximamnete {
-  height: 70vh;
-  width: 70vw;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 150px;
-  color: hsl(230, 100%, 95%);
-  animation: lights 5s 750ms linear infinite;
-}
-
 /* loading Screen */
 :root {
   --border-width: 7px;
@@ -301,10 +289,6 @@ aside {
   text-align-last: center;
   font-size: xx-large;
   margin-left: -40px;
-}
-
-.containerLoading {
-  display: none;
 }
 
 @keyframes rotate {

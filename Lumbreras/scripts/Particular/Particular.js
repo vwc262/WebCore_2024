@@ -2,17 +2,15 @@ import { Configuracion } from "../../config/config.js";
 import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
-import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import {
-  EnumUnidadesSignal,
   EnumModule,
   EnumTipoSignal,
   EnumEnlace,
   EnumProyecto,
 } from "../Utilities/Enums.js";
-import { GoBack, GoHome, Module, SetActualModule } from "../uiManager.js";
+import { GoHome, Module, SetActualModule } from "../uiManager.js";
 
 class Particular {
   //#region  Singleton
