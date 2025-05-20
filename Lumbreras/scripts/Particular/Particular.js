@@ -1,5 +1,4 @@
 import { Configuracion } from "../../config/config.js";
-import { ArranqueParo } from "../ArranqueParo/ArranqueParo.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
@@ -49,7 +48,6 @@ class Particular {
 
   //#region Metodos
   setEstacion(estacion) {
-    ArranqueParo.Instance.CloseArranqueParo();
     if (this.Estacion && this.Estacion.IdEstacion != estacion.IdEstacion) {
       // Hay Cambio de particular
       EventsManager.Instance.EmitirEvento("ParticularChanged");
@@ -133,7 +131,6 @@ class Particular {
     );
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
-    this.$panelBombas = document.querySelector(".arranqueParo__panelControl");
     let nombresLargos = Configuracion.GetNombresLargos(Core.Instance.IdProyecto);
     this.$headerTitle.innerText = nombresLargos ? nombresLargos[this.Estacion.IdEstacion] : this.Estacion.Nombre;
 

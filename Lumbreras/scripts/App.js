@@ -6,7 +6,6 @@ import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
-import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
   projectName = EnumProyecto.Lumbreras;
@@ -50,7 +49,6 @@ class VwcApp {
     const titulo = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     let $title = document.getElementById('title__page');
     let $header_image = document.getElementById('header_image');
-    let $headerImagen = document.getElementsByClassName('headerImagen')[0];
     $title.innerText = `VWC - ${titulo}`;
 
     const $titleHeader = document.querySelector("#title");
@@ -71,26 +69,8 @@ class VwcApp {
     const $imgGraficador = document.getElementById("imgGraficador");
     $imgGraficador.setAttribute("src", `${Core.Instance.ResourcesPath}Reportes/graficador.png?v=${Core.Instance.version}`);
 
-    const $imgLogin = document.getElementById("imgLogin");
-    $imgLogin.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_btn.png?v=${Core.Instance.version}`);
-
     const $imgRegresar = document.getElementById("imgRegresar");
     $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
-
-    const $loginVid1 = document.getElementById("loginVid1");
-    $loginVid1.setAttribute("src", `${Core.Instance.ResourcesPath}Control/login_loop.mp4?v=${Core.Instance.version}`);
-
-    const $imgContolPanel = document.getElementById("imgContolPanel");
-    $imgContolPanel.setAttribute("src", `${Core.Instance.ResourcesPath}Control/controlPanel.png?v=${Core.Instance.version}`);
-
-    const $imgClose = document.getElementById("imgClose");
-    $imgClose.setAttribute("src", `${Core.Instance.ResourcesPath}General/close_nrm.png?v=${Core.Instance.version}`);
-
-    const $imgPanelArranqueParo = document.getElementById("imgPanelArranqueParo");
-    $imgPanelArranqueParo.setAttribute("src", `${Core.Instance.ResourcesPath}Control/transition.gif?v=${Core.Instance.version}`);
-
-    const $imgEncender = document.getElementById("imgEncender");
-    $imgEncender.style.background = `url(${Core.Instance.ResourcesPath}Control/BTN_ON.png?v=${Core.Instance.version})`
 
     const $imgModal = document.getElementById("imgModal");
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
