@@ -82,7 +82,7 @@ class RowEstacion {
     }
 
     onclick() {
-
+        // info_estacion_row
     }
 
 

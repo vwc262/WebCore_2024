@@ -13,8 +13,8 @@ class Interceptor {
         let nombre_interceptor = config.nombre;
         this.estaciones = config.ids;
 
-        let interceptor_div = document.createElement('div');
-        interceptor_div.classList = 'interceptor';
+        this.interceptor_div = document.createElement('div');
+        this.interceptor_div.classList = 'interceptor';
 
         let row_div = document.createElement('div');
         row_div.classList = 'interceptor_row';
@@ -64,9 +64,9 @@ class Interceptor {
         /* ============== apendizar divs =================== */
 
         row_div.append(id_interceptor_div, nombre_interceptor_div, resumen_interceptor_div);
-        interceptor_div.append(row_div, this.estaciones_interceptor_div);
+        this.interceptor_div.append(row_div, this.estaciones_interceptor_div);
 
-        container.appendChild(interceptor_div);
+        container.appendChild(this.interceptor_div);
 
         this.root = row_div;
 
@@ -81,8 +81,8 @@ class Interceptor {
 
             let div = document.createElement('div');
 
-            div.addEventListener('click', this.onclick);
-            div.addEventListener('onmouseover', this.onmouseover);
+            this.interceptor_div.addEventListener('click', this.onclick);
+            this.interceptor_div.addEventListener('onmouseover', this.onmouseover);
 
             let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion);
         });
@@ -97,7 +97,8 @@ class Interceptor {
     }
 
     onclick() {
-
+        console.log("interceptor")
+        // estaciones_interceptor
     }
 
 
