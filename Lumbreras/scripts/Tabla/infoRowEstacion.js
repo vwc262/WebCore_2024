@@ -48,8 +48,6 @@ class infoRowEstacion {
         
         info_div.append(signals_div);
         container.appendChild(info_div);
-
-        this.Init();
     }
 
     Init() {

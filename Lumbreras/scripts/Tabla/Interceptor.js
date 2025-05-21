@@ -6,7 +6,6 @@ import { RowEstacion } from "./RowEstacion.js";
  */
 class Interceptor {
 
-
     constructor(container, config) {
 
         let key_interceptor = config.key;
@@ -70,21 +69,17 @@ class Interceptor {
 
         this.root = row_div;
 
-        this.Init();
-
     }
 
     Init() {
 
+        this.root.addEventListener('click', this.onclick.bind(this));
+        this.root.addEventListener('onmouseover', this.onmouseover);
+
         this.estaciones.forEach(idEstacion => {
             let estacion = Core.Instance.GetDatosEstacion(idEstacion);
-
-            let div = document.createElement('div');
-
-            this.interceptor_div.addEventListener('click', this.onclick);
-            this.interceptor_div.addEventListener('onmouseover', this.onmouseover);
-
             let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion);
+            rowEstacion.Init();
         });
 
         this.suscribirEventos();
@@ -93,12 +88,11 @@ class Interceptor {
 
 
     onmouseover() {
-
+        
     }
-
+    
     onclick() {
-        console.log("interceptor")
-        // estaciones_interceptor
+        this.estaciones_interceptor_div.style.display = this.estaciones_interceptor_div.style.display === "none" || this.estaciones_interceptor_div.style.display === "" ? "flex" : "none";
     }
 
 
