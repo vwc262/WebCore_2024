@@ -28,8 +28,6 @@ class infoRowEstacion {
 
         this.estacion.Signals.forEach(signal => {
             if(signal.TipoSignal == 1){
-
-                console.log(signal.Nombre)
                 
                 let signal_div = document.createElement('div');
                 signal_div.classList = 'signal_estacion';
