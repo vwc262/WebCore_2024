@@ -1,4 +1,4 @@
-import { EnumControllerMapeo, EnumNombreProyecto, EnumProyecto, EnumTipoSignal, RequestType } from "../Utilities/Enums.js";
+import { EnumControllerMapeo, EnumProyecto, EnumTipoSignal, RequestType } from "../Utilities/Enums.js";
 import { Reporteador } from "./Reporteador.js";
 import { ControladorCSV } from "./CSVController.js";
 import { PDFExporter } from "./PdfExporter.js";
@@ -310,11 +310,11 @@ class AppGraficador {
 
     AsignacionEventos() {
 
-        this.regresarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_Volver.png?)`;
-        this.csvBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_csv.png?)`;
-        this.pdfBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_pdf.png?)`;
-        this.porHora.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/check_a.png?)`;
-        this.btnCerrarSignals.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/btn_cerrar.png?)`;
+        this.regresarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/Reportes/btn_Volver.png?)`;
+        this.csvBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/Reportes/btn_csv.png?)`;
+        this.pdfBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/Reportes/btn_pdf.png?)`;
+        this.porHora.style.background = `url(${Reporteador.Instance.ResourcesPath}/General/check_a.png?)`;
+        this.btnCerrarSignals.style.background = `url(${Reporteador.Instance.ResourcesPath}/General/btn_cerrar.png?)`;
 
         this.graficarBtn.addEventListener('click', function (event) {
             Reporteador.Instance.fetchData();
@@ -354,8 +354,8 @@ class AppGraficador {
             PDFExporter.INSTANCE.descargarPDF(Reporteador.Instance.root, AppGraficador.Instance.GetNombreProyecto(), Reporteador.Instance.fechaInicial, Reporteador.Instance.fechaFinal, Reporteador.Instance.idSignalsAGraficar);
         });
 
-        this.graficarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/boton_graficador.png?)`;
-        this.borrarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/boton_basura.gif?)`;
+        this.graficarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/General/boton_graficador.png?)`;
+        this.borrarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/General/boton_basura.gif?)`;
 
         this.estaciones.forEach(estacion => {
 
@@ -425,7 +425,7 @@ class AppGraficador {
             this.maxDate.setHours(23);
             this.dateDRigth.style.display = this.porHoraCheck == true ? "none" : "inline";
             this.Date_Time.style.display = this.porHoraCheck == true ? "flex" : "none";
-            this.porHora.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/check_${state}.png?)`;
+            this.porHora.style.background = `url(${Reporteador.Instance.ResourcesPath}/General/check_${state}.png?)`;
 
             this.dateRigth.value = this.dateLeft.value;
             Reporteador.Instance.setFechas(this.minDate, this.maxDate);
@@ -553,7 +553,7 @@ class AppGraficador {
 
             const ico_signal = document.createElement('img');
             ico_signal.classList = `ico_signal_seleccion`;
-            ico_signal.src = `${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Encabezados/${EnumTipoSignalString[s.tipoSignal]}.png?`;
+            ico_signal.src = `${Reporteador.Instance.ResourcesPath}/Encabezados/${EnumTipoSignalString[s.tipoSignal]}.png?`;
 
             const bntSignal = document.createElement('div');
             bntSignal.IdSignal = s.idSignal;
@@ -603,11 +603,11 @@ class AppGraficador {
 
                         const iconoAGraficar = document.createElement('img');
                         iconoAGraficar.classList = 'icono_singal';
-                        iconoAGraficar.src = `${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Encabezados/${EnumTipoSignalString[s.tipoSignal]}.png`;
+                        iconoAGraficar.src = `${Reporteador.Instance.ResourcesPath}/Encabezados/${EnumTipoSignalString[s.tipoSignal]}.png`;
 
                         const quitarSignal = document.createElement('img');
                         quitarSignal.classList = 'quitar rotate45deg';
-                        quitarSignal.src = `${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/mas_nrm.png?`;
+                        quitarSignal.src = `${Reporteador.Instance.ResourcesPath}/General/mas_nrm.png?`;
 
                         const segnalAGraficar = document.createElement('div');
                         segnalAGraficar.classList = 'label_signal';

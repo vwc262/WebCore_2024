@@ -1,6 +1,7 @@
-import { EnumControllerHistorial, EnumTipoSignal, RequestType } from "../Utilities/Enums.js";
+import { EnumControllerHistorial, EnumNombreProyecto, EnumTipoSignal, RequestType } from "../Utilities/Enums.js";
 import { AppGraficador } from "./AppGraficador.js";
 import { APIGraficador } from "./APIGraficador.js";
+import { Core } from "../Core.js";
 
 /**
  * Antes Core
@@ -24,7 +25,7 @@ class Reporteador {
     chartRef = {};
 
     get ResourcesPath() {
-        return `https://virtualwavecontrol.com.mx/RecursosWeb/GraficadorMobile`;
+        return `https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/${EnumNombreProyecto[Core.Instance.IdProyecto]}`;
     }
 
     coloresSignals = [
