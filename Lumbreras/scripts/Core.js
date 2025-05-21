@@ -1,3 +1,4 @@
+import { Configuracion } from "../config/config.js";
 import { VwcApp } from "./App.js";
 import Estacion from "./Entities/Estacion.js";
 import { Fetcher } from "./Fetcher/Fetcher.js";
@@ -51,6 +52,10 @@ class Core {
     console.log("Iniciando App");
     this.IdProyecto = idProyecto;
     this.version = await Fetcher.Instance.RequestVersion(`OBTENERVERSION?idProyecto=${this.IdProyecto}`);
+
+    this.Configuracion = Configuracion.GetConfiguracion(
+      Core.Instance.IdProyecto
+    );
 
     await this.Update();
     this.IdInterval = setInterval(() => this.Update(), 10 * 1000);

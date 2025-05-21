@@ -45,7 +45,7 @@ class VwcApp {
   }
 
   IniciarHeader() {
-    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+    const config = Core.Instance.Configuracion;
 
     const titulo = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     let $title = document.getElementById('title__page');
