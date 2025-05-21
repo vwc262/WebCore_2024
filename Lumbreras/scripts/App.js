@@ -87,8 +87,9 @@ class VwcApp {
     }
 
     new Tabla().create(); // Inicio de tabla
-    new Perfil().create(); // Inicio del perfil
+    const perfil = new Perfil().create(); // Inicio del perfil
     new Mapa().create();
+
     AppGraficador.Instance.Start();
 
     this.suscribirEventos();
