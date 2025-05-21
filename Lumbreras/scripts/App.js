@@ -55,7 +55,7 @@ class VwcApp {
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = titulo;
 
-    $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/${config.tipoHeader}.png?v=${Core.Instance.version}`);
+    $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/Segiagua.png?v=${Core.Instance.version}`);
 
   }
 
