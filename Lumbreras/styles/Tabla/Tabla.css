@@ -23,12 +23,11 @@
   align-items: center;
 }
 
-.estaciones_interceptor{
+.estaciones_interceptor {
   display: none;
   width: 100%;
-  height: 50px;
   border: 1px dotted rgb(255, 175, 3);
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   align-content: center;
   justify-content: space-around;
@@ -47,6 +46,13 @@
   align-items: center;
 }
 
+.estacion_row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
 .data_row {
   display: flex;
   width: 100%;
@@ -59,8 +65,15 @@
   align-items: center;
 }
 
-.info_estacion_row {
+.signals_estacion {
   display: none;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.info_estacion_row {
+  display: flex;
   width: 100%;
   height: 100%;
   border: 1px dotted rgb(255, 3, 3);

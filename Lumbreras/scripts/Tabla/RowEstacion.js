@@ -56,21 +56,16 @@ class RowEstacion {
 
         container.appendChild(row_est_div);
 
-        this.Init();
+        this.root = row_est_div;
     }
 
     Init() {
 
+        this.root.addEventListener('click', this.onclick.bind(this));
+        this.root.addEventListener('onmouseover', this.onmouseover);
+
         let inforowEstacion = new infoRowEstacion(this.signals_estacion_div, this.estacion);
-
-        // this.estacion.Signals.forEach(signal => {
-        //     // console.log(signal)
-            
-        //     let div = document.createElement('div');
-
-        //     div.addEventListener('click', this.onclick);
-        //     div.addEventListener('onmouseover', this.onmouseover);
-        // });
+        inforowEstacion.Init();
 
         this.suscribirEventos();
         this.update();
@@ -83,6 +78,8 @@ class RowEstacion {
 
     onclick() {
         // info_estacion_row
+        
+        this.signals_estacion_div.style.display = this.signals_estacion_div.style.display === "none" || this.signals_estacion_div.style.display === "" ? "flex" : "none";
     }
 
 

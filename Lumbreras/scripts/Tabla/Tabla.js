@@ -29,6 +29,7 @@ class Tabla {
     interceptores_keys.forEach((key, index) => {
       let config = this.interceptores[key];
       let interceptor = new Interceptor(this.tBody, config);
+      interceptor.Init();
 
       interceptor.root.addEventListener('click', this.onclick);
       interceptor.root.addEventListener('onmouseover', this.onmouseover);
