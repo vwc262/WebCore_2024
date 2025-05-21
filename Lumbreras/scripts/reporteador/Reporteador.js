@@ -1,7 +1,10 @@
 import { EnumControllerHistorial, EnumTipoSignal, RequestType } from "../Utilities/Enums.js";
-import { VwcApp } from "./App.js";
+import { AppGraficador } from "./AppGraficador.js";
 import { APIGraficador } from "./APIGraficador.js";
 
+/**
+ * Antes Core
+ */
 class Reporteador {
 
     static #_instance = undefined;
@@ -142,7 +145,7 @@ class Reporteador {
                 fechaFinal: this.fechaFinal,
             };
 
-            const jsonData = await APIGraficador.Instance.request(`${EnumControllerHistorial.READ}?idProyecto=${VwcApp.Instance.IdProyecto}`, RequestType.POST, data, true);
+            const jsonData = await APIGraficador.Instance.request(`${EnumControllerHistorial.READ}?idProyecto=${AppGraficador.Instance.IdProyecto}`, RequestType.POST, data, true);
             if (jsonData.length > 0) {
                 this.dataCruda.push(jsonData);
             } else {
@@ -161,8 +164,8 @@ class Reporteador {
             } else {
                 if (new Date().getTime() - date.getTime() > 1000 * 10 * 1) {
                     clearInterval(interval);
-                    VwcApp.Instance.chartdivContainer.style.display = 'none';
-                    VwcApp.Instance.noDatadiv.style.display = 'flex';
+                    AppGraficador.Instance.chartdivContainer.style.display = 'none';
+                    AppGraficador.Instance.noDatadiv.style.display = 'flex';
                 }
             }
         }, 200);
@@ -178,9 +181,9 @@ class Reporteador {
             let btn = document.getElementById(id);
             if (btn != undefined || btn != null) btn.classList = 'bntSignal signalNA';
 
-            VwcApp.Instance.buttonSignalsSelected.splice(id, 1);
+            AppGraficador.Instance.buttonSignalsSelected.splice(id, 1);
             Reporteador.Instance.idSignalsAGraficar.splice(index, 1);
-            VwcApp.Instance.segnales_graficacion_dinamicas.removeChild(VwcApp.Instance.segnales_graficacion_dinamicas.children[index]);
+            AppGraficador.Instance.segnales_graficacion_dinamicas.removeChild(AppGraficador.Instance.segnales_graficacion_dinamicas.children[index]);
         });
     }
 
@@ -190,8 +193,8 @@ class Reporteador {
 
         if (this.dataCruda.length > 0) {
 
-            VwcApp.Instance.chartdivContainer.style.display = 'flex';
-            VwcApp.Instance.noDatadiv.style.display = 'none';
+            AppGraficador.Instance.chartdivContainer.style.display = 'flex';
+            AppGraficador.Instance.noDatadiv.style.display = 'none';
 
             let aux = [];
             this.dataCruda.forEach((infoSignal) => {
@@ -223,15 +226,15 @@ class Reporteador {
             this.data = aux;
             this.plot();
 
-            VwcApp.Instance.containerPDF.style.display = 'flex';
-            VwcApp.Instance.containerCSV.style.display = 'flex';
+            AppGraficador.Instance.containerPDF.style.display = 'flex';
+            AppGraficador.Instance.containerCSV.style.display = 'flex';
         }
         else {
-            VwcApp.Instance.containerPDF.style.display = 'none';
-            VwcApp.Instance.containerCSV.style.display = 'none';
+            AppGraficador.Instance.containerPDF.style.display = 'none';
+            AppGraficador.Instance.containerCSV.style.display = 'none';
 
-            VwcApp.Instance.chartdivContainer.style.display = 'none';
-            VwcApp.Instance.noDatadiv.style.display = 'flex';
+            AppGraficador.Instance.chartdivContainer.style.display = 'none';
+            AppGraficador.Instance.noDatadiv.style.display = 'flex';
         }
     }
 
@@ -469,7 +472,7 @@ class Reporteador {
         chart.appear(1000, 100);
 
         setTimeout(() => {
-            VwcApp.Instance.scaleDocument();
+            AppGraficador.Instance.scaleDocument();
         }, 100);
     }
 
@@ -490,7 +493,7 @@ class Reporteador {
             var factorWidth = 1 - (widthCanvas / widthChart);
             var factorHeight = 1 - (heightCanvas / heightChart);
 
-            // container.firstChild.style.transform = `scaleX(${(1 + factorWidth) * ((1 + 1 - VwcApp.Instance.actualWidthFactor) * (VwcApp.Instance.actualFactor > 0.55 ? 0.85 : 0.98))}) scaleY(${(1 + factorHeight) * ((1 + 1 - VwcApp.Instance.actualHeightFactor) * (VwcApp.Instance.actualFactor > 0.55 ? 0.85 : 0.98))})`;
+            // container.firstChild.style.transform = `scaleX(${(1 + factorWidth) * ((1 + 1 - AppGraficador.Instance.actualWidthFactor) * (AppGraficador.Instance.actualFactor > 0.55 ? 0.85 : 0.98))}) scaleY(${(1 + factorHeight) * ((1 + 1 - AppGraficador.Instance.actualHeightFactor) * (AppGraficador.Instance.actualFactor > 0.55 ? 0.85 : 0.98))})`;
             container.firstChild.style.transform = `scaleX(0.5) scaleY(0.5)`;
         }
     }

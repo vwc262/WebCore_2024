@@ -1,7 +1,7 @@
 import { RequestType } from "../Utilities/Enums.js";
 
 /**
- * Clase base para request
+ * Clase base para request // fetcher
  */
 class APIGraficador {
   isLogged = false;

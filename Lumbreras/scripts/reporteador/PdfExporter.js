@@ -1,5 +1,5 @@
 import { EnumProyecto } from "../Utilities/Enums.js";
-import { VwcApp } from "./App.js";
+import { AppGraficador } from "./AppGraficador.js";
 import { Reporteador } from "./Reporteador.js";
 
 class PDFExporter {
@@ -183,7 +183,7 @@ class PDFExporter {
     }
 
     obtenerHeader() {
-        switch (VwcApp.Instance.IdProyecto) {
+        switch (AppGraficador.Instance.IdProyecto) {
             case EnumProyecto.PozosPAI:
                 return OCAVAM_Cybercom.Logo;
             case EnumProyecto.LineaMorada:

@@ -358,6 +358,14 @@ const EnumTipoHeader = {
   Seguiagua: 2,
 }
 
+/**
+ * Enum que contiene las acciones para pedir historicos a la api
+ */
+const EnumControllerHistorial = {
+  READ: 'ReadHistorial',
+  READPOLEO: 'ReadHistorialPoleo',
+};
+
 export {
   RequestType,
   EnumProyecto,
@@ -383,5 +391,6 @@ export {
   EnumTipoPolygon,
   EnumNombreProyectoFolder,
   EnumTipoHeader,
+  EnumControllerHistorial
 };
 

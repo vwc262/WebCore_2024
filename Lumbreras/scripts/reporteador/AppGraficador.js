@@ -3,22 +3,23 @@ import { Reporteador } from "./Reporteador.js";
 import { ControladorCSV } from "./CSVController.js";
 import { PDFExporter } from "./PdfExporter.js";
 import { APIGraficador } from "./APIGraficador.js";
+import { Core } from "../Core.js";
 
-class VwcApp {
+class AppGraficador {
 
     static #_instance = undefined;
 
     /**
-     * @returns {VwcApp}
+     * @returns {AppGraficador}
      */
     static get Instance() {
         if (!this.#_instance) {
-            this.#_instance = new VwcApp();
+            this.#_instance = new AppGraficador();
         }
         return this.#_instance;
     }
 
-    IdProyecto = EnumProyecto.LineaMorada;
+    IdProyecto = Core.Instance.IdProyecto;
     maxVariablesGraficar = 6;
     buttonSignalsSelected = [];
     actualWidthFactor = 0.0;
@@ -59,10 +60,10 @@ class VwcApp {
     async Start() {
 
         let d = new Date();
-        VwcApp.Instance.minDate = d;
-        VwcApp.Instance.maxDate = d;
+        AppGraficador.Instance.minDate = d;
+        AppGraficador.Instance.maxDate = d;
         let maxD = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${(d.getDate()).toString().padStart(2, '0')}`;
-        let minD = VwcApp.Instance.minDate;
+        let minD = AppGraficador.Instance.minDate;
 
         const options = {
             type: 'default',
@@ -111,52 +112,52 @@ class VwcApp {
 
                     /* ================ Validaciones para la seleccion de fechas ================ */
                     // Validacion por si se selecciona la fecha inicial
-                    if (VwcApp.Instance.fechaIzquierda) {
+                    if (AppGraficador.Instance.fechaIzquierda) {
                         // Si fue la segunda en seleccionar y se selecciono el mismo dia validamos que Dates tenga valor
                         if (dates.length > 0) {
-                            VwcApp.Instance.minDate = new Date(Math.min(...dates));
-                            minD = VwcApp.Instance.minDate;
-                            VwcApp.Instance.dateLeft.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
+                            AppGraficador.Instance.minDate = new Date(Math.min(...dates));
+                            minD = AppGraficador.Instance.minDate;
+                            AppGraficador.Instance.dateLeft.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
                         }
                         // En caso de que no tenga valor se le asigna el valor final al valor inicial
                         else {
-                            VwcApp.Instance.minDate = VwcApp.Instance.maxDate;
-                            minD = VwcApp.Instance.minDate;
-                            VwcApp.Instance.dateLeft.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
+                            AppGraficador.Instance.minDate = AppGraficador.Instance.maxDate;
+                            minD = AppGraficador.Instance.minDate;
+                            AppGraficador.Instance.dateLeft.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
                         }
-                        Reporteador.Instance.setFechas(VwcApp.Instance.minDate, VwcApp.Instance.maxDate);
-                        this.minDate = VwcApp.Instance.minDate;
+                        Reporteador.Instance.setFechas(AppGraficador.Instance.minDate, AppGraficador.Instance.maxDate);
+                        this.minDate = AppGraficador.Instance.minDate;
                     }
                     // Validaciones por si se selecciona la fecha final
                     else {
                         // Si fue la segunda en seleccionar y se selecciono el mismo dia validamos que Dates tenga valor
                         if (dates.length > 0) {
-                            VwcApp.Instance.maxDate = new Date(Math.max(...dates));
+                            AppGraficador.Instance.maxDate = new Date(Math.max(...dates));
                             // Validamos que la fecha final sea mayor a la inicial
-                            if (VwcApp.Instance.maxDate > VwcApp.Instance.minDate) {
-                                maxD = VwcApp.Instance.maxDate;
-                                VwcApp.Instance.dateRigth.value = `${maxD.getFullYear()}-${(maxD.getMonth() + 1).toString().padStart(2, '0')}-${(maxD.getDate()).toString().padStart(2, '0')}`;
+                            if (AppGraficador.Instance.maxDate > AppGraficador.Instance.minDate) {
+                                maxD = AppGraficador.Instance.maxDate;
+                                AppGraficador.Instance.dateRigth.value = `${maxD.getFullYear()}-${(maxD.getMonth() + 1).toString().padStart(2, '0')}-${(maxD.getDate()).toString().padStart(2, '0')}`;
                             }
                             // en caso de que la fecha final no sea mayor a la inicial
                             else {
-                                VwcApp.Instance.auxDate = VwcApp.Instance.maxDate; // Guardamos la fecha seleccionada
-                                VwcApp.Instance.maxDate = VwcApp.Instance.minDate; // Le pasamos el valor de la fecha mayor a la fecha final
-                                VwcApp.Instance.minDate = VwcApp.Instance.auxDate; // Y guardamos el valor de la fecha seleccionada en la fecha final
+                                AppGraficador.Instance.auxDate = AppGraficador.Instance.maxDate; // Guardamos la fecha seleccionada
+                                AppGraficador.Instance.maxDate = AppGraficador.Instance.minDate; // Le pasamos el valor de la fecha mayor a la fecha final
+                                AppGraficador.Instance.minDate = AppGraficador.Instance.auxDate; // Y guardamos el valor de la fecha seleccionada en la fecha final
 
-                                minD = VwcApp.Instance.minDate;
-                                VwcApp.Instance.dateRigth.value = VwcApp.Instance.dateLeft.value;
-                                VwcApp.Instance.dateLeft.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
+                                minD = AppGraficador.Instance.minDate;
+                                AppGraficador.Instance.dateRigth.value = AppGraficador.Instance.dateLeft.value;
+                                AppGraficador.Instance.dateLeft.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
                             }
-                            Reporteador.Instance.setFechas(VwcApp.Instance.minDate, VwcApp.Instance.maxDate);
+                            Reporteador.Instance.setFechas(AppGraficador.Instance.minDate, AppGraficador.Instance.maxDate);
                         }
                         // n caso de que no tenga valor se le asigna el valor inicial al valor final
                         else {
-                            VwcApp.Instance.dateRigth.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
-                            Reporteador.Instance.setFechas(VwcApp.Instance.minDate, VwcApp.Instance.minDate);
+                            AppGraficador.Instance.dateRigth.value = `${minD.getFullYear()}-${(minD.getMonth() + 1).toString().padStart(2, '0')}-${(minD.getDate()).toString().padStart(2, '0')}`;
+                            Reporteador.Instance.setFechas(AppGraficador.Instance.minDate, AppGraficador.Instance.minDate);
                         }
                     }
 
-                    VwcApp.Instance.calendarioDate.style.display = "none";
+                    AppGraficador.Instance.calendarioDate.style.display = "none";
                 },
             },
             date: {
@@ -195,7 +196,7 @@ class VwcApp {
             mostarSignals[i].addEventListener("click", (e) => {
                 e.target.textContent = e.target.textContent == "+" ? "-" : "+";
                 this.habilitarRow(i + 1)
-                VwcApp.Instance.btnSeleccionado = e.target;
+                AppGraficador.Instance.btnSeleccionado = e.target;
             });
         }
 
@@ -271,8 +272,6 @@ class VwcApp {
         this.menuChart = document.getElementById('menu_chart');
         this.pantallaPrincipal = document.getElementById('pantalla_inicial');
 
-        this.titulo = document.getElementById('titulo');
-
         this.chartdiv = document.getElementById('chartdiv');
         this.chartdivContainer = document.getElementsByClassName('chartdivContainer')[0];
         this.noDatadiv = document.getElementById('noDatadiv');
@@ -311,14 +310,6 @@ class VwcApp {
 
     AsignacionEventos() {
 
-        this.lbl_w = document.getElementById('lbl_w');
-        this.lbl_h = document.getElementById('lbl_h');
-
-        this.lbl_w.innerHTML = `width:  ${window.innerWidth}px`;
-        this.lbl_h.innerHTML = `height: ${window.innerHeight}px`;
-
-        // this.regresarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_regresar.png?)`;
-        // this.csvBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/csv.png?)`;
         this.regresarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_Volver.png?)`;
         this.csvBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_csv.png?)`;
         this.pdfBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/Reportes/btn_pdf.png?)`;
@@ -344,12 +335,12 @@ class VwcApp {
                 if (btn != undefined || btn != null) btn.classList = 'bntSignal signalNA';
             });
 
-            VwcApp.Instance.segnales_graficacion_dinamicas.innerHTML = '';
-            VwcApp.Instance.segnales_graficacion_dinamicas_dicL = {};
+            AppGraficador.Instance.segnales_graficacion_dinamicas.innerHTML = '';
+            AppGraficador.Instance.segnales_graficacion_dinamicas_dicL = {};
             this.cerrarPaneldeSitios
 
             Reporteador.Instance.idSignalsAGraficar = [];
-            VwcApp.Instance.buttonSignalsSelected = [];
+            AppGraficador.Instance.buttonSignalsSelected = [];
 
         });
 
@@ -360,16 +351,11 @@ class VwcApp {
 
         this.pdfBtn.addEventListener('click', (event) => {
             this.popUpContainer.style.display = "flex";
-            PDFExporter.INSTANCE.descargarPDF(Reporteador.Instance.root, VwcApp.Instance.GetNombreProyecto(), Reporteador.Instance.fechaInicial, Reporteador.Instance.fechaFinal, Reporteador.Instance.idSignalsAGraficar);
+            PDFExporter.INSTANCE.descargarPDF(Reporteador.Instance.root, AppGraficador.Instance.GetNombreProyecto(), Reporteador.Instance.fechaInicial, Reporteador.Instance.fechaFinal, Reporteador.Instance.idSignalsAGraficar);
         });
 
-        // this.graficarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/btn_graficar1.png?)`;
-        // this.graficarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/boton_graficador.gif?)`;
         this.graficarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/boton_graficador.png?)`;
         this.borrarBtn.style.background = `url(${Reporteador.Instance.ResourcesPath}/${EnumNombreProyecto[this.IdProyecto]}/General/boton_basura.gif?)`;
-
-        this.titulo.innerHTML = `Reportes de ${Object.keys(EnumProyecto)[this.IdProyecto]}`;
-        document.title = this.titulo.innerText;
 
         this.estaciones.forEach(estacion => {
 
@@ -705,6 +691,6 @@ class VwcApp {
 
 }
 
-export { VwcApp };
+export { AppGraficador };
 
-window.onload = () => VwcApp.Instance.Start();
+// window.onload = () => AppGraficador.Instance.Start();
