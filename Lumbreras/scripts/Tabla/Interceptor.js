@@ -1,4 +1,5 @@
 import { Core } from "../Core.js";
+import { RowEstacion } from "./RowEstacion.js";
 
 /**
  * @returns {Interceptor}
@@ -11,6 +12,9 @@ class Interceptor {
         let key_interceptor = config.key;
         let nombre_interceptor = config.nombre;
         this.estaciones = config.ids;
+
+        let interceptor_div = document.createElement('div');
+        interceptor_div.classList = 'interceptor';
 
         let row_div = document.createElement('div');
         row_div.classList = 'interceptor_row';
@@ -26,8 +30,43 @@ class Interceptor {
         let resumen_interceptor_div = document.createElement('div');
         resumen_interceptor_div.classList = 'resumen_interceptor';
 
+        this.estaciones_interceptor_div = document.createElement('div');
+        this.estaciones_interceptor_div.classList = 'estaciones_interceptor';
+
+        /* ============ Header Estaciones ================*/
+
+        let estaciones_header_div = document.createElement('div');
+        estaciones_header_div.classList = 'estaciones_header';
+
+        let id_estacion = document.createElement('div');
+        id_estacion.classList = 'Columna_ID';
+        id_estacion.innerHTML = 'ID';
+
+        let nombre_estacion = document.createElement('div');
+        nombre_estacion.classList = 'Columna_Nombre';
+        nombre_estacion.innerHTML = 'Nombre';
+
+        let nivel_estacion = document.createElement('div');
+        nivel_estacion.classList = 'Columna_Nivel';
+        nivel_estacion.innerHTML = 'Nivel';
+
+        let fecha_estacion = document.createElement('div');
+        fecha_estacion.classList = 'Columna_Fecha';
+        fecha_estacion.innerHTML = 'Fecha';
+
+        let hora_estacion = document.createElement('div');
+        hora_estacion.classList = 'Columna_hora';
+        hora_estacion.innerHTML = 'Hora';
+
+        estaciones_header_div.append(id_estacion, nombre_estacion, nivel_estacion, fecha_estacion, hora_estacion);
+        this.estaciones_interceptor_div.append(estaciones_header_div);
+
+        /* ============== apendizar divs =================== */
+
         row_div.append(id_interceptor_div, nombre_interceptor_div, resumen_interceptor_div);
-        container.appendChild(row_div);
+        interceptor_div.append(row_div, this.estaciones_interceptor_div);
+
+        container.appendChild(interceptor_div);
 
         this.root = row_div;
 
@@ -39,12 +78,13 @@ class Interceptor {
 
         this.estaciones.forEach(idEstacion => {
             let estacion = Core.Instance.GetDatosEstacion(idEstacion);
-            console.log(estacion);
 
             let div = document.createElement('div');
 
             div.addEventListener('click', this.onclick);
             div.addEventListener('onmouseover', this.onmouseover);
+
+            let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion);
         });
 
         this.suscribirEventos();
