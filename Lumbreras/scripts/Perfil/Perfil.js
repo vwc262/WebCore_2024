@@ -22,6 +22,7 @@ class Perfil {
 
     constructor() {
         this.actualInterceptor = 0;
+        this.actualFrame = 0;
     }
 
     InitializeDial() {
@@ -63,7 +64,7 @@ class Perfil {
         const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
 
         for (const elemento of rightLeftBtn_dial) {
-            elemento.addEventListener('click', this.onRightLeftBtnClick);
+            elemento.addEventListener('click', this.onRightLeftBtnClick.bind(this));
         }
 
     }
@@ -71,50 +72,75 @@ class Perfil {
     onDialBtnInterceptoriclick(e) {
         const target = e.target;
         const interceptor = parseInt(target.getAttribute('interceptor'));
-        const toLeft = this.actualInterceptor > interceptor;
-
+        const left = this.actualInterceptor > interceptor;
         const steps = Math.abs(this.actualInterceptor - interceptor);
 
-        this.pressButton(toLeft);
-        this.spinDial(steps, toLeft);
+        this.spinDial(steps, left);
     }
 
     onRightLeftBtnClick(e) {
         const target = e.target;
         const className = target.classList[1];
-        const toLeft = className.includes('left');
+        const left = className.includes('left');
 
-        Perfil.Instance.pressButton(toLeft);
-        Perfil.Instance.spinDial(1, toLeft);
+        this.spinDial(1, left);
     }
 
     spinDial(steps, left) {
-        const dial_images = document.getElementsByClassName(this.dial_name);
 
-        if (left ? this.actualInterceptor - steps < 0 : this.actualInterceptor + steps > dial_images.length - 1)
+        const dial_images = document.getElementsByClassName(this.dial_name);
+        const total_interceptores = document.getElementsByClassName('dial_button_interceptor');
+        const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
+
+        if (left ? this.actualInterceptor - steps < 0 : this.actualInterceptor + steps > total_interceptores.length - 1)
             return;
 
         const ticks = 24;
-        const stop = this.actualInterceptor + (left ? -steps : steps);
+        const frame_step = dial_images.length / total_interceptores.length;
+        const stop = Math.min(Math.max(this.actualFrame + (left ? -steps : steps) * frame_step, 0), dial_images.length - 1)
+        this.actualInterceptor += + (left ? -steps : steps);
+
+        if(stop == this.actualFrame) return;
+        
+        this.habilitarInteraccion('none', total_interceptores);
+        this.habilitarInteraccion('none', rightLeftBtn_dial);
+
+        this.pressButton(left);
 
         const interval = setInterval(() => {
 
+            this.actualFrame = Math.min(Math.max(this.actualFrame, 0), dial_images.length - 1);
+
             if (left) {
-                if (this.actualInterceptor <= stop) clearInterval(interval);
+                if (this.actualFrame <= stop) {
+                    this.habilitarInteraccion('all', total_interceptores);
+                    this.habilitarInteraccion('all', rightLeftBtn_dial);
+                    clearInterval(interval);
+                }
                 else {
-                    dial_images[this.actualInterceptor].style.display = 'none';
-                    this.actualInterceptor--;
+                    dial_images[this.actualFrame].style.display = 'none';
+                    this.actualFrame--;
                 }
             } else {
-                if (this.actualInterceptor >= stop) clearInterval(interval);
+                if (this.actualFrame >= stop) {
+                    this.habilitarInteraccion('all', total_interceptores);
+                    this.habilitarInteraccion('all', rightLeftBtn_dial);
+                    clearInterval(interval);
+                }
                 else {
-                    this.actualInterceptor++;
-                    dial_images[this.actualInterceptor].style.display = 'block';
+                    this.actualFrame++;
+                    dial_images[this.actualFrame].style.display = 'block';
                 }
 
             }
 
         }, ticks);
+    }
+
+    habilitarInteraccion(habilitar, coleccion) {
+        for (const elemento of coleccion) {
+            elemento.style.pointerEvents = `${habilitar}`;
+        }
     }
 
     pressButton(left) {
