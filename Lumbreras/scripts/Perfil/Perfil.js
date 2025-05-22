@@ -21,7 +21,7 @@ class Perfil {
     btn_right_name = 'Boton_02/Secuencia_Dial00';
 
     constructor() {
-        this.actualFrame = 0;
+        this.actualInterceptor = 0;
     }
 
     InitializeDial() {
@@ -34,7 +34,7 @@ class Perfil {
         this.cargarImagenesDial(6, this.btn_left_name);
         this.cargarImagenesDial(6, this.btn_right_name);
 
-        document.getElementsByClassName(this.dial_name)[this.actualFrame].style.display = 'block';
+        document.getElementsByClassName(this.dial_name)[this.actualInterceptor].style.display = 'block';
         document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
         document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
 
@@ -54,7 +54,9 @@ class Perfil {
             dial_button_interceptor.style.left = `${pos.left}px`;
             dial_button_interceptor.style.top = `${pos.top}px`;
 
-            dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick);
+            dial_button_interceptor.setAttribute('interceptor', index);
+
+            dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick.bind(this));
             this.contenedor_botones.append(dial_button_interceptor);
         });
 
@@ -66,8 +68,15 @@ class Perfil {
 
     }
 
-    onDialBtnInterceptoriclick() {
+    onDialBtnInterceptoriclick(e) {
+        const target = e.target;
+        const interceptor = parseInt(target.getAttribute('interceptor'));
+        const toLeft = this.actualInterceptor > interceptor;
 
+        const steps = Math.abs(this.actualInterceptor - interceptor);
+
+        this.pressButton(toLeft);
+        this.spinDial(steps, toLeft);
     }
 
     onRightLeftBtnClick(e) {
@@ -80,28 +89,27 @@ class Perfil {
     }
 
     spinDial(steps, left) {
-
         const dial_images = document.getElementsByClassName(this.dial_name);
 
-        if (left ? this.actualFrame - steps < 0 : this.actualFrame + steps > dial_images.length - 1)
+        if (left ? this.actualInterceptor - steps < 0 : this.actualInterceptor + steps > dial_images.length - 1)
             return;
 
         const ticks = 24;
-        const stop = this.actualFrame + (left ? -steps : steps);
+        const stop = this.actualInterceptor + (left ? -steps : steps);
 
         const interval = setInterval(() => {
 
             if (left) {
-                if (this.actualFrame <= stop) clearInterval(interval);
+                if (this.actualInterceptor <= stop) clearInterval(interval);
                 else {
-                    dial_images[this.actualFrame].style.display = 'none';
-                    this.actualFrame--;
+                    dial_images[this.actualInterceptor].style.display = 'none';
+                    this.actualInterceptor--;
                 }
             } else {
-                if (this.actualFrame >= stop) clearInterval(interval);
+                if (this.actualInterceptor >= stop) clearInterval(interval);
                 else {
-                    this.actualFrame++;
-                    dial_images[this.actualFrame].style.display = 'block';
+                    this.actualInterceptor++;
+                    dial_images[this.actualInterceptor].style.display = 'block';
                 }
 
             }
