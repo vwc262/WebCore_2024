@@ -137,7 +137,6 @@ class Particular {
     section__home.style.display = "none";
     section__mapa.style.display = "none";
     section__graficador.style.display = "none";
-    section__login.style.display = "none";
     section__particular.style.display = "block";
 
     this.$datosHeader.style.opacity = "1";
