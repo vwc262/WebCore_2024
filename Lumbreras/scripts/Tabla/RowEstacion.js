@@ -30,11 +30,11 @@ class RowEstacion {
         data_row.classList = 'data_row';
 
         let id_estacion_div = document.createElement('div');
-        id_estacion_div.classList = 'ColumnaID';
+        id_estacion_div.classList = 'Columna_ID estacion_ID';
         id_estacion_div.innerHTML = `${this.estacion.IdEstacion}`;
 
         let nombre_estacion_div = document.createElement('div');
-        nombre_estacion_div.classList = 'Columna_Nombre';
+        nombre_estacion_div.classList = 'Columna_Nombre estacionNombre';
 
         let nombre_estacion = document.createElement('div');
         nombre_estacion.innerHTML = `${this.estacion.Nombre}`;
@@ -45,21 +45,21 @@ class RowEstacion {
         this.alojarElementoDinamico([estado_estacion]);
 
         let valor_estacion = document.createElement('div');
-        valor_estacion.classList = 'Columna_Nivel';
+        valor_estacion.classList = 'Columna_Nivel estacion_Nivel';
         valor_estacion.id = `Tabla_nivel_${this.estacion.IdEstacion}`;
         valor_estacion.innerHTML = `${this.estacion.Signals[0].Valor} m`;
         this.alojarElementoDinamico([valor_estacion]);
 
         let fecha_estacion = document.createElement('div');
-        fecha_estacion.classList = 'Columna_Fecha';
+        fecha_estacion.classList = 'Columna_Fecha estacion_Fecha';
         fecha_estacion.id = `Tabla_fecha_${this.estacion.IdEstacion}`;
-        fecha_estacion.innerHTML = `${this.estacion.Tiempo.split("T")[0]}`;
+        fecha_estacion.innerHTML = `${this.estacion.ObtenerFecha().split(" ")[0]}`;
         this.alojarElementoDinamico([fecha_estacion]);
 
         let hora_estacion = document.createElement('div');
-        hora_estacion.classList = 'Columna_hora';
+        hora_estacion.classList = 'Columna_Hora estacion_Hora';
         hora_estacion.id = `Tabla_hora_${this.estacion.IdEstacion}`;
-        hora_estacion.innerHTML = `${this.estacion.Tiempo.split("T")[1]}`;
+        hora_estacion.innerHTML = `${this.estacion.ObtenerFecha().split(" ")[1]}`;
         this.alojarElementoDinamico([hora_estacion]);
 
         this.signals_estacion_div = document.createElement('div');
@@ -105,20 +105,21 @@ class RowEstacion {
     update = () => {
         if (this.estacion) {
             const estacionUpdate = Core.Instance.GetDatosEstacion(this.estacion.IdEstacion);
-            let valorEnlace = estacionUpdate.Enlace;
 
-            const offline = valorEnlace == EnumEnlace.FueraLinea;
+            const offline = !estacionUpdate.EstaEnLinea();
             let enlace = offline == true ? "offline" : "online";
 
             let estado_estacion = this.HTMLUpdateElements[`Tabla_enlace_${estacionUpdate.IdEstacion}`];
             let valor_estacion = this.HTMLUpdateElements[`Tabla_nivel_${estacionUpdate.IdEstacion}`];
             let fecha_estacion = this.HTMLUpdateElements[`Tabla_fecha_${estacionUpdate.IdEstacion}`];
             let hora_estacion = this.HTMLUpdateElements[`Tabla_hora_${estacionUpdate.IdEstacion}`];
+            let formatoFecha = estacionUpdate.ObtenerFecha().split(" ");
 
             estado_estacion.src = `${Core.Instance.ResourcesPath}Tabla/sitio_${enlace}.png?v=${Core.Instance.version}`;
             valor_estacion.innerHTML = `${estacionUpdate.Signals[0].Valor} m`;
-            fecha_estacion.innerHTML = `${estacionUpdate.Tiempo.split("T")[0]}`;
-            hora_estacion.innerHTML = `${estacionUpdate.Tiempo.split("T")[1]}`;
+            valor_estacion.style.color = `${estacionUpdate.Signals[0].GetValorColor()}`;
+            fecha_estacion.innerHTML = `${formatoFecha[0]}`;
+            hora_estacion.innerHTML = `${formatoFecha[1]}`;
         }
     };
 

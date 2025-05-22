@@ -1,6 +1,13 @@
+.titulo{
+  font-size: 20px;
+}
+
+.sub_titulo{
+  font-size: 15px;
+}
+
 .table-container {
   display: flex;
-  border: 1px dotted aquamarine;
   width: 100%;
   height: 94%;
   margin-top: 58px;
@@ -18,7 +25,6 @@
   display: flex;
   width: 100%;
   height: 50px;
-  border: 1px dotted tomato;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
@@ -29,7 +35,6 @@
 .estaciones_interceptor {
   display: none;
   width: 100%;
-  border: 1px dotted rgb(255, 175, 3);
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: center;
@@ -38,10 +43,11 @@
 }
 
 .estaciones_header {
+  background: linear-gradient(180deg, rgba(153, 164, 246, 1) 0%, rgba(153, 164, 246, 1) 10%, rgba(79, 93, 216, 1) 10%);
   display: flex;
   width: 100%;
   height: 50px;
-  border: 1px dotted rgb(154, 3, 255);
+  border-radius: 0 0 25px 25px;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
@@ -65,8 +71,7 @@
 .data_row {
   display: flex;
   width: 100%;
-  height: 50px;
-  border: 1px dotted rgb(255, 175, 3);
+  height: 60px;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
@@ -132,21 +137,103 @@
 }
 
 .id_interceptor {
-  width: 10%;
-  border: 1px solid red;
+  background: linear-gradient(0deg, rgba(50, 64, 173, 1) 0%, rgba(80, 93, 207, 1) 100%);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  width: 8%;
+  height: 94%;
+  align-items: center;
+  justify-content: center;
 }
 
 .nombre_interceptor {
+  background: linear-gradient(0deg, rgba(16, 50, 98, 1) 0%, rgba(5, 11, 59, 1) 100%);
+  display: flex;
   width: 70%;
-  border: 1px solid blue;
+  height: 95%;
+  align-items: center;
+
+}
+
+.nombre_interceptor p{
+margin-left: 5px;
 }
 
 .resumen_interceptor {
+  background: linear-gradient(0deg, rgba(53, 68, 159, 1) 0%, rgba(20, 33, 114, 1) 100%);
   display: flex;
-  width: 20%;
-  border: 1px solid green;
+  width: 22%;
+  height: 100%;
+  border: 2px solid #8694ED;
+  border-radius: 10px;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: nowrap;
+}
+
+/* ========== estilos header tabla ================ */
+.Columna_ID {
+  display: flex;
+  width: 10%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.Columna_Nombre {
+  display: flex;
+  width: 43%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.Columna_Nivel {
+  display: flex;
+  width: 12%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.Columna_Fecha {
+  display: flex;
+  width: 20%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.Columna_Hora {
+  display: flex;
+  width: 15%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.estacionNombre {
+  background: linear-gradient(0deg, rgba(47, 62, 166, 1) 0%, rgba(81, 87, 183, 1) 100%);
+  justify-content: flex-start !important;
+}
+
+.estacion_ID {
+  background: linear-gradient(0deg, rgba(87, 102, 187, 1) 0%, rgba(128, 136, 217, 1) 100%);
+}
+
+.estacion_Nivel {
+  background: linear-gradient(0deg, rgba(54, 68, 169, 1) 0%, rgba(75, 88, 202, 1) 100%);
+  font-weight: bold;
+}
+
+.estacion_Hora {
+  background: linear-gradient(0deg, rgba(54, 68, 169, 1) 0%, rgba(75, 88, 202, 1) 100%);
+  color: goldenrod;
+  font-weight: bold;
+}
+
+.estacion_Fecha {
+  background: linear-gradient(0deg, rgba(39, 52, 146, 1) 0%, rgba(47, 55, 138, 1) 100%);
 }
