@@ -114,6 +114,8 @@ class Particular {
   mostrarDetalles(interceptor) {
     SetActualModule("Particular");
 
+    this.HTMLUpdateElements = {};
+
     // Maneja los zIndex al cambiar de "paginas"
     section__home.style.display = "none";
     section__mapa.style.display = "none";
@@ -121,26 +123,26 @@ class Particular {
     section__particular.style.display = "block";
 
     // Elementos del particular
-    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
     this.$headerParticularName = document.querySelector("#nombre__particular");
     this.$headerInterceptor = document.querySelector("#interceptor__particular");
     this.$headerDate = document.querySelector("#date__particular");
     this.$headerStatus = document.querySelector("#state_particular");
     this.$particularImg = document.querySelector("#particularImg");
     this.$particularCapaTextoImg = document.querySelector("#particularTextoImg");
-    
+    this.barras = document.getElementsByClassName("barraNivelContainer");
+
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
     const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=${Core.Instance.version}`;
     const urlImgParticularCapaTexto = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/capatexto.png?v=${Core.Instance.version}`;
-    
+
     // Asignar la URL de la imagen al atributo src del elemento de imagen
     this.$particularImg.src = urlImgParticular;
     this.$particularCapaTextoImg.src = urlImgParticularCapaTexto;
 
     this.$headerParticularName.innerText = this.Estacion.Nombre;
     this.$headerInterceptor.innerText = interceptor;
-    
+
     // Crear señales
     this.createSignals();
 
@@ -160,47 +162,48 @@ class Particular {
     this.HTMLUpdateElements = {};
     let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
 
-    // Filtrar los signals con TipoSignal igual a 1, 3 o 4
-    // estacionUpdate.Signals.filter((signal) =>
-    //   signal.TipoSignal == EnumTipoSignal.Nivel ||
-    //   signal.TipoSignal == EnumTipoSignal.Presion ||
-    //   signal.TipoSignal == EnumTipoSignal.Gasto ||
-    //   signal.TipoSignal == EnumTipoSignal.Totalizado ||
-    //   signal.TipoSignal == EnumTipoSignal.ValvulaAnalogica ||
-    //   signal.TipoSignal == EnumTipoSignal.ValvulaDiscreta ||
-    //   signal.TipoSignal == EnumTipoSignal.Voltaje ||
-    //   signal.TipoSignal == EnumTipoSignal.Precipitacion ||
-    //   signal.TipoSignal == EnumTipoSignal.Temperatura ||
-    //   signal.TipoSignal == EnumTipoSignal.Humedad ||
-    //   signal.TipoSignal == EnumTipoSignal.Evaporacion ||
-    //   signal.TipoSignal == EnumTipoSignal.Intensidad ||
-    //   signal.TipoSignal == EnumTipoSignal.Direccion
+    const niveles = estacionUpdate.Signals.filter((signal) => signal.TipoSignal == EnumTipoSignal.Nivel);
 
-    // ).forEach((signal) => {
-    //   const $signalItem = CreateElement({
-    //     nodeElement: "div",
-    //     attributes: { class: "particular__item" },
-    //   });
+    for (let index = 0; index < this.barras.length; index++) {
+      const barra = this.barras[index];
+      barra.innerHTML = '';
 
-    //   const $etiquetaNombre = CreateElement({
-    //     nodeElement: "div",
-    //     attributes: { class: "etiqueta__Nombre"},
-    //     innerText: `${signal.GetNomenclaturaSignal()}: `,
-    //   });
+      if (index <= niveles.length - 1) {
+        const nivel = niveles[index];
 
-    //   const $etiquetaValor = CreateElement({
-    //     nodeElement: "div",
-    //     attributes: {
-    //       class: "etiqueta__Valor",
-    //       id: `particular__valorSlider_${signal.IdSignal}`,
-    //     },
-    //     innerHTML: signal.GetValorString(true, true),
-    //   });
+        const signalItem = CreateElement({
+          nodeElement: "div",
+          attributes: { class: "particular__item" },
+        });
 
-    //   $signalItem.append($etiquetaNombre, $etiquetaValor);
-    //   this.alojarElementoDinamico([$etiquetaValor]);
-    //   this.$signalsContainer.appendChild($signalItem);
-    // });
+        const etiquetaNombre = CreateElement({
+          nodeElement: "div",
+          attributes: { class: "etiqueta__Nombre" },
+          innerText: `${nivel.GetNomenclaturaSignal()}: `,
+        });
+
+        const etiquetaValor = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "etiqueta__Valor",
+            id: `nivel_${nivel.IdSignal}`,
+          },
+          innerHTML: nivel.GetValorString(true, true),
+        });
+
+        this.alojarElementoDinamico([etiquetaValor]);
+
+        signalItem.append(etiquetaNombre, etiquetaValor);
+        barra.append(signalItem);
+
+        barra.style.display = 'block';
+      } else {
+
+        barra.removeAttribute('id');
+        barra.style.display = 'none';
+      }
+
+    }
   }
   /**
    *aloja un elemento dinamico a la propiedad HTML
