@@ -131,8 +131,7 @@ class Particular {
     );
     this.$datosHeader = document.querySelector(".header__datos-particular");
     this.$btnBack = document.querySelector(".header__btnRegresar");
-    let nombresLargos = Configuracion.GetNombresLargos(Core.Instance.IdProyecto);
-    this.$headerTitle.innerText = nombresLargos ? nombresLargos[this.Estacion.IdEstacion] : this.Estacion.Nombre;
+    this.$headerTitle.innerText = this.Estacion.Nombre;
 
     // Maneja los zIndex al cambiar de "paginas"
     section__home.style.display = "none";

@@ -10,12 +10,6 @@ var Configuracion = {
 
         return config;
     },
-
-    GetNombresLargos() {
-        let nombres = `Sistema de drenaje produndo`
-        return nombres;
-    }
-
 }
 
 export { Configuracion };
