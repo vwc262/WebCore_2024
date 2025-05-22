@@ -1,4 +1,4 @@
-export const PozosPAI = {
+export const PozosCoyoacan = {
     doPanX: false,
     doPanY: false,
     widthRender: 1945,

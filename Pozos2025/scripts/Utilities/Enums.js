@@ -10,19 +10,16 @@ const RequestType = {
  */
 const EnumProyecto = {
   Default: 0,
-  PozosTeoloyucan: 14,
-  PozosAIFA: 17,
-  PozosZumpango: 18,
-  PozosPAI: 21,
-  PozosCoyoacan: 22
+  PozosCoyoacan: 22,
+  PozosAzcapotzalco: 23
 };
 /**
  * @returns NombreProyecto
  */
 const EnumNombreProyecto = {
   Default: 0,
-  21: "PozosPAI",
-  22: "PozosCoyoacan"
+  22: "PozosCoyoacan",
+  23: "PozosAzcapotzalco"
 };
 
 /**
@@ -30,8 +27,8 @@ const EnumNombreProyecto = {
  */
 const EnumNombreProyectoFolder = {
   "Default": 0,
-  "PozosPAI2024": 21,
-  "PozosCoyoacan2025": 22
+  "PozosCoyoacan2025": 22,
+  "PozosAzcapotzalco2025": 23
 };
 
 /**

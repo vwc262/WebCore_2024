@@ -1,5 +1,6 @@
 import { EnumProyecto } from "../scripts/Utilities/Enums.js";
-import { PozosPAI } from "./PozosPAI.js";
+import { PozosCoyoacan } from "./PozosCoyoacan.js";
+import { PozosAzcapotzalco } from "./PozosAzcapotzalco.js";
 
 var Configuracion = {
     /**
@@ -7,10 +8,13 @@ var Configuracion = {
      * @param {EnumProyecto} EnumProyecto 
      */
     GetConfiguracion(enumProyecto) {
-        let config = PozosPAI;
-        switch (enumProyecto) {            
-            case EnumProyecto.PozosPAI:
-                config = PozosPAI;
+        let config = {};
+        switch (enumProyecto) {
+            case EnumProyecto.PozosCoyoacan:
+                config = PozosCoyoacan;
+                break;
+            case EnumProyecto.PozosAzcapotzalco:
+                config = PozosAzcapotzalco;
                 break;
         }
         return config;

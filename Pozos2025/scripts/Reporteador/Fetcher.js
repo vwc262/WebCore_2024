@@ -95,7 +95,7 @@ const FetcherGraficador = {
       delete options.headers;
     }
 
-    const fetchresult = await fetch(`https://virtualwavecontrol.com.mx/API24/VWC/APP2024/GetInfraestructuraPozosPai`, options);
+    const fetchresult = await fetch(`${this.uri}/${action}?idProyecto=${Core.Instance.IdProyecto}`, options);
     let jsonData = null;
 
     jsonData = await fetchresult.json();
@@ -118,10 +118,8 @@ const EnumNameProjecto = {
 
 const getNombreProyectoIdProyecto = (idProyecto) => {
   switch (idProyecto) {
-    case EnumProyecto.PozosPAI: return "PozosPAI";
-    case EnumProyecto.PozosTeoloyucan: return "Teoloyucan";
-    case EnumProyecto.PozosAIFA: return "PozosAIFA";
-    case EnumProyecto.PozosZumpango: return "PozosZumpango";
+    case EnumProyecto.PozosCoyoacan: return "PozosCoyoacan";
+    case EnumProyecto.PozosAzcapotzalco: return "PozosAzcapotzalco";
     default: return "NA";
   }
 
