@@ -18,9 +18,10 @@ class RowEstacion {
      */
     HTMLUpdateElements = {};
 
-    constructor(container, estacion) {
+    constructor(container, estacion, interceptor) {
         this.HTMLUpdateElements = {};
         this.estacion = estacion;
+        this.interceptor = interceptor;
 
         let row_est_div = document.createElement('div');
         row_est_div.classList = 'estacion_row';
@@ -84,7 +85,7 @@ class RowEstacion {
         this.root.addEventListener('click', this.onclick.bind(this));
         this.root.addEventListener('onmouseover', this.onmouseover);
 
-        let inforowEstacion = new infoRowEstacion(this.signals_estacion_div, this.estacion);
+        let inforowEstacion = new infoRowEstacion(this.signals_estacion_div, this.estacion, this.interceptor);
         inforowEstacion.Init();
 
         this.suscribirEventos();
