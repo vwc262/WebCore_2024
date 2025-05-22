@@ -70,9 +70,6 @@ class VwcApp {
     const $imgGraficador = document.getElementById("imgGraficador");
     $imgGraficador.setAttribute("src", `${Core.Instance.ResourcesPath}Reportes/graficador.png?v=${Core.Instance.version}`);
 
-    const $imgRegresar = document.getElementById("imgRegresar");
-    $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
-
     const $imgModal = document.getElementById("imgModal");
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
     $imgModal.style.backgroundSize = `contain`;

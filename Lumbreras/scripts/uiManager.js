@@ -81,17 +81,10 @@ function GoBack() {
 }
 
 function Modal() {
-  const $panelControl_Particulares = document.querySelector(
-    ".particular__panelControl"
-  );
-
+  
   const $modal = document.querySelector(".modal");
   const $closeModal = document.querySelector(".modal__close");
   const $aceptarModal = document.querySelector(".modal__Aceptar");
-
-  $panelControl_Particulares.addEventListener("click", (e) => {
-    e.preventDefault();
-  });
 
   $closeModal.addEventListener("click", (e) => {
     e.preventDefault();
