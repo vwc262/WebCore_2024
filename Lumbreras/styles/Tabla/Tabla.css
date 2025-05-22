@@ -142,6 +142,11 @@
 }
 
 .resumen_interceptor {
+  display: flex;
   width: 20%;
   border: 1px solid green;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
 }

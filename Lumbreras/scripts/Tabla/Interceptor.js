@@ -1,16 +1,27 @@
 import { Core } from "../Core.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
+import { EnumEnlace } from "../Utilities/Enums.js";
 import { RowEstacion } from "./RowEstacion.js";
 
 /**
  * @returns {Interceptor}
  */
 class Interceptor {
+    /**
+     * 
+     * @param {estacion} Estacion 
+     */
+    /**
+     * @type {HTMLElement}
+     */
+    HTMLUpdateElements = {};
 
     constructor(container, config) {
 
         let key_interceptor = config.key;
-        let nombre_interceptor = config.nombre;
+        this.nombre_interceptor = config.nombre;
         this.estaciones = config.ids;
+        this.estacionesEnlaces = [];
 
         this.interceptor_div = document.createElement('div');
         this.interceptor_div.classList = 'interceptor';
@@ -24,10 +35,28 @@ class Interceptor {
 
         let nombre_interceptor_div = document.createElement('div');
         nombre_interceptor_div.classList = 'nombre_interceptor';
-        nombre_interceptor_div.innerHTML = `${nombre_interceptor}`;
+        nombre_interceptor_div.innerHTML = `${this.nombre_interceptor}`;
 
         let resumen_interceptor_div = document.createElement('div');
         resumen_interceptor_div.classList = 'resumen_interceptor';
+
+        let online_num = document.createElement('div');
+        online_num.id = "online_num";
+        online_num.innerHTML = "5";
+        this.alojarElementoDinamico([online_num]);
+
+        let offline_num = document.createElement('div');
+        offline_num.id = "offline_num";
+        offline_num.innerHTML = "10";
+        this.alojarElementoDinamico([offline_num]);
+
+        let onlie_img = document.createElement('img');
+        onlie_img.src = `${Core.Instance.ResourcesPath}Tabla/total_online.png?v=${Core.Instance.version}`;
+
+        let offline_img = document.createElement('img');
+        offline_img.src = `${Core.Instance.ResourcesPath}Tabla/total_offline.png?v=${Core.Instance.version}`;
+
+        resumen_interceptor_div.append(online_num, onlie_img, offline_num, offline_img)
 
         this.estaciones_interceptor_div = document.createElement('div');
         this.estaciones_interceptor_div.classList = 'estaciones_interceptor';
@@ -71,6 +100,12 @@ class Interceptor {
 
     }
 
+        alojarElementoDinamico(elementos) {
+        elementos.forEach((elemento) => {
+            this.HTMLUpdateElements[elemento.id] = elemento;
+        });
+    }
+
     Init() {
 
         this.root.addEventListener('click', this.onclick.bind(this));
@@ -78,7 +113,8 @@ class Interceptor {
 
         this.estaciones.forEach(idEstacion => {
             let estacion = Core.Instance.GetDatosEstacion(idEstacion);
-            let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion);
+            this.estacionesEnlaces.push(estacion)
+            let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion, this.nombre_interceptor);
             rowEstacion.Init();
         });
 
@@ -97,14 +133,22 @@ class Interceptor {
 
 
     update() {
+        let onfflineCount = 0;
+        let totalSites = 0;
 
+        this.estacionesEnlaces.forEach(estacion => {
+            totalSites++;
+            if(estacion.Enlace == EnumEnlace.FueraLinea){
+                onfflineCount++;
+            }
+        });
     }
 
     suscribirEventos() {
-        // EventsManager.Instance.Suscribirevento(
-        //     "Update",
-        //     new EventoCustomizado(() => this.update())
-        // );
+        EventsManager.Instance.Suscribirevento(
+            "Update",
+            new EventoCustomizado(() => this.update())
+        );
         // EventsManager.Instance.Suscribirevento(
         //     "Onevento",
         //     new EventoCustomizado((data) => {

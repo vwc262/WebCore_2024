@@ -1,4 +1,5 @@
 import { Core } from "../Core.js";
+import { EventsManager } from "../Managers/EventsManager.js";
 import { Particular } from "../Particular/Particular.js";
 
 /**
@@ -8,10 +9,16 @@ class infoRowEstacion {
 
     /**
      * 
-     * @param {estacion} estacion 
+     * @param {estacion} Estacion 
      */
-    constructor(container, estacion) {
+    /**
+     * @type {HTMLElement}
+     */
+    HTMLUpdateElements = {};
+
+    constructor(container, estacion, interceptor) {
         this.estacion = estacion;
+        this.interceptor = interceptor;
 
         let info_div = document.createElement('div');
         info_div.classList = 'info_estacion_row';
@@ -41,8 +48,10 @@ class infoRowEstacion {
                 signal_nombre.innerHTML = `${signal.Nombre}`;
 
                 let signal_valor = document.createElement('div');
+                signal_valor.id = `signal_${signal.IdSignal}`;
                 signal_valor.classList = 'signal_valor';
                 signal_valor.innerHTML = `${signal.Valor} m`;
+                this.alojarElementoDinamico([signal_valor]);
 
                 signal_div.append(signal_nombre, signal_valor);
                 signals_div.append(signal_div);
@@ -56,18 +65,48 @@ class infoRowEstacion {
         container.appendChild(info_div);
     }
 
+        alojarElementoDinamico(elementos) {
+        elementos.forEach((elemento) => {
+            this.HTMLUpdateElements[elemento.id] = elemento;
+        });
+    }
+
     Init() {
         this.root.addEventListener('click', this.onclick.bind(this));
         this.update();
     }
 
     onclick() {
-            Particular.Instance.setEstacion(this.estacion);
-            Particular.Instance.mostrarDetalles();
+        Particular.Instance.setEstacion(this.estacion);
+        Particular.Instance.mostrarDetalles(this.interceptor);
     }
 
     update() {
+        if (this.estacion) {
+            const estacionUpdate = Core.Instance.GetDatosEstacion(this.estacion.IdEstacion);
+            
+            estacionUpdate.Signals.forEach(signal => {
+                if(signal.TipoSignal == 1){
+                    let valor_signal = this.HTMLUpdateElements[`signal_${signal.IdSignal}`];
+                    valor_signal.innerHTML = `${estacionUpdate.Signals[0].Valor} m`;
+                }
+            })
 
+
+        }
+    }
+
+    suscribirEventos() {
+        EventsManager.Instance.Suscribirevento(
+            "Update",
+            new EventoCustomizado(this.update)
+        );
+        // EventsManager.Instance.Suscribirevento(
+        //     "Onevento",
+        //     new EventoCustomizado((data) => {
+
+        //     })
+        // );
     }
 
 }
