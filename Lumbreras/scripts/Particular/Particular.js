@@ -213,33 +213,11 @@ class Particular {
   }
 
   setEnlaceParticular(estacion) {
-    let valorEnlace = estacion.Enlace;
-    let timeout = estacion.IsTimeout();
-    let enMantenimiento = estacion.IsEnMantenimiento();
 
-    // Cambiar el texto de acuerdo al estado de la estación
-    const offline = valorEnlace == EnumEnlace.FueraLinea;
-    const tipoEnlace =
-      valorEnlace == EnumEnlace.Celular
-        ? "C"
-        : valorEnlace == EnumEnlace.Radio
-          ? "R"
-          : "CR";
-    this.$headerStatus.innerHTML = timeout
-      ? "Fuera de línea (Tiempo)"
-      : enMantenimiento ?
-        'En Mantenimiento' :
-        offline
-          ? "Fuera de línea"
-          : `En línea (${tipoEnlace})`;
-    this.$headerStatus.style.color = timeout
-      ? "rgb(129, 11, 11)"
-      :
-      enMantenimiento ?
-        "rgb(129, 129, 129)"
-        : offline
-          ? "rgb(140, 13, 13)"
-          : "rgb(0, 128, 0)";
+    const estado = estacion.ObtenerEstadoEnlace();
+
+    this.$headerStatus.innerHTML = estado.textoEnlace;
+    this.$headerStatus.style.color = estado.color;
   }
 
   createNiveles() {

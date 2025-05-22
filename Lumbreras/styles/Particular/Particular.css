@@ -8,10 +8,9 @@
   top: 58px;
   display: flex;
   width: 604px;
-  height: 60px;
+  height: 80px;
   background: linear-gradient(90deg, rgba(14, 83, 97, 0.303) 0%, rgba(14, 83, 97, 0.84) 35%, rgba(14, 83, 97, 0.84) 70%, rgba(14, 83, 97, 0.303) 100%);
   align-items: center;
-  gap: 2px;
   z-index: 1;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -100,7 +99,11 @@
 }
 
 #nombre__particular {
-  font-size: 24px;
+  font-size: 22px;
+}
+
+#interceptor__particular {
+  font-size: 25px;
 }
 
 .info__header_part {
@@ -128,7 +131,7 @@
   width: 45px;
 }
 
-#particularTextoImg{
+#particularTextoImg {
   z-index: 1;
   pointer-events: none;
 }
