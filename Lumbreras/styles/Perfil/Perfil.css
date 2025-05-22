@@ -49,9 +49,14 @@
     font-size: 16px;
     text-shadow: 0 0 black;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .elemento_dial {
     position: absolute;
     display: none;
+}
+
+.dial_button{
+    cursor: pointer;
 }
