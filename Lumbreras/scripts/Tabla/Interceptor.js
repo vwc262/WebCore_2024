@@ -30,15 +30,15 @@ class Interceptor {
         row_div.classList = 'interceptor_row';
 
         let id_interceptor_div = document.createElement('div');
-        id_interceptor_div.classList = 'id_interceptor';
+        id_interceptor_div.classList = 'id_interceptor titulo';
         id_interceptor_div.innerHTML = `${key_interceptor}`;
 
         let nombre_interceptor_div = document.createElement('div');
-        nombre_interceptor_div.classList = 'nombre_interceptor';
-        nombre_interceptor_div.innerHTML = `${this.nombre_interceptor}`;
+        nombre_interceptor_div.classList = 'nombre_interceptor titulo';
+        nombre_interceptor_div.innerHTML = `<p>${this.nombre_interceptor}</p>`;
 
         let resumen_interceptor_div = document.createElement('div');
-        resumen_interceptor_div.classList = 'resumen_interceptor';
+        resumen_interceptor_div.classList = 'resumen_interceptor titulo';
 
         let online_num = document.createElement('div');
         online_num.id = "online_num";
@@ -59,12 +59,12 @@ class Interceptor {
         resumen_interceptor_div.append(online_num, onlie_img, offline_num, offline_img)
 
         this.estaciones_interceptor_div = document.createElement('div');
-        this.estaciones_interceptor_div.classList = 'estaciones_interceptor';
+        this.estaciones_interceptor_div.classList = 'estaciones_interceptor sub_titulo';
 
         /* ============ Header Estaciones ================*/
 
         let estaciones_header_div = document.createElement('div');
-        estaciones_header_div.classList = 'estaciones_header';
+        estaciones_header_div.classList = 'estaciones_header sub_titulo';
 
         let id_estacion = document.createElement('div');
         id_estacion.classList = 'Columna_ID';
@@ -83,7 +83,7 @@ class Interceptor {
         fecha_estacion.innerHTML = 'Fecha';
 
         let hora_estacion = document.createElement('div');
-        hora_estacion.classList = 'Columna_hora';
+        hora_estacion.classList = 'Columna_Hora';
         hora_estacion.innerHTML = 'Hora';
 
         estaciones_header_div.append(id_estacion, nombre_estacion, nivel_estacion, fecha_estacion, hora_estacion);
@@ -100,7 +100,7 @@ class Interceptor {
 
     }
 
-        alojarElementoDinamico(elementos) {
+    alojarElementoDinamico(elementos) {
         elementos.forEach((elemento) => {
             this.HTMLUpdateElements[elemento.id] = elemento;
         });
@@ -124,24 +124,30 @@ class Interceptor {
 
 
     onmouseover() {
-        
+
     }
-    
+
     onclick() {
         this.estaciones_interceptor_div.style.display = this.estaciones_interceptor_div.style.display === "none" || this.estaciones_interceptor_div.style.display === "" ? "flex" : "none";
     }
 
 
     update() {
-        let onfflineCount = 0;
+        let offlineCount = 0;
         let totalSites = 0;
 
         this.estacionesEnlaces.forEach(estacion => {
             totalSites++;
-            if(estacion.Enlace == EnumEnlace.FueraLinea){
-                onfflineCount++;
+            if (!estacion.EstaEnLinea()) {
+                offlineCount++;
             }
         });
+
+        let total_online = this.HTMLUpdateElements['online_num'];
+        let total_offline = this.HTMLUpdateElements['offline_num'];
+
+        total_online.innerHTML = totalSites - offlineCount;
+        total_offline.innerHTML = offlineCount;
     }
 
     suscribirEventos() {
