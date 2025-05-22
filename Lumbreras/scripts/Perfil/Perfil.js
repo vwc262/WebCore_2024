@@ -96,9 +96,11 @@ class Perfil {
             return;
 
         const ticks = 24;
-        const frame_step = dial_images.length / total_interceptores.length;
+        const frame_step = 1/* dial_images.length / total_interceptores.length;*/
         const stop = Math.min(Math.max(this.actualFrame + (left ? -steps : steps) * frame_step, 0), dial_images.length - 1)
         this.actualInterceptor += + (left ? -steps : steps);
+
+        console.log(this.actualInterceptor);
 
         if(stop == this.actualFrame) return;
         
@@ -113,7 +115,7 @@ class Perfil {
 
             if (left) {
                 if (this.actualFrame <= stop) {
-                    this.habilitarInteraccion('all', total_interceptores);
+                    this.habilitarInteraccion('all', total_interceptores);3
                     this.habilitarInteraccion('all', rightLeftBtn_dial);
                     clearInterval(interval);
                 }

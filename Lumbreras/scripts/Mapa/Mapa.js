@@ -64,7 +64,7 @@ class Mapa {
       this.markerContainer.setAttribute(`IdEstacion`, dataMarker.IdEstacion);
 
       this.markerTag.className = "marker-tag";
-      this.markerTag.textContent = dataMarker.Nombre;
+      this.markerTag.textContent = `${dataMarker.IdEstacion} - ${dataMarker.Abreviacion}`;
 
       this.markerImg.classList.add("marker-img");
 
