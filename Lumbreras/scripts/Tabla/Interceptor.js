@@ -131,6 +131,9 @@ class Interceptor {
         this.estaciones_interceptor_div.style.display = this.estaciones_interceptor_div.style.display === "none" || this.estaciones_interceptor_div.style.display === "" ? "flex" : "none";
     }
 
+    cerrarInterceptor(){
+        this.estaciones_interceptor_div.style.display = "none";
+    }
 
     update() {
         let offlineCount = 0;
@@ -154,6 +157,10 @@ class Interceptor {
         EventsManager.Instance.Suscribirevento(
             "Update",
             new EventoCustomizado(() => this.update())
+        );
+        EventsManager.Instance.Suscribirevento(
+            "Cerrar",
+            new EventoCustomizado(() => this.cerrarInterceptor())
         );
         // EventsManager.Instance.Suscribirevento(
         //     "Onevento",
