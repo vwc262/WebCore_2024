@@ -1,7 +1,8 @@
 import { Core } from "../Core.js";
+import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { EnumEnlace } from "../Utilities/Enums.js";
 import { infoRowEstacion } from "./infoRowEstacion.js";
+import { Interceptor } from "./Interceptor.js";
 
 
 /**
@@ -18,6 +19,12 @@ class RowEstacion {
      */
     HTMLUpdateElements = {};
 
+    /**
+     * 
+     * @param {HTMLElement} container 
+     * @param {Estacion} estacion 
+     * @param {String} interceptor 
+     */
     constructor(container, estacion, interceptor) {
         this.HTMLUpdateElements = {};
         this.estacion = estacion;
@@ -74,6 +81,10 @@ class RowEstacion {
         this.root = row_est_div;
     }
 
+    /**
+     * 
+     * @param {[HTMLElement]} elementos 
+     */
     alojarElementoDinamico(elementos) {
         elementos.forEach((elemento) => {
             this.HTMLUpdateElements[elemento.id] = elemento;
@@ -101,6 +112,9 @@ class RowEstacion {
         this.signals_estacion_div.style.display = this.signals_estacion_div.style.display === "none" || this.signals_estacion_div.style.display === "" ? "flex" : "none";
     }
 
+    cerrarTodo() {
+       this.signals_estacion_div.style.display = "none";
+    }
 
     update = () => {
         if (this.estacion) {
@@ -128,12 +142,10 @@ class RowEstacion {
             "Update",
             new EventoCustomizado(this.update)
         );
-        // EventsManager.Instance.Suscribirevento(
-        //     "Onevento",
-        //     new EventoCustomizado((data) => {
-
-        //     })
-        // );
+        EventsManager.Instance.Suscribirevento(
+            "Cerrar",
+            new EventoCustomizado(() => this.cerrarTodo())
+        );
     }
 }
 export { RowEstacion }

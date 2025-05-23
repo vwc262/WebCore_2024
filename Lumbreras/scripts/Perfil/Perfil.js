@@ -27,11 +27,19 @@ class Perfil {
 
     InitializeDial() {
 
+        const sombra = document.getElementsByClassName("dial_sombra")[0];
+        sombra.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/sombra.png?v=${Core.Instance.version}`);
+
+        const dial_interceptores = document.getElementsByClassName("dial_interceptores")[0];
+        dial_interceptores.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/Dial_Ramales.png?v=${Core.Instance.version}`);
+
         this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
         this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
 
+        const interceptores = Core.Instance.Configuracion.interceptores;
+        const interceptores_keys = Object.keys(interceptores);
 
-        this.cargarImagenesDial(26, this.dial_name);
+        this.cargarImagenesDial(interceptores_keys.length, this.dial_name);
         this.cargarImagenesDial(6, this.btn_left_name);
         this.cargarImagenesDial(6, this.btn_right_name);
 
@@ -39,16 +47,12 @@ class Perfil {
         document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
         document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
 
-        const interceptores = Core.Instance.Configuracion.interceptores;
-        const interceptores_keys = Object.keys(interceptores);
-
-        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 455, 440);
+        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 450, 430);
 
         interceptores_keys.forEach((key, index) => {
 
             const dial_button_interceptor = document.createElement('div');
             dial_button_interceptor.classList = 'dial_button_interceptor';
-            dial_button_interceptor.innerHTML = `${interceptores[key].abreviacion}`;
 
             const pos = posiciones[index];
 
@@ -96,14 +100,13 @@ class Perfil {
             return;
 
         const ticks = 24;
-        const frame_step = 1/* dial_images.length / total_interceptores.length;*/
-        const stop = Math.min(Math.max(this.actualFrame + (left ? -steps : steps) * frame_step, 0), dial_images.length - 1)
+        const frame_step = dial_images.length / total_interceptores.length;
+        let start = this.actualFrame;
         this.actualInterceptor += + (left ? -steps : steps);
+        const stop = Math.round(this.actualInterceptor * frame_step);
 
-        console.log(this.actualInterceptor);
+        // if (stop == this.actualFrame) return;
 
-        if(stop == this.actualFrame) return;
-        
         this.habilitarInteraccion('none', total_interceptores);
         this.habilitarInteraccion('none', rightLeftBtn_dial);
 
@@ -111,27 +114,27 @@ class Perfil {
 
         const interval = setInterval(() => {
 
-            this.actualFrame = Math.min(Math.max(this.actualFrame, 0), dial_images.length - 1);
-
             if (left) {
-                if (this.actualFrame <= stop) {
-                    this.habilitarInteraccion('all', total_interceptores);3
+                if (start <= stop) {
+                    this.habilitarInteraccion('all', total_interceptores); 3
                     this.habilitarInteraccion('all', rightLeftBtn_dial);
                     clearInterval(interval);
                 }
                 else {
-                    dial_images[this.actualFrame].style.display = 'none';
-                    this.actualFrame--;
+                    dial_images[start].style.display = 'none';
+                    start--;
+                    this.actualFrame = start;
                 }
             } else {
-                if (this.actualFrame >= stop) {
+                if (start >= stop) {
                     this.habilitarInteraccion('all', total_interceptores);
                     this.habilitarInteraccion('all', rightLeftBtn_dial);
                     clearInterval(interval);
                 }
                 else {
-                    this.actualFrame++;
-                    dial_images[this.actualFrame].style.display = 'block';
+                    start++;
+                    this.actualFrame = start;
+                    dial_images[start].style.display = 'block';
                 }
 
             }

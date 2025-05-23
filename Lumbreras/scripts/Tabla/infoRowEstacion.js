@@ -6,16 +6,14 @@ import { Particular } from "../Particular/Particular.js";
  * @returns {infoRowEstacion}
  */
 class infoRowEstacion {
+    HTMLUpdateElements = {};
 
     /**
      * 
-     * @param {estacion} Estacion 
+     * @param {HTMLElement} container 
+     * @param {Estacion} estacion 
+     * @param {String} interceptor 
      */
-    /**
-     * @type {HTMLElement}
-     */
-    HTMLUpdateElements = {};
-
     constructor(container, estacion, interceptor) {
         this.estacion = estacion;
         this.interceptor = interceptor;
@@ -28,6 +26,7 @@ class infoRowEstacion {
 
         let btn_goParticular = document.createElement('button');
         btn_goParticular.classList = "btn_goParticular";
+        btn_goParticular.style.background = `url(${Core.Instance.ResourcesPath}Tabla/goToPerfil.png?v=${Core.Instance.version})`
 
         let img_estacion_div = document.createElement('div');
         img_estacion_div.classList = 'ImgEstacion';
@@ -79,6 +78,8 @@ class infoRowEstacion {
     onclick() {
         Particular.Instance.setEstacion(this.estacion);
         Particular.Instance.mostrarDetalles(this.interceptor);
+
+        EventsManager.Instance.EmitirEvento("Cerrar");
     }
 
     update() {
@@ -89,6 +90,7 @@ class infoRowEstacion {
                 if(signal.TipoSignal == 1){
                     let valor_signal = this.HTMLUpdateElements[`signal_${signal.IdSignal}`];
                     valor_signal.innerHTML = `${estacionUpdate.Signals[0].Valor} m`;
+                    valor_signal.style.color = `${estacionUpdate.Signals[0].GetValorColor()}`;
                 }
             })
 
@@ -101,12 +103,6 @@ class infoRowEstacion {
             "Update",
             new EventoCustomizado(this.update)
         );
-        // EventsManager.Instance.Suscribirevento(
-        //     "Onevento",
-        //     new EventoCustomizado((data) => {
-
-        //     })
-        // );
     }
 
 }

@@ -23,5 +23,5 @@ export const LumbrerasConfig = {
         16: { key: 16, abreviacion: 'ICC', nombre: 'Interceptor Centro Centro', ids: [67] },
         17: { key: 17, abreviacion: 'ELC', nombre: 'Iztapalapa', ids: [76, 77, 78, 79] },
         18: { key: 18, abreviacion: 'RCH', nombre: 'Río Churubusco', ids: [59, 61, 62, 63, 74, 81] },
-    }
+    },
 };
