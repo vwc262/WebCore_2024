@@ -76,9 +76,9 @@ class Signal {
             // if (this.DentroRango) {
 
             if (this.Valor) {
-                return '';
+                return 'OK';
             } else {
-                return 'Falla AC';
+                return 'Falla';
             }
             // } else {
             //     return '---';
@@ -86,7 +86,7 @@ class Signal {
         }
         else if (this.TipoSignal == EnumTipoSignal.PuertaAbierta) {
             // if (this.DentroRango) {
-            if (this.Valor >= 250 && this.Valor <= 259) {
+           /* if (this.Valor >= 250 && this.Valor <= 259) {
                 return 'Cerrada';
             } if (this.Valor >= 510 && this.Valor <= 519) {
                 return 'Abierta';
@@ -94,6 +94,18 @@ class Signal {
                 return 'Alarmada';
             } else {
                 return '';
+            }*/
+
+            switch (this.Valor) {
+                case 0:
+                    return 'Abierta';
+                    break;
+                case 1:
+                    return 'Cerrada';
+                    break;
+                default:
+                    return '';
+                    break;
             }
         }
         // else if (this.TipoSignal == EnumTipoSignal.Totalizado) {
@@ -128,7 +140,7 @@ class Signal {
             return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
 
         }
-        else if(this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad ||  this.TipoSignal == EnumTipoSignal.Direccion || this.TipoSignal == EnumTipoSignal.Totalizado){
+        else if (this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad || this.TipoSignal == EnumTipoSignal.Direccion || this.TipoSignal == EnumTipoSignal.Totalizado) {
             let value = `${parseFloat(this.Valor).toFixed(0)}`;
 
             if (value < 0)
@@ -142,7 +154,7 @@ class Signal {
 
             return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
         }
-        else if(this.TipoSignal == EnumTipoSignal.Temperatura || this.TipoSignal == EnumTipoSignal.Intensidad){
+        else if (this.TipoSignal == EnumTipoSignal.Temperatura || this.TipoSignal == EnumTipoSignal.Intensidad) {
             let value = `${parseFloat(this.Valor).toFixed(1)}`;
 
             if (value < 0)
