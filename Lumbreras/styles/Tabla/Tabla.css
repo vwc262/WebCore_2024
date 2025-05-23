@@ -42,7 +42,7 @@
   background: linear-gradient(0deg, rgba(26, 36, 123, 1) 0%, rgba(23, 32, 109, 1) 100%);
   display: flex;
   width: 100%;
-  height: 86%;
+  height: 81%;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: stretch;
@@ -97,7 +97,7 @@
 .btn_goParticular {
   width: 66px;
   height: 61px;
-  margin: 0 0 10px 10px;
+  margin: 0 0 -2px -2px;
   border: none;
 }
 
@@ -120,10 +120,12 @@
 
 .signals_estacion {
   display: none;
+  justify-content: flex-start;
   flex-direction: column;
   width: 100%;
-  justify-content: center;
+  height: 269px;
 }
+
 
 .info_estacion_row {
   display: flex;
@@ -143,29 +145,30 @@
 .signals_div {
   display: flex;
   width: 100%;
+  height: 100%;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: stretch;
   align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .ImgEstacion {
-  width: 384px;
-  margin-left: 10px;
-  height: 247px;
   display: flex;
   flex-direction: column-reverse;
-  /* border: solid #14bae4;
-  border-right-width: 8px;
-  border-left-width: 8px;
-  border-bottom-width: 8px; */
-  border-radius: 0px 0px 10px 10px;
-  border-width: 8px;
-  border-style: solid;
-  border-image:
-    linear-gradient(to bottom,
-      #14bae4,
-      #09326a) 100 1%;
+  width: 161px;
+  height: 246px;
+  border-radius: 8px;
+}
+
+.gradiant_div {
+  border-radius: 10px;
+  border: 10px solid transparent;
+  background: linear-gradient(0deg, #11ffff, #0e3167) border-box;
+  mask: linear-gradient(#00000000 0 0) padding-box, linear-gradient(#000000 0 0);
+  mask-composite: exclude;
+  width: 201px;
+  height: 263px;
 }
 
 .signal_nombre {
@@ -173,8 +176,17 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 71%;
+  height: 41%;
+}
+
+.nivel_div {
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .signal_valor {
@@ -183,19 +195,39 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  height: 100%;
+  height: 41%;
+}
+
+.semaforos_div {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.semaforoCont {
+  background: linear-gradient(0deg, rgba(20, 47, 116, 1) 0%, rgba(39, 103, 151, 1) 100%);
+  width: 100%;
+  height: 29px;
+  text-align-last: center;
+  align-content: center;
 }
 
 .signal_estacion {
   display: flex;
   width: 100%;
-  height: 50px;
+  height: 90px;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-content: center;
+  align-content: flex-start;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
 }
+
+
+
 
 .id_interceptor {
   background: linear-gradient(0deg, rgba(50, 64, 173, 1) 0%, rgba(80, 93, 207, 1) 100%);
