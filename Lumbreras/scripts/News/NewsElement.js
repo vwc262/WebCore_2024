@@ -1,6 +1,7 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import Signal from "../Entities/Signal.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumSemaforo } from "../Utilities/Enums.js";
 
 
@@ -49,12 +50,13 @@ class NewsElement {
         container.append(interceptor, estacion, nivel);
         this.container.append(container);
 
-        this.update();
+        this.Update();
+        this.suscribirEventos();
 
         return this.root;
     }
 
-    update() {
+    Update= () => {
         const updatedEstacion = Core.Instance.GetDatosEstacion(this.estacion.IdEstacion);
         const updatedNivel = updatedEstacion.Signals.find(s => s.IdSignal == this.nivel.IdSignal);
 
@@ -78,7 +80,7 @@ class NewsElement {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento(
             "Update",
-            new EventoCustomizado(this.update)
+            new EventoCustomizado(this.Update)
         );
     }
 }

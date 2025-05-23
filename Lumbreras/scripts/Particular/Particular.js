@@ -109,6 +109,8 @@ class Particular {
 
       this.MostrarFallaAc(estacionUpdate.IsFallaAc());
 
+      // todo: Update setBaraNivel
+
     }
   };
 
@@ -243,12 +245,12 @@ class Particular {
    */
   setBaraNivel(barraNivel, signal) {
 
-    let max_height = 330;
+    let max_height = 310;
     let altura = signal.Semaforo?.Altura || 1.0;
     let amount = (signal.Valor / altura) * max_height;
     let color = signal.GetColorSemaforo();
 
-    barraNivel.style.height = `${amount}px`;
+    barraNivel.style.height = `${amount + 20}px`;
     barraNivel.style.backgroundColor = color;
   }
 

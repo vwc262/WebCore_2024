@@ -1,7 +1,7 @@
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
-import NewsElement from "./NewsElement.js";
+import NewsElement from "../News/NewsElement.js";
 
 
 /** @returns {News} */
@@ -67,11 +67,11 @@ class News {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento(
             "Update",
-            new EventoCustomizado(this.update)
+            new EventoCustomizado(this.Update)
         );
     }
 
-    update() {
+    Update= () => {
         const elemVisibles = this.HTMLElements.filter(f => f.visible);
         this.enEjecucion = elemVisibles.length > 10;
         this.animar(performance.now());

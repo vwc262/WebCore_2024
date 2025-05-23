@@ -91,6 +91,12 @@ aside {
   display: none;
 }
 
+#imgHome,
+#imgMapa,
+#imgGraficador {
+  pointer-events: none;
+}
+
 .headerBtn__Home,
 .headerBtn__Mapa,
 .headerBtn__Graficador,
