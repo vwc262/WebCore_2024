@@ -38,7 +38,7 @@ export const CreateElement = function ({
  */
 export const ObtenerFormatoTituloProyecto = function (titulo) {
     //titulo = titulo.replace(/([A-Z])/g, " $1").trim();
-    titulo = 'MONITOREO DE DERENAJE PROFUNDO'
+    titulo = 'MONITOREO DE DRENAJE PROFUNDO'
 
   return titulo;
 };

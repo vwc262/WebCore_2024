@@ -30,11 +30,16 @@ class Perfil {
         const sombra = document.getElementsByClassName("dial_sombra")[0];
         sombra.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/sombra.png?v=${Core.Instance.version}`);
 
+        const dial_interceptores = document.getElementsByClassName("dial_interceptores")[0];
+        dial_interceptores.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/Dial_Ramales.png?v=${Core.Instance.version}`);
+
         this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
         this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
 
+        const interceptores = Core.Instance.Configuracion.interceptores;
+        const interceptores_keys = Object.keys(interceptores);
 
-        this.cargarImagenesDial(26, this.dial_name);
+        this.cargarImagenesDial(interceptores_keys.length, this.dial_name);
         this.cargarImagenesDial(6, this.btn_left_name);
         this.cargarImagenesDial(6, this.btn_right_name);
 
@@ -42,16 +47,12 @@ class Perfil {
         document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
         document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
 
-        const interceptores = Core.Instance.Configuracion.interceptores;
-        const interceptores_keys = Object.keys(interceptores);
-
-        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 455, 440);
+        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 450, 430);
 
         interceptores_keys.forEach((key, index) => {
 
             const dial_button_interceptor = document.createElement('div');
             dial_button_interceptor.classList = 'dial_button_interceptor';
-            dial_button_interceptor.innerHTML = `${interceptores[key].abreviacion}`;
 
             const pos = posiciones[index];
 

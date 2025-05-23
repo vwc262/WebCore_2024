@@ -1,6 +1,7 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
+import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import {
@@ -169,8 +170,15 @@ class Particular {
       barra.innerHTML = '';
 
       if (index <= niveles.length - 1) {
+
         const nivel = niveles[index];
 
+        const barraContainer = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "barraContainer",
+          },
+        });
 
         const barraNivel = CreateElement({
           nodeElement: "div",
@@ -179,6 +187,9 @@ class Particular {
             id: `barraNivel_${nivel.IdSignal}`,
           },
         });
+
+        barraContainer.append(barraNivel);
+        this.setBaraNivel(barraNivel, nivel);
 
         const signalItem = CreateElement({
           nodeElement: "div",
@@ -203,7 +214,7 @@ class Particular {
         this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
         signalItem.append(etiquetaNombre, etiquetaValor);
-        barra.append(barraNivel, signalItem);
+        barra.append(barraContainer, signalItem);
 
         barra.style.display = 'block';
       } else {
@@ -214,6 +225,7 @@ class Particular {
 
     }
   }
+
   /**
    *aloja un elemento dinamico a la propiedad HTML
    * @param {[HTMLElement]} elementos
@@ -222,6 +234,24 @@ class Particular {
     elementos.forEach((elemento) => {
       this.HTMLUpdateElements[elemento.id] = elemento;
     });
+  }
+
+  /**
+   * 
+   * @param {HTMLElement} barraNivel 
+   * @param {Signal} signal 
+   */
+  setBaraNivel(barraNivel, signal) {
+
+    let max_height = 330;
+    let altura = signal.Semaforo?.Altura || 1.0;
+    let amount = (signal.Valor / altura) * max_height;
+    let color = !signal.DentroRango ? 'gray' :
+      signal.Valor >= signal.Semaforo.Critico ? 'red' :
+        signal.Valor >= signal.Semaforo.Preventivo ? 'yellow' : 'green';
+
+    barraNivel.style.height = `${amount}px`;
+    barraNivel.style.backgroundColor = color;
   }
 
   setEnlaceParticular(estacion) {

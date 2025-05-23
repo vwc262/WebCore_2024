@@ -62,7 +62,7 @@ nav {
 }
 
 nav img {
-  width: 10px;
+  width: 25px;
 }
 
 main {
@@ -97,9 +97,17 @@ aside {
 .headerBtn__Login {
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-bottom: solid rgb(182, 180, 180) 1px;
+  border-bottom: solid rgb(47 12 168) 5px;
   cursor: pointer;
+  background: #00345d;
+  width: 60px;
+  height: 40px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .headerBtn__Login {
