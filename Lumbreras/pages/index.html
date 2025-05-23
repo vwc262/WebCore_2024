@@ -7,6 +7,7 @@
   <title id="title__page">VWC</title>
   <link rel="stylesheet" href="../styles/index.css">
   <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
+  <link rel="stylesheet" href="../styles/Tabla/TablaBuscador.css">
   <link rel="stylesheet" href="../styles/Particular/Particular.css">
   <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
   <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
@@ -66,8 +67,6 @@
         </filter>
       </svg>
 
-
-
       <section id="section__home" class="section__home" style="display: block;">
         <div class="contenedor_dial">
           <img class="dial_sombra">
@@ -83,13 +82,14 @@
 
       <!-- ========================= Tabla ========================= -->
       <aside class="aside__tabla" style="display: block;">
-        <search class = "buscadorTabla">
+        <div class = "buscadorTabla">
           <label class="buscadorTxT">
             <input class="buscadorTxT" type="search" id="query" />
           </label>
-        </search>
+        </div>
 
         <div class="table-container"></div>
+        <div class="table-buscador-container"></div>
       </aside>
 
       <!-- ========================= Mapa ========================= -->
