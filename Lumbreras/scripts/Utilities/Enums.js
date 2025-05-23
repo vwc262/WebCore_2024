@@ -358,6 +358,13 @@ const EnumTipoHeader = {
   Seguiagua: 2,
 }
 
+const EnumSemaforo = {
+  NoDisponible: 0,
+  Normal: 1,
+  Preventivo: 2,
+  Critico: 3
+}
+
 /**
  * Enum que contiene las acciones para pedir historicos a la api
  */
@@ -391,6 +398,7 @@ export {
   EnumTipoPolygon,
   EnumNombreProyectoFolder,
   EnumTipoHeader,
-  EnumControllerHistorial
+  EnumControllerHistorial,
+  EnumSemaforo
 };
 

@@ -246,9 +246,7 @@ class Particular {
     let max_height = 330;
     let altura = signal.Semaforo?.Altura || 1.0;
     let amount = (signal.Valor / altura) * max_height;
-    let color = !signal.DentroRango ? 'gray' :
-      signal.Valor >= signal.Semaforo.Critico ? 'red' :
-        signal.Valor >= signal.Semaforo.Preventivo ? 'yellow' : 'green';
+    let color = signal.GetColorSemaforo();
 
     barraNivel.style.height = `${amount}px`;
     barraNivel.style.backgroundColor = color;
