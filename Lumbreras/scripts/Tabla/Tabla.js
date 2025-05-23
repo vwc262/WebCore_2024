@@ -15,16 +15,19 @@ class Tabla {
      * @type {HTMLElement}
      */
     this.tBody = document.querySelector(".table-container");
-
+    
     this.Configuracion = Configuracion.GetConfiguracion(
       Core.Instance.IdProyecto
     );
   }
-
+  
   create() {
-
+    
+    this.buscadorImg = document.querySelector(".buscadorTabla");
     this.interceptores = this.Configuracion.interceptores;
     let interceptores_keys = Object.keys(this.interceptores);
+
+    this.buscadorImg.style.background = `url(${Core.Instance.ResourcesPath}Tabla/buscadorTabla.png?v=${Core.Instance.version})`;
 
     interceptores_keys.forEach((key, index) => {
       let config = this.interceptores[key];

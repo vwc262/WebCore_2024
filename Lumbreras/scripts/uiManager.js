@@ -5,8 +5,6 @@ import { EnumModule, EnumNombreProyecto } from "./Utilities/Enums.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
 const $btnHome = document.querySelector(".headerBtn__Home");
-const $datosHeader = document.querySelector(".header__datos-particular");
-const $titleHeader = document.querySelector("#title");
 
 let ultimoBotonSeleccionado = $btnHome;
 
@@ -22,19 +20,13 @@ $btnHeader.addEventListener("click", (ev) => {
     const actualTarger = ev.target;
     actualTarger.classList.add("header__active");
     const isParticularActive = Module == EnumModule.Particular;
-    const $btnBack = document.querySelector(".header__btnRegresar");
     const $asidetabla = document.querySelector(".aside__tabla");
-    $btnBack.removeEventListener('click', Particular.Instance.backParticular);
 
     section__home.style.display = "none";
     section__mapa.style.display = "none";
     section__graficador.style.display = "none";
     section__particular.style.display = "none";
 
-    $datosHeader.style.opacity = "0";
-    $datosHeader.style.display = "none";
-    $btnBack.style.opacity = "0";
-    $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
         SetActualModule(isParticularActive ? "Particular" : "Perfil");
@@ -42,13 +34,10 @@ $btnHeader.addEventListener("click", (ev) => {
         section__home.style.display = isParticularActive ? "none" : "block";
         section__particular.style.display = isParticularActive ? "block" : "none";
 
-        $datosHeader.style.display = "flex";
         ultimoBotonSeleccionado = actualTarger;
         $asidetabla.style.display = "block";
         if (isParticularActive) {
           Particular.Instance.mostrarDetalles();
-          $btnBack.style.opacity = "1";
-          $btnBack.addEventListener('click', Particular.Instance.backParticular);
         } else {
 
         }
