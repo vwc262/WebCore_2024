@@ -27,6 +27,9 @@ class Perfil {
 
     InitializeDial() {
 
+        const sombra = document.getElementsByClassName("dial_sombra")[0];
+        sombra.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/sombra.png?v=${Core.Instance.version}`);
+
         this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
         this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
 
@@ -96,14 +99,13 @@ class Perfil {
             return;
 
         const ticks = 24;
-        const frame_step = 1/* dial_images.length / total_interceptores.length;*/
-        const stop = Math.min(Math.max(this.actualFrame + (left ? -steps : steps) * frame_step, 0), dial_images.length - 1)
+        const frame_step = dial_images.length / total_interceptores.length;
+        let start = this.actualFrame;
         this.actualInterceptor += + (left ? -steps : steps);
+        const stop = Math.round(this.actualInterceptor * frame_step);
 
-        console.log(this.actualInterceptor);
+        // if (stop == this.actualFrame) return;
 
-        if(stop == this.actualFrame) return;
-        
         this.habilitarInteraccion('none', total_interceptores);
         this.habilitarInteraccion('none', rightLeftBtn_dial);
 
@@ -111,27 +113,27 @@ class Perfil {
 
         const interval = setInterval(() => {
 
-            this.actualFrame = Math.min(Math.max(this.actualFrame, 0), dial_images.length - 1);
-
             if (left) {
-                if (this.actualFrame <= stop) {
-                    this.habilitarInteraccion('all', total_interceptores);3
+                if (start <= stop) {
+                    this.habilitarInteraccion('all', total_interceptores); 3
                     this.habilitarInteraccion('all', rightLeftBtn_dial);
                     clearInterval(interval);
                 }
                 else {
-                    dial_images[this.actualFrame].style.display = 'none';
-                    this.actualFrame--;
+                    dial_images[start].style.display = 'none';
+                    start--;
+                    this.actualFrame = start;
                 }
             } else {
-                if (this.actualFrame >= stop) {
+                if (start >= stop) {
                     this.habilitarInteraccion('all', total_interceptores);
                     this.habilitarInteraccion('all', rightLeftBtn_dial);
                     clearInterval(interval);
                 }
                 else {
-                    this.actualFrame++;
-                    dial_images[this.actualFrame].style.display = 'block';
+                    start++;
+                    this.actualFrame = start;
+                    dial_images[start].style.display = 'block';
                 }
 
             }

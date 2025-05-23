@@ -171,6 +171,15 @@ class Particular {
       if (index <= niveles.length - 1) {
         const nivel = niveles[index];
 
+
+        const barraNivel = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "barraNivel",
+            id: `barraNivel_${nivel.IdSignal}`,
+          },
+        });
+
         const signalItem = CreateElement({
           nodeElement: "div",
           attributes: { class: "particular__item" },
@@ -191,10 +200,10 @@ class Particular {
           innerHTML: nivel.GetValorString(true, true),
         });
 
-        this.alojarElementoDinamico([etiquetaValor]);
+        this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
         signalItem.append(etiquetaNombre, etiquetaValor);
-        barra.append(signalItem);
+        barra.append(barraNivel, signalItem);
 
         barra.style.display = 'block';
       } else {

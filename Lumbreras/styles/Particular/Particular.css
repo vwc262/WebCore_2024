@@ -30,14 +30,16 @@
 }
 
 .etiqueta__Nombre {
-  color: cyan;
-  text-align: center;
-  display: inline-block;
+color: cyan;
+    text-align: end;
+    display: inline-block;
+    width: 150px;
 }
 
 .etiqueta__Valor {
   text-align: center;
   display: inline-block;
+  width: 90px;
 }
 
 .etiqueta__Unidad {
@@ -69,10 +71,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  height: 100%;
-  text-align: center;
-  justify-content: space-evenly;
-  align-items: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  justify-content: flex-end;
+  width: 250px;
 }
 
 .particular__aguaNivel img {
@@ -136,44 +139,42 @@
   pointer-events: none;
 }
 
-.barraNivelContainer{
-    width: 80px;
-    height: 400px;
-    border: 1px solid red;
-    position: absolute;
-    bottom: 100px;
-    right: 25px;
+.barraNivelContainer {
+  width: 80px;
+  height: 400px;
+  position: absolute;
+  bottom: 100px;
+  right: 25px;
 }
 
-.barraNivel{
-width: 40px;
-    height: 330px;
-    border: 1px solid green;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+.barraNivel {
+  width: 40px;
+  height: 330px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 
-.valorNivel{
-    width: 150px;
-    height: 35px;
-    border: 1px solid blue;
-    position: absolute;
-    top: 50px;
-    right: 0px;
+.valorNivel {
+  width: 150px;
+  height: 35px;
+  border: 1px solid blue;
+  position: absolute;
+  top: 50px;
+  right: 0px;
 }
 
-.barra_particular2{
-    right: 70px;
-    bottom: 70px;
+.barra_particular2 {
+  right: 70px;
+  bottom: 70px;
 }
 
-.barra_particular3{
-    right: 140px;
-    bottom: 40px;
+.barra_particular3 {
+  right: 140px;
+  bottom: 40px;
 }
 
-.barra_particular4{
-    right: 210px;
-    bottom: 10px;
+.barra_particular4 {
+  right: 210px;
+  bottom: 10px;
 }

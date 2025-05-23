@@ -7,6 +7,10 @@
     bottom: 0px;
 }
 
+.dial_sombra {
+    position: absolute;
+}
+
 .dial_secuencias_interceptores {}
 
 .dial_secuencias_btn_izquiero {}
@@ -57,6 +61,6 @@
     display: none;
 }
 
-.dial_button{
+.dial_button {
     cursor: pointer;
 }
