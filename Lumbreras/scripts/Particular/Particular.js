@@ -1,6 +1,7 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
+import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import {
@@ -169,8 +170,8 @@ class Particular {
       barra.innerHTML = '';
 
       if (index <= niveles.length - 1) {
-        const nivel = niveles[index];
 
+        const nivel = niveles[index];
 
         const barraNivel = CreateElement({
           nodeElement: "div",
@@ -179,6 +180,8 @@ class Particular {
             id: `barraNivel_${nivel.IdSignal}`,
           },
         });
+
+        this.setBaraNivel(barraNivel, nivel);
 
         const signalItem = CreateElement({
           nodeElement: "div",
@@ -214,6 +217,7 @@ class Particular {
 
     }
   }
+
   /**
    *aloja un elemento dinamico a la propiedad HTML
    * @param {[HTMLElement]} elementos
@@ -222,6 +226,19 @@ class Particular {
     elementos.forEach((elemento) => {
       this.HTMLUpdateElements[elemento.id] = elemento;
     });
+  }
+
+  /**
+   * 
+   * @param {HTMLElement} barraNivel 
+   * @param {Signal} signal 
+   */
+  setBaraNivel(barraNivel, signal) {
+
+    let max_height = 330;
+    let altura = signal.Semaforo?.Altura || 1.0;
+    let amount = (signal.Valor / altura) * max_height;
+    barraNivel.style.height = `${amount}px`;
   }
 
   setEnlaceParticular(estacion) {
