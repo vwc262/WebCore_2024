@@ -1,4 +1,5 @@
 import { Core } from "../Core.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
 import NewsElement from "./NewsElement.js";
 
@@ -36,9 +37,21 @@ class News {
             });
         });
 
-        this.ultimoTiempo = 0;
-        this.animar(performance.now());
+        this.setupNews();
+        this.suscribirEventos();
+    }
 
+    setupNews() {
+        let xAcumulado = 0;
+        const espaciado = 10;
+
+        this.HTMLElements.forEach(elemento => {
+            elemento.style.left = `${xAcumulado}px`;
+
+            if (elemento.visible) {
+                xAcumulado += elemento.width + espaciado;
+            }
+        });
     }
 
     /**
@@ -47,11 +60,25 @@ class News {
     */
     alojarElementoDinamico(elementos) {
         elementos.forEach((elemento) => {
-            this.HTMLElements[elemento.id] = elemento;
+            this.HTMLElements.push(elemento);
         });
     }
 
+    suscribirEventos() {
+        EventsManager.Instance.Suscribirevento(
+            "Update",
+            new EventoCustomizado(this.update)
+        );
+    }
+
+    update() {
+        const elemVisibles = this.HTMLElements.filter(f => f.visible);
+        this.enEjecucion = elemVisibles.length > 10;
+        this.animar(performance.now());
+    }
+
     animar(tiempoActual) {
+
         if (!this.enEjecucion) return;
 
         // Calcular delta time en segundos
@@ -61,19 +88,37 @@ class News {
         // Calcular desplazamiento basado en tiempo
         const desplazamiento = this.velocidad * deltaTime;
         this.xBase -= desplazamiento; // Mover la posición base
-
-        // Aplicar a todos los elementos con sus posiciones relativas
-        let xAcumulado = 0;
         const espaciado = 10;
 
-        for (const key in this.HTMLElements) {
-            let elemento = this.HTMLElements[key];
+        // Verificar si necesitamos reciclar
+        const primerElemento = this.HTMLElements[0];
+        let parar = false;
+
+        if (primerElemento && parseFloat(primerElemento.style.left) + primerElemento.width + espaciado < 0) {
+
+            // Mover primer elemento al final
+            const ultimoElemento = [...this.HTMLElements].reverse().find(el => el.visible);
+
+            const nuevoX = parseFloat(ultimoElemento.style.left.replace('px', '')) + ultimoElemento.width + espaciado;
+
+            primerElemento.style.left = `${nuevoX}px`;
+            this.xBase += primerElemento.width + espaciado;;
+
+            // Reordenar array para mantener secuencia
+            this.HTMLElements = [...this.HTMLElements.slice(1), this.HTMLElements[0]];
+
+        }
+
+        // Aplicar a todos los HTMLElements con sus posiciones relativas
+        let xAcumulado = 0;
+
+        this.HTMLElements.forEach(elemento => {
+            elemento.style.left = `${this.xBase + xAcumulado}px`;
 
             if (elemento.visible) {
-                elemento.style.left = `${this.xBase + xAcumulado}px`;
                 xAcumulado += elemento.width + espaciado;
             }
-        }
+        });
 
         // Continuar la animación
         this.animacionId = requestAnimationFrame(t => this.animar(t));

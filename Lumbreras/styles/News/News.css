@@ -5,7 +5,7 @@
     width: 100%;
     height: 58px;
     z-index: 6;
-    border: 2px dotted goldenrod;
+    background: #171b1e;
     overflow: hidden;
 }
 
@@ -13,11 +13,25 @@
     height: 100%;
     display: flex;
     width: 160px;
-    border: 1px solid red;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     position: absolute;
+    padding: 5px;
+    font-weight: bold;
+    text-shadow: 0 0 black;
+    border-radius: 10px;
+}
+
+.news_element_interceptor {
+    font-size: 12px;
+}
+
+.news_element_estacion {
+    font-size: 15px;
+}
+
+.news_element_nivel {
+    font-size: 11px;
 }
