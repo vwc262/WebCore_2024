@@ -2,16 +2,17 @@
     position: absolute;
     width: 960px;
     height: 540px;
-    /* border: 1px solid lime; */
     right: 0px;
     bottom: 0px;
+    transform: scale(0.5);
+    transform-origin: bottom right;
 }
 
 .dial_sombra {
     position: absolute;
 }
 
-.dial_interceptores{
+.dial_interceptores {
     position: absolute;
     width: 960px !important;
     height: 540px !important;

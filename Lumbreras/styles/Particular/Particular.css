@@ -30,10 +30,10 @@
 }
 
 .etiqueta__Nombre {
-color: cyan;
-    text-align: end;
-    display: inline-block;
-    width: 150px;
+  color: cyan;
+  text-align: end;
+  display: inline-block;
+  width: 150px;
 }
 
 .etiqueta__Valor {
@@ -72,8 +72,8 @@ color: cyan;
   flex-direction: row;
   flex-wrap: nowrap;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 70px;
+  right: 15px;
   justify-content: flex-end;
   width: 250px;
 }
@@ -148,13 +148,23 @@ color: cyan;
 }
 
 .barraNivel {
-    width: 20px;
-    height: 0px;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    background: cadetblue;
-    border-radius: 10px;
+  width: 20px;
+  height: 0px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background: cadetblue;
+  border-radius: 10px;
+}
+
+.barraContainer {
+  width: 20px;
+  height: 330px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  border: 1px solid cadetblue;
+  border-radius: 10px;
 }
 
 .valorNivel {
@@ -166,17 +176,22 @@ color: cyan;
   right: 0px;
 }
 
+.barra_particular1 {
+  right: 20px;
+  bottom: 100px;
+}
+
 .barra_particular2 {
-  right: 70px;
+  right: 90px;
   bottom: 70px;
 }
 
 .barra_particular3 {
-  right: 140px;
+  right: 160px;
   bottom: 40px;
 }
 
 .barra_particular4 {
-  right: 210px;
+  right: 230px;
   bottom: 10px;
 }

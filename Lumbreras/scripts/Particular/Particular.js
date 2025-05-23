@@ -173,6 +173,13 @@ class Particular {
 
         const nivel = niveles[index];
 
+        const barraContainer = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "barraContainer",
+          },
+        });
+
         const barraNivel = CreateElement({
           nodeElement: "div",
           attributes: {
@@ -181,6 +188,7 @@ class Particular {
           },
         });
 
+        barraContainer.append(barraNivel);
         this.setBaraNivel(barraNivel, nivel);
 
         const signalItem = CreateElement({
@@ -206,7 +214,7 @@ class Particular {
         this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
         signalItem.append(etiquetaNombre, etiquetaValor);
-        barra.append(barraNivel, signalItem);
+        barra.append(barraContainer, signalItem);
 
         barra.style.display = 'block';
       } else {
@@ -238,7 +246,12 @@ class Particular {
     let max_height = 330;
     let altura = signal.Semaforo?.Altura || 1.0;
     let amount = (signal.Valor / altura) * max_height;
+    let color = !signal.DentroRango ? 'gray' :
+      signal.Valor >= signal.Semaforo.Critico ? 'red' :
+        signal.Valor >= signal.Semaforo.Preventivo ? 'yellow' : 'green';
+
     barraNivel.style.height = `${amount}px`;
+    barraNivel.style.backgroundColor = color;
   }
 
   setEnlaceParticular(estacion) {
