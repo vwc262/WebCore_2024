@@ -5,7 +5,7 @@ export const PozosAzcapotzalco = {
     heightRender: 1080,
     perfil: {
         estilosEstacion: [
-            /* pozos coyoacan*/
+            /* pozos azcapotzalco*/
 			{ 
                 "IdEstacion": 1, //ajusco
                 "Imagen": "position: absolute;      left: 983px; top: 415px; ",
@@ -144,48 +144,7 @@ export const PozosAzcapotzalco = {
                 "Etiqueta": "position: absolute; 	left: 722px; top: 355px; ",
                 "Estado": "display:none;"
             },
-            {
-                "IdEstacion": 24, //santa ursula coapa
-                "Imagen": "position: absolute; 		left: 1239px; top: 595px; ",
-                "Etiqueta": "position: absolute; 	left: 1226px; top: 552px; ",
-                "Estado": "display:none;"
-            },
-            {
-                "IdEstacion": 25, //terranova
-                "Imagen": "position: absolute; 		left: 269px; top: 312px; ",
-                "Etiqueta": "position: absolute; 	left: 256px; top: 269px; ",
-                "Estado": "display:none;"
-            },
-            {
-                "IdEstacion": 26, //villa olimpica 1
-                "Imagen": "position: absolute; 		left: 273px; top: 702px; ",
-                "Etiqueta": "position: absolute; 	left: 260px; top: 659px; ",
-                "Estado": "display:none;"
-            },
-            {
-                "IdEstacion": 27, //viveros del reloj 1
-                "Imagen": "position: absolute; 		left: 1269px; top: 475px; ",
-                "Etiqueta": "position: absolute; 	left: 1256px; top: 432px; ",
-                "Estado": "display:none;"
-            },
-            {
-                "IdEstacion": 28, //zapata 15
-                "Imagen": "position: absolute; 		left: 1079px; top: 719px; ",
-                "Etiqueta": "position: absolute; 	left: 1066px; top: 676px; ",
-                "Estado": "display:none;"
-            },
-            {
-                "IdEstacion": 29, //zapata 16
-                "Imagen": "position: absolute; 		left: 893px; top: 588px; ",
-                "Etiqueta": "position: absolute; 	left: 880px; top: 545px; ",
-                "Estado": "display:none;"
-            },
-            {
-                "IdEstacion": 30, //zapotecas
-                "Imagen": "position: absolute; 		left: 924px; top: 372px; ",
-                "Etiqueta": "position: absolute; 	left: 911px; top: 329px; ",
-                "Estado": "display:none;"
-            }
+            
         ],
         estilosTuberias: {
             PorGravedad: [
