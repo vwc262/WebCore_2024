@@ -7,6 +7,7 @@ import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { AppGraficador } from "./reporteador/AppGraficador.js";
+import News from "./news/news.js";
 
 class VwcApp {
   projectName = EnumProyecto.Lumbreras;
@@ -86,6 +87,7 @@ class VwcApp {
     new Tabla().create(); // Inicio de tabla
     const perfil = new Perfil().create(); // Inicio del perfil
     new Mapa().create();
+    new News().Init();
 
     AppGraficador.Instance.Start();
 

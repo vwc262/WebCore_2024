@@ -1,5 +1,5 @@
 import { Core } from "../Core.js";
-import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBombaString, EnumPerillaGeneralString } from "../Utilities/Enums.js";
+import { EnumTipoSignalNomenclatura, EnumUnidadesSignal, EnumTipoSignal, EnumValorValvulaDiscreta, EnumValorBomba, EnumPerillaGeneral, EnumFallaAC, EnumPuertaAbierta, EnumDentroLimite, EnumPerillaBombaString, EnumPerillaGeneralString, EnumSemaforo } from "../Utilities/Enums.js";
 import Linea from "./Linea.js";
 import Semaforo from "./Semaforo.js";
 class Signal {
@@ -226,9 +226,11 @@ class Signal {
 
         return color;
     }
+
     GetImagenBombaPanelControl() {
         return `background: url(${Core.Instance.ResourcesPath}Control/btn_bomba.png?v=${Core.Instance.version}) 100% 100%;filter: ${this.FilterPanelBombaColor(this.Valor)}`;
     }
+
     FilterPanelBombaColor(valorBomba) {
         let filter = 'grayscale(2)';
         switch (valorBomba) {
@@ -247,6 +249,7 @@ class Signal {
         }
         return filter;
     }
+
     /**
      * 
      * @param {Signal} signalPerilla 
@@ -254,11 +257,28 @@ class Signal {
     GetValorPerillaBomba() {
         return EnumPerillaBombaString[this.Valor] ?? '---';
     }
+
     GetValorPerillaGeneral() {
         return EnumPerillaGeneralString[this.Valor] ?? '---';
     }
 
+    GetColorSemaforo() {
 
+        let color = !this.DentroRango ? 'gray' :
+            this.Valor >= this.Semaforo.Critico ? 'red' :
+                this.Valor >= this.Semaforo.Preventivo ? 'yellow' : 'green';
+
+        return color;
+    }
+
+    GetEnumSemaforo() {
+
+        let enumerador = !this.DentroRango ? EnumSemaforo.NoDisponible :
+            this.Valor >= this.Semaforo.Critico ? EnumSemaforo.Critico :
+                this.Valor >= this.Semaforo.Preventivo ? EnumSemaforo.Preventivo : EnumSemaforo.Normal;
+
+        return enumerador;
+    }
 }
 
 export default Signal;
