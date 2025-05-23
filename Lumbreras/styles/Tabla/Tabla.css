@@ -1,16 +1,41 @@
-.titulo{
+.titulo {
   font-size: 20px;
 }
 
-.sub_titulo{
+.sub_titulo {
   font-size: 15px;
 }
 
+.buscadorTabla {
+  /* background: linear-gradient(0deg, rgba(106, 110, 217, 0.5) 0%, rgba(94, 93, 186, 0.5) 100%); */
+  display: flex;
+  margin-top: 80px;
+  margin-left: 10px;
+  align-items: center;
+  align-content: stretch;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 45px;
+}
+
+.buscadorImg {
+  height: 35px;
+}
+
+.buscadorTxT {
+  background: linear-gradient(0deg, rgba(20, 24, 69, 0.5) 0%, rgba(118, 124, 210, 0.5) 100%);
+  width: 505px;
+  height: 32px;
+  border: none;
+}
+
 .table-container {
+  background: linear-gradient(0deg, rgba(26, 36, 123, 1) 0%, rgba(23, 32, 109, 1) 100%);
   display: flex;
   width: 100%;
-  height: 94%;
-  margin-top: 58px;
+  height: 90%;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: stretch;
@@ -63,9 +88,10 @@
 }
 
 .btn_goParticular {
-  width: 68px;
-  height: 67px;
+  width: 66px;
+  height: 61px;
   margin: 0 0 10px 10px;
+  border: none;
 }
 
 .data_row {
@@ -96,7 +122,6 @@
   display: flex;
   width: 100%;
   height: 100%;
-  border: 1px dotted rgb(255, 3, 3);
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
@@ -123,6 +148,35 @@
   height: 247px;
   display: flex;
   flex-direction: column-reverse;
+  /* border: solid #14bae4;
+  border-right-width: 8px;
+  border-left-width: 8px;
+  border-bottom-width: 8px; */
+  border-radius: 0px 0px 10px 10px;
+  border-width: 8px;
+  border-style: solid;
+  border-image:
+    linear-gradient(to bottom,
+      #14bae4,
+      #09326a) 100 1%;
+}
+
+.signal_nombre {
+  background: linear-gradient(0deg, rgba(56, 118, 177, 1) 0%, rgba(19, 35, 86, 1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.signal_valor {
+  background: linear-gradient(0deg, rgba(57, 160, 177, 1) 0%, rgba(28, 57, 123, 1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
 }
 
 .signal_estacion {
@@ -155,8 +209,8 @@
 
 }
 
-.nombre_interceptor p{
-margin-left: 5px;
+.nombre_interceptor p {
+  margin-left: 5px;
 }
 
 .resumen_interceptor {
@@ -171,6 +225,8 @@ margin-left: 5px;
   justify-content: space-evenly;
   flex-wrap: nowrap;
 }
+
+
 
 /* ========== estilos header tabla ================ */
 .Columna_ID {
