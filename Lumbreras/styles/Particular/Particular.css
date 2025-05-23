@@ -3,68 +3,43 @@
 }
 
 .particular__header {
+  right: 715px;
   position: absolute;
   top: 58px;
   display: flex;
-  width: 1455px;
-  height: 50px;
-  background: linear-gradient(90deg,
-      rgb(36 53 69) 0%,
-      rgb(21 21 22 / 94%) 35%,
-      rgb(14 83 97 / 99%) 70%,
-      rgb(36 49 52) 100%);
+  width: 604px;
+  height: 80px;
+  background: linear-gradient(90deg, rgba(14, 83, 97, 0.303) 0%, rgba(14, 83, 97, 0.84) 35%, rgba(14, 83, 97, 0.84) 70%, rgba(14, 83, 97, 0.303) 100%);
   align-items: center;
-  gap: 51px;
   z-index: 1;
-}
-
-.particular__panelControl {
-  width: 100px;
-  height: 50px;
-  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: stretch;
   justify-content: center;
-  align-items: center;
-}
-
-.particular__panelControl img {
-  width: 60px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-
-.particular__panelControl img:hover {
-  width: 65px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
 }
 
 .particular__items {
-  width: 900px;
-  height: 50px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  max-width: 900px;
-  overflow: hidden;
-}
-
-.particular__slider {
-  width: 210px;
-  height: 50px;
-  align-items: center;
-  position: absolute;
-  left: 1100px;
-  display: none;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
 }
 
 .etiqueta__Nombre {
   color: cyan;
-  text-align: center;
+  text-align: end;
   display: inline-block;
+  width: 150px;
 }
 
 .etiqueta__Valor {
   text-align: center;
   display: inline-block;
+  width: 90px;
 }
 
 .etiqueta__Unidad {
@@ -92,70 +67,15 @@
   top: 0px;
 }
 
-.particular__ItemsContainer {
-  position: absolute;
-  left: 180px;
-  display: flex;
-  max-width: 900px;
-  overflow: hidden;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 20px;
-  font-size: 14px;
-}
-
 .particular__item {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 4px;
-  /* background-color: aliceblue; */
-  height: 100%;
-  min-width: fit-content;
-  text-align: center;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.header__datos-particular {
-  opacity: 0;
-  transition: all 0.4s ease;
-  font-size: 12pt;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px black;
-  display: none;
-}
-
-.particular__slider input[type="range"] {
-  appearance: none;
-  width: 250px !important;
-  height: 10px;
-  display: inline-block;
-  border-radius: 25px;
-  background: linear-gradient(90deg,
-      rgb(24 49 57) 0%,
-      rgb(77 200 124) 50%,
-      rgb(20 45 53) 100%);
-  transform: scale(0.65);
-  box-shadow: 0px 4px 5px 0px #0000008f;
-}
-
-.particular__slider input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  position: relative;
-  background: var(--bolaSlider);
-  width: 22px;
-  height: 22px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  transition: all 0.6s ease;
-  cursor: pointer;
-}
-
-.particular__slider input[type="range"]::-webkit-slider-thumb:hover {
-  width: 30px;
-  height: 30px;
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  justify-content: flex-end;
+  width: 250px;
 }
 
 .particular__aguaNivel img {
@@ -181,10 +101,23 @@
   pointer-events: none;
 }
 
-#date__particular {
-  color: #d09f24;
+#nombre__particular {
+  font-size: 22px;
 }
 
+#interceptor__particular {
+  font-size: 25px;
+}
+
+.info__header_part {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
 
 .optimizedsvg {
   shape-rendering: optimizeSpeed;
@@ -199,4 +132,66 @@
   position: absolute;
   left: 1105px;
   width: 45px;
+}
+
+#particularTextoImg {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.barraNivelContainer {
+  width: 80px;
+  height: 400px;
+  position: absolute;
+  bottom: 100px;
+  right: 25px;
+}
+
+.barraNivel {
+  width: 20px;
+  height: 0px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background: cadetblue;
+  border-radius: 10px;
+}
+
+.barraContainer {
+  width: 20px;
+  height: 330px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  border: 1px solid cadetblue;
+  border-radius: 10px;
+}
+
+.valorNivel {
+  width: 150px;
+  height: 35px;
+  border: 1px solid blue;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+}
+
+.barra_particular1 {
+  right: 20px;
+  bottom: 100px;
+}
+
+.barra_particular2 {
+  right: 90px;
+  bottom: 70px;
+}
+
+.barra_particular3 {
+  right: 160px;
+  bottom: 40px;
+}
+
+.barra_particular4 {
+  right: 230px;
+  bottom: 10px;
 }

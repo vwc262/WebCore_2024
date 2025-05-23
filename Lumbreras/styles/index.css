@@ -1,24 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-@font-face {
-  font-family: Montserrat;
-  src:
-    url(../assets/fonts/Moserrat/Montserrat-Medium.ttf),
-    url(../assets/fonts/Moserrat/Montserrat-Light.ttf),
-    url(../assets/fonts/Moserrat/Montserrat-Black.ttf),
-    url(../assets/fonts/Moserrat/Montserrat-Bold.ttf),
-    url(../assets/fonts/Moserrat/Montserrat-Italic.ttf);
-}
-
-@font-face {
-  font-family: GMX;
-  src:
-    url(../assets/fonts/GMX/GMX-Regular.ttf),
-    url(../assets/fonts/GMX/GMX-Black.ttf),
-    url(../assets/fonts/GMX/GMX-Bold.ttf),
-    url(../assets/fonts/GMX/GMX-Light.ttf);
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -64,6 +45,8 @@ body {
   display: flex;
   width: 983px;
   height: 57px;
+  position: absolute;
+  right: 0px;
 }
 
 nav {
@@ -71,10 +54,15 @@ nav {
   align-items: center;
   gap: 12px;
   margin-left: 30px;
+  position: absolute;
+  right: 0px;
+  top: 66px;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 nav img {
-  width: 10px;
+  width: 25px;
 }
 
 main {
@@ -88,7 +76,7 @@ section {
   position: absolute;
   top: 0;
   width: 1920px;
-  height: 1080px;
+  height: 1022px;
 }
 
 aside {
@@ -109,9 +97,17 @@ aside {
 .headerBtn__Login {
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-bottom: solid rgb(182, 180, 180) 1px;
+  border-bottom: solid rgb(47 12 168) 5px;
   cursor: pointer;
+  background: #00345d;
+  width: 60px;
+  height: 40px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .headerBtn__Login {

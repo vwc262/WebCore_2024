@@ -7,6 +7,7 @@ import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { AppGraficador } from "./reporteador/AppGraficador.js";
+import News from "./news/news.js";
 
 class VwcApp {
   projectName = EnumProyecto.Lumbreras;
@@ -70,9 +71,6 @@ class VwcApp {
     const $imgGraficador = document.getElementById("imgGraficador");
     $imgGraficador.setAttribute("src", `${Core.Instance.ResourcesPath}Reportes/graficador.png?v=${Core.Instance.version}`);
 
-    const $imgRegresar = document.getElementById("imgRegresar");
-    $imgRegresar.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
-
     const $imgModal = document.getElementById("imgModal");
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
     $imgModal.style.backgroundSize = `contain`;
@@ -89,6 +87,7 @@ class VwcApp {
     new Tabla().create(); // Inicio de tabla
     const perfil = new Perfil().create(); // Inicio del perfil
     new Mapa().create();
+    new News().Init();
 
     AppGraficador.Instance.Start();
 

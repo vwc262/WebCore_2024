@@ -21,92 +21,131 @@ class Perfil {
     btn_right_name = 'Boton_02/Secuencia_Dial00';
 
     constructor() {
+        this.actualInterceptor = 0;
         this.actualFrame = 0;
     }
 
     InitializeDial() {
 
+        const sombra = document.getElementsByClassName("dial_sombra")[0];
+        sombra.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/sombra.png?v=${Core.Instance.version}`);
+
+        const dial_interceptores = document.getElementsByClassName("dial_interceptores")[0];
+        dial_interceptores.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/Dial_Ramales.png?v=${Core.Instance.version}`);
+
         this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
         this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
-
-
-        this.cargarImagenesDial(26, this.dial_name);
-        this.cargarImagenesDial(6, this.btn_left_name);
-        this.cargarImagenesDial(6, this.btn_right_name);
-
-        document.getElementsByClassName(this.dial_name)[this.actualFrame].style.display = 'block';
-        document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
-        document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
 
         const interceptores = Core.Instance.Configuracion.interceptores;
         const interceptores_keys = Object.keys(interceptores);
 
-        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 455, 440);
+        this.cargarImagenesDial(interceptores_keys.length, this.dial_name);
+        this.cargarImagenesDial(6, this.btn_left_name);
+        this.cargarImagenesDial(6, this.btn_right_name);
+
+        document.getElementsByClassName(this.dial_name)[this.actualInterceptor].style.display = 'block';
+        document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
+        document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
+
+        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 450, 430);
 
         interceptores_keys.forEach((key, index) => {
 
             const dial_button_interceptor = document.createElement('div');
             dial_button_interceptor.classList = 'dial_button_interceptor';
-            dial_button_interceptor.innerHTML = `${interceptores[key].abreviacion}`;
 
             const pos = posiciones[index];
 
             dial_button_interceptor.style.left = `${pos.left}px`;
             dial_button_interceptor.style.top = `${pos.top}px`;
 
-            dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick);
+            dial_button_interceptor.setAttribute('interceptor', index);
+
+            dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick.bind(this));
             this.contenedor_botones.append(dial_button_interceptor);
         });
 
         const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
 
         for (const elemento of rightLeftBtn_dial) {
-            elemento.addEventListener('click', this.onRightLeftBtnClick);
+            elemento.addEventListener('click', this.onRightLeftBtnClick.bind(this));
         }
 
     }
 
-    onDialBtnInterceptoriclick() {
+    onDialBtnInterceptoriclick(e) {
+        const target = e.target;
+        const interceptor = parseInt(target.getAttribute('interceptor'));
+        const left = this.actualInterceptor > interceptor;
+        const steps = Math.abs(this.actualInterceptor - interceptor);
 
+        this.spinDial(steps, left);
     }
 
     onRightLeftBtnClick(e) {
         const target = e.target;
         const className = target.classList[1];
-        const toLeft = className.includes('left');
+        const left = className.includes('left');
 
-        Perfil.Instance.pressButton(toLeft);
-        Perfil.Instance.spinDial(1, toLeft);
+        this.spinDial(1, left);
     }
 
     spinDial(steps, left) {
 
         const dial_images = document.getElementsByClassName(this.dial_name);
+        const total_interceptores = document.getElementsByClassName('dial_button_interceptor');
+        const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
 
-        if (left ? this.actualFrame - steps < 0 : this.actualFrame + steps > dial_images.length - 1)
+        if (left ? this.actualInterceptor - steps < 0 : this.actualInterceptor + steps > total_interceptores.length - 1)
             return;
 
         const ticks = 24;
-        const stop = this.actualFrame + (left ? -steps : steps);
+        const frame_step = dial_images.length / total_interceptores.length;
+        let start = this.actualFrame;
+        this.actualInterceptor += + (left ? -steps : steps);
+        const stop = Math.round(this.actualInterceptor * frame_step);
+
+        // if (stop == this.actualFrame) return;
+
+        this.habilitarInteraccion('none', total_interceptores);
+        this.habilitarInteraccion('none', rightLeftBtn_dial);
+
+        this.pressButton(left);
 
         const interval = setInterval(() => {
 
             if (left) {
-                if (this.actualFrame <= stop) clearInterval(interval);
+                if (start <= stop) {
+                    this.habilitarInteraccion('all', total_interceptores); 3
+                    this.habilitarInteraccion('all', rightLeftBtn_dial);
+                    clearInterval(interval);
+                }
                 else {
-                    dial_images[this.actualFrame].style.display = 'none';
-                    this.actualFrame--;
+                    dial_images[start].style.display = 'none';
+                    start--;
+                    this.actualFrame = start;
                 }
             } else {
-                if (this.actualFrame >= stop) clearInterval(interval);
+                if (start >= stop) {
+                    this.habilitarInteraccion('all', total_interceptores);
+                    this.habilitarInteraccion('all', rightLeftBtn_dial);
+                    clearInterval(interval);
+                }
                 else {
-                    this.actualFrame++;
-                    dial_images[this.actualFrame].style.display = 'block';
+                    start++;
+                    this.actualFrame = start;
+                    dial_images[start].style.display = 'block';
                 }
 
             }
 
         }, ticks);
+    }
+
+    habilitarInteraccion(habilitar, coleccion) {
+        for (const elemento of coleccion) {
+            elemento.style.pointerEvents = `${habilitar}`;
+        }
     }
 
     pressButton(left) {

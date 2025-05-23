@@ -137,7 +137,51 @@ class Estacion {
      * @returns {boolean}
      */
     EstaEnLinea() {
-        return this.Enlace >= EnumEnlace.Radio && this.Enlace <= EnumEnlace.Hibrido;
+        const estado = this.ObtenerEstadoEnlace();
+        return !(estado.timeout || estado.offline);
+    }
+
+    ObtenerEstadoEnlace() {
+        let valorEnlace = this.Enlace;
+
+        let estado = {
+            tipoEnlace: '',
+            offline: false,
+            textoEnlace: '',
+            color: '',
+            timeout: false,
+            mantenimiento: false,
+        };
+
+        estado.offline = valorEnlace == EnumEnlace.FueraLinea;
+        estado.timeout = this.IsTimeout();
+        estado.mantenimiento = this.IsEnMantenimiento();
+
+        estado.tipoEnlace =
+            valorEnlace == EnumEnlace.Celular
+                ? "C"
+                : valorEnlace == EnumEnlace.Radio
+                    ? "R"
+                    : "CR";
+
+        estado.textoEnlace = estado.timeout
+            ? "Fuera de línea (Tiempo)"
+            : estado.mantenimiento ?
+                'En Mantenimiento' :
+                estado.offline
+                    ? "Fuera de línea"
+                    : `En línea (${estado.tipoEnlace})`;
+
+        estado.color = estado.timeout
+            ? "rgb(129, 11, 11)"
+            :
+            estado.mantenimiento ?
+                "rgb(129, 129, 129)"
+                : estado.offline
+                    ? "rgb(140, 13, 13)"
+                    : "rgb(0, 128, 0)";
+
+        return estado;
     }
 
     SetTurbulencia(signal, modulo) {

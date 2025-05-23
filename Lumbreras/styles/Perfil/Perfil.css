@@ -2,9 +2,20 @@
     position: absolute;
     width: 960px;
     height: 540px;
-    /* border: 1px solid lime; */
     right: 0px;
     bottom: 0px;
+    transform: scale(0.5);
+    transform-origin: bottom right;
+}
+
+.dial_sombra {
+    position: absolute;
+}
+
+.dial_interceptores {
+    position: absolute;
+    width: 960px !important;
+    height: 540px !important;
 }
 
 .dial_secuencias_interceptores {}
@@ -41,17 +52,19 @@
 
 .dial_button_interceptor {
     position: absolute;
-    transform: rotate(-1deg);
-    background: #13193b;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    font-size: 16px;
-    text-shadow: 0 0 black;
-    border-radius: 5px;
+    /* background: #13193b; */
+    width: 60px;
+    cursor: pointer;
+    height: 45px;
+    border-radius: 15px;
+    transform: rotate(-5deg);
 }
 
 .elemento_dial {
     position: absolute;
     display: none;
+}
+
+.dial_button {
+    cursor: pointer;
 }

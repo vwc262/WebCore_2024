@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../styles/Particular/Particular.css">
   <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
   <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
+  <link rel="stylesheet" href="../styles/News/News.css">
   <link rel="stylesheet" href="../styles/Modal/modal.css">
   <!-- reportes -->
   <link rel="stylesheet" href="../styles/reportes/reportes.css">
@@ -22,27 +23,17 @@
   <div class="header">
     <nav class="header__buttons">
       <div class="headerBtn__Home header__active">
-        <img id="imgHome" alt="">Home
+        <img id="imgHome" alt="">
       </div>
       <div class="headerBtn__Mapa">
-        <img id="imgMapa" alt="">Mapa
+        <img id="imgMapa" alt="">
       </div>
       <div class="headerBtn__Graficador">
-        <img id="imgGraficador" alt="">Graficador
+        <img id="imgGraficador" alt="">
       </div>
     </nav>
     <div class="header__title">
       <h1 id="title"></h1>
-      <div class="header__datos-particular">
-        <span id="date__particular">00/00/0000</span>
-        &nbsp;
-        <span id="state_particular">Fuera de línea</span>
-      </div>
-    </div>
-    <img class="fallaAcParticular">
-    <div class="header__btnRegresar">
-      <img id="imgRegresar">
-      <span>Regresar</span>
     </div>
     <div class="headerImagen">
       <img id="header_image">
@@ -76,26 +67,35 @@
         </filter>
       </svg>
 
-
-
       <section id="section__home" class="section__home" style="display: block;">
         <div class="contenedor_dial">
+          <img class="dial_sombra">
           <div class="dial_secuencias_interceptores"></div>
           <div class="dial_secuencias_btn_izquiero"></div>
           <div class="dial_secuencias_btn_derecho"></div>
+          <img class="dial_interceptores">
           <div class="contenedor_botones"></div>
           <div class="dial_button dial_button_left"></div>
           <div class="dial_button dial_button_right"></div>
         </div>
       </section>
 
+      <!-- ========================= Tabla ========================= -->
       <aside class="aside__tabla" style="display: block;">
+        <search class = "buscadorTabla">
+          <label class="buscadorTxT">
+            <input class="buscadorTxT" type="search" id="query" />
+          </label>
+        </search>
+
         <div class="table-container"></div>
       </aside>
 
+      <!-- ========================= Mapa ========================= -->
       <section id="section__mapa" class="section__mapa" style="display: none;">
         <div id="map" style="width: 1920px; height: 1080px;"></div>
       </section>
+
       <section id="section__graficador" class="section__graficador" style="display: none;">
 
         <div class="main_graficador">
@@ -254,30 +254,29 @@
 
       <section id="section__particular" class="section__particular" style="display: none;">
         <div class="particular__header">
-          <div class="particular__panelControl">
-            <img id="imgContolPanel">
+          <div id="nombre__particular">Lumbrera</div>
+          <div id="interceptor__particular">Interceptor</div>
+          <div class="info__header_part">
+            <div id="state_particular">Fuera de línea</div>
+            <div id="date__particular">00/00/0000</div>
           </div>
-          <div class="particular__ItemsContainer">
-            <div class="particular__items">
-              <div class="particular__item">
-                <div class="etiqueta__Nombre">N1</div>
-                <div class="etiqueta__Valor">3.08</div>
-                <div class="etiqueta__Unidad">m</div>
-              </div>
-            </div>
-          </div>
-          <div class="particular__slider">
-            <input id="sliderInput" type="range" style="display: inline-block" value="0" min="0" max="3" step="0.1">
-          </div>
+          <img class="fallaAcParticular">
         </div>
         <div class="particular__imgSitio">
           <img src="" id="particularImg">
           <img src="" id="particularTextoImg">
         </div>
 
+        <div class="barraNivelContainer barra_particular1"></div>
+        <div class="barraNivelContainer barra_particular2"></div>
+        <div class="barraNivelContainer barra_particular3"></div>
+        <div class="barraNivelContainer barra_particular4"></div>
+
         <div id="particular__aguaNivel"></div>
         <div id="particular__bombasEstado"></div>
       </section>
+
+      <div class="news"></div>
 
       <section class="modal ">
         <div id="imgModal" class="modal__container">

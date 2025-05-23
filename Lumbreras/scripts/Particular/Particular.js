@@ -1,6 +1,7 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
+import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { CreateElement } from "../Utilities/CustomFunctions.js";
 import {
@@ -57,12 +58,14 @@ class Particular {
     this.Estacion = Core.Instance.GetDatosEstacion(estacion.IdEstacion);
     this.MostrarFallaAc(this.Estacion.IsFallaAc());
   }
+
   MostrarFallaAc(mostrar) {
     let urlFallaAc = `${Core.Instance.ResourcesPath}/Iconos/backupenergy.png?v=${Core.Instance.version}`
     let imgFallaAc = document.querySelector('.fallaAcParticular');
     imgFallaAc.setAttribute('src', urlFallaAc);
     imgFallaAc.style.display = mostrar ? 'block' : 'none';
   }
+
   Update = () => {
     if (this.Estacion) {
       //console.log("particular Update");
@@ -101,59 +104,33 @@ class Particular {
             "src",
             estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
           );
-          this.ponerBombaPurple(signal, $imgBombaParticular);
         }
       });
-      if (Module == EnumModule.Particular) {
-        this.MostrarFallaAc(estacionUpdate.IsFallaAc());
-      }
 
-      this.showHideSlider();
+      this.MostrarFallaAc(estacionUpdate.IsFallaAc());
+
     }
   };
 
-  ponerBombaPurple(signal, $imgBombaParticular) {
-    if (Core.Instance.IdProyecto == EnumProyecto.Lerma) {
-      $imgBombaParticular.style.filter = signal.Valor == 4 ? "hue-rotate(295deg)" : "hue-rotate(0deg)";
-    }
-  }
-  mostrarDetalles() {
+  mostrarDetalles(interceptor) {
     SetActualModule("Particular");
-    // Elementos del DOM
-    //console.log("Detalles de la estación:", this.Estacion.Signals);
-    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
-    this.$headerTitle = document.querySelector("#title");
-    this.$headerDate = document.querySelector("#date__particular");
-    this.$headerStatus = document.querySelector("#state_particular");
-    this.$particularImg = document.querySelector("#particularImg");
-    this.$particularCapaTextoImg = document.querySelector(
-      "#particularTextoImg"
-    );
-    this.$datosHeader = document.querySelector(".header__datos-particular");
-    this.$btnBack = document.querySelector(".header__btnRegresar");
-    let nombresLargos = Configuracion.GetNombresLargos(Core.Instance.IdProyecto);
-    this.$headerTitle.innerText = nombresLargos ? nombresLargos[this.Estacion.IdEstacion] : this.Estacion.Nombre;
+
+    this.HTMLUpdateElements = {};
 
     // Maneja los zIndex al cambiar de "paginas"
     section__home.style.display = "none";
     section__mapa.style.display = "none";
     section__graficador.style.display = "none";
-    section__login.style.display = "none";
     section__particular.style.display = "block";
 
-    this.$datosHeader.style.opacity = "1";
-    this.$datosHeader.style.display = "block";
-    this.$btnBack.style.opacity = "1";
-    this.$btnBack.style.pointerEvents = "auto";
-    //this.$panelBombas.style.pointerEvents = "auto";
-    this.$particularCapaTextoImg.style.zIndex = 1;
-    this.$particularCapaTextoImg.style.pointerEvents = "none";
-
-    // Cambiar el texto de acuerdo al estado de la estación
-    this.setEnlaceParticular(estacionUpdate);
-
-    // Asignar la fecha formateada al elemento HTML
-    this.$headerDate.innerText = estacionUpdate.ObtenerFecha();
+    // Elementos del particular
+    this.$headerParticularName = document.querySelector("#nombre__particular");
+    this.$headerInterceptor = document.querySelector("#interceptor__particular");
+    this.$headerDate = document.querySelector("#date__particular");
+    this.$headerStatus = document.querySelector("#state_particular");
+    this.$particularImg = document.querySelector("#particularImg");
+    this.$particularCapaTextoImg = document.querySelector("#particularTextoImg");
+    this.barras = document.getElementsByClassName("barraNivelContainer");
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
@@ -164,25 +141,16 @@ class Particular {
     this.$particularImg.src = urlImgParticular;
     this.$particularCapaTextoImg.src = urlImgParticularCapaTexto;
 
+    this.$headerParticularName.innerText = this.Estacion.Nombre;
+    this.$headerInterceptor.innerText = interceptor;
+
     // Crear señales
     this.createSignals();
 
-    // Funconalidad del slider para recorrer las señales
-    this.slider();
-
-    // Funcionalidad para mostrar el panel de control
-    this.panelControl();
-
-    this.setNivelAgua(sitioAbrev);
-
-    this.MostrarFallaAc(estacionUpdate.IsFallaAc());
-
-    const $btnBack = document.querySelector(".header__btnRegresar");
-    $btnBack.addEventListener("click", this.backParticular);
+    this.Update();
   }
 
   backParticular = () => {
-
     SetActualModule("Perfil");
     GoHome();
   }
@@ -192,52 +160,72 @@ class Particular {
       ".particular__ItemsContainer"
     );
 
-    this.$signalsContainer.innerHTML = "";
     this.HTMLUpdateElements = {};
     let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
 
-    // Filtrar los signals con TipoSignal igual a 1, 3 o 4
-    estacionUpdate.Signals.filter((signal) =>
-      signal.TipoSignal == EnumTipoSignal.Nivel ||
-      signal.TipoSignal == EnumTipoSignal.Presion ||
-      signal.TipoSignal == EnumTipoSignal.Gasto ||
-      signal.TipoSignal == EnumTipoSignal.Totalizado ||
-      signal.TipoSignal == EnumTipoSignal.ValvulaAnalogica ||
-      signal.TipoSignal == EnumTipoSignal.ValvulaDiscreta ||
-      signal.TipoSignal == EnumTipoSignal.Voltaje ||
-      signal.TipoSignal == EnumTipoSignal.Precipitacion ||
-      signal.TipoSignal == EnumTipoSignal.Temperatura ||
-      signal.TipoSignal == EnumTipoSignal.Humedad ||
-      signal.TipoSignal == EnumTipoSignal.Evaporacion ||
-      signal.TipoSignal == EnumTipoSignal.Intensidad ||
-      signal.TipoSignal == EnumTipoSignal.Direccion
+    const niveles = estacionUpdate.Signals.filter((signal) => signal.TipoSignal == EnumTipoSignal.Nivel);
 
-    ).forEach((signal) => {
-      const $signalItem = CreateElement({
-        nodeElement: "div",
-        attributes: { class: "particular__item" },
-      });
+    for (let index = 0; index < this.barras.length; index++) {
+      const barra = this.barras[index];
+      barra.innerHTML = '';
 
-      const $etiquetaNombre = CreateElement({
-        nodeElement: "div",
-        attributes: { class: "etiqueta__Nombre"},
-        innerText: `${signal.GetNomenclaturaSignal()}: `,
-      });
+      if (index <= niveles.length - 1) {
 
-      const $etiquetaValor = CreateElement({
-        nodeElement: "div",
-        attributes: {
-          class: "etiqueta__Valor",
-          id: `particular__valorSlider_${signal.IdSignal}`,
-        },
-        innerHTML: signal.GetValorString(true, true),
-      });
+        const nivel = niveles[index];
 
-      $signalItem.append($etiquetaNombre, $etiquetaValor);
-      this.alojarElementoDinamico([$etiquetaValor]);
-      this.$signalsContainer.appendChild($signalItem);
-    });
+        const barraContainer = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "barraContainer",
+          },
+        });
+
+        const barraNivel = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "barraNivel",
+            id: `barraNivel_${nivel.IdSignal}`,
+          },
+        });
+
+        barraContainer.append(barraNivel);
+        this.setBaraNivel(barraNivel, nivel);
+
+        const signalItem = CreateElement({
+          nodeElement: "div",
+          attributes: { class: "particular__item" },
+        });
+
+        const etiquetaNombre = CreateElement({
+          nodeElement: "div",
+          attributes: { class: "etiqueta__Nombre" },
+          innerText: `${nivel.GetNomenclaturaSignal()}: `,
+        });
+
+        const etiquetaValor = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "etiqueta__Valor",
+            id: `nivel_${nivel.IdSignal}`,
+          },
+          innerHTML: nivel.GetValorString(true, true),
+        });
+
+        this.alojarElementoDinamico([barraNivel, etiquetaValor]);
+
+        signalItem.append(etiquetaNombre, etiquetaValor);
+        barra.append(barraContainer, signalItem);
+
+        barra.style.display = 'block';
+      } else {
+
+        barra.removeAttribute('id');
+        barra.style.display = 'none';
+      }
+
+    }
   }
+
   /**
    *aloja un elemento dinamico a la propiedad HTML
    * @param {[HTMLElement]} elementos
@@ -248,88 +236,31 @@ class Particular {
     });
   }
 
-  slider() {
-    const container = document.querySelector(".particular__ItemsContainer");
-    const sliderInput = document.querySelector("#sliderInput");
-    const sliderInputBola = document.querySelector(
-      ".particular__slider input[type='range']"
-    );
+  /**
+   * 
+   * @param {HTMLElement} barraNivel 
+   * @param {Signal} signal 
+   */
+  setBaraNivel(barraNivel, signal) {
 
-    this.showHideSlider();
+    let max_height = 330;
+    let altura = signal.Semaforo?.Altura || 1.0;
+    let amount = (signal.Valor / altura) * max_height;
+    let color = signal.GetColorSemaforo();
 
-    sliderInputBola.style.setProperty(
-      "--bolaSlider",
-      `url(${Core.Instance.ResourcesPath}General/esfera_slider.png?v=${Core.Instance.version})`
-    );
-
-    if (
-      document.querySelector(".particular__slider").style.display !== "none"
-    ) {
-      sliderInput.addEventListener("input", (event) => {
-        const container = document.querySelector(".particular__ItemsContainer");
-
-        const currentValue = parseFloat(event.target.value);
-        const containerWidth = container.offsetWidth;
-        const scrollWidth = container.scrollWidth;
-        const maxScrollLeft = scrollWidth - containerWidth;
-        const scrollLeft = (maxScrollLeft * currentValue) / sliderInput.max;
-
-        container.scrollLeft = scrollLeft;
-      });
-    }
-  }
-
-  showHideSlider() {
-    const container = document.querySelector(".particular__ItemsContainer");
-
-    // Mostrar el control deslizante si los elementos se desbordan del contenedor
-    document.querySelector(".particular__slider").style.display =
-      container.scrollWidth > container.offsetWidth ? "flex" : "none";
-  }
-
-  panelControl() {
-    let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
-    const signals = estacionUpdate.Signals;
-    const tipoSignal7Count = signals.filter(
-      (signal) => signal.TipoSignal === 7
-    ).length;
-    const panelControlElement = document.querySelector(
-      ".particular__panelControl"
-    );
-    panelControlElement.style.display = tipoSignal7Count >= 1 ? "flex" : "none";
+    barraNivel.style.height = `${amount}px`;
+    barraNivel.style.backgroundColor = color;
   }
 
   setEnlaceParticular(estacion) {
-    let valorEnlace = estacion.Enlace;
-    let timeout = estacion.IsTimeout();
-    let enMantenimiento = estacion.IsEnMantenimiento();
 
-    // Cambiar el texto de acuerdo al estado de la estación
-    const offline = valorEnlace == EnumEnlace.FueraLinea;
-    const tipoEnlace =
-      valorEnlace == EnumEnlace.Celular
-        ? "C"
-        : valorEnlace == EnumEnlace.Radio
-          ? "R"
-          : "CR";
-    this.$headerStatus.innerHTML = timeout
-      ? "Fuera de línea (Tiempo)"
-      : enMantenimiento ?
-        'En Mantenimiento' :
-        offline
-          ? "Fuera de línea"
-          : `En línea (${tipoEnlace})`;
-    this.$headerStatus.style.color = timeout
-      ? "rgb(129, 11, 11)"
-      :
-      enMantenimiento ?
-        "rgb(129, 129, 129)"
-        : offline
-          ? "rgb(140, 13, 13)"
-          : "rgb(0, 128, 0)";
+    const estado = estacion.ObtenerEstadoEnlace();
+
+    this.$headerStatus.innerHTML = estado.textoEnlace;
+    this.$headerStatus.style.color = estado.color;
   }
 
-  setNivelAgua() {
+  createNiveles() {
     let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
     const $nivelContainer = document.getElementById("particular__aguaNivel");
     const $bombasContainer = document.getElementById(
