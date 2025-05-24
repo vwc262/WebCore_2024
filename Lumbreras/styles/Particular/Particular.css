@@ -34,12 +34,13 @@
   text-align: end;
   display: inline-block;
   width: 150px;
+  margin-top: -1px;
 }
 
 .etiqueta__Valor {
   text-align: center;
   display: inline-block;
-  width: 90px;
+  width: 125px;
 }
 
 .etiqueta__Unidad {

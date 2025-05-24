@@ -210,7 +210,7 @@ class Particular {
             class: "etiqueta__Valor",
             id: `nivel_${nivel.IdSignal}`,
           },
-          innerHTML: nivel.GetValorString(true, true),
+          innerHTML: `${nivel.GetValorString(false, true)} / ${nivel.Semaforo?.Altura || 'ND'}`,
         });
 
         this.alojarElementoDinamico([barraNivel, etiquetaValor]);

@@ -52,6 +52,8 @@ class News {
                 xAcumulado += elemento.width + espaciado;
             }
         });
+
+        this.Update();
     }
 
     /**
@@ -71,7 +73,7 @@ class News {
         );
     }
 
-    Update= () => {
+    Update = () => {
         const elemVisibles = this.HTMLElements.filter(f => f.visible);
         this.enEjecucion = elemVisibles.length > 10;
         this.animar(performance.now());
