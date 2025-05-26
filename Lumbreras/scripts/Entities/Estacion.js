@@ -200,7 +200,7 @@ class Estacion {
     ObtenerRenderNivelOBomba(signal, modulo) {
 
         let url = "";
-        const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "l" : "b";
+        const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "n" : "b";
         let indiceImagen = "";
         if (Core.Instance.IdProyecto == EnumProyecto.Lerma) {
             const isBombaPurple = signal.Valor == 4;
@@ -223,15 +223,15 @@ class Estacion {
 
             if (signal.TipoSignal == EnumTipoSignal.Nivel) {
                 if (signal.DentroRango) {
-                    if (signal.DentroLimite == EnumDentroLimite.Alto) {
-                        indiceImagen = "10r";
-                    }
-                    else {
+                    // if (signal.DentroLimite == EnumDentroLimite.Alto) {
+                    //     indiceImagen = "10r";
+                    // }
+                    // else {
                         indiceImagen = signal.IndiceImagen;
-                    }
+                    // }
                 }
                 else {
-                    indiceImagen = "r";
+                    indiceImagen = "nd";
                 }
             }
             else {
