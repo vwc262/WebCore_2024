@@ -62,14 +62,12 @@ class VwcApp {
 
   IniciarUI() {
 
-    const $imgHome = document.getElementById("imgHome");
-    $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
 
-    const $imgMapa = document.getElementById("imgMapa");
-    $imgMapa.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/icomapa.png?v=${Core.Instance.version}`);
-
-    const $imgGraficador = document.getElementById("imgGraficador");
-    $imgGraficador.setAttribute("src", `${Core.Instance.ResourcesPath}Reportes/graficador.png?v=${Core.Instance.version}`);
+    this.inicializarBotonHeader("imgHome", 'home');
+    this.inicializarBotonHeader("imgMapa", 'icomapa');
+    this.inicializarBotonHeader("imgGraficador", 'graficador');
+    this.inicializarBotonHeader("imgExterior", 'exterior');
+    this.inicializarBotonHeader("imgSubterraneo", 'subterraneo');
 
     const $imgModal = document.getElementById("imgModal");
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
@@ -92,6 +90,13 @@ class VwcApp {
     AppGraficador.Instance.Start();
 
     this.suscribirEventos();
+  }
+
+  inicializarBotonHeader(id, fondo){
+    const navButton = document.getElementById(id);
+    navButton.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/${fondo}.png?v=${Core.Instance.version}`);
+    navButton.addEventListener('mouseover', (e) => { e.target.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/${fondo}_over.png?v=${Core.Instance.version}`); });
+    navButton.addEventListener('mouseleave', (e) => { e.target.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/${fondo}.png?v=${Core.Instance.version}`); });
   }
 
   suscribirEventos() {

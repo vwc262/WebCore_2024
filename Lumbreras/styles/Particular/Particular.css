@@ -33,14 +33,22 @@
   color: cyan;
   text-align: end;
   display: inline-block;
-  width: 150px;
-  margin-top: -1px;
+  margin-top: 3px;
+  font-size: 12px;
 }
 
 .etiqueta__Valor {
-  text-align: center;
+  text-align: end;
   display: inline-block;
-  width: 125px;
+  margin-right: 4px;
+  margin-left: 10px;
+}
+
+.etiqueta__Altura {
+  text-align: start;
+  display: inline-block;
+  font-size: 12px;
+  margin-top: 3px;
 }
 
 .etiqueta__Unidad {
@@ -76,7 +84,8 @@
   top: 70px;
   right: 15px;
   justify-content: flex-end;
-  width: 250px;
+  width: 390px;
+  margin-right: 15px;
 }
 
 .particular__aguaNivel img {

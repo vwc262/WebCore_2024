@@ -31,15 +31,15 @@ class NewsElement {
         let container = document.createElement('div');
         container.classList = 'news_element';
         container.id = this.id;
-        
+
         let interceptor = document.createElement('div');
         interceptor.classList = 'news_element_interceptor';
         interceptor.innerHTML = `${this.interceptor} (${this.estacion.IdEstacion})`;
-        
+
         let estacion = document.createElement('div');
         estacion.classList = 'news_element_estacion';
         estacion.innerHTML = `${this.estacion.Nombre.slice(0, 25)}`;
-        
+
         let nivel = document.createElement('div');
         nivel.classList = 'news_element_nivel';
         nivel.innerHTML = `Nivel: ${this.nivel.Nombre}`;
@@ -56,18 +56,19 @@ class NewsElement {
         return this.root;
     }
 
-    Update= () => {
+    Update = () => {
         const updatedEstacion = Core.Instance.GetDatosEstacion(this.estacion.IdEstacion);
         const updatedNivel = updatedEstacion.Signals.find(s => s.IdSignal == this.nivel.IdSignal);
 
         if (updatedNivel) {
-            const color = updatedNivel.GetColorSemaforo();
             const enumerador = updatedNivel.GetEnumSemaforo();
 
             if (enumerador == EnumSemaforo.Critico || enumerador == EnumSemaforo.Preventivo) {
                 this.root.visible = true;
                 this.root.style.display = 'flex';
-                this.root.style.background = color;
+                this.root.style.background = enumerador == EnumSemaforo.Critico ?
+                    `linear-gradient(90deg, rgba(255, 0, 0, 0) 0%, rgba(255, 0, 0, 1) 15%, rgba(255, 0, 0, 1) 85%, rgba(255, 0, 0, 0) 100%` :
+                    `linear-gradient(90deg, rgba(255, 0, 0, 0) 0%, rgba(255, 251, 0, 1) 15%, rgba(255, 251, 0, 1) 85%, rgba(255, 0, 0, 0) 100%`;
                 this.root.style.color = enumerador == EnumSemaforo.Critico ? 'beige' : 'blue';
             }
             else {

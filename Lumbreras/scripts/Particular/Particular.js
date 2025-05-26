@@ -69,7 +69,6 @@ class Particular {
 
   Update = () => {
     if (this.Estacion) {
-      //console.log("particular Update");
       const estacionUpdate = Core.Instance.GetDatosEstacion(
         this.Estacion.IdEstacion
       );
@@ -79,33 +78,26 @@ class Particular {
 
       estacionUpdate.Signals.forEach((signal) => {
         let signalActualizar =
-          this.HTMLUpdateElements[`particular__valorSlider_${signal.IdSignal}`];
+          this.HTMLUpdateElements[`valor_nivel_${signal.IdSignal}`];
 
         if (signalActualizar) {
-          signalActualizar.innerHTML = signal.GetValorString(true, true);
+          signalActualizar.innerHTML = `${signal.GetValorString(false, true)}`;
+          signalActualizar.style.color = signal.GetColorSemaforo();
         }
 
-        let $imgNivelAgua =
-          this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
-
+        let $imgNivelAgua = this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
         if ($imgNivelAgua) {
-          $imgNivelAgua.setAttribute(
-            "src",
-            estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
-          );
+          $imgNivelAgua.setAttribute("src", estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular"));
+
           if (signal.DentroRango == 1) $imgNivelAgua.classList.add('turbulence');
           else $imgNivelAgua.classList.remove('turbulence')
         }
 
         let barraNivel = this.HTMLUpdateElements[`barraNivel_${signal.IdSignal}`];
-        if (barraNivel)
-          this.setBaraNivel(barraNivel, signal);
+        if (barraNivel) this.setBaraNivel(barraNivel, signal);
       });
 
       this.MostrarFallaAc(estacionUpdate.IsFallaAc());
-
-      // todo: Update setBaraNivel
-
     }
   };
 
@@ -142,10 +134,10 @@ class Particular {
     this.$headerInterceptor.innerText = interceptor;
 
     // Crear señales
-    this.createSignals();
+    this.createNivelesTexto();
 
     // crear imagenes niveles
-    this.createNiveles();
+    this.createNivelesImagen();
 
     this.Update();
   }
@@ -155,7 +147,7 @@ class Particular {
     GoHome();
   }
 
-  createSignals() {
+  createNivelesTexto() {
     this.$signalsContainer = document.querySelector(
       ".particular__ItemsContainer"
     );
@@ -206,14 +198,22 @@ class Particular {
           nodeElement: "div",
           attributes: {
             class: "etiqueta__Valor",
-            id: `nivel_${nivel.IdSignal}`,
+            id: `valor_nivel_${nivel.IdSignal}`,
           },
-          innerHTML: `${nivel.GetValorString(false, true)} / ${nivel.Semaforo?.Altura || 'ND'}`,
+          innerHTML: `${nivel.GetValorString(false, true)}`,
+        });
+
+        const etiquetaAltura = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "etiqueta__Altura",
+          },
+          innerHTML: ` [m], altura: ${nivel.Semaforo?.Altura || 'ND'} [m]`,
         });
 
         this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
-        signalItem.append(etiquetaNombre, etiquetaValor);
+        signalItem.append(etiquetaNombre, etiquetaValor, etiquetaAltura);
         barra.append(barraContainer, signalItem);
 
         barra.style.display = 'block';
@@ -260,7 +260,7 @@ class Particular {
     this.$headerStatus.style.color = estado.color;
   }
 
-  createNiveles() {
+  createNivelesImagen() {
     let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
     const $nivelContainer = document.getElementById("particular__aguaNivel");
     $nivelContainer.innerHTML = "";

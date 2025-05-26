@@ -51,9 +51,6 @@ body {
 
 nav {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: 30px;
   position: absolute;
   right: 0px;
   top: 66px;
@@ -62,7 +59,7 @@ nav {
 }
 
 nav img {
-  width: 25px;
+  width: 50px;
 }
 
 main {
@@ -94,26 +91,15 @@ aside {
 #imgHome,
 #imgMapa,
 #imgGraficador {
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .headerBtn__Home,
 .headerBtn__Mapa,
 .headerBtn__Graficador,
 .headerBtn__Login {
-  display: flex;
-  align-items: center;
-  border-bottom: solid rgb(47 12 168) 5px;
-  cursor: pointer;
-  background: #00345d;
-  width: 60px;
-  height: 40px;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: space-evenly;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  pointer-events: auto;
 }
 
 .headerBtn__Login {
