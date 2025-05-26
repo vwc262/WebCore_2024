@@ -118,7 +118,7 @@ class Particular {
 
     this.headerBtn__Exterior = document.getElementsByClassName('headerBtn__Exterior')[0];
     this.headerBtn__Exterior.style.display = 'block';
-    
+
     this.headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
     this.headerBtn__Subterraneo.style.display = 'block';
     this.headerBtn__Subterraneo.click();
@@ -212,6 +212,11 @@ class Particular {
           attributes: { class: "particular__item" },
         });
 
+        const valoresContainer = CreateElement({
+          nodeElement: "div",
+          attributes: { class: "valores_container" },
+        });
+
         const etiquetaNombre = CreateElement({
           nodeElement: "div",
           attributes: { class: "etiqueta__Nombre" },
@@ -245,7 +250,8 @@ class Particular {
 
         this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
-        signalItem.append(etiquetaNombre, etiquetaValor, etiquetaUnidades, etiquetaAltura);
+        valoresContainer.append(etiquetaNombre, etiquetaValor, etiquetaUnidades);
+        signalItem.append(valoresContainer, etiquetaAltura);
         barra.append(barraContainer, signalItem);
 
         barra.style.display = 'block';
