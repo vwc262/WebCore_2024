@@ -52,7 +52,6 @@
   overflow-y: scroll;
   margin-left: 10px;
 
-  /* Estilizado para navegadores WebKit (Chrome, Safari, Edge) */
   &::-webkit-scrollbar {
     width: 8px;
   }
