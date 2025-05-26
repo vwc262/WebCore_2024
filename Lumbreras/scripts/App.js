@@ -69,10 +69,6 @@ class VwcApp {
     this.inicializarBotonHeader("imgExterior", 'exterior');
     this.inicializarBotonHeader("imgSubterraneo", 'subterraneo');
 
-    const $imgModal = document.getElementById("imgModal");
-    $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
-    $imgModal.style.backgroundSize = `contain`;
-
     if (this.isApple()) {
       let html = document.getElementsByTagName('html')[0];
 
@@ -104,10 +100,7 @@ class VwcApp {
   }
 
   update() {
-    if (Core.Instance.version != this.version) {
-      this.version = Core.Instance.version;
-      ShowModal("Se ha detectado un cambio de versión", "Cambio de versión", true);
-    }
+
   }
 }
 

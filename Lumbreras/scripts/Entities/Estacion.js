@@ -9,6 +9,7 @@ import {
     EnumEnlace,
     EnumProyecto,
 } from "../Utilities/Enums.js";
+import { Clamp } from "../Utilities/CustomFunctions.js";
 
 class Estacion {
     constructor(estacionCruda) {
@@ -227,7 +228,7 @@ class Estacion {
                     //     indiceImagen = "10r";
                     // }
                     // else {
-                        indiceImagen = signal.IndiceImagen;
+                    indiceImagen = this.rellenarCeros(Clamp(signal.IndiceImagen, 1, 10));
                     // }
                 }
                 else {
@@ -250,6 +251,15 @@ class Estacion {
 
         return url;
     }
+
+    rellenarCeros(numero) {
+        let str = numero.toString();
+        while (str.length < 2) {
+            str = "0" + str;
+        }
+        return str;
+    }
+
     /**
      *
      * @param {Signal} signal

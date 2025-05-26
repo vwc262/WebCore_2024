@@ -29,6 +29,10 @@ class Particular {
 
   //#region Constructor
   constructor() {
+
+    this.headerBtn__Exterior = null;
+    this.headerBtn__Subterraneo = null;
+
     EventsManager.Instance.Suscribirevento(
       "Update",
       new EventoCustomizado(this.Update)
@@ -82,7 +86,7 @@ class Particular {
 
         if (signalActualizar) {
           signalActualizar.innerHTML = `${signal.GetValorString(false, true)}`;
-          signalActualizar.style.color = signal.GetColorSemaforo();
+          signalActualizar.style.color = signal.GetColorSemaforo('floralwhite');
         }
 
         let $imgNivelAgua = this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
@@ -111,6 +115,11 @@ class Particular {
     section__mapa.style.display = "none";
     section__graficador.style.display = "none";
     section__particular.style.display = "block";
+
+    this.headerBtn__Exterior = document.getElementsByClassName('headerBtn__Exterior')[0];
+    this.headerBtn__Exterior.style.display = 'block';
+    this.headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
+
 
     // Elementos del particular
     this.$headerParticularName = document.querySelector("#nombre__particular");
@@ -180,7 +189,15 @@ class Particular {
           },
         });
 
-        barraContainer.append(barraNivel);
+        const cristalBarra = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "cristalBarra",
+            style: `background: url(${Core.Instance.ResourcesPath}General/Barra_Nivel.png?v=${Core.Instance.version}); background-size: 100% 100%; background-repeat: no-repeat`
+          },
+        });
+
+        barraContainer.append(barraNivel, cristalBarra);
         this.setBaraNivel(barraNivel, nivel);
 
         const signalItem = CreateElement({
@@ -243,7 +260,7 @@ class Particular {
    */
   setBaraNivel(barraNivel, signal) {
 
-    let max_height = 310;
+    let max_height = 180;
     let altura = signal.Semaforo?.Altura || 1.0;
     let amount = Clamp((signal.Valor / altura) * max_height, 0, max_height);
     let color = signal.GetColorSemaforo();

@@ -90,15 +90,23 @@ aside {
 
 #imgHome,
 #imgMapa,
-#imgGraficador {
+#imgGraficador,
+#imgExterior,
+#imgSubterraneo {
   pointer-events: auto;
   cursor: pointer;
+}
+
+.headerBtn__Exterior,
+.headerBtn__Subterraneo {
+  display: none;
 }
 
 .headerBtn__Home,
 .headerBtn__Mapa,
 .headerBtn__Graficador,
-.headerBtn__Login {
+.headerBtn__Exterior,
+.headerBtn__Subterraneo {
   pointer-events: auto;
 }
 
@@ -107,7 +115,8 @@ aside {
 }
 
 .header__active {
-  color: rgb(155, 155, 38);
+  transform: scale(1.2);
+  filter: hue-rotate(45deg);
 }
 
 .header__title {

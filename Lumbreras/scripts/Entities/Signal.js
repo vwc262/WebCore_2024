@@ -260,11 +260,11 @@ class Signal {
         return EnumPerillaGeneralString[this.Valor] ?? '---';
     }
 
-    GetColorSemaforo() {
+    GetColorSemaforo(normalColor = 'green') {
 
         let color = !this.DentroRango ? 'gray' :
             this.Valor >= this.Semaforo.Critico ? 'red' :
-                this.Valor >= this.Semaforo.Preventivo ? 'yellow' : 'green';
+                this.Valor >= this.Semaforo.Preventivo ? 'yellow' : normalColor;
 
         return color;
     }

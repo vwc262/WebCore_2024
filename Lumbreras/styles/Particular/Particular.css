@@ -48,7 +48,7 @@
   text-align: start;
   display: inline-block;
   font-size: 12px;
-  margin-top: 3px;
+  margin-top: -3px;
 }
 
 .etiqueta__Unidad {
@@ -79,12 +79,12 @@
 .particular__item {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   position: absolute;
-  top: 70px;
+  top: 170px;
   right: 15px;
   justify-content: flex-end;
-  width: 390px;
+  width: 120px;
   margin-right: 15px;
 }
 
@@ -159,22 +159,26 @@
 
 .barraNivel {
   width: 20px;
-  height: 0px;
   position: absolute;
   bottom: 0px;
   right: 0px;
-  background: cadetblue;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.cristalBarra {
+  width: 55px;
+  height: 230px;
+  position: absolute;
+  top: 12px;
+  left: -28px;
 }
 
 .barraContainer {
   width: 20px;
-  height: 330px;
+  height: 230px;
   position: absolute;
   bottom: 0px;
   right: 0px;
-  border: 1px solid cadetblue;
-  border-radius: 10px;
 }
 
 .valorNivel {
