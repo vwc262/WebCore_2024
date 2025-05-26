@@ -1,14 +1,14 @@
 .titulo {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .sub_titulo {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .buscadorTabla {
   display: flex;
-  margin-top: 80px;
+  margin-top: 60px;
   margin-left: 10px;
   align-items: center;
   align-content: stretch;
@@ -25,12 +25,13 @@
 
 .buscadorTxT {
   background: linear-gradient(0deg, rgba(20, 24, 69, 0.5) 0%, rgba(118, 124, 210, 0.5) 100%);
-  width: 446px;
-  height: 45px;
+  width: 394px;
+  height: 40px;
   border: none;
   color: white;
   margin-right: 8px;
   border-radius: 0px 5px 5px 0px;
+  margin-bottom: 10px;
 }
 
 .buscadorTxT input[type="search"] {
@@ -118,7 +119,7 @@
 .data_row {
   display: flex;
   width: 100%;
-  height: 60px;
+  height: 48px;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
@@ -293,7 +294,7 @@
 
 .Columna_Nombre {
   display: flex;
-  width: 43%;
+  width: 47%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -301,7 +302,7 @@
 
 .Columna_Nivel {
   display: flex;
-  width: 12%;
+  width: 15%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -309,7 +310,7 @@
 
 .Columna_Fecha {
   display: flex;
-  width: 20%;
+  width: 17%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -317,7 +318,7 @@
 
 .Columna_Hora {
   display: flex;
-  width: 15%;
+  width: 11%;
   height: 100%;
   align-items: center;
   justify-content: center;
