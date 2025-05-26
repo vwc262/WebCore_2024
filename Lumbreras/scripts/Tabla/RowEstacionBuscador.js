@@ -129,7 +129,7 @@ class RowEstacionBuscador {
 
             estado_estacion.src = `${Core.Instance.ResourcesPath}Tabla/sitio_${enlace}.png?v=${Core.Instance.version}`;
             valor_estacion.innerHTML = `${estacionUpdate.Signals[0].Valor} m`;
-            valor_estacion.style.color = `${estacionUpdate.Signals[0].GetValorColor()}`;
+            valor_estacion.style.color = `${estacionUpdate.Signals[0].GetColorSemaforo()}`;
             fecha_estacion.innerHTML = `${formatoFecha[0]}`;
             hora_estacion.innerHTML = `${formatoFecha[1]}`;
         }

@@ -63,11 +63,11 @@ class infoRowEstacion {
 
                 let semaforo_prev = document.createElement('div');
                 semaforo_prev.classList = 'semaforoCont';
-                semaforo_prev.innerHTML = `${signal.Semaforo?.Preventivo ? 'Prev. ' + signal.Semaforo.Preventivo + ' m' : 'ND'}`;
+                semaforo_prev.innerHTML = `${signal.Semaforo?.Preventivo ? '<span style="color: yellow;">Prev. </span> ' + signal.Semaforo.Preventivo + ' m' : 'ND'}`;
 
                 let semaforo_critc = document.createElement('div');
                 semaforo_critc.classList = 'semaforoCont';
-                semaforo_critc.innerHTML = `${signal.Semaforo?.Critico ? 'Crit. ' + signal.Semaforo.Critico + ' m' : 'ND'}`;
+                semaforo_critc.innerHTML = `${signal.Semaforo?.Critico ? '<span style="color: red;">Crit. </span> ' + signal.Semaforo.Critico + ' m' : 'ND'}`;
 
                 semaforos_div.append(semaforo_prev, semaforo_critc);
                 nivel_div.append(signal_valor, semaforos_div)
@@ -108,12 +108,10 @@ class infoRowEstacion {
             estacionUpdate.Signals.forEach(signal => {
                 if(signal.TipoSignal == 1){
                     let valor_signal = this.HTMLUpdateElements[`signal_${signal.IdSignal}`];
-                    valor_signal.innerHTML = `${estacionUpdate.Signals[0].Valor} m`;
-                    valor_signal.style.color = `${estacionUpdate.Signals[0].GetValorColor()}`;
+                    valor_signal.innerHTML = `${signal.DentroRango? signal.Valor : "---"} m`;
+                    valor_signal.style.color = `${signal.GetColorSemaforo()}`;
                 }
             })
-
-
         }
     }
 
@@ -123,6 +121,5 @@ class infoRowEstacion {
             new EventoCustomizado(this.update)
         );
     }
-
 }
 export { infoRowEstacion }
