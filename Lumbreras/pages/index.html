@@ -21,23 +21,6 @@
 
 <body>
   <div class="header">
-    <nav class="header__buttons">
-      <div class="headerBtn__Home header__active">
-        <img id="imgHome" alt="">
-      </div>
-      <div class="headerBtn__Mapa">
-        <img id="imgMapa" alt="">
-      </div>
-      <div class="headerBtn__Graficador">
-        <img id="imgGraficador" alt="">
-      </div>
-      <div class="headerBtn__Exterior">
-        <img id="imgExterior" alt="">
-      </div>
-      <div class="headerBtn__Subterraneo">
-        <img id="imgSubterraneo" alt="">
-      </div>
-    </nav>
     <div class="header__title">
       <h1 id="title"></h1>
     </div>
@@ -45,6 +28,24 @@
       <img id="header_image">
     </div>
   </div>
+
+  <nav class="header__buttons">
+    <div class="headerBtn__Home header__active">
+      <img id="imgHome" alt="">
+    </div>
+    <div class="headerBtn__Mapa">
+      <img id="imgMapa" alt="">
+    </div>
+    <div class="headerBtn__Graficador">
+      <img id="imgGraficador" alt="">
+    </div>
+    <div class="headerBtn__Exterior">
+      <img id="imgExterior" alt="">
+    </div>
+    <div class="headerBtn__Subterraneo">
+      <img id="imgSubterraneo" alt="">
+    </div>
+  </nav>
 
   <main>
     <container class="Content_on_load">
@@ -90,7 +91,7 @@
 
       <!-- ========================= Tabla ========================= -->
       <aside class="aside__tabla" style="display: block;">
-        <div class = "buscadorTabla">
+        <div class="buscadorTabla">
           <label class="buscadorTxT">
             <input class="buscadorTxT" type="search" id="query" />
           </label>
@@ -230,7 +231,7 @@
                 </div>
 
 
-                <!-- ============== Calnedario ================ -->
+                <!-- ============== Calendario ================ -->
                 <div class="contenedor_fecha_estacion" id="calendarioDate">
                   <div class="menu menu_fechas">
                     <div class="fechas">
@@ -282,7 +283,7 @@
         <div class="barraNivelContainer barra_particular4"></div>
 
         <div id="particular__aguaNivel"></div>
-        <div id="particular__bombasEstado"></div>
+        <img src="" id="particularImgExterior" style="display: none;">
       </section>
 
       <div class="news"></div>

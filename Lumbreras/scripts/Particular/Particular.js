@@ -118,25 +118,32 @@ class Particular {
 
     this.headerBtn__Exterior = document.getElementsByClassName('headerBtn__Exterior')[0];
     this.headerBtn__Exterior.style.display = 'block';
+    
     this.headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
-
+    this.headerBtn__Subterraneo.style.display = 'block';
+    this.headerBtn__Subterraneo.click();
 
     // Elementos del particular
     this.$headerParticularName = document.querySelector("#nombre__particular");
     this.$headerInterceptor = document.querySelector("#interceptor__particular");
     this.$headerDate = document.querySelector("#date__particular");
     this.$headerStatus = document.querySelector("#state_particular");
+
     this.$particularImg = document.querySelector("#particularImg");
+    this.$particularImgExterior = document.querySelector("#particularImgExterior");
     this.$particularCapaTextoImg = document.querySelector("#particularTextoImg");
+
     this.barras = document.getElementsByClassName("barraNivelContainer");
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
     const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=${Core.Instance.version}`;
+    const urlImgParticularExterior = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo2.jpg?v=${Core.Instance.version}`;
     const urlImgParticularCapaTexto = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/capatexto.png?v=${Core.Instance.version}`;
 
     // Asignar la URL de la imagen al atributo src del elemento de imagen
     this.$particularImg.src = urlImgParticular;
+    this.$particularImgExterior.src = urlImgParticularExterior;
     this.$particularCapaTextoImg.src = urlImgParticularCapaTexto;
 
     this.$headerParticularName.innerText = this.Estacion.Nombre;
@@ -220,17 +227,25 @@ class Particular {
           innerHTML: `${nivel.GetValorString(false, true)}`,
         });
 
+        const etiquetaUnidades = CreateElement({
+          nodeElement: "div",
+          attributes: {
+            class: "etiqueta__Nombre",
+          },
+          innerHTML: `[m]`,
+        });
+
         const etiquetaAltura = CreateElement({
           nodeElement: "div",
           attributes: {
             class: "etiqueta__Altura",
           },
-          innerHTML: ` [m], altura: ${nivel.Semaforo?.Altura || 'ND'} [m]`,
+          innerHTML: `altura: ${nivel.Semaforo?.Altura || 'ND'} [m]`,
         });
 
         this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
-        signalItem.append(etiquetaNombre, etiquetaValor, etiquetaAltura);
+        signalItem.append(etiquetaNombre, etiquetaValor, etiquetaUnidades, etiquetaAltura);
         barra.append(barraContainer, signalItem);
 
         barra.style.display = 'block';
@@ -275,6 +290,10 @@ class Particular {
 
     this.$headerStatus.innerHTML = estado.textoEnlace;
     this.$headerStatus.style.color = estado.color;
+  }
+
+  setParticularScene(exterior) {
+    this.$particularImgExterior.style.display = `${exterior ? 'block' : 'none'}`;
   }
 
   createNivelesImagen() {
