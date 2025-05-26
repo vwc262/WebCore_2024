@@ -17,6 +17,7 @@ body {
   -moz-user-drag: none !important;
   -o-user-drag: none !important;
   -webkit-user-drag: none !important;
+  overflow: hidden;
 }
 
 body {
@@ -24,29 +25,12 @@ body {
 }
 
 .header {
-  width: 1920px;
-  height: 58px;
-  display: flex;
-  flex-direction: row;
   position: absolute;
   z-index: 111;
-  background: linear-gradient(90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgb(35 41 46) 22%,
-      rgb(36 44 58) 68%,
-      rgb(72 92 139) 84%,
-      rgb(113 139 182) 100%,
-      rgb(132 162 217) 100%);
-  align-items: center;
-  justify-content: space-between;
 }
 
-.headerImagen {
-  display: flex;
-  width: 983px;
-  height: 57px;
-  position: absolute;
-  right: 0px;
+#header_image {
+  width: 100%;
 }
 
 nav {
@@ -56,6 +40,7 @@ nav {
   top: 66px;
   flex-direction: column;
   flex-wrap: nowrap;
+  z-index: 111;
 }
 
 nav img {
