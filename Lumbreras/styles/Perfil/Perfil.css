@@ -2,8 +2,8 @@
     position: absolute;
     width: 960px;
     height: 540px;
-    right: 0px;
-    bottom: 0px;
+    right: -50px;
+    bottom: -25px;
     transform: scale(0.5);
     transform-origin: bottom right;
 }
@@ -89,7 +89,7 @@
     left: 235px;
     pointer-events: none;
     font-size: 33px;
-    
+
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
