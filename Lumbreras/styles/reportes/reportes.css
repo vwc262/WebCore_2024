@@ -479,6 +479,7 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   margin-top: 58px;
+  background: #00001c;
 }
 
 /* Contenedor con scroll */
