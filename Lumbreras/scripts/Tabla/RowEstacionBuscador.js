@@ -79,7 +79,7 @@ class RowEstacionBuscador {
         this.signals_estacion_div = document.createElement('div');
         this.signals_estacion_div.classList = 'signals_estacionBuscador';
 
-        nombre_estacion_div.append(estado_estacion, nombre_estacion)
+        nombre_estacion_div.append(estado_estacion, nombre_estacion, alerta_estacion)
         data_row.append(id_estacion_div, nombre_estacion_div, valor_estacion, fecha_estacion, hora_estacion)
         row_est_div.append(data_row, this.signals_estacion_div);
 
