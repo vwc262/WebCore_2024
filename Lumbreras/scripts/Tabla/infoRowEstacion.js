@@ -109,7 +109,7 @@ class infoRowEstacion {
                 if(signal.TipoSignal == 1){
                     let valor_signal = this.HTMLUpdateElements[`signal_${signal.IdSignal}`];
                     valor_signal.innerHTML = `${signal.DentroRango? signal.Valor : "---"} m`;
-                    valor_signal.style.color = `${signal.GetColorSemaforo()}`;
+                    valor_signal.style.color = `${signal.GetColorSemaforo('floralwhite')}`;
                 }
             })
         }
