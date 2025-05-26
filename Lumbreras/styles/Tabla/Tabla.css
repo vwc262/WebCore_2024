@@ -51,6 +51,21 @@
   overflow-x: hidden;
   overflow-y: scroll;
   margin-left: 10px;
+
+  /* Estilizado para navegadores WebKit (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: url("https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/Lumbreras/Tabla/scrollTablaBase.png");
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: url("https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/Lumbreras/Tabla/scrollTabla.png");
+    border-radius: 4px;
+  }
 }
 
 .interceptor_row {
@@ -309,6 +324,18 @@
   justify-content: center;
 }
 
+.Columna_EstacionEnlace {
+  width: 20%;
+}
+
+.Columna_EstacionNombre {
+  width: 100%;
+}
+
+.Columna_EstacionAlerta {
+  width: 20%;
+}
+
 .estacionNombre {
   background: linear-gradient(0deg, rgba(47, 62, 166, 1) 0%, rgba(81, 87, 183, 1) 100%);
   justify-content: flex-start !important;
@@ -316,6 +343,10 @@
 
 .estacion_ID {
   background: linear-gradient(0deg, rgba(87, 102, 187, 1) 0%, rgba(128, 136, 217, 1) 100%);
+}
+
+.alertaEstacion {
+  display: flex;
 }
 
 .estacion_Nivel {
