@@ -3,12 +3,13 @@ import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import Signal from "../Entities/Signal.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import { CreateElement } from "../Utilities/CustomFunctions.js";
+import { Clamp, CreateElement } from "../Utilities/CustomFunctions.js";
 import {
   EnumModule,
   EnumTipoSignal,
   EnumEnlace,
   EnumProyecto,
+  EnumSemaforo,
 } from "../Utilities/Enums.js";
 import { GoHome, Module, SetActualModule } from "../uiManager.js";
 
@@ -96,15 +97,9 @@ class Particular {
           else $imgNivelAgua.classList.remove('turbulence')
         }
 
-        let $imgBombaParticular =
-          this.HTMLUpdateElements[`particular_bomba_${signal.IdSignal}`];
-
-        if ($imgBombaParticular) {
-          $imgBombaParticular.setAttribute(
-            "src",
-            estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular")
-          );
-        }
+        let barraNivel = this.HTMLUpdateElements[`barraNivel_${signal.IdSignal}`];
+        if (barraNivel)
+          this.setBaraNivel(barraNivel, signal);
       });
 
       this.MostrarFallaAc(estacionUpdate.IsFallaAc());
@@ -148,6 +143,9 @@ class Particular {
 
     // Crear señales
     this.createSignals();
+
+    // crear imagenes niveles
+    this.createNiveles();
 
     this.Update();
   }
@@ -247,7 +245,7 @@ class Particular {
 
     let max_height = 310;
     let altura = signal.Semaforo?.Altura || 1.0;
-    let amount = (signal.Valor / altura) * max_height;
+    let amount = Clamp((signal.Valor / altura) * max_height, 0, max_height);
     let color = signal.GetColorSemaforo();
 
     barraNivel.style.height = `${amount + 20}px`;
@@ -265,28 +263,7 @@ class Particular {
   createNiveles() {
     let estacionUpdate = Core.Instance.GetDatosEstacion(this.Estacion.IdEstacion);
     const $nivelContainer = document.getElementById("particular__aguaNivel");
-    const $bombasContainer = document.getElementById(
-      "particular__bombasEstado"
-    );
-
     $nivelContainer.innerHTML = "";
-    $bombasContainer.innerHTML = "";
-
-    this.Estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(
-      (bomba) => {
-        const $imgBombaParticular = CreateElement({
-          nodeElement: "img",
-          attributes: {
-            id: `particular_bomba_${bomba.IdSignal}`,
-            class: "bomba__Particular ",
-            src: estacionUpdate.ObtenerRenderNivelOBomba(bomba, "Particular"),
-          },
-        });
-        this.HTMLUpdateElements[$imgBombaParticular.id] = $imgBombaParticular;
-        this.ponerBombaPurple(bomba, $imgBombaParticular);
-        $bombasContainer.append($imgBombaParticular);
-      }
-    );
 
     estacionUpdate.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(
       (nivel) => {
@@ -298,6 +275,7 @@ class Particular {
             src: estacionUpdate.ObtenerRenderNivelOBomba(nivel, "Particular"),
           },
         });
+
         this.HTMLUpdateElements[$nivelAgua.id] = $nivelAgua;
         $nivelContainer.append($nivelAgua);
       }
