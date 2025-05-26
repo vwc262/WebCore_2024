@@ -64,10 +64,16 @@ class Tabla {
 
   search(event) {
     const texto = event.target.value.toLowerCase();
+    let table = document.getElementById("tableContainer");
+    let tableBuscador = document.getElementById("tableContainerBuscador");
+
+    table.style.display = `${texto == "" ? 'flex' : 'none'}`;
+    tableBuscador.style.display = `${texto != "" ? 'flex' : 'none'}`;
+
     this.rows.forEach(row => {
-      const textoEstacion = row.estacion.Nombre; 
+      const textoEstacion = row.estacion.Nombre;
       const coincide = textoEstacion.toLowerCase().includes(texto);
-        row.root.style.display = coincide ? "flex" : "none";
+      row.root.style.display = coincide ? "flex" : "none";
     });
   }
 
