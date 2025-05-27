@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="title__page">VWC</title>
+  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
+  <link rel="stylesheet" href="../styles/Tabla/TablaBuscador.css">
+  <link rel="stylesheet" href="../styles/Particular/Particular.css">
+  <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
+  <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
+  <link rel="stylesheet" href="../styles/News/News.css">
+  <!-- reportes -->
+  <link rel="stylesheet" href="../styles/reportes/reportes.css">
+  <link rel="stylesheet" href="../scripts/vanilla-calendar/build/vanilla-calendar.min.css">
+  <!-- CustomStyles -->
+  <script src="../scripts/Core.js" type="module"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header__title">
+      <h1 id="title"></h1>
+    </div>
+    <div class="headerImagen">
+      <img id="header_image">
+    </div>
+  </div>
+
+  <nav class="header__buttons">
+    <div class="headerBtn__Home header__active">
+      <img id="imgHome" alt="">
+    </div>
+    <div class="headerBtn__Mapa">
+      <img id="imgMapa" alt="">
+    </div>
+    <div class="headerBtn__Graficador">
+      <img id="imgGraficador" alt="">
+    </div>
+    <div class="headerBtn__Exterior">
+      <img id="imgExterior" alt="">
+    </div>
+    <div class="headerBtn__Subterraneo">
+      <img id="imgSubterraneo" alt="">
+    </div>
+  </nav>
+
+  <main>
+    <container class="Content_on_load">
+      <svg class="optimizedsvg" width="1920" height="1080" viewbox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+        <filter id="otherFilter3">
+          <feColorMatrix type="matrix" values="0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 1">
+          </feColorMatrix>
+        </filter>
+        <filter id="turbulence">
+          <feTurbulence id="sea-filter" result="turbulence" baseFrequency="0.025" numOctaves="4" seed="15">
+          </feTurbulence>
+          <feColorMatrix type="matrix" in="SourceGraphic" result="o_mascara" values="0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 0
+                    0 0 0 1 0">
+          </feColorMatrix>
+          <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10">
+          </feDisplacementMap>
+          <feBlend in="SourceGraphic" in2="sea-filter" result="o_movida" mode="lighten" />
+          <feComposite operator="in" in2="o_mascara" in="o_movida" />
+          <animate xlink:href="#sea-filter" attributeName="baseFrequency" dur="14s" repeatCount="indefinite"
+            values="0.02 0.01; 0.01 0.02" keyTimes="0; 1"></animate>
+        </filter>
+      </svg>
+
+      <section id="section__home" class="section__home" style="display: block;">
+        <div class="contenedor_dial">
+          <img class="dial_sombra">
+          <div class="dial_secuencias_interceptores"></div>
+          <div class="dial_secuencias_btn_izquiero"></div>
+          <div class="dial_secuencias_btn_derecho"></div>
+          <img class="dial_interceptores">
+          <div class="contenedor_destello"></div>
+          <div class="nombre_interceptores"></div>
+          <div class="contenedor_botones"></div>
+          <div class="dial_button dial_button_left"></div>
+          <div class="dial_button dial_button_right"></div>
+        </div>
+      </section>
+
+      <!-- ========================= Tabla ========================= -->
+      <aside class="aside__tabla" style="display: block;">
+        <div class="buscadorTabla">
+          <label class="buscadorTxT">
+            <input class="buscadorTxT" type="search" id="query" placeholder="Buscar lumbrera" />
+          </label>
+        </div>
+
+        <div id="tableContainer" class="table-container"></div>
+        <div id="tableContainerBuscador" class="table-buscador-container"></div>
+      </aside>
+
+      <!-- ========================= Mapa ========================= -->
+      <section id="section__mapa" class="section__mapa" style="display: none;">
+        <div id="map" style="width: 1920px; height: 1080px;"></div>
+      </section>
+
+      <section id="section__graficador" class="section__graficador" style="display: none;">
+
+        <div class="main_graficador">
+          <div class="menu_chart" id="menu_chart">
+            <div class="chartdivContainer fondo_panel">
+              <div id="chartdiv"></div>
+
+              <div class="popUp" id="popUpContainer">
+                <h3>¡Descarga completada!</h3>
+                <p>El archivo se ha descargado correctamente.</p>
+                <button class="popUp-button" id="popUpAceptar">Aceptar</button>
+              </div>
+
+            </div>
+            <div id="noDatadiv" class="fondo_panel"><label>Sin históricos...</label></div>
+            <div class="menu_csv">
+              <div class="botones_descarga_graficador" id="containerCSV">
+                <input id="descargarCSV" type="button">
+                <label class="textButtonDescarga">Descargar CSV</label>
+              </div>
+
+              <div class="botones_descarga_graficador" id="containerPDF">
+                <input id="descargarPDF" type="button">
+                <label class="textButtonDescarga">Descargar PDF</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="pantalla_inicial" class="pantalla_inicial">
+            <div class="lista_sitios_container">
+              <div class="menu menu_estacion fondo_panel">
+
+                <div id="headerParametros" class="Parametros">
+                  Parámetros:
+                </div>
+
+                <div class="contenedor_signals fondo_panel">
+                  <div class="rowEstacionSignal signal_1">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #1f77b4;" type="text" class="nameSignalCont" id="nameSignal_1"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_2">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #ff7f0e;" type="text" class="nameSignalCont" id="nameSignal_2"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_3">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #2ca02c;" type="text" class="nameSignalCont" id="nameSignal_3"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_4">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #d62728;" type="text" class="nameSignalCont" id="nameSignal_4"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_5">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #9467bd;" type="text" class="nameSignalCont" id="nameSignal_5"
+                      readonly disabled="disabled">
+                  </div>
+
+                  <div class="rowEstacionSignal signal_6">
+                    <button class="mostarSignal">+</button>
+                    <input style="background-color: #8c564b;" type="text" class="nameSignalCont" id="nameSignal_6"
+                      readonly disabled="disabled">
+                  </div>
+                </div>
+
+                <div id="headerSignalsParametros" class="ParametrosSignals">
+                  <input name="cerrar" id="btnCerrarSignals">
+                  <p>Selecciona un Parámetro:</p>
+                </div>
+
+                <div class="contenedor_lista_sitios fondo_panel">
+                  <div id="lista_sitios" class="lista_sitios"></div>
+                </div>
+
+                <div id="headerParametros" class="Parametros">
+                  Rango de tiempo:
+                </div>
+                <div class="contenedor_Date fondo_panel">
+                  <div class="contenedor_DateTime">
+
+                    <div class="Date_Date">
+                      <div>
+                        <p>Fecha inicial:</p>
+                        <input id="dateLeft" readonly />
+                      </div>
+                      <div id="dateDRigth">
+                        <p>Fecha final:</p>
+                        <input id="dateRigth" readonly />
+                      </div>
+                    </div>
+
+                    <div class="Date_Time">
+                      <div class="FristTime">
+                        Inicio:
+                        <select class="slide" id="FirstHours">
+                        </select>h
+                        <select class="slide" id="FirstMinuts">
+                        </select>m
+                      </div>
+                      <div class="SecondTime">
+                        Fin:
+                        <select class="slide" id="SecondHours">
+                        </select>h
+                        <select class="slide" id="SecondMinuts">
+                        </select>m
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="forHora fondo_panel">
+                    Validar por Hora <input name="Validar_por_Hora" id="porHora">
+                  </div>
+                </div>
+
+
+                <!-- ============== Calendario ================ -->
+                <div class="contenedor_fecha_estacion" id="calendarioDate">
+                  <div class="menu menu_fechas">
+                    <div class="fechas">
+                      <div id="calendar"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="botones_del_graficador" id="menu_graficador">
+                  <div class="botones_acciones_graficador fondo_panel" style="display: none;">
+                    <input id="borrar" type="button">
+                    <label>BORRAR</label>
+                  </div>
+                  <div class="botones_acciones_graficador">
+                    <input id="regresar" type="button">
+                    <label class="textButton">Regresar</label>
+                  </div>
+                  <div class="botones_acciones_graficador">
+                    <input id="graficar" type="button">
+                    <label class="textButton">Graficar</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <section id="section__particular" class="section__particular" style="display: none;">
+        <div class="particular__header">
+          <div id="nombre__particular">Lumbrera</div>
+          <div id="interceptor__particular">Interceptor</div>
+          <div class="info__header_part">
+            <div id="state_particular">Fuera de línea</div>
+            <div id="date__particular">00/00/0000</div>
+          </div>
+          <img class="fallaAcParticular">
+        </div>
+        <div class="particular__imgSitio">
+          <img src="" id="particularImg">
+          <img src="" id="particularTextoImg">
+        </div>
+
+        <div class="barraNivelContainer barra_particular1"></div>
+        <div class="barraNivelContainer barra_particular2"></div>
+        <div class="barraNivelContainer barra_particular3"></div>
+        <div class="barraNivelContainer barra_particular4"></div>
+
+        <div id="particular__aguaNivel"></div>
+        <img src="" id="particularImgExterior" style="display: none;">
+      </section>
+
+      <div class="news"></div>
+
+    </container>
+  </main>
+</body>
+
+<script type="module" src="../scripts/uiManager.js"></script>
+<!-- reportes -->
+<!-- amcharts 5 -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Responsive.js"></script>
+<!-- pdf make -->
+<script type="module" src="../scripts/external/pdfmake.js"></script>
+<!-- vanilla canlendar -->
+<script src="../scripts/vanilla-calendar/build/vanilla-calendar.min.js"></script>
+
+<!-- google maps -->
+<script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+    ({ key: "AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98", v: "beta" });</script>
+
+<!-- panzoom -->
+
+</html>

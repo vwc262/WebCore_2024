@@ -76,6 +76,7 @@ const getNombreProyectoIdProyecto = (idProyecto) => {
     case EnumProyecto.Chiconautla: return "Chiconautla";
     case EnumProyecto.LermaAnexo: return "LermaAnexo";
     case EnumProyecto.SistemaCutzamala: return "SistemaCutzamala";
+    case EnumProyecto.ClimatologicasHidrometricas: return "ClimatologicasHidrometricas";
   }
 
 }
