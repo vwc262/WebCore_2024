@@ -29,6 +29,14 @@
   justify-content: center;
 }
 
+.valores_container {
+  width: 180px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
 .etiqueta__Nombre {
   color: cyan;
   text-align: end;
@@ -84,7 +92,7 @@
   top: 170px;
   right: 15px;
   justify-content: flex-end;
-  width: 120px;
+  width: 180px;
   margin-right: 15px;
 }
 
