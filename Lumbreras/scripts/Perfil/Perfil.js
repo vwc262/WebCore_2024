@@ -1,6 +1,8 @@
 import { Core } from "../Core.js";
 import { Configuracion } from "../../config/config.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
+import Perfil3D from "./Perfil3D.js";
+
 
 class Perfil {
 
@@ -279,6 +281,8 @@ class Perfil {
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
 
         this.InitializeDial();
+
+        new Perfil3D().create();
     }
 
 }
