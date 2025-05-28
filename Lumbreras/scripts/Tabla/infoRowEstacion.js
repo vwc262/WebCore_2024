@@ -57,21 +57,25 @@ class infoRowEstacion {
 
                 let signal_valor = document.createElement('div');
                 signal_valor.id = `signal_${signal.IdSignal}`;
-                signal_valor.classList = 'signal_valor';
+                signal_valor.classList = 'signal_valor textoValor';
                 signal_valor.innerHTML = `${signal.Valor} m`;
                 this.alojarElementoDinamico([signal_valor]);
 
+                let semaforo_altura = document.createElement('div');
+                semaforo_altura.classList = 'semaforoCont';
+                semaforo_altura.innerHTML = `${signal.Semaforo?.Altura ? 'Altura<br>' + signal.Semaforo.Altura + 'm': 'ND'}`;
+
                 let semaforo_prev = document.createElement('div');
                 semaforo_prev.classList = 'semaforoCont';
-                semaforo_prev.innerHTML = `${signal.Semaforo?.Preventivo ? '<span style="color: yellow;">Prev. </span> ' + signal.Semaforo.Preventivo + ' m' : 'ND'}`;
+                semaforo_prev.innerHTML = `${signal.Semaforo?.Preventivo ? '<span style="color: yellow;">Prev.<br> </span>' + signal.Semaforo.Preventivo + ' m' : 'ND'}`;
 
                 let semaforo_critc = document.createElement('div');
                 semaforo_critc.classList = 'semaforoCont';
-                semaforo_critc.innerHTML = `${signal.Semaforo?.Critico ? '<span style="color: red;">Crit. </span> ' + signal.Semaforo.Critico + ' m' : 'ND'}`;
+                semaforo_critc.innerHTML = `${signal.Semaforo?.Critico ? '<span style="color: red;">Crit.<br> </span>' + signal.Semaforo.Critico + ' m' : 'ND'}`;
 
-                semaforos_div.append(semaforo_prev, semaforo_critc);
-                nivel_div.append(signal_valor, semaforos_div)
-                signal_div.append(signal_nombre, nivel_div);
+                semaforos_div.append(semaforo_altura, semaforo_prev, semaforo_critc);
+                nivel_div.append(signal_nombre, semaforos_div)
+                signal_div.append(nivel_div, signal_valor);
                 signals_div.append(signal_div);
 
             }
