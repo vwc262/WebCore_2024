@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climatológicas e Hidrométricas</title>
+
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./styles/media_querys.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Climatológicas e Hidrométricas</h1>
+  </header>
+
+  <main>
+    <div class="lista_contenedor">
+      <div class="lista">
+        <div class="lista_header">
+          <p>ID</p>
+          <p>NOMBRE</p>
+          <p>CONEXIÓN</p>
+        </div>
+        <div class="lista_contenido_principal">
+          <div class="lista_elemento">
+            <div class="lista_elemento_datos_principales">
+              <div class="lista_elemento_button"></div>
+              <div class="lista_elemento_nombre_contenedor">
+                <p id="lista_elemento_nombre">nombre del sitios</p>
+                <p id="lista_elemento_fecha">00/00/0000, 00:00 hrs</p>
+              </div>
+              <div class="lista_elemento_enlaces">
+              </div>
+            </div>
+            <div class="lista_elemento_datos_secundarios">
+              <div class="lista_elemento_variables_climato">
+                <div class="lista_elemento_vista_previa"></div>
+                <div class="lista_elemento_variables">
+                  <div class="variable">
+                    <div class="variable_icono"></div>
+                    <div class="variable_nombre_barra">
+                      <p id="nombre_variable">nombre vari</p>
+                      <p id="unidad_variable">[uni]</p>
+                    </div>
+                    <div class="variable_valor">00.00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="lista_elemento_variables_climato_2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lista_footer">
+          <div class="lista_footer_contador">
+            <p id="lista_total_online">Total sitios en linea: 10</p>
+          </div>
+          <div class="lista_footer_contador">
+            <p id="lista_total_offline">Total sitios fuera de línea: 10</p>
+          </div>
+        </div>
+      </div>
+      <button id="lista_button" class="lista_button">
+        < </button>
+    </div>
+  </main>
+
+  <script type="module" src="./scripts/main.js"></script>
+
+</body>
+
+</html>
