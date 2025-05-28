@@ -1,5 +1,4 @@
-import { Estacion } from "../../Entities/Estacion";
-
+import { Estacion } from "../../Entities/Estacion.js";
 class GlobalData {
     static #_instance = undefined;
     /**
@@ -12,14 +11,28 @@ class GlobalData {
         return this.#_instance;
     }
 
-    Estaciones = new Map();
-
+    #Estaciones = new Map();
+    /**
+     * 
+     * @param {Estacion} estacion 
+     */
+    agregarEstacion = (estacion) => {
+        this.#Estaciones.set(estacion.IdEstacion, estacion);
+    }
     /**
      * 
      * @returns {Estacion[]}
      */
     getEstaciones = () => {
-        return Array.from(this.Estaciones.values())
+        return Array.from(this.#Estaciones.values())
+    }
+    /**
+     * 
+     * @param {number} idEstacion 
+     * @returns {Estacion}
+     */
+    getEstacion = (idEstacion) => {
+        return this.#Estaciones.get(idEstacion);
     }
 }
 

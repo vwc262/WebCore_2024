@@ -12,5 +12,7 @@ async function RequestInfraestructura() {
   let estacionesCrudas = JSON.parse(result);
   estacionesCrudas.forEach(element => {
     new Estacion(element);
-  });  
+  });
+  //console.log(GlobalData.Instance.getEstacion(1).getSignals(2));
+  //console.log(GlobalData.Instance.getEstacion(1).getSignal(2));
 }

@@ -1,5 +1,5 @@
 import { GlobalData } from "../scripts/Global/GlobalData.js";
-
+import { Signal } from "./Signal.js";
 class Estacion {
     constructor(estacionCruda) {
         this.IdEstacion = estacionCruda.idEstacion;
@@ -11,7 +11,42 @@ class Estacion {
         this.Tiempo = estacionCruda.tiempo;
         this.TipoEstacion = estacionCruda.tipoEstacion;
         this.TipoPoleo = estacionCruda.tipoPoleo
-        GlobalData.Instance.Estaciones.set(this.IdEstacion, this);        
+        this.Signals = new Map()
+        this.SignalIndividual = new Map()
+        this.#agregarSignals(estacionCruda.signals);
+        GlobalData.Instance.agregarEstacion(this);
+    }
+
+    /**
+     * 
+     * @param {[]} signals 
+     */
+    #agregarSignals = (signals) => {
+        signals.forEach(s => {
+            this.SignalIndividual.set(s.idSignal, s);
+            if (!this.Signals.has(s.tipoSignal)) {
+                this.Signals.set(s.tipoSignal, []);
+            }
+            this.Signals.get(s.tipoSignal).push(s);
+        })
+    }
+
+    /**
+     * 
+     * @param {E_TipoSignal} tipoSignal 
+     * @returns {Signal[]}
+     */
+    getSignals = (tipoSignal) => {
+        return this.Signals.get(tipoSignal)
+    }
+
+    /**
+     * 
+     * @param {number} idSignal 
+     * @returns {Signal}
+     */
+    getSignal = (idSignal) => {
+        return this.SignalIndividual.get(idSignal)
     }
 
 }
