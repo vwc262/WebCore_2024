@@ -163,6 +163,7 @@
   position: absolute;
   bottom: 100px;
   right: 25px;
+  z-index: 1;
 }
 
 .barraNivel {

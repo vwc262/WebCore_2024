@@ -151,7 +151,7 @@ class Particular {
 
     // Crear señales
     this.createNivelesTexto();
-
+    
     // crear imagenes niveles
     this.createNivelesImagen();
 
