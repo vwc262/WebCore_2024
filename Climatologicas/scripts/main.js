@@ -4,10 +4,16 @@ import { GlobalData } from "./Global/GlobalData.js";
 import { initLista } from "./lista.js";
 import { crearElementoDesdeEstacion } from "./lista_creador.js";
 
+
+const updateInterval = 10000;
 window.onload = () => {
   console.log("page is fully loaded");
   initLista();
   RequestInfraestructura();
+  Update();
+  setInterval(() => {
+    Update();
+  }, updateInterval);
 };
 
 async function RequestInfraestructura() {
@@ -33,4 +39,8 @@ async function RequestInfraestructura() {
     const item = crearElementoDesdeEstacion(estacion);
     contenedor.appendChild(item);
   });
+}
+
+async function Update() {
+  GlobalData.Instance.updateData(await Fetcher.Instance.RequestData('app2024/GetUpdateLite', 'GET', {}, false));
 }

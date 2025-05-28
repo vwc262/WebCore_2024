@@ -9,7 +9,9 @@ class Signal {
     nombre;
     ordinal;
     tipoSignal;
-    valor
+    valor;
 }
+
+
 
 export { Signal }
