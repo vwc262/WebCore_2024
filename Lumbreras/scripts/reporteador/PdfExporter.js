@@ -1,5 +1,4 @@
-import { EnumProyecto } from "../Utilities/Enums.js";
-import { AppGraficador } from "./AppGraficador.js";
+import { Segiagua } from "../../assets/imagenes/logos/Segiagua.js";
 import { Reporteador } from "./Reporteador.js";
 
 class PDFExporter {
@@ -16,14 +15,14 @@ class PDFExporter {
     // Configuración de estilos
     STYLES = {
         header: {
-            margin: [40, -15, 40, 10], // [left, top, right, bottom]
+            margin: [40, -20, 40, 10], // [left, top, right, bottom]
             width: 3334 * this.scale_header,
             height: 215 * this.scale_header
         },
         title: {
             fontSize: 15,
             bold: true,
-            margin: [40, 10, 40, 0],
+            margin: [40, 5, 40, 0],
             alignment: "center",
             color: "#2c3e50",
             font: "Roboto"
@@ -110,7 +109,7 @@ class PDFExporter {
         // Se concatena el intervalo de la fecha del reporte
         nombreArchivo += `de ${this.getFechaTitulo(Reporteador.Instance.fechaInicial)} a ${this.getFechaTitulo(Reporteador.Instance.fechaFinal)}`;
         nombreArchivo = `${nombreArchivo.replace(/([A-Z])/g, " $1").trim().replaceAll('.', '').replaceAll(' ', '_')}.pdf`
-        
+
 
         let variables = ``;
         this.IdSegnales.forEach(element => {
@@ -183,14 +182,7 @@ class PDFExporter {
     }
 
     obtenerHeader() {
-        switch (AppGraficador.Instance.IdProyecto) {
-            case EnumProyecto.PozosPAI:
-                return OCAVAM_Cybercom.Logo;
-            case EnumProyecto.LineaMorada:
-                return AguaDePuebla_VWC.Logo;
-            default:
-                return AguaDePuebla.Logo;
-        }
+        return Segiagua.Logo;
     }
 
     async fileToDataURL(file) {
