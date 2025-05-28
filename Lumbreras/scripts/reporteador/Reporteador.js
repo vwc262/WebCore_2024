@@ -495,7 +495,7 @@ class Reporteador {
             var factorHeight = 1 - (heightCanvas / heightChart);
 
             // container.firstChild.style.transform = `scaleX(${(1 + factorWidth) * ((1 + 1 - AppGraficador.Instance.actualWidthFactor) * (AppGraficador.Instance.actualFactor > 0.55 ? 0.85 : 0.98))}) scaleY(${(1 + factorHeight) * ((1 + 1 - AppGraficador.Instance.actualHeightFactor) * (AppGraficador.Instance.actualFactor > 0.55 ? 0.85 : 0.98))})`;
-            container.firstChild.style.transform = `scaleX(0.5) scaleY(0.5)`;
+            container.firstChild.style.transform = `scaleX(0.8) scaleY(0.8)`;
         }
     }
 
