@@ -30,7 +30,7 @@ class RowEstacionBuscador {
         this.interceptor = interceptor;
 
         let row_est_div = document.createElement('div');
-        row_est_div.classList = 'estacion_rowBuscador';
+        row_est_div.classList = 'estacion_rowBuscador sub_titulo';
 
         let data_row = document.createElement('div');
         data_row.classList = 'data_rowBuscador';
