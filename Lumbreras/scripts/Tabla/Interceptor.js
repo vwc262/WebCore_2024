@@ -22,6 +22,7 @@ class Interceptor {
         this.nombre_interceptor = config.nombre;
         this.estaciones = config.ids;
         this.estacionesEnlaces = [];
+        this.selectInterceptor = false;
 
         this.interceptor_div = document.createElement('div');
         this.interceptor_div.classList = 'interceptor';
@@ -31,7 +32,11 @@ class Interceptor {
 
         let id_interceptor_div = document.createElement('div');
         id_interceptor_div.classList = 'id_interceptor titulo';
-        id_interceptor_div.innerHTML = `${key_interceptor}`;
+        // id_interceptor_div.innerHTML = `${key_interceptor}`;
+
+        this.flecha_interceptor = document.createElement('img')
+        this.flecha_interceptor.classList = 'intecpetorFlechaImg';
+        this.flecha_interceptor.src = `${Core.Instance.ResourcesPath}Tabla/flecha_icon.png?v=${Core.Instance.version}`;
 
         let nombre_interceptor_div = document.createElement('div');
         nombre_interceptor_div.classList = 'nombre_interceptor titulo';
@@ -91,6 +96,7 @@ class Interceptor {
 
         /* ============== apendizar divs =================== */
 
+        id_interceptor_div.append(this.flecha_interceptor)
         row_div.append(id_interceptor_div, nombre_interceptor_div, resumen_interceptor_div);
         this.interceptor_div.append(row_div, this.estaciones_interceptor_div);
 
@@ -128,10 +134,14 @@ class Interceptor {
     }
 
     onclick() {
+        this.selectInterceptor = !this.selectInterceptor;
+        this.flecha_interceptor.style.transform = `rotate(${this.selectInterceptor ? 180 : 0}deg)`;
         this.estaciones_interceptor_div.style.display = this.estaciones_interceptor_div.style.display === "none" || this.estaciones_interceptor_div.style.display === "" ? "flex" : "none";
     }
 
     cerrarInterceptor(){
+        this.selectInterceptor = false;
+        this.flecha_interceptor.style.transform = `rotate(0deg)`;
         this.estaciones_interceptor_div.style.display = "none";
     }
 
@@ -162,12 +172,6 @@ class Interceptor {
             "Cerrar",
             new EventoCustomizado(() => this.cerrarInterceptor())
         );
-        // EventsManager.Instance.Suscribirevento(
-        //     "Onevento",
-        //     new EventoCustomizado((data) => {
-
-        //     })
-        // );
     }
 }
 

@@ -78,7 +78,7 @@ class VwcApp {
     }
 
     new Tabla().create(); // Inicio de tabla
-    const perfil = new Perfil().create(); // Inicio del perfil
+    new Perfil().create(); // Inicio del perfil
     new Mapa().create();
     new News().Init();
 

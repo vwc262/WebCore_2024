@@ -183,7 +183,7 @@ class AppGraficador {
 
         let interval = setInterval(() => {
 
-            if (this.estaciones.length > 0) {
+            if (this.estaciones != undefined && this.estaciones.length > 0) {
                 clearInterval(interval);
 
                 // this.GetReferences();

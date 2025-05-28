@@ -91,7 +91,7 @@ class Particular {
 
         let $imgNivelAgua = this.HTMLUpdateElements[`particular_nivel_${signal.IdSignal}`];
         if ($imgNivelAgua) {
-          $imgNivelAgua.setAttribute("src", estacionUpdate.ObtenerRenderNivelOBomba(signal, "Particular"));
+          $imgNivelAgua.setAttribute("src", estacionUpdate.ObtenerRenderNivelOBomba(signal, ""));
 
           if (signal.DentroRango == 1) $imgNivelAgua.classList.add('turbulence');
           else $imgNivelAgua.classList.remove('turbulence')
@@ -137,9 +137,9 @@ class Particular {
 
     // Construir la URL de la imagen particular
     const sitioAbrev = this.Estacion.Abreviacion;
-    const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo.jpg?v=${Core.Instance.version}`;
-    const urlImgParticularExterior = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/fondo2.jpg?v=${Core.Instance.version}`;
-    const urlImgParticularCapaTexto = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/Particular/capatexto.png?v=${Core.Instance.version}`;
+    const urlImgParticular = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/fondo.jpg?v=${Core.Instance.version}`;
+    const urlImgParticularExterior = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/fondo2.jpg?v=${Core.Instance.version}`;
+    const urlImgParticularCapaTexto = `${Core.Instance.ResourcesPath}/Sitios/${sitioAbrev}/capatexto.png?v=${Core.Instance.version}`;
 
     // Asignar la URL de la imagen al atributo src del elemento de imagen
     this.$particularImg.src = urlImgParticular;
