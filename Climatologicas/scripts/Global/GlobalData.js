@@ -34,6 +34,12 @@ class GlobalData {
     getEstacion = (idEstacion) => {
         return this.#Estaciones.get(idEstacion);
     }
+    updateData = (updateDataCrudo) => {
+        for (const [idEstacion, estacion] of Object.entries(updateDataCrudo.E)) {
+            this.getEstacion(parseInt(idEstacion)).updateData(estacion);
+        }
+
+    }
 }
 
 export { GlobalData }

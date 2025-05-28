@@ -48,6 +48,17 @@ class Estacion {
     getSignal = (idSignal) => {
         return this.SignalIndividual.get(idSignal)
     }
+    updateData = (updateCrudo) => {
+        this.Enlace = updateCrudo.E;
+        this.Tiempo = updateCrudo.T;
+        this.FallaEnergia = updateCrudo.F;
+        for (const [idSignal, valorsignal] of Object.entries(updateCrudo.S)) {
+            let signal = this.getSignal(parseInt(idSignal));
+            signal.valor = valorsignal;
+            signal.dentroRango = signal.valor != -0.9;
+        }
+        // console.log(this.getSignals(1))
+    }
 
 }
 
