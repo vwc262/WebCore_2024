@@ -72,6 +72,10 @@
 .lista_elemento_button {
   background-color: blueviolet;
   width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 .lista_elemento_nombre_contenedor {
   background-color: rgb(189, 134, 241);

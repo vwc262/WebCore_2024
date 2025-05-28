@@ -1,6 +1,8 @@
+import { GlobalData } from "./Global/GlobalData.js";
+
 export function initLista() {
   animar_lista();
-  manejarClickElemento();
+  // manejarClickElemento();
 }
 
 function manejarClickElemento() {
@@ -23,6 +25,7 @@ function manejarClickElemento() {
       clickTimer = setTimeout(() => {
         detalle.classList.toggle("activo");
         console.log("Click simple en:", target);
+        console.log(GlobalData.Instance.getEstaciones());
         clickTimer = null;
       }, 250);
     });
