@@ -145,7 +145,7 @@ class PerfilPozos {
             }
         })
 
-        this.Panner.append(capaTubos,backgroundPerfil, capaSitios )
+        this.Panner.append(capaTubos, backgroundPerfil, capaSitios)
         backgroundPerfil.append(tuberiasDiv, this.hoverDiv);
         perfil.append(this.Panner);
 
@@ -154,7 +154,7 @@ class PerfilPozos {
 
     }
 
-    establecerPanzoom(elementoPanner) {        
+    establecerPanzoom(elementoPanner) {
         this.PanzoomRef = Panzoom(elementoPanner, this.PanZoomConfig);
         elementoPanner.addEventListener('wheel', this.PanzoomRef.zoomWithWheel);
         elementoPanner.addEventListener('panzoomzoom', this.checarLimitesPanzoom);
@@ -192,6 +192,9 @@ class PerfilPozos {
             newY = e.detail.y;
         }
     }
+
+    
+    
 }
 
 export { PerfilPozos };
