@@ -1,0 +1,250 @@
+.lista_contenedor {
+  background-color: #b2c8d3;
+  width: 700px;
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.3s ease;
+}
+
+.oculta {
+  transform: translateX(-94%);
+}
+
+.lista_button {
+  width: 50px;
+  height: 100px;
+}
+
+.lista {
+  background-color: antiquewhite;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lista_header {
+  background-color: violet;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.lista_header p {
+  color: white;
+}
+
+.lista_contenido_principal {
+  background-color: rgb(61, 18, 61);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.lista_footer {
+  background-color: rgb(129, 115, 129);
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lista_footer_contador {
+  color: white;
+  padding: 0 1rem;
+}
+
+.lista_elemento {
+  background-color: #81c4e8;
+}
+
+.lista_elemento_datos_principales {
+  background-color: #b2c8d3;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.lista_elemento_button {
+  background-color: blueviolet;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.lista_elemento_nombre_contenedor {
+  background-color: rgb(189, 134, 241);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px;
+  color: white;
+}
+.lista_elemento_enlaces {
+  background-color: rgb(80, 31, 126);
+  width: 150px;
+}
+.lista_elemento_datos_secundarios {
+  background-color: aqua;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 2rem;
+  gap: 15px;
+}
+
+.lista_elemento_datos_secundarios.activo {
+  max-height: 500px; /* igual o mayor al contenido real */
+  padding: 1rem 2rem; /* se activa cuando se expande */
+}
+
+.lista_elemento_variables_climato {
+  background-color: #81e897;
+  width: 100%;
+  height: 325px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.lista_elemento_vista_previa,
+.lista_elemento_variables {
+  background-color: #81c4e8;
+  height: 100%;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lista_elemento_variables_climato_2 {
+  background-color: #81e897;
+  width: 100%;
+  height: 150px;
+}
+
+.variable {
+  background-color: #a081e8;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.variable_icono {
+  background-color: aliceblue;
+  height: 100%;
+  width: 40px;
+}
+
+.variable_nombre_barra {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.variable_valor {
+  height: 100%;
+  width: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.lista_elemento_variables_climato_2 {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.variables_climato_2 {
+  background-color: #81c4e8;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.variables_climato_volts {
+  background-color: #81c4e8;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.variable_climato {
+  background-color: violet;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  gap: 5px;
+}
+
+.variable_climato_icono {
+  background-color: #a081e8;
+  width: 60px;
+}
+
+.variable_climato_nombre {
+  background-color: #a081e8;
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.variable_climato_barra {
+  background-color: #a081e8;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.variable_climato_valor {
+  background-color: #a081e8;
+  width: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.variable_volt {
+  background-color: bisque;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.volt_valor {
+  background-color: #a081e8;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volt_icon {
+  background-color: #a081e8;
+  height: 100%;
+  width: 50px;
+}

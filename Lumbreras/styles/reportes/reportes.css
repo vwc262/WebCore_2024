@@ -31,7 +31,7 @@ input[type="button"] {
 }
 
 #graficar {
-  width: 295px;
+  width: 307px;
   height: 74px;
   cursor: pointer;
   border: none;
@@ -144,7 +144,7 @@ input[type="button"] {
 .lista_sitios_container {
   display: flex;
   flex-direction: column;
-  width: 91%;
+  width: 85%;
   height: 99%;
   justify-content: flex-start;
   align-items: stretch;
@@ -264,6 +264,7 @@ input[type="button"] {
   border-radius: 10px 0px 0px 10px;
   border: none;
   text-shadow: 2px 2px #717171a8;
+  cursor: pointer;
 }
 
 
@@ -412,6 +413,7 @@ input[type="button"] {
   height: 67px;
   transform: scale(.4);
   border: none;
+  cursor: pointer;
 }
 
 #btnCerrarSignals {
@@ -751,9 +753,9 @@ input[type="button"] {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
-  width: 36%;
+  width: 39%;
   height: 91%;
 }
 
@@ -786,12 +788,10 @@ input[type="button"] {
 
 .nombre_est {
   color: #f5f3e6;
-  font-size: 1.4em;
-  font-family: 'Roboto';
-  font-weight: 600;
-  font-weight: lighter;
   width: 80%;
-  height: 38px;
+  font-size: 17px;
+  font-family: 'Roboto';
+  font-weight: lighter;
   align-content: center;
 }
 
@@ -832,8 +832,7 @@ input[type=text] {
   background-color: rgba(255, 255, 255, 0);
   border: 0;
   width: 85%;
-  height: 28px;
-  font-size: larger;
+  font-size: 20px;
   padding-left: 7px;
 }
 
@@ -1024,10 +1023,8 @@ input[type=text] {
 .botones_acciones_graficador {
   display: flex;
   flex-direction: column;
-  width: 190px;
   flex-wrap: nowrap;
   margin-top: 0px;
-  height: 103px;
   align-items: center;
   justify-content: center;
   gap: 0px;
