@@ -70,11 +70,11 @@ class Perfil3D {
         camera.attachControl(this.canvas, true); // Habilitar controles
 
         // 4. Configurar límites y comportamientos
-        camera.upperBetaLimit = this.deg2rad(55); // Límite superior
-        camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
+        // camera.upperBetaLimit = this.deg2rad(55); // Límite superior
+        // camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
 
-        camera.upperAlphaLimit = this.deg2rad(-90); // Límite superior
-        camera.lowerAlphaLimit = this.deg2rad(-180); // Límite inferior
+        // camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
+        // camera.lowerAlphaLimit = this.deg2rad(-180); // Límite horizontal der
 
         camera.panningSensibility = 2500;
         camera.panningDistanceLimit = 10;
@@ -92,6 +92,23 @@ class Perfil3D {
         camera.angularSensibilityY = 2500;
 
         this.camera = camera;
+
+        // Crear skybox con una textura que sí existe
+        const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", { size: 1000 }, scene);
+        const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+        skyboxMaterial.backFaceCulling = false;
+        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
+            '../../assets/3D/textures/BlueSunset',
+            scene,
+            ["_px.png", "_py.png", "_pz.png", "_nx.png", "_ny.png", "_nz.png"]
+        );
+        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        skyboxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
+        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+        skyboxMaterial.disableLighting = true;
+        skyboxMaterial.reflectionTexture.gammaSpace = true;
+        skyboxMaterial.reflectionTexture.level = 1.5; // Valores > 1 aumentan el brillo
+        skybox.material = skyboxMaterial;
 
         // cdmx
         BABYLON.SceneLoader.ImportMesh(
@@ -115,20 +132,61 @@ class Perfil3D {
                     areaLight2.intensity = 4.0;
                 }
 
+                let crystalMaterial = null;
+
                 newMesh.forEach((mesh, i) => {
 
-                    if (mesh.name.includes('lane')) {
+                    if (mesh.name.includes('CrystalCDMX_primitive0')) {
 
-                        mesh.material.specularPower = 128;
-                        mesh.material.alpha = 1.0;
-                        mesh.material.metallic = 0.9;
-                        mesh.material.roughness = 0.2;
+                        mesh.material.metallic = 0;
+                        mesh.material.roughness = 0.02;
+                        // mesh.material.subSurface.isRefractionEnabled = true;
+                        // mesh.material.subSurface.indexOfRefraction = 0.89;
+
+                        // mesh.material.diffuseColor = new BABYLON.Color4(0.8, 0.9, 1, 0.3); // Color con transparencia
+                        // mesh.material.specularColor = new BABYLON.Color3(1, 1, 1); // Reflejos blancos puros
+
+                        // Parámetros clave para efecto cristal:
+                        // mesh.material.environmentTexture = skyboxMaterial.reflectionTexture.clone();
+                        // mesh.material.environmentIntensity = 1.0;
+                        // mesh.material.reflectionTexture = mesh.material.environmentTexture;
+                        // mesh.material.reflectionTexture.level = 0.8; // Reflejos más intensos (0.7-1)
+                        // mesh.material.refractionTexture = mesh.material.environmentTexture.clone(); // Para refracción
+                        // mesh.material.indexOfRefraction = 0.59; // Índice de refracción (0.85-1.1)
+                        // mesh.material.linkRefractionWithTransparency = true;
+                        // mesh.material.alpha = 0.7; // Transparencia (0-1)
+                        // mesh.material.microSurface = 1; // Máximo brillo
+                        // mesh.material.specularIntensity = 0.3; // Reflejos sutiles
+                        // mesh.material.useRadianceOverAlpha = false; // Evita efectos de sobreexposición
+                        // mesh.material.directIntensity = 0.8; // Reduce impacto de luces directas
+
+                        // Opcional: Efecto Fresnel para reflejos más realistas
+                        // mesh.material.reflectionFresnelParameters = new BABYLON.FresnelParameters();
+                        // mesh.material.reflectionFresnelParameters.bias = 0.1;
+                        // mesh.material.reflectionFresnelParameters.power = 1.2;
+
+                        if (crystalMaterial == null)
+                            crystalMaterial = mesh.material
                     }
-                    else if (mesh.name.includes('rystal')) {
-                        mesh.material.specularPower = 128;
-                        mesh.material.alpha = 0.76;
-                        mesh.material.metallic = 0.43;
-                        mesh.material.roughness = 0.2;
+                    // caras internas
+                    else if (mesh.name.includes('CrystalCDMX_primitive1')) {
+
+                    }
+                    else if (mesh.name.includes('Plane')) {
+
+                        mesh.material.metallic = 0;
+                        mesh.material.roughness = 0.02;
+                        // mesh.material.subSurface.isRefractionEnabled = true;
+                        // mesh.material.subSurface.indexOfRefraction = 0.69;
+
+                        // mesh.material.diffuseColor = new BABYLON.Color3(0.3, 0.3, 0.4); // Color base
+                        // mesh.material.specularColor = new BABYLON.Color3(0.2, 0.2, 0.3); // Reflejos especulares
+
+                        // // Parámetros clave para reflejos:
+                        // mesh.material.environmentTexture = skyboxMaterial.reflectionTexture.clone();
+                        // mesh.material.environmentIntensity = 0.7;
+                        // mesh.material.reflectionTexture = mesh.material.environmentTexture; // Usar el mismo skybox
+                        // mesh.material.reflectionTexture.level = 0.4; // Intensidad del reflejo (0.3-0.6 para azulejos)
                     }
                 })
             },
@@ -138,11 +196,55 @@ class Perfil3D {
             }
         );
 
-        scene.freezeActiveMeshes();
+        scene.performancePriority = BABYLON.ScenePerformancePriority.Aggressive;
+
+        scene.autoClear = false;
+        scene.autoClearDepthAndStencil = false;
+        // scene.freezeActiveMeshes();
         //scene.debugLayer.show();
 
         return scene;
     };
+
+    diagnoseMaterial(mesh) {
+        if (!mesh || !mesh.material) {
+            return "No material found";
+        }
+
+        const mat = mesh.material;
+        let result = {
+            type: mat.getClassName ? mat.getClassName() : "Unknown",
+            properties: {}
+        };
+
+        // Propiedades comunes
+        if (mat instanceof BABYLON.StandardMaterial) {
+            result.properties = {
+                diffuseColor: mat.diffuseColor,
+                specularColor: mat.specularColor,
+                reflectionTexture: !!mat.reflectionTexture,
+                emissiveColor: mat.emissiveColor
+            };
+        }
+        else if (mat instanceof BABYLON.PBRMaterial) {
+            result.properties = {
+                albedoColor: mat.albedoColor,
+                metallic: mat.metallic,
+                roughness: mat.roughness,
+                environmentTexture: !!mat.environmentTexture
+            };
+        }
+
+        // Verificar si es un material multi-material
+        if (mesh.subMeshes && mesh.subMeshes.length > 1) {
+            result.multiMaterial = true;
+            result.subMaterials = mesh.subMeshes.map(sub => {
+                return scene.multiMaterials[sub.materialIndex]?.getClassName();
+            });
+        }
+
+        console.log(result);
+    }
 
     deg2rad(degrees) {
         return degrees * (Math.PI / 180);
