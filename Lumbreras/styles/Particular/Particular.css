@@ -5,7 +5,7 @@
 .particular__header {
   right: 715px;
   position: absolute;
-  top: 58px;
+  top: 31px;
   display: flex;
   width: 604px;
   height: 80px;
@@ -29,17 +29,34 @@
   justify-content: center;
 }
 
+.valores_container {
+  width: 180px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
 .etiqueta__Nombre {
   color: cyan;
   text-align: end;
   display: inline-block;
-  width: 150px;
+  margin-top: 3px;
+  font-size: 12px;
 }
 
 .etiqueta__Valor {
-  text-align: center;
+  text-align: end;
   display: inline-block;
-  width: 90px;
+  margin-right: 4px;
+  margin-left: 10px;
+}
+
+.etiqueta__Altura {
+  text-align: start;
+  display: inline-block;
+  font-size: 12px;
+  margin-top: -3px;
 }
 
 .etiqueta__Unidad {
@@ -70,12 +87,13 @@
 .particular__item {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   position: absolute;
-  top: 70px;
+  top: 170px;
   right: 15px;
   justify-content: flex-end;
-  width: 250px;
+  width: 180px;
+  margin-right: 15px;
 }
 
 .particular__aguaNivel img {
@@ -145,26 +163,31 @@
   position: absolute;
   bottom: 100px;
   right: 25px;
+  z-index: 1;
 }
 
 .barraNivel {
   width: 20px;
-  height: 0px;
   position: absolute;
   bottom: 0px;
   right: 0px;
-  background: cadetblue;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.cristalBarra {
+  width: 55px;
+  height: 230px;
+  position: absolute;
+  top: 12px;
+  left: -28px;
 }
 
 .barraContainer {
   width: 20px;
-  height: 330px;
+  height: 230px;
   position: absolute;
   bottom: 0px;
   right: 0px;
-  border: 1px solid cadetblue;
-  border-radius: 10px;
 }
 
 .valorNivel {

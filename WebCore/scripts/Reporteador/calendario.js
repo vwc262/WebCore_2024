@@ -197,7 +197,7 @@ function onClickEventMes() {
       // Limpiar y actualizar la tabla con los días del nuevo año
       limpiarYActualizarTabla(añoActual, index);
       let dia = e.currentTarget.diaSeleccionado
-      if(dia){
+      if (dia) {
         document.querySelector(`.d${dia}`).click();
         e.currentTarget.diaSeleccionado = undefined;
       }else{

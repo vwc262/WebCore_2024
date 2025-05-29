@@ -24,13 +24,16 @@ class infoRowEstacion {
         let signals_div = document.createElement('div');
         signals_div.classList = 'signals_div';
 
+        let gradiant_div = document.createElement('div');
+        gradiant_div.classList = 'gradiant_div';
+
         let btn_goParticular = document.createElement('button');
         btn_goParticular.classList = "btn_goParticular";
         btn_goParticular.style.background = `url(${Core.Instance.ResourcesPath}Tabla/goToPerfil.png?v=${Core.Instance.version})`
 
         let img_estacion_div = document.createElement('div');
         img_estacion_div.classList = 'ImgEstacion';
-        img_estacion_div.style.background = `url(${Core.Instance.ResourcesPath}Tabla/sitio.jpg?v=${Core.Instance.version})`;
+        img_estacion_div.style.background = `url(${Core.Instance.ResourcesPath}Tabla/sitio.jpg?v=${Core.Instance.version}) 0% 0% / contain no-repeat`;
 
         img_estacion_div.append(btn_goParticular)
 
@@ -42,25 +45,45 @@ class infoRowEstacion {
                 let signal_div = document.createElement('div');
                 signal_div.classList = 'signal_estacion';
 
+                let nivel_div = document.createElement('div');
+                nivel_div.classList = 'nivel_div';
+
+                let semaforos_div = document.createElement('div');
+                semaforos_div.classList = 'semaforos_div';
+
                 let signal_nombre = document.createElement('div');
                 signal_nombre.classList = 'signal_nombre';
                 signal_nombre.innerHTML = `${signal.Nombre}`;
 
                 let signal_valor = document.createElement('div');
                 signal_valor.id = `signal_${signal.IdSignal}`;
-                signal_valor.classList = 'signal_valor';
+                signal_valor.classList = 'signal_valor textoValor';
                 signal_valor.innerHTML = `${signal.Valor} m`;
                 this.alojarElementoDinamico([signal_valor]);
 
-                signal_div.append(signal_nombre, signal_valor);
+                let semaforo_altura = document.createElement('div');
+                semaforo_altura.classList = 'semaforoCont';
+                semaforo_altura.innerHTML = `${signal.Semaforo?.Altura ? 'Altura<br>' + signal.Semaforo.Altura + 'm': 'ND'}`;
+
+                let semaforo_prev = document.createElement('div');
+                semaforo_prev.classList = 'semaforoCont';
+                semaforo_prev.innerHTML = `${signal.Semaforo?.Preventivo ? '<span style="color: yellow;">Prev.<br> </span>' + signal.Semaforo.Preventivo + ' m' : 'ND'}`;
+
+                let semaforo_critc = document.createElement('div');
+                semaforo_critc.classList = 'semaforoCont';
+                semaforo_critc.innerHTML = `${signal.Semaforo?.Critico ? '<span style="color: red;">Crit.<br> </span>' + signal.Semaforo.Critico + ' m' : 'ND'}`;
+
+                semaforos_div.append(semaforo_altura, semaforo_prev, semaforo_critc);
+                nivel_div.append(signal_nombre, semaforos_div)
+                signal_div.append(nivel_div, signal_valor);
                 signals_div.append(signal_div);
 
             }
         });
 
         this.root = btn_goParticular;
-
-        info_div.append(img_estacion_div, signals_div);
+        gradiant_div.append(img_estacion_div)
+        info_div.append(gradiant_div, signals_div);
         container.appendChild(info_div);
     }
 
@@ -89,12 +112,10 @@ class infoRowEstacion {
             estacionUpdate.Signals.forEach(signal => {
                 if(signal.TipoSignal == 1){
                     let valor_signal = this.HTMLUpdateElements[`signal_${signal.IdSignal}`];
-                    valor_signal.innerHTML = `${estacionUpdate.Signals[0].Valor} m`;
-                    valor_signal.style.color = `${estacionUpdate.Signals[0].GetValorColor()}`;
+                    valor_signal.innerHTML = `${signal.DentroRango? signal.Valor : "---"} m`;
+                    valor_signal.style.color = `${signal.GetColorSemaforo('floralwhite')}`;
                 }
             })
-
-
         }
     }
 
@@ -104,6 +125,5 @@ class infoRowEstacion {
             new EventoCustomizado(this.update)
         );
     }
-
 }
 export { infoRowEstacion }

@@ -2,8 +2,8 @@
     position: absolute;
     width: 960px;
     height: 540px;
-    right: 0px;
-    bottom: 0px;
+    right: -50px;
+    bottom: -25px;
     transform: scale(0.5);
     transform-origin: bottom right;
 }
@@ -67,4 +67,43 @@
 
 .dial_button {
     cursor: pointer;
+}
+
+.contenedor_destello {
+    width: 505px;
+    position: absolute;
+    top: 10px;
+    left: 215px;
+    pointer-events: none;
+}
+
+.contenedor_destello img {
+    width: 100%;
+}
+
+.nombre_interceptores {
+    width: 484px;
+    height: 64px;
+    position: absolute;
+    top: 0px;
+    left: 235px;
+    pointer-events: none;
+    font-size: 33px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/**/
+
+#renderCanvas {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    width: 1440px;
+    height: 1011px;
 }

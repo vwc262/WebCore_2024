@@ -135,11 +135,11 @@ class Signal {
                     _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
                 }
 
-                return `<label style="color: ${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+                return `<label">${value}</label> <label class="unidades">${_unidades}</label>`;
             } else if (this.DentroRango == -1) {
-                return `<label style="color: ${this.GetValorColor()};">nan</label>`;
+                return `<label">nan</label>`;
             } else {
-                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
+                return `<label">${rayitas ? '---' : 'N/D'}</label>`;
             }
         }
         else if (this.TipoSignal == EnumTipoSignal.Voltaje) {
@@ -155,7 +155,7 @@ class Signal {
                 _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
             }
 
-            return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+            return `<label">${value}</label> <label class="unidades">${_unidades}</label>`;
 
         }
         else {
@@ -167,12 +167,12 @@ class Signal {
                     _unidades = `[${EnumUnidadesSignal[this.TipoSignal]}]`;
                 }
 
-                return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
+                return `<label">${value}</label> <label class="unidades">${_unidades}</label>`;
             } else if (this.DentroRango == -1) {
-                return `<label style="color: ${this.GetValorColor()};">nan</label>`;
+                return `<label">nan</label>`;
             }
             else {
-                return `<label style="color: ${this.GetValorColor()};">${rayitas ? '---' : 'N/D'}</label>`;
+                return `<label">${rayitas ? '---' : 'N/D'}</label>`;
             }
         }
 
@@ -181,7 +181,6 @@ class Signal {
      * @returns {string} nomenclatura (ejem. N1)
      */
     GetNomenclaturaSignal() {
-        // return `${EnumTipoSignalNomenclatura[this.TipoSignal]}${this.Ordinal + 1}`;
         return `${this.Nombre}`;
     }
 
@@ -203,7 +202,6 @@ class Signal {
                 color = `${parseInt(this.Valor) == EnumFallaAC.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
             case EnumTipoSignal.PuertaAbierta:
-                // color = `${parseInt(this.Valor) == EnumPuertaAbierta.Normal ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 var aux = parseInt(this.Valor);
                 color = `${aux >= 250 && aux <= 259 ? 'rgb(223, 177, 49)' : 'rgb(203, 185, 136)'}`;
                 break;
@@ -262,11 +260,11 @@ class Signal {
         return EnumPerillaGeneralString[this.Valor] ?? '---';
     }
 
-    GetColorSemaforo() {
+    GetColorSemaforo(normalColor = 'green') {
 
         let color = !this.DentroRango ? 'gray' :
             this.Valor >= this.Semaforo.Critico ? 'red' :
-                this.Valor >= this.Semaforo.Preventivo ? 'yellow' : 'green';
+                this.Valor >= this.Semaforo.Preventivo ? 'yellow' : normalColor;
 
         return color;
     }

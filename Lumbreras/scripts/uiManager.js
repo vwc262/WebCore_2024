@@ -1,65 +1,65 @@
-import { Core } from "./Core.js";
 import { Particular } from "./Particular/Particular.js";
-import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
-import { EnumModule, EnumNombreProyecto } from "./Utilities/Enums.js";
+import { EnumModule } from "./Utilities/Enums.js";
 
 const $btnHeader = document.querySelector(".header__buttons");
 const $btnHome = document.querySelector(".headerBtn__Home");
+const headerBtn__Exterior = document.getElementsByClassName('headerBtn__Exterior')[0];
+const headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
 
 let ultimoBotonSeleccionado = $btnHome;
 
-$btnHeader.addEventListener("click", (ev) => {
+let divs = [...$btnHeader.children].filter(h => h.tagName == 'DIV');
+divs.forEach(btn => btn.addEventListener("click", (ev) => {
+
+  let lastTarget = document.getElementsByClassName('header__active')[0];
+  lastTarget.classList.remove("header__active");
+
+  const target = ev.currentTarget;
+  target.classList.add("header__active");
+
+  const isParticularActive = Module == EnumModule.Particular;
+
+  section__home.style.display = "none";
+  section__mapa.style.display = "none";
+  section__graficador.style.display = "none";
+  section__particular.style.display = "none";
+
+  headerBtn__Exterior.style.display = "none";
+  headerBtn__Subterraneo.style.display = "none";
+
   Particular.Instance.MostrarFallaAc(false);
-  const table = document.querySelector(".aside__tabla");
-  if (ev.target.nodeName == "DIV") {
-    table.style.display = "block";
-    [...ev.currentTarget.children].forEach((element) => {
-      element.classList.remove("header__active");
-    });
 
-    const actualTarger = ev.target;
-    actualTarger.classList.add("header__active");
-    const isParticularActive = Module == EnumModule.Particular;
-    const $asidetabla = document.querySelector(".aside__tabla");
+  switch (target.className) {
+    case "headerBtn__Home header__active":
+      SetActualModule("Perfil");
 
-    section__home.style.display = "none";
-    section__mapa.style.display = "none";
-    section__graficador.style.display = "none";
-    section__particular.style.display = "none";
+      section__home.style.display = "block";
+      ultimoBotonSeleccionado = target;
 
-    switch (actualTarger.className) {
-      case "headerBtn__Home header__active":
-        SetActualModule(isParticularActive ? "Particular" : "Perfil");
+      break;
+    case "headerBtn__Mapa header__active":
+      SetActualModule("Mapa");
 
-        section__home.style.display = isParticularActive ? "none" : "block";
-        section__particular.style.display = isParticularActive ? "block" : "none";
+      section__mapa.style.display = "block";
+      ultimoBotonSeleccionado = target;
+      break;
+    case "headerBtn__Graficador header__active":
+      SetActualModule("Graficador");
 
-        ultimoBotonSeleccionado = actualTarger;
-        $asidetabla.style.display = "block";
-        if (isParticularActive) {
-          Particular.Instance.mostrarDetalles();
-        } else {
-
-        }
-
-        break;
-      case "headerBtn__Mapa header__active":
-        SetActualModule("Mapa");
-
-        section__mapa.style.display = "block";
-        ultimoBotonSeleccionado = actualTarger;
-        $asidetabla.style.display = "block";
-        break;
-      case "headerBtn__Graficador header__active":
-        SetActualModule("Graficador");
-
-        section__graficador.style.display = "block";
-        ultimoBotonSeleccionado = actualTarger;
-        $asidetabla.style.display = "none";
-        break;
-    }
+      section__graficador.style.display = "block";
+      ultimoBotonSeleccionado = target;
+      break;
+    case "headerBtn__Exterior header__active":
+    case "headerBtn__Subterraneo header__active":
+      let isExterior = target.className.includes('headerBtn__Exterior');
+      
+      section__particular.style.display = "block";
+      headerBtn__Exterior.style.display = "block";
+      headerBtn__Subterraneo.style.display = "block";
+      Particular.Instance.setParticularScene(isExterior);
+      break
   }
-});
+}));
 
 function GoHome() {
   $btnHome.click();
@@ -68,41 +68,6 @@ function GoHome() {
 function GoBack() {
   ultimoBotonSeleccionado?.click();
 }
-
-function Modal() {
-  
-  const $modal = document.querySelector(".modal");
-  const $closeModal = document.querySelector(".modal__close");
-  const $aceptarModal = document.querySelector(".modal__Aceptar");
-
-  $closeModal.addEventListener("click", (e) => {
-    e.preventDefault();
-    $modal.classList.remove("modal--show");
-  });
-
-  $aceptarModal.addEventListener("click", (e) => {
-    e.preventDefault();
-    $modal.classList.remove("modal--show");
-    location.reload();
-  });
-}
-
-const ShowModal = (txtToShow, title, flag) => {
-  const $modal = document.querySelector(".modal");
-  $modal.classList.add("modal--show");
-  $modal.querySelector(".modal__title").innerText = title;
-  $modal.querySelector(".modal__paragraph").innerText = txtToShow;
-  if (flag) {
-    $modal.querySelector(".modal__Aceptar").style.display = "block";
-    $modal.querySelector(".modal__Aceptar").style.pointerEvents = "auto";
-  }
-  else {
-    {
-      $modal.querySelector(".modal__close").style.display = "block";
-      $modal.querySelector(".modal__close").style.pointerEvents = "auto";
-    }
-  }
-};
 
 var Module = EnumModule.Perfil;
 /**
@@ -113,6 +78,4 @@ const SetActualModule = function (enumModule) {
   Module = EnumModule[enumModule];
 };
 
-Modal();
-
-export { GoHome, GoBack, ShowModal, SetActualModule, Module };
+export { GoHome, GoBack, SetActualModule, Module };

@@ -9,6 +9,7 @@ import {
     EnumEnlace,
     EnumProyecto,
 } from "../Utilities/Enums.js";
+import { Clamp } from "../Utilities/CustomFunctions.js";
 
 class Estacion {
     constructor(estacionCruda) {
@@ -200,7 +201,7 @@ class Estacion {
     ObtenerRenderNivelOBomba(signal, modulo) {
 
         let url = "";
-        const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "l" : "b";
+        const carpetaTipoSignal = signal.TipoSignal == EnumTipoSignal.Nivel ? "n" : "b";
         let indiceImagen = "";
         if (Core.Instance.IdProyecto == EnumProyecto.Lerma) {
             const isBombaPurple = signal.Valor == 4;
@@ -223,15 +224,15 @@ class Estacion {
 
             if (signal.TipoSignal == EnumTipoSignal.Nivel) {
                 if (signal.DentroRango) {
-                    if (signal.DentroLimite == EnumDentroLimite.Alto) {
-                        indiceImagen = "10r";
-                    }
-                    else {
-                        indiceImagen = signal.IndiceImagen;
-                    }
+                    // if (signal.DentroLimite == EnumDentroLimite.Alto) {
+                    //     indiceImagen = "10r";
+                    // }
+                    // else {
+                    indiceImagen = this.rellenarCeros(Clamp(signal.IndiceImagen, 1, 10));
+                    // }
                 }
                 else {
-                    indiceImagen = "r";
+                    indiceImagen = "nd";
                 }
             }
             else {
@@ -250,6 +251,15 @@ class Estacion {
 
         return url;
     }
+
+    rellenarCeros(numero) {
+        let str = numero.toString();
+        while (str.length < 2) {
+            str = "0" + str;
+        }
+        return str;
+    }
+
     /**
      *
      * @param {Signal} signal

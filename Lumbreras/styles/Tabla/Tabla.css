@@ -1,23 +1,26 @@
 .titulo {
-  font-size: 20px;
-}
-
-.sub_titulo {
   font-size: 15px;
 }
 
+.sub_titulo {
+  font-size: 12px;
+}
+
+.textoValor{
+  font-size: 22px;
+}
+
 .buscadorTabla {
-  /* background: linear-gradient(0deg, rgba(106, 110, 217, 0.5) 0%, rgba(94, 93, 186, 0.5) 100%); */
   display: flex;
-  margin-top: 80px;
+  margin-top: 40px;
   margin-left: 10px;
   align-items: center;
   align-content: stretch;
-  justify-content: center;
+  justify-content: flex-end;
   flex-direction: row;
   flex-wrap: nowrap;
   width: 100%;
-  height: 45px;
+  height: 58px;
 }
 
 .buscadorImg {
@@ -26,16 +29,25 @@
 
 .buscadorTxT {
   background: linear-gradient(0deg, rgba(20, 24, 69, 0.5) 0%, rgba(118, 124, 210, 0.5) 100%);
-  width: 505px;
-  height: 32px;
+  width: 390px;
+  height: 40px;
   border: none;
+  color: white;
+  margin-right: 8px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.buscadorTxT input[type="search"] {
+  text-indent: 15px;
+  font-size: 25px;
 }
 
 .table-container {
   background: linear-gradient(0deg, rgba(26, 36, 123, 1) 0%, rgba(23, 32, 109, 1) 100%);
   display: flex;
   width: 100%;
-  height: 90%;
+  height: auto;
+  max-height: 946px;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: stretch;
@@ -44,6 +56,24 @@
   overflow-x: hidden;
   overflow-y: scroll;
   margin-left: 10px;
+
+  &::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: url("https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/Lumbreras/Tabla/scrollTablaBase.png");
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: url("https://virtualwavecontrol.com.mx/RecursosWeb/WebCore24/Lumbreras/Tabla/scrollTabla.png");
+    border-radius: 4px;
+  }
 }
 
 .interceptor_row {
@@ -55,6 +85,11 @@
   align-content: center;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
+}
+
+.intecpetorFlechaImg {
+  height: 25px;
 }
 
 .estaciones_interceptor {
@@ -90,19 +125,21 @@
 .btn_goParticular {
   width: 66px;
   height: 61px;
-  margin: 0 0 10px 10px;
+  margin: 0 0 -2px -2px;
   border: none;
+  cursor: pointer;
 }
 
 .data_row {
   display: flex;
   width: 100%;
-  height: 60px;
+  height: 48px;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
   justify-content: space-around;
   align-items: center;
+  cursor: pointer;
 }
 
 .Columna_Nombre {
@@ -113,10 +150,12 @@
 
 .signals_estacion {
   display: none;
+  justify-content: flex-start;
   flex-direction: column;
   width: 100%;
-  justify-content: center;
+  height: 230px;
 }
+
 
 .info_estacion_row {
   display: flex;
@@ -136,29 +175,30 @@
 .signals_div {
   display: flex;
   width: 100%;
+  height: 100%;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: stretch;
   align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .ImgEstacion {
-  width: 384px;
-  margin-left: 10px;
-  height: 247px;
   display: flex;
   flex-direction: column-reverse;
-  /* border: solid #14bae4;
-  border-right-width: 8px;
-  border-left-width: 8px;
-  border-bottom-width: 8px; */
-  border-radius: 0px 0px 10px 10px;
-  border-width: 8px;
-  border-style: solid;
-  border-image:
-    linear-gradient(to bottom,
-      #14bae4,
-      #09326a) 100 1%;
+  width: 136px;
+  height: 211px;
+  border-radius: 8px;
+}
+
+.gradiant_div {
+  background: linear-gradient(0deg, #11ffff, #0e3167) border-box;
+  mask: linear-gradient(#00000000 0 0) padding-box, linear-gradient(#000000 0 0);
+  border-radius: 10px;
+  border: 10px solid transparent;
+  mask-composite: exclude;
+  width: 201px;
+  height: 228px;
 }
 
 .signal_nombre {
@@ -167,7 +207,16 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
+  height: 27px;
+}
+
+.nivel_div {
+  display: flex;
+  align-items: center;
+  width: 100%;
   height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .signal_valor {
@@ -175,19 +224,35 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  width: 50%;
   height: 100%;
+}
+
+.semaforos_div {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.semaforoCont {
+  background: linear-gradient(0deg, rgba(31, 49, 149, 1) 0%, rgba(24, 87, 182, 1) 100%);
+  width: 100%;
+  height: 29px;
+  text-align-last: center;
+  align-content: center;
 }
 
 .signal_estacion {
   display: flex;
   width: 100%;
-  height: 50px;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-content: center;
+  align-content: flex-start;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .id_interceptor {
@@ -240,7 +305,7 @@
 
 .Columna_Nombre {
   display: flex;
-  width: 43%;
+  width: 47%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -248,7 +313,7 @@
 
 .Columna_Nivel {
   display: flex;
-  width: 12%;
+  width: 15%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -256,7 +321,7 @@
 
 .Columna_Fecha {
   display: flex;
-  width: 20%;
+  width: 17%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -264,10 +329,22 @@
 
 .Columna_Hora {
   display: flex;
-  width: 15%;
+  width: 11%;
   height: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.Columna_EstacionEnlace {
+  width: 20%;
+}
+
+.Columna_EstacionNombre {
+  width: 100%;
+}
+
+.Columna_EstacionAlerta {
+  width: 20%;
 }
 
 .estacionNombre {
@@ -277,6 +354,10 @@
 
 .estacion_ID {
   background: linear-gradient(0deg, rgba(87, 102, 187, 1) 0%, rgba(128, 136, 217, 1) 100%);
+}
+
+.alertaEstacion {
+  display: flex;
 }
 
 .estacion_Nivel {

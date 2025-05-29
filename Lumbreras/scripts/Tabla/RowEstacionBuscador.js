@@ -3,13 +3,11 @@ import Estacion from "../Entities/Estacion.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumSemaforo } from "../Utilities/Enums.js";
 import { infoRowEstacion } from "./infoRowEstacion.js";
-import { Interceptor } from "./Interceptor.js";
-
 
 /**
- * @returns {RowEstacion}
+ * @returns {RowEstacionBuscador}
  */
-class RowEstacion {
+class RowEstacionBuscador {
 
     /**
      * 
@@ -32,10 +30,10 @@ class RowEstacion {
         this.interceptor = interceptor;
 
         let row_est_div = document.createElement('div');
-        row_est_div.classList = 'estacion_row';
+        row_est_div.classList = 'estacion_rowBuscador sub_titulo';
 
         let data_row = document.createElement('div');
-        data_row.classList = 'data_row';
+        data_row.classList = 'data_rowBuscador';
 
         let id_estacion_div = document.createElement('div');
         id_estacion_div.classList = 'Columna_ID estacion_ID';
@@ -79,7 +77,7 @@ class RowEstacion {
         this.alojarElementoDinamico([hora_estacion]);
 
         this.signals_estacion_div = document.createElement('div');
-        this.signals_estacion_div.classList = 'signals_estacion';
+        this.signals_estacion_div.classList = 'signals_estacionBuscador';
 
         nombre_estacion_div.append(estado_estacion, nombre_estacion, alerta_estacion)
         data_row.append(id_estacion_div, nombre_estacion_div, valor_estacion, fecha_estacion, hora_estacion)
@@ -169,4 +167,4 @@ class RowEstacion {
         );
     }
 }
-export { RowEstacion }
+export { RowEstacionBuscador }

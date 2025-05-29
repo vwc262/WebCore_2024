@@ -1,7 +1,7 @@
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumTipoSignal } from "../Utilities/Enums.js";
-import NewsElement from "./NewsElement.js";
+import NewsElement from "../News/NewsElement.js";
 
 
 /** @returns {News} */
@@ -52,6 +52,8 @@ class News {
                 xAcumulado += elemento.width + espaciado;
             }
         });
+
+        this.Update();
     }
 
     /**
@@ -67,11 +69,11 @@ class News {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento(
             "Update",
-            new EventoCustomizado(this.update)
+            new EventoCustomizado(this.Update)
         );
     }
 
-    update() {
+    Update = () => {
         const elemVisibles = this.HTMLElements.filter(f => f.visible);
         this.enEjecucion = elemVisibles.length > 10;
         this.animar(performance.now());
@@ -79,35 +81,35 @@ class News {
 
     animar(tiempoActual) {
 
-        if (!this.enEjecucion) return;
-
+        
         // Calcular delta time en segundos
         const deltaTime = (tiempoActual - this.ultimoTiempo) / 1000;
         this.ultimoTiempo = tiempoActual;
-
+        
         // Calcular desplazamiento basado en tiempo
         const desplazamiento = this.velocidad * deltaTime;
         this.xBase -= desplazamiento; // Mover la posición base
         const espaciado = 10;
-
+        
         // Verificar si necesitamos reciclar
         const primerElemento = this.HTMLElements[0];
-        let parar = false;
-
+        
         if (primerElemento && parseFloat(primerElemento.style.left) + primerElemento.width + espaciado < 0) {
-
+            
             // Mover primer elemento al final
             const ultimoElemento = [...this.HTMLElements].reverse().find(el => el.visible);
-
+            
             const nuevoX = parseFloat(ultimoElemento.style.left.replace('px', '')) + ultimoElemento.width + espaciado;
-
+            
             primerElemento.style.left = `${nuevoX}px`;
             this.xBase += primerElemento.width + espaciado;;
-
+            
             // Reordenar array para mantener secuencia
             this.HTMLElements = [...this.HTMLElements.slice(1), this.HTMLElements[0]];
-
+            
         }
+        
+        if (!this.enEjecucion) return;
 
         // Aplicar a todos los HTMLElements con sus posiciones relativas
         let xAcumulado = 0;

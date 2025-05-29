@@ -183,7 +183,7 @@ class AppGraficador {
 
         let interval = setInterval(() => {
 
-            if (this.estaciones.length > 0) {
+            if (this.estaciones != undefined && this.estaciones.length > 0) {
                 clearInterval(interval);
 
                 // this.GetReferences();
@@ -559,7 +559,7 @@ class AppGraficador {
             bntSignal.IdSignal = s.idSignal;
             bntSignal.IdTipoSignal = s.tipoSignal;
             bntSignal.NombreSignal = s.tipoSignal == EnumTipoSignal.Tiempo ? 'Poleo' : s.nombre;
-            bntSignal.NombreEstacion = estacion.nombre;
+            bntSignal.NombreEstacion = estacion.abreviacion.toUpperCase();
             bntSignal.classList = `bntSignal signalNA`;
             bntSignal.id = `e_${idEstacion}_s_${s.idSignal}`;
             bntSignal.disabled = 0;
