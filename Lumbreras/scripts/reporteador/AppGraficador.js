@@ -88,7 +88,6 @@ class AppGraficador {
             actions: {
                 clickDay(event, self) {
                     // self.classList.remove('selected')
-                    console.log(this)
                     let d = new Date();
                     let dates = self.selectedDates.map(_date => {
                         let _d = d;
