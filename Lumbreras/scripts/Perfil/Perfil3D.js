@@ -6,12 +6,13 @@ class Perfil3D {
         this.canvas = null;
         this.engine = null;
         this.scene = null;
+        this.camera = null;
+        this.initialPosition = null;
         this.actionManager = undefined; // Manager to handle events    
         this.rootPath = '../../assets/3D/';
     }
 
     create() {
-
 
         // Obtener el canvas del DOM
         this.canvas = document.getElementById("renderCanvas");
@@ -21,12 +22,20 @@ class Perfil3D {
 
         // Llamar a la función y renderizar la escena
         this.scene = this.createScene();
-        //this.scene.clearColor = new BABYLON.Color3(0.2, .2, 0.2);
         this.scene.useRightHandedSystem = true;
 
         // Render loop (animación continua)
         this.engine.runRenderLoop(() => {
             this.scene.render();
+            // console.log(this.camera.position);
+            // console.log(
+            //     {
+            //         alpha: this.camera.alpha,
+            //         beta: this.camera.beta,
+            //         alphaDeg: this.camera.alpha * 180 / Math.PI,
+            //         betaDeg: this.camera.beta * 180 / Math.PI
+            //     }
+            // );
         });
 
         this.suscribirEventos();
@@ -38,74 +47,88 @@ class Perfil3D {
         // Crear un objeto escena
         const scene = new BABYLON.Scene(this.engine);
 
-        let CameraTarget = new BABYLON.TransformNode('target', scene)
-        CameraTarget.position.addInPlace(new BABYLON.Vector3(0, 0, 0));
+        // 1. Crear el nodo objetivo (target)
+        let cameraTarget = new BABYLON.TransformNode('cameraTarget', scene);
+        cameraTarget.position = new BABYLON.Vector3(0, 0, -1);
 
-        const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, CameraTarget.position, scene);
-        camera.mapPanning = true;
-        camera.panningSensibility = 50;
-        camera.upperBetaLimit = Math.PI * .4; //(it is equalt to 1.57079… just round it to 1.57)
-        camera.lowerRadiusLimit = 50;
-        camera.upperRadiusLimit = 150;
-        camera.panningDistanceLimit = 120;
-        camera.zoomToMouseLocation = true;
+        // 2. Crear la cámara con parámetros iniciales
+        const camera = new BABYLON.ArcRotateCamera(
+            "mainCamera",
+            this.deg2rad(-129),   // alpha (rotación horizontal en radianes)
+            this.deg2rad(55),  // beta (rotación vertical en radianes)
+            0,             // radio (distancia al target)
+            cameraTarget.position,
+            scene
+        );
+
+        this.initialPosition = camera.position;
+
+        // 3. Asignar el target correctamente (mejor que usar solo la posición)
+        // camera.setTarget(cameraTarget);
 
         // Targets the camera to scene origin
         camera.attachControl(this.canvas, true); // Habilitar controles
 
-        // This attaches the camera to the canvas            
-        // Creates a light, aiming 0,1,0 - to the sky
-        var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 0, 1), scene);
-        // Dim the light a small amount - 0 to 1
+        // 4. Configurar límites y comportamientos
+        camera.upperBetaLimit = this.deg2rad(55); // Límite superior
+        camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
 
-        // Skybox
-        var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", { size: 920 }, scene);
-        var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-        skyboxMaterial.backFaceCulling = false;
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(`${this.rootPath}/textures/dark-s`, scene);
-        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-        skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.disableLighting = true;
-        skybox.material = skyboxMaterial;
+        camera.upperAlphaLimit = this.deg2rad(-90); // Límite superior
+        camera.lowerAlphaLimit = this.deg2rad(-180); // Límite inferior
 
+        camera.panningSensibility = 2500;
+        camera.panningDistanceLimit = 10;
 
-        const water = new BABYLON.WaterMaterial("water", scene);
-        water.bumpTexture = new BABYLON.Texture(`${this.rootPath}/textures/waterbump.png`, scene);
-        water.windForce = -15;
-        water.waveHeight = 1.3;
-        water.windDirection = new BABYLON.Vector2(1, 1);
-        water.waterColor = new BABYLON.Color3(0.1, 0.1, 0.6);
-        water.colorBlendFactor = 0.2;
-        water.bumpHeight = .7;
-        water.waveLength = 0.2;
-        water.disableDepthWrite = true;
+        camera.wheelPrecision = 50;
+        camera.zoomToMouseLocation = true;
 
+        // 5. Ajustar radio inicial y límites
+        camera.radius = 10;  // Distancia inicial
+        camera.lowerRadiusLimit = 5;  // Zoom in mínimo
+        camera.upperRadiusLimit = 20; // Zoom out máximo
+
+        // 7. Para modelos muy pequeños, usa valores más altos
+        camera.angularSensibilityX = 2500;
+        camera.angularSensibilityY = 2500;
+
+        this.camera = camera;
+
+        // cdmx
         BABYLON.SceneLoader.ImportMesh(
             "",
             `${this.rootPath}/models/`,
             "cdmx.glb",
             scene,
             async (newMesh) => {
-                let box = BABYLON.MeshBuilder.CreateBox(`dummyBox`, { size: 2 }, scene);
-                box.isVisible = false;
+
+                const directionalLight = scene.getLightByName("Light");
+                const areaLight1 = scene.getLightByName("Area");
+                const areaLight2 = scene.getLightByName("Area.001");
+
+                if (directionalLight) {
+                    directionalLight.intensity = 1.0;
+                }
+                if (areaLight1) {
+                    areaLight1.intensity = 3.0;
+                }
+                if (areaLight2) {
+                    areaLight2.intensity = 4.0;
+                }
 
                 newMesh.forEach((mesh, i) => {
 
-                    if (mesh.name.includes('alc_')) {
+                    if (mesh.name.includes('lane')) {
 
-                        mesh.material.emissiveColor = new BABYLON.Color3(0, 0, 0);
-                        mesh.material.albedoColor = new BABYLON.Color3(0.007, 0.007, 0.009);
-
-                        mesh.material = mesh.material.clone(`${mesh.material.name}`);
-                        mesh.actionManager = this.getActionManager();
-                        mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, function (ev) {
-                            mesh.material.emissiveColor = new BABYLON.Color3(0, 0, 0.2);
-                        }));
-
-                        mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, function (ev) {
-                            mesh.material.emissiveColor = new BABYLON.Color3(0, 0, 0);
-                        }));
+                        mesh.material.specularPower = 128;
+                        mesh.material.alpha = 1.0;
+                        mesh.material.metallic = 0.9;
+                        mesh.material.roughness = 0.2;
+                    }
+                    else if (mesh.name.includes('rystal')) {
+                        mesh.material.specularPower = 128;
+                        mesh.material.alpha = 0.76;
+                        mesh.material.metallic = 0.43;
+                        mesh.material.roughness = 0.2;
                     }
                 })
             },
@@ -115,29 +138,18 @@ class Perfil3D {
             }
         );
 
-        scene.activeCamera.alpha += Math.PI;
-
-        let activateDebugInterface = false;
-        if (activateDebugInterface) {
-            var nodeMaterial = new BABYLON.NodeMaterial("node material", scene, { emitComments: true });
-            scene.debugLayer.show();
-            scene.debugLayer.select(nodeMaterial);
-        }
         scene.freezeActiveMeshes();
-        this.engine.runRenderLoop(function () {
-            scene.render();
-        });
+        //scene.debugLayer.show();
 
         return scene;
     };
 
-    createCylinder() {
-        const cylinder = new BABYLON.MeshBuilder.CreateCylinder('cylinder', { height: 22, diameterTop: 2, diameterBottom: 2, tessellation: 20, subdivisions: 1, }, this.scene);
-        cylinder.position.z = 0;
-        cylinder.position.y = 0;
-        cylinder.position.x = 0;
-        cylinder.visibility = .9999;
-        return cylinder;
+    deg2rad(degrees) {
+        return degrees * (Math.PI / 180);
+    }
+
+    radiansToDegrees(radians) {
+        return radians * (180 / Math.PI);
     }
 
     getActionManager() {
@@ -151,17 +163,41 @@ class Perfil3D {
         });
 
         /*Prototypes*/
-        BABYLON.Camera.prototype.aniLockedTarget = function (targetPos, speed) {
-            if (!this.lockedTarget) {
-                this.setTarget(this.target);
-            }
-            // var ease = new BABYLON.CubicEase();
-            // ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEOUTIN);
-            // BABYLON.Animation.CreateAndStartAnimation('atz', this, 'radius', speed, 150, this.radius, 50, 0, ease);
-            // ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-            // BABYLON.Animation.CreateAndStartAnimation('at5', this, 'target', speed, 100, this.target, targetPos, 0, ease);
-            // BABYLON.Animation.CreateAndStartAnimation('atr', this, 'beta', speed, 150, this.beta, Math.PI / 4, 0, ease);
+        BABYLON.Camera.prototype.aniLockedTarget = function () {
+
         }
+
+        const originalTarget = this.camera.target.clone();
+        const minHeight = 0.5; // Altura mínima sobre el piso
+        const maxHeight = 1.5; // Altura mínima sobre el piso
+
+        this.scene.onBeforeRenderObservable.add(() => {
+
+            const currentOffset = this.camera.target.subtract(originalTarget);
+            const horizontalDistance = Math.sqrt(currentOffset.x * currentOffset.x + currentOffset.z * currentOffset.z);
+
+            // Soft limit para el radio
+            if (horizontalDistance > this.camera.panningDistanceLimit * 0.3) {
+                const exceedRatio = (horizontalDistance - this.camera.panningDistanceLimit * 0.3) / (this.camera.panningDistanceLimit * 0.2);
+                const resistance = exceedRatio * exceedRatio * 0.1; // Aumenta resistencia exponencialmente
+
+                const directionXZ = new BABYLON.Vector3(currentOffset.x, 0, currentOffset.z).normalize();
+                this.camera.target.x -= directionXZ.x * resistance;
+                this.camera.target.z -= directionXZ.z * resistance;
+            }
+
+            // Soft limit para altura
+            if (this.camera.target.y < minHeight * 1.5) {
+                const exceed = (minHeight * 1.5 - this.camera.target.y) / minHeight;
+                this.camera.target.y += exceed * 0.05;
+            }
+
+            // Soft limit para altura máxima
+            if (this.camera.target.y > maxHeight * 0.9) {
+                const exceed = (this.camera.target.y - maxHeight * 0.9) / maxHeight;
+                this.camera.target.y -= exceed * 0.05;
+            }
+        });
     }
 }
 
