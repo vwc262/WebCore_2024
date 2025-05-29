@@ -62,7 +62,7 @@ class PerfilPozos {
 
         this.Panner = CreateElement({
             nodeElement: "div",
-            attributes: { class: "perfilPanner" },
+            attributes: { class: "perfilPanner", style: "width: 1920px; height: 1080px;" },
             // events: new Map().set('mousemove', [this.#drag])
         });
         this.Panner.doPanX = configuracionProyecto.doPanX;
@@ -171,6 +171,8 @@ class PerfilPozos {
         let limiteY = {
             pos: origenY,
             neg: - origenY
+            /*pos: 0,
+            neg: - 540*/
         }
         let newX, newY;
         if (e.detail.scale === this.PanZoomConfig.minScale && (e.detail.x !== 0 || e.detail.y !== 0)) {
@@ -178,12 +180,12 @@ class PerfilPozos {
             newX = origenX;
             newY = origenY;
         }
-        else if (e.detail.x > limiteX.pos || e.detail.x < (limiteX.neg) || e.detail.y > limiteY.pos || e.detail.y < limiteY.neg) {
+        else if (e.detail.x > limiteX.pos || e.detail.x < limiteX.neg || e.detail.y > limiteY.pos || e.detail.y < limiteY.neg) {
             newX = e.detail.x <= limiteX.pos && e.detail.x >= limiteX.neg ? e.detail.x : e.detail.x > limiteX.pos ? limiteX.pos : limiteX.neg;
             newY = e.detail.y <= limiteY.pos && e.detail.y >= limiteY.neg ? e.detail.y : e.detail.y > limiteY.pos ? limiteY.pos : limiteY.neg;
             this.PanzoomRef.pan(newX, newY);
-            let dir = this.oldScrollValuePan > e.detail.x ? 1 : -1;
-            this.oldScrollValuePan = newX;
+            // let dir = this.oldScrollValuePan > e.detail.x ? 1 : -1;
+            // this.oldScrollValuePan = newX;
         }
         else {
             e.detail.x = e.detail.x;
@@ -193,7 +195,6 @@ class PerfilPozos {
         }
     }
 
-    
     
 }
 
