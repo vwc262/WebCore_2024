@@ -70,11 +70,11 @@ class Perfil3D {
         camera.attachControl(this.canvas, true); // Habilitar controles
 
         // 4. Configurar límites y comportamientos
-        // camera.upperBetaLimit = this.deg2rad(55); // Límite superior
-        // camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
+        camera.upperBetaLimit = this.deg2rad(55); // Límite superior
+        camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
 
-        // camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
-        // camera.lowerAlphaLimit = this.deg2rad(-180); // Límite horizontal der
+        camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
+        camera.lowerAlphaLimit = this.deg2rad(-180); // Límite horizontal der
 
         camera.panningSensibility = 2500;
         camera.panningDistanceLimit = 10;
