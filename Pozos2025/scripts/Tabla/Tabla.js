@@ -118,6 +118,7 @@ class Tabla {
       );
       console.log(this.quantityColumns);
       this.tBodyVariablesContainer.style = `right:${visible ? `-530` : `${(this.quantityColumns * 86) - 550 + 55}`
+      //this.tBodyVariablesContainer.style = `right:${visible ? `-530` : `${(12 * 86) - 550 + 55}`
         }px;`;
       this.btnTabla.style.background = `url("${Core.Instance.ResourcesPath
         }General/${visible ? "btn_abrir" : "btn_abrirrotate"}.png?v=${Core.Instance.version
@@ -224,6 +225,7 @@ class Tabla {
           estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Direccion)
             .length > 0
       ),
+      
     };
 
     Object.keys(this.columns).forEach((key) => {
