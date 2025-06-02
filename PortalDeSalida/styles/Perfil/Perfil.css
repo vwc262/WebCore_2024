@@ -1,0 +1,109 @@
+.contenedor_dial {
+    position: absolute;
+    width: 960px;
+    height: 540px;
+    right: -50px;
+    bottom: -25px;
+    transform: scale(0.5);
+    transform-origin: bottom right;
+}
+
+.dial_sombra {
+    position: absolute;
+}
+
+.dial_interceptores {
+    position: absolute;
+    width: 960px !important;
+    height: 540px !important;
+}
+
+.dial_secuencias_interceptores {}
+
+.dial_secuencias_btn_izquiero {}
+
+.dial_secuencias_btn_derecho {}
+
+.contenedor_botones {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.dial_button_left {
+    position: absolute;
+    width: 100px;
+    height: 200px;
+    /* border: 1px solid blue; */
+    left: 375px;
+    bottom: 50px;
+}
+
+.dial_button_right {
+    position: absolute;
+    width: 100px;
+    height: 200px;
+    /* border: 1px solid red; */
+    left: 485px;
+    bottom: 50px;
+}
+
+.dial_button_interceptor {
+    position: absolute;
+    /* background: #13193b; */
+    width: 60px;
+    cursor: pointer;
+    height: 45px;
+    border-radius: 15px;
+    transform: rotate(-5deg);
+}
+
+.elemento_dial {
+    position: absolute;
+    display: none;
+}
+
+.dial_button {
+    cursor: pointer;
+}
+
+.contenedor_destello {
+    width: 505px;
+    position: absolute;
+    top: 10px;
+    left: 215px;
+    pointer-events: none;
+}
+
+.contenedor_destello img {
+    width: 100%;
+}
+
+.nombre_interceptores {
+    width: 484px;
+    height: 64px;
+    position: absolute;
+    top: 0px;
+    left: 235px;
+    pointer-events: none;
+    font-size: 33px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/**/
+
+#renderCanvas {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    width: 1440px;
+    height: 1011px;
+}
