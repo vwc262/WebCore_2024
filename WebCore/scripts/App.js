@@ -1,16 +1,15 @@
 import { Core } from "./Core.js";
 import { Configuracion } from "../config/config.js";
 import { Tabla } from "./Tabla/Tabla.js";
-import { EnumNombreProyecto, EnumProyecto, EnumTipoHeader } from "./Utilities/Enums.js";
+import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
-import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Lumbreras;
+  projectName = EnumProyecto.Yaqui;
   constructor() {
 
   }

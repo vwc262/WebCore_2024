@@ -353,6 +353,7 @@ input[type="button"] {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid #7498af;
+  cursor: pointer;
 }
 
 .slide {
@@ -363,6 +364,25 @@ input[type="button"] {
   font-size: 19px;
   margin: 2px;
   border-radius: 10px;
+  cursor: pointer;
+
+    &::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #0125b7;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #7e80fb;
+    border-radius: 4px;
+  }
 }
 
 .slide::before,

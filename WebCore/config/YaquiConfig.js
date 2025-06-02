@@ -7,7 +7,7 @@ export const YaquiConfig = {
         estilosEstacion: [
             { 
                 IdEstacion: 1, 
-                Imagen: "position:absolute;height:251px;width:423px;left:318px;top:755px", 
+                Imagen: "position:absolute;height:251px;width:423px;left:318px;top:755px",
                 Etiqueta: "position:absolute;height:60px;width:177px;left:355px;top:1010px;", 
                 Estado: "display:block" 
             },
