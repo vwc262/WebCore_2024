@@ -200,8 +200,8 @@ class AppGraficador {
             });
         }
 
-        window.addEventListener("resize", this.scaleDocument);
-        this.scaleDocument();
+        // window.addEventListener("resize", this.scaleDocument);
+        // this.scaleDocument();
     }
 
     setDateTime() {

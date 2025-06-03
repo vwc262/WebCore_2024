@@ -73,6 +73,13 @@ class Perfil {
 
             dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick.bind(this));
             this.contenedor_botones.append(dial_button_interceptor);
+
+            EventsManager.Instance.Suscribirevento(
+                "Interceptor_Click",
+                new EventoCustomizado((data) => {
+                    this.onInterceptorClick(data);
+                })
+            );
         });
 
         const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
@@ -92,6 +99,8 @@ class Perfil {
         const steps = Math.abs(this.actualInterceptor - interceptor);
 
         this.spinDial(steps, left);
+
+        EventsManager.Instance.EmitirEvento(`Interceptor_Dial_Click_${interceptor}`);
     }
 
     onRightLeftBtnClick(e) {
@@ -271,6 +280,14 @@ class Perfil {
 
             container.append(elem);
         }
+    }
+
+    onInterceptorClick(data) {
+        const interceptor = data.key;
+        const left = this.actualInterceptor > interceptor;
+        const steps = Math.abs(this.actualInterceptor - interceptor);
+
+        this.spinDial(steps, left);
     }
 
     create() {
