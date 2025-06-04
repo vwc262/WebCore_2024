@@ -199,6 +199,24 @@ export const PozosPAI = {
                 "Etiqueta": "position: absolute; left: 1017px; top: 986px; ",
                 "Estado": "display:none;"
             },
+            {
+                "IdEstacion": 1714,
+                "Imagen": "position: absolute; left: 1123px; top: 1001px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 1067px; top: 986px; ",
+                "Estado": "display:none;"
+            },
+            {
+                "IdEstacion": 1715,
+                "Imagen": "position: absolute; left: 1173px; top: 1001px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 1117px; top: 986px; ",
+                "Estado": "display:none;"
+            },
+            {
+                "IdEstacion": 1716,
+                "Imagen": "position: absolute; left: 1223px; top: 1001px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 1167px; top: 986px; ",
+                "Estado": "display:none;"
+            },
              /* pozos teoloyucan*/
              {
                 "IdEstacion": 1801,
