@@ -31,6 +31,9 @@ class Perfil3D {
         this.lastHighlighted = null;
         // Material para resaltado
         this.highlightMaterial = null;
+
+        this.tiempoTranscurrido = 0;
+        this.interpolando = false;
     }
 
     create() {
@@ -118,8 +121,14 @@ class Perfil3D {
         const scene = new BABYLON.Scene(this.engine);
 
         // 1. Crear el nodo objetivo (target)
-        let cameraTarget = new BABYLON.TransformNode('cameraTarget', scene);
-        cameraTarget.position = new BABYLON.Vector3(0, 0, -1);
+        this.cameraTarget = new BABYLON.TransformNode('cameraTarget', scene);
+        this.cameraTarget.position = new BABYLON.Vector3(0, 0, -1);
+
+        // Muestra el target actual
+        this.targetDebug = BABYLON.MeshBuilder.CreateSphere("debug", { diameter: 0.25 }, scene);
+        this.targetDebug.material = new BABYLON.StandardMaterial("debugMat", scene);
+        this.targetDebug.material.diffuseColor = BABYLON.Color3.Red();
+        this.targetDebug.position = this.cameraTarget.position;
 
         // 2. Crear la cámara con parámetros iniciales
         const camera = new BABYLON.ArcRotateCamera(
@@ -127,24 +136,21 @@ class Perfil3D {
             this.deg2rad(-129),   // alpha (rotación horizontal en radianes)
             this.deg2rad(55),  // beta (rotación vertical en radianes)
             0,             // radio (distancia al target)
-            cameraTarget.position,
+            this.cameraTarget.position,
             scene
         );
 
         this.initialPosition = camera.position;
 
-        // 3. Asignar el target correctamente (mejor que usar solo la posición)
-        // camera.setTarget(cameraTarget);
-
         // Targets the camera to scene origin
         camera.attachControl(this.canvas, true); // Habilitar controles
 
         // 4. Configurar límites y comportamientos
-        // camera.upperBetaLimit = this.deg2rad(55); // Límite superior
-        // camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
+        camera.upperBetaLimit = this.deg2rad(55); // Límite superior
+        camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
 
-        // camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
-        // camera.lowerAlphaLimit = this.deg2rad(-180); // Límite horizontal der
+        camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
+        camera.lowerAlphaLimit = this.deg2rad(-180); // Límite horizontal der
 
         camera.panningSensibility = 2500;
         camera.panningDistanceLimit = 10;
@@ -184,6 +190,11 @@ class Perfil3D {
         this.highlightMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0.2); // Naranja brillante
         this.highlightMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3); // Ligero brillo
 
+        // O una luz direccional más fuerte
+        const dirLight = new BABYLON.DirectionalLight("dirLight",
+            new BABYLON.Vector3(-1, -2, -1), scene);
+        dirLight.intensity = 2.0;
+
         // cdmx
         BABYLON.SceneLoader.ImportMesh(
             "",
@@ -198,12 +209,15 @@ class Perfil3D {
 
                 if (directionalLight) {
                     directionalLight.intensity = 1.0;
+                    directionalLight.dispose();
                 }
                 if (areaLight1) {
                     areaLight1.intensity = 3.0;
+                    areaLight1.dispose();
                 }
                 if (areaLight2) {
                     areaLight2.intensity = 4.0;
+                    areaLight2.dispose();
                 }
 
                 newMesh.forEach((mesh, i) => {
@@ -267,6 +281,21 @@ class Perfil3D {
                             mesh.dispose();
                         }
                     }
+                    else if (mesh.name.includes('Cube_')) {
+                        if (!mesh.name.includes('root')) {
+                            mesh.isPickable = true;
+                            mesh.actionManager = new BABYLON.ActionManager(scene);
+
+                            mesh.actionManager.registerAction(
+                                new BABYLON.ExecuteCodeAction(
+                                    BABYLON.ActionManager.OnPickTrigger,
+                                    () => {
+                                        this.interpolar(mesh);
+                                    }
+                                )
+                            );
+                        }
+                    }
                 })
 
             },
@@ -284,6 +313,73 @@ class Perfil3D {
 
         return scene;
     };
+
+    interpolar(mesh, duration = 1.0) {
+        // 1. Guardar posiciones iniciales
+        const startTargetPos = this.cameraTarget.position.clone();
+        const startCamPos = this.camera.position.clone();
+
+        // 2. Calcular la posición final del target (el mesh clickeado)
+        const endTargetPos = mesh.position.clone();
+
+        // 3. Calcular la dirección y distancia final de la cámara
+        const direction = startCamPos.subtract(endTargetPos).normalize();
+        const currentDistance = BABYLON.Vector3.Distance(startCamPos, startTargetPos);
+        const endCamPos = endTargetPos.add(direction.scale(currentDistance));
+
+        // 4. Animación con smoothstep
+        let startTime = Date.now();
+        const animate = () => {
+            const elapsed = (Date.now() - startTime) / 1000; // Tiempo en segundos
+            const t = Math.min(elapsed / duration, 1.0); // Normalizado [0, 1]
+
+            // Aplicar smoothstep (suavizado)
+            const smoothT = t * t * (3 - 2 * t); // Fórmula smoothstep
+
+            // Interpolar posiciones
+            this.cameraTarget.position = BABYLON.Vector3.Lerp(
+                startTargetPos,
+                endTargetPos,
+                smoothT
+            );
+
+            this.targetDebug.position = this.cameraTarget.position;
+
+            // 1. Guardar la distancia actual (radio) y ángulos de la cámara
+            const radioActual = this.camera.radius;
+            const alphaActual = this.camera.alpha;
+            const betaActual = this.camera.beta;
+
+            // 2. Mover el target al nuevo mesh
+            this.camera.target = BABYLON.Vector3.Lerp(
+                startTargetPos,
+                endTargetPos,
+                smoothT
+            );
+
+            this.camera.position = BABYLON.Vector3.Lerp(
+                startCamPos,
+                endCamPos,
+                smoothT
+            );
+
+            // 3. Recalcular la posición de la cámara manteniendo rotación y distancia
+            this.camera.radius = radioActual; // Conservar distancia
+            this.camera.alpha = alphaActual;  // Conservar rotación horizontal
+            this.camera.beta = betaActual;    // Conservar rotación vertical
+
+            // (Opcional) Forzar actualización si es necesario
+            this.camera.rebuildAnglesAndRadius();
+
+            // Continuar animación hasta completar
+            if (t < 1.0) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        animate();
+
+    }
 
     onInterceptorClick() {
 
@@ -401,6 +497,7 @@ class Perfil3D {
                 this.camera.target.y -= exceed * 0.05;
             }
         });
+
     }
 }
 
