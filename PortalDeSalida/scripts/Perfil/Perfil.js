@@ -1,7 +1,7 @@
 import { Core } from "../Core.js";
 import { Configuracion } from "../../config/config.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
-import Perfil3D from "./Perfil3D.js";
+
 
 
 class Perfil {
@@ -18,71 +18,11 @@ class Perfil {
         return this.#_instance;
     }
 
-    dial_name = 'Dial_01/SDial00';
-    btn_left_name = 'Boton_01/SDial_b1_00';
-    btn_right_name = 'Boton_02/Secuencia_Dial00';
-    destello = 'Destello/SDestello';
-
     constructor() {
         this.actualInterceptor = 0;
         this.actualFrame = 0;
         this.nombre_interceptores = null;
         this.config = Core.Instance.Configuracion;
-    }
-
-    InitializeDial() {
-
-        const sombra = document.getElementsByClassName("dial_sombra")[0];
-        sombra.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/sombra.png?v=${Core.Instance.version}`);
-
-        const dial_interceptores = document.getElementsByClassName("dial_interceptores")[0];
-        dial_interceptores.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/Dial_Ramales.png?v=${Core.Instance.version}`);
-
-        const destello_container = document.getElementsByClassName("contenedor_destello")[0];
-        this.nombre_interceptores = document.getElementsByClassName("nombre_interceptores")[0];
-        this.nombre_interceptores.style.background = `url(${Core.Instance.ResourcesPath}secuencias/Destello/Nombre_contenedor.png?v=${Core.Instance.version})`;
-
-        this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
-        this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
-
-        this.interceptores = Core.Instance.Configuracion.interceptores;
-        this.interceptores_keys = Object.keys(this.interceptores);
-
-        this.cargarImagenesDial(this.dial_interceptores, this.interceptores_keys.length, this.dial_name);
-        this.cargarImagenesDial(this.dial_interceptores, 6, this.btn_left_name);
-        this.cargarImagenesDial(this.dial_interceptores, 6, this.btn_right_name);
-        this.cargarImagenesDial(destello_container, 6, this.destello);
-
-        document.getElementsByClassName(this.dial_name)[this.actualInterceptor].style.display = 'block';
-        document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
-        document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
-
-        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, this.interceptores_keys.length, 285, 450, 430);
-
-        this.interceptores_keys.forEach((key, index) => {
-
-            const dial_button_interceptor = document.createElement('div');
-            dial_button_interceptor.classList = 'dial_button_interceptor';
-
-            const pos = posiciones[index];
-
-            dial_button_interceptor.style.left = `${pos.left}px`;
-            dial_button_interceptor.style.top = `${pos.top}px`;
-
-            dial_button_interceptor.setAttribute('interceptor', index);
-
-            dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick.bind(this));
-            this.contenedor_botones.append(dial_button_interceptor);
-        });
-
-        const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
-
-        for (const elemento of rightLeftBtn_dial) {
-            elemento.addEventListener('click', this.onRightLeftBtnClick.bind(this));
-        }
-
-
-        this.contenedor_botones.children[0].click();
     }
 
     onDialBtnInterceptoriclick(e) {
@@ -262,27 +202,12 @@ class Perfil {
         return posiciones;
     }
 
-    cargarImagenesDial(container, frames, image_name) {
-        for (let index = 0; index < frames; index++) {
-            const elem = document.createElement("img");
-
-            elem.classList = `elemento_dial ${image_name}`;
-            elem.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/${image_name}${(index < 10 ? '0' : '')}${index}.png?v=${Core.Instance.version}`);
-
-            container.append(elem);
-        }
-    }
-
     create() {
         const configuracionProyecto = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
         const widthRenderPerfil = configuracionProyecto.widthRender;
         const heightRender = configuracionProyecto.heightRender;
 
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
-
-        this.InitializeDial();
-
-        new Perfil3D().create();
     }
 
 }

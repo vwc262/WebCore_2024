@@ -1,5 +1,4 @@
 import { Core } from "./Core.js";
-import { Configuracion } from "../config/config.js";
 import { Tabla } from "./Tabla/Tabla.js";
 import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
@@ -7,10 +6,9 @@ import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { AppGraficador } from "./reporteador/AppGraficador.js";
-import News from "./news/news.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Lumbreras;
+  projectName = EnumProyecto.PortalDeSalida;
   constructor() {
 
   }
@@ -46,8 +44,6 @@ class VwcApp {
   }
 
   IniciarHeader() {
-    const config = Core.Instance.Configuracion;
-
     const titulo = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     let $title = document.getElementById('title__page');
     let $header_image = document.getElementById('header_image');
@@ -60,8 +56,6 @@ class VwcApp {
   }
 
   IniciarUI() {
-
-
     this.inicializarBotonHeader("imgHome", 'home');
     this.inicializarBotonHeader("imgMapa", 'icomapa');
     this.inicializarBotonHeader("imgGraficador", 'graficador');
@@ -80,7 +74,6 @@ class VwcApp {
     new Tabla().create(); // Inicio de tabla
     new Perfil().create(); // Inicio del perfil
     new Mapa().create();
-    new News().Init();
 
     AppGraficador.Instance.Start();
 

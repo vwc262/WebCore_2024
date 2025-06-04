@@ -36,6 +36,7 @@ const EnumProyecto = {
   Encharcamientos: 24,
   Lumbreras: 25,
   Ramales: 26,
+  PortalDeSalida: 27,
 };
 /**
  * @returns NombreProyecto
@@ -68,6 +69,7 @@ const EnumNombreProyecto = {
   24: "Encharcamientos",
   25: "Lumbreras",
   26: "Ramales",
+  27: "PortalDeSalida",
 };
 
 /**
@@ -101,6 +103,7 @@ const EnumNombreProyectoFolder = {
   "Encharcamientos2025": 24,
   "Lumbreras2025": 25,
   "Ramales2025": 26,
+  "PortalDeSalida2025": 27,
 };
 
 /**

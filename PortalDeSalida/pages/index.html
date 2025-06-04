@@ -7,11 +7,9 @@
   <title id="title__page">VWC</title>
   <link rel="stylesheet" href="../styles/index.css">
   <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
-  <link rel="stylesheet" href="../styles/Tabla/TablaBuscador.css">
   <link rel="stylesheet" href="../styles/Particular/Particular.css">
   <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
   <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
-  <link rel="stylesheet" href="../styles/News/News.css">
   <!-- reportes -->
   <link rel="stylesheet" href="../styles/reportes/reportes.css">
   <link rel="stylesheet" href="../scripts/vanilla-calendar/build/vanilla-calendar.min.css">
@@ -74,32 +72,15 @@
         </filter>
       </svg>
 
-      <section id="section__home" class="section__home" style="display: block;">
-        <canvas id="renderCanvas" width="1440" height="954"></canvas>
-        <div class="contenedor_dial">
-          <img class="dial_sombra">
-          <div class="dial_secuencias_interceptores"></div>
-          <div class="dial_secuencias_btn_izquiero"></div>
-          <div class="dial_secuencias_btn_derecho"></div>
-          <img class="dial_interceptores">
-          <div class="contenedor_destello"></div>
-          <div class="nombre_interceptores"></div>
-          <div class="contenedor_botones"></div>
-          <div class="dial_button dial_button_left"></div>
-          <div class="dial_button dial_button_right"></div>
-        </div>
-      </section>
-
       <!-- ========================= Tabla ========================= -->
       <aside class="aside__tabla" style="display: block;">
-        <div class="buscadorTabla">
-          <label class="buscadorTxT">
-            <input class="buscadorTxT" type="search" id="query" placeholder="Buscar lumbrera" />
-          </label>
+        <div class="estaciones_header sub_titulo">
+          <div class="Columna_ID"> ID </div>
+          <div class="Columna_Nombre"> Nombre </div>
+          <div class="Columna_Fecha"> Fecha </div>
+          <div class="Columna_Hora"> Hora </div>
         </div>
-
         <div id="tableContainer" class="table-container"></div>
-        <div id="tableContainerBuscador" class="table-buscador-container"></div>
       </aside>
 
       <!-- ========================= Mapa ========================= -->
@@ -286,8 +267,6 @@
         <div id="particular__aguaNivel"></div>
         <img src="" id="particularImgExterior" style="display: none;">
       </section>
-
-      <div class="news"></div>
 
     </container>
   </main>

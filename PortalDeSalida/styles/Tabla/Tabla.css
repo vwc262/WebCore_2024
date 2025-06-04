@@ -6,7 +6,7 @@
   font-size: 12px;
 }
 
-.textoValor{
+.textoValor {
   font-size: 22px;
 }
 
@@ -47,15 +47,14 @@
   display: flex;
   width: 100%;
   height: auto;
-  max-height: 946px;
+  max-height: 961px;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-content: stretch;
   justify-content: flex-start;
   align-items: stretch;
-  overflow-x: hidden;
-  overflow-y: scroll;
   margin-left: 10px;
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
 
   &::-webkit-scrollbar-thumb:active {
     cursor: grabbing;
@@ -103,16 +102,19 @@
 }
 
 .estaciones_header {
-  background: linear-gradient(180deg, rgba(153, 164, 246, 1) 0%, rgba(153, 164, 246, 1) 10%, rgba(79, 93, 216, 1) 10%);
+  background: linear-gradient(0deg, rgba(153, 164, 246, 1) 0%, rgba(26, 63, 143, 1) 50%, rgba(24, 87, 182, 1) 100%);
+  color: #40e0d0;
   display: flex;
   width: 100%;
-  height: 50px;
-  border-radius: 0 0 25px 25px;
+  height: 36px;
+  border-radius: 15px 15px 0 0;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
   justify-content: space-around;
   align-items: center;
+  margin-top: 35px;
+  margin-left: 10px;
 }
 
 .estacion_row {
@@ -123,9 +125,8 @@
 }
 
 .btn_goParticular {
-  width: 66px;
-  height: 61px;
-  margin: 0 0 -2px -2px;
+  width: 37px;
+  height: 33px;
   border: none;
   cursor: pointer;
 }
@@ -149,11 +150,11 @@
 }
 
 .signals_estacion {
-  display: none;
+  display: flex;
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
-  height: 230px;
+  height: 112px;
 }
 
 
@@ -186,9 +187,11 @@
 .ImgEstacion {
   display: flex;
   flex-direction: column-reverse;
-  width: 136px;
-  height: 211px;
+  width: 133px;
+  max-width: 133px;
+  height: 102px;
   border-radius: 8px;
+  margin: -3px -5px -0px -6px;
 }
 
 .gradiant_div {
@@ -197,8 +200,7 @@
   border-radius: 10px;
   border: 10px solid transparent;
   mask-composite: exclude;
-  width: 201px;
-  height: 228px;
+  height: 112px;
 }
 
 .signal_nombre {
@@ -224,7 +226,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 50%;
+  width: 34%;
   height: 100%;
 }
 
@@ -321,7 +323,7 @@
 
 .Columna_Fecha {
   display: flex;
-  width: 17%;
+  width: 26%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -329,7 +331,7 @@
 
 .Columna_Hora {
   display: flex;
-  width: 11%;
+  width: 18%;
   height: 100%;
   align-items: center;
   justify-content: center;

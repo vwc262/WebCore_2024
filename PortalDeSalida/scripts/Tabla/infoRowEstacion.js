@@ -40,7 +40,7 @@ class infoRowEstacion {
         /* =========== creacion de signals ===================== */
 
         this.estacion.Signals.forEach(signal => {
-            if (signal.TipoSignal == 1) {
+            if (signal.TipoSignal == 1 || signal.TipoSignal == 24) {
 
                 let signal_div = document.createElement('div');
                 signal_div.classList = 'signal_estacion';
@@ -52,25 +52,25 @@ class infoRowEstacion {
                 semaforos_div.classList = 'semaforos_div';
 
                 let signal_nombre = document.createElement('div');
-                signal_nombre.classList = 'signal_nombre';
+                signal_nombre.classList = 'signal_nombre sub_titulo';
                 signal_nombre.innerHTML = `${signal.Nombre}`;
 
                 let signal_valor = document.createElement('div');
                 signal_valor.id = `signal_${signal.IdSignal}`;
-                signal_valor.classList = 'signal_valor textoValor';
+                signal_valor.classList = 'signal_valor textoValor sub_titulo';
                 signal_valor.innerHTML = `${signal.Valor} m`;
                 this.alojarElementoDinamico([signal_valor]);
 
                 let semaforo_altura = document.createElement('div');
-                semaforo_altura.classList = 'semaforoCont';
-                semaforo_altura.innerHTML = `${signal.Semaforo?.Altura ? 'Altura<br>' + signal.Semaforo.Altura + 'm': 'ND'}`;
+                semaforo_altura.classList = 'semaforoCont  sub_titulo';
+                semaforo_altura.innerHTML = `${signal.Semaforo?.Altura ? 'Altura<br>' + signal.Semaforo.Altura + ' m': 'ND'}`;
 
                 let semaforo_prev = document.createElement('div');
-                semaforo_prev.classList = 'semaforoCont';
+                semaforo_prev.classList = 'semaforoCont  sub_titulo';
                 semaforo_prev.innerHTML = `${signal.Semaforo?.Preventivo ? '<span style="color: yellow;">Prev.<br> </span>' + signal.Semaforo.Preventivo + ' m' : 'ND'}`;
 
                 let semaforo_critc = document.createElement('div');
-                semaforo_critc.classList = 'semaforoCont';
+                semaforo_critc.classList = 'semaforoCont  sub_titulo';
                 semaforo_critc.innerHTML = `${signal.Semaforo?.Critico ? '<span style="color: red;">Crit.<br> </span>' + signal.Semaforo.Critico + ' m' : 'ND'}`;
 
                 semaforos_div.append(semaforo_altura, semaforo_prev, semaforo_critc);
