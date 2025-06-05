@@ -551,6 +551,7 @@ class Tabla {
     //   this.scrollValue = event.currentTarget.value;
     // });
   }
+  
   normalizedTableOffset = 0;
   SVGScrollHandler = {
     minY: 169,

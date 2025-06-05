@@ -125,7 +125,7 @@ class SitioPerfil {
 
         let estacionDiv = CreateElement({
             nodeElement: 'div',
-            attributes: { id: `sitioPerfil_${estacion.Nombre}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
+            attributes: { id: `sitioPerfil_${estacion.Abreviacion}`, class: 'sitioPerfil', style: `${this.estilosEstacionEtiqueta.Imagen}` },
             events: new Map()
                 .set("click", [this.SetEventoClick(estacion)])
                 .set("mouseover", [() => {
