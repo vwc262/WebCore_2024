@@ -491,7 +491,7 @@ class Perfil3D {
                 }
 
                 // Soft limit para altura
-                if (this.camera.target.y < minHeight * 1.5) {
+                if (this.camera.target.y < minHeight * 0.75) {
                     const exceed = (minHeight * 1.5 - this.camera.target.y) / minHeight;
                     this.camera.target.y += exceed * 0.05;
                 }
