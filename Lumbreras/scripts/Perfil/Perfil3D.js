@@ -125,7 +125,7 @@ class Perfil3D {
         this.cameraTarget.position = new BABYLON.Vector3(0, 0, -1);
 
         // Muestra el target actual
-        this.targetDebug = BABYLON.MeshBuilder.CreateSphere("debug", { diameter: 0.25 }, scene);
+        this.targetDebug = BABYLON.MeshBuilder.CreateSphere("debug", { diameter: 0.125 }, scene);
         this.targetDebug.material = new BABYLON.StandardMaterial("debugMat", scene);
         this.targetDebug.material.diffuseColor = BABYLON.Color3.Red();
         this.targetDebug.position = this.cameraTarget.position;
@@ -146,22 +146,22 @@ class Perfil3D {
         camera.attachControl(this.canvas, true); // Habilitar controles
 
         // 4. Configurar límites y comportamientos
-        camera.upperBetaLimit = this.deg2rad(55); // Límite superior
-        camera.lowerBetaLimit = this.deg2rad(25); // Límite inferior
+        camera.upperBetaLimit = this.deg2rad(62); // Límite superior
+        camera.lowerBetaLimit = this.deg2rad(15); // Límite inferior
 
         camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
-        camera.lowerAlphaLimit = this.deg2rad(-180); // Límite horizontal der
+        camera.lowerAlphaLimit = this.deg2rad(-150); // Límite horizontal der
 
         camera.panningSensibility = 2500;
-        camera.panningDistanceLimit = 10;
+        camera.panningDistanceLimit = 22;
 
         camera.wheelPrecision = 50;
         camera.zoomToMouseLocation = true;
 
         // 5. Ajustar radio inicial y límites
         camera.radius = 10;  // Distancia inicial
-        camera.lowerRadiusLimit = 5;  // Zoom in mínimo
-        camera.upperRadiusLimit = 20; // Zoom out máximo
+        camera.lowerRadiusLimit = 1;  // Zoom in mínimo
+        camera.upperRadiusLimit = 10; // Zoom out máximo
 
         // 7. Para modelos muy pequeños, usa valores más altos
         camera.angularSensibilityX = 2500;
@@ -329,6 +329,8 @@ class Perfil3D {
 
         // 4. Animación con smoothstep
         let startTime = Date.now();
+        this.interpolando = true;
+
         const animate = () => {
             const elapsed = (Date.now() - startTime) / 1000; // Tiempo en segundos
             const t = Math.min(elapsed / duration, 1.0); // Normalizado [0, 1]
@@ -374,6 +376,8 @@ class Perfil3D {
             // Continuar animación hasta completar
             if (t < 1.0) {
                 requestAnimationFrame(animate);
+            } else{
+                this.interpolando = false;
             }
         };
 
@@ -475,27 +479,32 @@ class Perfil3D {
             const currentOffset = this.camera.target.subtract(originalTarget);
             const horizontalDistance = Math.sqrt(currentOffset.x * currentOffset.x + currentOffset.z * currentOffset.z);
 
-            // Soft limit para el radio
-            if (horizontalDistance > this.camera.panningDistanceLimit * 0.3) {
-                const exceedRatio = (horizontalDistance - this.camera.panningDistanceLimit * 0.3) / (this.camera.panningDistanceLimit * 0.2);
-                const resistance = exceedRatio * exceedRatio * 0.1; // Aumenta resistencia exponencialmente
+            if (!this.interpolando) {
+                // Soft limit para el radio
+                if (horizontalDistance > this.camera.panningDistanceLimit * 0.3) {
+                    const exceedRatio = (horizontalDistance - this.camera.panningDistanceLimit * 0.3) / (this.camera.panningDistanceLimit * 0.2);
+                    const resistance = exceedRatio * exceedRatio * 0.1; // Aumenta resistencia exponencialmente
 
-                const directionXZ = new BABYLON.Vector3(currentOffset.x, 0, currentOffset.z).normalize();
-                this.camera.target.x -= directionXZ.x * resistance;
-                this.camera.target.z -= directionXZ.z * resistance;
+                    const directionXZ = new BABYLON.Vector3(currentOffset.x, 0, currentOffset.z).normalize();
+                    this.camera.target.x -= directionXZ.x * resistance;
+                    this.camera.target.z -= directionXZ.z * resistance;
+                }
+
+                // Soft limit para altura
+                if (this.camera.target.y < minHeight * 1.5) {
+                    const exceed = (minHeight * 1.5 - this.camera.target.y) / minHeight;
+                    this.camera.target.y += exceed * 0.05;
+                }
+
+                // Soft limit para altura máxima
+                if (this.camera.target.y > maxHeight * 0.9) {
+                    const exceed = (this.camera.target.y - maxHeight * 0.9) / maxHeight;
+                    this.camera.target.y -= exceed * 0.05;
+                }
             }
 
-            // Soft limit para altura
-            if (this.camera.target.y < minHeight * 1.5) {
-                const exceed = (minHeight * 1.5 - this.camera.target.y) / minHeight;
-                this.camera.target.y += exceed * 0.05;
-            }
-
-            // Soft limit para altura máxima
-            if (this.camera.target.y > maxHeight * 0.9) {
-                const exceed = (this.camera.target.y - maxHeight * 0.9) / maxHeight;
-                this.camera.target.y -= exceed * 0.05;
-            }
+            this.cameraTarget.position = this.camera.target;
+            this.targetDebug.position = this.camera.target;
         });
 
     }
