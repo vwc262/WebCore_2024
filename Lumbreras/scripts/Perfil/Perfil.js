@@ -21,7 +21,7 @@ class Perfil {
     dial_name = 'Dial_01/SDial00';
     btn_left_name = 'Boton_01/SDial_b1_00';
     btn_right_name = 'Boton_02/Secuencia_Dial00';
-    destello = 'Destello/SDestello';
+    destello = 'Seleccion/Secuencia_Select';
 
     constructor() {
         this.actualInterceptor = 0;
@@ -39,8 +39,8 @@ class Perfil {
         dial_interceptores.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/Dial_Ramales.png?v=${Core.Instance.version}`);
 
         const destello_container = document.getElementsByClassName("contenedor_destello")[0];
+
         this.nombre_interceptores = document.getElementsByClassName("nombre_interceptores")[0];
-        this.nombre_interceptores.style.background = `url(${Core.Instance.ResourcesPath}secuencias/Destello/Nombre_contenedor.png?v=${Core.Instance.version})`;
 
         this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
         this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
@@ -51,7 +51,7 @@ class Perfil {
         this.cargarImagenesDial(this.dial_interceptores, this.interceptores_keys.length, this.dial_name);
         this.cargarImagenesDial(this.dial_interceptores, 6, this.btn_left_name);
         this.cargarImagenesDial(this.dial_interceptores, 6, this.btn_right_name);
-        this.cargarImagenesDial(destello_container, 6, this.destello);
+        this.cargarImagenesDial(destello_container, 7, this.destello);
 
         document.getElementsByClassName(this.dial_name)[this.actualInterceptor].style.display = 'block';
         document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
@@ -73,6 +73,13 @@ class Perfil {
 
             dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick.bind(this));
             this.contenedor_botones.append(dial_button_interceptor);
+
+            EventsManager.Instance.Suscribirevento(
+                "Interceptor_Click",
+                new EventoCustomizado((data) => {
+                    this.onInterceptorClick(data);
+                })
+            );
         });
 
         const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
@@ -92,6 +99,8 @@ class Perfil {
         const steps = Math.abs(this.actualInterceptor - interceptor);
 
         this.spinDial(steps, left);
+
+        EventsManager.Instance.EmitirEvento(`Interceptor_Dial_Click_${interceptor}`);
     }
 
     onRightLeftBtnClick(e) {
@@ -114,7 +123,7 @@ class Perfil {
         const ticks = 24;
         const frame_step = dial_images.length / total_interceptores.length;
         let start = this.actualFrame;
-        this.actualInterceptor += + (left ? -steps : steps);
+        this.actualInterceptor += (left ? -steps : steps);
         const stop = Math.round(this.actualInterceptor * frame_step);
 
         // if (stop == this.actualFrame) return;
@@ -175,15 +184,19 @@ class Perfil {
         const interval = setInterval(() => {
             if (actual_frame >= destellos.length - 1) {
                 clearInterval(interval);
+                destellos[destellos.length - 1].style.display = 'none';
             }
             else {
                 actual_frame++;
+                for (let index = 0; index < destellos.length; index++) {
+                    destellos[index].style.display = 'none';
+                }
                 destellos[actual_frame].style.display = 'block';
             }
         }, ticks);
 
 
-        this.nombre_interceptores.innerHTML = `${this.interceptores[this.interceptores_keys[this.actualInterceptor]].nombre}`;
+        this.nombre_interceptores.src = `${Core.Instance.ResourcesPath}secuencias/Seleccion/${this.interceptores[this.interceptores_keys[this.actualInterceptor]].abreviacion}.png?v=${Core.Instance.version}`;
     }
 
     pressButton(left) {
@@ -271,6 +284,14 @@ class Perfil {
 
             container.append(elem);
         }
+    }
+
+    onInterceptorClick(data) {
+        const interceptor = data.key;
+        const left = this.actualInterceptor > interceptor;
+        const steps = Math.abs(this.actualInterceptor - interceptor);
+
+        this.spinDial(steps, left);
     }
 
     create() {

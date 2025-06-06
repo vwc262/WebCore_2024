@@ -70,10 +70,6 @@
 }
 
 .contenedor_destello {
-    width: 505px;
-    position: absolute;
-    top: 10px;
-    left: 215px;
     pointer-events: none;
 }
 
@@ -82,20 +78,9 @@
 }
 
 .nombre_interceptores {
-    width: 484px;
-    height: 64px;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 0px;
-    left: 235px;
-    pointer-events: none;
-    font-size: 33px;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
 }
 
 /**/
