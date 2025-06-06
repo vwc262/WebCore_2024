@@ -1,6 +1,7 @@
 import { Core } from "../Core.js";
 import { EventsManager } from "../Managers/EventsManager.js";
 import { Particular } from "../Particular/Particular.js";
+import { EnumUnidadesSignal } from "../Utilities/Enums.js";
 
 /**
  * @returns {infoRowEstacion}
@@ -40,7 +41,7 @@ class infoRowEstacion {
         /* =========== creacion de signals ===================== */
 
         this.estacion.Signals.forEach(signal => {
-            if (signal.TipoSignal == 1 || signal.TipoSignal == 24) {
+            if (signal.TipoSignal == 1) {
 
                 let signal_div = document.createElement('div');
                 signal_div.classList = 'signal_estacion';
@@ -79,6 +80,29 @@ class infoRowEstacion {
                 signals_div.append(signal_div);
 
             }
+            else if (signal.TipoSignal == 3 || signal.TipoSignal == 24) {
+
+                let signal_div = document.createElement('div');
+                signal_div.classList = 'signal_estacion';
+
+                let nivel_div = document.createElement('div');
+                nivel_div.classList = 'nivel_div';
+
+                let signal_nombre = document.createElement('div');
+                signal_nombre.classList = 'signal_nombre sub_titulo';
+                signal_nombre.innerHTML = `${signal.Nombre}`;
+
+                let signal_valor = document.createElement('div');
+                signal_valor.id = `signal_${signal.IdSignal}`;
+                signal_valor.classList = 'signal_valor textoValor sub_titulo';
+                signal_valor.innerHTML = `${signal.Valor} ${EnumUnidadesSignal[signal.TipoSignal]}`;
+                this.alojarElementoDinamico([signal_valor]);
+
+                nivel_div.append(signal_nombre)
+                signal_div.append(nivel_div, signal_valor);
+                signals_div.append(signal_div);
+
+            }
         });
 
         this.root = btn_goParticular;
@@ -102,7 +126,7 @@ class infoRowEstacion {
         Particular.Instance.setEstacion(this.estacion);
         Particular.Instance.mostrarDetalles(this.interceptor);
 
-        EventsManager.Instance.EmitirEvento("Cerrar");
+        // EventsManager.Instance.EmitirEvento("Cerrar");
     }
 
     update() {
@@ -112,7 +136,7 @@ class infoRowEstacion {
             estacionUpdate.Signals.forEach(signal => {
                 if(signal.TipoSignal == 1){
                     let valor_signal = this.HTMLUpdateElements[`signal_${signal.IdSignal}`];
-                    valor_signal.innerHTML = `${signal.DentroRango? signal.Valor : "---"} m`;
+                    valor_signal.innerHTML = `${signal.DentroRango? signal.Valor : "---"} ${EnumUnidadesSignal[signal.TipoSignal]}`;
                     valor_signal.style.color = `${signal.GetColorSemaforo('floralwhite')}`;
                 }
             })

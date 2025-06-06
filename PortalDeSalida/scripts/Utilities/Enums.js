@@ -221,7 +221,7 @@ var EnumTipoSignalNomenclatura = {
 const EnumUnidadesSignal = {
   1: "m",
   2: "<sup>kg</sup>/<sub>cm<sup>2</sup></sub>",
-  3: "<sup>l</sup>/<sub>s</sub>",
+  3: "m3/s",
   4: "m<sup>3</sup>",
   5: "%",
   10: "V",
@@ -233,7 +233,7 @@ const EnumUnidadesSignal = {
   21: "°C",
   22: "%",
   23: "%",
-  24: "<sup>Km</sup>/<sup>H</sup>",
+  24: "m/s",
   25: "°",
   26: "°",
 };

@@ -120,7 +120,6 @@ class Particular {
     this.headerBtn__Exterior.style.display = 'block';
 
     this.headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
-    console.log(`${interceptor == 'Interceptor Poniente' ? 'none' : 'block'}`)
     this.headerBtn__Subterraneo.style.display = `${interceptor == 'Interceptor Poniente' ? 'none' : 'block'}`;
     this.headerBtn__Subterraneo.click();
 
@@ -174,95 +173,95 @@ class Particular {
 
     const niveles = estacionUpdate.Signals.filter((signal) => signal.TipoSignal == EnumTipoSignal.Nivel);
 
-    for (let index = 0; index < this.barras.length; index++) {
-      const barra = this.barras[index];
-      barra.innerHTML = '';
+    // for (let index = 0; index < this.barras.length; index++) {
+    //   const barra = this.barras[index];
+    //   barra.innerHTML = '';
 
-      if (index <= niveles.length - 1) {
+    //   if (index <= niveles.length - 1) {
 
-        const nivel = niveles[index];
+    //     const nivel = niveles[index];
 
-        const barraContainer = CreateElement({
-          nodeElement: "div",
-          attributes: {
-            class: "barraContainer",
-          },
-        });
+    //     const barraContainer = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: {
+    //         class: "barraContainer",
+    //       },
+    //     });
 
-        const barraNivel = CreateElement({
-          nodeElement: "div",
-          attributes: {
-            class: "barraNivel",
-            id: `barraNivel_${nivel.IdSignal}`,
-          },
-        });
+    //     const barraNivel = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: {
+    //         class: "barraNivel",
+    //         id: `barraNivel_${nivel.IdSignal}`,
+    //       },
+    //     });
 
-        const cristalBarra = CreateElement({
-          nodeElement: "div",
-          attributes: {
-            class: "cristalBarra",
-            style: `background: url(${Core.Instance.ResourcesPath}General/Barra_Nivel.png?v=${Core.Instance.version}); background-size: 100% 100%; background-repeat: no-repeat`
-          },
-        });
+    //     const cristalBarra = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: {
+    //         class: "cristalBarra",
+    //         style: `background: url(${Core.Instance.ResourcesPath}General/Barra_Nivel.png?v=${Core.Instance.version}); background-size: 100% 100%; background-repeat: no-repeat`
+    //       },
+    //     });
 
-        barraContainer.append(barraNivel, cristalBarra);
-        this.setBaraNivel(barraNivel, nivel);
+    //     barraContainer.append(barraNivel, cristalBarra);
+    //     this.setBaraNivel(barraNivel, nivel);
 
-        const signalItem = CreateElement({
-          nodeElement: "div",
-          attributes: { class: "particular__item" },
-        });
+    //     const signalItem = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: { class: "particular__item" },
+    //     });
 
-        const valoresContainer = CreateElement({
-          nodeElement: "div",
-          attributes: { class: "valores_container" },
-        });
+    //     const valoresContainer = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: { class: "valores_container" },
+    //     });
 
-        const etiquetaNombre = CreateElement({
-          nodeElement: "div",
-          attributes: { class: "etiqueta__Nombre" },
-          innerText: `${nivel.GetNomenclaturaSignal()}: `,
-        });
+    //     const etiquetaNombre = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: { class: "etiqueta__Nombre" },
+    //       innerText: `${nivel.GetNomenclaturaSignal()}: `,
+    //     });
 
-        const etiquetaValor = CreateElement({
-          nodeElement: "div",
-          attributes: {
-            class: "etiqueta__Valor",
-            id: `valor_nivel_${nivel.IdSignal}`,
-          },
-          innerHTML: `${nivel.GetValorString(false, true)}`,
-        });
+    //     const etiquetaValor = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: {
+    //         class: "etiqueta__Valor",
+    //         id: `valor_nivel_${nivel.IdSignal}`,
+    //       },
+    //       innerHTML: `${nivel.GetValorString(false, true)}`,
+    //     });
 
-        const etiquetaUnidades = CreateElement({
-          nodeElement: "div",
-          attributes: {
-            class: "etiqueta__Nombre",
-          },
-          innerHTML: `[m]`,
-        });
+    //     const etiquetaUnidades = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: {
+    //         class: "etiqueta__Nombre",
+    //       },
+    //       innerHTML: `[m]`,
+    //     });
 
-        const etiquetaAltura = CreateElement({
-          nodeElement: "div",
-          attributes: {
-            class: "etiqueta__Altura",
-          },
-          innerHTML: `altura: ${nivel.Semaforo?.Altura || 'ND'} [m]`,
-        });
+    //     const etiquetaAltura = CreateElement({
+    //       nodeElement: "div",
+    //       attributes: {
+    //         class: "etiqueta__Altura",
+    //       },
+    //       innerHTML: `altura: ${nivel.Semaforo?.Altura || 'ND'} [m]`,
+    //     });
 
-        this.alojarElementoDinamico([barraNivel, etiquetaValor]);
+    //     this.alojarElementoDinamico([barraNivel, etiquetaValor]);
 
-        valoresContainer.append(etiquetaNombre, etiquetaValor, etiquetaUnidades);
-        signalItem.append(valoresContainer, etiquetaAltura);
-        barra.append(barraContainer, signalItem);
+    //     valoresContainer.append(etiquetaNombre, etiquetaValor, etiquetaUnidades);
+    //     signalItem.append(valoresContainer, etiquetaAltura);
+    //     barra.append(barraContainer, signalItem);
 
-        barra.style.display = 'block';
-      } else {
+    //     barra.style.display = 'block';
+    //   } else {
 
-        barra.removeAttribute('id');
-        barra.style.display = 'none';
-      }
+    //     barra.removeAttribute('id');
+    //     barra.style.display = 'none';
+    //   }
 
-    }
+    // }
   }
 
   /**
@@ -300,6 +299,7 @@ class Particular {
   }
 
   setParticularScene(exterior) {
+    console.log(this.$particularImgExterior)
     this.$particularImgExterior.style.display = `${exterior ? 'block' : 'none'}`;
   }
 

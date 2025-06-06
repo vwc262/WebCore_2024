@@ -1,6 +1,5 @@
 import { Configuracion } from "../../config/config.js";
 import { Core } from "../Core.js";
-import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { RowEstacion } from "./RowEstacion.js";
 
 /**
@@ -39,29 +38,6 @@ class Tabla {
         this.rows.push(rowEstacion);
       });
     });
-
-    this.suscribirEventos();
-    this.update();
-  }
-
-
-  onmouseover() { }
-
-  onclick() { }
-
-  update() { }
-
-  suscribirEventos() {
-    EventsManager.Instance.Suscribirevento(
-      "Update",
-      new EventoCustomizado(() => this.update())
-    );
-    EventsManager.Instance.Suscribirevento(
-      "OnMouseHoverPerfil",
-      new EventoCustomizado((data) =>
-        this.hoverRow(data.mouseover, data.IdEstacion, data.stopPropagation)
-      )
-    );
   }
 }
 

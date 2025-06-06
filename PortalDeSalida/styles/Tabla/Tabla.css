@@ -132,6 +132,8 @@
 }
 
 .data_row {
+  z-index: 1;
+  background: #8694ED;
   display: flex;
   width: 100%;
   height: 48px;
@@ -141,6 +143,10 @@
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
+}
+
+.data_row > * {
+  pointer-events: none;
 }
 
 .Columna_Nombre {

@@ -34,6 +34,8 @@ class RowEstacion {
 
         let data_row = document.createElement('div');
         data_row.classList = 'data_row';
+        data_row.addEventListener('mouseover', this.onmouseover.bind(this));
+        data_row.addEventListener('mouseout', this.onmouseout.bind(this));
 
         let id_estacion_div = document.createElement('div');
         id_estacion_div.classList = 'Columna_ID estacion_ID';
@@ -102,7 +104,6 @@ class RowEstacion {
     Init() {
 
         this.root.addEventListener('click', this.onclick.bind(this));
-        this.root.addEventListener('onmouseover', this.onmouseover);
 
         let inforowEstacion = new infoRowEstacion(this.signals_estacion_div, this.estacion, this.interceptor);
         inforowEstacion.Init();
@@ -113,7 +114,17 @@ class RowEstacion {
 
 
     onmouseover() {
+        EventsManager.Instance.EmitirEvento(
+            "OnMouseHoverEstacion",
+            this.estacion
+        );
+    }
 
+    onmouseout() {
+        // EventsManager.Instance.EmitirEvento(
+        //     "OnMouseOutEstacion",
+        //     this.estacion
+        // );
     }
 
     onclick() {
