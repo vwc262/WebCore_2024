@@ -24,10 +24,9 @@ class RowEstacion {
      * @param {Estacion} estacion 
      * @param {String} interceptor 
      */
-    constructor(container, estacion, interceptor) {
+    constructor(container, estacion) {
         this.HTMLUpdateElements = {};
         this.estacion = estacion;
-        this.interceptor = interceptor;
 
         let row_est_div = document.createElement('div');
         row_est_div.classList = 'estacion_row';
@@ -105,7 +104,7 @@ class RowEstacion {
 
         this.root.addEventListener('click', this.onclick.bind(this));
 
-        let inforowEstacion = new infoRowEstacion(this.signals_estacion_div, this.estacion, this.interceptor);
+        let inforowEstacion = new infoRowEstacion(this.signals_estacion_div, this.estacion);
         inforowEstacion.Init();
 
         this.suscribirEventos();

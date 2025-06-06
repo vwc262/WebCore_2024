@@ -22,22 +22,15 @@ class Tabla {
   }
 
   create() {
-    this.interceptores = this.Configuracion.interceptores;
-    let interceptores_keys = Object.keys(this.interceptores);
+    this.estaciones = Core.Instance.data;
 
-    interceptores_keys.forEach((key, index) => {
-      let config = this.interceptores[key];
 
-      config.ids.forEach(idEstacion => {
-        const nombre_interceptor = config.nombre;
-        let estacion = Core.Instance.GetDatosEstacion(idEstacion);
-
-        let rowEstacion = new RowEstacion(this.tBody, estacion, nombre_interceptor);
+      this.estaciones.forEach(estacion => {
+        let rowEstacion = new RowEstacion(this.tBody, estacion);
         rowEstacion.Init();
 
         this.rows.push(rowEstacion);
       });
-    });
   }
 }
 

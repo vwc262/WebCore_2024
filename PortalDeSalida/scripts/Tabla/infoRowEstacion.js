@@ -15,9 +15,8 @@ class infoRowEstacion {
      * @param {Estacion} estacion 
      * @param {String} interceptor 
      */
-    constructor(container, estacion, interceptor) {
+    constructor(container, estacion) {
         this.estacion = estacion;
-        this.interceptor = interceptor;
 
         let info_div = document.createElement('div');
         info_div.classList = 'info_estacion_row';
@@ -123,9 +122,7 @@ class infoRowEstacion {
     }
 
     onclick() {
-        Particular.Instance.setEstacion(this.estacion);
-        Particular.Instance.mostrarDetalles(this.interceptor);
-
+        // Particular.Instance.setEstacion(this.estacion);
         // EventsManager.Instance.EmitirEvento("Cerrar");
     }
 
