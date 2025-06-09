@@ -133,12 +133,19 @@ class Perfil3D {
         // 2. Crear la cámara con parámetros iniciales
         const camera = new BABYLON.ArcRotateCamera(
             "mainCamera",
-            this.deg2rad(-129),   // alpha (rotación horizontal en radianes)
+            this.deg2rad(90),   // alpha (rotación horizontal en radianes)
             this.deg2rad(55),  // beta (rotación vertical en radianes)
             0,             // radio (distancia al target)
             this.cameraTarget.position,
             scene
         );
+
+        // Configurar planos de recorte
+        camera.minZ = 0.1;    // Distancia mínima de renderizado (near)
+        camera.maxZ = 1000;   // Distancia máxima de renderizado (far)
+
+        // También puedes ajustar el radio mínimo si la cámara se acerca demasiado
+        camera.lowerRadiusLimit = 0.5;
 
         this.initialPosition = camera.position;
 
@@ -146,14 +153,14 @@ class Perfil3D {
         camera.attachControl(this.canvas, true); // Habilitar controles
 
         // 4. Configurar límites y comportamientos
-        camera.upperBetaLimit = this.deg2rad(62); // Límite superior
-        camera.lowerBetaLimit = this.deg2rad(15); // Límite inferior
+        camera.upperBetaLimit = this.deg2rad(50); // Límite superior
+        camera.lowerBetaLimit = this.deg2rad(10); // Límite inferior
 
-        camera.upperAlphaLimit = this.deg2rad(-60); // Límite horizontal izq
-        camera.lowerAlphaLimit = this.deg2rad(-150); // Límite horizontal der
+        camera.upperAlphaLimit = this.deg2rad(150); // Límite horizontal izq
+        camera.lowerAlphaLimit = this.deg2rad(-40); // Límite horizontal der
 
         camera.panningSensibility = 2500;
-        camera.panningDistanceLimit = 22;
+        camera.panningDistanceLimit = 10;
 
         camera.wheelPrecision = 50;
         camera.zoomToMouseLocation = true;
@@ -161,7 +168,7 @@ class Perfil3D {
         // 5. Ajustar radio inicial y límites
         camera.radius = 10;  // Distancia inicial
         camera.lowerRadiusLimit = 1;  // Zoom in mínimo
-        camera.upperRadiusLimit = 10; // Zoom out máximo
+        camera.upperRadiusLimit = 6; // Zoom out máximo
 
         // 7. Para modelos muy pequeños, usa valores más altos
         camera.angularSensibilityX = 2500;
@@ -376,7 +383,7 @@ class Perfil3D {
             // Continuar animación hasta completar
             if (t < 1.0) {
                 requestAnimationFrame(animate);
-            } else{
+            } else {
                 this.interpolando = false;
             }
         };
