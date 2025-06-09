@@ -28,10 +28,6 @@ class Perfil3D {
         this.interceptores_keys = null;
         this.interceptores_mesh = {};
 
-        this.lastHighlighted = null;
-        // Material para resaltado
-        this.highlightMaterial = null;
-
         this.tiempoTranscurrido = 0;
         this.interpolando = false;
     }
@@ -55,61 +51,7 @@ class Perfil3D {
         // Render loop (animación continua)
         this.engine.runRenderLoop(() => {
             this.scene.render();
-            // console.log(this.camera.position);
-            // console.log(
-            //     {
-            //         alpha: this.camera.alpha,
-            //         beta: this.camera.beta,
-            //         alphaDeg: this.camera.alpha * 180 / Math.PI,
-            //         betaDeg: this.camera.beta * 180 / Math.PI
-            //     }
-            // );
         });
-
-        this.scene.onPointerMove = (evt) => {
-            const corrected = this.getCorrectedPickingCoordinates(evt.clientX, evt.clientY);
-
-            // Debug: mostrar coordenadas
-            //console.log(`Original: ${evt.clientX},${evt.clientY} | Corregido: ${corrected.x},${corrected.y}`);
-
-            // Crear rayo con coordenadas corregidas
-            const ray = this.scene.createPickingRay(
-                corrected.x,
-                corrected.y,
-                BABYLON.Matrix.Identity(),
-                this.camera
-            );
-
-            // Opciones avanzadas de picking
-            const hit = this.scene.pickWithRay(ray, (mesh) => {
-                return mesh.isPickable && mesh.isVisible; // Filtro personalizado
-            });
-
-
-            // Restaurar mesh previamente resaltado
-            if (this.lastHighlighted) {
-                // this.lastHighlighted.material = this.lastHighlighted.originalMaterial;
-                // this.lastHighlighted = null;
-            }
-
-            // Resaltar nuevo mesh
-            if (hit.pickedMesh
-                && hit.pickedMesh.name.includes('Interceptor')
-            ) {
-                // // Guardar material original
-                // hit.pickedMesh.originalMaterial = hit.pickedMesh.material;
-
-                // // Aplicar material de resaltado
-                // hit.pickedMesh.material = this.highlightMaterial;
-                // this.lastHighlighted = hit.pickedMesh;
-
-                // console.log("Detección precisa en:", hit.pickedMesh.name);
-            }
-        };
-
-        // this.highlightMaterial = new BABYLON.StandardMaterial("highlightMat", this.scene);
-        // this.highlightMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0.2); // Naranja brillante
-        // this.highlightMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3); // Ligero brillo
 
         this.suscribirEventos();
 
@@ -157,7 +99,7 @@ class Perfil3D {
         camera.lowerBetaLimit = this.deg2rad(10); // Límite inferior
 
         camera.upperAlphaLimit = this.deg2rad(150); // Límite horizontal izq
-        camera.lowerAlphaLimit = this.deg2rad(-40); // Límite horizontal der
+        camera.lowerAlphaLimit = this.deg2rad(0); // Límite horizontal der
 
         camera.panningSensibility = 2500;
         camera.panningDistanceLimit = 10;
@@ -176,33 +118,11 @@ class Perfil3D {
 
         this.camera = camera;
 
-        // Crear skybox con una textura que sí existe
-        const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", { size: 1000 }, scene);
-        const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-        skyboxMaterial.backFaceCulling = false;
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-            '../../assets/3D/textures/BlueSunset',
-            scene,
-            ["_px.png", "_py.png", "_pz.png", "_nx.png", "_ny.png", "_nz.png"]
-        );
-        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-        skyboxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
-        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.disableLighting = true;
-        skyboxMaterial.reflectionTexture.gammaSpace = true;
-        skyboxMaterial.reflectionTexture.level = 1.5; // Valores > 1 aumentan el brillo
-        skybox.material = skyboxMaterial;
-
         this.highlightMaterial = new BABYLON.StandardMaterial("highlightMat", scene);
         this.highlightMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0.2); // Naranja brillante
         this.highlightMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3); // Ligero brillo
 
-        // O una luz direccional más fuerte
-        const dirLight = new BABYLON.DirectionalLight("dirLight",
-            new BABYLON.Vector3(-1, -2, -1), scene);
-        dirLight.intensity = 2.0;
 
-        // cdmx
         BABYLON.SceneLoader.ImportMesh(
             "",
             `${this.rootPath}/models/`,
@@ -210,35 +130,18 @@ class Perfil3D {
             scene,
             async (newMesh) => {
 
-                const directionalLight = scene.getLightByName("Light");
-                const areaLight1 = scene.getLightByName("Area");
-                const areaLight2 = scene.getLightByName("Area.001");
-
-                if (directionalLight) {
-                    directionalLight.intensity = 1.0;
-                    directionalLight.dispose();
-                }
-                if (areaLight1) {
-                    areaLight1.intensity = 3.0;
-                    areaLight1.dispose();
-                }
-                if (areaLight2) {
-                    areaLight2.intensity = 4.0;
-                    areaLight2.dispose();
-                }
-
                 newMesh.forEach((mesh, i) => {
 
                     if (mesh.name.includes('CrystalCDMX_primitive0')) {
 
                         mesh.material.metallic = 0;
                         mesh.material.roughness = 0.02;
+                        mesh.material.emissiveColor = new BABYLON.Color3(1, 1, 1);
+                        mesh.material.emissiveIntensity = 1.10; // Valor entre 0 y 1
+                        mesh.material.alpha = 0.9
                     }
                     // caras internas
                     else if (mesh.name.includes('CrystalCDMX_primitive1')) {
-
-                    }
-                    else if (mesh.name.includes('Plane')) {
 
                     }
                     else if (mesh.name.includes('"Valle_cdmx_2023_4"')) {
@@ -246,10 +149,23 @@ class Perfil3D {
                     }
                     else if (mesh.name.includes('Plane')) {
 
-                        mesh.material.metallic = 0;
-                        mesh.material.roughness = 0.02;
-                    }
+                        // Crear nuevo material Unlit
+                        const unlitMaterial = new BABYLON.StandardMaterial("unlit_" + mesh.name, scene);
 
+                        // Copiar propiedades básicas del material original
+                        if (mesh.material.albedoTexture) {
+                            unlitMaterial.emissiveTexture = mesh.material.albedoTexture.clone();
+                            unlitMaterial.diffuseTexture = mesh.material.albedoTexture.clone();
+                        }
+
+                        // Configurar como Unlit
+                        unlitMaterial.emissiveColor = mesh.material.albedoColor || new BABYLON.Color3(2, 2, 2);
+                        unlitMaterial.disableLighting = true;  // ¡Esto lo hace Unlit!
+                        unlitMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+
+                        // Aplicar el nuevo material
+                        mesh.material = unlitMaterial;
+                    }
                     else if (mesh.name.includes('Interceptor_')) {
                         let splitted = mesh.name.split('_');
                         let abrev = splitted[splitted.length - 1];

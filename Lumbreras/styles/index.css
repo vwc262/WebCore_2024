@@ -36,8 +36,8 @@ body {
 nav {
   display: flex;
   position: absolute;
-  right: 0px;
-  top: 50px;
+  left: 0px;
+  top: 100px;
   flex-direction: column;
   flex-wrap: nowrap;
   z-index: 111;
@@ -65,7 +65,7 @@ aside {
   position: absolute;
   width: 470px;
   height: 1080px;
-  left: 0px;
+  right: 0px;
   z-index: 6;
 }
 

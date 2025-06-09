@@ -2,14 +2,16 @@
     position: absolute;
     width: 960px;
     height: 540px;
-    right: -50px;
+    left: -50px;
     bottom: -25px;
     transform: scale(0.5);
-    transform-origin: bottom right;
+    transform-origin: bottom left;
 }
 
 .dial_sombra {
     position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .dial_interceptores {
@@ -88,7 +90,7 @@
 #renderCanvas {
     position: absolute;
     top: 36px;
-    right: 0px;
-    width: 1440px;
+    left: 0px;
+    width: 1460px;
     height: 1011px;
 }

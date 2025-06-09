@@ -19,8 +19,8 @@ class Perfil {
     }
 
     dial_name = 'Dial_01/SDial00';
-    btn_left_name = 'Boton_01/SDial_b1_00';
-    btn_right_name = 'Boton_02/Secuencia_Dial00';
+    btn_left_name = 'Boton_01/SDial_b1_';
+    btn_right_name = 'Boton_02/SDial_b2_';
     destello = 'Seleccion/Secuencia_Select';
 
     constructor() {
