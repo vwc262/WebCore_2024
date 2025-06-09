@@ -127,7 +127,7 @@ class RowEstacion {
     }
 
     onclick() {
-        // this.signals_estacion_div.style.display = this.signals_estacion_div.style.display === "none" || this.signals_estacion_div.style.display === "" ? "flex" : "none";
+        console.log(this.estacion)
     }
 
     cerrarTodo() {

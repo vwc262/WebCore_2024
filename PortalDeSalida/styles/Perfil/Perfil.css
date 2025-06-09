@@ -87,7 +87,7 @@
 #renderCanvas {
     position: absolute;
     top: 36px;
-    right: 0px;
+    /* right: 0px; */
     width: 1440px;
     height: 1011px;
 }
