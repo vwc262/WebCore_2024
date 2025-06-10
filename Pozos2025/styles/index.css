@@ -162,6 +162,8 @@ aside {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   text-transform: uppercase;
   top: 50px;
+  position: relative;
+  top: 0px;
 }
 
 .conagua_logos {
