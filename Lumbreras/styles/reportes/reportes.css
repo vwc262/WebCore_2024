@@ -366,7 +366,7 @@ input[type="button"] {
   border-radius: 10px;
   cursor: pointer;
 
-    &::-webkit-scrollbar-thumb:active {
+  &::-webkit-scrollbar-thumb:active {
     cursor: grabbing;
   }
 
@@ -456,6 +456,7 @@ input[type="button"] {
   flex-wrap: nowrap;
   margin-top: 33px;
   background: #00001c;
+  margin-left: 45px;
 }
 
 /* Contenedor con scroll */

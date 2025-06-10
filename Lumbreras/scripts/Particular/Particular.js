@@ -120,7 +120,8 @@ class Particular {
     this.headerBtn__Exterior.style.display = 'block';
 
     this.headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
-    this.headerBtn__Subterraneo.style.display = 'block';
+    console.log(`${interceptor == 'Interceptor Poniente' ? 'none' : 'block'}`)
+    this.headerBtn__Subterraneo.style.display = `${interceptor == 'Interceptor Poniente' ? 'none' : 'block'}`;
     this.headerBtn__Subterraneo.click();
 
     // Elementos del particular
