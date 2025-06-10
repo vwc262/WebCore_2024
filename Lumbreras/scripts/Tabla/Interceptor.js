@@ -118,10 +118,13 @@ class Interceptor {
         this.root.addEventListener('onmouseover', this.onmouseover);
 
         this.estaciones.forEach(idEstacion => {
-            let estacion = Core.Instance.GetDatosEstacion(idEstacion);
-            this.estacionesEnlaces.push(estacion)
-            let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion, this.nombre_interceptor);
-            rowEstacion.Init();
+            if (idEstacion < 41) {
+
+                let estacion = Core.Instance.GetDatosEstacion(idEstacion);
+                this.estacionesEnlaces.push(estacion)
+                let rowEstacion = new RowEstacion(this.estaciones_interceptor_div, estacion, this.nombre_interceptor);
+                rowEstacion.Init();
+            }
         });
 
         this.suscribirEventos();
@@ -139,7 +142,7 @@ class Interceptor {
         this.estaciones_interceptor_div.style.display = this.estaciones_interceptor_div.style.display === "none" || this.estaciones_interceptor_div.style.display === "" ? "flex" : "none";
     }
 
-    cerrarInterceptor(){
+    cerrarInterceptor() {
         this.selectInterceptor = false;
         this.flecha_interceptor.style.transform = `rotate(0deg)`;
         this.estaciones_interceptor_div.style.display = "none";
