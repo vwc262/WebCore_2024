@@ -101,6 +101,14 @@ class RowEstacion {
     }
 
     Init() {
+        this.headerBtn__Reset = document.getElementsByClassName('headerBtn__Reset')[0];
+        this.headerBtn__Reset.style.display = 'none';
+
+        this.headerBtn__Exterior = document.getElementsByClassName('headerBtn__Exterior')[0];
+        this.headerBtn__Exterior.style.display = 'none';
+
+        this.headerBtn__Subterraneo = document.getElementsByClassName('headerBtn__Subterraneo')[0];
+        this.headerBtn__Subterraneo.style.display = 'none';
 
         this.root.addEventListener('click', this.onclick.bind(this));
 
@@ -127,7 +135,10 @@ class RowEstacion {
     }
 
     onclick() {
-        console.log(this.estacion)
+        EventsManager.Instance.EmitirEvento("camara_interior", this.estacion.IdEstacion);
+        this.headerBtn__Reset.style.display = this.headerBtn__Reset.style.display == "none" ? "flex" : "none";
+        this.headerBtn__Exterior.style.display = this.headerBtn__Exterior.style.display == "none" ? "flex" : "none";
+        this.headerBtn__Subterraneo.style.display = this.headerBtn__Subterraneo.style.display == "none" ? "flex" : "none";
     }
 
     cerrarTodo() {

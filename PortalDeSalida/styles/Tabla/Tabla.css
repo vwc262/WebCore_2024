@@ -52,10 +52,10 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  border-color: rgb(27, 27, 100);
+  /* border-color: rgb(27, 27, 100);
   border-width: 0px 10px 10px;
   border-radius: 0px 0px 10px 10px;
-  border-style: solid;
+  border-style: solid; */
   /* overflow-x: hidden;
   overflow-y: scroll; */
 
