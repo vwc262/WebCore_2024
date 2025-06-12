@@ -1,6 +1,7 @@
 import { Core } from "../Core.js";
 import Estacion from "../Entities/Estacion.js";
 import Signal from "../Entities/Signal.js";
+import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { EnumSemaforo } from "../Utilities/Enums.js";
 
 
@@ -29,28 +30,46 @@ class NewsElement {
     createElement() {
         let container = document.createElement('div');
         container.classList = 'news_element';
-        container.innerHTML = `${this.interceptor} - (${this.estacion.IdEstacion}) ${this.estacion.Nombre}: ${this.nivel.Nombre}`;
         container.id = this.id;
 
+        let interceptor = document.createElement('div');
+        interceptor.classList = 'news_element_interceptor';
+        interceptor.innerHTML = `${this.interceptor} (${this.estacion.IdEstacion})`;
+
+        let estacion = document.createElement('div');
+        estacion.classList = 'news_element_estacion';
+        estacion.innerHTML = `${this.estacion.Nombre.slice(0, 25)}`;
+
+        let nivel = document.createElement('div');
+        nivel.classList = 'news_element_nivel';
+        nivel.innerHTML = `Nivel: ${this.nivel.Nombre}`;
+
         this.root = container;
+        this.root.visible = true;
+
+        container.append(interceptor, estacion, nivel);
         this.container.append(container);
-        this.update();
+
+        this.Update();
+        this.suscribirEventos();
 
         return this.root;
     }
 
-    update() {
+    Update = () => {
         const updatedEstacion = Core.Instance.GetDatosEstacion(this.estacion.IdEstacion);
         const updatedNivel = updatedEstacion.Signals.find(s => s.IdSignal == this.nivel.IdSignal);
 
         if (updatedNivel) {
-            const color = updatedNivel.GetEnumSemaforo();
             const enumerador = updatedNivel.GetEnumSemaforo();
 
-            if (enumerador == EnumSemaforo.Critico || enumerador == EnumSemaforo.Critico) {
+            if (enumerador == EnumSemaforo.Critico || enumerador == EnumSemaforo.Preventivo) {
                 this.root.visible = true;
                 this.root.style.display = 'flex';
-                this.root.style.background = color;
+                this.root.style.background = enumerador == EnumSemaforo.Critico ?
+                    `linear-gradient(90deg, rgba(255, 0, 0, 0) 0%, rgba(255, 0, 0, 1) 15%, rgba(255, 0, 0, 1) 85%, rgba(255, 0, 0, 0) 100%` :
+                    `linear-gradient(90deg, rgba(255, 0, 0, 0) 0%, rgba(255, 251, 0, 1) 15%, rgba(255, 251, 0, 1) 85%, rgba(255, 0, 0, 0) 100%`;
+                this.root.style.color = enumerador == EnumSemaforo.Critico ? 'beige' : 'blue';
             }
             else {
                 this.root.visible = false;
@@ -62,7 +81,7 @@ class NewsElement {
     suscribirEventos() {
         EventsManager.Instance.Suscribirevento(
             "Update",
-            new EventoCustomizado(this.update)
+            new EventoCustomizado(this.Update)
         );
     }
 }

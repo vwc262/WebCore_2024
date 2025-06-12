@@ -7,11 +7,11 @@
   <title id="title__page">VWC</title>
   <link rel="stylesheet" href="../styles/index.css">
   <link rel="stylesheet" href="../styles/Tabla/Tabla.css">
+  <link rel="stylesheet" href="../styles/Tabla/TablaBuscador.css">
   <link rel="stylesheet" href="../styles/Particular/Particular.css">
   <link rel="stylesheet" href="../styles/Perfil/Perfil.css">
   <link rel="stylesheet" href="../styles/Mapa/Mapa.css">
   <link rel="stylesheet" href="../styles/News/News.css">
-  <link rel="stylesheet" href="../styles/Modal/modal.css">
   <!-- reportes -->
   <link rel="stylesheet" href="../styles/reportes/reportes.css">
   <link rel="stylesheet" href="../scripts/vanilla-calendar/build/vanilla-calendar.min.css">
@@ -21,17 +21,6 @@
 
 <body>
   <div class="header">
-    <nav class="header__buttons">
-      <div class="headerBtn__Home header__active">
-        <img id="imgHome" alt="">
-      </div>
-      <div class="headerBtn__Mapa">
-        <img id="imgMapa" alt="">
-      </div>
-      <div class="headerBtn__Graficador">
-        <img id="imgGraficador" alt="">
-      </div>
-    </nav>
     <div class="header__title">
       <h1 id="title"></h1>
     </div>
@@ -39,6 +28,24 @@
       <img id="header_image">
     </div>
   </div>
+
+  <nav class="header__buttons">
+    <div class="headerBtn__Home header__active">
+      <img id="imgHome" alt="">
+    </div>
+    <div class="headerBtn__Mapa">
+      <img id="imgMapa" alt="">
+    </div>
+    <div class="headerBtn__Graficador">
+      <img id="imgGraficador" alt="">
+    </div>
+    <div class="headerBtn__Exterior">
+      <img id="imgExterior" alt="">
+    </div>
+    <div class="headerBtn__Subterraneo">
+      <img id="imgSubterraneo" alt="">
+    </div>
+  </nav>
 
   <main>
     <container class="Content_on_load">
@@ -68,12 +75,15 @@
       </svg>
 
       <section id="section__home" class="section__home" style="display: block;">
+        <canvas id="renderCanvas" width="1460" height="1011"></canvas>
         <div class="contenedor_dial">
           <img class="dial_sombra">
           <div class="dial_secuencias_interceptores"></div>
           <div class="dial_secuencias_btn_izquiero"></div>
           <div class="dial_secuencias_btn_derecho"></div>
           <img class="dial_interceptores">
+          <div class="contenedor_destello"></div>
+          <img class="nombre_interceptores"/>
           <div class="contenedor_botones"></div>
           <div class="dial_button dial_button_left"></div>
           <div class="dial_button dial_button_right"></div>
@@ -82,13 +92,14 @@
 
       <!-- ========================= Tabla ========================= -->
       <aside class="aside__tabla" style="display: block;">
-        <search class = "buscadorTabla">
+        <div class="buscadorTabla">
           <label class="buscadorTxT">
-            <input class="buscadorTxT" type="search" id="query" />
+            <input class="buscadorTxT" type="search" id="query" placeholder="Buscar lumbrera" />
           </label>
-        </search>
+        </div>
 
-        <div class="table-container"></div>
+        <div id="tableContainer" class="table-container"></div>
+        <div id="tableContainerBuscador" class="table-buscador-container"></div>
       </aside>
 
       <!-- ========================= Mapa ========================= -->
@@ -221,7 +232,7 @@
                 </div>
 
 
-                <!-- ============== Calnedario ================ -->
+                <!-- ============== Calendario ================ -->
                 <div class="contenedor_fecha_estacion" id="calendarioDate">
                   <div class="menu menu_fechas">
                     <div class="fechas">
@@ -235,7 +246,7 @@
                     <input id="borrar" type="button">
                     <label>BORRAR</label>
                   </div>
-                  <div class="botones_acciones_graficador">
+                  <div class="botones_acciones_graficador" style="display: none;">
                     <input id="regresar" type="button">
                     <label class="textButton">Regresar</label>
                   </div>
@@ -273,21 +284,10 @@
         <div class="barraNivelContainer barra_particular4"></div>
 
         <div id="particular__aguaNivel"></div>
-        <div id="particular__bombasEstado"></div>
+        <img src="" id="particularImgExterior" style="display: none;">
       </section>
 
       <div class="news"></div>
-
-      <section class="modal ">
-        <div id="imgModal" class="modal__container">
-          <div class="modal__text">
-            <h2 class="modal__title">Panel de control</h2>
-            <p class="modal__paragraph">Debe iniciar sesión para acceder al control de bombas.</p>
-            <a href="#" class="modal__close">Cerrar</a>
-            <a href="#" class="modal__Aceptar">Aceptar</a>
-          </div>
-        </div>
-      </section>
 
     </container>
   </main>
@@ -304,7 +304,12 @@
 <script type="module" src="../scripts/external/pdfmake.js"></script>
 <!-- vanilla canlendar -->
 <script src="../scripts/vanilla-calendar/build/vanilla-calendar.min.js"></script>
-
+<!-- Carga Babylon.js desde CDN -->
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<!-- Plugin para GLTF/GLB -->
+<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+<!-- Carga la librería de materiales (incluye WaterMaterial) -->
+<script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
 <!-- google maps -->
 <script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
     ({ key: "AIzaSyADj-4tE-dSFY6D83ytGt98HzpR9QBwX98", v: "beta" });</script>

@@ -3,9 +3,9 @@
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 58px;
+    height: 33px;
     z-index: 6;
-    border: 2px dotted goldenrod;
+    background: #171b1e;
     overflow: hidden;
 }
 
@@ -13,11 +13,27 @@
     height: 100%;
     display: flex;
     width: 160px;
-    border: 1px solid red;
     flex-direction: column;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    position: absolute;
+    font-weight: bold;
+    text-shadow: 0 0 black;
+    border-radius: 10px;
     align-content: center;
     justify-content: center;
     align-items: center;
-    position: absolute;
+}
+
+.news_element_interceptor {
+    font-size: 10px;
+    margin-bottom: -4px;
+}
+
+.news_element_estacion {
+    font-size: 12px;
+    margin-bottom: -2px;
+}
+
+.news_element_nivel {
+    font-size: 9px;
 }

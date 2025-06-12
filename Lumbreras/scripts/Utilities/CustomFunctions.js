@@ -43,32 +43,6 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
   return titulo;
 };
 
-export const AdjustSize = function () {
-  if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")){
-   ajustador(); 
-  }  
-};
-
-const ajustador = () => {
-  const contentWidth = 1920;
-  const contentHeight = 1080;
-
-  let currentScreenWidth = window.innerWidth;
-  let currentScreenHeight = window.innerHeight;
-
-  let widthScale = (currentScreenWidth / contentWidth).toFixed(3);
-  let heightScale = (currentScreenHeight / contentHeight).toFixed(3);
-
-  let body = document.getElementsByTagName("body")[0];
-
-  if (widthScale > heightScale) {
-    let margin = (currentScreenWidth - contentWidth * heightScale) / 2;
-    body.style = `transform: scale(${heightScale}); margin: 0px 0px 0px ${margin}px; transform-origin: left top; width: 1920px; height: 1080px;`;
-  } else {
-    body.style = `transform: scale(${widthScale}); margin: 0px 0px 0px 0px; transform-origin: left top; width: 1920px; height: 1080px;`;
-  }
-}
-
 export const ArmarFechaSQL = function (datetime, isInicio) {
   //2024/05/14 00:00
   const year = datetime.getFullYear();

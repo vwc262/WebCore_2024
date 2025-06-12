@@ -5,7 +5,7 @@ import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
-import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
+import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { AppGraficador } from "./reporteador/AppGraficador.js";
 import News from "./news/news.js";
 
@@ -21,7 +21,6 @@ class VwcApp {
     this.version = Core.Instance.version;
 
     this.IniciarHeader();
-    AdjustSize();
 
     if (this.version != -99) {
       this.IniciarUI();
@@ -56,24 +55,17 @@ class VwcApp {
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = titulo;
 
-    $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/Segiagua.png?v=${Core.Instance.version}`);
-
+    $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/header.png?v=${Core.Instance.version}`);
   }
 
   IniciarUI() {
 
-    const $imgHome = document.getElementById("imgHome");
-    $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
 
-    const $imgMapa = document.getElementById("imgMapa");
-    $imgMapa.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/icomapa.png?v=${Core.Instance.version}`);
-
-    const $imgGraficador = document.getElementById("imgGraficador");
-    $imgGraficador.setAttribute("src", `${Core.Instance.ResourcesPath}Reportes/graficador.png?v=${Core.Instance.version}`);
-
-    const $imgModal = document.getElementById("imgModal");
-    $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
-    $imgModal.style.backgroundSize = `contain`;
+    this.inicializarBotonHeader("imgHome", 'home');
+    this.inicializarBotonHeader("imgMapa", 'icomapa');
+    this.inicializarBotonHeader("imgGraficador", 'graficador');
+    this.inicializarBotonHeader("imgExterior", 'exterior');
+    this.inicializarBotonHeader("imgSubterraneo", 'subterraneo');
 
     if (this.isApple()) {
       let html = document.getElementsByTagName('html')[0];
@@ -85,7 +77,7 @@ class VwcApp {
     }
 
     new Tabla().create(); // Inicio de tabla
-    const perfil = new Perfil().create(); // Inicio del perfil
+    new Perfil().create(); // Inicio del perfil
     new Mapa().create();
     new News().Init();
 
@@ -94,18 +86,20 @@ class VwcApp {
     this.suscribirEventos();
   }
 
+  inicializarBotonHeader(id, fondo){
+    const navButton = document.getElementById(id);
+    navButton.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/${fondo}.png?v=${Core.Instance.version}`);
+    navButton.addEventListener('mouseover', (e) => { e.target.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/${fondo}_over.png?v=${Core.Instance.version}`); });
+    navButton.addEventListener('mouseleave', (e) => { e.target.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/${fondo}.png?v=${Core.Instance.version}`); });
+  }
+
   suscribirEventos() {
     EventsManager.Instance.Suscribirevento('Update', new EventoCustomizado(() => this.update()));
   }
 
   update() {
-    if (Core.Instance.version != this.version) {
-      this.version = Core.Instance.version;
-      ShowModal("Se ha detectado un cambio de versión", "Cambio de versión", true);
-    }
+
   }
 }
 
 export { VwcApp };
-
-window.onresize = () => { AdjustSize(); };

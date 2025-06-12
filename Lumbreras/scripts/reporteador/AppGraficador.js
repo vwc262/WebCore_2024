@@ -88,7 +88,6 @@ class AppGraficador {
             actions: {
                 clickDay(event, self) {
                     // self.classList.remove('selected')
-                    console.log(this)
                     let d = new Date();
                     let dates = self.selectedDates.map(_date => {
                         let _d = d;
@@ -183,7 +182,7 @@ class AppGraficador {
 
         let interval = setInterval(() => {
 
-            if (this.estaciones.length > 0) {
+            if (this.estaciones != undefined && this.estaciones.length > 0) {
                 clearInterval(interval);
 
                 // this.GetReferences();
@@ -200,8 +199,8 @@ class AppGraficador {
             });
         }
 
-        window.addEventListener("resize", this.scaleDocument);
-        this.scaleDocument();
+        // window.addEventListener("resize", this.scaleDocument);
+        // this.scaleDocument();
     }
 
     setDateTime() {
@@ -559,7 +558,7 @@ class AppGraficador {
             bntSignal.IdSignal = s.idSignal;
             bntSignal.IdTipoSignal = s.tipoSignal;
             bntSignal.NombreSignal = s.tipoSignal == EnumTipoSignal.Tiempo ? 'Poleo' : s.nombre;
-            bntSignal.NombreEstacion = estacion.nombre;
+            bntSignal.NombreEstacion = estacion.abreviacion.toUpperCase();
             bntSignal.classList = `bntSignal signalNA`;
             bntSignal.id = `e_${idEstacion}_s_${s.idSignal}`;
             bntSignal.disabled = 0;

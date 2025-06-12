@@ -1,6 +1,8 @@
 import { Core } from "../Core.js";
 import { Configuracion } from "../../config/config.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
+import Perfil3D from "./Perfil3D.js";
+
 
 class Perfil {
 
@@ -17,12 +19,15 @@ class Perfil {
     }
 
     dial_name = 'Dial_01/SDial00';
-    btn_left_name = 'Boton_01/SDial_b1_00';
-    btn_right_name = 'Boton_02/Secuencia_Dial00';
+    btn_left_name = 'Boton_01/SDial_b1_';
+    btn_right_name = 'Boton_02/SDial_b2_';
+    destello = 'Seleccion/Secuencia_Select';
 
     constructor() {
         this.actualInterceptor = 0;
         this.actualFrame = 0;
+        this.nombre_interceptores = null;
+        this.config = Core.Instance.Configuracion;
     }
 
     InitializeDial() {
@@ -33,23 +38,28 @@ class Perfil {
         const dial_interceptores = document.getElementsByClassName("dial_interceptores")[0];
         dial_interceptores.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/Dial_01/Dial_Ramales.png?v=${Core.Instance.version}`);
 
+        const destello_container = document.getElementsByClassName("contenedor_destello")[0];
+
+        this.nombre_interceptores = document.getElementsByClassName("nombre_interceptores")[0];
+
         this.dial_interceptores = document.getElementsByClassName("dial_secuencias_interceptores")[0];
         this.contenedor_botones = document.getElementsByClassName("contenedor_botones")[0];
 
-        const interceptores = Core.Instance.Configuracion.interceptores;
-        const interceptores_keys = Object.keys(interceptores);
+        this.interceptores = Core.Instance.Configuracion.interceptores;
+        this.interceptores_keys = Object.keys(this.interceptores);
 
-        this.cargarImagenesDial(interceptores_keys.length, this.dial_name);
-        this.cargarImagenesDial(6, this.btn_left_name);
-        this.cargarImagenesDial(6, this.btn_right_name);
+        this.cargarImagenesDial(this.dial_interceptores, this.interceptores_keys.length, this.dial_name);
+        this.cargarImagenesDial(this.dial_interceptores, 6, this.btn_left_name);
+        this.cargarImagenesDial(this.dial_interceptores, 6, this.btn_right_name);
+        this.cargarImagenesDial(destello_container, 7, this.destello);
 
         document.getElementsByClassName(this.dial_name)[this.actualInterceptor].style.display = 'block';
         document.getElementsByClassName(this.btn_left_name)[0].style.display = 'block';
         document.getElementsByClassName(this.btn_right_name)[0].style.display = 'block';
 
-        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, interceptores_keys.length, 285, 450, 430);
+        const posiciones = this.distribuirElementosEnCircunferencia(190, 200, this.interceptores_keys.length, 285, 450, 430);
 
-        interceptores_keys.forEach((key, index) => {
+        this.interceptores_keys.forEach((key, index) => {
 
             const dial_button_interceptor = document.createElement('div');
             dial_button_interceptor.classList = 'dial_button_interceptor';
@@ -63,6 +73,13 @@ class Perfil {
 
             dial_button_interceptor.addEventListener('click', this.onDialBtnInterceptoriclick.bind(this));
             this.contenedor_botones.append(dial_button_interceptor);
+
+            EventsManager.Instance.Suscribirevento(
+                "Interceptor_Click",
+                new EventoCustomizado((data) => {
+                    this.onInterceptorClick(data);
+                })
+            );
         });
 
         const rightLeftBtn_dial = document.getElementsByClassName('dial_button');
@@ -71,6 +88,8 @@ class Perfil {
             elemento.addEventListener('click', this.onRightLeftBtnClick.bind(this));
         }
 
+
+        this.contenedor_botones.children[0].click();
     }
 
     onDialBtnInterceptoriclick(e) {
@@ -80,6 +99,8 @@ class Perfil {
         const steps = Math.abs(this.actualInterceptor - interceptor);
 
         this.spinDial(steps, left);
+
+        EventsManager.Instance.EmitirEvento(`Interceptor_Dial_Click_${interceptor}`);
     }
 
     onRightLeftBtnClick(e) {
@@ -102,7 +123,7 @@ class Perfil {
         const ticks = 24;
         const frame_step = dial_images.length / total_interceptores.length;
         let start = this.actualFrame;
-        this.actualInterceptor += + (left ? -steps : steps);
+        this.actualInterceptor += (left ? -steps : steps);
         const stop = Math.round(this.actualInterceptor * frame_step);
 
         // if (stop == this.actualFrame) return;
@@ -111,6 +132,7 @@ class Perfil {
         this.habilitarInteraccion('none', rightLeftBtn_dial);
 
         this.pressButton(left);
+        this.destellar();
 
         const interval = setInterval(() => {
 
@@ -146,6 +168,35 @@ class Perfil {
         for (const elemento of coleccion) {
             elemento.style.pointerEvents = `${habilitar}`;
         }
+    }
+
+    destellar() {
+
+        const destellos = document.getElementsByClassName(this.destello);
+
+        const ticks = 24;
+        let actual_frame = 0;
+
+        for (let index = 0; index < destellos.length; index++) {
+            destellos[index].style.display = 'none';
+        }
+
+        const interval = setInterval(() => {
+            if (actual_frame >= destellos.length - 1) {
+                clearInterval(interval);
+                destellos[destellos.length - 1].style.display = 'none';
+            }
+            else {
+                actual_frame++;
+                for (let index = 0; index < destellos.length; index++) {
+                    destellos[index].style.display = 'none';
+                }
+                destellos[actual_frame].style.display = 'block';
+            }
+        }, ticks);
+
+
+        this.nombre_interceptores.src = `${Core.Instance.ResourcesPath}secuencias/Seleccion/${this.interceptores[this.interceptores_keys[this.actualInterceptor]].abreviacion}.png?v=${Core.Instance.version}`;
     }
 
     pressButton(left) {
@@ -224,15 +275,23 @@ class Perfil {
         return posiciones;
     }
 
-    cargarImagenesDial(frames, image_name) {
+    cargarImagenesDial(container, frames, image_name) {
         for (let index = 0; index < frames; index++) {
             const elem = document.createElement("img");
 
             elem.classList = `elemento_dial ${image_name}`;
             elem.setAttribute('src', `${Core.Instance.ResourcesPath}secuencias/${image_name}${(index < 10 ? '0' : '')}${index}.png?v=${Core.Instance.version}`);
 
-            this.dial_interceptores.append(elem);
+            container.append(elem);
         }
+    }
+
+    onInterceptorClick(data) {
+        const interceptor = data.key;
+        const left = this.actualInterceptor > interceptor;
+        const steps = Math.abs(this.actualInterceptor - interceptor);
+
+        this.spinDial(steps, left);
     }
 
     create() {
@@ -243,6 +302,8 @@ class Perfil {
         EventsManager.Instance.Suscribirevento('OnMouseHoverTabla', new EventoCustomizado((data) => this.setHoverPerfil(data.isMouseOut, data.estacion, data.css)));
 
         this.InitializeDial();
+
+        new Perfil3D().create();
     }
 
 }
