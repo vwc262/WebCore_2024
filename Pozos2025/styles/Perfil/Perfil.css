@@ -85,7 +85,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index: 5;
+    
 }
 
 .estacionPerfil {
@@ -230,7 +230,7 @@
 
 .thunderPosition {
     position: relative;
-    left: -18px;
+    left: -12px;
     top: -18px;
 }
 
