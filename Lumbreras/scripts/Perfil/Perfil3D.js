@@ -1,3 +1,5 @@
+import { franja_fragmentShader, franja_vertexShader } from "../../assets/3D/models/shaders/franja.js";
+import { noise_fragmentSource, noise_vertexSource } from "../../assets/3D/models/shaders/noise.js";
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 
@@ -30,6 +32,9 @@ class Perfil3D {
 
         this.tiempoTranscurrido = 0;
         this.interpolando = false;
+
+        this.franjaShaderMaterialBase = null;
+        this.shaderTime = 0;
     }
 
     create() {
@@ -75,8 +80,8 @@ class Perfil3D {
         // 2. Crear la cámara con parámetros iniciales
         const camera = new BABYLON.ArcRotateCamera(
             "mainCamera",
-            this.deg2rad(90),   // alpha (rotación horizontal en radianes)
-            this.deg2rad(55),  // beta (rotación vertical en radianes)
+            this.deg2rad(55),   // alpha (rotación horizontal en radianes)
+            this.deg2rad(90),  // beta (rotación vertical en radianes)
             0,             // radio (distancia al target)
             this.cameraTarget.position,
             scene
@@ -85,9 +90,6 @@ class Perfil3D {
         // Configurar planos de recorte
         camera.minZ = 0.1;    // Distancia mínima de renderizado (near)
         camera.maxZ = 1000;   // Distancia máxima de renderizado (far)
-
-        // También puedes ajustar el radio mínimo si la cámara se acerca demasiado
-        camera.lowerRadiusLimit = 0.5;
 
         this.initialPosition = camera.position;
 
@@ -109,7 +111,7 @@ class Perfil3D {
 
         // 5. Ajustar radio inicial y límites
         camera.radius = 10;  // Distancia inicial
-        camera.lowerRadiusLimit = 1;  // Zoom in mínimo
+        camera.lowerRadiusLimit = 2;  // Zoom in mínimo
         camera.upperRadiusLimit = 6; // Zoom out máximo
 
         // 7. Para modelos muy pequeños, usa valores más altos
@@ -117,11 +119,6 @@ class Perfil3D {
         camera.angularSensibilityY = 2500;
 
         this.camera = camera;
-
-        this.highlightMaterial = new BABYLON.StandardMaterial("highlightMat", scene);
-        this.highlightMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0.2); // Naranja brillante
-        this.highlightMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3); // Ligero brillo
-
 
         BABYLON.SceneLoader.ImportMesh(
             "",
@@ -165,6 +162,37 @@ class Perfil3D {
 
                         // Aplicar el nuevo material
                         mesh.material = unlitMaterial;
+
+
+                        const unlitNoiseMaterial = this.initShader("stripeShader", noise_vertexSource, noise_fragmentSource,
+                            ["position", "uv"],
+                            ["worldViewProjection", "diffuseTexture", "noiseTexture", "noiseIntensity", "noiseScale"],
+                            ["diffuseTexture", "noiseTexture"],
+                            true
+                        );
+
+                        // 2. Configurar texturas CORRECTAMENTE
+                        const diffuseTexture = unlitMaterial.diffuseTexture;
+                        const noiseTexture = new BABYLON.Texture(`${this.rootPath}/textures/AO_Waves.jpg`, scene);
+
+                        // Configurar repetición del ruido
+                        noiseTexture.wrapU = BABYLON.Texture.WRAP_REPEAT;
+                        noiseTexture.wrapV = BABYLON.Texture.WRAP_REPEAT;
+
+                        // Asignar texturas al material
+                        unlitNoiseMaterial.setTexture("diffuseTexture", diffuseTexture);
+                        unlitNoiseMaterial.setTexture("noiseTexture", noiseTexture);
+
+                        // 3. Configurar parámetros
+                        unlitNoiseMaterial.setFloat("noiseIntensity", 2.0); // Intensidad (0-1)
+                        unlitNoiseMaterial.setFloat("noiseScale", 12.0);     // Escala del ruido
+
+                        // 4. Forzar modo Unlit
+                        unlitNoiseMaterial.disableLighting = true;
+
+                        // 5. Aplicar a la malla
+                        mesh.material = unlitNoiseMaterial;
+
                     }
                     else if (mesh.name.includes('Interceptor_')) {
                         let splitted = mesh.name.split('_');
@@ -181,7 +209,8 @@ class Perfil3D {
                                 `Interceptor_Dial_Click_${_intercetptor}`,
                                 new EventoCustomizado(() => {
                                     this.onInterceptorClick();
-                                    mesh.material.emissiveColor = new BABYLON.Color3(0.0, 0.0, 1.0);
+
+                                    mesh.material = this.franjaShaderMaterialSelected;
                                 })
                             );
 
@@ -194,8 +223,26 @@ class Perfil3D {
                                 )
                             );
 
-                            mesh.material = new BABYLON.StandardMaterial("highlightMat", this.scene);
-                            mesh.material.emissiveColor = new BABYLON.Color3(0.0, 1.0, 0.0); // Ligero brillo
+                            this.franjaShaderMaterialBase = this.initShader("stripeShader", franja_vertexShader, franja_fragmentShader,
+                                ["position", "uv"],
+                                ["worldViewProjection", "time", "stripeWidth", "stripeColor", "backgroundColor", "speed", "direction"],
+                                []
+                            );
+                            this.franjaShaderMaterialSelected = this.initShader("stripeShader", franja_vertexShader, franja_fragmentShader, ["position", "uv"], ["worldViewProjection", "time", "stripeWidth", "stripeColor", "speed", "direction"], []);
+
+                            // Configurar parámetros iniciales
+                            this.franjaShaderMaterialBase.setFloat("stripeWidth", 0.2);
+                            this.franjaShaderMaterialBase.setColor3("stripeColor", new BABYLON.Color3(0.6, 0.12, 1));
+                            this.franjaShaderMaterialBase.setColor3("backgroundColor", new BABYLON.Color3(0.2, 0.2, 0.8)); // Azul oscuro para el fondo
+                            this.franjaShaderMaterialBase.setFloat("speed", -0.5);
+                            this.franjaShaderMaterialBase.setVector2("direction", new BABYLON.Vector2(0, 1));
+
+                            this.franjaShaderMaterialSelected.setFloat("stripeWidth", 0.2);
+                            this.franjaShaderMaterialSelected.setColor3("stripeColor", new BABYLON.Color3(0.15, 0.79, 0.83));
+                            this.franjaShaderMaterialSelected.setFloat("speed", -0.5);
+                            this.franjaShaderMaterialSelected.setVector2("direction", new BABYLON.Vector2(0, 1));
+
+                            mesh.material = this.franjaShaderMaterialBase;
 
                             if (this.interceptores_mesh[_intercetptor] == undefined) {
                                 this.interceptores_mesh[_intercetptor] = mesh;
@@ -206,6 +253,7 @@ class Perfil3D {
                     }
                     else if (mesh.name.includes('Cube_')) {
                         if (!mesh.name.includes('root')) {
+                            let idCubo = parseInt(mesh.name.split('_')[1]);
                             mesh.isPickable = true;
                             mesh.actionManager = new BABYLON.ActionManager(scene);
 
@@ -217,6 +265,10 @@ class Perfil3D {
                                     }
                                 )
                             );
+
+                            if (idCubo > 40) {
+                                mesh.dispose();
+                            }
                         }
                     }
                 })
@@ -237,13 +289,33 @@ class Perfil3D {
         return scene;
     };
 
+    initShader(nombre, vertex, fragment, attributes, uniforms, samplers, needAlphaBlending = false) {
+        const material = new BABYLON.ShaderMaterial(
+            nombre,
+            this.scene,
+            {
+                vertexSource: vertex,
+                fragmentSource: fragment,
+            },
+            {
+                attributes: attributes,
+                uniforms: uniforms,
+                samplers: samplers,
+                needAlphaBlending: needAlphaBlending
+            },
+        );
+
+        return material;
+    }
+
     interpolar(mesh, duration = 1.0) {
         // 1. Guardar posiciones iniciales
         const startTargetPos = this.cameraTarget.position.clone();
         const startCamPos = this.camera.position.clone();
 
         // 2. Calcular la posición final del target (el mesh clickeado)
-        const endTargetPos = mesh.position.clone();
+        let endTargetPos = mesh.position.clone();
+        endTargetPos.y = this.camera.target.y;
 
         // 3. Calcular la dirección y distancia final de la cámara
         const direction = startCamPos.subtract(endTargetPos).normalize();
@@ -312,7 +384,7 @@ class Perfil3D {
 
         let keys = Object.keys(this.interceptores_mesh);
         keys.forEach(k => {
-            this.interceptores_mesh[k].material.emissiveColor = new BABYLON.Color3(1.0, 0.0, 0.0);
+            this.interceptores_mesh[k].material = this.franjaShaderMaterialBase;
         })
 
     }
@@ -334,46 +406,6 @@ class Perfil3D {
             x: (offsetX / rect.width) * this.canvas.width,
             y: (offsetY / rect.height) * this.canvas.height
         };
-    }
-
-    diagnoseMaterial(mesh) {
-        if (!mesh || !mesh.material) {
-            return "No material found";
-        }
-
-        const mat = mesh.material;
-        let result = {
-            type: mat.getClassName ? mat.getClassName() : "Unknown",
-            properties: {}
-        };
-
-        // Propiedades comunes
-        if (mat instanceof BABYLON.StandardMaterial) {
-            result.properties = {
-                diffuseColor: mat.diffuseColor,
-                specularColor: mat.specularColor,
-                reflectionTexture: !!mat.reflectionTexture,
-                emissiveColor: mat.emissiveColor
-            };
-        }
-        else if (mat instanceof BABYLON.PBRMaterial) {
-            result.properties = {
-                albedoColor: mat.albedoColor,
-                metallic: mat.metallic,
-                roughness: mat.roughness,
-                environmentTexture: !!mat.environmentTexture
-            };
-        }
-
-        // Verificar si es un material multi-material
-        if (mesh.subMeshes && mesh.subMeshes.length > 1) {
-            result.multiMaterial = true;
-            result.subMaterials = mesh.subMeshes.map(sub => {
-                return scene.multiMaterials[sub.materialIndex]?.getClassName();
-            });
-        }
-
-        console.log(result);
     }
 
     deg2rad(degrees) {
@@ -413,23 +445,17 @@ class Perfil3D {
                     this.camera.target.z -= directionXZ.z * resistance;
                 }
 
-                // Soft limit para altura
-                if (this.camera.target.y < minHeight * 0.75) {
-                    const exceed = (minHeight * 1.5 - this.camera.target.y) / minHeight;
-                    this.camera.target.y += exceed * 0.05;
-                }
-
-                // Soft limit para altura máxima
-                if (this.camera.target.y > maxHeight * 0.9) {
-                    const exceed = (this.camera.target.y - maxHeight * 0.9) / maxHeight;
-                    this.camera.target.y -= exceed * 0.05;
-                }
+                this.camera.target.y = originalTarget.y;
             }
 
             this.cameraTarget.position = this.camera.target;
             this.targetDebug.position = this.camera.target;
-        });
 
+            if (this.franjaShaderMaterialBase) {
+                this.shaderTime += this.scene.getAnimationRatio() * 0.01;
+                this.franjaShaderMaterialBase.setFloat("time", this.shaderTime);
+            }
+        });
     }
 }
 

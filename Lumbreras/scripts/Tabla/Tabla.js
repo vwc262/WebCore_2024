@@ -44,12 +44,14 @@ class Tabla {
       interceptor.root.addEventListener('onmouseover', this.onmouseover);
 
       config.ids.forEach(idEstacion => {
-        const nombre_interceptor = config.nombre;
+        if (idEstacion < 41) {
+          const nombre_interceptor = config.nombre;
 
-        let estacion = Core.Instance.GetDatosEstacion(idEstacion);
-        let RowEstacion_Buscador = new RowEstacionBuscador(this.tbBody, estacion, nombre_interceptor);
-        this.rows.push(RowEstacion_Buscador);
-        RowEstacion_Buscador.Init();
+          let estacion = Core.Instance.GetDatosEstacion(idEstacion);
+          let RowEstacion_Buscador = new RowEstacionBuscador(this.tbBody, estacion, nombre_interceptor);
+          this.rows.push(RowEstacion_Buscador);
+          RowEstacion_Buscador.Init();
+        }
       });
     });
 
