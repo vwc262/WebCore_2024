@@ -9,7 +9,7 @@ import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.PozosAzcapotzalco;
+  projectName = EnumProyecto.PozosCoyoacan;
   constructor() {
     
   }

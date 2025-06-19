@@ -170,11 +170,23 @@ class Estacion {
      * @param {Signal} signal
      * @param {keyof EnumModule} modulo
      */
-    ObtenerRenderNivelOBombaLerma(signal) {
+    ObtenerRenderNivelOBombaLerma(estacion, signal) {
         let indiceImagen = "";
         let bombaMorada = signal.Valor == 4;
         indiceImagen = bombaMorada ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
+         //Verifica estados de la estación
+        /*if (estacionUpdate.IsTimeout() || estacionUpdate.IsEnMantenimiento() || !estacionUpdate.EstaEnLinea()) {
+            indiceImagen = 2;
+        } else {
+            // Verifica el valor de la señal 5
+            if ( estacionUpdate.Signals[5].Valor == 2) {
+                indiceImagen = 0;
+            } else {
+                indiceImagen = 1;
+            }
+        }*/
         const url = `${Core.Instance.ResourcesPath}Sitios/global/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
+        
         return url;
     }
 
