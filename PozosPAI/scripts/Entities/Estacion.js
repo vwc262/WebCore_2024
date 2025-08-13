@@ -175,16 +175,19 @@ class Estacion {
         let bombaMorada = signal.Valor == 4;
         indiceImagen = bombaMorada ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
          //Verifica estados de la estación
-        /*if (estacionUpdate.IsTimeout() || estacionUpdate.IsEnMantenimiento() || !estacionUpdate.EstaEnLinea()) {
+        if (estacion.IsTimeout() || estacion.IsEnMantenimiento() || !estacion.EstaEnLinea()) 
+        {
             indiceImagen = 2;
-        } else {
-            // Verifica el valor de la señal 5
-            if ( estacionUpdate.Signals[5].Valor == 2) {
+        } 
+        else 
+        {
+            // Verifica el valor de la bomba 
+            if ( estacion.Signals[5].Valor == 2) {
                 indiceImagen = 0;
             } else {
                 indiceImagen = 1;
             }
-        }*/
+        }
         const url = `${Core.Instance.ResourcesPath}Sitios/global/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
         
         return url;
