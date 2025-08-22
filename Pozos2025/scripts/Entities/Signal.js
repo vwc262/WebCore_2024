@@ -140,7 +140,7 @@ class Signal {
             return `<label style="color:${this.GetValorColor()};">${value}</label> <label class="unidades">${_unidades}</label>`;
 
         }
-        else if (this.TipoSignal == EnumTipoSignal.Presion || this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad || this.TipoSignal == EnumTipoSignal.Direccion || this.TipoSignal == EnumTipoSignal.Totalizado) {
+        else if ( this.TipoSignal == EnumTipoSignal.Precipitacion || this.TipoSignal == EnumTipoSignal.RadiacionSolar || this.TipoSignal == EnumTipoSignal.Humedad || this.TipoSignal == EnumTipoSignal.Direccion) {
             let value = `${parseFloat(this.Valor).toFixed(0)}`;
 
             if (value < 0)

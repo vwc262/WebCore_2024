@@ -153,7 +153,10 @@ aside {
   position: absolute;
   z-index: 10;
   /*top: 10px;*/
-  left: 804px;
+  left: 758px;
+  position: absolute;
+  width: 406px;
+  height: inherit;
 }
 
 .header__title h1 {
@@ -162,6 +165,7 @@ aside {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   text-transform: uppercase;
   top: 50px;
+
 }
 
 .conagua_logos {
@@ -203,8 +207,8 @@ aside {
   text-shadow: 1px 1px 2px black;
   cursor: pointer;
   position: absolute;
-    left: 1180px;
-    top: 40px;
+  left: 1180px;
+  top: 40px;
 }
 
 .header__btnRegresar img {
