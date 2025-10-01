@@ -332,7 +332,8 @@ class Particular {
         "rgb(129, 129, 129)"
         : offline
           ? "rgb(140, 13, 13)"
-          : "rgb(0, 128, 0)";
+          : //"rgb(0, 128, 0)";
+          "rgba(255, 255, 255, 1)";
   }
 
   setNivelAgua() {

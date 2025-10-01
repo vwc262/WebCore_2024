@@ -70,6 +70,7 @@ class VwcApp {
 
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
+    //$imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}General/ToPerfil.gif?v=${Core.Instance.version}`);
 
     const $imgMapa = document.getElementById("imgMapa");
     $imgMapa.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/icomapa.png?v=${Core.Instance.version}`);

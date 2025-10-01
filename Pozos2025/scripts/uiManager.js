@@ -54,13 +54,14 @@ $btnHeader.addEventListener("click", (ev) => {
     $titleHeader.innerText = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     switch (actualTarger.className) {
       case "headerBtn__Home header__active":
-         SetActualModule(isParticularActive ? "Particular" : "Perfil");
+         SetActualModule(isParticularActive ? "Perfil" : "Perfil");
         //isParticularActive = false;
         
         // section__home.style.zIndex = isParticularActive ? "5" : "10";
         // section__particular.style.zIndex = isParticularActive ? "10" : "5";
 
-        section__home.style.display= isParticularActive ? "none" : "block";
+        //here
+        /*section__home.style.display= isParticularActive ? "none" : "block";
         section__particular.style.display = isParticularActive ? "block" : "none";
 
         $datosHeader.style.display = "flex";
@@ -72,7 +73,22 @@ $btnHeader.addEventListener("click", (ev) => {
           $btnBack.style.opacity = "1";
           $btnBack.addEventListener('click', Particular.Instance.backParticular);
         } else
-           CerrarPanelBombas($panelBombas);
+           CerrarPanelBombas($panelBombas);*/ 
+        //end here
+
+        section__home.style.display= isParticularActive ? "block" : "block";
+        section__particular.style.display = isParticularActive ? "none" : "none";
+
+        $datosHeader.style.display = "flex";
+        ultimoBotonSeleccionado = actualTarger;
+        $asidetabla.style.display = "block";
+        $panelBombas.style.pointerEvents = isParticularActive ? "none" : "none";
+        /*if (isParticularActive) {
+          Particular.Instance.mostrarDetalles();
+          $btnBack.style.opacity = "1";
+          $btnBack.addEventListener('click', Particular.Instance.backParticular);
+        } else
+           CerrarPanelBombas($panelBombas);*/
 
         break;
       case "headerBtn__Mapa header__active":
