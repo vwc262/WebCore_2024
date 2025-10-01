@@ -78,7 +78,7 @@ export const IztapalapaConfig = {
 
             {
                 IdEstacion: 11,
-                Imagen: "width:159px;height:174px;position: absolute; left: 563px; top: 68px;",
+                Imagen: "width:159px;height:94px;position: absolute; left: 1140px; top: 68px;display:none",
                 Etiqueta: "width:92px;height:50px;position: absolute; left: 1154px; top: 125px;",
                 Estado: "display:block"
             },
