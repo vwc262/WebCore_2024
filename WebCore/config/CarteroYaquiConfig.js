@@ -1,4 +1,4 @@
-export const YaquiConfig = {
+export const CarteroYaquiConfig = {
     doPanX: false,
     doPanY: false,
     widthRender: 1970,
