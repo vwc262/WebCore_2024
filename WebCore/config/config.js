@@ -12,7 +12,7 @@ import { PadiernaConfig } from "./PadiernaConfig.js";
 import { PozosSistemaLermaConfig } from "./PozosSistemaLermaConfig.js";
 import { SantaCatarinaConfig } from "./SantaCatarinaConfig.js";
 import { TeoloyucanConfig } from "./Teoloyucan.js";
-import { YaquiConfig } from "./YaquiConfig.js";
+import { CarteroYaquiConfig } from "./CarteroYaquiConfig.js";
 
 
 var Configuracion = {
@@ -39,7 +39,7 @@ var Configuracion = {
                 config = ChalmitaConfig;
                 break;
             case EnumProyecto.Yaqui:
-                config = YaquiConfig;
+                config = undefined;
                 break;
             case EnumProyecto.SistemaCutzamala:
                 config = undefined;
@@ -102,6 +102,30 @@ var Configuracion = {
                 config = undefined;
                 break;
             case EnumProyecto.Ramales:
+                config = undefined;
+                break;
+            case EnumProyecto.PortalDeSalida:
+                config = undefined;
+                break;
+            case EnumProyecto.Cutzamala:
+                config = undefined;
+                break;
+            case EnumProyecto.Ramales2026:
+                config = undefined;
+                break;
+            case EnumProyecto.PozosTlahuac:
+                config = undefined;
+                break;
+            case EnumProyecto.PozosCDMX:
+                config = undefined;
+                break;
+            case EnumProyecto.Cartero:
+                config = undefined;
+                break;
+            case EnumProyecto.CarteroYaqui:
+                config = CarteroYaquiConfig;
+                break;
+            case EnumProyecto.MilpaAlta:
                 config = undefined;
                 break;
         }

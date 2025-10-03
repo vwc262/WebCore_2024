@@ -36,6 +36,14 @@ const EnumProyecto = {
   Encharcamientos: 24,
   Lumbreras: 25,
   Ramales: 26,
+  PortalDeSalida: 27,
+  Cutzamala: 28,
+  Ramales2026: 29,
+  PozosTlahuac: 30,
+  PozosCDMX: 31,
+  Cartero: 32,
+  CarteroYaqui: 33,
+  MilpaAlta: 34,
 };
 /**
  * @returns NombreProyecto
@@ -68,6 +76,14 @@ const EnumNombreProyecto = {
   24: "Encharcamientos",
   25: "Lumbreras",
   26: "Ramales",
+  27: "PortalDeSalida",
+  28: "Cutzamala",
+  29: "Ramales2026",
+  30: "PozosTlahuac",
+  31: "PozosCDMX",
+  32: "Cartero",
+  33: "CarteroYaqui",
+  34: "MilpaAlta",
 };
 
 /**
@@ -101,6 +117,14 @@ const EnumNombreProyectoFolder = {
   "Encharcamientos2025": 24,
   "Lumbreras2025": 25,
   "Ramales2025": 26,
+  "PortalDeSalida": 27,
+  "Cutzamala": 28,
+  "Ramales2026": 29,
+  "PozosTlahuac": 30,
+  "PozosCDMX": 31,
+  "Cartero": 32,
+  "CarteroYaqui": 33,
+  "MilpaAlta": 34,
 };
 
 /**
