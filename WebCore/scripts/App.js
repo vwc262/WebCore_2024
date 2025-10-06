@@ -9,7 +9,7 @@ import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunc
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.Yaqui;
+  projectName = EnumProyecto.CarteroYaqui;
   constructor() {
 
   }

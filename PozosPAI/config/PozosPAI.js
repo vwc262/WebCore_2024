@@ -120,6 +120,12 @@ export const PozosPAI = {
                 "Etiqueta": "position: absolute; left: 138px; top: 233px; ",
                 "Estado": "display:none;"
             },
+            {
+                "IdEstacion": 1420,
+                "Imagen": "position: absolute; left: 20px; top: 70px; width: 30px; height: 50px;",
+                "Etiqueta": "position: absolute; left: 20px; top: 70px; ",
+                "Estado": "display:none;"
+            },
              /*pozos aifa*/
              {
                 "IdEstacion": 1701,
