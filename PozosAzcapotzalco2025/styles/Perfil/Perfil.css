@@ -1,0 +1,242 @@
+.sitioPerfil {
+    cursor: pointer;
+}
+
+.etiquetaSitioPerfil {
+    background: linear-gradient(180deg, rgba(182, 141, 76, 1) 0%, rgba(128, 98, 54, 1) 51%, rgba(182, 141, 76, 1) 100%);
+    border: 2px solid goldenrod;
+    box-shadow: inset 2px 2px 2px rgb(0 0 0 / 40%), inset -2px -2px 2px rgb(0 0 0);
+    font-size: 12px;
+    border-radius: 8px;
+    width: 125px !important;
+    text-shadow: 1px 1px 1px black;
+    height: auto !important;
+}
+
+.signalSitioPerfil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    text-align: center;
+    gap: 6px;
+    margin-bottom: 5px;
+}
+
+.estiloNombreEstacion {
+    pointer-events: none;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    margin: 5px;
+    margin-top: 3px;
+}
+
+.idEstacionFondo {
+    position: absolute;
+}
+
+.horizontalScroll {
+    width: 390px !important;
+    height: 10px;
+    position: absolute;
+    top: 1046px;
+    left: 533px;
+    background-color: #fff02c00 !important;
+    transform: rotate(0deg);
+    border-radius: 10px;
+    transition: all ease 0.2s;
+    background-size: 100% !important;
+    background-position: 0px 10px !important;
+    -webkit-appearance: none;
+}
+
+.verticalScroll {
+    width: 390px !important;
+    height: 10px;
+    position: absolute;
+    top: 520px;
+    left: -182px;
+    background-color: #fff02c00 !important;
+    transform: rotate(90deg);
+    border-radius: 10px;
+    transition: all ease 0.2s;
+    background-size: 100% !important;
+    background-position: 0px 10px !important;
+    -webkit-appearance: none;
+}
+
+.horizontalScroll::-webkit-slider-thumb {
+    background: var(--bola);
+    -webkit-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.renderImagesSitio {
+    pointer-events: none;  
+    width: 35px;
+    height: 60px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    
+}
+
+.estacionPerfil {
+    pointer-events: none;
+}
+
+.hoverPerfil {
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.capasitios {
+    position: absolute;
+    top: 0;
+    pointer-events: none;
+}
+
+
+/*Estilos Pozos Lerma*/
+
+.lblCirclePerfil {
+    pointer-events: none;
+    color: white;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 12px;
+    width: auto !important;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: unset;
+    transition: height ease 0.3s;
+    z-index: 4;
+    background: transparent;
+    position: absolute;
+    transform-origin: center;
+    height: auto !important;
+
+}
+
+.imLinkCircle {
+    pointer-events: auto;
+    width: 40px;
+    height: 66px;
+    background-size: 100% 100% !important;
+    transform-origin: center;
+    transform: scale(1);
+    cursor: pointer;
+}
+
+.imLinkCircle:hover {
+    filter: drop-shadow(rgb(0, 255, 231) 0px 0px 1px);
+}
+
+.txtLinkCircle {
+    width: 56px;
+    height: 50px;
+    background-size: 100% 100% !important;
+    transform-origin: center;
+    transform: scale(1);
+    position: absolute;
+    top: -9px;
+    padding-left: 0.5px;
+    left: 1px;
+}
+
+.txtLinkCircle:after {
+    content: attr(abv);
+    font-size: 18px;
+    text-align: center;
+    vertical-align: -33px;
+}
+
+
+.sitioPerfilLerma {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 10px;
+    height: 16px;
+}
+
+.imgBck {
+    background-size: contain !important;
+    background-position: 0px 0px !important;
+}
+
+.DialContainerLerma {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    bottom: -13px;
+    left: -21px;
+    transform: scale(0.6);
+}
+
+.contenedorSecuenciasDialLerma {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 20px;
+    top: -5%;
+    left: -1px;
+    transform: perspective(200px) rotateX(20deg) rotateY(-1deg) rotateZ(648deg);
+    transition: all 1s ease-out 0s;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+.animButtonsContainer {
+    position: absolute;
+    width: 78%;
+    height: 78%;
+    top: 11%;
+    left: 11%;
+    display: flex;
+    flex-direction: row;
+    z-index: 200;
+    opacity: 1;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.rButtonPerilla {
+    position: absolute;
+    width: 125px;
+    height: 200px;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    opacity: 0.1;
+}
+
+.lButtonPerilla {
+    position: absolute;
+    width: 125px;
+    height: 200px;
+    cursor: pointer;
+    opacity: 0.1;
+}
+
+.thunderPosition {
+    position: relative;
+    left: -12px;
+    top: -18px;
+}
+
+.xSmallIcon {
+    width: 20px;
+    height: 20px;
+}
+
+/*Fin Estilos Pozos Lerma*/
