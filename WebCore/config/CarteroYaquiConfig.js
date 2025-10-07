@@ -7,7 +7,7 @@ export const CarteroYaquiConfig = {
         estilosEstacion: [
             { 
                 IdEstacion: 1, 
-                Imagen: "position:absolute;height:251px;width:423px;left:318px;top:755px",
+                Imagen: "position:absolute;height:149px;width:128px;left:404px;top:850px;z-index:1;",
                 Etiqueta: "position:absolute;height:60px;width:177px;left:355px;top:1010px;", 
                 Estado: "display:block" 
             },
@@ -34,28 +34,28 @@ export const CarteroYaquiConfig = {
             },
 
             { 
-                IdEstacion: 5, 
+                IdEstacion: 5,
                 Imagen: "position:absolute;height:164px;width:235px;left:1088px;top:800px;", 
                 Etiqueta: "position:absolute;height:60px;width:177px;left:1123px;top:969px;", 
                 Estado: "display:block" 
             },
 
             { 
-                IdEstacion: 6, 
+                IdEstacion: 8, 
                 Imagen: "position:absolute; height:92px; width:119px; left:483px; top:539px;",
                 Etiqueta: "position:absolute;height:60px;width:177px;left:532px;top:498px;", 
                 Estado: "display:block" 
             },
 
             { 
-                IdEstacion: 7, 
+                IdEstacion: 6, 
                 Imagen: "position:absolute;height:159px;width:174px;left:309px;top:501px;", 
                 Etiqueta: "position:absolute;height:60px;width:177px;left:422px;top:637px;", 
                 Estado: "display:block" 
             },
 
             { 
-                IdEstacion: 8, 
+                IdEstacion: 7, 
                 Imagen: "position:absolute;height:138px;width:235px;left:74px;top:539px;", 
                 Etiqueta: "position:absolute;height:60px;width:177px;left:73px;top:518px;", 
                 Estado: "display:block" 
