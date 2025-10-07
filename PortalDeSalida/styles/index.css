@@ -41,6 +41,12 @@ nav {
   flex-direction: column;
   flex-wrap: nowrap;
   z-index: 111;
+
+  background: linear-gradient(-90deg,rgba(96, 61, 252, 1) 0%, rgba(66, 18, 105, 1) 100%);
+  mask: linear-gradient(#00000000 0 0) padding-box, linear-gradient(#000000 0 0);
+  border-radius: 0px 10px 10px 0px;
+  border: 10px 0px 0px 0px solid transparent;
+  mask-composite: exclude;
 }
 
 nav img {
@@ -67,7 +73,7 @@ aside {
   height: 1014px;
   left: 1431px;
   margin-left: 10px;
-  margin-top: 35px;
+  margin-top: 40px;
   z-index: 6;
 }
 
@@ -78,6 +84,7 @@ aside {
 #imgHome,
 #imgMapa,
 #imgGraficador,
+#imgReset,
 #imgExterior,
 #imgSubterraneo {
   pointer-events: auto;

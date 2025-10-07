@@ -1,6 +1,7 @@
 import { Core } from "../Core.js";
 import { EventoCustomizado, EventsManager } from "../Managers/EventsManager.js";
 import { water_vertexShader, water_fragmentShader } from "../../assets/shaders/s_water.js"
+import { EnumTipoSignal } from "../Utilities/Enums.js";
 
 /** @returns {Perfil3D} */
 class Perfil3D {
@@ -22,21 +23,16 @@ class Perfil3D {
         this.engine = null;
         this.scene = null;
         this.camera = null;
-        this.initialPosition = null;
+        this.initialPosition = {};
         this.rootPath = '../../assets/3D/';
 
         this.interceptores = null;
         this.interceptores_keys = null;
         this.interceptores_mesh = {};
 
-        this.lastHighlighted = null;
-
-        // Material para resaltado
-        this.highlightMaterial = null;
-
         this.tiempoTranscurrido = 0;
         this.interpolando = false;
-        this.aguas = []
+        this.configuracionAguas = {}
     }
 
     create() {
@@ -58,61 +54,7 @@ class Perfil3D {
         // Render loop (animación continua)
         this.engine.runRenderLoop(() => {
             this.scene.render();
-            // console.log(this.camera.position);
-            // console.log(
-            //     {
-            //         alpha: this.camera.alpha,
-            //         beta: this.camera.beta,
-            //         alphaDeg: this.camera.alpha * 180 / Math.PI,
-            //         betaDeg: this.camera.beta * 180 / Math.PI
-            //     }
-            // );
         });
-
-        this.scene.onPointerMove = (evt) => {
-            const corrected = this.getCorrectedPickingCoordinates(evt.clientX, evt.clientY);
-
-            // Debug: mostrar coordenadas
-            //console.log(`Original: ${evt.clientX},${evt.clientY} | Corregido: ${corrected.x},${corrected.y}`);
-
-            // Crear rayo con coordenadas corregidas
-            const ray = this.scene.createPickingRay(
-                corrected.x,
-                corrected.y,
-                BABYLON.Matrix.Identity(),
-                this.camera
-            );
-
-            // Opciones avanzadas de picking
-            const hit = this.scene.pickWithRay(ray, (mesh) => {
-                return mesh.isPickable && mesh.isVisible; // Filtro personalizado
-            });
-
-
-            // Restaurar mesh previamente resaltado
-            if (this.lastHighlighted) {
-                // this.lastHighlighted.material = this.lastHighlighted.originalMaterial;
-                // this.lastHighlighted = null;
-            }
-
-            // Resaltar nuevo mesh
-            if (hit.pickedMesh
-                && hit.pickedMesh.name.includes('Interceptor')
-            ) {
-                // // Guardar material original
-                // hit.pickedMesh.originalMaterial = hit.pickedMesh.material;
-
-                // // Aplicar material de resaltado
-                // hit.pickedMesh.material = this.highlightMaterial;
-                // this.lastHighlighted = hit.pickedMesh;
-
-                // console.log("Detección precisa en:", hit.pickedMesh.name);
-            }
-        };
-
-        // this.highlightMaterial = new BABYLON.StandardMaterial("highlightMat", this.scene);
-        // this.highlightMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0.2); // Naranja brillante
-        // this.highlightMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3); // Ligero brillo
 
         this.suscribirEventos();
 
@@ -167,7 +109,10 @@ class Perfil3D {
         // También puedes ajustar el radio mínimo si la cámara se acerca demasiado
         camera.lowerRadiusLimit = 0.5;
 
-        this.initialPosition = camera.position;
+        this.initialPosition = {
+            position: camera.position.clone(),
+            rotate: camera.rotation.clone()
+        }
 
         // Targets the camera to scene origin
         camera.attachControl(this.canvas, true); // Habilitar controles
@@ -196,43 +141,59 @@ class Perfil3D {
 
         this.camera = camera;
 
-        // Crear skybox con una textura que sí existe
-        const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", { size: 1000 }, scene);
-        const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-        skyboxMaterial.backFaceCulling = false;
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-            '../../assets/3D/textures/BlueSunset',
-            scene,
-            ["_px.png", "_py.png", "_pz.png", "_nx.png", "_ny.png", "_nz.png"]
+        // 2. Luz: Añadir una luz direccional fuerte
+        const light = new BABYLON.DirectionalLight(
+            "light",
+            new BABYLON.Vector3(0.5, -1, 1), // Dirección de la luz
+            scene
         );
-        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-        skyboxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
-        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.disableLighting = true;
-        skyboxMaterial.reflectionTexture.gammaSpace = true;
-        skyboxMaterial.reflectionTexture.level = 1.5; // Valores > 1 aumentan el brillo
-        skybox.material = skyboxMaterial;
-
-        this.highlightMaterial = new BABYLON.StandardMaterial("highlightMat", scene);
-        this.highlightMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0.2); // Naranja brillante
-        this.highlightMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3); // Ligero brillo
-
-        // O una luz direccional más fuerte
-        const dirLight = new BABYLON.DirectionalLight("dirLight",
-            new BABYLON.Vector3(-1, -2, -1), scene);
-        dirLight.intensity = 2.0;
+        light.intensity = 0.8; // Intensidad de la luz
 
         // cdmx
         BABYLON.SceneLoader.ImportMesh(
             "",
             `${this.rootPath}/models/`,
-            "Portal_DeSalida_All_Test.glb",
+            "51_lumbrera_6_TEO.glb",
             scene,
             async (newMesh) => {
+                const pivote_i = scene.getNodeByName("Water_0");
+                const pivote_s = scene.getNodeByName("Water_1");
+                const camera_i = scene.getNodeByName("Int");
+                const camera_e = scene.getNodeByName("Ext_1");
+                const sensor = scene.getNodeByName("Sensor");
+console.log(camera_i.rotation)
+                this.configuracionAguas["2"] = {
+                    meshes: [],
+                    pivotes: [{
+                        vectorInferior: pivote_i.position.clone(),
+                        vectorSuperior: pivote_s.position.clone(),
+                    }],
+                    camaras: [{
+                        camera_Interior_p: camera_i.position.clone(),
+                        camera_Interior_r: camera_i.rotation.clone(),
+                        camera_Exterior_p: camera_e.position.clone(),
+                        camera_Exterior_r: camera_e.rotation.clone(),
+                    }],
+                    sensores: [sensor]
+                }
+console.log(this.configuracionAguas["2"].camaras[0])
                 newMesh.forEach((mesh, i) => {
+                    // if (mesh.name.includes("primitive")) {
+                    //     console.log(mesh.name)
+                    //     const unlitMaterial = new BABYLON.StandardMaterial("unlit_" + mesh.name, scene)
+                    //     // Copiar propiedades básicas del material original
+                    //     if (mesh.material.albedoTexture) {
+                    //         unlitMaterial.emissiveTexture = mesh.material.albedoTexture.clone();
+                    //         unlitMaterial.diffuseTexture = mesh.material.albedoTexture.clone();
+                    //     }
+                    //     unlitMaterial.emissiveColor = mesh.material.albedoColor || new BABYLON.Color3(2, 2, 2);
+                    //     unlitMaterial.disableLighting = true;  // ¡Esto lo hace Unlit!
+                    //     unlitMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+                    //     mesh.material = unlitMaterial;
+                    // }
+
                     if (mesh.name.includes("Agua")) {
-                        this.aguas.push(mesh);
-                        mesh.material = this.initShader("waterShader", water_vertexShader, water_fragmentShader, ["position", "normal"]);
+                        this.configuracionAguas["2"].meshes.push(mesh);
                     }
                 });
             },
@@ -251,13 +212,15 @@ class Perfil3D {
         return scene;
     };
 
-    interpolar(mesh, duration = 1.0) {
+    interpolar(position, duration = 1.0) {
+        console.log(position)
         // 1. Guardar posiciones iniciales
         const startTargetPos = this.cameraTarget.position.clone();
         const startCamPos = this.camera.position.clone();
 
-        // 2. Calcular la posición final del target (el mesh clickeado)
-        const endTargetPos = mesh.position.clone();
+        // 2. Calcular la posición final del target (el position clickeado)
+        const endTargetPos = position;
+        endTargetPos.y = this.camera.target.y;
 
         // 3. Calcular la dirección y distancia final de la cámara
         const direction = startCamPos.subtract(endTargetPos).normalize();
@@ -319,16 +282,6 @@ class Perfil3D {
         };
 
         animate();
-
-    }
-
-    onInterceptorClick() {
-
-        let keys = Object.keys(this.interceptores_mesh);
-        keys.forEach(k => {
-            this.interceptores_mesh[k].material.emissiveColor = new BABYLON.Color3(1.0, 0.0, 0.0);
-        })
-
     }
 
     // 2. Función corregida para coordenadas con scale y offset
@@ -350,52 +303,43 @@ class Perfil3D {
         };
     }
 
-    diagnoseMaterial(mesh) {
-        if (!mesh || !mesh.material) {
-            return "No material found";
-        }
-
-        const mat = mesh.material;
-        let result = {
-            type: mat.getClassName ? mat.getClassName() : "Unknown",
-            properties: {}
-        };
-
-        // Propiedades comunes
-        if (mat instanceof BABYLON.StandardMaterial) {
-            result.properties = {
-                diffuseColor: mat.diffuseColor,
-                specularColor: mat.specularColor,
-                reflectionTexture: !!mat.reflectionTexture,
-                emissiveColor: mat.emissiveColor
-            };
-        }
-        else if (mat instanceof BABYLON.PBRMaterial) {
-            result.properties = {
-                albedoColor: mat.albedoColor,
-                metallic: mat.metallic,
-                roughness: mat.roughness,
-                environmentTexture: !!mat.environmentTexture
-            };
-        }
-
-        // Verificar si es un material multi-material
-        if (mesh.subMeshes && mesh.subMeshes.length > 1) {
-            result.multiMaterial = true;
-            result.subMaterials = mesh.subMeshes.map(sub => {
-                return scene.multiMaterials[sub.materialIndex]?.getClassName();
-            });
-        }
-
-        console.log(result);
-    }
-
     deg2rad(degrees) {
         return degrees * (Math.PI / 180);
     }
 
     radiansToDegrees(radians) {
         return radians * (180 / Math.PI);
+    }
+
+    update() {
+        let estaciones = Core.Instance.data;
+        estaciones.forEach(estacion => {
+            let niveles = estacion.Signals.filter(s => s.TipoSignal == EnumTipoSignal.Nivel);
+            niveles.forEach((nivel, i) => {
+                let semaforo = nivel.Semaforo;
+
+                // let valor = nivel.DentroRango ? (nivel.Valor / semaforo.Altura) : 0;
+                let valor = Math.random();
+
+                // Asegurar que t esté en el rango [0, 1]
+                let t = Math.max(0, Math.min(1, valor));
+
+                // Interpolación lineal (LERP)
+                if (this.configuracionAguas[estacion.IdEstacion])
+                    this.configuracionAguas[estacion.IdEstacion].meshes[i].position = BABYLON.Vector3.Lerp(this.configuracionAguas[estacion.IdEstacion].pivotes[i].vectorInferior, this.configuracionAguas[estacion.IdEstacion].pivotes[i].vectorSuperior, t);
+            });
+        })
+    }
+
+    resetCamara() {
+        this.interpolar(this.initialPosition.position);
+    }
+
+    camara_interior(IdEstacion) {
+        if (this.configuracionAguas[IdEstacion]) {
+            let position = this.configuracionAguas[IdEstacion].camaras[0].camera_Interior_p;
+            this.interpolar(position)
+        }
     }
 
     suscribirEventos() {
@@ -406,6 +350,20 @@ class Perfil3D {
             this.camera.getViewMatrix(true);
             this.camera.getProjectionMatrix(true);
         });
+
+        EventsManager.Instance.Suscribirevento(
+            "Update",
+            new EventoCustomizado(() => { this.update() })
+        );
+        EventsManager.Instance.Suscribirevento(
+            "reset_Camara",
+            new EventoCustomizado(() => { this.resetCamara() })
+        );
+
+        EventsManager.Instance.Suscribirevento(
+            "camara_interior",
+            new EventoCustomizado((IdEstacion) => this.camara_interior(IdEstacion))
+        )
 
         const originalTarget = this.camera.target.clone();
         const minHeight = 0.5; // Altura mínima sobre el piso
@@ -427,25 +385,11 @@ class Perfil3D {
             //         this.camera.target.z -= directionXZ.z * resistance;
             //     }
 
-            //     // Soft limit para altura
-            //     if (this.camera.target.y < minHeight * 0.75) {
-            //         const exceed = (minHeight * 1.5 - this.camera.target.y) / minHeight;
-            //         this.camera.target.y += exceed * 0.05;
-            //     }
-
-            //     // Soft limit para altura máxima
-            //     if (this.camera.target.y > maxHeight * 0.9) {
-            //         const exceed = (this.camera.target.y - maxHeight * 0.9) / maxHeight;
-            //         this.camera.target.y -= exceed * 0.05;
-            //     }
+            // this.camera.target.y = originalTarget.y;
             // }
 
             this.cameraTarget.position = this.camera.target;
             this.targetDebug.position = this.camera.target;
-
-            this.aguas.forEach(agua => {
-                agua.scaling.y += 2 * Math.sin(performance.now() / 1000); // Efecto pulsante
-            })
         });
 
     }
