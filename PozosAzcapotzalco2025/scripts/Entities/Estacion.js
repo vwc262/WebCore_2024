@@ -126,7 +126,7 @@ class Estacion {
             else {
                 indiceImagen = "0";
             }
-            url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion
+            url = `${Core.Instance.ResourcesPath}Sitios/${this.IdEstacion
                 }/${modulo}/${carpetaTipoSignal}/b${signal.Ordinal + 1}_${isBombaPurple ? 2 : indiceImagen}.png?v=${Core.Instance.version}`;
         }
         else {
@@ -159,7 +159,7 @@ class Estacion {
                 }
             }
 
-            url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion}/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
+            url = `${Core.Instance.ResourcesPath}Sitios/${this.IdEstacion}/${modulo}/${carpetaTipoSignal}/${EnumTipoSignalNomenclatura[signal.TipoSignal]
                 }${signal.Ordinal + 1}_${indiceImagen}.png?v=${Core.Instance.version}`;
         }
 
@@ -174,7 +174,7 @@ class Estacion {
         let indiceImagen = "";
         let bombaMorada = signal.Valor == 4;
         indiceImagen = bombaMorada ? 2 : signal.Valor <= 3 ? signal.Valor : 0;
-        const url = `${Core.Instance.ResourcesPath}Sitios/${this.Abreviacion}/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
+        const url = `${Core.Instance.ResourcesPath}Sitios/${this.IdEstacion}/b1_${indiceImagen}.png?v=${Core.Instance.version}`;
         return url;
     }
 
