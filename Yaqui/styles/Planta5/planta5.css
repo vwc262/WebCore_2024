@@ -1,0 +1,74 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainContainer {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+}
+
+.fondo {
+    width: 100%;
+    height: 100%;
+    background: url('../../Planta5Resources/fondoPlanta5.jpg') no-repeat ;
+    background-size: cover;
+
+}
+
+.header{
+    width: 100%;
+    position: absolute;
+}
+
+.qBox{
+    position: absolute;
+    background: rgb(17 73 96);
+    width: 83px;
+    height: 51px;
+    text-transform: uppercase;
+    left: 1252px;
+    top: 1034px;
+    color: white;
+    font-family: roboto;
+    font-size: 45px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.datosContainer{        
+    font-size: 24pt;
+    display: flex;
+    top: 80px;
+    left: 896px;
+    width: 350px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 90px;
+    padding: 0;
+    background: #0000008f;
+}
+.gapSignals{
+    flex-direction: column !important;
+    margin-left: 20px;
+}
+.textoBlanco{
+    color: white;
+}
+
+.rowDatos{
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+.enlace{
+	margin-top: 30px;
+    width: 100px;
+    height: 25px;
+}
+
+.tiempo{
+	margin-left: 20px;
+}
