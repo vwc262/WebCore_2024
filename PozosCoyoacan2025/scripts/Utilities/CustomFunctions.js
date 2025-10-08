@@ -37,9 +37,9 @@ export const CreateElement = function ({
  * @param {String} titulo
  */
 export const ObtenerFormatoTituloProyecto = function (titulo) {
-  if(titulo == 'SistemaCutzamala')
+  if (titulo == 'SistemaCutzamala')
     titulo = 'Sistema Cutzamala';
-  else if(titulo == 'Lerma')
+  else if (titulo == 'Lerma')
     titulo = 'Pozos Sistema Lerma';
   else
     titulo = titulo.replace(/([A-Z])/g, " $1").trim();
@@ -48,30 +48,59 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
 };
 
 export const AdjustSize = function () {
-  if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")){
-   ajustador(); 
-  }  
+  if (/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")) {
+    ajustador();
+  }
 };
 
-const ajustador = () => {
+// const ajustador = () => {
+//   const contentWidth = 1920;
+//   const contentHeight = 1080;
+
+//   let currentScreenWidth = window.innerWidth;
+//   let currentScreenHeight = window.innerHeight;
+
+//   let widthScale = (currentScreenWidth / contentWidth).toFixed(3);
+//   let heightScale = (currentScreenHeight / contentHeight).toFixed(3);
+
+//   let body = document.getElementsByTagName("body")[0];
+
+//   if (widthScale > heightScale) {
+//     let margin = (currentScreenWidth - contentWidth * heightScale) / 2;
+//     body.style = `transform: scale(${heightScale}); margin: 0px 0px 0px ${margin}px; transform-origin: left top; width: 1920px; height: 1080px;`;
+//   } else {
+//     body.style = `transform: scale(${widthScale}); margin: 0px 0px 0px 0px; transform-origin: left top; width: 1920px; height: 1080px;`;
+//   }
+// }
+
+function ajustador() {
   const contentWidth = 1920;
   const contentHeight = 1080;
 
-  let currentScreenWidth = window.innerWidth;
-  let currentScreenHeight = window.innerHeight;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
 
-  let widthScale = (currentScreenWidth / contentWidth).toFixed(3);
-  let heightScale = (currentScreenHeight / contentHeight).toFixed(3);
+  const widthScale = screenWidth / contentWidth;
+  const heightScale = screenHeight / contentHeight;
 
-  let body = document.getElementsByTagName("body")[0];
+  const scale = Math.min(widthScale, heightScale);
+  const body = document.body;
 
-  if (widthScale > heightScale) {
-    let margin = (currentScreenWidth - contentWidth * heightScale) / 2;
-    body.style = `transform: scale(${heightScale}); margin: 0px 0px 0px ${margin}px; transform-origin: left top; width: 1920px; height: 1080px;`;
-  } else {
-    body.style = `transform: scale(${widthScale}); margin: 0px 0px 0px 0px; transform-origin: left top; width: 1920px; height: 1080px;`;
-  }
+  const offsetX = (screenWidth - contentWidth * scale) / 2;
+  const offsetY = (screenHeight - contentHeight * scale) / 2;
+
+  body.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
+  body.style.transformOrigin = "top left";
+  body.style.width = `${contentWidth}px`;
+  body.style.height = `${contentHeight}px`;
+  body.style.margin = "0";
+  body.style.overflow = "hidden";
 }
+
+// Llama a la función cuando cargue y cuando cambie el tamaño de pantalla
+window.addEventListener("load", ajustador);
+window.addEventListener("resize", ajustador);
+
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
   //2024/05/14 00:00
