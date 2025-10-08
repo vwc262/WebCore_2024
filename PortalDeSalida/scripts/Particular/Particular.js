@@ -299,8 +299,7 @@ class Particular {
   }
 
   setParticularScene(exterior) {
-    console.log(this.$particularImgExterior)
-    this.$particularImgExterior.style.display = `${exterior ? 'block' : 'none'}`;
+    // this.$particularImgExterior.style.display = `${exterior ? 'block' : 'none'}`;
   }
 
   createNivelesImagen() {

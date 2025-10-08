@@ -55,9 +55,13 @@ class VwcApp {
   }
 
   IniciarUI() {
+    // const navBackground = document.getElementById("back_navbar");
+    // navBackground.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/background_Navbar.png?v=${Core.Instance.version}`);
+    
     this.inicializarBotonHeader("imgHome", 'home');
     this.inicializarBotonHeader("imgMapa", 'icomapa');
     this.inicializarBotonHeader("imgGraficador", 'graficador');
+    this.inicializarBotonHeader("imgReset", 'reset');
     this.inicializarBotonHeader("imgExterior", 'exterior');
     this.inicializarBotonHeader("imgSubterraneo", 'subterraneo');
 
