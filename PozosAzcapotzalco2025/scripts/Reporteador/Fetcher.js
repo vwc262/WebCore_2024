@@ -16,7 +16,7 @@ const FetcherGraficador = {
    * @returns
    */
   request: async function ({
-    action = EnumControllerPoleo.CONSULTAR,
+    action = EnumPeticiones.READ,
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
@@ -48,7 +48,7 @@ const FetcherGraficador = {
     return `${Core.Instance.ResourcesPath}${folderRoot}/${assetName}.${ext}?v=${this.version}`;
   },
   requestGraficador: async function ({
-    action = EnumControllerPoleo.CONSULTAR,
+    action = EnumPeticiones.READ,
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
@@ -95,7 +95,7 @@ const FetcherGraficador = {
       delete options.headers;
     }
 
-    const fetchresult = await fetch(`https://virtualwavecontrol.com.mx/api24/VWC/APP2024/GetInfraestructura?idProyecto=23`, options);
+    const fetchresult = await fetch(`${this.uri}/getInfraestructura?idProyecto=${Core.Instance.IdProyecto}`, options);
     let jsonData = null;
 
     jsonData = await fetchresult.json();
@@ -118,10 +118,8 @@ const EnumNameProjecto = {
 
 const getNombreProyectoIdProyecto = (idProyecto) => {
   switch (idProyecto) {
-    case EnumProyecto.PozosPAI: return "PozosPAI";
-    case EnumProyecto.PozosTeoloyucan: return "Teoloyucan";
-    case EnumProyecto.PozosAIFA: return "PozosAIFA";
-    case EnumProyecto.PozosZumpango: return "PozosZumpango";
+    case EnumProyecto.PozosCoyoacan: return "PozosCoyoacan";
+    case EnumProyecto.PozosAzcapotzalco: return "PozosAzcapotzalco";
     default: return "NA";
   }
 

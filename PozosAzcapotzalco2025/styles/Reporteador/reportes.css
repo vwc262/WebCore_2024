@@ -36,8 +36,7 @@ article video {
   height: 255px;
   width: 450px;
   justify-content: space-around;
-  transform: perspective(1200px) scale(1.6) rotateZ(-12deg) rotateY(38deg)
-    rotateX(-15deg);
+  transform: perspective(1200px) scale(1.6) rotateZ(-12deg) rotateY(38deg) rotateX(-15deg);
   background-color: #0f131d;
   opacity: 0;
   transition: all 0.3s ease;
@@ -83,12 +82,10 @@ article video {
   letter-spacing: 1.5px;
   text-shadow: 0px 2px 3px black;
   background: rgb(0, 0, 0) !important;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(9, 91, 121, 1) 50%,
-    rgba(0, 0, 0, 1) 100%
-  ) !important;
+  background: linear-gradient(90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(9, 91, 121, 1) 50%,
+      rgba(0, 0, 0, 1) 100%) !important;
 }
 
 .listaSignalTitle {
@@ -196,8 +193,8 @@ article video {
 .btnReturn {
   position: absolute;
   width: 100px;
-  top: 1px;
-  left: 1511px;
+  top: 962px;
+  left: 1311px;
   z-index: 10;
   opacity: 0;
   transition: all 0.6s ease;
@@ -315,13 +312,11 @@ article video {
   width: 66px;
   top: 186px;
   left: 455px;
-  background: linear-gradient(
-    0deg,
-    rgb(234 234 234) 0%,
-    rgb(47 45 45) 14%,
-    rgb(67 67 67) 57%,
-    rgb(133 141 135) 100%
-  );
+  background: linear-gradient(0deg,
+      rgb(234 234 234) 0%,
+      rgb(47 45 45) 14%,
+      rgb(67 67 67) 57%,
+      rgb(133 141 135) 100%);
   border-radius: 10px;
   color: white;
   box-shadow: 1px 4px 12px black;
@@ -365,7 +360,7 @@ article video {
     filter: blur(2.5px);
   }
 
-  + .holoBntsReportes {
+  +.holoBntsReportes {
     animation-duration: 0.75s;
     opacity: 0.5;
   }
@@ -376,6 +371,7 @@ article video {
     will-change: unset;
     transform: translateY(-10px);
   }
+
   to {
     will-change: transform;
     transform: translateY(-30px);
@@ -392,6 +388,7 @@ article video {
       0 -35px 60px #00fcfcda, 0 -45px 70px #00fcfcda, 0 -65px 80px #00fcfcda,
       0 -75px 90px #00fcfcda;
   }
+
   to {
     will-change: unset;
     box-shadow: 0 -1px 5px #00fcfcda, 0 -1px 2px #00fcfcda, 0 -1px 5px #00fcfcda,

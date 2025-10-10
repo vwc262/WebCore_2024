@@ -561,6 +561,7 @@ class Tabla {
     canvasCoordinates: undefined,
     path: undefined,
     filler: undefined,
+    scrollcurve: undefined,
     init: function (canvas) {
       setTimeout(() => {
         this.canvasCoordinates = canvas.getBoundingClientRect();
@@ -569,6 +570,7 @@ class Tabla {
         this.filler = document.querySelector("#filler");
         this.startAtOrigin();
         this.setEvents(canvas);
+        this.scrollcurve = document.querySelector(".scrollCurve");
       }, 10);
     },
     startAtOrigin: function () {
@@ -581,7 +583,8 @@ class Tabla {
         canvas.addEventListener("mousemove", this.onMouseMove);
       });
       canvas.addEventListener("touchstart", (event) => {
-        canvas.addEventListener("touchmove", this.onTouchMove);
+        this.setCoords();
+        canvas.addEventListener("touchmove", this.onTouchMove.bind(this));
       });
       canvas.addEventListener("touchend", (event) => {
         canvas.removeEventListener("touchmove", this.onTouchMove);
@@ -594,16 +597,20 @@ class Tabla {
       });
     },
     onMouseMove: (mouseEvent) => {
+      // console.log(mouseEvent.offsetY)
       let yValNormalized = this.SVGScrollHandler.getNormalizedValue(
         mouseEvent.offsetY
       );
       this.SVGScrollHandler.setFollowerPosition(yValNormalized, true);
     },
-    onTouchMove: (touchEvent) => {
-      let yValNormalized = this.SVGScrollHandler.getNormalizedValue(
-        touchEvent.touches[0].clientY
-      );
-      this.SVGScrollHandler.setFollowerPosition(yValNormalized, true);
+    setCoords:function(){
+        var coords = this.scrollcurve.getBoundingClientRect();
+        this.maxY = coords.bottom
+        this.minY = coords.top
+    },
+    onTouchMove: function (touchEvent) {
+        let yValNormalized = this.getNormalizedValue(touchEvent.touches[0].clientY);
+        this.setFollowerPosition(yValNormalized, true);
     },
     getNormalizedValue: (yVal) => {
       return (
