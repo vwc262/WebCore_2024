@@ -23,7 +23,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-   touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 html,
@@ -98,7 +98,7 @@ aside {
   position: absolute;
   top: 0px;
   z-index: -1;
-
+  pointer-events: none;
 }
 
 .Content_on_load {
@@ -118,24 +118,36 @@ aside {
 
 .headerBtn__Graficador {
   position: absolute;
-  left: 1681px;
+  left: 1674px;
+  width: 106px;
+  height: 33px;
+  justify-content: center;
 }
 
 .headerBtn__Mapa {
   position: absolute;
-  left: 1566px;
+  left: 1542px;
+  width: 106px;
+  height: 33px;
+  justify-content: center;
 }
 
 .headerBtn__Home {
   position: absolute;
-  left: 1432px;
+  left: 1410px;
+  width: 106px;
+  height: 33px;
+  justify-content: center;
 }
 
 .headerBtn__Login {
   border: none;
   display: flex;
   position: absolute;
-  left: 1830px;
+  left: 1805px;
+  width: 106px;
+  height: 33px;
+  justify-content: center;
 }
 
 .header__active {
