@@ -43,7 +43,7 @@ export const CarteroYaquiConfig = {
             { 
                 IdEstacion: 8, 
                 Imagen: "position:absolute; height:92px; width:119px; left:483px; top:539px;",
-                Etiqueta: "position:absolute;height:60px;width:177px;left:532px;top:498px;", 
+                Etiqueta: "position:absolute;height:60px;width:177px;left:532px;top:498px; display: none", 
                 Estado: "display:block" 
             },
 
@@ -85,7 +85,7 @@ export const CarteroYaquiConfig = {
             { 
                 IdEstacion: 14, 
                 Imagen: "position:absolute; height:123px; width:123px; left:223px; top:414px;", 
-                Etiqueta: "position:absolute;height:60px;width:177px;left:338px;top:395px", 
+                Etiqueta: "position:absolute;height:60px;width:177px;left:338px;top:395px; display: none", 
                 Estado: "display:block" 
             },
 
