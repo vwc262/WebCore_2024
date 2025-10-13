@@ -57,12 +57,12 @@ class SitioPerfil {
         });
 
         if (signal) {
-            const valor = `${signal.GetValorString(true, true)}`;
+            let valor = `${signal.GetValorString(true, true)}`;
 
             valorSignal = CreateElement({
                 nodeElement: 'div',
                 attributes: {
-                    id: `valor_${signal.IdEstacion}`,
+                    id: `valor_${signal.IdSignal}`,
                 },
                 innerHTML: valor
             });
@@ -70,12 +70,36 @@ class SitioPerfil {
             nameSignal = CreateElement({
                 nodeElement: 'p',
                 attributes: {
-                    id: `name_${signal.Nombre}`,
+                    id: `name_${signal.IdSignal}`,
                 },
                 innerText: `${signal.GetNomenclaturaSignal()}:  `
             });
 
             signalDiv.append(nameSignal, valorSignal)
+
+            /* parche ponchesco - ismael */
+            if (estacion.IdEstacion == 13) {
+                var nivel2 = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel && s.Ordinl == 1);
+                let valor = `${nivel2.GetValorString(true, true)}`;
+
+                valorSignal = CreateElement({
+                    nodeElement: 'div',
+                    attributes: {
+                        id: `valor_${nivel2.IdSignal}`,
+                    },
+                    innerHTML: valor
+                });
+
+                nameSignal = CreateElement({
+                    nodeElement: 'p',
+                    attributes: {
+                        id: `name_${nivel2.IdSignal}`,
+                    },
+                    innerText: `${nivel2.GetNomenclaturaSignal()}:  `
+                });
+
+                signalDiv.append(nameSignal, valorSignal)
+            }
         }
 
         this.ElementosDinamicosHTML[nombreSitio.id] = nombreSitio;
@@ -191,9 +215,20 @@ class SitioPerfil {
         name.style.background = estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)";
 
         if (signal) {
-            const valor = `${signal.GetValorString(true, true)}`;
-            const valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdEstacion}`];
-            valorSignal.innerHTML = valor;
+            let valor = `${signal.GetValorString(true, true)}`;
+            let valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdSignal}`];
+            /* parche ponchesco - ismael */
+            if (estacion.IdEstacion == 13) {
+                var nivel2 = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel && s.Ordinl == 1);
+
+                valor = `${nivel2.GetValorString(true, true)}`;
+                valorSignal = this.ElementosDinamicosHTML[`valor_${nivel2.IdSignal}`];
+
+                valorSignal.innerHTML = valor;
+
+            } else {
+                valorSignal.innerHTML = valor;
+            }
         }
 
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Nivel).forEach(signalNivel => {
