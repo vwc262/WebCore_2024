@@ -53,7 +53,8 @@ class SitioPerfil {
                 id: `idEstacion_${estacion.IdEstacion}`, class: 'estiloNombreEstacion',
                 style: `background: ${estacion.IsTimeout() ? 'rgb(129, 11, 11)' : estacion.IsEnMantenimiento() ? 'rgb(129, 129, 129)' : estacion.Enlace == EnumEnlace.FueraLinea ? "rgb(235, 13, 13)" : "rgb(0, 128, 0)"}`
             },
-            innerText: estacion.Nombre
+            /* parche ponchesco - ismael*/
+            innerText: `${estacion.IdEstacion == 6 ? 'R. Yaqui - Calvario 1' : estacion.IdEstacion == 7 ? 'R. Yaqui - Calvario 2' : estacion.Nombre}`
         });
 
         if (signal) {
@@ -79,7 +80,7 @@ class SitioPerfil {
 
             /* parche ponchesco - ismael */
             if (estacion.IdEstacion == 13) {
-                var nivel2 = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel && s.Ordinl == 1);
+                var nivel2 = estacion.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel && s.Ordinal == 1);
                 let valor = `${nivel2.GetValorString(true, true)}`;
 
                 valorSignal = CreateElement({
