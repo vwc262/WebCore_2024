@@ -220,7 +220,7 @@ class SitioPerfil {
             let valorSignal = this.ElementosDinamicosHTML[`valor_${signal.IdSignal}`];
             /* parche ponchesco - ismael */
             if (estacion.IdEstacion == 13) {
-                var nivel2 = this.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel && s.Ordinl == 1);
+                var nivel2 = estacion.Signals.find(s => s.TipoSignal == EnumTipoSignal.Nivel && s.Ordinl == 1);
 
                 valor = `${nivel2.GetValorString(true, true)}`;
                 valorSignal = this.ElementosDinamicosHTML[`valor_${nivel2.IdSignal}`];
