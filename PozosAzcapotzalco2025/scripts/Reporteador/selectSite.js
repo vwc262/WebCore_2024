@@ -21,7 +21,7 @@ function InicialSelector() {
   nameSitio.textContent = sitioPredeterminado.Nombre;
   imgSitioSeleccionado.setAttribute(
     "src",
-    `${FetcherGraficador.getImage(projectName,`Sitios/${sitioPredeterminado.Abreviacion}/Particular`,'fondo','jpg')}`,
+    `${FetcherGraficador.getImage(projectName,`Sitios/${sitioPredeterminado.Id}/Particular`,'fondo','jpg')}`,
   );
 
 
@@ -46,7 +46,7 @@ function createList(
     option.classList.add("option");
     const optionText = document.createElement("span"); // Crea un elemento span para el texto de la opción
     optionText.classList.add(`option-text`, `${index % 2 == 0 ? 'normal' : 'blue'}`);
-    optionText.textContent = Sitio.Nombre; // Establece el texto de la opción como el nombre del sitio
+    optionText.textContent = Sitio.Id + " - " + Sitio.Nombre; // Establece el texto de la opción como el nombre del sitio
     option.appendChild(optionText); // Agrega el elemento de texto como hijo del elemento li
     optionContainer.appendChild(option); // Agrega el elemento li al contenedor de opciones
 
@@ -62,7 +62,7 @@ function createList(
 
       imgSitioSeleccionado.setAttribute(
         "src",
-        `${FetcherGraficador.getImage(projectName,`Sitios/${Sitio.Abreviacion}/Particular`,'fondo','jpg')}`,
+        `${FetcherGraficador.getImage(projectName,`Sitios/${Sitio.Id}/Particular`,'fondo','jpg')}`,
       );
     });
   });
