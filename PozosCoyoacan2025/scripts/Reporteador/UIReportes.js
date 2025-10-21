@@ -133,9 +133,13 @@ var UIReportes = {
     }
     else if (UIReportes.signalesFetcheadas == UIReportes.idSignalsAGraficar.length) {
       UIReportes.idSignalsABorrar.forEach((index) => {
-        const signalItem = document.getElementsByClassName(`variable_${UIReportes.idSignalsAGraficar[index].IdSignal}`)[0];
-        signalItem.remove();
-        UIReportes.idSignalsAGraficar.splice(index, 1)
+        if(UIReportes.idSignalsAGraficar[index])
+        {
+
+          const signalItem = document.getElementsByClassName(`variable_${UIReportes.idSignalsAGraficar[index].IdSignal}`)[0];
+          signalItem.remove();
+          UIReportes.idSignalsAGraficar.splice(index, 1)
+        }
       })
 
       this.PrepararChart();

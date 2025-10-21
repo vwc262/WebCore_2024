@@ -16,7 +16,7 @@ const FetcherGraficador = {
    * @returns
    */
   request: async function ({
-    action = EnumControllerPoleo.CONSULTAR,
+    action = EnumPeticiones.READ,
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
@@ -48,7 +48,7 @@ const FetcherGraficador = {
     return `${Core.Instance.ResourcesPath}${folderRoot}/${assetName}.${ext}?v=${this.version}`;
   },
   requestGraficador: async function ({
-    action = EnumControllerPoleo.CONSULTAR,
+    action = EnumPeticiones.READ,
     method = this.methodType.GET,
     data = this.SinData,
     jsonizar = true,
@@ -95,7 +95,7 @@ const FetcherGraficador = {
       delete options.headers;
     }
 
-    const fetchresult = await fetch(`${this.uri}/${action}?idProyecto=${Core.Instance.IdProyecto}`, options);
+    const fetchresult = await fetch(`${this.uri}/getInfraestructura?idProyecto=${Core.Instance.IdProyecto}`, options);
     let jsonData = null;
 
     jsonData = await fetchresult.json();
