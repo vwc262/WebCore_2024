@@ -335,6 +335,7 @@ const EnumEnlace = {
   Radio: 1,
   Celular: 2,
   Hibrido: 3,
+  Local: 4,
 };
 
 /**

@@ -305,6 +305,19 @@ class Particular {
     panelControlElement.style.display = tipoSignal7Count >= 1 ? "flex" : "none";
   }
 
+  getEtiquetaEnlace(valorEnlace){
+    switch (valorEnlace){
+      case EnumEnlace.Celular:
+        return "C"
+      case EnumEnlace.Radio:
+        return "R"
+      case EnumEnlace.Hibrido:
+        return "CR"
+      case EnumEnlace.Local:
+        return "L"
+    }
+  }
+
   setEnlaceParticular(estacion) {
     let valorEnlace = estacion.Enlace;
     let timeout = estacion.IsTimeout();
@@ -312,12 +325,12 @@ class Particular {
 
     // Cambiar el texto de acuerdo al estado de la estación
     const offline = valorEnlace == EnumEnlace.FueraLinea;
-    const tipoEnlace =
-      valorEnlace == EnumEnlace.Celular
-        ? "C"
-        : valorEnlace == EnumEnlace.Radio
-          ? "R"
-          : "CR";
+    const tipoEnlace = this.getEtiquetaEnlace(valorEnlace)
+      // valorEnlace == EnumEnlace.Celular
+      //   ? "C"
+      //   : valorEnlace == EnumEnlace.Radio
+      //     ? "R"
+      //     : "CR";
     this.$headerStatus.innerHTML = timeout
       ? "Fuera de línea (Tiempo)"
       : enMantenimiento ?
