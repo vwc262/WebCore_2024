@@ -57,20 +57,24 @@ const ajustador = () => {
   const contentWidth = 1920;
   const contentHeight = 1080;
 
-  let currentScreenWidth = window.innerWidth;
-  let currentScreenHeight = window.innerHeight;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
 
-  let widthScale = (currentScreenWidth / contentWidth).toFixed(3);
-  let heightScale = (currentScreenHeight / contentHeight).toFixed(3);
+  const widthScale = screenWidth / contentWidth;
+  const heightScale = screenHeight / contentHeight;
 
-  let body = document.getElementsByTagName("body")[0];
+  const scale = Math.min(widthScale, heightScale);
+  const body = document.body;
 
-  if (widthScale > heightScale) {
-    let margin = (currentScreenWidth - contentWidth * heightScale) / 2;
-    body.style = `transform: scale(${heightScale}); margin: 0px 0px 0px ${margin}px; transform-origin: left top; width: 1920px; height: 1080px;`;
-  } else {
-    body.style = `transform: scale(${widthScale}); margin: 0px 0px 0px 0px; transform-origin: left top; width: 1920px; height: 1080px;`;
-  }
+  const offsetX = (screenWidth - contentWidth * scale) / 2;
+  const offsetY = (screenHeight - contentHeight * scale) / 2;
+
+  body.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
+  body.style.transformOrigin = "top left";
+  body.style.width = `${contentWidth}px`;
+  body.style.height = `${contentHeight}px`;
+  body.style.margin = "0";
+  body.style.overflow = "hidden";
 }
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
