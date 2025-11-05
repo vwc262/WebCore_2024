@@ -658,18 +658,20 @@ class Tabla {
 
   update() {
     let onlineCount = Core.Instance.data.filter(
-      (estacion) => estacion.Enlace != EnumEnlace.FueraLinea && !estacion.IsTimeout() && !estacion.IsEnMantenimiento()
+      (estacion) => estacion.Enlace != EnumEnlace.FueraLinea && !estacion.IsEnMantenimiento() && !estacion.IsTimeout() 
     ).length;
+
     let offlineCount = Core.Instance.data.filter(
       (estacion) => {
-        if (estacion.IsTimeout()) return true;
-        else if (estacion.IsEnMantenimiento()) return false;
+        if (estacion.IsEnMantenimiento()) return false;
+        else if (estacion.IsTimeout()) return true;
         else if (estacion.Enlace == EnumEnlace.FueraLinea) return true
       }
     ).length;
 
+  
     let enMantenimiento = Core.Instance.data.filter((estacion) =>
-      estacion.IsEnMantenimiento() && !estacion.IsTimeout()
+      estacion.IsEnMantenimiento() //&& !estacion.IsTimeout()
     ).length;
 
 
