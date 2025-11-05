@@ -96,10 +96,10 @@ class Row {
 
   Update() {
     const estacion = Core.Instance.GetDatosEstacion(this.IdEstacion);
-
+  
     this.enlace.setAttribute(
       "src",
-      `${Core.Instance.ResourcesPath}General/state_${estacion.IsTimeout() ? 't' : estacion.IsEnMantenimiento() ? 'm' : estacion.Enlace}.png?v=${Core.Instance.version}`
+      `${Core.Instance.ResourcesPath}General/state_${estacion.IsEnMantenimiento() ? 'm' : estacion.IsTimeout() ? 't' : estacion.Enlace}.png?v=${Core.Instance.version}`
     );
     this.fecha.innerText = `${estacion.ObtenerFecha()}`;
   }

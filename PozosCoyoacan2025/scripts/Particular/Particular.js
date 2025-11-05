@@ -217,7 +217,7 @@ class Particular {
       signal.TipoSignal == EnumTipoSignal.Temperatura ||
       signal.TipoSignal == EnumTipoSignal.Humedad ||
       signal.TipoSignal == EnumTipoSignal.Intensidad ||
-      signal.TipoSignal == EnumTipoSignal.Direccion 
+      signal.TipoSignal == EnumTipoSignal.Direccion
     ).forEach((signal) => {
       const $signalItem = CreateElement({
         nodeElement: "div",
@@ -226,7 +226,7 @@ class Particular {
 
       const $etiquetaNombre = CreateElement({
         nodeElement: "div",
-        attributes: { class: "etiqueta__Nombre"},
+        attributes: { class: "etiqueta__Nombre" },
         innerText: `${signal.GetNomenclaturaSignal()}: `,
       });
 
@@ -318,18 +318,18 @@ class Particular {
         : valorEnlace == EnumEnlace.Radio
           ? "R"
           : "CR";
-    this.$headerStatus.innerHTML = timeout
-      ? "Fuera de línea (Tiempo)"
-      : enMantenimiento ?
-        'En Mantenimiento' :
+    this.$headerStatus.innerHTML = enMantenimiento
+      ? "En Mantenimiento"
+      : timeout ?
+        'Fuera de línea (Tiempo)' :
         offline
           ? "Fuera de línea"
           : `En línea (${tipoEnlace})`;
-    this.$headerStatus.style.color = timeout
-      ? "rgb(129, 11, 11)"
+    this.$headerStatus.style.color = enMantenimiento
+      ? "rgba(237, 237, 237, 1)"
       :
-      enMantenimiento ?
-        "rgb(129, 129, 129)"
+      IsTimeout ?
+        "rgb(129, 11, 11)"
         : offline
           ? "rgb(140, 13, 13)"
           : //"rgb(0, 128, 0)";

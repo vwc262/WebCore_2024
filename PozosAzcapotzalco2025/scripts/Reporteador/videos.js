@@ -8,7 +8,7 @@ const controladorVideo = {
     this.videoInicio.setAttribute("src", url);
 
     // Agregar event listener para el evento "loadedmetadata"
-    this.videoInicio.addEventListener("loadedmetadata", this.loadVideo);
+    this.videoInicio.addEventListener("loadedmetadata", this.loadVideo);    
 
     // Agregar event listener para el evento "ended"
     this.videoInicio.addEventListener("ended", this.ended);
@@ -18,16 +18,16 @@ const controladorVideo = {
   // Método para cargar el video
   loadVideo() {
     // Verificar si el video está listo para reproducirse
-    if (controladorVideo.videoInicio.readyState === 4) {
-      // Reproducir el video
-      controladorVideo.videoInicio.play();
-    }
+    controladorVideo.videoInicio.play();
+    // if (controladorVideo.videoInicio.readyState === 4) {
+    //   // Reproducir el video
+    // }
   },
 
   ended: function (e) {
     controladorVideo.endVideo(e, e.currentTarget.callback);
   },
-
+  
   // Método para manejar el evento de fin de video
   endVideo(ev, callback) {
     // Remover event listeners para evitar fugas de memoria
