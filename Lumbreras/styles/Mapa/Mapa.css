@@ -1,9 +1,9 @@
 #map {
-  width: 1380px !important;
+  width: 1460px !important;
   height: 1022px;
   position: absolute;
   overflow: hidden;
-  right: 0px;
+  left: 0px;
   top: 33px;
 }
 

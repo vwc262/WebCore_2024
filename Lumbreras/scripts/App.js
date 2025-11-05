@@ -5,7 +5,7 @@ import { EnumNombreProyecto, EnumProyecto } from "./Utilities/Enums.js";
 import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
-import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
+import { ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
 import { AppGraficador } from "./reporteador/AppGraficador.js";
 import News from "./news/news.js";
 
@@ -21,7 +21,6 @@ class VwcApp {
     this.version = Core.Instance.version;
 
     this.IniciarHeader();
-    AdjustSize();
 
     if (this.version != -99) {
       this.IniciarUI();
@@ -104,5 +103,3 @@ class VwcApp {
 }
 
 export { VwcApp };
-
-window.onresize = () => { AdjustSize(); };

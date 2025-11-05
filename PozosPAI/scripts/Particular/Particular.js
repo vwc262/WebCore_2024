@@ -97,9 +97,24 @@ class Particular {
           if (signal.DentroRango == 1) $imgNivelAgua.classList.add('turbulence');
           else $imgNivelAgua.classList.remove('turbulence')
         }
+        let indiceImagen = "";
+        if (estacionUpdate.IsTimeout() || estacionUpdate.IsEnMantenimiento() || !estacionUpdate.EstaEnLinea()) 
+        {
+            indiceImagen = 2;
+        } 
+        else 
+        {
+            // Verifica el valor de la bomba
+            if ( signal.IdSignal == 2) {
+                indiceImagen = 0;
+            } else {
+                indiceImagen = 1;
+            }
+        }
 
         let $imgBombaParticular =
-          this.HTMLUpdateElements[`particular_bomba_${signal.IdSignal}`];
+          //this.HTMLUpdateElements[`particular_bomba_${signal.IdSignal}`];
+          this.HTMLUpdateElements[`particular_bomba_${indiceImagen}`];
 
         if ($imgBombaParticular) {
           $imgBombaParticular.setAttribute(

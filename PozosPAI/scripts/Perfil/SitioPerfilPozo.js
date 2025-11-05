@@ -106,7 +106,7 @@ class SitioPerfilPozo {
         estacion.ObtenerSignalPorTipoSignal(EnumTipoSignal.Bomba).forEach(signalBomba => {
             let imagenEstacionBombaPerfil = CreateElement({
                 nodeElement: "img",
-                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio imgBck", src: estacion.ObtenerRenderNivelOBombaLerma(signalBomba, "Perfil") }
+                attributes: { id: `idBomba_${signalBomba.IdSignal}`, class: "renderImagesSitio imgBck", src: estacion.ObtenerRenderNivelOBombaLerma(estacion, signalBomba, "Perfil") }
             });
 
             imagenEstacionBombaPerfil.signal = signalBomba;
@@ -130,16 +130,30 @@ class SitioPerfilPozo {
         }
     }
     ActualizarEnlaceLermaPerfil(estacionUpdate) {
-        if (estacionUpdate) {
-            const imgCirculo = this;
-            const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 3}.png`;
-            imgCirculo.setAttribute('src', url);
+    if (estacionUpdate) {
+        // Asegúrate que this es el elemento <img>, o usa otro método para seleccionarlo si no lo es
+        const imgCirculo = this; // o document.getElementById('miImagen') si aplica
+        //const url = `${Core.Instance.ResourcesPath}General/circlestate_${estacionUpdate.IsTimeout() ? 0 : estacionUpdate.IsEnMantenimiento() ? 1 : estacionUpdate.EstaEnLinea() ? 2 : 3}.png`;
+        let url = "";
+
+        // Verifica estados de la estación
+        if (estacionUpdate.IsTimeout() || estacionUpdate.IsEnMantenimiento() || !estacionUpdate.EstaEnLinea()) {
+            url = `${Core.Instance.ResourcesPath}General/circlestate_0.png`;
+        } else {
+            // Verifica el valor de la señal 5
+            if ( estacionUpdate.Signals[5].Valor == 2) {
+                url = `${Core.Instance.ResourcesPath}General/circlestate_1.png`;    
+            } else {
+                url = `${Core.Instance.ResourcesPath}General/circlestate_2.png`;
+            }
         }
+        imgCirculo.setAttribute('src', url);
     }
+}
     ActualizarImagenBombaPerfilLerma(estacionUpdate) {
         if (estacionUpdate) {
             const imagenBomba = this;
-            imagenBomba.setAttribute('src', estacionUpdate.ObtenerRenderNivelOBombaLerma(imagenBomba.signal, "Perfil"));
+            imagenBomba.setAttribute('src', estacionUpdate.ObtenerRenderNivelOBombaLerma(estacionUpdate, imagenBomba.signal, "Perfil"));
             imagenBomba.style.filter = imagenBomba.signal.Valor == 4 ? "hue-rotate(295deg)" : "[hue-rotate(0deg)";
         }
     }
