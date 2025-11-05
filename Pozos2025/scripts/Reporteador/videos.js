@@ -18,9 +18,9 @@ const controladorVideo = {
   // Método para cargar el video
   loadVideo() {
     // Verificar si el video está listo para reproducirse
+    controladorVideo.videoInicio.play();
     if (controladorVideo.videoInicio.readyState === 4) {
       // Reproducir el video
-      controladorVideo.videoInicio.play();
     }
   },
 
