@@ -48,10 +48,10 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
 };
 
 export const AdjustSize = function () {
-  // if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")){
-  //  ajustador(); 
-  // }  
-  ajustador();
+   if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")){
+    ajustador(); 
+   }  
+  
 };
 
 const ajustador = () => {
@@ -77,6 +77,8 @@ const ajustador = () => {
   body.style.margin = "0";
   body.style.overflow = "hidden";
 }
+window.addEventListener("load", ajustador);
+window.addEventListener("resize", ajustador);
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
   //2024/05/14 00:00
