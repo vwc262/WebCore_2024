@@ -328,7 +328,7 @@ class Particular {
     this.$headerStatus.style.color = enMantenimiento
       ? "rgba(237, 237, 237, 1)"
       :
-      IsTimeout ?
+      timeout ?
         "rgb(129, 11, 11)"
         : offline
           ? "rgb(140, 13, 13)"
