@@ -112,14 +112,14 @@ class VwcApp {
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
     $imgModal.style.backgroundSize = `contain`;
 
-    if (this.isApple()) {
-      let html = document.getElementsByTagName('html')[0];
+    // if (this.isApple()) {
+    //   let html = document.getElementsByTagName('html')[0];
 
-      html.style['-webkit-user-drag'] = 'auto';
-      html.style['-moz-user-drag'] = 'auto';
-      html.style['-o-user-drag'] = 'auto';
-      html.style['-webkit-user-drag'] = 'auto';
-    }
+    //   html.style['-webkit-user-drag'] = 'auto';
+    //   html.style['-moz-user-drag'] = 'auto';
+    //   html.style['-o-user-drag'] = 'auto';
+    //   html.style['-webkit-user-drag'] = 'auto';
+    // }
 
 
     new Tabla().create(); // Inicio de tabla curva
