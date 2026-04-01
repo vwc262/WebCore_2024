@@ -54,6 +54,8 @@ export const AdjustSize = function () {
 };
 
 const ajustador = () => {
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  if(isIOS)return;
   const contentWidth = 1920;
   const contentHeight = 1080;
 
