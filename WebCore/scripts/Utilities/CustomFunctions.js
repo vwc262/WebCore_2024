@@ -48,34 +48,49 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
 };
 
 export const AdjustSize = function () {
-  // if (/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows") || navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh")) {
-  //   ajustador();
-  // }
+  if (/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows") || navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh")) {
+    ajustador();
+  }
 };
 
+
+
+const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+
+let initialized = false;
+let lastWidth = window.innerWidth;
+let lastHeight = window.innerHeight;
+
 const ajustador = () => {
-  const contentWidth = 1920;
-  const contentHeight = 1080;
+  const vv = window.visualViewport;
+
+  // 🔥 Solo bloquear zoom DESPUÉS del primer render
+  if (initialized && isIOS && vv && vv.scale !== 1) return;
 
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  const widthScale = screenWidth / contentWidth;
-  const heightScale = screenHeight / contentHeight;
+  const contentWidth = 1920;
+  const contentHeight = 1080;
 
-  const scale = Math.min(widthScale, heightScale);
-  const body = document.body;
+  const scale = Math.min(
+    screenWidth / contentWidth,
+    screenHeight / contentHeight
+  );
+
+  const app = document.getElementById("bodyAux");
 
   const offsetX = (screenWidth - contentWidth * scale) / 2;
   const offsetY = (screenHeight - contentHeight * scale) / 2;
 
-  body.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
-  body.style.transformOrigin = "top left";
-  body.style.width = `${contentWidth}px`;
-  body.style.height = `${contentHeight}px`;
-  body.style.margin = "0";
-  body.style.overflow = "hidden";
-}
+  app.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+  app.style.transformOrigin = "top left";
+
+  app.style.width = `${contentWidth}px`;
+  app.style.height = `${contentHeight}px`;
+
+  initialized = true;
+};
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
   //2024/05/14 00:00
