@@ -53,10 +53,7 @@ export const AdjustSize = function () {
   }
 };
 
-
-
 const ajustador = () => {
-  var bodyaux = document.getElementById('bodyAux');
   const contentWidth = 1920;
   const contentHeight = 1080;
 
@@ -72,12 +69,12 @@ const ajustador = () => {
   const offsetX = (screenWidth - contentWidth * scale) / 2;
   const offsetY = (screenHeight - contentHeight * scale) / 2;
 
-  bodyaux.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
-  bodyaux.style.transformOrigin = "top left";
-  bodyaux.style.width = `${contentWidth}px`;
-  bodyaux.style.height = `${contentHeight}px`;
-  bodyaux.style.margin = "0";
-  bodyaux.style.overflow = "hidden";
+  body.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
+  body.style.transformOrigin = "top left";
+  body.style.width = `${contentWidth}px`;
+  body.style.height = `${contentHeight}px`;
+  body.style.margin = "0";
+  body.style.overflow = "hidden";
 }
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
