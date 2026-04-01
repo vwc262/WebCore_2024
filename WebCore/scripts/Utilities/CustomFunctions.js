@@ -55,51 +55,30 @@ export const AdjustSize = function () {
 
 
 
-const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-
-let lastWidth = 0;
-let lastHeight = 0;
-
 const ajustador = () => {
-  const vv = window.visualViewport;
+  var bodyaux = document.getElementById('bodyAux');
+  const contentWidth = 1920;
+  const contentHeight = 1080;
 
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  // 🔥 Detectar zoom real (cuando viewport cambia pero layout no)
-  const isZooming =
-    vv &&
-    (Math.abs(vv.width - screenWidth) > 1 ||
-     Math.abs(vv.height - screenHeight) > 1);
+  const widthScale = screenWidth / contentWidth;
+  const heightScale = screenHeight / contentHeight;
 
-  // 🚫 Solo bloquear en iOS cuando es zoom
-  if (isIOS && isZooming) return;
-
-  // Evitar cálculos duplicados inútiles
-  if (screenWidth === lastWidth && screenHeight === lastHeight) return;
-
-  lastWidth = screenWidth;
-  lastHeight = screenHeight;
-
-  const contentWidth = 1920;
-  const contentHeight = 1080;
-
-  const scale = Math.min(
-    screenWidth / contentWidth,
-    screenHeight / contentHeight
-  );
-
-  const app = document.getElementById("app");
+  const scale = Math.min(widthScale, heightScale);
+  const body = document.body;
 
   const offsetX = (screenWidth - contentWidth * scale) / 2;
   const offsetY = (screenHeight - contentHeight * scale) / 2;
 
-  app.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
-  app.style.transformOrigin = "top left";
-
-  app.style.width = `${contentWidth}px`;
-  app.style.height = `${contentHeight}px`;
-};
+  bodyaux.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
+  bodyaux.style.transformOrigin = "top left";
+  bodyaux.style.width = `${contentWidth}px`;
+  bodyaux.style.height = `${contentHeight}px`;
+  bodyaux.style.margin = "0";
+  bodyaux.style.overflow = "hidden";
+}
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
   //2024/05/14 00:00
