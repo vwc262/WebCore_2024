@@ -57,18 +57,29 @@ export const AdjustSize = function () {
 
 const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
-let initialized = false;
-let lastWidth = window.innerWidth;
-let lastHeight = window.innerHeight;
+let lastWidth = 0;
+let lastHeight = 0;
 
 const ajustador = () => {
   const vv = window.visualViewport;
 
-  // 🔥 Solo bloquear zoom DESPUÉS del primer render
-  if (initialized && isIOS ) return;
-
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
+
+  // 🔥 Detectar zoom real (cuando viewport cambia pero layout no)
+  const isZooming =
+    vv &&
+    (Math.abs(vv.width - screenWidth) > 1 ||
+     Math.abs(vv.height - screenHeight) > 1);
+
+  // 🚫 Solo bloquear en iOS cuando es zoom
+  if (isIOS && isZooming) return;
+
+  // Evitar cálculos duplicados inútiles
+  if (screenWidth === lastWidth && screenHeight === lastHeight) return;
+
+  lastWidth = screenWidth;
+  lastHeight = screenHeight;
 
   const contentWidth = 1920;
   const contentHeight = 1080;
@@ -78,7 +89,7 @@ const ajustador = () => {
     screenHeight / contentHeight
   );
 
-  const app = document.getElementById("bodyAux");
+  const app = document.getElementById("app");
 
   const offsetX = (screenWidth - contentWidth * scale) / 2;
   const offsetY = (screenHeight - contentHeight * scale) / 2;
@@ -88,8 +99,6 @@ const ajustador = () => {
 
   app.style.width = `${contentWidth}px`;
   app.style.height = `${contentHeight}px`;
-
-  initialized = true;
 };
 
 export const ArmarFechaSQL = function (datetime, isInicio) {
