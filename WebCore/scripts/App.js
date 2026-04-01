@@ -6,20 +6,22 @@ import Perfil from "./Perfil/Perfil.js";
 import { EventoCustomizado, EventsManager } from "./Managers/EventsManager.js";
 import { Mapa } from "./Mapa/Mapa.js";
 import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunctions.js";
+import { PerfilPozos } from "./Perfil/PerfilPozos.js";
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
   projectName = EnumProyecto.SantaCatarina;
   constructor() {
-
+    this.isPerfilTipoPozos = EnumNombreProyecto[this.projectName].toLowerCase().includes('lerma');
   }
   async Start() {
-
+    //UIReportes.PrepararChart();
     await Core.Instance.Init(this.projectName); // Espera a que tenga la informacion
     this.version = Core.Instance.version;
-
     this.IniciarHeader();
-    this.verificarCambioDeOrientacion()
+    
+    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
+
     AdjustSize();
 
     if (this.version != -99) {
@@ -37,12 +39,6 @@ class VwcApp {
       containerLoading.remove();
     }
   }
-  
-  verificarCambioDeOrientacion(){
-    if (window.screen.orientation)
-      window.screen.orientation.addEventListener('change',AdjustSize)
-    
-  }
 
   onLoad() {
     const loadscreen = document.querySelector(".sec-loading");
@@ -57,27 +53,16 @@ class VwcApp {
   }
 
   IniciarHeader() {
-    const config = Configuracion.GetConfiguracion(Core.Instance.IdProyecto);
-
     const titulo = `${ObtenerFormatoTituloProyecto(EnumNombreProyecto[Core.Instance.IdProyecto])}`;
     let $title = document.getElementById('title__page');
-    let $header_image = document.getElementById('header_image');
-    let $headerImagen = document.getElementsByClassName('headerImagen')[0];
     $title.innerText = `VWC - ${titulo}`;
 
     const $titleHeader = document.querySelector("#title");
     $titleHeader.innerText = titulo;
 
-    if (config.tipoHeader)
-      $header_image.setAttribute("src", `${Core.Instance.ResourcesPath}General/${config.tipoHeader}.png?v=${Core.Instance.version}`);
-    else
-      $headerImagen.style.display = "none"
-
   }
 
   IniciarUI() {
-
-
     const $imgHome = document.getElementById("imgHome");
     $imgHome.setAttribute("src", `${Core.Instance.ResourcesPath}Iconos/home.png?v=${Core.Instance.version}`);
 
@@ -112,21 +97,26 @@ class VwcApp {
     $imgModal.style.background = `url(${Core.Instance.ResourcesPath}Control/modalbackground.png?v=${Core.Instance.version}) no-repeat`;
     $imgModal.style.backgroundSize = `contain`;
 
-    // if (this.isApple()) {
-    //   let html = document.getElementsByTagName('html')[0];
+    if (this.isApple()) {
+      let html = document.getElementsByTagName('html')[0];
 
-    //   html.style['-webkit-user-drag'] = 'auto';
-    //   html.style['-moz-user-drag'] = 'auto';
-    //   html.style['-o-user-drag'] = 'auto';
-    //   html.style['-webkit-user-drag'] = 'auto';
-    // }
+      html.style['-webkit-user-drag'] = 'auto';
+      html.style['-moz-user-drag'] = 'auto';
+      html.style['-o-user-drag'] = 'auto';
+      html.style['-webkit-user-drag'] = 'auto';
+    }
 
 
     new Tabla().create(); // Inicio de tabla curva
-
-    new Perfil().create(); // Inicio del perfil
-
+    if (this.isPerfilTipoPozos) {
+      PerfilPozos.Instace.create();
+    }
+    else {
+      new Perfil().create(); // Inicio del perfil
+    }
     new Mapa().create();
+
+
 
     this.suscribirEventos();
   }
