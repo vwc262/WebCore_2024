@@ -26,7 +26,7 @@ export const CreateElement = function ({
 
   for (const [key, functions] of events.entries()) {
     functions.forEach((fnEv) => {
-      createdElement.addEventListener(key, fnEv);
+      createdElement.addEventListener(key, fnEv, { passive: false });
     });
   }
   return createdElement;
@@ -37,9 +37,9 @@ export const CreateElement = function ({
  * @param {String} titulo
  */
 export const ObtenerFormatoTituloProyecto = function (titulo) {
-  if(titulo == 'PlantasPotabilizadoras')
+  if (titulo == 'PlantasPotabilizadoras')
     titulo = 'Sistema Cutzamala';
-  else if(titulo == 'Lerma')
+  else if (titulo == 'Lerma')
     titulo = 'Pozos Sistema Lerma';
   else
     titulo = titulo.replace(/([A-Z])/g, " $1").trim();
@@ -48,9 +48,9 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
 };
 
 export const AdjustSize = function () {
-  if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows") || navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh")){
-   ajustador(); 
-  }  
+  if (/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows") || navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh")) {
+    ajustador();
+  }
 };
 
 const ajustador = () => {
