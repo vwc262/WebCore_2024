@@ -48,7 +48,7 @@ export const ObtenerFormatoTituloProyecto = function (titulo) {
 };
 
 export const AdjustSize = function () {
-  if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows")){
+  if(/Android/i.test(navigator.userAgent) || navigator.userAgent.includes("Windows") || navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh")){
    ajustador(); 
   }  
 };

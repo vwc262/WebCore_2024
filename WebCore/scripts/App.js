@@ -9,7 +9,7 @@ import { AdjustSize, ObtenerFormatoTituloProyecto } from "./Utilities/CustomFunc
 import { ShowModal } from "./uiManager.js";
 
 class VwcApp {
-  projectName = EnumProyecto.CarteroYaqui;
+  projectName = EnumProyecto.SantaCatarina;
   constructor() {
 
   }
@@ -19,6 +19,7 @@ class VwcApp {
     this.version = Core.Instance.version;
 
     this.IniciarHeader();
+    this.verificarCambioDeOrientacion()
     AdjustSize();
 
     if (this.version != -99) {
@@ -35,6 +36,12 @@ class VwcApp {
       const containerLoading = document.querySelector(".containerLoading");
       containerLoading.remove();
     }
+  }
+  
+  verificarCambioDeOrientacion(){
+    if (window.screen.orientation)
+      window.screen.orientation.addEventListener('change',AdjustSize)
+    
   }
 
   onLoad() {
