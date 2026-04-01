@@ -54,8 +54,8 @@ export const AdjustSize = function () {
 };
 
 const ajustador = () => {
-  const isIOS =  navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh");
-  if(isIOS)return;
+  // const isIOS =  navigator.userAgent.includes("iPad") || navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Macintosh");
+  // if(isIOS)return;
   const contentWidth = 1920;
   const contentHeight = 1080;
 
