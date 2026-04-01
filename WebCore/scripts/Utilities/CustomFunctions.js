@@ -65,7 +65,7 @@ const ajustador = () => {
   const vv = window.visualViewport;
 
   // 🔥 Solo bloquear zoom DESPUÉS del primer render
-  if (initialized && isIOS && vv && vv.scale !== 1) return;
+  if (initialized && isIOS ) return;
 
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
